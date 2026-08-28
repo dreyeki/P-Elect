@@ -1,22 +1,112 @@
 {
   "backgrounds": [
-    { "id":"lawyer","name":"律師","desc":"你在事務所打過幾場漂亮的公益官司，媒體給了你版面，但基層覺得你講話像在唸判決書。",
-      "attrs":{"eloquence":1,"judgment":1},"personalAssets":4000000,
-      "popFavor":{"farmer":-1,"bluecollar":-1},"corpMood":0,"stigma":0,"grassroots":0,"mediaContacts":1 },
-    { "id":"reporter","name":"記者","desc":"跑了八年政治線，認識半個政壇，也知道太多人的把柄，但存款簿一直很誠實。",
-      "attrs":{"sociability":1,"judgment":1},"personalAssets":1200000,
-      "popFavor":{"capitalist":-1},"corpMood":-1,"stigma":0,"grassroots":0,"mediaContacts":3 },
-    { "id":"activist","name":"社運工作者","desc":"你在街頭上被拖走過三次，支持者叫你戰神，工商團體叫你麻煩人物。",
-      "attrs":{"boldness":2},"personalAssets":400000,
-      "popFavor":{"student":1,"bluecollar":1,"capitalist":-2},"corpMood":-2,"stigma":0,"grassroots":0,"mediaContacts":1 },
-    { "id":"heir","name":"企業二代","desc":"家族企業給了你資源與人脈，也給了你一個永遠洗不掉的出身標籤。",
-      "attrs":{"sociability":1,"stamina":1},"personalAssets":60000000,
-      "popFavor":{"bluecollar":-1,"capitalist":2},"corpMood":2,"stigma":1,"grassroots":0,"mediaContacts":1 },
-    { "id":"doctor","name":"醫師","desc":"看了二十年的診，鄉親信任你的判斷，只是你到現在還不太懂政治的規矩。",
-      "attrs":{"judgment":1,"charisma":1,"boldness":-1},"personalAssets":15000000,
-      "popFavor":{"retiree":1},"corpMood":0,"stigma":0,"grassroots":0,"mediaContacts":0 },
-    { "id":"local","name":"里長樁腳","desc":"婚喪喜慶你場場到，誰家孫子考上哪間學校你都記得，就是上台講話會卡詞。",
-      "attrs":{"sociability":2,"eloquence":-1},"personalAssets":2500000,
-      "popFavor":{"student":-1,"retiree":1},"corpMood":0,"stigma":0,"grassroots":2,"mediaContacts":0 }
+    {
+      "id": "lawyer",
+      "name": "律師",
+      "desc": "你在事務所打過幾場漂亮的公益官司，媒體給了你版面，但基層覺得你講話像在唸判決書。",
+      "attrs": {
+        "eloquence": 1,
+        "judgment": 1
+      },
+      "personalAssets": 800000,
+      "popFavor": {
+        "farmer": -1,
+        "bluecollar": -1
+      },
+      "corpMood": 0,
+      "stigma": 0,
+      "grassroots": 0,
+      "mediaContacts": 1
+    },
+    {
+      "id": "reporter",
+      "name": "記者",
+      "desc": "跑了八年政治線，認識半個政壇，也知道太多人的把柄，但存款簿一直很誠實。",
+      "attrs": {
+        "sociability": 1,
+        "judgment": 1
+      },
+      "personalAssets": 350000,
+      "popFavor": {
+        "capitalist": -1
+      },
+      "corpMood": -1,
+      "stigma": 0,
+      "grassroots": 0,
+      "mediaContacts": 3
+    },
+    {
+      "id": "activist",
+      "name": "社運工作者",
+      "desc": "你在街頭上被拖走過三次，支持者叫你戰神，工商團體叫你麻煩人物。",
+      "attrs": {
+        "boldness": 2
+      },
+      "personalAssets": 150000,
+      "popFavor": {
+        "student": 1,
+        "bluecollar": 1,
+        "capitalist": -2
+      },
+      "corpMood": -2,
+      "stigma": 0,
+      "grassroots": 0,
+      "mediaContacts": 1
+    },
+    {
+      "id": "heir",
+      "name": "企業二代",
+      "desc": "家族企業給了你資源與人脈，也給了你一個永遠洗不掉的出身標籤。",
+      "attrs": {
+        "sociability": 1,
+        "stamina": 1
+      },
+      "personalAssets": 3000000,
+      "popFavor": {
+        "bluecollar": -1,
+        "capitalist": 2
+      },
+      "corpMood": 2,
+      "stigma": 1,
+      "grassroots": 0,
+      "mediaContacts": 1,
+      "extraNote": "家族每年還會給一筆，但那筆錢從來不是白拿的。"
+    },
+    {
+      "id": "doctor",
+      "name": "醫師",
+      "desc": "看了二十年的診，鄉親信任你的判斷，只是你到現在還不太懂政治的規矩。",
+      "attrs": {
+        "judgment": 1,
+        "charisma": 1,
+        "boldness": -1
+      },
+      "personalAssets": 1500000,
+      "popFavor": {
+        "retiree": 1
+      },
+      "corpMood": 0,
+      "stigma": 0,
+      "grassroots": 0,
+      "mediaContacts": 0
+    },
+    {
+      "id": "local",
+      "name": "里長樁腳",
+      "desc": "婚喪喜慶你場場到，誰家孫子考上哪間學校你都記得，就是上台講話會卡詞。",
+      "attrs": {
+        "sociability": 2,
+        "eloquence": -1
+      },
+      "personalAssets": 500000,
+      "popFavor": {
+        "student": -1,
+        "retiree": 1
+      },
+      "corpMood": 0,
+      "stigma": 0,
+      "grassroots": 2,
+      "mediaContacts": 0
+    }
   ]
 }

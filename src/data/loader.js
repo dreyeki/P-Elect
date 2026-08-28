@@ -3,11 +3,23 @@ const FILES = [
   'meta', 'scales', 'naming', 'districts', 'regions', 'central', 'world',
   'corporations', 'parties', 'laws', 'localBills', 'values', 'pops',
   'media', 'issues', 'budget', 'elections', 'starts', 'backgrounds',
-  'tags', 'staffRoles', 'donations',
+  'tags', 'staffRoles', 'donations', 'pollsters', 'shows', 'constitution',
 ];
 const EVENT_FILES = ['economy', 'energy', 'crossStrait', 'disaster', 'society', 'scandal', 'party', 'personal'];
 
 import { normalizeEvents } from './normalize.js';
+
+/** 單檔版把資料直接內嵌在頁面裡，就不用（也不能）走 fetch */
+async function readJSON(rel) {
+  const embedded = globalThis.__PE_DATA;
+  if (embedded) {
+    if (!(rel in embedded)) throw new Error(`內嵌資料缺少 ${rel}`);
+    return embedded[rel];
+  }
+  const res = await fetch(`./${rel}`);
+  if (!res.ok) throw new Error(`載入 ${rel} 失敗：${res.status}`);
+  return res.json();
+}
 
 export async function loadData(onProgress = () => {}) {
   const data = {};
@@ -15,17 +27,12 @@ export async function loadData(onProgress = () => {}) {
   const total = FILES.length + 1;
 
   await Promise.all(FILES.map(async (f) => {
-    const res = await fetch(`./data/${f}.json`);
-    if (!res.ok) throw new Error(`載入 data/${f}.json 失敗：${res.status}`);
-    data[f] = await res.json();
+    data[f] = await readJSON(`data/${f}.json`);
     onProgress(++done / total, f);
   }));
 
-  const eventPacks = await Promise.all(EVENT_FILES.map(async (f) => {
-    const res = await fetch(`./data/events/${f}.json`);
-    if (!res.ok) throw new Error(`載入 data/events/${f}.json 失敗`);
-    return (await res.json()).events;
-  }));
+  const eventPacks = await Promise.all(EVENT_FILES.map(async (f) =>
+    (await readJSON(`data/events/${f}.json`)).events));
   data.events = eventPacks.flat();
   onProgress(1, 'events');
 
@@ -50,6 +57,8 @@ function index(d) {
     tag: Object.fromEntries(d.tags.tags.map((t) => [t.id, t])),
     staffRole: Object.fromEntries(d.staffRoles.roles.map((r) => [r.id, r])),
     event: Object.fromEntries(d.events.map((e) => [e.id, e])),
+    pollster: Object.fromEntries(d.pollsters.pollsters.map((p) => [p.id, p])),
+    show: Object.fromEntries(d.shows.shows.map((s) => [s.id, s])),
   };
   d.strataIds = d.pops.strata.map((s) => s.id);
   d.genIds = d.pops.generations.map((g) => g.id);

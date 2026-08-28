@@ -1,0 +1,123 @@
+// @ts-check
+/**
+ * 政論節目。
+ * 沒有通告就上不了節目——這是知名度在遊戲裡最真實的門檻。
+ */
+import { clamp, clamp05, clampBi } from '../core/Formula.js';
+import { bumpCounter } from './Effects.js';
+import { teamBonus } from './TeamSystem.js';
+
+export function tick(state, ctx) {
+  const { data, rng, scaleMult } = ctx;
+  state.invitations ??= [];
+  const news = [];
+
+  // 舊通告過期
+  state.invitations = state.invitations.filter((i) => (i.expiresIn -= 1) > 0);
+
+  const p = state.player;
+  const hotIssue = Object.entries(state.issues).sort((a, b) => b[1] - a[1])[0];
+
+  for (const show of data.shows.shows) {
+    if (state.invitations.some((i) => i.showId === show.id)) continue;
+    if (p.fame < show.fameNeed) continue;
+    const media = state.media[show.mediaId];
+    const rel = media?.playerRelation ?? 0;
+
+    // 立場相近的節目比較願意找你；有話題性的時候大家都來找你
+    const myLean = p.party ? (state.parties[p.party]?.platform.unification ?? 0) : 0;
+    const affinity = 1 - Math.abs(show.bias - myLean) / 12;
+    let chance = 0.05
+      + p.fame * 0.055
+      + affinity * 0.14
+      + rel * 0.02
+      + (state.flags.recentBuzz ?? 0) * 0.05
+      - show.difficulty * 0.012;
+    if (state.meta.scale === 'week') chance *= 1.7;      // 選戰期大家都在搶來賓
+    if (p.stigma >= 3) chance *= show.riskBonus ? 1.6 : 0.7;   // 爆料節目反而更想找你
+
+    if (rng.bool(clamp(chance, 0, 0.55) * (state.meta.scale === 'week' ? 1 : scaleMult))) {
+      state.invitations.push({
+        showId: show.id, showName: show.name,
+        topic: hotIssue[0], topicName: data.byId.issue[hotIssue[0]].name,
+        expiresIn: state.meta.scale === 'week' ? 2 : 2,
+        turn: state.meta.turn,
+      });
+    }
+  }
+  state.flags.recentBuzz = Math.max(0, (state.flags.recentBuzz ?? 0) - 0.4 * scaleMult);
+  if (state.invitations.length > 5) state.invitations = state.invitations.slice(-5);
+  return { news };
+}
+
+/** 上節目：表現分決定一切 */
+export function appear(state, data, showId, rng) {
+  const inv = state.invitations.find((i) => i.showId === showId);
+  if (!inv) return { ok: false, msg: '你手上沒有這個節目的通告。' };
+  const show = data.byId.show[showId];
+  const p = state.player;
+
+  const prep = state.flags.showPrep ?? 0;
+  const spokesperson = teamBonus(state, data, 'mediaFrame');
+  const score = p.attrs.eloquence * 11
+    + p.attrs.judgment * 6
+    + p.attrs.charisma * 5
+    + prep * 6
+    + spokesperson * 22
+    + (state.issues[inv.topic] ?? 2) * 2
+    - show.difficulty * 8
+    + rng.range(-16, 16);
+
+  const perf = clamp05(Math.round((score - 8) / 11));
+  state.invitations = state.invitations.filter((i) => i !== inv);
+  state.flags.showPrep = 0;
+  state.flags.recentBuzz = clamp((state.flags.recentBuzz ?? 0) + 0.5 + perf * 0.3, 0, 4);
+
+  // 觀眾組成決定這場表演打到誰
+  const P = state.pops;
+  const gain = (perf - 2) * 0.13;
+  for (let i = 0; i < P.n; i++) {
+    const gid = data.genIds[P.gen[i]];
+    const sid = data.strataIds[P.stratum[i]];
+    const w = (show.gen[gid] ?? 1) * (show.strata[sid] ?? show.strata._all ?? 1);
+    if (w < 0.35) continue;
+    P.playerFavor[i] = clampBi(P.playerFavor[i] + gain * w * (show.reach / 5));
+  }
+  p.fame = clamp05(p.fame + (perf >= 3 ? 0.12 : 0.05) * (show.reach / 4));
+  state.finance.personal += show.fee ?? 0;
+
+  const media = state.media[show.mediaId];
+  if (media) media.playerRelation = clampBi(media.playerRelation + (perf >= 3 ? 0.4 : perf <= 1 ? -0.3 : 0.1));
+
+  let text, extra = '';
+  if (perf >= 5) {
+    p.politicalCapital = Math.min(999, p.politicalCapital + 30);
+    bumpCounter(state, data, 'expertSpeech');
+    text = `你今天講得非常好。有一段被剪成短片，隔天早上還在各群組裡轉，連對面的支持者都在討論你講的那句話。`;
+  } else if (perf === 4) {
+    p.politicalCapital = Math.min(999, p.politicalCapital + 15);
+    text = `你在節目上占了上風，主持人最後還主動問你下次要不要再來。`;
+  } else if (perf === 3) {
+    text = `整場表現得體，該講的都講到了，沒有出錯，也沒有特別亮眼的地方。`;
+  } else if (perf === 2) {
+    text = `你講得中規中矩，錄完之後製作單位很客氣地送你到門口，沒有提下一次。`;
+  } else if (perf === 1) {
+    p.favorNational = clampBi(p.favorNational - 0.3);
+    bumpCounter(state, data, 'interpellationFail');
+    text = `你有兩題明顯答不出來，鏡頭掃到你的時候正好在翻資料，那個畫面被截圖了。`;
+  } else {
+    p.favorNational = clampBi(p.favorNational - 0.6);
+    p.integrity = clamp05(p.integrity - 0.2);
+    bumpCounter(state, data, 'interpellationFail');
+    text = `這一集是災難。你講錯了一個很基本的數字，主持人當場糾正，剪出來的片段現在是全網最紅的十五秒。`;
+  }
+  if (show.riskBonus && perf <= 1 && rng.bool(show.riskBonus * 3)) {
+    p.stigma = clamp05(p.stigma + 0.3);
+    extra = '節目最後主持人拿出一份文件問你，你當下沒有正面回答，那份文件現在在別人手上。';
+  }
+  return { ok: true, perf, show, text, extra };
+}
+
+export function prepare(state) {
+  state.flags.showPrep = clamp05((state.flags.showPrep ?? 0) + 1.5);
+}

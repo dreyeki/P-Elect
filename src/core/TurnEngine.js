@@ -18,6 +18,9 @@ import * as Scandal from '../systems/ScandalSystem.js';
 import * as Interp from '../systems/InterpellationSystem.js';
 import * as Events from '../systems/EventSystem.js';
 import * as Election from '../systems/ElectionSystem.js';
+import * as Poll from '../systems/PollSystem.js';
+import * as Show from '../systems/ShowSystem.js';
+import * as Court from '../systems/CourtSystem.js';
 import { apOf } from '../systems/CharacterSystem.js';
 
 const PIPELINE = [
@@ -26,7 +29,8 @@ const PIPELINE = [
   ['party', Party.tick], ['council', Council.tick], ['budget', Budget.tick],
   ['finance', Finance.tick], ['team', Team.tick], ['character', Character.tick],
   ['scandal', Scandal.tick], ['legis', Legis.tick], ['interp', Interp.tick],
-  ['media', Media.tick],
+  ['court', Court.tick], ['media', Media.tick],
+  ['poll', Poll.tick], ['show', Show.tick],
 ];
 
 /** 推進一個回合。回傳本回合的新聞與待決事項。 */

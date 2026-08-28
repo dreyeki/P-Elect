@@ -5,6 +5,7 @@ import { reactToVote } from './PartySystem.js';
 import { teamBonus } from './TeamSystem.js';
 import { isConsensus } from './ValueSystem.js';
 import { nationalSupport } from './PopSystem.js';
+import { petition } from './CourtSystem.js';
 
 export const STAGES = ['提案', '一讀付委', '委員會審查', '黨團協商', '二讀', '三讀', '公布施行'];
 
@@ -51,6 +52,10 @@ export function tick(state, ctx) {
       if (res.passed) {
         enact(state, data, bill);
         news.push({ kind: 'law', text: `《${law.name}》修正案三讀通過，改為「${law.tiers[bill.targetTier].name}」，${res.detail}` });
+        const rev = petition(state, data, bill.lawId, rng);
+        if (rev) {
+          news.push({ kind: 'court', text: `在野立委今天完成連署，就《${law.name}》修正條文向憲法法庭聲請釋憲。這件事在裁判出來之前都不算定案。` });
+        }
         bumpCounter(state, data, 'policyDelivered');
         state.player.partyPrestige = clamp05(state.player.partyPrestige + 0.3);
       } else {
@@ -114,6 +119,7 @@ export function vote(state, data, bill, rng) {
 function enact(state, data, bill) {
   const law = data.byId.law[bill.lawId];
   const oldTier = state.laws[bill.lawId];
+  state.flags['prevTier_' + bill.lawId] = oldTier;   // 釋憲被撤銷時要退回這裡
   // 撤掉舊檔位的持續修正
   state.modifiers.removeBySource('law:' + bill.lawId);
   state.laws[bill.lawId] = bill.targetTier;

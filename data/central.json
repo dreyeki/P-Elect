@@ -1,21 +1,21 @@
 {
-  "_source": "以 2025 年主計總處、財政部、經濟部能源署、國防部公開統計為基底，遊戲化改編",
+  "_source": "2026 年公開統計：主計總處（GDP 成長 11.05%、CPI 2.07%、每人 GDP 45,332 美元、出口 +41.19%）、失業率約 3.3%、台股加權指數約 45,300 點。遊戲化改編。",
   "fiscal": {
-    "gdp": 26840,
-    "gdpGrowth": 0.028,
-    "inflation": 0.019,
-    "unemployment": 0.035,
-    "revenueBase": 3200,
-    "expenditure": 3350,
+    "gdp": 31200,
+    "gdpGrowth": 0.105,
+    "inflation": 0.0207,
+    "unemployment": 0.033,
+    "revenueBase": 3850,
+    "expenditure": 3900,
     "debtOutstanding": 68000,
     "debtCeilingRatio": 0.405,
     "creditRating": "AA"
   },
   "monetary": {
     "policyRate": 0.02,
-    "exchangeRateUSD": 31.2,
-    "foreignReserves": 590,
-    "m2Growth": 0.055
+    "exchangeRateUSD": 30.6,
+    "foreignReserves": 625,
+    "m2Growth": 0.062
   },
   "energy": {
     "mix": {
@@ -50,7 +50,7 @@
     "birthRate": 0.87,
     "agingRatio": 0.196,
     "giniIndex": 0.341,
-    "housingAffordability": 9.8,
+    "housingAffordability": 10.4,
     "healthcareSustainability": 2,
     "pensionSustainability": 2,
     "crimeRate": 100,
@@ -67,12 +67,12 @@
       "PDA": 51,
       "CRP": 52,
       "TPL": 8,
-      "NGF": 2,
+      "NGF": 0,
       "TWR": 0,
       "GSP": 0,
       "CUA": 0,
-      "IND": 0
+      "IND": 2
     }
   },
-  "stockIndex": 22000
+  "stockIndex": 45300
 }

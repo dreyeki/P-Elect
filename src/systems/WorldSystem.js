@@ -19,7 +19,8 @@ export function tick(state, ctx) {
         b.domesticPolitics.orientation = o === 'internationalist' ? 'isolationist' : 'internationalist';
         const d = b.domesticPolitics.orientation === 'isolationist' ? -1.2 : 1.2;
         b.stance = clampBi(b.stance + d);
-        news.push({ kind: 'world', text: `${b.name}的政局出現轉向，新的執政團隊對外政策明顯不同以往，我方必須重新評估既有的合作基礎。` });
+        const dir = b.domesticPolitics.orientation === 'isolationist' ? '向內收縮' : '重新對外開放';
+        news.push({ kind: 'world', text: `${b.name}的內政路線出現明顯轉向，對外政策整體${dir}，我方必須重新評估既有的合作基礎與往來節奏。` });
       }
       b.domesticPolitics.nextShiftYear += 4;
     }

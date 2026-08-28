@@ -40,7 +40,8 @@ export function save(state, slot = 'auto') {
 }
 
 export function load(slot = 'auto') {
-  const raw = localStorage.getItem(KEY + slot);
+  let raw = null;
+  try { raw = localStorage.getItem(KEY + slot); } catch { return null; }
   if (!raw) return null;
   try { return deserialize(JSON.parse(raw)); }
   catch (e) { console.error('[save] 讀檔失敗', e); return null; }
@@ -48,7 +49,8 @@ export function load(slot = 'auto') {
 
 export function listSlots() {
   return SLOTS.map((s) => {
-    const raw = localStorage.getItem(KEY + s);
+    let raw = null;
+    try { raw = localStorage.getItem(KEY + s); } catch { return { slot: s, empty: true }; }
     if (!raw) return { slot: s, empty: true };
     try {
       const o = JSON.parse(raw);
@@ -57,7 +59,7 @@ export function listSlots() {
   });
 }
 
-export function remove(slot) { localStorage.removeItem(KEY + slot); }
+export function remove(slot) { try { localStorage.removeItem(KEY + slot); } catch {} }
 
 export function exportFile(state) {
   const blob = new Blob([JSON.stringify(serialize(state))], { type: 'application/json' });

@@ -1,10 +1,11 @@
 // @ts-check
 import { loadData } from './data/loader.js';
-import { initScales, word } from './util/scale.js';
+import { initScales, word, biWord } from './util/scale.js';
 import { createGame } from './core/GameState.js';
 import { advance } from './core/TurnEngine.js';
 import { Rng, randomSeedString } from './core/Rng.js';
 import { el, html, raw, esc } from './util/dom.js';
+import { row } from './ui/components.js';
 import * as F from './util/format.js';
 import * as SaveMgr from './save/SaveManager.js';
 
@@ -15,7 +16,7 @@ import { dataPage } from './ui/pages/data.js';
 import { mapPage } from './ui/pages/map.js';
 import { teamPage, financePage, profilePage } from './ui/pages/misc.js';
 import { setupPage, setupDraft } from './ui/pages/setup.js';
-import { electionPage, CAMPAIGN_ACTIONS } from './ui/pages/election.js';
+import { electionPage, CAMPAIGN_ACTIONS, actionCost } from './ui/pages/election.js';
 
 import * as Events from './systems/EventSystem.js';
 import * as Char from './systems/CharacterSystem.js';
@@ -29,6 +30,9 @@ import * as Interp from './systems/InterpellationSystem.js';
 import * as Media from './systems/MediaSystem.js';
 import * as District from './systems/DistrictSystem.js';
 import * as Election from './systems/ElectionSystem.js';
+import * as Poll from './systems/PollSystem.js';
+import * as Show from './systems/ShowSystem.js';
+import * as Court from './systems/CourtSystem.js';
 import { applyEffects, bumpCounter } from './systems/Effects.js';
 import { clamp, clamp05, clampBi } from './core/Formula.js';
 
@@ -37,6 +41,7 @@ const ui = { politicsTab: 'overview', dataTab: 'macro', mapMode: 'favor', mapArg
 
 /* ─────────── 啟動 ─────────── */
 (async function boot() {
+  window.__peBooted = true;
   try {
     DATA = await loadData((p, name) => {
       el('bootBar').style.width = (p * 100).toFixed(0) + '%';
@@ -203,6 +208,26 @@ function handle(act, ds) {
     'fontsize': () => { document.documentElement.dataset.fs = ds.id; localStorage.setItem('p-election:fs', ds.id); },
     'restart': () => confirmModal('重新開始？', '目前這一局的所有進度都會消失，除非你已經存過檔。', '重新開始', showSetup),
 
+    /* 節目與民調 */
+    'open-shows': openShows,
+    'do-show': (d) => doShow(d.id),
+    'open-commission': openCommission,
+    'commission-poll': (d) => {
+      const r = Poll.commission(s, DATA, d.id, d.scope);
+      closeModal(); toast(r.msg); render();
+    },
+    'open-poll': (d) => openPoll(+d.idx),
+
+    /* 憲政 */
+    'open-court': () => { ui.politicsTab = 'court'; go('politics'); },
+    'open-nominate': (d) => openNominate(+d.idx),
+    'nominate': (d) => {
+      const rng = new Rng(s.meta.seed, s.meta.rngCounter);
+      const r = Court.nominateJustice(s, DATA, +d.idx, d.lean, rng);
+      s.meta.rngCounter = rng.counter;
+      closeModal(); toast(r.msg); render();
+    },
+
     /* 選舉 */
     'pick-run': (d) => pickRun(d),
     'primary-accept': () => { s.election = null; toast('你留下來輔選。這一次的人情，下一次會有人記得。'); render(); },
@@ -315,13 +340,15 @@ function resolveAction(s, id, arg, rng) {
       s.finance.campaign -= 30000;
       return `你在${DATA.byId.district[did].name}跑了一整個月，握到的手比講過的話多。`;
     }
-    case 'talkshow': {
-      const roll = p.attrs.eloquence * 12 + p.attrs.charisma * 6 + rng.range(-20, 20);
-      p.fame = clamp05(p.fame + 0.18);
-      if (roll > 45) { p.favorNational = clampBi(p.favorNational + 0.3); return '你今天講得很好，片段被剪下來在網路上流傳了一整天。'; }
-      if (roll < 15) { p.favorNational = clampBi(p.favorNational - 0.4); bumpCounter(s, DATA, 'interpellationFail'); return '你講錯了一句話，主持人當場愣住，那三秒鐘現在已經是迷因了。'; }
-      return '節目平順地錄完，有講到你想講的，也有講到不該講的。';
-    }
+    case 'talkshow':
+      openShows();
+      return '';
+    case 'showPrep':
+      Show.prepare(s);
+      return `你把可能被問的都想過一遍了。準備程度：${word('prep', s.flags.showPrep ?? 0)}。`;
+    case 'commissionPoll':
+      openCommission();
+      return '';
     case 'presser': {
       const heat = Object.entries(s.issues).sort((a, b) => b[1] - a[1])[0][0];
       const r = Media.pressConference(s, DATA, heat, rng);
@@ -467,10 +494,13 @@ function campaignAction(ds) {
   const s = app.state;
   const a = CAMPAIGN_ACTIONS.find((x) => x.id === ds.id);
   if (!a) return;
+  const cost = actionCost(s.election?.run, a);
   if (s.player.apUsed + a.ap > (s.player.ap ?? 2)) return toast('行動點不夠了。');
-  if (s.finance.campaign < a.cost) return toast('專戶裡的錢不夠。');
+  if (s.finance.campaign < cost) return toast('專戶裡的錢不夠。');
   s.player.apUsed += a.ap;
-  s.finance.campaign -= a.cost;
+  s.finance.campaign -= cost;
+  s.election.spent = (s.election.spent ?? 0) + cost;
+  s.finance.ledger.push({ turn: s.meta.turn, kind: 'out', amount: cost, note: '競選：' + a.name });
   s.player.fatigueRaw = clamp(s.player.fatigueRaw + a.fatigue, 0, 120);
   const rng = new Rng(s.meta.seed, s.meta.rngCounter);
   const msg = resolveCampaign(s, a, rng);
@@ -530,6 +560,30 @@ function resolveCampaign(s, a, rng) {
       for (const id of dSet) District.grow(s, id, 0.15);
       bump('enthusiasm', 0.2, (i) => DATA.genIds[P.gen[i]] === 'senior');
       return '你把該拜的廟都拜了，長輩看的是你有沒有來。';
+    case 'motorcade':
+      bump('enthusiasm', 0.18);
+      for (const id of dSet) s.districts[id].playerFavor = clampBi(s.districts[id].playerFavor + 0.1);
+      s.player.fame = clamp05(s.player.fame + 0.06);
+      return '宣傳車繞了整個選區一整週，喇叭聲從早響到晚，有人打電話來罵，也有人說終於看到你的名字了。';
+    case 'phonebank':
+      bump('enthusiasm', 0.3, (i) => P.awareness[i] >= 2.5);
+      return '志工打了幾千通電話。接起來的人不多，但接起來的那些，投票日多半真的會出門。';
+    case 'billboard': {
+      for (const id of dSet) s.districts[id].playerFavor = clampBi(s.districts[id].playerFavor + 0.28);
+      s.player.fame = clamp05(s.player.fame + 0.14);
+      s.flags.billboardUp = (s.flags.billboardUp ?? 0) + 1;
+      return '看板掛上去了。路口那一面特別大，連對手的樁腳都在群組裡轉照片。';
+    }
+    case 'pr': {
+      const roll = s.player.attrs.sociability * 10 + rng.range(-18, 18);
+      for (const m of Object.values(s.media)) {
+        m.playerRelation = clampBi(m.playerRelation + (roll > 25 ? 0.35 : 0.1));
+      }
+      s.player.fame = clamp05(s.player.fame + 0.08);
+      return roll > 25
+        ? '公關公司安排了兩篇專訪跟一支人物影片，這幾天的版面角度明顯對你比較友善。'
+        : '公關案子發出去了，效果沒有預期好，但至少負面的那幾則被壓下去一點。';
+    }
   }
   return '完成了。';
 }
@@ -612,4 +666,142 @@ function proposeLocalBill(ds) {
   const r = Council.proposeBill(s, DATA, region, id, +idx, rng);
   s.meta.rngCounter = rng.counter;
   closeModal(); toast(r.msg); render();
+}
+
+/* ─────────── 政論節目 ─────────── */
+function openShows() {
+  const s = app.state;
+  const invs = s.invitations ?? [];
+  if (!invs.length) {
+    return openModal(`<div class="modal-h">沒有人找你上節目</div>
+      <div class="modal-b">通告不是想上就能上的。等你的名字在圈子裡開始被提起，製作單位自然會打電話來。
+      多開幾場記者會、把議題炒熱一點，或是先把知名度做起來。</div>
+      <button class="btn primary full" data-act="modal-close">知道了</button>`);
+  }
+  const prep = s.flags.showPrep ?? 0;
+  const list = invs.map((i) => {
+    const show = DATA.byId.show[i.showId];
+    const media = s.media[show.mediaId];
+    const lean = show.bias > 2 ? '深藍' : show.bias > 0 ? '偏藍' : show.bias < -2 ? '深綠' : show.bias < 0 ? '偏綠' : '中間';
+    return `<button class="opt" data-act="do-show" data-id="${esc(i.showId)}">
+      <div style="display:flex;justify-content:space-between;align-items:baseline;gap:8px">
+        <span class="opt-t">${esc(show.name)}</span>
+        <span class="xs muted">${show.type === 'online' ? '網路直播' : '電視'}・${esc(lean)}</span>
+      </div>
+      <div class="opt-h">${esc(show.desc)}</div>
+      <div class="opt-e">
+        <span class="eff">觸及 ${esc(word('reach', show.reach))}</span>
+        <span class="eff">難度 ${esc(word('issueHeat', show.difficulty))}</span>
+        <span class="eff">主談 ${esc(i.topicName)}</span>
+        ${show.fee ? `<span class="eff up">通告費 ${F.money(show.fee)}</span>` : ''}
+      </div>
+    </button>`;
+  }).join('');
+  openModal(`<div class="modal-h">手上的通告</div>
+    <div class="modal-b">選一個上。你的準備程度是「${esc(word('prep', prep))}」——
+    節目難度越高，沒準備就上去的下場越難看。</div>${list}
+    <button class="btn ghost full" data-act="modal-close" style="margin-top:6px">這次都不上</button>`);
+}
+
+function doShow(showId) {
+  const s = app.state;
+  const rng = new Rng(s.meta.seed, s.meta.rngCounter);
+  const r = Show.appear(s, DATA, showId, rng);
+  s.meta.rngCounter = rng.counter;
+  if (!r.ok) { closeModal(); return toast(r.msg); }
+  openModal(`<div class="modal-h">${esc(r.show.name)}</div>
+    <div style="text-align:center;margin:6px 0 14px">
+      <div class="xs muted">表現</div>
+      <div class="tile-v ${r.perf >= 4 ? 'tone-good' : r.perf >= 3 ? 'tone-ok' : r.perf >= 2 ? 'tone-mid' : 'tone-bad'}"
+        style="font-size:22px">${esc(word('showPerf', r.perf))}</div>
+    </div>
+    <div class="modal-b">${esc(r.text)}${r.extra ? '<br><br>' + esc(r.extra) : ''}</div>
+    <button class="btn primary full" data-act="modal-close">好</button>`);
+  render();
+}
+
+/* ─────────── 委託民調 ─────────── */
+function openCommission() {
+  const s = app.state;
+  if (s.flags.commissionedPoll) {
+    return openModal(`<div class="modal-h">已經有一份在做了</div>
+      <div class="modal-b">你委託的民調還在進行中，下個回合就會交件。同時做兩份沒有意義，也會被人說在洗數據。</div>
+      <button class="btn primary full" data-act="modal-close">知道了</button>`);
+  }
+  const homeD = DATA.byId.district[s.player.homeDistrict];
+  const scopes = [
+    { id: 'nation', name: '全國', note: '看整體政黨版圖與自己的全國聲量' },
+    { id: 'region', name: homeD ? DATA.byId.region[homeD.regionId].name : '本縣市', note: '縣市長選舉或跨選區布局要看這個' },
+    { id: 'district', name: homeD?.name ?? '本選區', note: '議員選舉最實用，直接看得到自己在哪個位置' },
+  ];
+  const rows = DATA.pollsters.pollsters.filter((ps) => ps.commission > 0).map((ps) => {
+    const opts = scopes.filter((sc) => ps.scopes.includes(sc.id)).map((sc) => {
+      const cost = Math.round(ps.commission * (DATA.pollsters.commissionScopeMult[sc.id] ?? 1));
+      const afford = s.finance.campaign >= cost;
+      return `<button class="btn ${afford ? '' : 'ghost'} xs" data-act="commission-poll"
+        data-id="${esc(ps.id)}" data-scope="${sc.id}" ${afford ? '' : 'disabled'}
+        style="padding:5px 10px">${esc(sc.name)} ${F.money(cost)}</button>`;
+    }).join('');
+    return `<div class="row" style="display:block">
+      <div style="display:flex;justify-content:space-between;align-items:baseline">
+        <span class="row-k"><b>${esc(ps.short)}</b></span>
+        <span class="row-v xs">公信力 ${esc(word('pollTrust', ps.credibility))}・誤差 ±${ps.sampleError.toFixed(1)}%</span>
+      </div>
+      <div class="xs muted" style="margin:3px 0 6px;line-height:1.6">${esc(ps.desc)}</div>
+      <div class="btn-row" style="margin:0">${opts}</div>
+    </div>`;
+  }).join('');
+  openModal(`<div class="modal-h">委託內參民調</div>
+    <div class="modal-b">公開民調有房效應、有誤差，而且不見得測你想知道的東西。
+    自己出錢做的這一份誤差小得多、也不會外流——但錢是從競選專戶出的。
+    目前專戶餘額 ${F.money(s.finance.campaign)}。</div>${rows}
+    <button class="btn ghost full" data-act="modal-close" style="margin-top:6px">先不做</button>`);
+}
+
+function openPoll(idx) {
+  const s = app.state;
+  const p = (s.polls ?? [])[idx];
+  if (!p) return;
+  const rows = Object.entries(p.partySupport).filter(([, v]) => v >= 1)
+    .sort((a, b) => b[1] - a[1]).map(([pid, v]) =>
+      `<div class="votebar"><span class="vn" style="color:${partyColor(pid)}">${esc(s.parties[pid]?.shortName ?? pid)}</span>
+      <span class="vb"><i style="width:${Math.min(100, v * 2).toFixed(1)}%;background:${partyColor(pid)}"></i></span>
+      <span class="vp">${v.toFixed(1)}%</span></div>`).join('');
+  const biasWord = p.internal ? '內參，無立場修正'
+    : p.bias > 1 ? '讀數偏藍' : p.bias < -1 ? '讀數偏綠' : '立場大致中性';
+  openModal(`<div class="modal-h">${esc(p.pollsterName)}</div>
+    <div class="modal-b">
+      ${p.year} 年 ${p.month} 月・${esc(p.scopeName)}・樣本 ${p.sampleSize} 份・誤差 ±${p.error.toFixed(1)}%<br>
+      公信力 ${esc(word('pollTrust', p.credibility))}，${esc(biasWord)}。
+      ${p.internal ? '這份不會對外公布。' : '這份已經發布，輿論會跟著動。'}
+    </div>
+    <div class="sec-t">政黨支持度</div>${rows}
+    <div class="sec-t">其他</div>
+    ${row('總統滿意度', `<span class="num">${p.presidentApproval.toFixed(1)}%</span>`)}
+    ${row('你的支持度', p.playerListed
+      ? `<span class="num">${p.playerApproval.toFixed(1)}%</span>`
+      : '<span class="xs muted">知名度不足，未列入</span>')}
+    <button class="btn primary full" data-act="modal-close" style="margin-top:12px">關閉</button>`);
+}
+
+function openNominate(idx) {
+  const s = app.state;
+  const seat = s.court?.justices[idx];
+  if (!seat) return;
+  const mine = s.legislature[s.player.party] ?? 0;
+  const total = Object.values(s.legislature).reduce((a, b) => a + b, 0) || 113;
+  openModal(`<div class="modal-h">提名大法官</div>
+    <div class="modal-b">
+      你在立法院有 ${mine} 席，總額 ${total} 席。同意權在他們手上，不在你手上。<br><br>
+      這個人選會在憲法法庭裡待八年。你在任內推的每一條爭議法案，最後都會走到他面前。
+    </div>
+    <button class="opt" data-act="nominate" data-idx="${idx}" data-lean="ally">
+      <div class="opt-t">提名理念相近的人選</div>
+      <div class="opt-h">往後八年的釋憲會站在你這邊，但在野黨一定會杯葛，過不過要看你的席次。</div>
+    </button>
+    <button class="opt" data-act="nominate" data-idx="${idx}" data-lean="moderate">
+      <div class="opt-t">提名中間派學者</div>
+      <div class="opt-h">好過關得多，形象也加分。代價是他不欠你人情，判起來六親不認。</div>
+    </button>
+    <button class="btn ghost full" data-act="modal-close" style="margin-top:6px">再想想</button>`);
 }

@@ -1,0 +1,21 @@
+name: check
+on: [push, pull_request]
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with: { node-version: '22' }
+      - name: 資料檔完整性
+        run: node tools/validate-data.js
+      - name: 模組載入
+        run: node tests/load.mjs
+      - name: 頁面渲染與存讀檔
+        run: node tests/render.mjs
+      - name: 選舉系統
+        run: node tests/election.mjs
+      - name: 長線模擬（120 回合）
+        run: node tests/headless.mjs CISEED 120
+      - name: 單檔版可以順利打包
+        run: node tools/build-single.js

@@ -32,7 +32,10 @@ export function tick(state, ctx) {
     const corpMood = avgCorpMood(state, r.id);
     const disruption = state.modifiers.get(`region.${r.id}.disruption`, 0);
 
-    const growth = 0.0125
+    // 全球科技週期是這一輪台灣經濟最大的槓桿，直接進到每個縣市的成長率
+    const boom = state.world.GLOBAL.cycle * 0.078;
+    const growth = 0.012
+      + boom
       + sectorTerm
       + (infra - 0.6) * 0.010
       + (labor - 0.6) * 0.020
@@ -43,11 +46,12 @@ export function tick(state, ctx) {
       + rng.normal(0, 0.0025);
 
     const blend = 0.22 * scaleMult;
-    r.economy.gdpGrowth = clamp(r.economy.gdpGrowth * (1 - blend) + growth * blend, -0.07, 0.09);
+    r.economy.gdpGrowth = clamp(r.economy.gdpGrowth * (1 - blend) + growth * blend, -0.08, 0.18);
     r.economy.gdp *= 1 + r.economy.gdpGrowth / 12 * scaleMult;
 
-    const targetUnemp = clamp(0.037 - (r.economy.gdpGrowth - 0.025) * 0.55
-      + state.modifiers.get('econ.unemployment', 0), 0.014, 0.16);
+    // 高成長會壓低失業率，但台灣的結構性失業有下限，不會因為景氣好就趨近於零
+    const targetUnemp = clamp(0.0375 - (r.economy.gdpGrowth - 0.025) * 0.07
+      + state.modifiers.get('econ.unemployment', 0), 0.026, 0.16);
     r.economy.unemployment += (targetUnemp - r.economy.unemployment) * 0.12 * scaleMult;
 
     r.economy.perCapitaIncome *= 1 + (r.economy.gdpGrowth * 0.55 - c.fiscal.inflation * 0.25) / 12 * scaleMult;

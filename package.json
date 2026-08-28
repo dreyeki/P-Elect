@@ -8,6 +8,7 @@
     "test": "node --test tests/",
     "sim": "node tests/headless.mjs",
     "check": "node tools/validate-data.js",
-    "serve": "python3 -m http.server 8080"
+    "serve": "python3 -m http.server 8080",
+    "build": "node tools/build-single.js"
   }
 }

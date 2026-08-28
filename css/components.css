@@ -143,3 +143,21 @@ svg.chart{width:100%;height:auto;display:block}
 .actbtn.locked{opacity:.35}
 .mapcell .cw{font-size:9px;color:var(--fg-3);line-height:1.15;letter-spacing:-.02em}
 .mapcell{aspect-ratio:1.18}
+.lockbox{margin-top:10px;border-top:1px solid var(--line);padding-top:8px}
+.lockbox summary{font-size:var(--fs-xs);color:var(--fg-3);cursor:pointer;list-style:none}
+.lockbox summary::-webkit-details-marker{display:none}
+.lockbox summary::before{content:"▸ ";}
+.lockbox[open] summary::before{content:"▾ ";}
+.lockrow{display:flex;justify-content:space-between;gap:10px;padding:5px 0;font-size:var(--fs-xs)}
+.lockrow b{color:var(--fg-2);flex-shrink:0}
+.lockrow span{color:var(--fg-3);text-align:right}
+.justice{display:flex;align-items:center;gap:9px;padding:8px 0;border-bottom:1px solid var(--line)}
+.justice:last-child{border-bottom:none}
+.justice .jn{flex:1;min-width:0;font-size:var(--fs-s)}
+.justice .jl{width:66px;height:6px;background:var(--bg-4);border-radius:3px;position:relative;flex-shrink:0}
+.justice .jl i{position:absolute;top:-2px;width:10px;height:10px;border-radius:50%;transform:translateX(-5px)}
+
+.tabrow{display:flex;gap:6px;overflow-x:auto;margin:0 0 12px;padding-bottom:2px;
+  scrollbar-width:none;-webkit-overflow-scrolling:touch}
+.tabrow::-webkit-scrollbar{display:none}
+.tabrow .btn{flex:0 0 auto;padding:7px 13px;font-size:var(--fs-s)}

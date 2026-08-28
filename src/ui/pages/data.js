@@ -9,7 +9,7 @@ import { bracketOf, isConsensus } from '../../systems/ValueSystem.js';
 export function dataPage(s, data, tab = 'macro') {
   const t = tab ?? 'macro';
   const tabs = [['macro', '總體'], ['pops', '民生'], ['values', '價值觀'], ['world', '世界'], ['history', '走勢']];
-  const nav = `<div class="btn-row" style="margin:0 0 12px">${tabs.map(([id, n]) =>
+  const nav = `<div class="tabrow">${tabs.map(([id, n]) =>
     `<button class="btn ${t === id ? 'primary' : 'ghost'}" data-act="data-tab" data-id="${id}">${n}</button>`).join('')}</div>`;
   return nav + { macro, pops, values, world, history }[t](s, data);
 }

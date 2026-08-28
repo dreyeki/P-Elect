@@ -27,6 +27,31 @@
   <nav id="navbar" class="navbar"></nav>
 </div>
 <div id="modalRoot"></div>
+<script>
+// file:// 開啟時，瀏覽器會擋掉 ES Modules 與 fetch，main.js 根本不會執行。
+// 這段普通 script 一定跑得到，用來把原因講清楚，而不是讓人對著載入畫面乾等。
+if (location.protocol === 'file:') {
+  document.getElementById('bootMsg').innerHTML =
+    '<b style="color:#e2564a">沒辦法用 file:// 直接開啟</b><br><br>' +
+    '瀏覽器的安全限制會擋掉這個頁面要載入的程式與資料。<br>兩種方式都可以解決：<br><br>' +
+    '<b>一、雙擊資料夾裡的 start.bat</b><br>它會自動開一個本機伺服器並打開瀏覽器。<br><br>' +
+    '<b>二、改用單檔版本</b><br>打開 dist 資料夾裡的「選舉人生.html」，那一份可以直接雙擊執行。';
+  document.getElementById('bootMsg').style.lineHeight = '1.9';
+  document.getElementById('bootMsg').style.fontFamily = 'inherit';
+  document.getElementById('bootMsg').style.textAlign = 'left';
+  document.querySelector('.boot-inner').style.maxWidth = '440px';
+  document.querySelector('.boot-bar').style.display = 'none';
+} else {
+  // 模組如果十秒內沒有接手，代表載入出了問題，也要說清楚
+  window.__peBooted = false;
+  setTimeout(function () {
+    if (!window.__peBooted && !document.getElementById('boot').hidden) {
+      document.getElementById('bootMsg').textContent =
+        '載入超過十秒還沒完成，請打開瀏覽器的開發者工具看主控台的錯誤訊息。';
+    }
+  }, 10000);
+}
+</script>
 <script type="module" src="./src/main.js"></script>
 </body>
 </html>

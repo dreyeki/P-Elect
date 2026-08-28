@@ -7,13 +7,14 @@ import { word, biWord } from '../../util/scale.js';
 import { seatSummary, inSession } from '../../systems/LegislatureSystem.js';
 import { revenue, expenditure } from '../../systems/BudgetSystem.js';
 import { partyColor } from '../app.js';
+import { courtLean } from '../../systems/CourtSystem.js';
 
 export function politicsPage(s, data, tab = 'overview') {
   const t = tab ?? 'overview';
-  const tabs = [['overview', '概況'], ['laws', '法案'], ['factions', '派系'], ['budget', '預算'], ['interp', '質詢']];
-  const nav = `<div class="btn-row" style="margin:0 0 12px">${tabs.map(([id, n]) =>
+  const tabs = [['overview', '概況'], ['court', '憲政'], ['laws', '法案'], ['factions', '派系'], ['budget', '預算'], ['interp', '質詢']];
+  const nav = `<div class="tabrow">${tabs.map(([id, n]) =>
     `<button class="btn ${t === id ? 'primary' : 'ghost'}" data-act="politics-tab" data-id="${id}">${n}</button>`).join('')}</div>`;
-  const body = { overview, laws, factions, budget, interp }[t](s, data);
+  const body = ({ overview, court, laws, factions, budget, interp }[t] ?? overview)(s, data);
   return nav + body;
 }
 
@@ -56,6 +57,74 @@ function overview(s, data) {
       }).join('')
       : '<div class="xs muted">目前沒有你提的法案在程序中。法案要一關一關走，急不得。</div>')}
   `;
+}
+
+/* ── 憲政：總統、行政院長、大法官、釋憲 ── */
+function court(s, data) {
+  const pres = s.presidency;
+  const c = s.court;
+  if (!pres || !c) return card('憲政', '<div class="xs muted">資料還沒建立。</div>');
+  const lean = courtLean(s, data);
+  const nom = s.flags.courtNomination;
+
+  const justices = c.justices.map((j, i) => {
+    const v = j.ideology.unification ?? 0;
+    const col = v > 1 ? 'var(--crp)' : v < -1 ? 'var(--pda)' : 'var(--fg-3)';
+    const left = ((v + 5) / 10 * 100).toFixed(0);
+    return `<div class="justice">
+      <span class="jn">${j.vacantSince ? '<span class="tone-warn">（出缺）</span>' : esc(j.name)}
+        <span class="xs muted">　${j.nominatedYear} 年提名・任期至 ${j.termEnd}</span></span>
+      <span class="jl"><i style="left:${left}%;background:${col}"></i></span>
+      ${j.vacantSince && nom ? `<button class="btn ghost xs" data-act="open-nominate" data-idx="${i}" style="padding:3px 8px">提名</button>` : ''}
+    </div>`;
+  }).join('');
+
+  const reviews = c.pendingReviews.length ? c.pendingReviews.map((r) => `
+    <div class="row" style="display:block">
+      <div style="display:flex;justify-content:space-between">
+        <span class="row-k">《${esc(r.lawName)}》</span>
+        <span class="row-v xs">還要 ${Math.ceil(r.turnsLeft)} 個回合</span>
+      </div>
+      <div class="xs muted" style="margin-top:3px">在野方已聲請釋憲，裁判出來之前這條法都不算定案。</div>
+    </div>`).join('') : '<div class="xs muted">目前沒有案子在憲法法庭等著。</div>';
+
+  const hist = c.history.slice(-5).reverse().map((h) => {
+    const K = { unconstitutional: '違憲失效', conditional: '合憲但限期檢討', constitutional: '合憲' };
+    return `<div class="row"><span class="row-k">《${esc(h.lawName)}》</span>
+      <span class="row-v xs ${h.verdict === 'unconstitutional' ? 'tone-bad' : 'tone-ok'}">${K[h.verdict]}</span></div>`;
+  }).join('') || '<div class="xs muted">還沒有做出過任何裁判。</div>';
+
+  return html`
+    ${card('總統府', `
+      ${row('總統', `<b style="color:${partyColor(pres.party)}">${esc(pres.name)}</b>　<span class="xs muted">第 ${pres.term} 任</span>`)}
+      ${row('滿意度', `<span class="num ${pres.approval >= 50 ? 'tone-ok' : pres.approval < 35 ? 'tone-bad' : ''}">${pres.approval.toFixed(1)}%</span>`)}
+      ${row('任期', `<span class="num">${pres.termStart} － ${pres.termEnd}</span>`)}
+      ${row('行政院長', `${esc(pres.premier.name)}　<span class="xs muted">滿意度 ${pres.premier.approval.toFixed(0)}%</span>`)}
+      <div class="xs muted" style="margin-top:8px;line-height:1.7">
+        行政院長由總統直接任命，不需要立法院同意；但立法院過半就可以倒閣，代價是總統可以解散國會重選。
+      </div>`)}
+
+    ${card('憲法法庭', `
+      <div style="display:flex;justify-content:space-between;align-items:baseline;margin-bottom:6px">
+        <span class="row-k">十五位大法官的整體傾向</span>
+        <span class="word ${lean > 0.6 ? 'p-CRP' : lean < -0.6 ? 'p-PDA' : ''}">${
+          lean > 1.2 ? '明顯偏藍' : lean > 0.4 ? '略微偏藍' : lean < -1.2 ? '明顯偏綠' : lean < -0.4 ? '略微偏綠' : '大致平衡'}</span>
+      </div>
+      <div class="axis-track" style="margin-bottom:12px"><i style="left:${((lean + 5) / 10 * 100).toFixed(0)}%"></i></div>
+      ${justices}
+      <div class="xs muted" style="margin-top:10px;line-height:1.7">
+        大法官任期八年、不得連任，席次交錯到期。提名的是總統，同意的是立法院——
+        所以一位總統在任內能塞進去幾個人，取決於他跟國會的關係。
+      </div>`)}
+
+    ${nom ? card('你可以提名', `
+      <div class="small dim" style="line-height:1.8">
+        有 ${nom.count} 個席次等著你填。提名自己人可以確保往後八年的釋憲對你有利，
+        但立法院不見得會同意；提名中間派比較好過關，代價是他不欠你人情。
+      </div>`) : ''}
+
+    ${card('審理中的釋憲案', reviews)}
+    ${card('歷來裁判', hist)}`;
 }
 
 function laws(s, data) {

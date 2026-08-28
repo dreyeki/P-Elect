@@ -60,10 +60,29 @@ console.log('玩家       ', `知名度 ${word('fame', state.player.fame)}｜清
 console.log('私產       ', Math.round(state.finance.personal).toLocaleString(), '元；競選經費', Math.round(state.finance.campaign).toLocaleString(), '元');
 console.log('標籤       ', state.tags.join('、') || '（無）');
 console.log('價值觀     ', Object.entries(state.values).map(([k, v]) => `${k}:${v.toFixed(2)}`).join(' '));
+const { nationalSupport } = await import('../src/systems/PopSystem.js');
+const sup = nationalSupport(state, data);
+console.log('全國政黨支持度：', Object.entries(sup).sort((a, b) => b[1] - a[1])
+  .map(([k, v]) => `${data.byId.party[k]?.shortName ?? k} ${(v * 100).toFixed(1)}%`).join('　'));
 console.log('各階層生活水準：');
 for (const [k, v] of Object.entries(state.flags.stratSol ?? {})) {
   console.log('  ', data.byId.stratum[k].name.padEnd(6, '　'), v.toFixed(2), word('sol', v));
 }
 if (state.log.length) { console.log('\n錯誤紀錄：'); state.log.slice(0, 12).forEach((l) => console.log('  ', l.text)); }
+console.log(`民調：累積 ${(state.polls ?? []).length} 份`);
+const byPs = {};
+for (const p of state.polls ?? []) byPs[p.pollsterShort] = (byPs[p.pollsterShort] ?? 0) + 1;
+console.log('  最近各家：', Object.entries(byPs).map(([k, v]) => `${k}×${v}`).join('　'));
+const lp = (state.polls ?? [])[0];
+if (lp) console.log(`  最新一份 ${lp.pollsterShort}（${lp.scopeName}）：`,
+  Object.entries(lp.partySupport).filter(([, v]) => v >= 2).sort((a, b) => b[1] - a[1])
+    .map(([k, v]) => `${data.byId.party[k]?.shortName ?? k} ${v.toFixed(1)}%`).join('　'),
+  `｜總統 ${lp.presidentApproval.toFixed(0)}%`, lp.playerListed ? `｜你 ${lp.playerApproval.toFixed(1)}%` : '｜你未列入');
+console.log(`通告：手上 ${(state.invitations ?? []).length} 個`);
+console.log(`憲政：總統 ${state.presidency?.name}（${state.presidency?.party}）滿意度 ${state.presidency?.approval.toFixed(1)}%`);
+console.log(`  大法官 ${state.court?.justices.length} 位、審理中 ${state.court?.pendingReviews.length} 案、已裁判 ${state.court?.history.length} 案`);
+if (state.court?.history.length) {
+  for (const h of state.court.history.slice(-3)) console.log(`   《${h.lawName}》→ ${h.verdict}`);
+}
 console.log('\n最近新聞：');
 state.news.slice(0, 5).forEach((n) => console.log('  -', n.text));

@@ -11,7 +11,7 @@ export function mapPage(s, data, arg) {
   if (arg?.district) return districtDetail(s, data, arg.district);
   const mode = arg?.mode ?? 'favor';
   const modes = [['favor', '好感'], ['grass', '基層組織'], ['party', '執政黨'], ['sol', '生活水準']];
-  const nav = `<div class="btn-row" style="margin:0 0 10px">${modes.map(([id, n]) =>
+  const nav = `<div class="tabrow">${modes.map(([id, n]) =>
     `<button class="btn ${mode === id ? 'primary' : 'ghost'}" data-act="map-mode" data-id="${id}">${n}</button>`).join('')}</div>`;
 
   const solByRegion = regionSol(s, data);

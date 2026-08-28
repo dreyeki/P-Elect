@@ -1,0 +1,35 @@
+{
+  "_note": "總統、行政院長與大法官。爭議法案通過之後，在野方可以聲請釋憲，這是對權力最後的一道煞車。",
+  "court": {
+    "seats": 15,
+    "termYears": 8,
+    "quorum": 10,
+    "majorityNeeded": 8,
+    "nominateBy": "president",
+    "confirmBy": "legislature",
+    "_note": "任期交錯，每兩年約有四席到期。玩家當總統時可提名，但要立法院同意。"
+  },
+  "presidency": {
+    "termYears": 4,
+    "maxTerms": 2,
+    "currentTermStart": 2024,
+    "nextElection": 2028,
+    "_note": "開局時的總統是二〇二四年選出的第二任期第三年，二〇二八年一月改選。"
+  },
+  "review": {
+    "petitionThreshold": 0.25,
+    "_note": "立法委員總額四分之一以上連署即可聲請釋憲。",
+    "controversyNeeded": 4,
+    "turnsToRule": 6,
+    "outcomes": {
+      "unconstitutional": "法案失效，退回修法前的檔位",
+      "conditional": "法案保留但限期修正，社會信任下降",
+      "constitutional": "法案維持，聲請方形象受損"
+    },
+    "_note2": "爭議度為 0~5 的抽象量，四級以上（沸沸揚揚）才會有人動念聲請釋憲。"
+  },
+  "premierRole": {
+    "_note": "行政院長由總統任命，不需立法院同意，但立法院可以倒閣。",
+    "noConfidenceThreshold": 0.5
+  }
+}

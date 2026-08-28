@@ -26,6 +26,7 @@ const { electionPage } = await import('../src/ui/pages/election.js');
 const cases = [
   ['turn', () => turnPage(state, data)],
   ['politics/overview', () => politicsPage(state, data, 'overview')],
+  ['politics/court', () => politicsPage(state, data, 'court')],
   ['politics/laws', () => politicsPage(state, data, 'laws')],
   ['politics/factions', () => politicsPage(state, data, 'factions')],
   ['politics/budget', () => politicsPage(state, data, 'budget')],

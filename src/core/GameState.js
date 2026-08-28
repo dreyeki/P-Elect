@@ -3,6 +3,7 @@ import { Rng, seedFromString } from './Rng.js';
 import { ModifierStack } from './Modifier.js';
 import { buildPops } from './Pops.js';
 import { clamp, clamp05 } from './Formula.js';
+import * as Court from '../systems/CourtSystem.js';
 
 export const ROLE_ORDER = ['citizen', 'aide', 'village', 'councilor', 'legislator', 'mayor', 'minister', 'president'];
 export const ROLE_NAME = {
@@ -36,6 +37,7 @@ export function createGame(data, setup) {
     pops: null,
     modifiers: new ModifierStack(),
     pendingEvents: [], news: [], log: [], promises: [], history: [],
+    polls: [], invitations: [], court: null, presidency: null,
     counters: {}, tags: [], flags: {}, eventCooldown: {},
     legislature: structuredClone(data.central.government.legislature),
     session: { billsInProgress: [], budgetPhase: null },
@@ -92,6 +94,9 @@ export function createGame(data, setup) {
 
   // POP
   state.pops = buildPops(data, rng);
+
+  // 憲政機關：總統、行政院長、十五位大法官
+  Court.init(state, data, rng);
 
   // 起點資源
   applyStart(state, data, setup, rng);

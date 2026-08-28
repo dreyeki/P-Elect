@@ -1,21 +1,78 @@
 // @ts-check
 import { clamp, clamp05 } from '../core/Formula.js';
 
+/**
+ * 行動選單。
+ * 開局只有跑攤和進修——一個沒有職位、沒有知名度、沒有團隊的人，
+ * 本來就沒有太多事情可以做。其餘的隨著身分改變逐步解鎖。
+ */
 export const ACTIONS = [
-  { id: 'canvass', name: '選區跑攤', ap: 1, fatigue: 8, desc: '婚喪喜慶、市場、宮廟，一場一場跑。基層是這樣一點一點長出來的。' },
-  { id: 'talkshow', name: '上政論節目', ap: 1, fatigue: 8, desc: '同溫層會很爽，對面會很氣，中間選民會轉台。講錯一句就是明天的頭條。' },
-  { id: 'presser', name: '開記者會', ap: 1, fatigue: 8, desc: '主動設定議題，把大家的注意力拉到你想談的那件事上。' },
-  { id: 'draftLaw', name: '研擬法案', ap: 1, fatigue: 8, desc: '把條文寫扎實，通過的機會才會高，也才禁得起對手挑毛病。' },
-  { id: 'prepQuestion', name: '質詢準備', ap: 1, fatigue: 8, desc: '把資料讀熟、把數字背下來，上台才不會被反問到啞口無言。' },
-  { id: 'fundraise', name: '募款餐會', ap: 1, fatigue: 8, desc: '選舉是很花錢的事，而錢從來不會憑空出現在專戶裡。' },
-  { id: 'faction', name: '拜會派系大老', ap: 1, fatigue: 8, desc: '前輩會很客氣地泡茶給你喝，然後很自然地提起一件小事。' },
-  { id: 'trainStaff', name: '培養幕僚', ap: 1, fatigue: 8, desc: '好的幕僚不是找來的，是帶出來的，忠誠也是。' },
-  { id: 'visit', name: '出訪參訪', ap: 2, fatigue: 15, desc: '出去一趟很累，但回來以後你講的話會不太一樣。' },
-  { id: 'study', name: '進修讀書', ap: 1, fatigue: 8, desc: '在這一行，能靜下來讀完一本書本身就是一種奢侈。' },
-  { id: 'dealmaking', name: '私下協商', ap: 2, fatigue: 15, desc: '有些事在檯面上永遠談不成，但在檯面下十分鐘就有結論。' },
-  { id: 'family', name: '陪伴家人', ap: 1, fatigue: -20, desc: '你已經很久沒有好好吃一頓飯了，家裡的人也已經很久沒有抱怨了。' },
-  { id: 'rest', name: '休養', ap: 2, fatigue: -40, desc: '醫生說你再這樣下去會出事，你這次決定聽進去。' },
+  { id: 'canvass', name: '選區跑攤', ap: 1, fatigue: 8,
+    desc: '婚喪喜慶、市場、宮廟，一場一場跑。基層是這樣一點一點長出來的。' },
+  { id: 'study', name: '進修讀書', ap: 1, fatigue: 8,
+    desc: '在這一行，能靜下來讀完一本書本身就是一種奢侈。' },
+  { id: 'family', name: '陪伴家人', ap: 1, fatigue: -20,
+    desc: '你已經很久沒有好好吃一頓飯了，家裡的人也已經很久沒有抱怨了。' },
+  { id: 'rest', name: '休養', ap: 2, fatigue: -40,
+    desc: '醫生說你再這樣下去會出事，你這次決定聽進去。' },
+
+  { id: 'talkshow', name: '上政論節目', ap: 1, fatigue: 8,
+    unlock: { invitation: true }, unlockText: '要先收到節目通告',
+    desc: '同溫層會很爽，對面會很氣，中間選民會轉台。講錯一句就是明天的頭條。' },
+  { id: 'showPrep', name: '節目準備', ap: 1, fatigue: 6,
+    unlock: { invitation: true }, unlockText: '手上有通告才需要準備',
+    desc: '把稿子背熟、把可能被問的都想過一遍，上去才不會被主持人牽著走。' },
+  { id: 'presser', name: '開記者會', ap: 1, fatigue: 8,
+    unlock: { fame: 1 }, unlockText: '知名度到「略有耳聞」才會有記者來',
+    desc: '主動設定議題，把大家的注意力拉到你想談的那件事上。' },
+  { id: 'fundraise', name: '募款餐會', ap: 1, fatigue: 8,
+    unlock: { fame: 1 }, unlockText: '沒人認識你的時候，餐會是開不成的',
+    desc: '選舉是很花錢的事，而錢從來不會憑空出現在專戶裡。' },
+  { id: 'commissionPoll', name: '委託民調', ap: 1, fatigue: 4,
+    unlock: { fame: 1, funds: 200000 }, unlockText: '要有一點知名度，專戶也要有二十萬',
+    desc: '公開民調不會告訴你想知道的事。自己出錢做的那一份才會。' },
+  { id: 'faction', name: '拜會派系大老', ap: 1, fatigue: 8,
+    unlock: { party: true, fame: 1 }, unlockText: '要有政黨，而且對方得先聽過你',
+    desc: '前輩會很客氣地泡茶給你喝，然後很自然地提起一件小事。' },
+  { id: 'trainStaff', name: '培養幕僚', ap: 1, fatigue: 8,
+    unlock: { team: 1 }, unlockText: '你得先有幕僚',
+    desc: '好的幕僚不是找來的，是帶出來的，忠誠也是。' },
+  { id: 'draftLaw', name: '研擬法案', ap: 1, fatigue: 8,
+    unlock: { roles: ['councilor', 'legislator', 'mayor', 'minister', 'president'] },
+    unlockText: '要有民意代表或首長的身分',
+    desc: '把條文寫扎實，通過的機會才會高，也才禁得起對手挑毛病。' },
+  { id: 'prepQuestion', name: '質詢準備', ap: 1, fatigue: 8,
+    unlock: { roles: ['councilor', 'legislator'] }, unlockText: '要當上議員或立委才有質詢權',
+    desc: '把資料讀熟、把數字背下來，上台才不會被反問到啞口無言。' },
+  { id: 'visit', name: '出訪參訪', ap: 2, fatigue: 15,
+    unlock: { roles: ['councilor', 'legislator', 'mayor', 'minister', 'president'] },
+    unlockText: '要有公職身分才排得到行程',
+    desc: '出去一趟很累，但回來以後你講的話會不太一樣。' },
+  { id: 'dealmaking', name: '私下協商', ap: 2, fatigue: 15,
+    unlock: { fame: 2, politicalCapital: 40 }, unlockText: '要有一定份量，別人才願意跟你談',
+    desc: '有些事在檯面上永遠談不成，但在檯面下十分鐘就有結論。' },
 ];
+
+/** 這個行動現在能不能做，以及為什麼不能 */
+export function actionState(state, data, a) {
+  if (!a.unlock) return { unlocked: true };
+  const u = a.unlock, p = state.player;
+  if (u.fame != null && p.fame < u.fame) return { unlocked: false, why: a.unlockText };
+  if (u.party && !p.party) return { unlocked: false, why: a.unlockText };
+  if (u.team != null && state.team.length < u.team) return { unlocked: false, why: a.unlockText };
+  if (u.funds != null && state.finance.campaign < u.funds) return { unlocked: false, why: a.unlockText };
+  if (u.politicalCapital != null && p.politicalCapital < u.politicalCapital) return { unlocked: false, why: a.unlockText };
+  if (u.roles && !u.roles.includes(p.role)) return { unlocked: false, why: a.unlockText };
+  if (u.invitation && !(state.invitations ?? []).length) return { unlocked: false, why: a.unlockText };
+  return { unlocked: true };
+}
+
+export function availableActions(state, data) {
+  return ACTIONS.filter((a) => actionState(state, data, a).unlocked);
+}
+export function lockedActions(state, data) {
+  return ACTIONS.map((a) => ({ a, st: actionState(state, data, a) })).filter((x) => !x.st.unlocked);
+}
 
 export function apOf(state, data) {
   const p = state.player;

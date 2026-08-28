@@ -9,10 +9,18 @@
       "militaryPressure": 0,
       "techControl": 3,
       "narrativeInfluence": 4,
-      "cycle": 0.15,
+      "cycle": 0.35,
       "trend": 0.02,
-      "domesticPolitics": { "orientation": "internationalist", "nextShiftYear": 2028 },
-      "keyVars": ["安全承諾", "關稅", "科技管制", "軍售"],
+      "domesticPolitics": {
+        "orientation": "internationalist",
+        "nextShiftYear": 2028
+      },
+      "keyVars": [
+        "安全承諾",
+        "關稅",
+        "科技管制",
+        "軍售"
+      ],
       "desc": "台灣安全承諾與科技秩序的最終擔保者，也是最不受台灣控制的變數。每四年一次的政權輪替會重擲安全承諾與關稅立場，孤立主義轉向時軍售交貨遞延、關稅談判籌碼盡失，親善時則帶來軍售加速與國際空間。"
     },
     {
@@ -25,8 +33,17 @@
       "narrativeInfluence": 4,
       "cycle": -0.2,
       "trend": -0.01,
-      "domesticPolitics": { "orientation": "isolationist", "nextShiftYear": 2032 },
-      "keyVars": ["軍事壓力", "經濟脅迫", "統戰滲透", "觀光開放", "供應鏈"],
+      "domesticPolitics": {
+        "orientation": "isolationist",
+        "nextShiftYear": 2032
+      },
+      "keyVars": [
+        "軍事壓力",
+        "經濟脅迫",
+        "統戰滲透",
+        "觀光開放",
+        "供應鏈"
+      ],
       "desc": "同時是最大的貿易夥伴與唯一的軍事威脅，這個雙重身分讓台灣的每一項經濟決策都帶有國安成本。軍演與禁令是壓力閥，觀光與農產採購是誘因閥，兩者交替使用以牽動島內選民的兩岸議題熱度。"
     },
     {
@@ -39,8 +56,16 @@
       "narrativeInfluence": 3,
       "cycle": 0.1,
       "trend": 0.01,
-      "domesticPolitics": { "orientation": "internationalist", "nextShiftYear": 2030 },
-      "keyVars": ["安保合作", "經貿", "科技聯盟", "輿論友好"],
+      "domesticPolitics": {
+        "orientation": "internationalist",
+        "nextShiftYear": 2030
+      },
+      "keyVars": [
+        "安保合作",
+        "經貿",
+        "科技聯盟",
+        "輿論友好"
+      ],
       "desc": "西南諸島的地理位置使日本的安保討論與台海直接綁定，是美國之外最重要的安全側翼。材料與設備供應鏈深度嵌入台灣半導體業，輿論長期友好，但核食與漁權爭議隨時可能被島內政治動員成負面事件。"
     },
     {
@@ -53,8 +78,16 @@
       "narrativeInfluence": 2,
       "cycle": 0.25,
       "trend": 0.03,
-      "domesticPolitics": { "orientation": "internationalist", "nextShiftYear": 2030 },
-      "keyVars": ["半導體競爭強度", "記憶體週期", "產業對抗", "文化輸出"],
+      "domesticPolitics": {
+        "orientation": "internationalist",
+        "nextShiftYear": 2030
+      },
+      "keyVars": [
+        "半導體競爭強度",
+        "記憶體週期",
+        "產業對抗",
+        "文化輸出"
+      ],
       "desc": "在記憶體與先進製程上與台灣正面對撞的產業對手，其擴產決策直接壓縮台灣廠商的報價空間與稼動率。記憶體循環轉強時全球資本支出外溢利多，轉弱時則爆發削價競爭，牽動新竹台南兩地的就業與稅收。"
     },
     {
@@ -67,8 +100,16 @@
       "narrativeInfluence": 2,
       "cycle": 0.3,
       "trend": 0.02,
-      "domesticPolitics": { "orientation": "internationalist", "nextShiftYear": 2029 },
-      "keyVars": ["南向投資", "移工來源", "製造轉移", "農產競爭"],
+      "domesticPolitics": {
+        "orientation": "internationalist",
+        "nextShiftYear": 2029
+      },
+      "keyVars": [
+        "南向投資",
+        "移工來源",
+        "製造轉移",
+        "農產競爭"
+      ],
       "desc": "台商製造基地外移的首選去處，也是移工與新住民的主要來源，直接牽動移民軸與藍領就業。當地成本上升或政局不穩會把訂單推回台灣，反之則加速空洞化，並使南部農產在出口市場遭遇低價競爭。"
     },
     {
@@ -81,8 +122,16 @@
       "narrativeInfluence": 3,
       "cycle": -0.05,
       "trend": 0.01,
-      "domesticPolitics": { "orientation": "internationalist", "nextShiftYear": 2029 },
-      "keyVars": ["碳邊境調整", "法規標準", "政治聲援", "綠能技術"],
+      "domesticPolitics": {
+        "orientation": "internationalist",
+        "nextShiftYear": 2029
+      },
+      "keyVars": [
+        "碳邊境調整",
+        "法規標準",
+        "政治聲援",
+        "綠能技術"
+      ],
       "desc": "以法規而非軍力影響台灣的區塊，碳邊境調整機制與供應鏈盡職調查會直接轉譯成本土製造業的成本壓力。政治聲援多為象徵性但能提升國際能見度，綠能與電網技術輸出則是能源轉型能否落地的關鍵外部條件。"
     },
     {
@@ -95,8 +144,16 @@
       "narrativeInfluence": 2,
       "cycle": 0.0,
       "trend": 0.01,
-      "domesticPolitics": { "orientation": "internationalist", "nextShiftYear": 2029 },
-      "keyVars": ["金融", "CPTPP", "外交聲援", "高教人才"],
+      "domesticPolitics": {
+        "orientation": "internationalist",
+        "nextShiftYear": 2029
+      },
+      "keyVars": [
+        "金融",
+        "CPTPP",
+        "外交聲援",
+        "高教人才"
+      ],
       "desc": "體量不大但在多邊建制中具槓桿地位，是台灣叩關跨太平洋夥伴協定時的重要背書來源。倫敦金融市場的動向影響台灣壽險業的海外部位，國會友台動議則常被島內媒體放大成外交突破的敘事素材。"
     },
     {
@@ -109,8 +166,16 @@
       "narrativeInfluence": 1,
       "cycle": 0.35,
       "trend": 0.03,
-      "domesticPolitics": { "orientation": "internationalist", "nextShiftYear": 2029 },
-      "keyVars": ["製造替代", "軟體人才", "新興市場", "移工協議"],
+      "domesticPolitics": {
+        "orientation": "internationalist",
+        "nextShiftYear": 2029
+      },
+      "keyVars": [
+        "製造替代",
+        "軟體人才",
+        "新興市場",
+        "移工協議"
+      ],
       "desc": "被視為分散中國風險的下一個製造腹地，電子代工廠的南亞布局會抽走台灣本島的中階產能。移工引進協議一旦簽署將立即成為國內移民議題的引爆點，軟體人才則補上台灣資訊業長期的人力缺口。"
     },
     {
@@ -123,8 +188,16 @@
       "narrativeInfluence": 2,
       "cycle": -0.3,
       "trend": -0.01,
-      "domesticPolitics": { "orientation": "isolationist", "nextShiftYear": 2030 },
-      "keyVars": ["能源價格", "地緣牽制", "國際秩序衝擊", "認知作戰"],
+      "domesticPolitics": {
+        "orientation": "isolationist",
+        "nextShiftYear": 2030
+      },
+      "keyVars": [
+        "能源價格",
+        "地緣牽制",
+        "國際秩序衝擊",
+        "認知作戰"
+      ],
       "desc": "透過能源價格與國際秩序的震盪間接影響台灣，歐洲戰事升溫時天然氣現貨飆漲會直接推高電價與物價議題。同時提供威權陣營的行動範本，其對外行動的成敗會被島內兩派各自截取，成為疑美論與備戰論的彈藥。"
     },
     {
@@ -137,8 +210,16 @@
       "narrativeInfluence": 1,
       "cycle": 0.1,
       "trend": -0.02,
-      "domesticPolitics": { "orientation": "isolationist", "nextShiftYear": 2031 },
-      "keyVars": ["原油價格", "天然氣價格", "航運風險", "主權基金"],
+      "domesticPolitics": {
+        "orientation": "isolationist",
+        "nextShiftYear": 2031
+      },
+      "keyVars": [
+        "原油價格",
+        "天然氣價格",
+        "航運風險",
+        "主權基金"
+      ],
       "desc": "台灣能源進口的上游閥門，波灣局勢緊張時原油與液化天然氣同步跳漲，兩週內就會傳導到油價與電價。荷姆茲海峽與紅海的航運風險還會拉高保費與運費，讓出口導向的製造業毛利瞬間被吃掉一大截。"
     },
     {
@@ -151,8 +232,16 @@
       "narrativeInfluence": 1,
       "cycle": 0.05,
       "trend": 0.01,
-      "domesticPolitics": { "orientation": "internationalist", "nextShiftYear": 2028 },
-      "keyVars": ["邦交國存續", "農產進口", "資源", "僑社"],
+      "domesticPolitics": {
+        "orientation": "internationalist",
+        "nextShiftYear": 2028
+      },
+      "keyVars": [
+        "邦交國存續",
+        "農產進口",
+        "資源",
+        "僑社"
+      ],
       "desc": "現存邦交國最集中的區域，任何一國的政權更替都可能觸發斷交事件並重擊執政者的外交評價。同時是黃豆玉米等大宗農產與銅礦的來源，作物歉收或港口罷工會沿著飼料成本一路推升島內的物價議題。"
     },
     {
@@ -165,8 +254,16 @@
       "narrativeInfluence": 1,
       "cycle": 0.2,
       "trend": 0.02,
-      "domesticPolitics": { "orientation": "isolationist", "nextShiftYear": 2031 },
-      "keyVars": ["邦交國", "關鍵礦產", "新興市場", "醫療外交"],
+      "domesticPolitics": {
+        "orientation": "isolationist",
+        "nextShiftYear": 2031
+      },
+      "keyVars": [
+        "邦交國",
+        "關鍵礦產",
+        "新興市場",
+        "醫療外交"
+      ],
       "desc": "關鍵礦產的供應源頭，鈷鋰與稀土的出口管制會直接卡住電池與磁性材料的下游廠商。邦交競逐在此地最為激烈，醫療團與農技團是成本最低的外交工具，撤館事件則會被在野方拿來檢驗外交預算的效益。"
     },
     {
@@ -179,8 +276,16 @@
       "narrativeInfluence": 2,
       "cycle": 0.1,
       "trend": 0.01,
-      "domesticPolitics": { "orientation": "internationalist", "nextShiftYear": 2028 },
-      "keyVars": ["液化天然氣", "農產", "太平洋邦交競逐", "礦產"],
+      "domesticPolitics": {
+        "orientation": "internationalist",
+        "nextShiftYear": 2028
+      },
+      "keyVars": [
+        "液化天然氣",
+        "農產",
+        "太平洋邦交競逐",
+        "礦產"
+      ],
       "desc": "台灣天然氣長約與煤炭的主要供應方，其出口政策變動會直接改寫發電成本與備轉容量的假設。太平洋島國是邦交攻防的主戰場，澳紐在區域安全上的表態則常被視為美國承諾之外的第二層安全指標。"
     },
     {
@@ -193,8 +298,16 @@
       "narrativeInfluence": 3,
       "cycle": 0.0,
       "trend": 0.0,
-      "domesticPolitics": { "orientation": "internationalist", "nextShiftYear": 2030 },
-      "keyVars": ["衛生組織參與", "貿易組織爭端", "區域經貿協定", "國際空間"],
+      "domesticPolitics": {
+        "orientation": "internationalist",
+        "nextShiftYear": 2030
+      },
+      "keyVars": [
+        "衛生組織參與",
+        "貿易組織爭端",
+        "區域經貿協定",
+        "國際空間"
+      ],
       "desc": "台灣國際空間的計分板，觀察員身分與入會談判的每一次進退都會立刻轉成國內的外交績效評價。多邊規則同時是保護傘與緊箍咒，貿易爭端裁決與技術標準採認會反過來限制國內產業政策的操作空間。"
     },
     {
@@ -205,11 +318,19 @@
       "militaryPressure": 0,
       "techControl": 3,
       "narrativeInfluence": 3,
-      "cycle": 0.45,
+      "cycle": 0.92,
       "trend": 0.03,
-      "domesticPolitics": { "orientation": "internationalist", "nextShiftYear": 2029 },
-      "keyVars": ["半導體循環", "AI 資本支出週期", "航運指數", "全球利率"],
-      "desc": "全遊戲最大的經濟槓桿，半導體與人工智慧資本支出的循環相位決定了出口、稅收、股市與科技聚落就業的基本盤。景氣高原期讓執政者不必做對事也有政績，反轉時則同時引爆失業、稅收缺口與資產價格修正三重危機。"
+      "domesticPolitics": {
+        "orientation": "internationalist",
+        "nextShiftYear": 2029
+      },
+      "keyVars": [
+        "半導體循環",
+        "AI 資本支出週期",
+        "航運指數",
+        "全球利率"
+      ],
+      "desc": "半導體與 AI 資本支出週期。二〇二六年正處在這一輪熱潮的高點，出口與稅收都被它撐起來；但週期終究會回落，把這段紅利當成常態來編預算的人，會在幾年後付出代價。"
     }
   ]
 }

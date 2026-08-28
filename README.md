@@ -44,13 +44,28 @@
 
 ## 執行
 
+**最簡單的方式**：打開 `dist/選舉人生.html`，直接雙擊就能玩。那是把所有程式與資料內嵌在一起的單檔版本。
+
+**開發時**：
+
 ```bash
-# 任何靜態伺服器都可以，不需要建置
-python3 -m http.server 8080
-# 然後打開 http://localhost:8080
+# Windows
+start.bat
+
+# macOS / Linux
+./start.sh
+
+# 或自己開
+python3 -m http.server 8080     # 然後打開 http://localhost:8080
 ```
 
-因為用了 ES Modules 與 `fetch`，直接用 `file://` 開啟不會動，要透過 HTTP 服務。
+**為什麼不能直接用 `file://` 開 `index.html`**：瀏覽器基於安全考量，禁止 `file://` 頁面用 ES Modules 與 `fetch` 載入本機檔案，程式根本不會執行。多檔版本必須透過 HTTP 服務。單檔版本沒有這個限制，因為它不需要載入任何外部檔案。
+
+改完程式碼之後要重新產生單檔版：
+
+```bash
+node tools/build-single.js
+```
 
 ## 開發
 

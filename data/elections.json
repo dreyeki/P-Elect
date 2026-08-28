@@ -1,1608 +1,1624 @@
 {
- "_source": "區域立委選區由議員選區依人口貪婪組合而成，非官方劃分",
- "schedule": [
-  {
-   "year": 2026,
-   "month": 11,
-   "types": [
-    "mayor",
-    "councilor",
-    "townshipHead",
-    "villageHead"
-   ]
-  },
-  {
-   "year": 2028,
-   "month": 1,
-   "types": [
-    "president",
-    "legislator",
-    "partyList"
-   ]
-  },
-  {
-   "year": 2030,
-   "month": 11,
-   "types": [
-    "mayor",
-    "councilor",
-    "townshipHead",
-    "villageHead"
-   ]
-  },
-  {
-   "year": 2032,
-   "month": 1,
-   "types": [
-    "president",
-    "legislator",
-    "partyList"
-   ]
-  },
-  {
-   "year": 2034,
-   "month": 11,
-   "types": [
-    "mayor",
-    "councilor",
-    "townshipHead",
-    "villageHead"
-   ]
-  },
-  {
-   "year": 2036,
-   "month": 1,
-   "types": [
-    "president",
-    "legislator",
-    "partyList"
-   ]
-  },
-  {
-   "year": 2038,
-   "month": 11,
-   "types": [
-    "mayor",
-    "councilor",
-    "townshipHead",
-    "villageHead"
-   ]
-  },
-  {
-   "year": 2040,
-   "month": 1,
-   "types": [
-    "president",
-    "legislator",
-    "partyList"
-   ]
-  },
-  {
-   "year": 2042,
-   "month": 11,
-   "types": [
-    "mayor",
-    "councilor",
-    "townshipHead",
-    "villageHead"
-   ]
-  },
-  {
-   "year": 2044,
-   "month": 1,
-   "types": [
-    "president",
-    "legislator",
-    "partyList"
-   ]
-  },
-  {
-   "year": 2046,
-   "month": 11,
-   "types": [
-    "mayor",
-    "councilor",
-    "townshipHead",
-    "villageHead"
-   ]
-  },
-  {
-   "year": 2048,
-   "month": 1,
-   "types": [
-    "president",
-    "legislator",
-    "partyList"
-   ]
-  },
-  {
-   "year": 2050,
-   "month": 11,
-   "types": [
-    "mayor",
-    "councilor",
-    "townshipHead",
-    "villageHead"
-   ]
-  }
- ],
- "levels": {
-  "villageHead": {
-   "name": "村里長",
-   "turnoutFactor": 0.75,
-   "scope": "sub",
-   "deposit": 20000,
-   "fameNeed": 0
-  },
-  "townshipRep": {
-   "name": "鄉鎮市民代表",
-   "turnoutFactor": 0.75,
-   "scope": "sub",
-   "deposit": 20000,
-   "fameNeed": 0
-  },
-  "townshipHead": {
-   "name": "鄉鎮市長",
-   "turnoutFactor": 0.85,
-   "scope": "sub",
-   "deposit": 200000,
-   "fameNeed": 1
-  },
-  "councilor": {
-   "name": "縣市議員",
-   "turnoutFactor": 0.9,
-   "scope": "district",
-   "deposit": 200000,
-   "fameNeed": 1,
-   "system": "SNTV"
-  },
-  "mayor": {
-   "name": "縣市長",
-   "turnoutFactor": 1.05,
-   "scope": "region",
-   "deposit": 2000000,
-   "fameNeed": 3
-  },
-  "legislator": {
-   "name": "區域立委",
-   "turnoutFactor": 1,
-   "scope": "legDistrict",
-   "deposit": 200000,
-   "fameNeed": 2
-  },
-  "partyList": {
-   "name": "不分區立委",
-   "turnoutFactor": 1,
-   "scope": "nation",
-   "threshold": 0.05,
-   "seats": 34
-  },
-  "president": {
-   "name": "總統",
-   "turnoutFactor": 1.15,
-   "scope": "nation",
-   "deposit": 15000000,
-   "fameNeed": 4
-  }
- },
- "subsidyPerVote": 30,
- "subsidyThreshold": 0.03,
- "legislatorDistricts": [
-  {
-   "id": "TPE-L01",
-   "regionId": "TPE",
-   "name": "臺北市第1選舉區",
-   "parts": [
-    {
-     "districtId": "TPE-01",
-     "weight": 0.6121
-    }
-   ],
-   "population": 307886
-  },
-  {
-   "id": "TPE-L02",
-   "regionId": "TPE",
-   "name": "臺北市第2選舉區",
-   "parts": [
-    {
-     "districtId": "TPE-01",
-     "weight": 0.3879
-    },
-    {
-     "districtId": "TPE-02",
-     "weight": 0.2936
-    }
-   ],
-   "population": 307856
-  },
-  {
-   "id": "TPE-L03",
-   "regionId": "TPE",
-   "name": "臺北市第3選舉區",
-   "parts": [
-    {
-     "districtId": "TPE-02",
-     "weight": 0.7064
-    },
-    {
-     "districtId": "TPE-03",
-     "weight": 0.0939
-    }
-   ],
-   "population": 307879
-  },
-  {
-   "id": "TPE-L04",
-   "regionId": "TPE",
-   "name": "臺北市第4選舉區",
-   "parts": [
-    {
-     "districtId": "TPE-03",
-     "weight": 0.7894
-    }
-   ],
-   "population": 307866
-  },
-  {
-   "id": "TPE-L05",
-   "regionId": "TPE",
-   "name": "臺北市第5選舉區",
-   "parts": [
-    {
-     "districtId": "TPE-03",
-     "weight": 0.1167
-    },
-    {
-     "districtId": "TPE-04",
-     "weight": 0.7856
-    }
-   ],
-   "population": 307903
-  },
-  {
-   "id": "TPE-L06",
-   "regionId": "TPE",
-   "name": "臺北市第6選舉區",
-   "parts": [
-    {
-     "districtId": "TPE-04",
-     "weight": 0.2144
-    },
-    {
-     "districtId": "TPE-05",
-     "weight": 0.7292
-    }
-   ],
-   "population": 307870
-  },
-  {
-   "id": "TPE-L07",
-   "regionId": "TPE",
-   "name": "臺北市第7選舉區",
-   "parts": [
-    {
-     "districtId": "TPE-05",
-     "weight": 0.2708
-    },
-    {
-     "districtId": "TPE-06",
-     "weight": 0.4169
-    }
-   ],
-   "population": 307862
-  },
-  {
-   "id": "TPE-L08",
-   "regionId": "TPE",
-   "name": "臺北市第8選舉區",
-   "parts": [
-    {
-     "districtId": "TPE-06",
-     "weight": 0.5831
-    }
-   ],
-   "population": 307877
-  },
-  {
-   "id": "NTP-L01",
-   "regionId": "NTP",
-   "name": "新北市第1選舉區",
-   "parts": [
-    {
-     "districtId": "NTP-01",
-     "weight": 1
-    },
-    {
-     "districtId": "NTP-02",
-     "weight": 0.1385
-    }
-   ],
-   "population": 329311
-  },
-  {
-   "id": "NTP-L02",
-   "regionId": "NTP",
-   "name": "新北市第2選舉區",
-   "parts": [
-    {
-     "districtId": "NTP-02",
-     "weight": 0.6776
-    }
-   ],
-   "population": 329314
-  },
-  {
-   "id": "NTP-L03",
-   "regionId": "NTP",
-   "name": "新北市第3選舉區",
-   "parts": [
-    {
-     "districtId": "NTP-02",
-     "weight": 0.1838
-    },
-    {
-     "districtId": "NTP-03",
-     "weight": 0.6417
-    }
-   ],
-   "population": 329323
-  },
-  {
-   "id": "NTP-L04",
-   "regionId": "NTP",
-   "name": "新北市第4選舉區",
-   "parts": [
-    {
-     "districtId": "NTP-03",
-     "weight": 0.3583
-    },
-    {
-     "districtId": "NTP-04",
-     "weight": 0.473
-    }
-   ],
-   "population": 329353
-  },
-  {
-   "id": "NTP-L05",
-   "regionId": "NTP",
-   "name": "新北市第5選舉區",
-   "parts": [
-    {
-     "districtId": "NTP-04",
-     "weight": 0.527
-    },
-    {
-     "districtId": "NTP-05",
-     "weight": 0.2064
-    }
-   ],
-   "population": 329313
-  },
-  {
-   "id": "NTP-L06",
-   "regionId": "NTP",
-   "name": "新北市第6選舉區",
-   "parts": [
-    {
-     "districtId": "NTP-05",
-     "weight": 0.6087
-    }
-   ],
-   "population": 329307
-  },
-  {
-   "id": "NTP-L07",
-   "regionId": "NTP",
-   "name": "新北市第7選舉區",
-   "parts": [
-    {
-     "districtId": "NTP-05",
-     "weight": 0.1848
-    },
-    {
-     "districtId": "NTP-06",
-     "weight": 0.5691
-    }
-   ],
-   "population": 329324
-  },
-  {
-   "id": "NTP-L08",
-   "regionId": "NTP",
-   "name": "新北市第8選舉區",
-   "parts": [
-    {
-     "districtId": "NTP-06",
-     "weight": 0.4309
-    },
-    {
-     "districtId": "NTP-07",
-     "weight": 0.7207
-    }
-   ],
-   "population": 329324
-  },
-  {
-   "id": "NTP-L09",
-   "regionId": "NTP",
-   "name": "新北市第9選舉區",
-   "parts": [
-    {
-     "districtId": "NTP-07",
-     "weight": 0.2793
-    },
-    {
-     "districtId": "NTP-08",
-     "weight": 0.4353
-    }
-   ],
-   "population": 329344
-  },
-  {
-   "id": "NTP-L10",
-   "regionId": "NTP",
-   "name": "新北市第10選舉區",
-   "parts": [
-    {
-     "districtId": "NTP-08",
-     "weight": 0.5329
-    }
-   ],
-   "population": 329332
-  },
-  {
-   "id": "NTP-L11",
-   "regionId": "NTP",
-   "name": "新北市第11選舉區",
-   "parts": [
-    {
-     "districtId": "NTP-08",
-     "weight": 0.0318
-    },
-    {
-     "districtId": "NTP-09",
-     "weight": 0.9162
-    }
-   ],
-   "population": 329328
-  },
-  {
-   "id": "NTP-L12",
-   "regionId": "NTP",
-   "name": "新北市第12選舉區",
-   "parts": [
-    {
-     "districtId": "NTP-09",
-     "weight": 0.0838
-    },
-    {
-     "districtId": "NTP-10",
-     "weight": 1
-    }
-   ],
-   "population": 329324
-  },
-  {
-   "id": "TYC-L01",
-   "regionId": "TYC",
-   "name": "桃園市第1選舉區",
-   "parts": [
-    {
-     "districtId": "TYC-01",
-     "weight": 0.8129
-    }
-   ],
-   "population": 364992
-  },
-  {
-   "id": "TYC-L02",
-   "regionId": "TYC",
-   "name": "桃園市第2選舉區",
-   "parts": [
-    {
-     "districtId": "TYC-01",
-     "weight": 0.1871
-    },
-    {
-     "districtId": "TYC-02",
-     "weight": 1
-    },
-    {
-     "districtId": "TYC-03",
-     "weight": 0.535
-    }
-   ],
-   "population": 365008
-  },
-  {
-   "id": "TYC-L03",
-   "regionId": "TYC",
-   "name": "桃園市第3選舉區",
-   "parts": [
-    {
-     "districtId": "TYC-03",
-     "weight": 0.465
-    },
-    {
-     "districtId": "TYC-04",
-     "weight": 1
-    },
-    {
-     "districtId": "TYC-05",
-     "weight": 0.4217
-    }
-   ],
-   "population": 364993
-  },
-  {
-   "id": "TYC-L04",
-   "regionId": "TYC",
-   "name": "桃園市第4選舉區",
-   "parts": [
-    {
-     "districtId": "TYC-05",
-     "weight": 0.5783
-    },
-    {
-     "districtId": "TYC-06",
-     "weight": 0.6182
-    }
-   ],
-   "population": 365011
-  },
-  {
-   "id": "TYC-L05",
-   "regionId": "TYC",
-   "name": "桃園市第5選舉區",
-   "parts": [
-    {
-     "districtId": "TYC-06",
-     "weight": 0.3818
-    },
-    {
-     "districtId": "TYC-07",
-     "weight": 1
-    },
-    {
-     "districtId": "TYC-08",
-     "weight": 0.9402
-    }
-   ],
-   "population": 364999
-  },
-  {
-   "id": "TYC-L06",
-   "regionId": "TYC",
-   "name": "桃園市第6選舉區",
-   "parts": [
-    {
-     "districtId": "TYC-09",
-     "weight": 1
-    },
-    {
-     "districtId": "TYC-10",
-     "weight": 1
-    },
-    {
-     "districtId": "TYC-11",
-     "weight": 1
-    },
-    {
-     "districtId": "TYC-12",
-     "weight": 1
-    }
-   ],
-   "population": 358000
-  },
-  {
-   "id": "TCH-L01",
-   "regionId": "TCH",
-   "name": "臺中市第1選舉區",
-   "parts": [
-    {
-     "districtId": "TCH-01",
-     "weight": 1
-    },
-    {
-     "districtId": "TCH-02",
-     "weight": 0.4609
-    }
-   ],
-   "population": 347611
-  },
-  {
-   "id": "TCH-L02",
-   "regionId": "TCH",
-   "name": "臺中市第2選舉區",
-   "parts": [
-    {
-     "districtId": "TCH-02",
-     "weight": 0.5391
-    },
-    {
-     "districtId": "TCH-03",
-     "weight": 0.5653
-    }
-   ],
-   "population": 347628
-  },
-  {
-   "id": "TCH-L03",
-   "regionId": "TCH",
-   "name": "臺中市第3選舉區",
-   "parts": [
-    {
-     "districtId": "TCH-03",
-     "weight": 0.4347
-    },
-    {
-     "districtId": "TCH-04",
-     "weight": 0.5736
-    }
-   ],
-   "population": 347642
-  },
-  {
-   "id": "TCH-L04",
-   "regionId": "TCH",
-   "name": "臺中市第4選舉區",
-   "parts": [
-    {
-     "districtId": "TCH-04",
-     "weight": 0.4264
-    },
-    {
-     "districtId": "TCH-05",
-     "weight": 0.6038
-    }
-   ],
-   "population": 347617
-  },
-  {
-   "id": "TCH-L05",
-   "regionId": "TCH",
-   "name": "臺中市第5選舉區",
-   "parts": [
-    {
-     "districtId": "TCH-05",
-     "weight": 0.3962
-    },
-    {
-     "districtId": "TCH-06",
-     "weight": 1
-    },
-    {
-     "districtId": "TCH-07",
-     "weight": 0.3047
-    }
-   ],
-   "population": 347630
-  },
-  {
-   "id": "TCH-L06",
-   "regionId": "TCH",
-   "name": "臺中市第6選舉區",
-   "parts": [
-    {
-     "districtId": "TCH-07",
-     "weight": 0.6953
-    },
-    {
-     "districtId": "TCH-08",
-     "weight": 1
-    },
-    {
-     "districtId": "TCH-09",
-     "weight": 0.1569
-    }
-   ],
-   "population": 347624
-  },
-  {
-   "id": "TCH-L07",
-   "regionId": "TCH",
-   "name": "臺中市第7選舉區",
-   "parts": [
-    {
-     "districtId": "TCH-09",
-     "weight": 0.8431
-    },
-    {
-     "districtId": "TCH-10",
-     "weight": 0.6656
-    }
-   ],
-   "population": 347622
-  },
-  {
-   "id": "TCH-L08",
-   "regionId": "TCH",
-   "name": "臺中市第8選舉區",
-   "parts": [
-    {
-     "districtId": "TCH-10",
-     "weight": 0.3344
-    },
-    {
-     "districtId": "TCH-11",
-     "weight": 1
-    },
-    {
-     "districtId": "TCH-12",
-     "weight": 1
-    }
-   ],
-   "population": 347626
-  },
-  {
-   "id": "TNN-L01",
-   "regionId": "TNN",
-   "name": "臺南市第1選舉區",
-   "parts": [
-    {
-     "districtId": "TNN-01",
-     "weight": 1
-    },
-    {
-     "districtId": "TNN-02",
-     "weight": 1
-    }
-   ],
-   "population": 308000
-  },
-  {
-   "id": "TNN-L02",
-   "regionId": "TNN",
-   "name": "臺南市第2選舉區",
-   "parts": [
-    {
-     "districtId": "TNN-03",
-     "weight": 0.9957
-    },
-    {
-     "districtId": "TNN-04",
-     "weight": 0.7629
-    }
-   ],
-   "population": 308672
-  },
-  {
-   "id": "TNN-L03",
-   "regionId": "TNN",
-   "name": "臺南市第3選舉區",
-   "parts": [
-    {
-     "districtId": "TNN-04",
-     "weight": 0.2371
-    },
-    {
-     "districtId": "TNN-05",
-     "weight": 1
-    },
-    {
-     "districtId": "TNN-06",
-     "weight": 0.1154
-    }
-   ],
-   "population": 308660
-  },
-  {
-   "id": "TNN-L04",
-   "regionId": "TNN",
-   "name": "臺南市第4選舉區",
-   "parts": [
-    {
-     "districtId": "TNN-06",
-     "weight": 0.8846
-    },
-    {
-     "districtId": "TNN-07",
-     "weight": 0.7982
-    }
-   ],
-   "population": 308664
-  },
-  {
-   "id": "TNN-L05",
-   "regionId": "TNN",
-   "name": "臺南市第5選舉區",
-   "parts": [
-    {
-     "districtId": "TNN-07",
-     "weight": 0.2018
-    },
-    {
-     "districtId": "TNN-08",
-     "weight": 1
-    },
-    {
-     "districtId": "TNN-09",
-     "weight": 0.786
-    }
-   ],
-   "population": 308673
-  },
-  {
-   "id": "TNN-L06",
-   "regionId": "TNN",
-   "name": "臺南市第6選舉區",
-   "parts": [
-    {
-     "districtId": "TNN-09",
-     "weight": 0.214
-    },
-    {
-     "districtId": "TNN-10",
-     "weight": 1
-    },
-    {
-     "districtId": "TNN-11",
-     "weight": 1
-    }
-   ],
-   "population": 308660
-  },
-  {
-   "id": "KHH-L01",
-   "regionId": "KHH",
-   "name": "高雄市第1選舉區",
-   "parts": [
-    {
-     "districtId": "KHH-01",
-     "weight": 1
-    },
-    {
-     "districtId": "KHH-02",
-     "weight": 0.5307
-    }
-   ],
-   "population": 337258
-  },
-  {
-   "id": "KHH-L02",
-   "regionId": "KHH",
-   "name": "高雄市第2選舉區",
-   "parts": [
-    {
-     "districtId": "KHH-02",
-     "weight": 0.4693
-    },
-    {
-     "districtId": "KHH-03",
-     "weight": 0.4292
-    }
-   ],
-   "population": 337258
-  },
-  {
-   "id": "KHH-L03",
-   "regionId": "KHH",
-   "name": "高雄市第3選舉區",
-   "parts": [
-    {
-     "districtId": "KHH-03",
-     "weight": 0.5708
-    },
-    {
-     "districtId": "KHH-04",
-     "weight": 0.6981
-    }
-   ],
-   "population": 337236
-  },
-  {
-   "id": "KHH-L04",
-   "regionId": "KHH",
-   "name": "高雄市第4選舉區",
-   "parts": [
-    {
-     "districtId": "KHH-04",
-     "weight": 0.3019
-    },
-    {
-     "districtId": "KHH-05",
-     "weight": 0.8494
-    }
-   ],
-   "population": 337249
-  },
-  {
-   "id": "KHH-L05",
-   "regionId": "KHH",
-   "name": "高雄市第5選舉區",
-   "parts": [
-    {
-     "districtId": "KHH-05",
-     "weight": 0.1506
-    },
-    {
-     "districtId": "KHH-06",
-     "weight": 1
-    },
-    {
-     "districtId": "KHH-07",
-     "weight": 0.1751
-    }
-   ],
-   "population": 337257
-  },
-  {
-   "id": "KHH-L06",
-   "regionId": "KHH",
-   "name": "高雄市第6選舉區",
-   "parts": [
-    {
-     "districtId": "KHH-07",
-     "weight": 0.8249
-    },
-    {
-     "districtId": "KHH-08",
-     "weight": 0.1891
-    }
-   ],
-   "population": 337251
-  },
-  {
-   "id": "KHH-L07",
-   "regionId": "KHH",
-   "name": "高雄市第7選舉區",
-   "parts": [
-    {
-     "districtId": "KHH-08",
-     "weight": 0.8109
-    },
-    {
-     "districtId": "KHH-09",
-     "weight": 0.219
-    }
-   ],
-   "population": 337233
-  },
-  {
-   "id": "KHH-L08",
-   "regionId": "KHH",
-   "name": "高雄市第8選舉區",
-   "parts": [
-    {
-     "districtId": "KHH-09",
-     "weight": 0.781
-    },
-    {
-     "districtId": "KHH-10",
-     "weight": 1
-    }
-   ],
-   "population": 337258
-  },
-  {
-   "id": "KEE-L01",
-   "regionId": "KEE",
-   "name": "基隆市第1選舉區",
-   "parts": [
-    {
-     "districtId": "KEE-01",
-     "weight": 1
-    },
-    {
-     "districtId": "KEE-02",
-     "weight": 1
-    },
-    {
-     "districtId": "KEE-03",
-     "weight": 1
-    },
-    {
-     "districtId": "KEE-04",
-     "weight": 1
-    },
-    {
-     "districtId": "KEE-05",
-     "weight": 1
-    },
-    {
-     "districtId": "KEE-06",
-     "weight": 1
-    },
-    {
-     "districtId": "KEE-07",
-     "weight": 1
-    }
-   ],
-   "population": 351000
-  },
-  {
-   "id": "HSC-L01",
-   "regionId": "HSC",
-   "name": "新竹市第1選舉區",
-   "parts": [
-    {
-     "districtId": "HSC-01",
-     "weight": 1
-    },
-    {
-     "districtId": "HSC-02",
-     "weight": 1
-    },
-    {
-     "districtId": "HSC-03",
-     "weight": 1
-    }
-   ],
-   "population": 443000
-  },
-  {
-   "id": "CYI-L01",
-   "regionId": "CYI",
-   "name": "嘉義市第1選舉區",
-   "parts": [
-    {
-     "districtId": "CYI-01",
-     "weight": 1
-    },
-    {
-     "districtId": "CYI-02",
-     "weight": 1
-    }
-   ],
-   "population": 260000
-  },
-  {
-   "id": "HSQ-L01",
-   "regionId": "HSQ",
-   "name": "新竹縣第1選舉區",
-   "parts": [
-    {
-     "districtId": "HSQ-01",
-     "weight": 1
-    },
-    {
-     "districtId": "HSQ-02",
-     "weight": 0.6038
-    }
-   ],
-   "population": 281494
-  },
-  {
-   "id": "HSQ-L02",
-   "regionId": "HSQ",
-   "name": "新竹縣第2選舉區",
-   "parts": [
-    {
-     "districtId": "HSQ-02",
-     "weight": 0.3962
-    },
-    {
-     "districtId": "HSQ-03",
-     "weight": 1
-    },
-    {
-     "districtId": "HSQ-04",
-     "weight": 1
-    },
-    {
-     "districtId": "HSQ-05",
-     "weight": 1
-    },
-    {
-     "districtId": "HSQ-06",
-     "weight": 1
-    }
-   ],
-   "population": 281506
-  },
-  {
-   "id": "MIA-L01",
-   "regionId": "MIA",
-   "name": "苗栗縣第1選舉區",
-   "parts": [
-    {
-     "districtId": "MIA-01",
-     "weight": 1
-    },
-    {
-     "districtId": "MIA-02",
-     "weight": 1
-    },
-    {
-     "districtId": "MIA-03",
-     "weight": 0.5374
-    }
-   ],
-   "population": 262502
-  },
-  {
-   "id": "MIA-L02",
-   "regionId": "MIA",
-   "name": "苗栗縣第2選舉區",
-   "parts": [
-    {
-     "districtId": "MIA-03",
-     "weight": 0.4626
-    },
-    {
-     "districtId": "MIA-04",
-     "weight": 1
-    },
-    {
-     "districtId": "MIA-05",
-     "weight": 1
-    },
-    {
-     "districtId": "MIA-06",
-     "weight": 1
-    },
-    {
-     "districtId": "MIA-07",
-     "weight": 1
-    }
-   ],
-   "population": 262498
-  },
-  {
-   "id": "CHA-L01",
-   "regionId": "CHA",
-   "name": "彰化縣第1選舉區",
-   "parts": [
-    {
-     "districtId": "CHA-01",
-     "weight": 1
-    },
-    {
-     "districtId": "CHA-02",
-     "weight": 0.7404
-    }
-   ],
-   "population": 311002
-  },
-  {
-   "id": "CHA-L02",
-   "regionId": "CHA",
-   "name": "彰化縣第2選舉區",
-   "parts": [
-    {
-     "districtId": "CHA-02",
-     "weight": 0.2596
-    },
-    {
-     "districtId": "CHA-03",
-     "weight": 1
-    },
-    {
-     "districtId": "CHA-04",
-     "weight": 0.9103
-    }
-   ],
-   "population": 311005
-  },
-  {
-   "id": "CHA-L03",
-   "regionId": "CHA",
-   "name": "彰化縣第3選舉區",
-   "parts": [
-    {
-     "districtId": "CHA-04",
-     "weight": 0.0897
-    },
-    {
-     "districtId": "CHA-05",
-     "weight": 1
-    },
-    {
-     "districtId": "CHA-06",
-     "weight": 1
-    },
-    {
-     "districtId": "CHA-07",
-     "weight": 0.5378
-    }
-   ],
-   "population": 310991
-  },
-  {
-   "id": "CHA-L04",
-   "regionId": "CHA",
-   "name": "彰化縣第4選舉區",
-   "parts": [
-    {
-     "districtId": "CHA-07",
-     "weight": 0.4622
-    },
-    {
-     "districtId": "CHA-08",
-     "weight": 1
-    },
-    {
-     "districtId": "CHA-09",
-     "weight": 1
-    }
-   ],
-   "population": 311002
-  },
-  {
-   "id": "NAN-L01",
-   "regionId": "NAN",
-   "name": "南投縣第1選舉區",
-   "parts": [
-    {
-     "districtId": "NAN-01",
-     "weight": 1
-    },
-    {
-     "districtId": "NAN-02",
-     "weight": 1
-    },
-    {
-     "districtId": "NAN-03",
-     "weight": 0.9505
-    }
-   ],
-   "population": 225496
-  },
-  {
-   "id": "NAN-L02",
-   "regionId": "NAN",
-   "name": "南投縣第2選舉區",
-   "parts": [
-    {
-     "districtId": "NAN-04",
-     "weight": 1
-    },
-    {
-     "districtId": "NAN-05",
-     "weight": 1
-    },
-    {
-     "districtId": "NAN-06",
-     "weight": 1
-    }
-   ],
-   "population": 221000
-  },
-  {
-   "id": "YUN-L01",
-   "regionId": "YUN",
-   "name": "雲林縣第1選舉區",
-   "parts": [
-    {
-     "districtId": "YUN-01",
-     "weight": 1
-    },
-    {
-     "districtId": "YUN-02",
-     "weight": 1
-    },
-    {
-     "districtId": "YUN-03",
-     "weight": 1
-    },
-    {
-     "districtId": "YUN-04",
-     "weight": 0.7727
-    }
-   ],
-   "population": 330497
-  },
-  {
-   "id": "YUN-L02",
-   "regionId": "YUN",
-   "name": "雲林縣第2選舉區",
-   "parts": [
-    {
-     "districtId": "YUN-04",
-     "weight": 0.2273
-    },
-    {
-     "districtId": "YUN-05",
-     "weight": 1
-    },
-    {
-     "districtId": "YUN-06",
-     "weight": 1
-    },
-    {
-     "districtId": "YUN-07",
-     "weight": 1
-    },
-    {
-     "districtId": "YUN-08",
-     "weight": 1
-    },
-    {
-     "districtId": "YUN-09",
-     "weight": 1
-    }
-   ],
-   "population": 330503
-  },
-  {
-   "id": "CYQ-L01",
-   "regionId": "CYQ",
-   "name": "嘉義縣第1選舉區",
-   "parts": [
-    {
-     "districtId": "CYQ-01",
-     "weight": 1
-    },
-    {
-     "districtId": "CYQ-02",
-     "weight": 1
-    },
-    {
-     "districtId": "CYQ-03",
-     "weight": 1
-    },
-    {
-     "districtId": "CYQ-04",
-     "weight": 0.1615
-    }
-   ],
-   "population": 241498
-  },
-  {
-   "id": "CYQ-L02",
-   "regionId": "CYQ",
-   "name": "嘉義縣第2選舉區",
-   "parts": [
-    {
-     "districtId": "CYQ-04",
-     "weight": 0.8385
-    },
-    {
-     "districtId": "CYQ-05",
-     "weight": 1
-    },
-    {
-     "districtId": "CYQ-06",
-     "weight": 1
-    },
-    {
-     "districtId": "CYQ-07",
-     "weight": 1
-    }
-   ],
-   "population": 241503
-  },
-  {
-   "id": "PIF-L01",
-   "regionId": "PIF",
-   "name": "屏東縣第1選舉區",
-   "parts": [
-    {
-     "districtId": "PIF-01",
-     "weight": 1
-    },
-    {
-     "districtId": "PIF-02",
-     "weight": 1
-    },
-    {
-     "districtId": "PIF-03",
-     "weight": 1
-    },
-    {
-     "districtId": "PIF-04",
-     "weight": 0.4787
-    }
-   ],
-   "population": 369998
-  },
-  {
-   "id": "PIF-L02",
-   "regionId": "PIF",
-   "name": "屏東縣第2選舉區",
-   "parts": [
-    {
-     "districtId": "PIF-04",
-     "weight": 0.5213
-    },
-    {
-     "districtId": "PIF-05",
-     "weight": 1
-    },
-    {
-     "districtId": "PIF-06",
-     "weight": 1
-    },
-    {
-     "districtId": "PIF-07",
-     "weight": 1
-    },
-    {
-     "districtId": "PIF-08",
-     "weight": 1
-    },
-    {
-     "districtId": "PIF-09",
-     "weight": 1
-    },
-    {
-     "districtId": "PIF-10",
-     "weight": 1
-    }
-   ],
-   "population": 370002
-  },
-  {
-   "id": "ILA-L01",
-   "regionId": "ILA",
-   "name": "宜蘭縣第1選舉區",
-   "parts": [
-    {
-     "districtId": "ILA-01",
-     "weight": 1
-    },
-    {
-     "districtId": "ILA-02",
-     "weight": 1
-    },
-    {
-     "districtId": "ILA-03",
-     "weight": 1
-    },
-    {
-     "districtId": "ILA-04",
-     "weight": 1
-    },
-    {
-     "districtId": "ILA-05",
-     "weight": 1
-    },
-    {
-     "districtId": "ILA-06",
-     "weight": 1
-    },
-    {
-     "districtId": "ILA-07",
-     "weight": 1
-    }
-   ],
-   "population": 432000
-  },
-  {
-   "id": "HUA-L01",
-   "regionId": "HUA",
-   "name": "花蓮縣第1選舉區",
-   "parts": [
-    {
-     "districtId": "HUA-01",
-     "weight": 1
-    },
-    {
-     "districtId": "HUA-02",
-     "weight": 1
-    },
-    {
-     "districtId": "HUA-03",
-     "weight": 1
-    },
-    {
-     "districtId": "HUA-04",
-     "weight": 1
-    },
-    {
-     "districtId": "HUA-05",
-     "weight": 1
-    },
-    {
-     "districtId": "HUA-06",
-     "weight": 1
-    }
-   ],
-   "population": 225000
-  },
-  {
-   "id": "TTT-L01",
-   "regionId": "TTT",
-   "name": "臺東縣第1選舉區",
-   "parts": [
-    {
-     "districtId": "TTT-01",
-     "weight": 1
-    },
-    {
-     "districtId": "TTT-02",
-     "weight": 1
-    },
-    {
-     "districtId": "TTT-03",
-     "weight": 1
-    },
-    {
-     "districtId": "TTT-04",
-     "weight": 1
-    },
-    {
-     "districtId": "TTT-05",
-     "weight": 1
-    },
-    {
-     "districtId": "TTT-06",
-     "weight": 1
-    }
-   ],
-   "population": 134000
-  },
-  {
-   "id": "PEN-L01",
-   "regionId": "PEN",
-   "name": "澎湖縣第1選舉區",
-   "parts": [
-    {
-     "districtId": "PEN-01",
-     "weight": 1
-    },
-    {
-     "districtId": "PEN-02",
-     "weight": 1
-    },
-    {
-     "districtId": "PEN-03",
-     "weight": 1
-    },
-    {
-     "districtId": "PEN-04",
-     "weight": 1
-    },
-    {
-     "districtId": "PEN-05",
-     "weight": 1
-    }
-   ],
-   "population": 106000
-  },
-  {
-   "id": "KIN-L01",
-   "regionId": "KIN",
-   "name": "金門縣第1選舉區",
-   "parts": [
-    {
-     "districtId": "KIN-01",
-     "weight": 1
-    },
-    {
-     "districtId": "KIN-02",
-     "weight": 1
-    },
-    {
-     "districtId": "KIN-03",
-     "weight": 1
-    },
-    {
-     "districtId": "KIN-04",
-     "weight": 1
-    },
-    {
-     "districtId": "KIN-05",
-     "weight": 1
-    }
-   ],
-   "population": 142000
-  },
-  {
-   "id": "LIE-L01",
-   "regionId": "LIE",
-   "name": "連江縣第1選舉區",
-   "parts": [
-    {
-     "districtId": "LIE-01",
-     "weight": 1
-    },
-    {
-     "districtId": "LIE-02",
-     "weight": 1
-    },
-    {
-     "districtId": "LIE-03",
-     "weight": 1
-    },
-    {
-     "districtId": "LIE-04",
-     "weight": 1
-    }
-   ],
-   "population": 13000
-  }
- ]
+  "_source": "區域立委選區由議員選區依人口貪婪組合而成，非官方劃分",
+  "schedule": [
+    {
+      "year": 2026,
+      "month": 11,
+      "types": [
+        "mayor",
+        "councilor",
+        "townshipHead",
+        "villageHead"
+      ]
+    },
+    {
+      "year": 2028,
+      "month": 1,
+      "types": [
+        "president",
+        "legislator",
+        "partyList"
+      ]
+    },
+    {
+      "year": 2030,
+      "month": 11,
+      "types": [
+        "mayor",
+        "councilor",
+        "townshipHead",
+        "villageHead"
+      ]
+    },
+    {
+      "year": 2032,
+      "month": 1,
+      "types": [
+        "president",
+        "legislator",
+        "partyList"
+      ]
+    },
+    {
+      "year": 2034,
+      "month": 11,
+      "types": [
+        "mayor",
+        "councilor",
+        "townshipHead",
+        "villageHead"
+      ]
+    },
+    {
+      "year": 2036,
+      "month": 1,
+      "types": [
+        "president",
+        "legislator",
+        "partyList"
+      ]
+    },
+    {
+      "year": 2038,
+      "month": 11,
+      "types": [
+        "mayor",
+        "councilor",
+        "townshipHead",
+        "villageHead"
+      ]
+    },
+    {
+      "year": 2040,
+      "month": 1,
+      "types": [
+        "president",
+        "legislator",
+        "partyList"
+      ]
+    },
+    {
+      "year": 2042,
+      "month": 11,
+      "types": [
+        "mayor",
+        "councilor",
+        "townshipHead",
+        "villageHead"
+      ]
+    },
+    {
+      "year": 2044,
+      "month": 1,
+      "types": [
+        "president",
+        "legislator",
+        "partyList"
+      ]
+    },
+    {
+      "year": 2046,
+      "month": 11,
+      "types": [
+        "mayor",
+        "councilor",
+        "townshipHead",
+        "villageHead"
+      ]
+    },
+    {
+      "year": 2048,
+      "month": 1,
+      "types": [
+        "president",
+        "legislator",
+        "partyList"
+      ]
+    },
+    {
+      "year": 2050,
+      "month": 11,
+      "types": [
+        "mayor",
+        "councilor",
+        "townshipHead",
+        "villageHead"
+      ]
+    }
+  ],
+  "levels": {
+    "villageHead": {
+      "name": "村里長",
+      "turnoutFactor": 0.75,
+      "scope": "sub",
+      "deposit": 20000,
+      "fameNeed": 0,
+      "costMult": 0.15,
+      "budgetGuide": "20 萬～50 萬"
+    },
+    "townshipRep": {
+      "name": "鄉鎮市民代表",
+      "turnoutFactor": 0.75,
+      "scope": "sub",
+      "deposit": 20000,
+      "fameNeed": 0,
+      "costMult": 0.2,
+      "budgetGuide": "30 萬～80 萬"
+    },
+    "townshipHead": {
+      "name": "鄉鎮市長",
+      "turnoutFactor": 0.85,
+      "scope": "sub",
+      "deposit": 200000,
+      "fameNeed": 1,
+      "costMult": 0.5,
+      "budgetGuide": "80 萬～200 萬"
+    },
+    "councilor": {
+      "name": "縣市議員",
+      "turnoutFactor": 0.9,
+      "scope": "district",
+      "deposit": 200000,
+      "fameNeed": 1,
+      "system": "SNTV",
+      "costMult": 1.0,
+      "budgetGuide": "100 萬～300 萬"
+    },
+    "mayor": {
+      "name": "縣市長",
+      "turnoutFactor": 1.05,
+      "scope": "region",
+      "deposit": 2000000,
+      "fameNeed": 3,
+      "costMult": 12,
+      "budgetGuide": "3000 萬～1.5 億"
+    },
+    "legislator": {
+      "name": "區域立委",
+      "turnoutFactor": 1,
+      "scope": "legDistrict",
+      "deposit": 200000,
+      "fameNeed": 2,
+      "costMult": 3.6,
+      "budgetGuide": "200 萬～2000 萬"
+    },
+    "partyList": {
+      "name": "不分區立委",
+      "turnoutFactor": 1,
+      "scope": "nation",
+      "threshold": 0.05,
+      "seats": 34,
+      "costMult": 1,
+      "budgetGuide": "政黨統籌"
+    },
+    "president": {
+      "name": "總統",
+      "turnoutFactor": 1.15,
+      "scope": "nation",
+      "deposit": 15000000,
+      "fameNeed": 4,
+      "costMult": 45,
+      "budgetGuide": "3 億～15 億"
+    }
+  },
+  "subsidyPerVote": 30,
+  "subsidyThreshold": 0.03,
+  "legislatorDistricts": [
+    {
+      "id": "TPE-L01",
+      "regionId": "TPE",
+      "name": "臺北市第1選舉區",
+      "parts": [
+        {
+          "districtId": "TPE-01",
+          "weight": 0.6121
+        }
+      ],
+      "population": 307886
+    },
+    {
+      "id": "TPE-L02",
+      "regionId": "TPE",
+      "name": "臺北市第2選舉區",
+      "parts": [
+        {
+          "districtId": "TPE-01",
+          "weight": 0.3879
+        },
+        {
+          "districtId": "TPE-02",
+          "weight": 0.2936
+        }
+      ],
+      "population": 307856
+    },
+    {
+      "id": "TPE-L03",
+      "regionId": "TPE",
+      "name": "臺北市第3選舉區",
+      "parts": [
+        {
+          "districtId": "TPE-02",
+          "weight": 0.7064
+        },
+        {
+          "districtId": "TPE-03",
+          "weight": 0.0939
+        }
+      ],
+      "population": 307879
+    },
+    {
+      "id": "TPE-L04",
+      "regionId": "TPE",
+      "name": "臺北市第4選舉區",
+      "parts": [
+        {
+          "districtId": "TPE-03",
+          "weight": 0.7894
+        }
+      ],
+      "population": 307866
+    },
+    {
+      "id": "TPE-L05",
+      "regionId": "TPE",
+      "name": "臺北市第5選舉區",
+      "parts": [
+        {
+          "districtId": "TPE-03",
+          "weight": 0.1167
+        },
+        {
+          "districtId": "TPE-04",
+          "weight": 0.7856
+        }
+      ],
+      "population": 307903
+    },
+    {
+      "id": "TPE-L06",
+      "regionId": "TPE",
+      "name": "臺北市第6選舉區",
+      "parts": [
+        {
+          "districtId": "TPE-04",
+          "weight": 0.2144
+        },
+        {
+          "districtId": "TPE-05",
+          "weight": 0.7292
+        }
+      ],
+      "population": 307870
+    },
+    {
+      "id": "TPE-L07",
+      "regionId": "TPE",
+      "name": "臺北市第7選舉區",
+      "parts": [
+        {
+          "districtId": "TPE-05",
+          "weight": 0.2708
+        },
+        {
+          "districtId": "TPE-06",
+          "weight": 0.4169
+        }
+      ],
+      "population": 307862
+    },
+    {
+      "id": "TPE-L08",
+      "regionId": "TPE",
+      "name": "臺北市第8選舉區",
+      "parts": [
+        {
+          "districtId": "TPE-06",
+          "weight": 0.5831
+        }
+      ],
+      "population": 307877
+    },
+    {
+      "id": "NTP-L01",
+      "regionId": "NTP",
+      "name": "新北市第1選舉區",
+      "parts": [
+        {
+          "districtId": "NTP-01",
+          "weight": 1
+        },
+        {
+          "districtId": "NTP-02",
+          "weight": 0.1385
+        }
+      ],
+      "population": 329311
+    },
+    {
+      "id": "NTP-L02",
+      "regionId": "NTP",
+      "name": "新北市第2選舉區",
+      "parts": [
+        {
+          "districtId": "NTP-02",
+          "weight": 0.6776
+        }
+      ],
+      "population": 329314
+    },
+    {
+      "id": "NTP-L03",
+      "regionId": "NTP",
+      "name": "新北市第3選舉區",
+      "parts": [
+        {
+          "districtId": "NTP-02",
+          "weight": 0.1838
+        },
+        {
+          "districtId": "NTP-03",
+          "weight": 0.6417
+        }
+      ],
+      "population": 329323
+    },
+    {
+      "id": "NTP-L04",
+      "regionId": "NTP",
+      "name": "新北市第4選舉區",
+      "parts": [
+        {
+          "districtId": "NTP-03",
+          "weight": 0.3583
+        },
+        {
+          "districtId": "NTP-04",
+          "weight": 0.473
+        }
+      ],
+      "population": 329353
+    },
+    {
+      "id": "NTP-L05",
+      "regionId": "NTP",
+      "name": "新北市第5選舉區",
+      "parts": [
+        {
+          "districtId": "NTP-04",
+          "weight": 0.527
+        },
+        {
+          "districtId": "NTP-05",
+          "weight": 0.2064
+        }
+      ],
+      "population": 329313
+    },
+    {
+      "id": "NTP-L06",
+      "regionId": "NTP",
+      "name": "新北市第6選舉區",
+      "parts": [
+        {
+          "districtId": "NTP-05",
+          "weight": 0.6087
+        }
+      ],
+      "population": 329307
+    },
+    {
+      "id": "NTP-L07",
+      "regionId": "NTP",
+      "name": "新北市第7選舉區",
+      "parts": [
+        {
+          "districtId": "NTP-05",
+          "weight": 0.1848
+        },
+        {
+          "districtId": "NTP-06",
+          "weight": 0.5691
+        }
+      ],
+      "population": 329324
+    },
+    {
+      "id": "NTP-L08",
+      "regionId": "NTP",
+      "name": "新北市第8選舉區",
+      "parts": [
+        {
+          "districtId": "NTP-06",
+          "weight": 0.4309
+        },
+        {
+          "districtId": "NTP-07",
+          "weight": 0.7207
+        }
+      ],
+      "population": 329324
+    },
+    {
+      "id": "NTP-L09",
+      "regionId": "NTP",
+      "name": "新北市第9選舉區",
+      "parts": [
+        {
+          "districtId": "NTP-07",
+          "weight": 0.2793
+        },
+        {
+          "districtId": "NTP-08",
+          "weight": 0.4353
+        }
+      ],
+      "population": 329344
+    },
+    {
+      "id": "NTP-L10",
+      "regionId": "NTP",
+      "name": "新北市第10選舉區",
+      "parts": [
+        {
+          "districtId": "NTP-08",
+          "weight": 0.5329
+        }
+      ],
+      "population": 329332
+    },
+    {
+      "id": "NTP-L11",
+      "regionId": "NTP",
+      "name": "新北市第11選舉區",
+      "parts": [
+        {
+          "districtId": "NTP-08",
+          "weight": 0.0318
+        },
+        {
+          "districtId": "NTP-09",
+          "weight": 0.9162
+        }
+      ],
+      "population": 329328
+    },
+    {
+      "id": "NTP-L12",
+      "regionId": "NTP",
+      "name": "新北市第12選舉區",
+      "parts": [
+        {
+          "districtId": "NTP-09",
+          "weight": 0.0838
+        },
+        {
+          "districtId": "NTP-10",
+          "weight": 1
+        }
+      ],
+      "population": 329324
+    },
+    {
+      "id": "TYC-L01",
+      "regionId": "TYC",
+      "name": "桃園市第1選舉區",
+      "parts": [
+        {
+          "districtId": "TYC-01",
+          "weight": 0.8129
+        }
+      ],
+      "population": 364992
+    },
+    {
+      "id": "TYC-L02",
+      "regionId": "TYC",
+      "name": "桃園市第2選舉區",
+      "parts": [
+        {
+          "districtId": "TYC-01",
+          "weight": 0.1871
+        },
+        {
+          "districtId": "TYC-02",
+          "weight": 1
+        },
+        {
+          "districtId": "TYC-03",
+          "weight": 0.535
+        }
+      ],
+      "population": 365008
+    },
+    {
+      "id": "TYC-L03",
+      "regionId": "TYC",
+      "name": "桃園市第3選舉區",
+      "parts": [
+        {
+          "districtId": "TYC-03",
+          "weight": 0.465
+        },
+        {
+          "districtId": "TYC-04",
+          "weight": 1
+        },
+        {
+          "districtId": "TYC-05",
+          "weight": 0.4217
+        }
+      ],
+      "population": 364993
+    },
+    {
+      "id": "TYC-L04",
+      "regionId": "TYC",
+      "name": "桃園市第4選舉區",
+      "parts": [
+        {
+          "districtId": "TYC-05",
+          "weight": 0.5783
+        },
+        {
+          "districtId": "TYC-06",
+          "weight": 0.6182
+        }
+      ],
+      "population": 365011
+    },
+    {
+      "id": "TYC-L05",
+      "regionId": "TYC",
+      "name": "桃園市第5選舉區",
+      "parts": [
+        {
+          "districtId": "TYC-06",
+          "weight": 0.3818
+        },
+        {
+          "districtId": "TYC-07",
+          "weight": 1
+        },
+        {
+          "districtId": "TYC-08",
+          "weight": 0.9402
+        }
+      ],
+      "population": 364999
+    },
+    {
+      "id": "TYC-L06",
+      "regionId": "TYC",
+      "name": "桃園市第6選舉區",
+      "parts": [
+        {
+          "districtId": "TYC-09",
+          "weight": 1
+        },
+        {
+          "districtId": "TYC-10",
+          "weight": 1
+        },
+        {
+          "districtId": "TYC-11",
+          "weight": 1
+        },
+        {
+          "districtId": "TYC-12",
+          "weight": 1
+        }
+      ],
+      "population": 358000
+    },
+    {
+      "id": "TCH-L01",
+      "regionId": "TCH",
+      "name": "臺中市第1選舉區",
+      "parts": [
+        {
+          "districtId": "TCH-01",
+          "weight": 1
+        },
+        {
+          "districtId": "TCH-02",
+          "weight": 0.4609
+        }
+      ],
+      "population": 347611
+    },
+    {
+      "id": "TCH-L02",
+      "regionId": "TCH",
+      "name": "臺中市第2選舉區",
+      "parts": [
+        {
+          "districtId": "TCH-02",
+          "weight": 0.5391
+        },
+        {
+          "districtId": "TCH-03",
+          "weight": 0.5653
+        }
+      ],
+      "population": 347628
+    },
+    {
+      "id": "TCH-L03",
+      "regionId": "TCH",
+      "name": "臺中市第3選舉區",
+      "parts": [
+        {
+          "districtId": "TCH-03",
+          "weight": 0.4347
+        },
+        {
+          "districtId": "TCH-04",
+          "weight": 0.5736
+        }
+      ],
+      "population": 347642
+    },
+    {
+      "id": "TCH-L04",
+      "regionId": "TCH",
+      "name": "臺中市第4選舉區",
+      "parts": [
+        {
+          "districtId": "TCH-04",
+          "weight": 0.4264
+        },
+        {
+          "districtId": "TCH-05",
+          "weight": 0.6038
+        }
+      ],
+      "population": 347617
+    },
+    {
+      "id": "TCH-L05",
+      "regionId": "TCH",
+      "name": "臺中市第5選舉區",
+      "parts": [
+        {
+          "districtId": "TCH-05",
+          "weight": 0.3962
+        },
+        {
+          "districtId": "TCH-06",
+          "weight": 1
+        },
+        {
+          "districtId": "TCH-07",
+          "weight": 0.3047
+        }
+      ],
+      "population": 347630
+    },
+    {
+      "id": "TCH-L06",
+      "regionId": "TCH",
+      "name": "臺中市第6選舉區",
+      "parts": [
+        {
+          "districtId": "TCH-07",
+          "weight": 0.6953
+        },
+        {
+          "districtId": "TCH-08",
+          "weight": 1
+        },
+        {
+          "districtId": "TCH-09",
+          "weight": 0.1569
+        }
+      ],
+      "population": 347624
+    },
+    {
+      "id": "TCH-L07",
+      "regionId": "TCH",
+      "name": "臺中市第7選舉區",
+      "parts": [
+        {
+          "districtId": "TCH-09",
+          "weight": 0.8431
+        },
+        {
+          "districtId": "TCH-10",
+          "weight": 0.6656
+        }
+      ],
+      "population": 347622
+    },
+    {
+      "id": "TCH-L08",
+      "regionId": "TCH",
+      "name": "臺中市第8選舉區",
+      "parts": [
+        {
+          "districtId": "TCH-10",
+          "weight": 0.3344
+        },
+        {
+          "districtId": "TCH-11",
+          "weight": 1
+        },
+        {
+          "districtId": "TCH-12",
+          "weight": 1
+        }
+      ],
+      "population": 347626
+    },
+    {
+      "id": "TNN-L01",
+      "regionId": "TNN",
+      "name": "臺南市第1選舉區",
+      "parts": [
+        {
+          "districtId": "TNN-01",
+          "weight": 1
+        },
+        {
+          "districtId": "TNN-02",
+          "weight": 1
+        }
+      ],
+      "population": 308000
+    },
+    {
+      "id": "TNN-L02",
+      "regionId": "TNN",
+      "name": "臺南市第2選舉區",
+      "parts": [
+        {
+          "districtId": "TNN-03",
+          "weight": 0.9957
+        },
+        {
+          "districtId": "TNN-04",
+          "weight": 0.7629
+        }
+      ],
+      "population": 308672
+    },
+    {
+      "id": "TNN-L03",
+      "regionId": "TNN",
+      "name": "臺南市第3選舉區",
+      "parts": [
+        {
+          "districtId": "TNN-04",
+          "weight": 0.2371
+        },
+        {
+          "districtId": "TNN-05",
+          "weight": 1
+        },
+        {
+          "districtId": "TNN-06",
+          "weight": 0.1154
+        }
+      ],
+      "population": 308660
+    },
+    {
+      "id": "TNN-L04",
+      "regionId": "TNN",
+      "name": "臺南市第4選舉區",
+      "parts": [
+        {
+          "districtId": "TNN-06",
+          "weight": 0.8846
+        },
+        {
+          "districtId": "TNN-07",
+          "weight": 0.7982
+        }
+      ],
+      "population": 308664
+    },
+    {
+      "id": "TNN-L05",
+      "regionId": "TNN",
+      "name": "臺南市第5選舉區",
+      "parts": [
+        {
+          "districtId": "TNN-07",
+          "weight": 0.2018
+        },
+        {
+          "districtId": "TNN-08",
+          "weight": 1
+        },
+        {
+          "districtId": "TNN-09",
+          "weight": 0.786
+        }
+      ],
+      "population": 308673
+    },
+    {
+      "id": "TNN-L06",
+      "regionId": "TNN",
+      "name": "臺南市第6選舉區",
+      "parts": [
+        {
+          "districtId": "TNN-09",
+          "weight": 0.214
+        },
+        {
+          "districtId": "TNN-10",
+          "weight": 1
+        },
+        {
+          "districtId": "TNN-11",
+          "weight": 1
+        }
+      ],
+      "population": 308660
+    },
+    {
+      "id": "KHH-L01",
+      "regionId": "KHH",
+      "name": "高雄市第1選舉區",
+      "parts": [
+        {
+          "districtId": "KHH-01",
+          "weight": 1
+        },
+        {
+          "districtId": "KHH-02",
+          "weight": 0.5307
+        }
+      ],
+      "population": 337258
+    },
+    {
+      "id": "KHH-L02",
+      "regionId": "KHH",
+      "name": "高雄市第2選舉區",
+      "parts": [
+        {
+          "districtId": "KHH-02",
+          "weight": 0.4693
+        },
+        {
+          "districtId": "KHH-03",
+          "weight": 0.4292
+        }
+      ],
+      "population": 337258
+    },
+    {
+      "id": "KHH-L03",
+      "regionId": "KHH",
+      "name": "高雄市第3選舉區",
+      "parts": [
+        {
+          "districtId": "KHH-03",
+          "weight": 0.5708
+        },
+        {
+          "districtId": "KHH-04",
+          "weight": 0.6981
+        }
+      ],
+      "population": 337236
+    },
+    {
+      "id": "KHH-L04",
+      "regionId": "KHH",
+      "name": "高雄市第4選舉區",
+      "parts": [
+        {
+          "districtId": "KHH-04",
+          "weight": 0.3019
+        },
+        {
+          "districtId": "KHH-05",
+          "weight": 0.8494
+        }
+      ],
+      "population": 337249
+    },
+    {
+      "id": "KHH-L05",
+      "regionId": "KHH",
+      "name": "高雄市第5選舉區",
+      "parts": [
+        {
+          "districtId": "KHH-05",
+          "weight": 0.1506
+        },
+        {
+          "districtId": "KHH-06",
+          "weight": 1
+        },
+        {
+          "districtId": "KHH-07",
+          "weight": 0.1751
+        }
+      ],
+      "population": 337257
+    },
+    {
+      "id": "KHH-L06",
+      "regionId": "KHH",
+      "name": "高雄市第6選舉區",
+      "parts": [
+        {
+          "districtId": "KHH-07",
+          "weight": 0.8249
+        },
+        {
+          "districtId": "KHH-08",
+          "weight": 0.1891
+        }
+      ],
+      "population": 337251
+    },
+    {
+      "id": "KHH-L07",
+      "regionId": "KHH",
+      "name": "高雄市第7選舉區",
+      "parts": [
+        {
+          "districtId": "KHH-08",
+          "weight": 0.8109
+        },
+        {
+          "districtId": "KHH-09",
+          "weight": 0.219
+        }
+      ],
+      "population": 337233
+    },
+    {
+      "id": "KHH-L08",
+      "regionId": "KHH",
+      "name": "高雄市第8選舉區",
+      "parts": [
+        {
+          "districtId": "KHH-09",
+          "weight": 0.781
+        },
+        {
+          "districtId": "KHH-10",
+          "weight": 1
+        }
+      ],
+      "population": 337258
+    },
+    {
+      "id": "KEE-L01",
+      "regionId": "KEE",
+      "name": "基隆市第1選舉區",
+      "parts": [
+        {
+          "districtId": "KEE-01",
+          "weight": 1
+        },
+        {
+          "districtId": "KEE-02",
+          "weight": 1
+        },
+        {
+          "districtId": "KEE-03",
+          "weight": 1
+        },
+        {
+          "districtId": "KEE-04",
+          "weight": 1
+        },
+        {
+          "districtId": "KEE-05",
+          "weight": 1
+        },
+        {
+          "districtId": "KEE-06",
+          "weight": 1
+        },
+        {
+          "districtId": "KEE-07",
+          "weight": 1
+        }
+      ],
+      "population": 351000
+    },
+    {
+      "id": "HSC-L01",
+      "regionId": "HSC",
+      "name": "新竹市第1選舉區",
+      "parts": [
+        {
+          "districtId": "HSC-01",
+          "weight": 1
+        },
+        {
+          "districtId": "HSC-02",
+          "weight": 1
+        },
+        {
+          "districtId": "HSC-03",
+          "weight": 1
+        }
+      ],
+      "population": 443000
+    },
+    {
+      "id": "CYI-L01",
+      "regionId": "CYI",
+      "name": "嘉義市第1選舉區",
+      "parts": [
+        {
+          "districtId": "CYI-01",
+          "weight": 1
+        },
+        {
+          "districtId": "CYI-02",
+          "weight": 1
+        }
+      ],
+      "population": 260000
+    },
+    {
+      "id": "HSQ-L01",
+      "regionId": "HSQ",
+      "name": "新竹縣第1選舉區",
+      "parts": [
+        {
+          "districtId": "HSQ-01",
+          "weight": 1
+        },
+        {
+          "districtId": "HSQ-02",
+          "weight": 0.6038
+        }
+      ],
+      "population": 281494
+    },
+    {
+      "id": "HSQ-L02",
+      "regionId": "HSQ",
+      "name": "新竹縣第2選舉區",
+      "parts": [
+        {
+          "districtId": "HSQ-02",
+          "weight": 0.3962
+        },
+        {
+          "districtId": "HSQ-03",
+          "weight": 1
+        },
+        {
+          "districtId": "HSQ-04",
+          "weight": 1
+        },
+        {
+          "districtId": "HSQ-05",
+          "weight": 1
+        },
+        {
+          "districtId": "HSQ-06",
+          "weight": 1
+        }
+      ],
+      "population": 281506
+    },
+    {
+      "id": "MIA-L01",
+      "regionId": "MIA",
+      "name": "苗栗縣第1選舉區",
+      "parts": [
+        {
+          "districtId": "MIA-01",
+          "weight": 1
+        },
+        {
+          "districtId": "MIA-02",
+          "weight": 1
+        },
+        {
+          "districtId": "MIA-03",
+          "weight": 0.5374
+        }
+      ],
+      "population": 262502
+    },
+    {
+      "id": "MIA-L02",
+      "regionId": "MIA",
+      "name": "苗栗縣第2選舉區",
+      "parts": [
+        {
+          "districtId": "MIA-03",
+          "weight": 0.4626
+        },
+        {
+          "districtId": "MIA-04",
+          "weight": 1
+        },
+        {
+          "districtId": "MIA-05",
+          "weight": 1
+        },
+        {
+          "districtId": "MIA-06",
+          "weight": 1
+        },
+        {
+          "districtId": "MIA-07",
+          "weight": 1
+        }
+      ],
+      "population": 262498
+    },
+    {
+      "id": "CHA-L01",
+      "regionId": "CHA",
+      "name": "彰化縣第1選舉區",
+      "parts": [
+        {
+          "districtId": "CHA-01",
+          "weight": 1
+        },
+        {
+          "districtId": "CHA-02",
+          "weight": 0.7404
+        }
+      ],
+      "population": 311002
+    },
+    {
+      "id": "CHA-L02",
+      "regionId": "CHA",
+      "name": "彰化縣第2選舉區",
+      "parts": [
+        {
+          "districtId": "CHA-02",
+          "weight": 0.2596
+        },
+        {
+          "districtId": "CHA-03",
+          "weight": 1
+        },
+        {
+          "districtId": "CHA-04",
+          "weight": 0.9103
+        }
+      ],
+      "population": 311005
+    },
+    {
+      "id": "CHA-L03",
+      "regionId": "CHA",
+      "name": "彰化縣第3選舉區",
+      "parts": [
+        {
+          "districtId": "CHA-04",
+          "weight": 0.0897
+        },
+        {
+          "districtId": "CHA-05",
+          "weight": 1
+        },
+        {
+          "districtId": "CHA-06",
+          "weight": 1
+        },
+        {
+          "districtId": "CHA-07",
+          "weight": 0.5378
+        }
+      ],
+      "population": 310991
+    },
+    {
+      "id": "CHA-L04",
+      "regionId": "CHA",
+      "name": "彰化縣第4選舉區",
+      "parts": [
+        {
+          "districtId": "CHA-07",
+          "weight": 0.4622
+        },
+        {
+          "districtId": "CHA-08",
+          "weight": 1
+        },
+        {
+          "districtId": "CHA-09",
+          "weight": 1
+        }
+      ],
+      "population": 311002
+    },
+    {
+      "id": "NAN-L01",
+      "regionId": "NAN",
+      "name": "南投縣第1選舉區",
+      "parts": [
+        {
+          "districtId": "NAN-01",
+          "weight": 1
+        },
+        {
+          "districtId": "NAN-02",
+          "weight": 1
+        },
+        {
+          "districtId": "NAN-03",
+          "weight": 0.9505
+        }
+      ],
+      "population": 225496
+    },
+    {
+      "id": "NAN-L02",
+      "regionId": "NAN",
+      "name": "南投縣第2選舉區",
+      "parts": [
+        {
+          "districtId": "NAN-04",
+          "weight": 1
+        },
+        {
+          "districtId": "NAN-05",
+          "weight": 1
+        },
+        {
+          "districtId": "NAN-06",
+          "weight": 1
+        }
+      ],
+      "population": 221000
+    },
+    {
+      "id": "YUN-L01",
+      "regionId": "YUN",
+      "name": "雲林縣第1選舉區",
+      "parts": [
+        {
+          "districtId": "YUN-01",
+          "weight": 1
+        },
+        {
+          "districtId": "YUN-02",
+          "weight": 1
+        },
+        {
+          "districtId": "YUN-03",
+          "weight": 1
+        },
+        {
+          "districtId": "YUN-04",
+          "weight": 0.7727
+        }
+      ],
+      "population": 330497
+    },
+    {
+      "id": "YUN-L02",
+      "regionId": "YUN",
+      "name": "雲林縣第2選舉區",
+      "parts": [
+        {
+          "districtId": "YUN-04",
+          "weight": 0.2273
+        },
+        {
+          "districtId": "YUN-05",
+          "weight": 1
+        },
+        {
+          "districtId": "YUN-06",
+          "weight": 1
+        },
+        {
+          "districtId": "YUN-07",
+          "weight": 1
+        },
+        {
+          "districtId": "YUN-08",
+          "weight": 1
+        },
+        {
+          "districtId": "YUN-09",
+          "weight": 1
+        }
+      ],
+      "population": 330503
+    },
+    {
+      "id": "CYQ-L01",
+      "regionId": "CYQ",
+      "name": "嘉義縣第1選舉區",
+      "parts": [
+        {
+          "districtId": "CYQ-01",
+          "weight": 1
+        },
+        {
+          "districtId": "CYQ-02",
+          "weight": 1
+        },
+        {
+          "districtId": "CYQ-03",
+          "weight": 1
+        },
+        {
+          "districtId": "CYQ-04",
+          "weight": 0.1615
+        }
+      ],
+      "population": 241498
+    },
+    {
+      "id": "CYQ-L02",
+      "regionId": "CYQ",
+      "name": "嘉義縣第2選舉區",
+      "parts": [
+        {
+          "districtId": "CYQ-04",
+          "weight": 0.8385
+        },
+        {
+          "districtId": "CYQ-05",
+          "weight": 1
+        },
+        {
+          "districtId": "CYQ-06",
+          "weight": 1
+        },
+        {
+          "districtId": "CYQ-07",
+          "weight": 1
+        }
+      ],
+      "population": 241503
+    },
+    {
+      "id": "PIF-L01",
+      "regionId": "PIF",
+      "name": "屏東縣第1選舉區",
+      "parts": [
+        {
+          "districtId": "PIF-01",
+          "weight": 1
+        },
+        {
+          "districtId": "PIF-02",
+          "weight": 1
+        },
+        {
+          "districtId": "PIF-03",
+          "weight": 1
+        },
+        {
+          "districtId": "PIF-04",
+          "weight": 0.4787
+        }
+      ],
+      "population": 369998
+    },
+    {
+      "id": "PIF-L02",
+      "regionId": "PIF",
+      "name": "屏東縣第2選舉區",
+      "parts": [
+        {
+          "districtId": "PIF-04",
+          "weight": 0.5213
+        },
+        {
+          "districtId": "PIF-05",
+          "weight": 1
+        },
+        {
+          "districtId": "PIF-06",
+          "weight": 1
+        },
+        {
+          "districtId": "PIF-07",
+          "weight": 1
+        },
+        {
+          "districtId": "PIF-08",
+          "weight": 1
+        },
+        {
+          "districtId": "PIF-09",
+          "weight": 1
+        },
+        {
+          "districtId": "PIF-10",
+          "weight": 1
+        }
+      ],
+      "population": 370002
+    },
+    {
+      "id": "ILA-L01",
+      "regionId": "ILA",
+      "name": "宜蘭縣第1選舉區",
+      "parts": [
+        {
+          "districtId": "ILA-01",
+          "weight": 1
+        },
+        {
+          "districtId": "ILA-02",
+          "weight": 1
+        },
+        {
+          "districtId": "ILA-03",
+          "weight": 1
+        },
+        {
+          "districtId": "ILA-04",
+          "weight": 1
+        },
+        {
+          "districtId": "ILA-05",
+          "weight": 1
+        },
+        {
+          "districtId": "ILA-06",
+          "weight": 1
+        },
+        {
+          "districtId": "ILA-07",
+          "weight": 1
+        }
+      ],
+      "population": 432000
+    },
+    {
+      "id": "HUA-L01",
+      "regionId": "HUA",
+      "name": "花蓮縣第1選舉區",
+      "parts": [
+        {
+          "districtId": "HUA-01",
+          "weight": 1
+        },
+        {
+          "districtId": "HUA-02",
+          "weight": 1
+        },
+        {
+          "districtId": "HUA-03",
+          "weight": 1
+        },
+        {
+          "districtId": "HUA-04",
+          "weight": 1
+        },
+        {
+          "districtId": "HUA-05",
+          "weight": 1
+        },
+        {
+          "districtId": "HUA-06",
+          "weight": 1
+        }
+      ],
+      "population": 225000
+    },
+    {
+      "id": "TTT-L01",
+      "regionId": "TTT",
+      "name": "臺東縣第1選舉區",
+      "parts": [
+        {
+          "districtId": "TTT-01",
+          "weight": 1
+        },
+        {
+          "districtId": "TTT-02",
+          "weight": 1
+        },
+        {
+          "districtId": "TTT-03",
+          "weight": 1
+        },
+        {
+          "districtId": "TTT-04",
+          "weight": 1
+        },
+        {
+          "districtId": "TTT-05",
+          "weight": 1
+        },
+        {
+          "districtId": "TTT-06",
+          "weight": 1
+        }
+      ],
+      "population": 134000
+    },
+    {
+      "id": "PEN-L01",
+      "regionId": "PEN",
+      "name": "澎湖縣第1選舉區",
+      "parts": [
+        {
+          "districtId": "PEN-01",
+          "weight": 1
+        },
+        {
+          "districtId": "PEN-02",
+          "weight": 1
+        },
+        {
+          "districtId": "PEN-03",
+          "weight": 1
+        },
+        {
+          "districtId": "PEN-04",
+          "weight": 1
+        },
+        {
+          "districtId": "PEN-05",
+          "weight": 1
+        }
+      ],
+      "population": 106000
+    },
+    {
+      "id": "KIN-L01",
+      "regionId": "KIN",
+      "name": "金門縣第1選舉區",
+      "parts": [
+        {
+          "districtId": "KIN-01",
+          "weight": 1
+        },
+        {
+          "districtId": "KIN-02",
+          "weight": 1
+        },
+        {
+          "districtId": "KIN-03",
+          "weight": 1
+        },
+        {
+          "districtId": "KIN-04",
+          "weight": 1
+        },
+        {
+          "districtId": "KIN-05",
+          "weight": 1
+        }
+      ],
+      "population": 142000
+    },
+    {
+      "id": "LIE-L01",
+      "regionId": "LIE",
+      "name": "連江縣第1選舉區",
+      "parts": [
+        {
+          "districtId": "LIE-01",
+          "weight": 1
+        },
+        {
+          "districtId": "LIE-02",
+          "weight": 1
+        },
+        {
+          "districtId": "LIE-03",
+          "weight": 1
+        },
+        {
+          "districtId": "LIE-04",
+          "weight": 1
+        }
+      ],
+      "population": 13000
+    }
+  ]
 }

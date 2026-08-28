@@ -32,9 +32,9 @@
         "deathRate": 0.0079
       },
       "economy": {
-        "gdp": 4800,
-        "gdpGrowth": 0.021,
-        "perCapitaIncome": 830000,
+        "gdp": 5472.0,
+        "gdpGrowth": 0.0958,
+        "perCapitaIncome": 962800,
         "unemployment": 0.034,
         "industryMix": {
           "primary": 0.001,
@@ -115,8 +115,8 @@
           "PDA": 20,
           "CRP": 26,
           "TPL": 8,
-          "NGF": 4,
-          "IND": 5
+          "NGF": 0,
+          "IND": 9
         }
       }
     },
@@ -151,9 +151,9 @@
         "deathRate": 0.0075
       },
       "economy": {
-        "gdp": 3150,
-        "gdpGrowth": 0.026,
-        "perCapitaIncome": 620000,
+        "gdp": 3591.0,
+        "gdpGrowth": 0.1196,
+        "perCapitaIncome": 719200,
         "unemployment": 0.037,
         "industryMix": {
           "primary": 0.003,
@@ -234,9 +234,9 @@
           "PDA": 22,
           "CRP": 28,
           "TPL": 7,
-          "NGF": 3,
+          "NGF": 0,
           "GSP": 1,
-          "IND": 5
+          "IND": 8
         }
       }
     },
@@ -271,9 +271,9 @@
         "deathRate": 0.0062
       },
       "economy": {
-        "gdp": 3350,
-        "gdpGrowth": 0.032,
-        "perCapitaIncome": 640000,
+        "gdp": 3819.0,
+        "gdpGrowth": 0.1383,
+        "perCapitaIncome": 742400,
         "unemployment": 0.036,
         "industryMix": {
           "primary": 0.008,
@@ -354,8 +354,8 @@
           "PDA": 20,
           "CRP": 27,
           "TPL": 6,
-          "NGF": 2,
-          "IND": 8
+          "NGF": 0,
+          "IND": 10
         }
       }
     },
@@ -390,9 +390,9 @@
         "deathRate": 0.007
       },
       "economy": {
-        "gdp": 3050,
-        "gdpGrowth": 0.03,
-        "perCapitaIncome": 640000,
+        "gdp": 3477.0,
+        "gdpGrowth": 0.1349,
+        "perCapitaIncome": 742400,
         "unemployment": 0.035,
         "industryMix": {
           "primary": 0.01,
@@ -473,8 +473,8 @@
           "PDA": 22,
           "CRP": 27,
           "TPL": 6,
-          "NGF": 2,
-          "IND": 8
+          "NGF": 0,
+          "IND": 10
         }
       }
     },
@@ -509,9 +509,9 @@
         "deathRate": 0.009
       },
       "economy": {
-        "gdp": 2350,
-        "gdpGrowth": 0.045,
-        "perCapitaIncome": 580000,
+        "gdp": 2679.0,
+        "gdpGrowth": 0.1315,
+        "perCapitaIncome": 672800,
         "unemployment": 0.036,
         "industryMix": {
           "primary": 0.025,
@@ -593,8 +593,8 @@
           "CRP": 14,
           "TPL": 3,
           "TWR": 2,
-          "NGF": 1,
-          "IND": 9
+          "NGF": 0,
+          "IND": 10
         }
       }
     },
@@ -629,9 +629,9 @@
         "deathRate": 0.0088
       },
       "economy": {
-        "gdp": 2700,
-        "gdpGrowth": 0.028,
-        "perCapitaIncome": 610000,
+        "gdp": 3078.0,
+        "gdpGrowth": 0.1069,
+        "perCapitaIncome": 707600,
         "unemployment": 0.039,
         "industryMix": {
           "primary": 0.012,
@@ -713,8 +713,8 @@
           "CRP": 17,
           "TPL": 4,
           "TWR": 2,
-          "NGF": 2,
-          "IND": 8
+          "NGF": 0,
+          "IND": 10
         }
       }
     },
@@ -749,9 +749,9 @@
         "deathRate": 0.0095
       },
       "economy": {
-        "gdp": 235,
-        "gdpGrowth": 0.014,
-        "perCapitaIncome": 570000,
+        "gdp": 267.9,
+        "gdpGrowth": 0.0822,
+        "perCapitaIncome": 661200,
         "unemployment": 0.04,
         "industryMix": {
           "primary": 0.005,
@@ -832,8 +832,8 @@
           "PDA": 9,
           "CRP": 14,
           "TPL": 3,
-          "NGF": 1,
-          "IND": 5
+          "NGF": 0,
+          "IND": 6
         }
       }
     },
@@ -868,9 +868,9 @@
         "deathRate": 0.0055
       },
       "economy": {
-        "gdp": 1750,
-        "gdpGrowth": 0.055,
-        "perCapitaIncome": 880000,
+        "gdp": 1995.0,
+        "gdpGrowth": 0.1893,
+        "perCapitaIncome": 1020800,
         "unemployment": 0.031,
         "industryMix": {
           "primary": 0.002,
@@ -951,8 +951,8 @@
           "PDA": 9,
           "CRP": 11,
           "TPL": 6,
-          "NGF": 2,
-          "IND": 5
+          "NGF": 0,
+          "IND": 7
         }
       }
     },
@@ -987,9 +987,9 @@
         "deathRate": 0.0085
       },
       "economy": {
-        "gdp": 190,
-        "gdpGrowth": 0.016,
-        "perCapitaIncome": 570000,
+        "gdp": 216.6,
+        "gdpGrowth": 0.089,
+        "perCapitaIncome": 661200,
         "unemployment": 0.038,
         "industryMix": {
           "primary": 0.005,
@@ -1105,9 +1105,9 @@
         "deathRate": 0.006
       },
       "economy": {
-        "gdp": 1300,
-        "gdpGrowth": 0.048,
-        "perCapitaIncome": 780000,
+        "gdp": 1482.0,
+        "gdpGrowth": 0.1808,
+        "perCapitaIncome": 904800,
         "unemployment": 0.03,
         "industryMix": {
           "primary": 0.008,
@@ -1188,8 +1188,8 @@
           "PDA": 7,
           "CRP": 18,
           "TPL": 3,
-          "NGF": 1,
-          "IND": 8
+          "NGF": 0,
+          "IND": 9
         }
       }
     },
@@ -1224,9 +1224,9 @@
         "deathRate": 0.0098
       },
       "economy": {
-        "gdp": 580,
-        "gdpGrowth": 0.022,
-        "perCapitaIncome": 560000,
+        "gdp": 661.2,
+        "gdpGrowth": 0.1434,
+        "perCapitaIncome": 649600,
         "unemployment": 0.037,
         "industryMix": {
           "primary": 0.03,
@@ -1342,9 +1342,9 @@
         "deathRate": 0.0088
       },
       "economy": {
-        "gdp": 900,
-        "gdpGrowth": 0.02,
-        "perCapitaIncome": 550000,
+        "gdp": 1026.0,
+        "gdpGrowth": 0.123,
+        "perCapitaIncome": 638000,
         "unemployment": 0.036,
         "industryMix": {
           "primary": 0.055,
@@ -1460,9 +1460,9 @@
         "deathRate": 0.0108
       },
       "economy": {
-        "gdp": 265,
-        "gdpGrowth": 0.012,
-        "perCapitaIncome": 500000,
+        "gdp": 302.1,
+        "gdpGrowth": 0.0915,
+        "perCapitaIncome": 580000,
         "unemployment": 0.038,
         "industryMix": {
           "primary": 0.07,
@@ -1578,9 +1578,9 @@
         "deathRate": 0.0118
       },
       "economy": {
-        "gdp": 690,
-        "gdpGrowth": 0.018,
-        "perCapitaIncome": 500000,
+        "gdp": 786.6,
+        "gdpGrowth": 0.0898,
+        "perCapitaIncome": 580000,
         "unemployment": 0.037,
         "industryMix": {
           "primary": 0.09,
@@ -1696,9 +1696,9 @@
         "deathRate": 0.0122
       },
       "economy": {
-        "gdp": 300,
-        "gdpGrowth": 0.013,
-        "perCapitaIncome": 470000,
+        "gdp": 342.0,
+        "gdpGrowth": 0.0915,
+        "perCapitaIncome": 545200,
         "unemployment": 0.039,
         "industryMix": {
           "primary": 0.13,
@@ -1814,9 +1814,9 @@
         "deathRate": 0.0105
       },
       "economy": {
-        "gdp": 440,
-        "gdpGrowth": 0.015,
-        "perCapitaIncome": 490000,
+        "gdp": 501.6,
+        "gdpGrowth": 0.089,
+        "perCapitaIncome": 568400,
         "unemployment": 0.041,
         "industryMix": {
           "primary": 0.11,
@@ -1933,9 +1933,9 @@
         "deathRate": 0.0098
       },
       "economy": {
-        "gdp": 320,
-        "gdpGrowth": 0.014,
-        "perCapitaIncome": 530000,
+        "gdp": 364.8,
+        "gdpGrowth": 0.0904,
+        "perCapitaIncome": 614800,
         "unemployment": 0.038,
         "industryMix": {
           "primary": 0.06,
@@ -2016,8 +2016,8 @@
           "PDA": 13,
           "CRP": 13,
           "TPL": 2,
-          "NGF": 1,
-          "IND": 5
+          "NGF": 0,
+          "IND": 6
         }
       }
     },
@@ -2052,9 +2052,9 @@
         "deathRate": 0.0105
       },
       "economy": {
-        "gdp": 215,
-        "gdpGrowth": 0.011,
-        "perCapitaIncome": 510000,
+        "gdp": 245.1,
+        "gdpGrowth": 0.0819,
+        "perCapitaIncome": 591600,
         "unemployment": 0.042,
         "industryMix": {
           "primary": 0.08,
@@ -2170,9 +2170,9 @@
         "deathRate": 0.0115
       },
       "economy": {
-        "gdp": 120,
-        "gdpGrowth": 0.01,
-        "perCapitaIncome": 470000,
+        "gdp": 136.8,
+        "gdpGrowth": 0.0774,
+        "perCapitaIncome": 545200,
         "unemployment": 0.043,
         "industryMix": {
           "primary": 0.13,
@@ -2288,9 +2288,9 @@
         "deathRate": 0.0092
       },
       "economy": {
-        "gdp": 58,
-        "gdpGrowth": 0.016,
-        "perCapitaIncome": 500000,
+        "gdp": 66.1,
+        "gdpGrowth": 0.0744,
+        "perCapitaIncome": 580000,
         "unemployment": 0.035,
         "industryMix": {
           "primary": 0.09,
@@ -2406,9 +2406,9 @@
         "deathRate": 0.0062
       },
       "economy": {
-        "gdp": 68,
-        "gdpGrowth": 0.012,
-        "perCapitaIncome": 560000,
+        "gdp": 77.5,
+        "gdpGrowth": 0.0744,
+        "perCapitaIncome": 649600,
         "unemployment": 0.03,
         "industryMix": {
           "primary": 0.06,
@@ -2525,9 +2525,9 @@
         "deathRate": 0.0058
       },
       "economy": {
-        "gdp": 9,
-        "gdpGrowth": 0.009,
-        "perCapitaIncome": 570000,
+        "gdp": 10.3,
+        "gdpGrowth": 0.0735,
+        "perCapitaIncome": 661200,
         "unemployment": 0.028,
         "industryMix": {
           "primary": 0.07,

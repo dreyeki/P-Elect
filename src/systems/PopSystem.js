@@ -16,6 +16,9 @@ export function tick(state, ctx) {
 
   // 各黨的 8 軸平台與議題評價，先攤平成陣列以避免內圈查表
   const platform = data.partyIds.map((pid) => data.axisIds.map((a) => state.parties[pid].platform[a] ?? 0));
+  // 政黨規模：選民多半不會把票投給沒有機會當選的政黨。
+  // 沒有這一項，七個黨會被 softmax 攤平成各佔一成幾，跟真實民調差很遠。
+  const scale = data.partyIds.map((pid) => state.parties[pid].scale ?? 0.15);
   const identAppeal = data.partyIds.map((pid) => {
     const ia = state.parties[pid].identityAppeal ?? {};
     return [ia.localist ?? 0, ia.chinese ?? 0, ia.dual ?? 0, ia.apathetic ?? 0];
@@ -79,13 +82,14 @@ export function tick(state, ctx) {
       const incumbent = data.partyIds[p] === state.central.government.presidentParty
         ? clamp((state.flags.solTrend ?? 0) < 0 ? 1 : 0, 0, 1) : 0;
       const grass = state.districts[d.id].grassroots[data.partyIds[p]] ?? 0;
-      raw[p] = 0.38 * fit + 0.30 * performance + 0.14 * ident + 0.10 * (grass / 5) - 0.08 * incumbent;
+      raw[p] = 0.30 * fit + 0.24 * performance + 0.12 * ident + 0.08 * (grass / 5)
+        - 0.07 * incumbent + 0.62 * scale[p];
     }
     // softmax（就地展開，避免物件配置）
     let mx = -Infinity;
     for (let p = 0; p < nP; p++) if (raw[p] > mx) mx = raw[p];
     let sum = 0;
-    for (let p = 0; p < nP; p++) { const e = Math.exp((raw[p] - mx) * 3.2); raw[p] = e; sum += e; }
+    for (let p = 0; p < nP; p++) { const e = Math.exp((raw[p] - mx) * 4.2); raw[p] = e; sum += e; }
     let topP = 0, topV = -1;
     for (let p = 0; p < nP; p++) {
       const v = raw[p] / sum;

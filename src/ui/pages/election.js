@@ -6,16 +6,43 @@ import * as F from '../../util/format.js';
 import { word, biWord } from '../../util/scale.js';
 import { partyColor } from '../app.js';
 
+/**
+ * 競選行動。cost 是「議員層級」的基準價，
+ * 實際花費會乘上該場選舉的 costMult——立委是議員的三點六倍，總統是四十五倍。
+ * 一場議員選戰打滿大約一百到三百萬，立委兩百萬到兩千萬，跟現實對得上。
+ */
 export const CAMPAIGN_ACTIONS = [
-  { id: 'street', name: '掃街拜票', ap: 1, cost: 50000, fatigue: 12, desc: '一條街一條街走，握到手酸為止。' },
-  { id: 'rally', name: '大型造勢', ap: 2, cost: 2000000, fatigue: 20, desc: '把場子做大，讓支持者覺得自己不孤單。' },
-  { id: 'tv', name: '電視廣告', ap: 1, cost: 5000000, fatigue: 5, desc: '砸錢買曝光，最快也最貴的辦法。' },
-  { id: 'online', name: '網路投放', ap: 1, cost: 800000, fatigue: 5, desc: '精準打到年輕人，成本比電視低得多。' },
-  { id: 'debate', name: '政見發表', ap: 1, cost: 200000, fatigue: 12, desc: '中間選民會看，講好講壞差很多。' },
-  { id: 'negative', name: '負面文宣', ap: 1, cost: 1500000, fatigue: 12, desc: '打對手，也一定會濺到自己身上。' },
-  { id: 'allocate', name: '配票操作', ap: 2, cost: 500000, fatigue: 15, desc: '複數選區才用得上，算錯就一起落選。' },
-  { id: 'temple', name: '拜廟與地方拜會', ap: 1, cost: 300000, fatigue: 12, desc: '長輩看的是你有沒有來，不是你講了什麼。' },
+  { id: 'street', name: '掃街拜票', ap: 1, cost: 30000, fatigue: 12,
+    desc: '一條街一條街走，握到手酸為止。最便宜也最紮實的辦法。' },
+  { id: 'motorcade', name: '車隊掃街', ap: 1, cost: 80000, fatigue: 14,
+    desc: '宣傳車配旗隊繞遍全區，聲音大、觸及廣，鄰居可能會有意見。' },
+  { id: 'phonebank', name: '電話拜票', ap: 1, cost: 50000, fatigue: 8,
+    desc: '志工一通一通打，效率不高，但打得到的都是會出門投票的人。' },
+  { id: 'temple', name: '拜廟與地方拜會', ap: 1, cost: 60000, fatigue: 12,
+    desc: '長輩看的是你有沒有來，不是你講了什麼。' },
+  { id: 'billboard', name: '廣告看板', ap: 1, cost: 250000, fatigue: 4,
+    desc: '路口大看板一掛就是一整個選季，看板本身就是一種「他真的有在選」的訊號。',
+    lasting: true },
+  { id: 'rally', name: '大型造勢', ap: 2, cost: 450000, fatigue: 20,
+    desc: '把場子做大，讓支持者覺得自己不孤單。下雨就慘了。' },
+  { id: 'tv', name: '電視廣告', ap: 1, cost: 600000, fatigue: 5,
+    desc: '砸錢買曝光，最快也最貴的辦法。' },
+  { id: 'online', name: '網路投放', ap: 1, cost: 120000, fatigue: 5,
+    desc: '精準打到年輕人，單位成本比電視低得多。' },
+  { id: 'pr', name: '媒體公關', ap: 1, cost: 150000, fatigue: 6,
+    desc: '請公關公司安排專訪、餵新聞稿、處理負面。花的是錢，買的是版面的角度。' },
+  { id: 'debate', name: '政見發表', ap: 1, cost: 40000, fatigue: 12,
+    desc: '中間選民會看，講好講壞差很多。' },
+  { id: 'negative', name: '負面文宣', ap: 1, cost: 200000, fatigue: 12,
+    desc: '打對手，也一定會濺到自己身上。' },
+  { id: 'allocate', name: '配票操作', ap: 2, cost: 100000, fatigue: 15,
+    desc: '複數選區才用得上，算錯就一起落選。' },
 ];
+
+/** 這場選舉裡某個行動的實際花費 */
+export function actionCost(run, a) {
+  return Math.round(a.cost * (run?.level?.costMult ?? 1) / 1000) * 1000;
+}
 
 export function electionPage(s, data) {
   const e = s.election;
@@ -59,7 +86,9 @@ function campaignPhase(s, data, e) {
   const poll = e.poll ?? [];
   return html`
     ${card(e.run.name, `
-      ${row('競選經費', `<span class="num ${s.finance.campaign < 500000 ? 'tone-warn' : ''}">${F.money(s.finance.campaign)}</span>`)}
+      ${row('競選經費', `<span class="num ${s.finance.campaign < 300000 * (e.run.level.costMult ?? 1) ? 'tone-warn' : ''}">${F.money(s.finance.campaign)}</span>`)}
+      ${row('這個層級的行情', `<span class="small">${esc(e.run.level.budgetGuide ?? '')}</span>`)}
+      ${row('已經花掉', `<span class="num">${F.money(e.spent ?? 0)}</span>`)}
       ${row('距離投票', `<span class="num">${e.weeksLeft} 週</span>`)}
       ${row('動員強度', `<span class="word">${esc(word('grassroots', e.mobilization ?? 0))}</span>`)}`)}
 
@@ -71,11 +100,12 @@ function campaignPhase(s, data, e) {
       : '<div class="xs muted">還沒有民調。</div>')}
 
     ${card(`競選行動（剩 ${left} 點）`, CAMPAIGN_ACTIONS.map((a) => {
-      const dis = a.ap > left || s.finance.campaign < a.cost;
+      const cost = actionCost(e.run, a);
+      const dis = a.ap > left || s.finance.campaign < cost;
       return `<button class="opt ${dis ? 'locked' : ''}" data-act="campaign-action" data-id="${a.id}" ${dis ? 'disabled' : ''}>
         <div style="display:flex;justify-content:space-between;align-items:baseline;gap:8px">
           <span class="opt-t">${esc(a.name)}</span>
-          <span class="xs muted">${a.ap} AP・${F.money(a.cost)}</span>
+          <span class="xs muted">${a.ap} AP・${F.money(cost)}</span>
         </div>
         <div class="opt-h">${esc(a.desc)}</div></button>`;
     }).join('') + `<button class="btn primary full" data-act="end-turn" style="margin-top:6px">結束這一週</button>`)}`;
