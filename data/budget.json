@@ -1,0 +1,35 @@
+{
+  "categories": [
+    { "id":"welfare","name":"社會福利","share":0.245,"rigid":0.55,"affects":{"popSoL":{"retiree":0.5,"bluecollar":0.3,"farmer":0.3},"society.pensionSustainability":0.3} },
+    { "id":"education","name":"教育科學文化","share":0.190,"rigid":0.60,"affects":{"infrastructure":{"education":0.4},"valuePressure":{"progressivism":0.2}} },
+    { "id":"defense","name":"國防","share":0.155,"rigid":0.40,"affects":{"defense.readiness":0.5,"defense.asymmetricCapability":0.3} },
+    { "id":"economy","name":"經濟發展","share":0.120,"rigid":0.20,"affects":{"gdpGrowthBonus":0.004,"corpMood":{"_all":0.3}} },
+    { "id":"general","name":"一般政務","share":0.095,"rigid":0.75,"affects":{"adminEfficiency":0.4} },
+    { "id":"interest","name":"債務付息","share":0.060,"rigid":1.00,"affects":{} },
+    { "id":"localGrant","name":"補助地方","share":0.055,"rigid":0.50,"affects":{"regionFinance":1.0} },
+    { "id":"transport","name":"交通建設","share":0.040,"rigid":0.25,"affects":{"infrastructure":{"transport":0.4}} },
+    { "id":"environment","name":"環境保護","share":0.020,"rigid":0.30,"affects":{"energy.carbonIntensity":-0.01,"valuePressure":{"environment":0.2}} },
+    { "id":"agriculture","name":"農業","share":0.015,"rigid":0.45,"affects":{"popSoL":{"farmer":0.4},"society.foodSelfSufficiency":0.01} },
+    { "id":"justice","name":"司法","share":0.005,"rigid":0.70,"affects":{"society.crimeRate":-2,"society.socialTrust":0.2} },
+    { "id":"reserve","name":"預備金","share":0.005,"rigid":0.00,"affects":{"disasterBuffer":1.0} }
+  ],
+  "taxes": [
+    { "id":"income","name":"綜合所得稅","baseShare":0.22,"lawId":"LAW_INCOME_TAX" },
+    { "id":"corporate","name":"營利事業所得稅","baseShare":0.20,"lawId":"LAW_CORP_TAX" },
+    { "id":"business","name":"營業稅","baseShare":0.14,"lawId":null },
+    { "id":"commodity","name":"貨物稅","baseShare":0.06,"lawId":null },
+    { "id":"tariff","name":"關稅","baseShare":0.04,"lawId":null },
+    { "id":"securities","name":"證券交易稅","baseShare":0.05,"lawId":null },
+    { "id":"landvalue","name":"土地增值稅","baseShare":0.04,"lawId":null },
+    { "id":"house","name":"房屋稅與地價稅","baseShare":0.07,"lawId":"LAW_HOUSE_TAX" },
+    { "id":"estate","name":"遺產及贈與稅","baseShare":0.02,"lawId":null },
+    { "id":"tobacco","name":"菸酒稅","baseShare":0.02,"lawId":null },
+    { "id":"fees","name":"規費與其他","baseShare":0.09,"lawId":null },
+    { "id":"soe","name":"國營事業盈餘","baseShare":0.05,"lawId":null }
+  ],
+  "specialBudgets": [
+    { "id":"SB_INFRA","name":"前瞻建設特別預算","amount":4200,"years":4,"effects":{"infrastructure":{"transport":0.8,"digital":0.6}} },
+    { "id":"SB_DEFENSE","name":"海空戰力提升特別預算","amount":2400,"years":5,"effects":{"defense.asymmetricCapability":1.0,"defense.readiness":0.6}},
+    { "id":"SB_RESILIENCE","name":"全社會韌性特別預算","amount":1500,"years":3,"effects":{"infrastructure":{"disasterResilience":1.0},"society.socialTrust":0.4} }
+  ]
+}

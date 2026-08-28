@@ -1,0 +1,3338 @@
+{
+  "laws": [
+    {
+      "id": "LAW_INCOME_TAX",
+      "name": "所得稅法",
+      "shortName": "綜所稅",
+      "category": "fiscal",
+      "committee": "財政",
+      "defaultTier": 2,
+      "controversy": 3,
+      "desc": "規範個人綜合所得稅的級距、免稅額與扣除額，是中央歲入與所得重分配的主要工具。",
+      "tiers": [
+        {
+          "name": "大幅減稅",
+          "desc": "最高級距稅率降至三成，免稅額與標準扣除額同步提高三成，中產與高所得負擔明顯下降。",
+          "effects": {
+            "central": {
+              "fiscal.revenueMult": -0.14,
+              "society.giniIndex": 0.006
+            },
+            "popSoL": {
+              "whitecollar": 0.3,
+              "techpro": 0.5,
+              "capitalist": 0.8,
+              "bluecollar": 0.1,
+              "smallbiz": 0.35
+            },
+            "corpMood": {
+              "_all": 0.8
+            },
+            "national": {
+              "giniDelta": 0.006
+            },
+            "valuePressure": {
+              "marketFreedom": 1.2
+            }
+          },
+          "partyStance": {
+            "PDA": -0.25,
+            "CRP": 0.3,
+            "TPL": 0.1,
+            "NGF": -0.4,
+            "TWR": -0.2,
+            "GSP": -0.35,
+            "CUA": 0.15
+          }
+        },
+        {
+          "name": "減稅",
+          "desc": "調降中段級距稅率一至二個百分點並小幅提高扣除額，屬溫和的減稅路線。",
+          "effects": {
+            "central": {
+              "fiscal.revenueMult": -0.07,
+              "society.giniIndex": 0.003
+            },
+            "popSoL": {
+              "whitecollar": 0.18,
+              "techpro": 0.25,
+              "capitalist": 0.4,
+              "smallbiz": 0.2
+            },
+            "corpMood": {
+              "_all": 0.4
+            },
+            "national": {
+              "giniDelta": 0.003
+            },
+            "valuePressure": {
+              "marketFreedom": 0.6
+            }
+          },
+          "partyStance": {
+            "PDA": -0.1,
+            "CRP": 0.35,
+            "TPL": 0.2,
+            "NGF": -0.25,
+            "TWR": -0.05,
+            "GSP": -0.2,
+            "CUA": 0.2
+          }
+        },
+        {
+          "name": "現行",
+          "desc": "維持既有級距與扣除額結構，稅制不作調整，各方勉強接受的現狀。",
+          "effects": {},
+          "partyStance": {
+            "PDA": 0.3,
+            "CRP": 0.15,
+            "TPL": 0.1,
+            "NGF": -0.05,
+            "TWR": 0.1,
+            "GSP": -0.05,
+            "CUA": 0.05
+          }
+        },
+        {
+          "name": "加稅",
+          "desc": "調升高所得級距稅率兩個百分點，並限縮特定列舉扣除額，充實中央財源。",
+          "effects": {
+            "central": {
+              "fiscal.revenueMult": 0.08,
+              "society.giniIndex": -0.004
+            },
+            "popSoL": {
+              "whitecollar": -0.15,
+              "techpro": -0.2,
+              "capitalist": -0.45,
+              "bluecollar": 0.1,
+              "retiree": 0.1
+            },
+            "corpMood": {
+              "_all": -0.5
+            },
+            "national": {
+              "giniDelta": -0.004
+            },
+            "valuePressure": {
+              "marketFreedom": -0.6
+            }
+          },
+          "partyStance": {
+            "PDA": 0.1,
+            "CRP": -0.35,
+            "TPL": -0.1,
+            "NGF": 0.45,
+            "TWR": 0.15,
+            "GSP": 0.5,
+            "CUA": -0.15
+          }
+        },
+        {
+          "name": "富人重稅",
+          "desc": "最高級距提高至五成並開徵資本利得附加稅，稅收全數挹注社會安全網。",
+          "effects": {
+            "central": {
+              "fiscal.revenueMult": 0.16,
+              "society.giniIndex": -0.009,
+              "fiscal.gdpGrowth": -0.002
+            },
+            "popSoL": {
+              "whitecollar": -0.2,
+              "techpro": -0.3,
+              "capitalist": -0.8,
+              "bluecollar": 0.25,
+              "service": 0.2,
+              "retiree": 0.2
+            },
+            "corpMood": {
+              "_all": -1.4,
+              "finance": -1.8
+            },
+            "national": {
+              "giniDelta": -0.01
+            },
+            "valuePressure": {
+              "marketFreedom": -1.3
+            }
+          },
+          "partyStance": {
+            "PDA": -0.05,
+            "CRP": -0.6,
+            "TPL": -0.3,
+            "NGF": 0.7,
+            "TWR": 0.1,
+            "GSP": 0.75,
+            "CUA": -0.3
+          }
+        }
+      ]
+    },
+    {
+      "id": "LAW_CORPORATE_TAX",
+      "name": "營利事業所得稅條例",
+      "shortName": "營所稅",
+      "category": "fiscal",
+      "committee": "財政",
+      "defaultTier": 2,
+      "controversy": 3,
+      "desc": "規範企業盈餘的課稅稅率與未分配盈餘加徵，直接牽動投資意願、外資流入與中央稅收。",
+      "tiers": [
+        {
+          "name": "稅率百分之十五",
+          "desc": "大幅調降企業稅率至十五個百分點，以租稅競爭吸引外資設廠與總部回流。",
+          "effects": {
+            "central": {
+              "fiscal.revenueMult": -0.1,
+              "fiscal.gdpGrowth": 0.004
+            },
+            "popSoL": {
+              "capitalist": 0.7,
+              "techpro": 0.2,
+              "smallbiz": 0.3
+            },
+            "corpMood": {
+              "_all": 1.6
+            },
+            "national": {
+              "giniDelta": 0.005
+            },
+            "valuePressure": {
+              "marketFreedom": 1.4
+            }
+          },
+          "partyStance": {
+            "PDA": -0.3,
+            "CRP": 0.4,
+            "TPL": 0.15,
+            "NGF": -0.55,
+            "TWR": -0.25,
+            "GSP": -0.5,
+            "CUA": 0.2
+          }
+        },
+        {
+          "name": "稅率百分之十八",
+          "desc": "稅率降兩個百分點並保留投資抵減，兼顧財源與招商引資的折衷方案。",
+          "effects": {
+            "central": {
+              "fiscal.revenueMult": -0.05,
+              "fiscal.gdpGrowth": 0.002
+            },
+            "popSoL": {
+              "capitalist": 0.35,
+              "smallbiz": 0.15
+            },
+            "corpMood": {
+              "_all": 0.8
+            },
+            "national": {
+              "giniDelta": 0.002
+            },
+            "valuePressure": {
+              "marketFreedom": 0.7
+            }
+          },
+          "partyStance": {
+            "PDA": -0.1,
+            "CRP": 0.4,
+            "TPL": 0.3,
+            "NGF": -0.3,
+            "TWR": -0.05,
+            "GSP": -0.25,
+            "CUA": 0.2
+          }
+        },
+        {
+          "name": "稅率百分之二十",
+          "desc": "維持現行企業稅率與未分配盈餘加徵制度，不作任何調整。",
+          "effects": {},
+          "partyStance": {
+            "PDA": 0.35,
+            "CRP": 0.1,
+            "TPL": 0.15,
+            "NGF": 0,
+            "TWR": 0.15,
+            "GSP": 0,
+            "CUA": 0.05
+          }
+        },
+        {
+          "name": "稅率百分之二十三",
+          "desc": "稅率調升三個百分點，並對超額獲利加徵臨時附加捐以支應社福支出。",
+          "effects": {
+            "central": {
+              "fiscal.revenueMult": 0.09,
+              "fiscal.gdpGrowth": -0.003
+            },
+            "popSoL": {
+              "capitalist": -0.5,
+              "bluecollar": 0.15,
+              "service": 0.15
+            },
+            "corpMood": {
+              "_all": -1
+            },
+            "national": {
+              "giniDelta": -0.004
+            },
+            "valuePressure": {
+              "marketFreedom": -0.8
+            }
+          },
+          "partyStance": {
+            "PDA": 0.1,
+            "CRP": -0.45,
+            "TPL": -0.15,
+            "NGF": 0.5,
+            "TWR": 0.1,
+            "GSP": 0.55,
+            "CUA": -0.2
+          }
+        },
+        {
+          "name": "稅率百分之二十六",
+          "desc": "企業稅率大幅拉高至二十六個百分點，並全面檢討各項租稅減免落日。",
+          "effects": {
+            "central": {
+              "fiscal.revenueMult": 0.17,
+              "fiscal.gdpGrowth": -0.006,
+              "fiscal.unemployment": 0.004
+            },
+            "popSoL": {
+              "capitalist": -0.8,
+              "techpro": -0.25,
+              "smallbiz": -0.3,
+              "bluecollar": 0.2,
+              "service": 0.2
+            },
+            "corpMood": {
+              "_all": -1.9,
+              "semiconductor": -2,
+              "finance": -1.8
+            },
+            "national": {
+              "giniDelta": -0.008
+            },
+            "valuePressure": {
+              "marketFreedom": -1.5
+            }
+          },
+          "partyStance": {
+            "PDA": -0.15,
+            "CRP": -0.7,
+            "TPL": -0.4,
+            "NGF": 0.65,
+            "TWR": 0.05,
+            "GSP": 0.75,
+            "CUA": -0.35
+          }
+        }
+      ]
+    },
+    {
+      "id": "LAW_FISCAL_ALLOCATION",
+      "name": "財政收支劃分法",
+      "shortName": "財劃法",
+      "category": "fiscal",
+      "committee": "財政",
+      "defaultTier": 2,
+      "controversy": 4,
+      "desc": "決定中央與二十二個縣市之間統籌分配稅款的比例，是中央地方權力關係的財政根基。",
+      "tiers": [
+        {
+          "name": "中央七比地方三",
+          "desc": "中央保留七成稅源，統籌款集中運用於全國性重大建設與國防社福支出。",
+          "effects": {
+            "central": {
+              "fiscal.revenueMult": 0.1
+            },
+            "popSoL": {
+              "publicsvc": 0.1,
+              "farmer": -0.2,
+              "service": -0.1
+            },
+            "valuePressure": {
+              "centralization": 1.5
+            }
+          },
+          "partyStance": {
+            "PDA": 0.1,
+            "CRP": -0.1,
+            "TPL": -0.15,
+            "NGF": -0.1,
+            "TWR": -0.2,
+            "GSP": -0.1,
+            "CUA": 0.25
+          }
+        },
+        {
+          "name": "中央六五比地方三五",
+          "desc": "中央略為讓利，統籌款分配公式微調，地方財政壓力稍獲舒緩。",
+          "effects": {
+            "central": {
+              "fiscal.revenueMult": 0.04
+            },
+            "popSoL": {
+              "farmer": -0.1
+            },
+            "valuePressure": {
+              "centralization": 0.7
+            }
+          },
+          "partyStance": {
+            "PDA": 0.2,
+            "CRP": 0,
+            "TPL": 0,
+            "NGF": 0,
+            "TWR": -0.05,
+            "GSP": 0.05,
+            "CUA": 0.2
+          }
+        },
+        {
+          "name": "中央六比地方四",
+          "desc": "維持現行分配公式，人口、營利事業額與土地面積權重不變。",
+          "effects": {},
+          "partyStance": {
+            "PDA": 0.25,
+            "CRP": 0.1,
+            "TPL": 0.1,
+            "NGF": 0.1,
+            "TWR": 0.05,
+            "GSP": 0.1,
+            "CUA": 0.1
+          }
+        },
+        {
+          "name": "中央五五比地方四五",
+          "desc": "稅源明顯下放，統籌款改以基本財政需求為主要計算基準，地方建設加速。",
+          "effects": {
+            "central": {
+              "fiscal.revenueMult": -0.06,
+              "fiscal.expenditureMult": -0.02
+            },
+            "popSoL": {
+              "farmer": 0.25,
+              "smallbiz": 0.15,
+              "bluecollar": 0.1,
+              "_all": 0.05
+            },
+            "valuePressure": {
+              "centralization": -0.9
+            }
+          },
+          "partyStance": {
+            "PDA": -0.05,
+            "CRP": 0.45,
+            "TPL": 0.35,
+            "NGF": 0.15,
+            "TWR": 0.2,
+            "GSP": 0.1,
+            "CUA": -0.05
+          }
+        },
+        {
+          "name": "中央五比地方五",
+          "desc": "稅源對半分割，地方自治財源大幅擴張，中央調控全國均衡發展的能力被削弱。",
+          "effects": {
+            "central": {
+              "fiscal.revenueMult": -0.13,
+              "fiscal.expenditureMult": -0.05
+            },
+            "popSoL": {
+              "farmer": 0.35,
+              "smallbiz": 0.25,
+              "bluecollar": 0.15,
+              "publicsvc": -0.1,
+              "_all": 0.08
+            },
+            "national": {
+              "giniDelta": 0.004
+            },
+            "valuePressure": {
+              "centralization": -1.8
+            }
+          },
+          "partyStance": {
+            "PDA": -0.3,
+            "CRP": 0.55,
+            "TPL": 0.45,
+            "NGF": 0.05,
+            "TWR": 0.3,
+            "GSP": -0.05,
+            "CUA": -0.2
+          }
+        }
+      ]
+    },
+    {
+      "id": "LAW_HOUSING_TAX",
+      "name": "房屋稅與囤房稅條例",
+      "shortName": "囤房稅",
+      "category": "fiscal",
+      "committee": "財政",
+      "defaultTier": 1,
+      "controversy": 4,
+      "desc": "規範非自住住宅的差別稅率與地方政府課稅彈性，是抑制房市投機與充實地方稅收的槓桿。",
+      "tiers": [
+        {
+          "name": "降稅",
+          "desc": "全面調降住宅持有稅並放寬自住認定，減輕屋主與置產族的持有成本。",
+          "effects": {
+            "central": {
+              "society.housingAffordability": -0.3
+            },
+            "popSoL": {
+              "capitalist": 0.4,
+              "retiree": 0.2,
+              "whitecollar": -0.15,
+              "student": -0.2
+            },
+            "corpMood": {
+              "_all": 0.4
+            },
+            "national": {
+              "housingPriceDelta": 0.05,
+              "giniDelta": 0.004
+            },
+            "valuePressure": {
+              "marketFreedom": 0.8
+            }
+          },
+          "partyStance": {
+            "PDA": -0.3,
+            "CRP": 0.25,
+            "TPL": -0.2,
+            "NGF": -0.6,
+            "TWR": -0.25,
+            "GSP": -0.55,
+            "CUA": 0.15
+          }
+        },
+        {
+          "name": "現行",
+          "desc": "維持既有非自住房屋差別稅率與地方訂定區間，不作進一步調整。",
+          "effects": {},
+          "partyStance": {
+            "PDA": 0.2,
+            "CRP": 0.2,
+            "TPL": 0,
+            "NGF": -0.2,
+            "TWR": 0.05,
+            "GSP": -0.15,
+            "CUA": 0.15
+          }
+        },
+        {
+          "name": "囤房稅二點零",
+          "desc": "以全國歸戶計算持有戶數，第三戶以上採累進重稅，稅收撥入住宅基金。",
+          "effects": {
+            "central": {
+              "society.housingAffordability": 0.35,
+              "fiscal.revenueMult": 0.02
+            },
+            "popSoL": {
+              "capitalist": -0.45,
+              "whitecollar": 0.25,
+              "student": 0.3,
+              "techpro": 0.2,
+              "retiree": -0.1
+            },
+            "corpMood": {
+              "_all": -0.6
+            },
+            "national": {
+              "housingPriceDelta": -0.04,
+              "giniDelta": -0.004
+            },
+            "valuePressure": {
+              "marketFreedom": -0.7
+            }
+          },
+          "partyStance": {
+            "PDA": 0.4,
+            "CRP": -0.25,
+            "TPL": 0.35,
+            "NGF": 0.65,
+            "TWR": 0.3,
+            "GSP": 0.6,
+            "CUA": -0.2
+          }
+        },
+        {
+          "name": "重稅",
+          "desc": "第四戶以上稅率一律提高至百分之四點八，並嚴查借名登記與人頭分散持有。",
+          "effects": {
+            "central": {
+              "society.housingAffordability": 0.65,
+              "fiscal.revenueMult": 0.04,
+              "fiscal.gdpGrowth": -0.002
+            },
+            "popSoL": {
+              "capitalist": -0.8,
+              "smallbiz": -0.25,
+              "whitecollar": 0.4,
+              "student": 0.45,
+              "techpro": 0.3,
+              "retiree": -0.2
+            },
+            "corpMood": {
+              "_all": -1.3,
+              "finance": -1.5
+            },
+            "national": {
+              "housingPriceDelta": -0.09,
+              "giniDelta": -0.007
+            },
+            "valuePressure": {
+              "marketFreedom": -1.3
+            }
+          },
+          "partyStance": {
+            "PDA": 0.15,
+            "CRP": -0.55,
+            "TPL": 0.25,
+            "NGF": 0.8,
+            "TWR": 0.3,
+            "GSP": 0.75,
+            "CUA": -0.4
+          }
+        }
+      ]
+    },
+    {
+      "id": "LAW_PUBLIC_DEBT",
+      "name": "公共債務法",
+      "shortName": "債限法",
+      "category": "fiscal",
+      "committee": "財政",
+      "defaultTier": 0,
+      "controversy": 3,
+      "desc": "設定中央與地方政府未償債務占國內生產毛額的上限，決定舉債擴張公共建設的空間。",
+      "tiers": [
+        {
+          "name": "債限百分之四十點六",
+          "desc": "維持現行債務上限，堅守財政紀律，大型特別預算須排擠既有支出。",
+          "effects": {},
+          "partyStance": {
+            "PDA": 0.2,
+            "CRP": 0.3,
+            "TPL": 0.35,
+            "NGF": -0.15,
+            "TWR": 0,
+            "GSP": 0.05,
+            "CUA": 0.2
+          }
+        },
+        {
+          "name": "債限百分之四十五",
+          "desc": "債限小幅放寬，釋出舉債空間支應交通與防災等長期公共建設。",
+          "effects": {
+            "central": {
+              "fiscal.expenditureMult": 0.04,
+              "fiscal.gdpGrowth": 0.002
+            },
+            "popSoL": {
+              "bluecollar": 0.15,
+              "farmer": 0.1,
+              "_all": 0.05
+            }
+          },
+          "partyStance": {
+            "PDA": 0.3,
+            "CRP": 0.05,
+            "TPL": 0.1,
+            "NGF": 0.25,
+            "TWR": 0.2,
+            "GSP": 0.2,
+            "CUA": 0.1
+          }
+        },
+        {
+          "name": "債限百分之五十",
+          "desc": "債限明顯上調，可支應大規模基礎建設與能源轉型投資，利息支出隨之攀升。",
+          "effects": {
+            "central": {
+              "fiscal.expenditureMult": 0.09,
+              "fiscal.gdpGrowth": 0.004,
+              "fiscal.inflation": 0.002
+            },
+            "popSoL": {
+              "bluecollar": 0.25,
+              "farmer": 0.2,
+              "service": 0.15,
+              "_all": 0.08
+            },
+            "corpMood": {
+              "_all": 0.5
+            }
+          },
+          "partyStance": {
+            "PDA": 0.25,
+            "CRP": -0.2,
+            "TPL": -0.15,
+            "NGF": 0.4,
+            "TWR": 0.25,
+            "GSP": 0.3,
+            "CUA": 0
+          }
+        },
+        {
+          "name": "債限百分之五十五",
+          "desc": "債限大幅鬆綁，赤字財政成為常態，信用評等與世代財政公平面臨質疑。",
+          "effects": {
+            "central": {
+              "fiscal.expenditureMult": 0.15,
+              "fiscal.gdpGrowth": 0.005,
+              "fiscal.inflation": 0.005,
+              "society.socialTrust": -0.2
+            },
+            "popSoL": {
+              "bluecollar": 0.3,
+              "farmer": 0.25,
+              "service": 0.2,
+              "student": -0.15,
+              "_all": 0.1
+            },
+            "corpMood": {
+              "_all": 0.2,
+              "finance": -0.6
+            }
+          },
+          "partyStance": {
+            "PDA": 0.05,
+            "CRP": -0.45,
+            "TPL": -0.4,
+            "NGF": 0.35,
+            "TWR": 0.15,
+            "GSP": 0.2,
+            "CUA": -0.1
+          }
+        }
+      ]
+    },
+    {
+      "id": "LAW_LABOR_STANDARDS",
+      "name": "勞動基準法",
+      "shortName": "勞基法",
+      "category": "labor",
+      "committee": "社會福利及衛生環境",
+      "defaultTier": 1,
+      "controversy": 4,
+      "desc": "規範工時、加班費、休假與解僱保護的勞動最低標準，牽動全體受僱者與企業人事成本。",
+      "tiers": [
+        {
+          "name": "彈性化",
+          "desc": "放寬變形工時與加班上限，允許以勞資協商調整休假，企業排班自由度大幅提高。",
+          "effects": {
+            "central": {
+              "fiscal.unemployment": -0.004,
+              "fiscal.gdpGrowth": 0.003
+            },
+            "popSoL": {
+              "bluecollar": -0.45,
+              "service": -0.4,
+              "whitecollar": -0.25,
+              "smallbiz": 0.35,
+              "capitalist": 0.5
+            },
+            "corpMood": {
+              "_all": 1.3,
+              "retail": 1.5,
+              "logistics": 1.4
+            },
+            "national": {
+              "giniDelta": 0.004
+            },
+            "valuePressure": {
+              "marketFreedom": 1.2
+            }
+          },
+          "partyStance": {
+            "PDA": -0.3,
+            "CRP": 0.35,
+            "TPL": 0.1,
+            "NGF": -0.75,
+            "TWR": -0.3,
+            "GSP": -0.6,
+            "CUA": 0.1
+          }
+        },
+        {
+          "name": "現行",
+          "desc": "維持每兩週八十四小時架構下的既有例休制度與加班上限規定。",
+          "effects": {},
+          "partyStance": {
+            "PDA": 0.25,
+            "CRP": 0.2,
+            "TPL": 0.15,
+            "NGF": -0.2,
+            "TWR": 0.05,
+            "GSP": -0.15,
+            "CUA": 0.15
+          }
+        },
+        {
+          "name": "工時縮減",
+          "desc": "推動每兩週多放半日的週休二點五日制，並將加班時數上限往下修。",
+          "effects": {
+            "central": {
+              "fiscal.unemployment": 0.003,
+              "fiscal.gdpGrowth": -0.003,
+              "society.socialTrust": 0.2
+            },
+            "popSoL": {
+              "bluecollar": 0.4,
+              "service": 0.35,
+              "whitecollar": 0.35,
+              "techpro": 0.25,
+              "smallbiz": -0.3,
+              "capitalist": -0.4
+            },
+            "corpMood": {
+              "_all": -1,
+              "retail": -1.3,
+              "food": -1.2
+            },
+            "national": {
+              "giniDelta": -0.003
+            },
+            "valuePressure": {
+              "marketFreedom": -0.9,
+              "progressivism": 0.5
+            }
+          },
+          "partyStance": {
+            "PDA": 0.2,
+            "CRP": -0.4,
+            "TPL": -0.1,
+            "NGF": 0.7,
+            "TWR": 0.2,
+            "GSP": 0.65,
+            "CUA": -0.15
+          }
+        },
+        {
+          "name": "加班費加倍與每週三十八小時",
+          "desc": "法定工時降至每週三十八小時，加班費倍率翻倍，違法裁罰上限同步提高。",
+          "effects": {
+            "central": {
+              "fiscal.unemployment": 0.007,
+              "fiscal.gdpGrowth": -0.006,
+              "fiscal.inflation": 0.003
+            },
+            "popSoL": {
+              "bluecollar": 0.6,
+              "service": 0.55,
+              "whitecollar": 0.45,
+              "techpro": 0.3,
+              "smallbiz": -0.6,
+              "capitalist": -0.7
+            },
+            "corpMood": {
+              "_all": -1.8,
+              "food": -2,
+              "retail": -1.9,
+              "logistics": -1.7
+            },
+            "national": {
+              "giniDelta": -0.006
+            },
+            "valuePressure": {
+              "marketFreedom": -1.6,
+              "progressivism": 0.8
+            }
+          },
+          "partyStance": {
+            "PDA": -0.05,
+            "CRP": -0.65,
+            "TPL": -0.35,
+            "NGF": 0.85,
+            "TWR": 0.15,
+            "GSP": 0.8,
+            "CUA": -0.3
+          }
+        }
+      ]
+    },
+    {
+      "id": "LAW_MINIMUM_WAGE",
+      "name": "最低工資法",
+      "shortName": "基本工資",
+      "category": "labor",
+      "committee": "社會福利及衛生環境",
+      "defaultTier": 1,
+      "controversy": 3,
+      "desc": "規範最低工資的審議機制與調整公式，直接決定基層勞工薪資底線與小型企業用人成本。",
+      "tiers": [
+        {
+          "name": "凍漲",
+          "desc": "最低工資暫停調整並取消年度自動審議，優先照顧中小企業經營壓力。",
+          "effects": {
+            "central": {
+              "fiscal.unemployment": -0.003,
+              "fiscal.inflation": -0.002
+            },
+            "popSoL": {
+              "bluecollar": -0.4,
+              "service": -0.35,
+              "student": -0.25,
+              "smallbiz": 0.4
+            },
+            "corpMood": {
+              "_all": 0.9,
+              "food": 1.1,
+              "retail": 1
+            },
+            "national": {
+              "giniDelta": 0.005
+            },
+            "valuePressure": {
+              "marketFreedom": 1
+            }
+          },
+          "partyStance": {
+            "PDA": -0.35,
+            "CRP": 0.2,
+            "TPL": -0.05,
+            "NGF": -0.8,
+            "TWR": -0.3,
+            "GSP": -0.7,
+            "CUA": 0.05
+          }
+        },
+        {
+          "name": "隨物價調整",
+          "desc": "以消費者物價指數年增率為基準逐年調升，維持購買力不倒退的基本原則。",
+          "effects": {},
+          "partyStance": {
+            "PDA": 0.35,
+            "CRP": 0.2,
+            "TPL": 0.3,
+            "NGF": -0.1,
+            "TWR": 0.15,
+            "GSP": -0.05,
+            "CUA": 0.15
+          }
+        },
+        {
+          "name": "每年調升百分之五",
+          "desc": "明訂最低工資每年至少調升百分之五，並納入家庭生活成本作為審議依據。",
+          "effects": {
+            "central": {
+              "fiscal.unemployment": 0.003,
+              "fiscal.inflation": 0.003
+            },
+            "popSoL": {
+              "bluecollar": 0.4,
+              "service": 0.35,
+              "student": 0.25,
+              "smallbiz": -0.35
+            },
+            "corpMood": {
+              "_all": -0.9,
+              "food": -1.2,
+              "retail": -1.1
+            },
+            "national": {
+              "giniDelta": -0.005
+            },
+            "valuePressure": {
+              "marketFreedom": -0.8
+            }
+          },
+          "partyStance": {
+            "PDA": 0.3,
+            "CRP": -0.35,
+            "TPL": 0.05,
+            "NGF": 0.7,
+            "TWR": 0.25,
+            "GSP": 0.7,
+            "CUA": -0.1
+          }
+        },
+        {
+          "name": "每年調升百分之八",
+          "desc": "以四年內達成生活工資為目標，每年強制調升百分之八並同步提高罰則。",
+          "effects": {
+            "central": {
+              "fiscal.unemployment": 0.008,
+              "fiscal.inflation": 0.006,
+              "fiscal.gdpGrowth": -0.003
+            },
+            "popSoL": {
+              "bluecollar": 0.6,
+              "service": 0.55,
+              "student": 0.35,
+              "farmer": 0.2,
+              "smallbiz": -0.7,
+              "capitalist": -0.45
+            },
+            "corpMood": {
+              "_all": -1.7,
+              "food": -2,
+              "retail": -1.9,
+              "tourism": -1.6
+            },
+            "national": {
+              "giniDelta": -0.009
+            },
+            "valuePressure": {
+              "marketFreedom": -1.5
+            }
+          },
+          "partyStance": {
+            "PDA": 0,
+            "CRP": -0.6,
+            "TPL": -0.25,
+            "NGF": 0.85,
+            "TWR": 0.15,
+            "GSP": 0.8,
+            "CUA": -0.25
+          }
+        }
+      ]
+    },
+    {
+      "id": "LAW_LABOR_PENSION",
+      "name": "勞工保險條例",
+      "shortName": "勞保年改",
+      "category": "welfare",
+      "committee": "社會福利及衛生環境",
+      "defaultTier": 0,
+      "controversy": 5,
+      "desc": "規範勞工保險的費率、給付與請領年齡，攸關基金存續與數百萬受僱者的退休保障。",
+      "tiers": [
+        {
+          "name": "不改",
+          "desc": "維持現行給付與費率結構，基金缺口持續擴大，破產時點在可預見的將來。",
+          "effects": {
+            "central": {
+              "society.pensionSustainability": -0.25
+            },
+            "popSoL": {
+              "retiree": 0.1
+            }
+          },
+          "partyStance": {
+            "PDA": 0.05,
+            "CRP": 0.1,
+            "TPL": -0.2,
+            "NGF": 0.05,
+            "TWR": 0.05,
+            "GSP": -0.1,
+            "CUA": 0.25
+          }
+        },
+        {
+          "name": "政府撥補",
+          "desc": "由中央年年編列預算撥補基金缺口，給付與費率維持不變，財政負擔轉由全民承擔。",
+          "effects": {
+            "central": {
+              "fiscal.expenditureMult": 0.05,
+              "society.pensionSustainability": 0.35
+            },
+            "popSoL": {
+              "retiree": 0.35,
+              "bluecollar": 0.2,
+              "publicsvc": -0.1
+            }
+          },
+          "partyStance": {
+            "PDA": 0.45,
+            "CRP": 0.25,
+            "TPL": 0.1,
+            "NGF": 0.35,
+            "TWR": 0.3,
+            "GSP": 0.25,
+            "CUA": 0.4
+          }
+        },
+        {
+          "name": "延後請領與調高費率",
+          "desc": "請領年齡逐年延後至六十七歲，費率分十年調升至百分之十八，給付公式微調。",
+          "effects": {
+            "central": {
+              "society.pensionSustainability": 0.7,
+              "fiscal.revenueMult": 0.02
+            },
+            "popSoL": {
+              "retiree": -0.45,
+              "bluecollar": -0.3,
+              "service": -0.25,
+              "whitecollar": -0.15,
+              "student": 0.2
+            },
+            "corpMood": {
+              "_all": -0.7
+            },
+            "valuePressure": {
+              "marketFreedom": 0.3
+            }
+          },
+          "partyStance": {
+            "PDA": 0.15,
+            "CRP": -0.05,
+            "TPL": 0.45,
+            "NGF": -0.2,
+            "TWR": 0,
+            "GSP": -0.05,
+            "CUA": -0.35
+          }
+        },
+        {
+          "name": "全面改制",
+          "desc": "新進勞工改採確定提撥制個人帳戶，舊制權益以政府擔保逐年結清，制度徹底重來。",
+          "effects": {
+            "central": {
+              "society.pensionSustainability": 1.1,
+              "fiscal.expenditureMult": 0.07,
+              "society.socialTrust": -0.3
+            },
+            "popSoL": {
+              "retiree": -0.55,
+              "bluecollar": -0.35,
+              "service": -0.3,
+              "student": 0.35,
+              "techpro": 0.2
+            },
+            "corpMood": {
+              "_all": 0.3,
+              "finance": 0.9
+            },
+            "valuePressure": {
+              "marketFreedom": 1.1
+            }
+          },
+          "partyStance": {
+            "PDA": -0.15,
+            "CRP": 0.3,
+            "TPL": 0.55,
+            "NGF": -0.45,
+            "TWR": -0.1,
+            "GSP": -0.3,
+            "CUA": -0.45
+          }
+        }
+      ]
+    },
+    {
+      "id": "LAW_NHI",
+      "name": "全民健康保險法",
+      "shortName": "健保法",
+      "category": "welfare",
+      "committee": "社會福利及衛生環境",
+      "defaultTier": 0,
+      "controversy": 4,
+      "desc": "規範健保費率、補充保費與部分負擔制度，決定醫療體系的財務健康度與就醫可及性。",
+      "tiers": [
+        {
+          "name": "費率凍結",
+          "desc": "一般保險費率凍結不動，收支缺口以安全準備金與菸捐挹注，短期民怨最低。",
+          "effects": {
+            "central": {
+              "society.healthcareSustainability": -0.3
+            },
+            "popSoL": {
+              "_all": 0.1,
+              "retiree": 0.15
+            }
+          },
+          "partyStance": {
+            "PDA": 0.2,
+            "CRP": 0.3,
+            "TPL": 0.1,
+            "NGF": 0.2,
+            "TWR": 0.15,
+            "GSP": 0.05,
+            "CUA": 0.35
+          }
+        },
+        {
+          "name": "小幅調升",
+          "desc": "一般費率調升零點三個百分點，維持總額成長率略高於醫療通膨的平衡點。",
+          "effects": {
+            "central": {
+              "society.healthcareSustainability": 0.3,
+              "fiscal.revenueMult": 0.01
+            },
+            "popSoL": {
+              "_all": -0.1,
+              "retiree": -0.05
+            },
+            "corpMood": {
+              "_all": -0.3
+            }
+          },
+          "partyStance": {
+            "PDA": 0.4,
+            "CRP": 0.1,
+            "TPL": 0.3,
+            "NGF": 0.05,
+            "TWR": 0.2,
+            "GSP": 0.15,
+            "CUA": 0
+          }
+        },
+        {
+          "name": "補充保費擴大",
+          "desc": "將股利、租金與海外所得全面納入補充保費計費範圍，並取消單筆計費上限。",
+          "effects": {
+            "central": {
+              "society.healthcareSustainability": 0.6,
+              "fiscal.revenueMult": 0.02
+            },
+            "popSoL": {
+              "capitalist": -0.55,
+              "whitecollar": -0.15,
+              "retiree": -0.1,
+              "bluecollar": 0.1
+            },
+            "corpMood": {
+              "_all": -0.6,
+              "finance": -1.1
+            },
+            "national": {
+              "giniDelta": -0.003
+            },
+            "valuePressure": {
+              "marketFreedom": -0.6
+            }
+          },
+          "partyStance": {
+            "PDA": 0.35,
+            "CRP": -0.3,
+            "TPL": 0.2,
+            "NGF": 0.6,
+            "TWR": 0.2,
+            "GSP": 0.55,
+            "CUA": -0.2
+          }
+        },
+        {
+          "name": "部分負擔大改革",
+          "desc": "大幅提高門診與檢驗的部分負擔，設定分級轉診差別費率，抑制醫療資源濫用。",
+          "effects": {
+            "central": {
+              "society.healthcareSustainability": 0.8,
+              "society.socialTrust": -0.2
+            },
+            "popSoL": {
+              "retiree": -0.5,
+              "bluecollar": -0.3,
+              "farmer": -0.3,
+              "whitecollar": -0.1,
+              "capitalist": 0.1
+            },
+            "corpMood": {
+              "_all": 0.2,
+              "biotech": 0.6
+            },
+            "valuePressure": {
+              "marketFreedom": 0.8
+            }
+          },
+          "partyStance": {
+            "PDA": 0.05,
+            "CRP": 0.35,
+            "TPL": 0.45,
+            "NGF": -0.35,
+            "TWR": -0.05,
+            "GSP": -0.25,
+            "CUA": -0.3
+          }
+        },
+        {
+          "name": "家戶總所得制",
+          "desc": "改以家戶總所得作為單一計費基礎，取消眷口數上限，制度公平但徵收成本高昂。",
+          "effects": {
+            "central": {
+              "society.healthcareSustainability": 1,
+              "society.socialTrust": -0.1,
+              "fiscal.revenueMult": 0.03
+            },
+            "popSoL": {
+              "capitalist": -0.6,
+              "whitecollar": -0.25,
+              "techpro": -0.2,
+              "bluecollar": 0.3,
+              "service": 0.25,
+              "retiree": 0.15
+            },
+            "corpMood": {
+              "_all": -0.8
+            },
+            "national": {
+              "giniDelta": -0.005
+            },
+            "valuePressure": {
+              "marketFreedom": -0.9,
+              "progressivism": 0.4
+            }
+          },
+          "partyStance": {
+            "PDA": 0.25,
+            "CRP": -0.4,
+            "TPL": 0.15,
+            "NGF": 0.7,
+            "TWR": 0.15,
+            "GSP": 0.65,
+            "CUA": -0.3
+          }
+        }
+      ]
+    },
+    {
+      "id": "LAW_LONGTERM_CARE",
+      "name": "長期照顧服務法",
+      "shortName": "長照法",
+      "category": "welfare",
+      "committee": "社會福利及衛生環境",
+      "defaultTier": 0,
+      "controversy": 3,
+      "desc": "規範長照服務的供給、財源與人力制度，攸關高齡照顧品質與家庭照顧者的負擔輕重。",
+      "tiers": [
+        {
+          "name": "現行",
+          "desc": "維持以菸酒稅與遺贈稅挹注的長照基金架構，服務量能維持既有規模。",
+          "effects": {},
+          "partyStance": {
+            "PDA": 0.3,
+            "CRP": 0.2,
+            "TPL": 0.15,
+            "NGF": 0,
+            "TWR": 0.15,
+            "GSP": 0.05,
+            "CUA": 0.2
+          }
+        },
+        {
+          "name": "擴大服務量能",
+          "desc": "大幅增加據點與居服人力補助，放寬給付額度，並將家庭照顧者喘息服務常態化。",
+          "effects": {
+            "central": {
+              "fiscal.expenditureMult": 0.04,
+              "society.birthRate": 0.02,
+              "society.socialTrust": 0.25
+            },
+            "popSoL": {
+              "retiree": 0.5,
+              "service": 0.3,
+              "whitecollar": 0.2,
+              "bluecollar": 0.2,
+              "_all": 0.1
+            },
+            "corpMood": {
+              "_all": 0.2,
+              "biotech": 0.5
+            },
+            "valuePressure": {
+              "progressivism": 0.6
+            }
+          },
+          "partyStance": {
+            "PDA": 0.55,
+            "CRP": 0.35,
+            "TPL": 0.4,
+            "NGF": 0.6,
+            "TWR": 0.4,
+            "GSP": 0.55,
+            "CUA": 0.35
+          }
+        },
+        {
+          "name": "長照保險制",
+          "desc": "另立長照保險，全民依所得費率繳費並確立法定給付項目，服務普及但增加薪資負擔。",
+          "effects": {
+            "central": {
+              "fiscal.expenditureMult": 0.06,
+              "fiscal.revenueMult": 0.03,
+              "society.birthRate": 0.04,
+              "society.healthcareSustainability": 0.3,
+              "society.socialTrust": 0.2
+            },
+            "popSoL": {
+              "retiree": 0.7,
+              "service": 0.35,
+              "whitecollar": -0.1,
+              "bluecollar": -0.1,
+              "techpro": -0.15,
+              "capitalist": -0.3
+            },
+            "corpMood": {
+              "_all": -0.7,
+              "biotech": 0.8
+            },
+            "valuePressure": {
+              "progressivism": 0.9,
+              "marketFreedom": -0.7
+            }
+          },
+          "partyStance": {
+            "PDA": 0.4,
+            "CRP": -0.1,
+            "TPL": 0.25,
+            "NGF": 0.7,
+            "TWR": 0.3,
+            "GSP": 0.7,
+            "CUA": 0.1
+          }
+        }
+      ]
+    },
+    {
+      "id": "LAW_ENERGY_MIX",
+      "name": "電業法與能源配比條例",
+      "shortName": "能源配比",
+      "category": "energy",
+      "committee": "經濟",
+      "defaultTier": 2,
+      "controversy": 5,
+      "desc": "規範發電結構、電價審議與再生能源占比目標，是能源安全、電價與碳排的核心法源。",
+      "tiers": [
+        {
+          "name": "重啟核能",
+          "desc": "既有機組重啟並延役，核能發電占比拉回一成五，同步下修再生能源期程目標。",
+          "effects": {
+            "central": {
+              "energy.electricityPrice": -0.08,
+              "energy.reserveMargin": 0.05,
+              "energy.carbonIntensity": -0.1,
+              "fiscal.gdpGrowth": 0.003,
+              "society.socialTrust": -0.2
+            },
+            "popSoL": {
+              "_all": 0.15,
+              "smallbiz": 0.25,
+              "bluecollar": 0.15
+            },
+            "corpMood": {
+              "_all": 1.2,
+              "semiconductor": 1.6,
+              "steel": 1.5,
+              "petrochemical": 1.4,
+              "energy": 0.6
+            },
+            "valuePressure": {
+              "environment": -1,
+              "marketFreedom": 0.4
+            }
+          },
+          "partyStance": {
+            "PDA": -0.55,
+            "CRP": 0.6,
+            "TPL": 0.45,
+            "NGF": -0.6,
+            "TWR": -0.5,
+            "GSP": -0.9,
+            "CUA": 0.55
+          }
+        },
+        {
+          "name": "延役與綠能並行",
+          "desc": "既有核能機組有條件延役作為過渡，同時維持再生能源建置節奏，追求穩定供電。",
+          "effects": {
+            "central": {
+              "energy.electricityPrice": -0.04,
+              "energy.reserveMargin": 0.03,
+              "energy.carbonIntensity": -0.06
+            },
+            "popSoL": {
+              "_all": 0.08,
+              "smallbiz": 0.1
+            },
+            "corpMood": {
+              "_all": 0.7,
+              "semiconductor": 0.9,
+              "steel": 0.8
+            },
+            "valuePressure": {
+              "environment": -0.4
+            }
+          },
+          "partyStance": {
+            "PDA": -0.25,
+            "CRP": 0.5,
+            "TPL": 0.55,
+            "NGF": -0.3,
+            "TWR": -0.25,
+            "GSP": -0.6,
+            "CUA": 0.4
+          }
+        },
+        {
+          "name": "現行非核家園",
+          "desc": "維持既定非核期程，以燃氣為橋接電力，再生能源依原訂目標逐年擴充。",
+          "effects": {},
+          "partyStance": {
+            "PDA": 0.5,
+            "CRP": -0.3,
+            "TPL": -0.05,
+            "NGF": 0.35,
+            "TWR": 0.45,
+            "GSP": 0.3,
+            "CUA": -0.35
+          }
+        },
+        {
+          "name": "加速綠能",
+          "desc": "再生能源占比目標拉高至四成，大規模布建光電、離岸風電與儲能，電價與土地爭議升高。",
+          "effects": {
+            "central": {
+              "energy.electricityPrice": 0.12,
+              "energy.reserveMargin": -0.03,
+              "energy.carbonIntensity": -0.14,
+              "fiscal.expenditureMult": 0.04,
+              "diplomacy.euRelation": 0.3
+            },
+            "popSoL": {
+              "farmer": -0.25,
+              "smallbiz": -0.25,
+              "bluecollar": -0.15,
+              "techpro": 0.15,
+              "_all": -0.1
+            },
+            "corpMood": {
+              "_all": -0.9,
+              "steel": -1.6,
+              "petrochemical": -1.5,
+              "semiconductor": -0.8,
+              "energy": 1.2
+            },
+            "valuePressure": {
+              "environment": 1.6
+            }
+          },
+          "partyStance": {
+            "PDA": 0.35,
+            "CRP": -0.6,
+            "TPL": -0.3,
+            "NGF": 0.55,
+            "TWR": 0.3,
+            "GSP": 0.9,
+            "CUA": -0.5
+          }
+        }
+      ]
+    },
+    {
+      "id": "LAW_CLIMATE_CARBON",
+      "name": "氣候變遷因應法",
+      "shortName": "碳費",
+      "category": "energy",
+      "committee": "社會福利及衛生環境",
+      "defaultTier": 0,
+      "controversy": 4,
+      "desc": "訂定溫室氣體減量目標與碳費費率，牽動高碳排產業成本、物價與國際碳邊境接軌。",
+      "tiers": [
+        {
+          "name": "每噸一百元",
+          "desc": "以象徵性費率起徵並提供高比例優惠折扣，對產業成本影響極為有限。",
+          "effects": {
+            "central": {
+              "energy.carbonIntensity": -0.02,
+              "diplomacy.euRelation": -0.2
+            },
+            "corpMood": {
+              "_all": 0.3,
+              "steel": 0.5,
+              "petrochemical": 0.5
+            },
+            "valuePressure": {
+              "environment": -0.3
+            }
+          },
+          "partyStance": {
+            "PDA": 0.1,
+            "CRP": 0.45,
+            "TPL": 0.3,
+            "NGF": -0.35,
+            "TWR": 0,
+            "GSP": -0.8,
+            "CUA": 0.35
+          }
+        },
+        {
+          "name": "每噸三百元",
+          "desc": "費率調升至三百元並縮減優惠費率適用範圍，開始對排碳大戶產生實質壓力。",
+          "effects": {
+            "central": {
+              "energy.carbonIntensity": -0.06,
+              "fiscal.inflation": 0.002,
+              "diplomacy.euRelation": 0.2
+            },
+            "popSoL": {
+              "_all": -0.05
+            },
+            "corpMood": {
+              "_all": -0.5,
+              "steel": -1.1,
+              "petrochemical": -1.2,
+              "energy": -0.8
+            },
+            "valuePressure": {
+              "environment": 0.6
+            }
+          },
+          "partyStance": {
+            "PDA": 0.45,
+            "CRP": 0.05,
+            "TPL": 0.3,
+            "NGF": 0.35,
+            "TWR": 0.3,
+            "GSP": 0.3,
+            "CUA": 0
+          }
+        },
+        {
+          "name": "每噸五百元",
+          "desc": "費率提高至五百元並建立自願減量抵換市場，收入專款用於產業低碳轉型補助。",
+          "effects": {
+            "central": {
+              "energy.carbonIntensity": -0.11,
+              "fiscal.inflation": 0.004,
+              "energy.electricityPrice": 0.05,
+              "diplomacy.euRelation": 0.45
+            },
+            "popSoL": {
+              "_all": -0.12,
+              "bluecollar": -0.15
+            },
+            "corpMood": {
+              "_all": -1,
+              "steel": -1.7,
+              "petrochemical": -1.8,
+              "energy": -1.2,
+              "biotech": 0.3
+            },
+            "valuePressure": {
+              "environment": 1.1
+            }
+          },
+          "partyStance": {
+            "PDA": 0.3,
+            "CRP": -0.35,
+            "TPL": 0.05,
+            "NGF": 0.6,
+            "TWR": 0.2,
+            "GSP": 0.8,
+            "CUA": -0.25
+          }
+        },
+        {
+          "name": "每噸一千元與碳邊境對接",
+          "desc": "費率一舉拉高至一千元並與國際碳邊境機制接軌，高碳排產業被迫加速轉型或外移。",
+          "effects": {
+            "central": {
+              "energy.carbonIntensity": -0.2,
+              "fiscal.inflation": 0.008,
+              "energy.electricityPrice": 0.1,
+              "fiscal.gdpGrowth": -0.004,
+              "diplomacy.euRelation": 0.8
+            },
+            "popSoL": {
+              "_all": -0.25,
+              "bluecollar": -0.35,
+              "smallbiz": -0.25
+            },
+            "corpMood": {
+              "_all": -1.6,
+              "steel": -2,
+              "petrochemical": -2,
+              "energy": -1.7,
+              "machinery": -1.2,
+              "biotech": 0.6
+            },
+            "valuePressure": {
+              "environment": 1.9
+            }
+          },
+          "partyStance": {
+            "PDA": 0.05,
+            "CRP": -0.65,
+            "TPL": -0.3,
+            "NGF": 0.55,
+            "TWR": 0.05,
+            "GSP": 0.95,
+            "CUA": -0.45
+          }
+        }
+      ]
+    },
+    {
+      "id": "LAW_INDUSTRIAL_INNOVATION",
+      "name": "產業創新條例",
+      "shortName": "產創條例",
+      "category": "industry",
+      "committee": "經濟",
+      "defaultTier": 1,
+      "controversy": 2,
+      "desc": "規範研發投資抵減、智慧機械與人才留用的租稅優惠，是產業政策最主要的財政工具。",
+      "tiers": [
+        {
+          "name": "縮減租稅優惠",
+          "desc": "逐步落日各項研發與設備抵減，回歸稅制中性，中央稅基明顯擴大。",
+          "effects": {
+            "central": {
+              "fiscal.revenueMult": 0.05,
+              "fiscal.gdpGrowth": -0.003
+            },
+            "popSoL": {
+              "techpro": -0.3,
+              "capitalist": -0.35,
+              "smallbiz": 0.1
+            },
+            "corpMood": {
+              "_all": -1,
+              "semiconductor": -1.5,
+              "electronics": -1.3
+            },
+            "national": {
+              "giniDelta": -0.003
+            },
+            "valuePressure": {
+              "marketFreedom": -0.3
+            }
+          },
+          "partyStance": {
+            "PDA": -0.15,
+            "CRP": -0.35,
+            "TPL": 0.2,
+            "NGF": 0.45,
+            "TWR": 0.05,
+            "GSP": 0.45,
+            "CUA": -0.1
+          }
+        },
+        {
+          "name": "現行",
+          "desc": "維持既有研發抵減率與適用門檻，優惠對象以中大型製造業為主。",
+          "effects": {},
+          "partyStance": {
+            "PDA": 0.35,
+            "CRP": 0.3,
+            "TPL": 0.15,
+            "NGF": -0.05,
+            "TWR": 0.15,
+            "GSP": -0.05,
+            "CUA": 0.2
+          }
+        },
+        {
+          "name": "擴大研發抵減",
+          "desc": "抵減率與適用年限雙雙放寬，並新增人工智慧應用與淨零技術的專章優惠。",
+          "effects": {
+            "central": {
+              "fiscal.revenueMult": -0.04,
+              "fiscal.gdpGrowth": 0.005
+            },
+            "popSoL": {
+              "techpro": 0.4,
+              "capitalist": 0.35,
+              "whitecollar": 0.15
+            },
+            "corpMood": {
+              "_all": 1,
+              "semiconductor": 1.5,
+              "electronics": 1.4,
+              "biotech": 1.2
+            },
+            "national": {
+              "giniDelta": 0.003
+            },
+            "valuePressure": {
+              "marketFreedom": 0.6
+            }
+          },
+          "partyStance": {
+            "PDA": 0.45,
+            "CRP": 0.4,
+            "TPL": 0.3,
+            "NGF": -0.2,
+            "TWR": 0.25,
+            "GSP": -0.15,
+            "CUA": 0.25
+          }
+        },
+        {
+          "name": "國家戰略產業全包",
+          "desc": "半導體、人工智慧與國防產業享有近乎全額抵減與專屬園區用地，資源高度集中。",
+          "effects": {
+            "central": {
+              "fiscal.revenueMult": -0.09,
+              "fiscal.gdpGrowth": 0.008,
+              "defense.domesticProduction": 0.4
+            },
+            "popSoL": {
+              "techpro": 0.65,
+              "capitalist": 0.55,
+              "whitecollar": 0.2,
+              "farmer": -0.2,
+              "service": -0.1
+            },
+            "corpMood": {
+              "_all": 0.8,
+              "semiconductor": 2,
+              "electronics": 1.8,
+              "biotech": 1.3,
+              "food": -0.4,
+              "retail": -0.3
+            },
+            "national": {
+              "giniDelta": 0.007
+            },
+            "valuePressure": {
+              "marketFreedom": 0.5,
+              "centralization": 0.6
+            }
+          },
+          "partyStance": {
+            "PDA": 0.5,
+            "CRP": 0.25,
+            "TPL": 0.1,
+            "NGF": -0.45,
+            "TWR": 0.35,
+            "GSP": -0.45,
+            "CUA": 0.05
+          }
+        }
+      ]
+    },
+    {
+      "id": "LAW_EIA",
+      "name": "環境影響評估法",
+      "shortName": "環評法",
+      "category": "industry",
+      "committee": "社會福利及衛生環境",
+      "defaultTier": 2,
+      "controversy": 4,
+      "desc": "規範開發行為的環境影響審查程序與否決權限，決定重大建設速度與環境保護強度。",
+      "tiers": [
+        {
+          "name": "大幅簡化",
+          "desc": "審查期程壓縮至三十日並大量放寬免評項目，開發案幾乎可即報即行。",
+          "effects": {
+            "central": {
+              "fiscal.gdpGrowth": 0.005,
+              "energy.carbonIntensity": 0.06,
+              "society.socialTrust": -0.25
+            },
+            "popSoL": {
+              "farmer": -0.35,
+              "bluecollar": 0.2,
+              "smallbiz": 0.25,
+              "capitalist": 0.4,
+              "_all": -0.1
+            },
+            "corpMood": {
+              "_all": 1.4,
+              "petrochemical": 1.7,
+              "steel": 1.6,
+              "semiconductor": 1.3
+            },
+            "valuePressure": {
+              "environment": -1.7,
+              "marketFreedom": 0.9
+            }
+          },
+          "partyStance": {
+            "PDA": -0.35,
+            "CRP": 0.45,
+            "TPL": 0.25,
+            "NGF": -0.7,
+            "TWR": -0.3,
+            "GSP": -0.95,
+            "CUA": 0.35
+          }
+        },
+        {
+          "name": "簡化",
+          "desc": "分階段併行審查並設定明確審查天數上限，減少無限期補件的行政拖延。",
+          "effects": {
+            "central": {
+              "fiscal.gdpGrowth": 0.003,
+              "energy.carbonIntensity": 0.02
+            },
+            "popSoL": {
+              "farmer": -0.15,
+              "capitalist": 0.2,
+              "smallbiz": 0.15
+            },
+            "corpMood": {
+              "_all": 0.8
+            },
+            "valuePressure": {
+              "environment": -0.7,
+              "marketFreedom": 0.4
+            }
+          },
+          "partyStance": {
+            "PDA": -0.05,
+            "CRP": 0.45,
+            "TPL": 0.4,
+            "NGF": -0.35,
+            "TWR": -0.1,
+            "GSP": -0.6,
+            "CUA": 0.3
+          }
+        },
+        {
+          "name": "現行",
+          "desc": "維持既有二階段環評制度與環評委員會的實質否決權限。",
+          "effects": {},
+          "partyStance": {
+            "PDA": 0.35,
+            "CRP": 0.05,
+            "TPL": 0.15,
+            "NGF": 0.25,
+            "TWR": 0.25,
+            "GSP": 0.25,
+            "CUA": 0.05
+          }
+        },
+        {
+          "name": "嚴格化",
+          "desc": "新增氣候變遷與健康風險評估專章，並賦予在地居民更完整的參與與訴訟權。",
+          "effects": {
+            "central": {
+              "fiscal.gdpGrowth": -0.004,
+              "energy.carbonIntensity": -0.07,
+              "society.socialTrust": 0.25
+            },
+            "popSoL": {
+              "farmer": 0.35,
+              "bluecollar": -0.15,
+              "smallbiz": -0.2,
+              "capitalist": -0.4,
+              "_all": 0.1
+            },
+            "corpMood": {
+              "_all": -1.4,
+              "petrochemical": -1.8,
+              "steel": -1.7,
+              "semiconductor": -1.1
+            },
+            "valuePressure": {
+              "environment": 1.8,
+              "progressivism": 0.4,
+              "directDemocracy": 0.5
+            }
+          },
+          "partyStance": {
+            "PDA": 0.25,
+            "CRP": -0.55,
+            "TPL": -0.25,
+            "NGF": 0.75,
+            "TWR": 0.3,
+            "GSP": 0.95,
+            "CUA": -0.3
+          }
+        }
+      ]
+    },
+    {
+      "id": "LAW_AGRICULTURE",
+      "name": "農業發展與糧食安全條例",
+      "shortName": "農業條例",
+      "category": "industry",
+      "committee": "經濟",
+      "defaultTier": 1,
+      "controversy": 3,
+      "desc": "規範農業補貼、農地變更與糧食安全儲備目標，攸關農漁民收入與國家糧食自主韌性。",
+      "tiers": [
+        {
+          "name": "市場化",
+          "desc": "大幅削減保價收購與肥料補貼，同時放寬農地變更管制，讓價格機能主導生產。",
+          "effects": {
+            "central": {
+              "fiscal.expenditureMult": -0.03,
+              "fiscal.gdpGrowth": 0.002
+            },
+            "popSoL": {
+              "farmer": -0.7,
+              "smallbiz": 0.15,
+              "capitalist": 0.25
+            },
+            "corpMood": {
+              "_all": 0.4,
+              "food": 0.8
+            },
+            "national": {
+              "foodSelfSufficiency": -0.04
+            },
+            "valuePressure": {
+              "marketFreedom": 1.1,
+              "environment": -0.5
+            }
+          },
+          "partyStance": {
+            "PDA": -0.3,
+            "CRP": 0.1,
+            "TPL": 0.35,
+            "NGF": -0.55,
+            "TWR": -0.45,
+            "GSP": -0.6,
+            "CUA": -0.05
+          }
+        },
+        {
+          "name": "現行",
+          "desc": "維持既有對地綠色給付、保價收購與農業保險的補貼組合。",
+          "effects": {},
+          "partyStance": {
+            "PDA": 0.35,
+            "CRP": 0.35,
+            "TPL": 0.1,
+            "NGF": 0.05,
+            "TWR": 0.25,
+            "GSP": 0.1,
+            "CUA": 0.3
+          }
+        },
+        {
+          "name": "擴大補貼",
+          "desc": "提高對地給付與農機補助額度，並擴大農業保險與天災救助的涵蓋範圍。",
+          "effects": {
+            "central": {
+              "fiscal.expenditureMult": 0.04
+            },
+            "popSoL": {
+              "farmer": 0.55,
+              "retiree": 0.1
+            },
+            "corpMood": {
+              "food": -0.3
+            },
+            "national": {
+              "foodSelfSufficiency": 0.03
+            },
+            "valuePressure": {
+              "marketFreedom": -0.6
+            }
+          },
+          "partyStance": {
+            "PDA": 0.5,
+            "CRP": 0.45,
+            "TPL": 0.05,
+            "NGF": 0.4,
+            "TWR": 0.55,
+            "GSP": 0.45,
+            "CUA": 0.4
+          }
+        },
+        {
+          "name": "糧食自給四成戰略計畫",
+          "desc": "設定糧食自給率四成的法定目標，全面凍結優良農地變更並建立國家戰略儲備。",
+          "effects": {
+            "central": {
+              "fiscal.expenditureMult": 0.08,
+              "fiscal.gdpGrowth": -0.003,
+              "society.socialTrust": 0.2
+            },
+            "popSoL": {
+              "farmer": 0.75,
+              "smallbiz": -0.2,
+              "capitalist": -0.35,
+              "_all": 0.05
+            },
+            "corpMood": {
+              "_all": -0.6,
+              "food": 0.6,
+              "semiconductor": -0.8
+            },
+            "national": {
+              "foodSelfSufficiency": 0.1
+            },
+            "valuePressure": {
+              "marketFreedom": -1.2,
+              "environment": 0.8
+            }
+          },
+          "partyStance": {
+            "PDA": 0.35,
+            "CRP": 0.1,
+            "TPL": -0.2,
+            "NGF": 0.6,
+            "TWR": 0.7,
+            "GSP": 0.65,
+            "CUA": 0.15
+          }
+        }
+      ]
+    },
+    {
+      "id": "LAW_MILITARY_SERVICE",
+      "name": "兵役法",
+      "shortName": "兵役法",
+      "category": "defense",
+      "committee": "外交及國防",
+      "defaultTier": 1,
+      "controversy": 4,
+      "desc": "規範義務役期長度、教育召集頻率與替代役制度，直接影響戰備能量與青年生涯規劃。",
+      "tiers": [
+        {
+          "name": "恢復四個月",
+          "desc": "役期縮回四個月軍事訓練，減輕青年負擔並釋出勞動力，戰備能量明顯下滑。",
+          "effects": {
+            "central": {
+              "defense.readiness": -0.7,
+              "fiscal.unemployment": -0.002,
+              "diplomacy.usRelation": -0.4,
+              "diplomacy.prcRelation": 0.3
+            },
+            "popSoL": {
+              "student": 0.55,
+              "bluecollar": 0.2,
+              "service": 0.15
+            },
+            "corpMood": {
+              "_all": 0.5,
+              "food": 0.6,
+              "retail": 0.5
+            },
+            "valuePressure": {
+              "militaryAutonomy": -1
+            }
+          },
+          "partyStance": {
+            "PDA": -0.45,
+            "CRP": 0.35,
+            "TPL": 0.3,
+            "NGF": -0.2,
+            "TWR": -0.65,
+            "GSP": -0.05,
+            "CUA": 0.55
+          }
+        },
+        {
+          "name": "一年",
+          "desc": "維持一年期義務役與強化射擊、城鎮戰訓練內容的既有制度安排。",
+          "effects": {},
+          "partyStance": {
+            "PDA": 0.45,
+            "CRP": 0,
+            "TPL": 0.1,
+            "NGF": 0.1,
+            "TWR": 0.35,
+            "GSP": 0.1,
+            "CUA": -0.25
+          }
+        },
+        {
+          "name": "一年加強化教召",
+          "desc": "役期維持一年，教育召集改為十四天並常態化，後備旅編實率大幅提高。",
+          "effects": {
+            "central": {
+              "defense.readiness": 0.55,
+              "defense.asymmetricCapability": 0.25,
+              "fiscal.expenditureMult": 0.02,
+              "diplomacy.usRelation": 0.35,
+              "diplomacy.prcRelation": -0.3
+            },
+            "popSoL": {
+              "student": -0.25,
+              "bluecollar": -0.2,
+              "whitecollar": -0.2,
+              "techpro": -0.15
+            },
+            "corpMood": {
+              "_all": -0.6
+            },
+            "valuePressure": {
+              "militaryAutonomy": 0.9
+            }
+          },
+          "partyStance": {
+            "PDA": 0.45,
+            "CRP": -0.15,
+            "TPL": 0,
+            "NGF": 0.2,
+            "TWR": 0.65,
+            "GSP": 0.15,
+            "CUA": -0.55
+          }
+        },
+        {
+          "name": "兩年與全民防衛",
+          "desc": "役期延長至兩年並納入全民防衛訓練，戰備顯著提升但青年與產業反彈強烈。",
+          "effects": {
+            "central": {
+              "defense.readiness": 1.1,
+              "defense.asymmetricCapability": 0.45,
+              "fiscal.expenditureMult": 0.05,
+              "fiscal.gdpGrowth": -0.004,
+              "diplomacy.usRelation": 0.6,
+              "diplomacy.prcRelation": -0.6
+            },
+            "popSoL": {
+              "student": -0.7,
+              "bluecollar": -0.35,
+              "whitecollar": -0.3,
+              "techpro": -0.3,
+              "service": -0.25
+            },
+            "corpMood": {
+              "_all": -1.3,
+              "electronics": -1.5,
+              "food": -1.2
+            },
+            "valuePressure": {
+              "militaryAutonomy": 1.7
+            }
+          },
+          "partyStance": {
+            "PDA": 0.1,
+            "CRP": -0.45,
+            "TPL": -0.35,
+            "NGF": -0.15,
+            "TWR": 0.7,
+            "GSP": -0.2,
+            "CUA": -0.75
+          }
+        }
+      ]
+    },
+    {
+      "id": "LAW_DEFENSE_BUDGET",
+      "name": "國防特別條例",
+      "shortName": "國防預算",
+      "category": "defense",
+      "committee": "外交及國防",
+      "defaultTier": 1,
+      "controversy": 4,
+      "desc": "訂定國防預算占國內生產毛額的法定比例與軍購特別預算額度，牽動戰備與社福排擠。",
+      "tiers": [
+        {
+          "name": "百分之二點五",
+          "desc": "國防預算比例下修至二點五，釋出財源投入社福與建設，軍事採購期程被迫延後。",
+          "effects": {
+            "central": {
+              "defense.budgetRatio": -0.006,
+              "defense.readiness": -0.6,
+              "defense.asymmetricCapability": -0.5,
+              "fiscal.expenditureMult": -0.03,
+              "diplomacy.usRelation": -0.7,
+              "diplomacy.prcRelation": 0.35
+            },
+            "popSoL": {
+              "retiree": 0.2,
+              "bluecollar": 0.15,
+              "_all": 0.1
+            },
+            "valuePressure": {
+              "militaryAutonomy": -1.2
+            }
+          },
+          "partyStance": {
+            "PDA": -0.4,
+            "CRP": 0.3,
+            "TPL": 0.15,
+            "NGF": 0.2,
+            "TWR": -0.65,
+            "GSP": 0.3,
+            "CUA": 0.65
+          }
+        },
+        {
+          "name": "百分之三點一",
+          "desc": "維持現行國防預算占比與既有軍購分年編列的財政安排。",
+          "effects": {},
+          "partyStance": {
+            "PDA": 0.45,
+            "CRP": 0.1,
+            "TPL": 0.2,
+            "NGF": 0.05,
+            "TWR": 0.2,
+            "GSP": 0.05,
+            "CUA": -0.2
+          }
+        },
+        {
+          "name": "百分之三點八",
+          "desc": "國防占比提高至三點八，重點投入無人載具、防空與後備動員等不對稱戰力。",
+          "effects": {
+            "central": {
+              "defense.budgetRatio": 0.007,
+              "defense.readiness": 0.55,
+              "defense.asymmetricCapability": 0.7,
+              "defense.domesticProduction": 0.3,
+              "fiscal.expenditureMult": 0.04,
+              "diplomacy.usRelation": 0.55,
+              "diplomacy.prcRelation": -0.4
+            },
+            "popSoL": {
+              "retiree": -0.2,
+              "bluecollar": -0.1,
+              "techpro": 0.15,
+              "_all": -0.08
+            },
+            "corpMood": {
+              "_all": 0.3,
+              "machinery": 1,
+              "electronics": 0.8
+            },
+            "valuePressure": {
+              "militaryAutonomy": 1.1
+            }
+          },
+          "partyStance": {
+            "PDA": 0.55,
+            "CRP": -0.2,
+            "TPL": 0.05,
+            "NGF": 0,
+            "TWR": 0.7,
+            "GSP": -0.15,
+            "CUA": -0.6
+          }
+        },
+        {
+          "name": "百分之五",
+          "desc": "國防占比一舉拉到五個百分點，軍購與自製並進，財政排擠效應與債務壓力同步升高。",
+          "effects": {
+            "central": {
+              "defense.budgetRatio": 0.019,
+              "defense.readiness": 1,
+              "defense.asymmetricCapability": 1.1,
+              "defense.domesticProduction": 0.55,
+              "fiscal.expenditureMult": 0.1,
+              "fiscal.gdpGrowth": -0.003,
+              "diplomacy.usRelation": 0.9,
+              "diplomacy.prcRelation": -0.75
+            },
+            "popSoL": {
+              "retiree": -0.45,
+              "bluecollar": -0.3,
+              "service": -0.25,
+              "farmer": -0.25,
+              "techpro": 0.2,
+              "_all": -0.2
+            },
+            "corpMood": {
+              "_all": 0.1,
+              "machinery": 1.6,
+              "electronics": 1.3,
+              "retail": -0.6
+            },
+            "valuePressure": {
+              "militaryAutonomy": 1.9
+            }
+          },
+          "partyStance": {
+            "PDA": 0.3,
+            "CRP": -0.5,
+            "TPL": -0.3,
+            "NGF": -0.3,
+            "TWR": 0.85,
+            "GSP": -0.45,
+            "CUA": -0.85
+          }
+        }
+      ]
+    },
+    {
+      "id": "LAW_CIVIL_DEFENSE",
+      "name": "全民防衛動員準備法",
+      "shortName": "動員法",
+      "category": "defense",
+      "committee": "外交及國防",
+      "defaultTier": 0,
+      "controversy": 3,
+      "desc": "規範戰時與災時的物資動員、民防訓練與避難設施建置，是社會韌性的制度骨幹。",
+      "tiers": [
+        {
+          "name": "現行",
+          "desc": "維持既有動員演習規模與民防編組，訓練多屬形式且物資儲備量能有限。",
+          "effects": {},
+          "partyStance": {
+            "PDA": 0.3,
+            "CRP": 0.3,
+            "TPL": 0.25,
+            "NGF": 0.05,
+            "TWR": 0,
+            "GSP": 0.1,
+            "CUA": 0.25
+          }
+        },
+        {
+          "name": "擴大民防訓練",
+          "desc": "民防訓練時數與涵蓋人數大幅提高，急救、消防與避難引導成為社區常態課程。",
+          "effects": {
+            "central": {
+              "defense.readiness": 0.35,
+              "society.socialTrust": 0.3,
+              "fiscal.expenditureMult": 0.02
+            },
+            "popSoL": {
+              "_all": 0.05,
+              "retiree": 0.1,
+              "student": -0.1
+            },
+            "valuePressure": {
+              "militaryAutonomy": 0.7
+            }
+          },
+          "partyStance": {
+            "PDA": 0.55,
+            "CRP": 0.2,
+            "TPL": 0.3,
+            "NGF": 0.35,
+            "TWR": 0.65,
+            "GSP": 0.35,
+            "CUA": -0.2
+          }
+        },
+        {
+          "name": "全社會韌性計畫",
+          "desc": "建立戰略物資儲備、分散式能源與全國避難設施網絡，並將韌性演練納入法定義務。",
+          "effects": {
+            "central": {
+              "defense.readiness": 0.65,
+              "defense.asymmetricCapability": 0.35,
+              "society.socialTrust": 0.5,
+              "fiscal.expenditureMult": 0.05,
+              "energy.reserveMargin": 0.02,
+              "diplomacy.usRelation": 0.4,
+              "diplomacy.prcRelation": -0.35
+            },
+            "popSoL": {
+              "_all": 0.1,
+              "smallbiz": -0.15,
+              "capitalist": -0.15
+            },
+            "corpMood": {
+              "_all": -0.2,
+              "machinery": 0.8,
+              "logistics": 0.7,
+              "energy": 0.6
+            },
+            "valuePressure": {
+              "militaryAutonomy": 1.4,
+              "centralization": 0.4
+            }
+          },
+          "partyStance": {
+            "PDA": 0.6,
+            "CRP": -0.15,
+            "TPL": 0.15,
+            "NGF": 0.45,
+            "TWR": 0.8,
+            "GSP": 0.4,
+            "CUA": -0.6
+          }
+        }
+      ]
+    },
+    {
+      "id": "LAW_CROSS_STRAIT_RELATIONS",
+      "name": "臺灣地區與大陸地區人民關係條例",
+      "shortName": "兩岸條例",
+      "category": "crossStrait",
+      "committee": "內政",
+      "defaultTier": 2,
+      "controversy": 5,
+      "desc": "規範兩岸經貿往來、人員流動與投資審查的基本框架，是兩岸關係最核心的法律載體。",
+      "tiers": [
+        {
+          "name": "大幅開放",
+          "desc": "服務業與貨品貿易全面開放，投資審查改為事後備查，觀光與農產外銷同步鬆綁。",
+          "effects": {
+            "central": {
+              "fiscal.gdpGrowth": 0.006,
+              "diplomacy.prcRelation": 1.2,
+              "diplomacy.usRelation": -0.7,
+              "diplomacy.japanRelation": -0.4,
+              "society.socialTrust": -0.3
+            },
+            "popSoL": {
+              "farmer": 0.3,
+              "service": 0.35,
+              "smallbiz": 0.3,
+              "capitalist": 0.55,
+              "bluecollar": -0.3,
+              "techpro": -0.2
+            },
+            "corpMood": {
+              "_all": 1.3,
+              "tourism": 2,
+              "retail": 1.6,
+              "food": 1.2,
+              "semiconductor": -0.5
+            },
+            "national": {
+              "giniDelta": 0.004
+            },
+            "valuePressure": {
+              "unification": 1.8,
+              "marketFreedom": 0.9
+            }
+          },
+          "partyStance": {
+            "PDA": -0.7,
+            "CRP": 0.5,
+            "TPL": 0.1,
+            "NGF": -0.85,
+            "TWR": -0.95,
+            "GSP": -0.6,
+            "CUA": 0.95
+          }
+        },
+        {
+          "name": "適度開放",
+          "desc": "恢復部分陸客團與農產採購管道，投資審查維持但放寬非敏感產業的門檻。",
+          "effects": {
+            "central": {
+              "fiscal.gdpGrowth": 0.003,
+              "diplomacy.prcRelation": 0.6,
+              "diplomacy.usRelation": -0.3
+            },
+            "popSoL": {
+              "farmer": 0.2,
+              "service": 0.25,
+              "smallbiz": 0.2,
+              "capitalist": 0.25
+            },
+            "corpMood": {
+              "_all": 0.7,
+              "tourism": 1.4,
+              "retail": 0.9,
+              "food": 0.6
+            },
+            "valuePressure": {
+              "unification": 0.9
+            }
+          },
+          "partyStance": {
+            "PDA": -0.35,
+            "CRP": 0.6,
+            "TPL": 0.35,
+            "NGF": -0.55,
+            "TWR": -0.75,
+            "GSP": -0.25,
+            "CUA": 0.75
+          }
+        },
+        {
+          "name": "現行",
+          "desc": "維持既有投資審查與人員往來管制，開放項目逐案審查、整體維持低度往來。",
+          "effects": {},
+          "partyStance": {
+            "PDA": 0.5,
+            "CRP": -0.1,
+            "TPL": 0.2,
+            "NGF": 0.3,
+            "TWR": 0.2,
+            "GSP": 0.3,
+            "CUA": -0.4
+          }
+        },
+        {
+          "name": "緊縮",
+          "desc": "關鍵技術與土地投資全面禁止，人員往來審查趨嚴，經貿依賴度刻意向下調整。",
+          "effects": {
+            "central": {
+              "fiscal.gdpGrowth": -0.004,
+              "diplomacy.prcRelation": -0.7,
+              "diplomacy.usRelation": 0.45,
+              "diplomacy.japanRelation": 0.3
+            },
+            "popSoL": {
+              "farmer": -0.25,
+              "service": -0.3,
+              "smallbiz": -0.25,
+              "capitalist": -0.3,
+              "techpro": 0.15
+            },
+            "corpMood": {
+              "_all": -0.9,
+              "tourism": -1.7,
+              "retail": -1.1,
+              "semiconductor": 0.4
+            },
+            "valuePressure": {
+              "unification": -1.1
+            }
+          },
+          "partyStance": {
+            "PDA": 0.4,
+            "CRP": -0.55,
+            "TPL": -0.15,
+            "NGF": 0.55,
+            "TWR": 0.8,
+            "GSP": 0.35,
+            "CUA": -0.85
+          }
+        },
+        {
+          "name": "高度管制",
+          "desc": "兩岸經貿往來採原則禁止例外許可，資金與人員流動全面納管，經濟脫鉤代價高昂。",
+          "effects": {
+            "central": {
+              "fiscal.gdpGrowth": -0.009,
+              "fiscal.unemployment": 0.005,
+              "diplomacy.prcRelation": -1.4,
+              "diplomacy.usRelation": 0.7,
+              "diplomacy.japanRelation": 0.5,
+              "society.socialTrust": -0.2
+            },
+            "popSoL": {
+              "farmer": -0.45,
+              "service": -0.5,
+              "smallbiz": -0.45,
+              "capitalist": -0.55,
+              "bluecollar": -0.2
+            },
+            "corpMood": {
+              "_all": -1.8,
+              "tourism": -2,
+              "retail": -1.8,
+              "electronics": -1.4,
+              "food": -1.3
+            },
+            "valuePressure": {
+              "unification": -1.9,
+              "marketFreedom": -1
+            }
+          },
+          "partyStance": {
+            "PDA": 0.05,
+            "CRP": -0.85,
+            "TPL": -0.55,
+            "NGF": 0.35,
+            "TWR": 0.95,
+            "GSP": 0.1,
+            "CUA": -1
+          }
+        }
+      ]
+    },
+    {
+      "id": "LAW_ANTI_INFILTRATION",
+      "name": "反滲透法與國安法制",
+      "shortName": "反滲透法",
+      "category": "crossStrait",
+      "committee": "司法及法制",
+      "defaultTier": 1,
+      "controversy": 5,
+      "desc": "規範境外敵對勢力的政治獻金、指示行為與資訊操弄的刑事責任與行政管制範圍。",
+      "tiers": [
+        {
+          "name": "鬆綁",
+          "desc": "大幅限縮構成要件並提高舉證門檻，減少寒蟬效應但統戰滲透空間隨之擴大。",
+          "effects": {
+            "central": {
+              "diplomacy.prcRelation": 0.55,
+              "diplomacy.usRelation": -0.35,
+              "society.socialTrust": -0.25
+            },
+            "popSoL": {
+              "service": 0.15,
+              "smallbiz": 0.15
+            },
+            "corpMood": {
+              "_all": 0.4,
+              "tourism": 0.8
+            },
+            "valuePressure": {
+              "unification": 1.1,
+              "progressivism": -0.3
+            }
+          },
+          "partyStance": {
+            "PDA": -0.65,
+            "CRP": 0.4,
+            "TPL": 0.05,
+            "NGF": -0.6,
+            "TWR": -0.9,
+            "GSP": -0.4,
+            "CUA": 0.9
+          }
+        },
+        {
+          "name": "現行",
+          "desc": "維持既有反滲透規範與查察量能，適用案件以選舉期間的資金流向為主。",
+          "effects": {},
+          "partyStance": {
+            "PDA": 0.45,
+            "CRP": 0,
+            "TPL": 0.25,
+            "NGF": 0.3,
+            "TWR": 0.3,
+            "GSP": 0.3,
+            "CUA": -0.5
+          }
+        },
+        {
+          "name": "擴大適用範圍",
+          "desc": "適用對象擴及媒體置入、宮廟參訪與網路協同操作，並提高最高刑度與罰金。",
+          "effects": {
+            "central": {
+              "diplomacy.prcRelation": -0.55,
+              "diplomacy.usRelation": 0.35,
+              "society.socialTrust": 0.2
+            },
+            "popSoL": {
+              "service": -0.15,
+              "smallbiz": -0.15,
+              "retiree": -0.15,
+              "student": 0.15
+            },
+            "corpMood": {
+              "_all": -0.4,
+              "tourism": -0.8
+            },
+            "valuePressure": {
+              "unification": -1,
+              "directDemocracy": -0.3
+            }
+          },
+          "partyStance": {
+            "PDA": 0.55,
+            "CRP": -0.55,
+            "TPL": 0,
+            "NGF": 0.45,
+            "TWR": 0.85,
+            "GSP": 0.35,
+            "CUA": -0.95
+          }
+        },
+        {
+          "name": "境外勢力代理人登記制",
+          "desc": "要求受境外資助者公開登記財務與活動，未登記即為犯罪，管制強度接近戰時法制。",
+          "effects": {
+            "central": {
+              "diplomacy.prcRelation": -0.9,
+              "diplomacy.usRelation": 0.55,
+              "diplomacy.euRelation": 0.2,
+              "society.socialTrust": -0.15
+            },
+            "popSoL": {
+              "service": -0.25,
+              "smallbiz": -0.25,
+              "retiree": -0.25,
+              "student": 0.2,
+              "publicsvc": -0.1
+            },
+            "corpMood": {
+              "_all": -0.8,
+              "tourism": -1.2,
+              "telecom": -0.6
+            },
+            "valuePressure": {
+              "unification": -1.6,
+              "progressivism": -0.5,
+              "directDemocracy": -0.6
+            }
+          },
+          "partyStance": {
+            "PDA": 0.3,
+            "CRP": -0.8,
+            "TPL": -0.35,
+            "NGF": 0.25,
+            "TWR": 0.95,
+            "GSP": 0.05,
+            "CUA": -1
+          }
+        }
+      ]
+    },
+    {
+      "id": "LAW_RECALL_ELECTION",
+      "name": "公職人員選舉罷免法",
+      "shortName": "選罷法",
+      "category": "polity",
+      "committee": "內政",
+      "defaultTier": 1,
+      "controversy": 4,
+      "desc": "規範各級公職選舉的登記、罷免連署與投票門檻，直接影響罷免頻率與政治穩定度。",
+      "tiers": [
+        {
+          "name": "提高罷免門檻",
+          "desc": "連署與同意門檻雙雙拉高，並限制就任兩年內不得提議，罷免幾乎難以成案。",
+          "effects": {
+            "central": {
+              "society.socialTrust": -0.2
+            },
+            "popSoL": {
+              "publicsvc": 0.15,
+              "student": -0.2
+            },
+            "valuePressure": {
+              "directDemocracy": -1.5
+            }
+          },
+          "partyStance": {
+            "PDA": 0.1,
+            "CRP": 0.3,
+            "TPL": -0.3,
+            "NGF": -0.55,
+            "TWR": -0.2,
+            "GSP": -0.4,
+            "CUA": 0.35
+          }
+        },
+        {
+          "name": "現行",
+          "desc": "維持既有連署比例與同意票須達選舉人數四分之一的罷免通過規定。",
+          "effects": {},
+          "partyStance": {
+            "PDA": 0.3,
+            "CRP": 0.2,
+            "TPL": 0.15,
+            "NGF": 0.05,
+            "TWR": 0.15,
+            "GSP": 0.1,
+            "CUA": 0.15
+          }
+        },
+        {
+          "name": "降低罷免門檻",
+          "desc": "連署比例與同意票門檻同步下修，公民問責更容易發動，政局波動隨之升高。",
+          "effects": {
+            "central": {
+              "society.socialTrust": 0.1
+            },
+            "popSoL": {
+              "student": 0.25,
+              "publicsvc": -0.15
+            },
+            "valuePressure": {
+              "directDemocracy": 1.3
+            }
+          },
+          "partyStance": {
+            "PDA": 0.05,
+            "CRP": -0.2,
+            "TPL": 0.55,
+            "NGF": 0.6,
+            "TWR": 0.35,
+            "GSP": 0.5,
+            "CUA": -0.25
+          }
+        },
+        {
+          "name": "不在籍投票與降門檻",
+          "desc": "增設不在籍投票制度並下修罷免門檻，投票率提升但爭議與行政成本同步增加。",
+          "effects": {
+            "central": {
+              "society.socialTrust": 0.2,
+              "fiscal.expenditureMult": 0.01
+            },
+            "popSoL": {
+              "student": 0.4,
+              "whitecollar": 0.2,
+              "techpro": 0.2,
+              "publicsvc": -0.2,
+              "retiree": -0.1
+            },
+            "valuePressure": {
+              "directDemocracy": 1.8
+            }
+          },
+          "partyStance": {
+            "PDA": -0.05,
+            "CRP": 0.15,
+            "TPL": 0.7,
+            "NGF": 0.55,
+            "TWR": 0.2,
+            "GSP": 0.45,
+            "CUA": 0.1
+          }
+        }
+      ]
+    },
+    {
+      "id": "LAW_REFERENDUM",
+      "name": "公民投票法",
+      "shortName": "公投法",
+      "category": "polity",
+      "committee": "內政",
+      "defaultTier": 1,
+      "controversy": 4,
+      "desc": "規範公民投票的提案、連署與通過門檻，以及是否與大選合併舉行的制度安排。",
+      "tiers": [
+        {
+          "name": "高門檻",
+          "desc": "提案與通過門檻大幅拉高，並排除財政與國安事項，公投實務上難以成案。",
+          "effects": {
+            "central": {
+              "society.socialTrust": -0.2
+            },
+            "popSoL": {
+              "student": -0.25,
+              "publicsvc": 0.1
+            },
+            "valuePressure": {
+              "directDemocracy": -1.6
+            }
+          },
+          "partyStance": {
+            "PDA": 0.2,
+            "CRP": 0.25,
+            "TPL": -0.4,
+            "NGF": -0.6,
+            "TWR": -0.15,
+            "GSP": -0.5,
+            "CUA": 0.3
+          }
+        },
+        {
+          "name": "現行",
+          "desc": "維持既有提案連署比例與有效同意票須超過選舉人四分之一的通過規定。",
+          "effects": {},
+          "partyStance": {
+            "PDA": 0.3,
+            "CRP": 0.2,
+            "TPL": 0.15,
+            "NGF": 0.05,
+            "TWR": 0.15,
+            "GSP": 0.1,
+            "CUA": 0.15
+          }
+        },
+        {
+          "name": "降門檻",
+          "desc": "連署與通過門檻下修，重大政策更容易交付全民公決，政策不確定性升高。",
+          "effects": {
+            "central": {
+              "society.socialTrust": 0.1,
+              "fiscal.gdpGrowth": -0.001
+            },
+            "popSoL": {
+              "student": 0.3,
+              "farmer": 0.1,
+              "capitalist": -0.2
+            },
+            "corpMood": {
+              "_all": -0.4
+            },
+            "valuePressure": {
+              "directDemocracy": 1.4
+            }
+          },
+          "partyStance": {
+            "PDA": 0.05,
+            "CRP": -0.15,
+            "TPL": 0.6,
+            "NGF": 0.55,
+            "TWR": 0.4,
+            "GSP": 0.5,
+            "CUA": -0.1
+          }
+        },
+        {
+          "name": "公投綁大選與低門檻",
+          "desc": "公投一律與大選合併舉行且門檻下修，投票率大增但議題操作與行政負荷同步放大。",
+          "effects": {
+            "central": {
+              "society.socialTrust": 0.05,
+              "fiscal.expenditureMult": 0.01,
+              "fiscal.gdpGrowth": -0.002
+            },
+            "popSoL": {
+              "student": 0.4,
+              "farmer": 0.15,
+              "capitalist": -0.3,
+              "publicsvc": -0.2
+            },
+            "corpMood": {
+              "_all": -0.6
+            },
+            "valuePressure": {
+              "directDemocracy": 1.9
+            }
+          },
+          "partyStance": {
+            "PDA": -0.2,
+            "CRP": 0.35,
+            "TPL": 0.65,
+            "NGF": 0.45,
+            "TWR": 0.3,
+            "GSP": 0.35,
+            "CUA": 0.2
+          }
+        }
+      ]
+    },
+    {
+      "id": "LAW_LOCAL_GOVERNMENT",
+      "name": "地方制度法",
+      "shortName": "地制法",
+      "category": "polity",
+      "committee": "內政",
+      "defaultTier": 0,
+      "controversy": 3,
+      "desc": "規範地方自治團體的權限劃分、行政區層級與基層首長產生方式，形塑地方政治生態。",
+      "tiers": [
+        {
+          "name": "現行",
+          "desc": "維持六都與十六縣市的既有架構，鄉鎮市長民選僅存於非直轄市轄區。",
+          "effects": {},
+          "partyStance": {
+            "PDA": 0.3,
+            "CRP": 0.3,
+            "TPL": 0.1,
+            "NGF": 0.05,
+            "TWR": 0.15,
+            "GSP": 0.1,
+            "CUA": 0.25
+          }
+        },
+        {
+          "name": "擴大地方權限",
+          "desc": "將教育、環保稽查與部分交通事權下放縣市，並擴大地方自治條例的立法空間。",
+          "effects": {
+            "central": {
+              "fiscal.expenditureMult": -0.02,
+              "society.socialTrust": 0.15
+            },
+            "popSoL": {
+              "farmer": 0.2,
+              "smallbiz": 0.2,
+              "publicsvc": 0.1,
+              "_all": 0.05
+            },
+            "valuePressure": {
+              "centralization": -1.3
+            }
+          },
+          "partyStance": {
+            "PDA": 0.1,
+            "CRP": 0.45,
+            "TPL": 0.4,
+            "NGF": 0.2,
+            "TWR": 0.35,
+            "GSP": 0.2,
+            "CUA": 0
+          }
+        },
+        {
+          "name": "行政區重劃",
+          "desc": "推動縣市合併與層級簡化，行政效率提升但既有地方派系版圖被大幅重組。",
+          "effects": {
+            "central": {
+              "fiscal.expenditureMult": -0.04,
+              "fiscal.gdpGrowth": 0.002,
+              "society.socialTrust": -0.2
+            },
+            "popSoL": {
+              "publicsvc": -0.3,
+              "farmer": -0.2,
+              "whitecollar": 0.15,
+              "techpro": 0.15
+            },
+            "corpMood": {
+              "_all": 0.4
+            },
+            "valuePressure": {
+              "centralization": 0.8
+            }
+          },
+          "partyStance": {
+            "PDA": 0.25,
+            "CRP": -0.15,
+            "TPL": 0.55,
+            "NGF": 0.3,
+            "TWR": 0.1,
+            "GSP": 0.3,
+            "CUA": -0.1
+          }
+        },
+        {
+          "name": "恢復鄉鎮市長民選",
+          "desc": "直轄市轄區恢復鄉鎮市長與代表會民選，基層自治恢復但派系動員能量同步復甦。",
+          "effects": {
+            "central": {
+              "fiscal.expenditureMult": 0.03,
+              "society.socialTrust": 0.1
+            },
+            "popSoL": {
+              "farmer": 0.3,
+              "smallbiz": 0.25,
+              "retiree": 0.2,
+              "student": -0.1
+            },
+            "valuePressure": {
+              "centralization": -1.6,
+              "directDemocracy": 0.6
+            }
+          },
+          "partyStance": {
+            "PDA": -0.2,
+            "CRP": 0.55,
+            "TPL": 0.05,
+            "NGF": -0.2,
+            "TWR": 0.1,
+            "GSP": -0.25,
+            "CUA": 0.45
+          }
+        }
+      ]
+    },
+    {
+      "id": "LAW_DIGITAL_PLATFORM",
+      "name": "數位傳播與平台責任法",
+      "shortName": "平台責任法",
+      "category": "society",
+      "committee": "交通",
+      "defaultTier": 1,
+      "controversy": 4,
+      "desc": "規範網路平台對違法內容的處理義務、演算法透明度與假訊息的裁罰責任範圍。",
+      "tiers": [
+        {
+          "name": "不管制",
+          "desc": "平台不負內容審查義務，言論空間最大化，境外資訊操弄與詐騙同步蔓延。",
+          "effects": {
+            "central": {
+              "society.socialTrust": -0.4,
+              "diplomacy.euRelation": -0.2
+            },
+            "popSoL": {
+              "student": 0.15,
+              "retiree": -0.25,
+              "_all": -0.1
+            },
+            "corpMood": {
+              "_all": 0.3,
+              "telecom": 0.9
+            },
+            "valuePressure": {
+              "progressivism": -0.4,
+              "unification": 0.5
+            }
+          },
+          "partyStance": {
+            "PDA": -0.35,
+            "CRP": 0.3,
+            "TPL": 0.2,
+            "NGF": -0.35,
+            "TWR": -0.55,
+            "GSP": -0.3,
+            "CUA": 0.6
+          }
+        },
+        {
+          "name": "自律機制",
+          "desc": "由平台自訂社群守則並定期公布透明報告，主管機關僅作行政指導不予裁罰。",
+          "effects": {},
+          "partyStance": {
+            "PDA": 0.25,
+            "CRP": 0.3,
+            "TPL": 0.35,
+            "NGF": 0,
+            "TWR": 0.05,
+            "GSP": 0.1,
+            "CUA": 0.2
+          }
+        },
+        {
+          "name": "平台問責制",
+          "desc": "課予平台通知取下義務與廣告金流揭露責任，逾期未處理者按次連續處罰。",
+          "effects": {
+            "central": {
+              "society.socialTrust": 0.3,
+              "diplomacy.euRelation": 0.3
+            },
+            "popSoL": {
+              "retiree": 0.2,
+              "whitecollar": 0.15,
+              "student": -0.15,
+              "_all": 0.08
+            },
+            "corpMood": {
+              "_all": -0.4,
+              "telecom": -1.1
+            },
+            "valuePressure": {
+              "progressivism": 0.4,
+              "unification": -0.5
+            }
+          },
+          "partyStance": {
+            "PDA": 0.5,
+            "CRP": -0.3,
+            "TPL": 0.1,
+            "NGF": 0.35,
+            "TWR": 0.55,
+            "GSP": 0.4,
+            "CUA": -0.45
+          }
+        },
+        {
+          "name": "假訊息重罰與演算法透明",
+          "desc": "散布可驗證假訊息者重罰，平台須開放推薦演算法稽核，言論自由爭議極大。",
+          "effects": {
+            "central": {
+              "society.socialTrust": 0.2,
+              "diplomacy.euRelation": 0.4
+            },
+            "popSoL": {
+              "retiree": 0.25,
+              "student": -0.35,
+              "techpro": -0.2,
+              "whitecollar": -0.1
+            },
+            "corpMood": {
+              "_all": -0.9,
+              "telecom": -1.8,
+              "electronics": -0.6
+            },
+            "valuePressure": {
+              "progressivism": 0.2,
+              "unification": -0.9,
+              "directDemocracy": -0.5
+            }
+          },
+          "partyStance": {
+            "PDA": 0.4,
+            "CRP": -0.65,
+            "TPL": -0.3,
+            "NGF": 0.2,
+            "TWR": 0.6,
+            "GSP": 0.35,
+            "CUA": -0.7
+          }
+        }
+      ]
+    },
+    {
+      "id": "LAW_SOCIAL_HOUSING",
+      "name": "住宅法與社會住宅條例",
+      "shortName": "社宅條例",
+      "category": "society",
+      "committee": "內政",
+      "defaultTier": 1,
+      "controversy": 3,
+      "desc": "規範社會住宅興辦目標、租金補貼制度與公有土地取得程序，牽動青年居住負擔。",
+      "tiers": [
+        {
+          "name": "租金補貼為主",
+          "desc": "停止大規模興建改以擴大租金補貼，財政負擔較輕但補貼可能被房東吸收。",
+          "effects": {
+            "central": {
+              "society.housingAffordability": 0.1,
+              "fiscal.expenditureMult": 0.02
+            },
+            "popSoL": {
+              "student": 0.2,
+              "whitecollar": 0.15,
+              "capitalist": 0.2
+            },
+            "corpMood": {
+              "_all": 0.4
+            },
+            "national": {
+              "housingPriceDelta": 0.02
+            },
+            "valuePressure": {
+              "marketFreedom": 0.7
+            }
+          },
+          "partyStance": {
+            "PDA": -0.1,
+            "CRP": 0.45,
+            "TPL": 0.2,
+            "NGF": -0.35,
+            "TWR": -0.05,
+            "GSP": -0.3,
+            "CUA": 0.3
+          }
+        },
+        {
+          "name": "現行",
+          "desc": "維持二十萬戶社會住宅與包租代管並行的既有推動目標與期程。",
+          "effects": {},
+          "partyStance": {
+            "PDA": 0.4,
+            "CRP": 0.2,
+            "TPL": 0.2,
+            "NGF": 0.1,
+            "TWR": 0.2,
+            "GSP": 0.15,
+            "CUA": 0.15
+          }
+        },
+        {
+          "name": "五十萬戶計畫",
+          "desc": "社宅目標拉高至五十萬戶並強制新開發案劃設一定比例，公有土地優先撥用。",
+          "effects": {
+            "central": {
+              "society.housingAffordability": 0.55,
+              "fiscal.expenditureMult": 0.05,
+              "society.birthRate": 0.02
+            },
+            "popSoL": {
+              "student": 0.5,
+              "whitecollar": 0.35,
+              "service": 0.25,
+              "bluecollar": 0.2,
+              "capitalist": -0.35
+            },
+            "corpMood": {
+              "_all": -0.5,
+              "machinery": 0.4
+            },
+            "national": {
+              "housingPriceDelta": -0.04
+            },
+            "valuePressure": {
+              "marketFreedom": -0.8,
+              "progressivism": 0.5
+            }
+          },
+          "partyStance": {
+            "PDA": 0.55,
+            "CRP": -0.2,
+            "TPL": 0.5,
+            "NGF": 0.7,
+            "TWR": 0.35,
+            "GSP": 0.6,
+            "CUA": -0.1
+          }
+        },
+        {
+          "name": "百萬戶只租不售",
+          "desc": "推動百萬戶只租不售的公共住宅體系，房市結構被根本改寫，財政與土地壓力極大。",
+          "effects": {
+            "central": {
+              "society.housingAffordability": 0.95,
+              "fiscal.expenditureMult": 0.11,
+              "society.birthRate": 0.05,
+              "fiscal.gdpGrowth": -0.002
+            },
+            "popSoL": {
+              "student": 0.7,
+              "whitecollar": 0.5,
+              "service": 0.4,
+              "bluecollar": 0.35,
+              "capitalist": -0.7,
+              "smallbiz": -0.25
+            },
+            "corpMood": {
+              "_all": -1.3,
+              "finance": -1.7,
+              "machinery": 0.8
+            },
+            "national": {
+              "housingPriceDelta": -0.1,
+              "giniDelta": -0.006
+            },
+            "valuePressure": {
+              "marketFreedom": -1.6,
+              "progressivism": 0.8
+            }
+          },
+          "partyStance": {
+            "PDA": 0.25,
+            "CRP": -0.6,
+            "TPL": 0.2,
+            "NGF": 0.85,
+            "TWR": 0.3,
+            "GSP": 0.8,
+            "CUA": -0.35
+          }
+        }
+      ]
+    }
+  ]
+}

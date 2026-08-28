@@ -1,0 +1,28 @@
+:root{
+  --bg:#0e1116; --bg-2:#151a22; --bg-3:#1c232d; --bg-4:#242d3a;
+  --line:#2a3441; --line-2:#3a4757;
+  --fg:#e6ebf2; --fg-2:#a8b4c4; --fg-3:#6f7d8f;
+  --accent:#4ea1ff; --accent-2:#2b6fd4;
+  --good:#39c07a; --ok:#7bc96f; --mid:#d9b23c; --warn:#e2893c; --bad:#e2564a;
+  --gold:#d9b23c;
+  --pda:#1B9C5A; --crp:#1F4E9C; --tpl:#18B4B4; --ngf:#C81E78;
+  --twr:#E0457B; --gsp:#4C7A34; --cua:#B01F2E; --ind:#8a8f98;
+  --r-s:6px; --r:10px; --r-l:16px;
+  --fs:15px; --fs-s:13px; --fs-xs:11.5px; --fs-l:17px; --fs-xl:21px;
+  --sp:12px;
+  --font: "Noto Sans TC", "PingFang TC", "Microsoft JhengHei", system-ui, -apple-system, sans-serif;
+  --mono: "SF Mono", ui-monospace, Menlo, monospace;
+  --safe-b: env(safe-area-inset-bottom, 0px);
+}
+:root[data-fs="s"]{--fs:13.5px;--fs-s:12px;--fs-xs:10.5px;--fs-l:15px;--fs-xl:19px}
+:root[data-fs="l"]{--fs:17px;--fs-s:15px;--fs-xs:13px;--fs-l:19.5px;--fs-xl:24px}
+body{background:var(--bg);color:var(--fg);font-family:var(--font);font-size:var(--fs)}
+.tone-good{color:var(--good)} .tone-ok{color:var(--ok)} .tone-mid{color:var(--mid)}
+.tone-warn{color:var(--warn)} .tone-bad{color:var(--bad)}
+.up2,.up1{color:var(--good)} .down1,.down2{color:var(--bad)} .flux{color:var(--fg-3)}
+.p-PDA{color:var(--pda)} .p-CRP{color:var(--crp)} .p-TPL{color:var(--tpl)}
+.p-NGF{color:var(--ngf)} .p-TWR{color:var(--twr)} .p-GSP{color:var(--gsp)}
+.p-CUA{color:var(--cua)} .p-IND{color:var(--ind)}
+.bg-PDA{background:var(--pda)} .bg-CRP{background:var(--crp)} .bg-TPL{background:var(--tpl)}
+.bg-NGF{background:var(--ngf)} .bg-TWR{background:var(--twr)} .bg-GSP{background:var(--gsp)}
+.bg-CUA{background:var(--cua)} .bg-IND{background:var(--ind)}

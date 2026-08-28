@@ -1,0 +1,579 @@
+{
+  "events": [
+    {
+      "id": "EVT_PTY_PRIMARY_FIGHT",
+      "category": "party",
+      "weight": 55,
+      "cooldown": 14,
+      "trigger": "party.primarySeason > 0 && player.partyPrestige > 10",
+      "requires": { "minTurn": 6, "roles": ["legislator", "mayor", "councilor"] },
+      "headline": "黨內初選民調規則生變，對手陣營要求納入市話樣本",
+      "body": "黨中央選舉對策委員會在初選登記截止前三天提議修改民調規則，將市話樣本比例從三成拉高到六成。你的對手陣營主張這樣才能反映真實的支持結構，你的團隊則指出這個調整明顯有利於年長選民為主的競爭者。黨主席辦公室不願表態，把球丟回給選舉對策委員會去表決。",
+      "options": [
+        {
+          "text": "在中常會上公開反對，要求維持原訂的規則",
+          "hint": "支持者會覺得你在捍衛公平，黨中央會把你貼上麻煩製造者",
+          "effects": {
+            "player": { "partyPrestige": -4, "fame": 3, "integrity": 3 },
+            "popMood": { "student": 3, "whitecollar": 2 },
+            "valuePressure": { "directDemocracy": 0.4 },
+            "issueHeat": { "corruption": 2 },
+            "tagGain": ["TAG_FIREBRAND"]
+          }
+        },
+        {
+          "text": "私下與各派系交換條件以換取規則不變",
+          "hint": "問題大概能解決，你欠下的人情遲早要用職位來還",
+          "effects": {
+            "player": { "politicalCapital": -6, "partyPrestige": 2, "integrity": -1 },
+            "grassroots": { "_home": 1 },
+            "popMood": { "publicsvc": 1 },
+            "issueHeat": { "corruption": 1 }
+          }
+        },
+        {
+          "text": "接受新規則，改把資源全押在基層動員上",
+          "hint": "不與黨中央硬碰硬，選戰會被迫打成一場肉搏戰",
+          "effects": {
+            "player": { "partyPrestige": 3, "funds": -5, "fatigue": 5 },
+            "grassroots": { "_home": 2 },
+            "popMood": { "retiree": 2, "farmer": 2 },
+            "central": { "politics.primaryFairness": -0.02 }
+          }
+        },
+        {
+          "text": "揚言若規則更改就退出初選改採獨立參選",
+          "hint": "談判籌碼一次押到底，退無可退的路你自己心裡有數",
+          "effects": {
+            "player": { "partyPrestige": -8, "fame": 5, "politicalCapital": -3 },
+            "popMood": { "student": 4, "whitecollar": 3 },
+            "valuePressure": { "directDemocracy": 0.5 },
+            "issueHeat": { "corruption": 3 },
+            "tagGain": ["TAG_FIREBRAND"]
+          }
+        }
+      ],
+      "_designNote": "初選規則之爭的公開反抗、私下交易、忍讓與掀桌四種策略"
+    },
+    {
+      "id": "EVT_PTY_FACTION_PRESSURE",
+      "category": "party",
+      "weight": 50,
+      "cooldown": 14,
+      "trigger": "party.factionTension > 0.4 && player.partyPrestige > 15",
+      "requires": { "minTurn": 8, "roles": ["legislator", "mayor", "councilor"] },
+      "headline": "派系大老要求讓出不分區安全名次，換取縣市長提名支持",
+      "body": "黨內最大派系的召集人在私人會館向你提出交換條件，要你放棄爭取不分區的安全名次。作為回報，他承諾在明年的縣市長提名作業中全力支持你所推薦的人選。這位召集人掌握中常會超過三分之一的票源，過去五年沒有一個提名案在他反對下通過過。",
+      "options": [
+        {
+          "text": "接受交換條件，把籌碼換到縣市長提名上",
+          "hint": "長線的佈局，短期內你在黨內的分量會明顯縮水",
+          "effects": {
+            "player": { "partyPrestige": 4, "politicalCapital": 5, "fame": -2 },
+            "grassroots": { "_all": 1 },
+            "popMood": { "publicsvc": 1 },
+            "issueHeat": { "corruption": 1 }
+          }
+        },
+        {
+          "text": "當面拒絕，並公開主張不分區應該全面初選",
+          "hint": "改革形象會非常鮮明，派系動員會在下次投票讓你難堪",
+          "effects": {
+            "player": { "partyPrestige": -6, "fame": 5, "integrity": 4 },
+            "popMood": { "student": 5, "whitecollar": 4 },
+            "valuePressure": { "directDemocracy": 0.6 },
+            "central": { "politics.primaryFairness": 0.03 },
+            "tagGain": ["TAG_FIREBRAND"]
+          }
+        },
+        {
+          "text": "拖延回應，同時聯絡其他派系尋求制衡空間",
+          "hint": "多線操作能保住彈性，被兩邊同時認定不可靠的風險很高",
+          "effects": {
+            "player": { "politicalCapital": -3, "fatigue": 4, "partyPrestige": -1 },
+            "popMood": { "publicsvc": -1 },
+            "issueHeat": { "corruption": 1 },
+            "grassroots": { "_home": 1 }
+          }
+        }
+      ],
+      "_designNote": "派系交易的接受、拒絕與拖延，黨內人望與改革形象成反比"
+    },
+    {
+      "id": "EVT_PTY_CHAIR_ELECTION",
+      "category": "party",
+      "weight": 45,
+      "cooldown": 24,
+      "trigger": "party.chairElection > 0 && turn > 12",
+      "requires": { "minTurn": 12, "roles": ["legislator", "mayor", "councilor"] },
+      "headline": "黨主席改選三強鼎立，路線之爭浮上檯面成為主軸",
+      "body": "黨主席改選登記在昨天截止，三位候選人分別代表世代交替、傳統動員與務實路線三種主張。世代交替派主張全面下修提名年齡並改革黨產運用，傳統派則強調基層組織才是勝選的唯一保證。黨員結構顯示六十歲以上的黨代表占比超過五成，但年輕黨員的入黨數在過去一年成長了三倍。",
+      "options": [
+        {
+          "text": "公開支持世代交替派並加入其政策小組",
+          "hint": "年輕黨員會把你當旗手，老幹部的資源網絡會對你關門",
+          "effects": {
+            "player": { "partyPrestige": -3, "fame": 4, "politicalCapital": 2 },
+            "popMood": { "student": 5, "whitecollar": 3, "retiree": -3 },
+            "valuePressure": { "progressivism": 0.5, "directDemocracy": 0.4 },
+            "grassroots": { "_home": -1 }
+          }
+        },
+        {
+          "text": "公開支持傳統動員派並負責選區的固樁工作",
+          "hint": "基層系統會全面向你靠攏，改革派媒體會把你寫成守舊力量",
+          "effects": {
+            "player": { "partyPrestige": 5, "fame": -1, "politicalCapital": 3 },
+            "grassroots": { "_home": 2, "_all": 1 },
+            "popMood": { "retiree": 4, "farmer": 3, "student": -4 },
+            "valuePressure": { "progressivism": -0.4 }
+          }
+        },
+        {
+          "text": "保持中立，把重心放在自己選區的政績上",
+          "hint": "不得罪任何一邊，新主席上任後也不會特別記得你",
+          "effects": {
+            "player": { "partyPrestige": -1, "integrity": 2, "fatigue": -2 },
+            "region": { "_player": { "infra.quality": 0.01 } },
+            "popMood": { "whitecollar": 1 },
+            "grassroots": { "_home": 1 }
+          }
+        },
+        {
+          "text": "自行投入登記參選，直接挑戰黨主席大位",
+          "hint": "一戰成名的機會就在眼前，輸了以後的位置會非常尷尬",
+          "effects": {
+            "player": { "fame": 8, "funds": -10, "fatigue": 6, "partyPrestige": -2 },
+            "popMood": { "_all": 2 },
+            "issueHeat": { "corruption": 2 },
+            "valuePressure": { "directDemocracy": 0.3 }
+          }
+        }
+      ],
+      "_designNote": "黨主席改選的四種站位，改革形象、基層系統與個人野心互相排擠"
+    },
+    {
+      "id": "EVT_PTY_WHIP_VOTE",
+      "category": "party",
+      "weight": 55,
+      "cooldown": 10,
+      "trigger": "party.whipPressure > 0.5 && issueHeat.economy > 25",
+      "requires": { "minTurn": 4, "roles": ["legislator"] },
+      "headline": "黨團下達甲級動員令，爭議法案表決前夕跑票疑雲四起",
+      "body": "黨團為一項爭議性極高的產業紓困法案下達甲級動員令，要求所有黨籍立委無條件配合表決。但這項法案在你的選區極不受歡迎，地方環保團體已經連續三天到服務處抗議。黨團書記長私下明說，這次若有人跑票，下個會期的委員會席次與預算補助都會重新分配。",
+      "options": [
+        {
+          "text": "遵守黨紀投下贊成票，回選區再親自說明",
+          "hint": "黨內位置保住了，選區的信任存款會被提走一大筆",
+          "effects": {
+            "player": { "partyPrestige": 5, "fame": -2, "integrity": -2 },
+            "popMood": { "student": -4, "whitecollar": -3 },
+            "grassroots": { "_home": -1 },
+            "corpMood": { "_all": 3 },
+            "issueHeat": { "environment": 3 }
+          }
+        },
+        {
+          "text": "投下反對票，公開說明選區民意的具體理由",
+          "hint": "選區會把你當自己人，黨團的秋後算帳一定會來",
+          "effects": {
+            "player": { "partyPrestige": -8, "fame": 4, "integrity": 4 },
+            "popMood": { "student": 4, "whitecollar": 3 },
+            "grassroots": { "_home": 2 },
+            "corpMood": { "_all": -3 },
+            "tagGain": ["TAG_FIREBRAND"]
+          }
+        },
+        {
+          "text": "以選區行程為由請假，避開這次的表決",
+          "hint": "兩邊都不必正面得罪，兩邊也都會看穿你在閃躲",
+          "effects": {
+            "player": { "partyPrestige": -2, "fame": -3, "integrity": -1, "stigma": 1 },
+            "popMood": { "whitecollar": -2, "student": -2 },
+            "grassroots": { "_home": -1 },
+            "tagGain": ["TAG_EMPTY"]
+          }
+        },
+        {
+          "text": "投贊成票但提出附帶決議要求加嚴配套",
+          "hint": "技術性的操作能兩面交代，兩邊也都只給你一半的信任",
+          "effects": {
+            "player": { "partyPrestige": 2, "integrity": 1, "fatigue": 3 },
+            "central": { "politics.billSafeguard": 0.03 },
+            "popMood": { "whitecollar": 1, "student": -1 },
+            "corpMood": { "_all": 1 },
+            "issueHeat": { "environment": 2 }
+          }
+        }
+      ],
+      "_designNote": "黨紀與選區民意的經典衝突，四種選擇對應四種不同的損耗"
+    },
+    {
+      "id": "EVT_PTY_DISCIPLINE",
+      "category": "party",
+      "weight": 45,
+      "cooldown": 14,
+      "trigger": "party.factionTension > 0.5 && player.fame > 30",
+      "requires": { "minTurn": 8, "roles": ["legislator", "mayor", "councilor"] },
+      "headline": "考紀會將處分四名跨黨連署的同志，停權年限成攻防焦點",
+      "body": "黨中央考紀會決定對四名參與跨黨派憲政改革連署的同志啟動調查，最重可能面臨停權兩年的處分。這四人主張改革案的內容與黨綱並無牴觸，只是提案的形式沒有先經過黨團的同意。黨內意見分裂，年輕黨代表發起連署要求撤案，資深幹部則堅持組織紀律不能有任何例外。",
+      "options": [
+        {
+          "text": "公開連署力挺同志，要求撤銷考紀會的調查",
+          "hint": "改革派會把你當領頭羊，你也會被列進下一份考紀名單",
+          "effects": {
+            "player": { "partyPrestige": -6, "fame": 5, "integrity": 4 },
+            "popMood": { "student": 5, "whitecollar": 4 },
+            "valuePressure": { "directDemocracy": 0.5, "progressivism": 0.3 },
+            "issueHeat": { "corruption": 2 },
+            "tagGain": ["TAG_FIREBRAND"]
+          }
+        },
+        {
+          "text": "支持處分但提案改以警告替代長期停權",
+          "hint": "折衷方案能保住每個人，兩邊都會嫌你的骨頭不夠硬",
+          "effects": {
+            "player": { "partyPrestige": 1, "integrity": 2, "fame": -1, "fatigue": 2 },
+            "popMood": { "publicsvc": 1, "student": -1 },
+            "central": { "politics.partyDiscipline": 0.01 }
+          }
+        },
+        {
+          "text": "支持從重處分，強調組織紀律是勝選的根本",
+          "hint": "黨中央會把你視為可靠的人，改革派的名單上你也上榜了",
+          "effects": {
+            "player": { "partyPrestige": 6, "fame": -2, "integrity": -2 },
+            "popMood": { "student": -5, "whitecollar": -3, "retiree": 2 },
+            "valuePressure": { "centralization": 0.4, "directDemocracy": -0.4 },
+            "grassroots": { "_all": 1 }
+          }
+        }
+      ],
+      "_designNote": "黨紀處分的力挺、折衷與從嚴，黨內位置與外部形象幾乎完全相反"
+    },
+    {
+      "id": "EVT_PTY_SPLIT_RUMOR",
+      "category": "party",
+      "weight": 40,
+      "cooldown": 20,
+      "trigger": "party.factionTension > 0.6 && party.support < 0.25",
+      "requires": { "minTurn": 12, "roles": ["legislator", "mayor", "councilor"] },
+      "headline": "六名同志密會傳籌組新黨，黨中央緊急召開危機會議",
+      "body": "島嶼之聲報導有六名同志在南部密會，議題涉及籌組新政黨與明年地方選舉的合作架構。這六人分屬兩個原本互不往來的派系，共同點是都在上一次提名作業中被中央強勢換下。黨中央連夜召開危機會議，同時放出將重啟提名協商的訊息，希望能把人留在黨內。",
+      "options": [
+        {
+          "text": "加入密會陣營，共同籌備新政黨的組建",
+          "hint": "掙脫了舊組織的束縛，你要從零開始建立全部的資源",
+          "effects": {
+            "player": { "partyPrestige": -12, "fame": 6, "politicalCapital": -5, "funds": -6 },
+            "grassroots": { "_all": -1 },
+            "popMood": { "student": 4, "whitecollar": 2 },
+            "valuePressure": { "directDemocracy": 0.5 },
+            "issueHeat": { "corruption": 2 }
+          }
+        },
+        {
+          "text": "居中斡旋，促成提名協商重啟以留住同志",
+          "hint": "黨內的裂痕能被縫起來，你要押上自己全部的信用",
+          "effects": {
+            "player": { "politicalCapital": -4, "partyPrestige": 5, "fatigue": 5, "fame": 2 },
+            "popMood": { "publicsvc": 2 },
+            "central": { "politics.partyStability": 0.04 },
+            "tagGain": ["TAG_DOER"]
+          }
+        },
+        {
+          "text": "公開呼籲團結，批評分裂只會讓對手得利",
+          "hint": "安全牌打得漂亮，被出走的人往後不會再把你當朋友",
+          "effects": {
+            "player": { "partyPrestige": 3, "fame": 1, "integrity": 1 },
+            "popMood": { "retiree": 2, "student": -2 },
+            "valuePressure": { "centralization": 0.3 },
+            "grassroots": { "_home": 1 }
+          }
+        },
+        {
+          "text": "保持距離觀望，等局勢明朗再決定要站哪邊",
+          "hint": "風險降到最低，兩邊事後都不會覺得欠你任何人情",
+          "effects": {
+            "player": { "partyPrestige": -1, "fame": -3, "politicalCapital": 1 },
+            "popMood": { "whitecollar": -2 },
+            "tagGain": ["TAG_EMPTY"]
+          }
+        }
+      ],
+      "_designNote": "政黨分裂危機的出走、斡旋、喊團結與觀望，四種風險曲線截然不同"
+    },
+    {
+      "id": "EVT_PTY_CROSS_ALLIANCE",
+      "category": "party",
+      "weight": 45,
+      "cooldown": 16,
+      "trigger": "party.seatShare < 0.4 && issueHeat.housing > 25",
+      "requires": { "minTurn": 8, "roles": ["legislator", "councilor", "mayor"] },
+      "headline": "跨黨派提出居住正義修法版本，邀你擔任共同提案人",
+      "body": "世代力量與綠色社會黨聯手提出一套居住正義的修法版本，內容涵蓋囤房稅級距與租賃專法的強制登錄。提案方主動邀請你擔任共同提案人，理由是你過去在委員會的發言與這個版本高度一致。但你所屬的黨團尚未形成共識，黨鞭已經明示不希望有人在協商前先跑到別人的版本上。",
+      "options": [
+        {
+          "text": "接受邀請並列名共同提案人推動修法",
+          "hint": "議題形象會非常鮮明，黨團協商的桌上你會少一個位子",
+          "effects": {
+            "player": { "partyPrestige": -5, "fame": 5, "integrity": 3 },
+            "popMood": { "student": 5, "whitecollar": 4, "capitalist": -4 },
+            "corpMood": { "finance": -5 },
+            "issueHeat": { "housing": 5 },
+            "valuePressure": { "marketFreedom": -0.4 }
+          }
+        },
+        {
+          "text": "婉拒列名但承諾在委員會投下贊成票",
+          "hint": "實質效果差不多，你也拿不到任何一分道德聲量",
+          "effects": {
+            "player": { "partyPrestige": -1, "integrity": 2, "fame": 1 },
+            "popMood": { "student": 2, "whitecollar": 2 },
+            "issueHeat": { "housing": 2 }
+          }
+        },
+        {
+          "text": "推動黨團提出自己的版本以爭取主導權",
+          "hint": "黨內會欣賞你的忠誠，法案通過的時程會被拖得更久",
+          "effects": {
+            "player": { "partyPrestige": 5, "fatigue": 4, "fame": 2 },
+            "popMood": { "student": -2, "whitecollar": 1 },
+            "central": { "politics.billProgress": -0.02 },
+            "issueHeat": { "housing": 3 }
+          }
+        }
+      ],
+      "_designNote": "跨黨合作的列名、暗助與競爭版本，議題聲量與黨內忠誠互相沖銷"
+    },
+    {
+      "id": "EVT_PTY_NOMINATION_SQUEEZE",
+      "category": "party",
+      "weight": 50,
+      "cooldown": 16,
+      "trigger": "party.primarySeason > 0 && player.fame < 35",
+      "requires": { "minTurn": 10, "roles": ["legislator", "councilor"] },
+      "headline": "中央徵召空降人選進駐選區，地方黨部連署要求收回",
+      "body": "黨中央宣布將徵召一位知名度極高的媒體人空降你耕耘多年的選區，理由是民調顯示該人選的勝率高出你將近九個百分點。地方黨部十四個區黨部主委中有十一位連署反對，強調基層經營不能被民調數字一筆勾銷。中央黨部則放話，若地方不配合，黨務補助與輔選資源將重新評估。",
+      "options": [
+        {
+          "text": "動員地方黨部強力反彈，要求中央收回成命",
+          "hint": "基層會為你拚到底，中央的資源水龍頭也可能就此關上",
+          "effects": {
+            "player": { "partyPrestige": -7, "fame": 4, "politicalCapital": -2 },
+            "grassroots": { "_home": 3 },
+            "popMood": { "farmer": 3, "smallbiz": 3 },
+            "issueHeat": { "corruption": 2 },
+            "tagGain": ["TAG_FIREBRAND"]
+          }
+        },
+        {
+          "text": "接受徵召安排，換取不分區或政務職的承諾",
+          "hint": "體面地換一條跑道，經營十年的選區從此不再屬於你",
+          "effects": {
+            "player": { "partyPrestige": 6, "politicalCapital": 4, "fame": -3 },
+            "grassroots": { "_home": -3 },
+            "popMood": { "farmer": -3, "smallbiz": -2 },
+            "issueHeat": { "corruption": 1 }
+          }
+        },
+        {
+          "text": "要求以公開初選民調決定人選，願賭服輸",
+          "hint": "程序正義誰都反對不了，你也可能真的就這樣輸掉",
+          "effects": {
+            "player": { "integrity": 4, "fame": 3, "partyPrestige": -2 },
+            "valuePressure": { "directDemocracy": 0.6 },
+            "popMood": { "whitecollar": 4, "student": 3 },
+            "central": { "politics.primaryFairness": 0.04 },
+            "grassroots": { "_home": 1 }
+          }
+        }
+      ],
+      "_designNote": "空降徵召的抗爭、交換與訴諸程序，選區根基與黨內前途的取捨"
+    },
+    {
+      "id": "EVT_PTY_COALITION_TALK",
+      "category": "party",
+      "weight": 40,
+      "cooldown": 18,
+      "trigger": "party.seatShare < 0.35 && turn > 16",
+      "requires": { "minTurn": 16, "roles": ["legislator", "mayor"] },
+      "headline": "第三勢力開價談合作，要求議長職位與兩席副市長",
+      "body": "議會席次過半的談判進入關鍵階段，台灣民生黨開出的條件包括議長職位與兩席副市長的人事同意權。他們同時要求在下一年度預算中保留一筆專屬的社福加碼額度，作為合作的基本盤。你的黨團內部強烈反彈，認為讓出議長等於把議事主導權整個交出去。",
+      "options": [
+        {
+          "text": "接受條件換取穩定過半的執政多數",
+          "hint": "施政能真的推得動，你的黨內同志會覺得被出賣了",
+          "effects": {
+            "player": { "partyPrestige": -5, "politicalCapital": 6, "fame": 2 },
+            "central": { "politics.governability": 0.06, "fiscal.balance": -0.004 },
+            "popMood": { "publicsvc": 2, "retiree": 3 },
+            "issueHeat": { "corruption": 2 }
+          }
+        },
+        {
+          "text": "只讓出副市長人事，議長職位堅持不退讓",
+          "hint": "守住了關鍵位置，合作的穩定度會隨時可能崩掉",
+          "effects": {
+            "player": { "politicalCapital": 2, "partyPrestige": 1, "fatigue": 4 },
+            "central": { "politics.governability": 0.02 },
+            "popMood": { "whitecollar": 1 },
+            "issueHeat": { "corruption": 1 }
+          }
+        },
+        {
+          "text": "拒絕交易，改採逐案協商的少數執政模式",
+          "hint": "沒有欠任何人人情，每一個議案你都得重新求人一次",
+          "effects": {
+            "player": { "integrity": 4, "fatigue": 5, "partyPrestige": 3, "fame": 2 },
+            "central": { "politics.governability": -0.05 },
+            "popMood": { "whitecollar": 3, "student": 2 },
+            "valuePressure": { "directDemocracy": 0.3 }
+          }
+        }
+      ],
+      "_designNote": "組閣談判的全盤接受、局部讓步與少數執政，治理效能與獨立性的兌換"
+    },
+    {
+      "id": "EVT_PTY_YOUTH_WING",
+      "category": "party",
+      "weight": 35,
+      "cooldown": 16,
+      "trigger": "party.youthShare < 0.2 && issueHeat.education > 20",
+      "requires": { "minTurn": 8, "roles": ["legislator", "mayor", "councilor"] },
+      "headline": "青年部集體請辭，指控黨務資源長期分配不均",
+      "body": "黨中央青年部的十七名幹部集體請辭，公開指控青年事務的預算僅占黨務總支出的百分之一點三。他們同時揭露黨代表的年齡中位數已達五十九歲，而近三年新入黨的年輕黨員留存率不到兩成。資深黨務主管回應，資源分配是依照過去的動員貢獻度來衡量，並非任何形式的世代歧視。",
+      "options": [
+        {
+          "text": "推動青年黨代表保障席次與預算比例的入章",
+          "hint": "年輕世代會被真正拉進來，老幹部的席次會直接被稀釋",
+          "effects": {
+            "player": { "partyPrestige": -4, "fame": 4, "integrity": 3 },
+            "popMood": { "student": 6, "whitecollar": 3, "retiree": -3 },
+            "valuePressure": { "progressivism": 0.5, "directDemocracy": 0.4 },
+            "central": { "politics.partyYouth": 0.05 }
+          }
+        },
+        {
+          "text": "把自己辦公室的資源撥出來支援青年培力",
+          "hint": "實際又不必修改黨章，你自己的競選資源會被吃掉一塊",
+          "effects": {
+            "player": { "funds": -5, "fame": 3, "integrity": 3, "fatigue": 2 },
+            "popMood": { "student": 5 },
+            "grassroots": { "_home": 1 },
+            "tagGain": ["TAG_DOER"]
+          }
+        },
+        {
+          "text": "支持依貢獻度分配，主張年輕人要先做出成績",
+          "hint": "老幹部會覺得你懂規矩，青年票的流失會慢慢反映在民調",
+          "effects": {
+            "player": { "partyPrestige": 4, "fame": -2 },
+            "popMood": { "student": -6, "retiree": 3, "farmer": 2 },
+            "valuePressure": { "progressivism": -0.4 },
+            "grassroots": { "_all": 1 }
+          }
+        }
+      ],
+      "_designNote": "政黨世代衝突的制度改革、自掏腰包與維持現狀三種回應"
+    },
+    {
+      "id": "EVT_PTY_POLICY_UTURN",
+      "category": "party",
+      "weight": 45,
+      "cooldown": 14,
+      "trigger": "party.support < 0.3 && issueHeat.energy > 30",
+      "requires": { "minTurn": 10, "roles": ["legislator", "mayor", "councilor"] },
+      "headline": "黨綱能源立場醞釀轉向，你三年前的公開承諾被翻出",
+      "body": "黨中央因為民調壓力而醞釀調整能源政策的黨綱立場，方向與你三年前在造勢場合的公開承諾完全相反。當年的影片已經被對手陣營剪輯成短片，在社群平台上累積超過八十萬次的觀看。黨團書記長希望你能配合新版說帖，並暗示這關係到你在能源委員會的席次。",
+      "options": [
+        {
+          "text": "配合黨綱轉向，公開說明政策環境已經改變",
+          "hint": "黨內位置穩住了，那支對比影片會跟著你到每一場選舉",
+          "effects": {
+            "player": { "partyPrestige": 5, "integrity": -4, "stigma": 2 },
+            "popMood": { "student": -5, "whitecollar": -3 },
+            "issueHeat": { "energy": 4 },
+            "tagGain": ["TAG_EMPTY"]
+          }
+        },
+        {
+          "text": "堅持原有立場，公開表達與黨綱不同的意見",
+          "hint": "誠信形象會被牢牢記住，委員會的位置大概保不住了",
+          "effects": {
+            "player": { "partyPrestige": -7, "integrity": 5, "fame": 4 },
+            "popMood": { "student": 5, "whitecollar": 4 },
+            "valuePressure": { "directDemocracy": 0.3 },
+            "issueHeat": { "energy": 5 },
+            "tagGain": ["TAG_FIREBRAND"]
+          }
+        },
+        {
+          "text": "主張黨綱調整前先辦全國黨員的政策辯論",
+          "hint": "程序上誰都無法反對，你會被說成用拖延來閃避表態",
+          "effects": {
+            "player": { "partyPrestige": -2, "integrity": 3, "fatigue": 3, "fame": 1 },
+            "valuePressure": { "directDemocracy": 0.6 },
+            "popMood": { "whitecollar": 2, "student": 1 },
+            "central": { "politics.partyDemocracy": 0.04 }
+          }
+        }
+      ],
+      "_designNote": "政策轉彎的配合、堅持與程序拖延，誠信與黨內位置直接互換"
+    },
+    {
+      "id": "EVT_PTY_BLACKMAIL_LEAK",
+      "category": "party",
+      "weight": 40,
+      "cooldown": 18,
+      "trigger": "party.factionTension > 0.45 && player.politicalCapital > 15",
+      "requires": { "minTurn": 12, "roles": ["legislator", "mayor", "councilor"] },
+      "headline": "黨內對手的黑資料送到你手上，交換條件是初選退讓",
+      "body": "一位資深黨工在深夜把一疊資料送到你的服務處，內容是黨內主要競爭者涉及工程回扣的往來紀錄。送件者沒有署名，只留下一句希望你在合適的時機使用的紙條。三天後，另一位派系幹部打來電話，暗示只要你在初選中禮讓，這份資料就不必出現在任何地方。",
+      "options": [
+        {
+          "text": "把全部資料原封送交檢調並公開此事經過",
+          "hint": "站到了道德的制高點，黨內從此沒有人敢再跟你談任何事",
+          "effects": {
+            "player": { "integrity": 6, "fame": 5, "partyPrestige": -8, "politicalCapital": -3 },
+            "popMood": { "whitecollar": 5, "student": 5 },
+            "issueHeat": { "corruption": 6 },
+            "tagGain": ["TAG_CLEAN"]
+          }
+        },
+        {
+          "text": "接受交換條件，把資料鎖進抽屜不再提起",
+          "hint": "眼前的路變得平坦，你手上多了一顆隨時會爆的炸彈",
+          "effects": {
+            "player": { "politicalCapital": 5, "partyPrestige": 3, "integrity": -5, "stigma": 2 },
+            "grassroots": { "_home": 1 },
+            "popMood": { "publicsvc": -1 },
+            "issueHeat": { "corruption": 1 }
+          }
+        },
+        {
+          "text": "把資料退還並要求黨中央啟動內部調查",
+          "hint": "手不必弄髒也算有交代，內部調查通常會不了了之",
+          "effects": {
+            "player": { "integrity": 4, "partyPrestige": -2, "fame": 1 },
+            "central": { "politics.partyAudit": 0.02 },
+            "popMood": { "publicsvc": 2, "whitecollar": 2 },
+            "issueHeat": { "corruption": 2 }
+          }
+        },
+        {
+          "text": "把資料匿名交給調查記者，自己完全不出面",
+          "hint": "殺傷力最大又看不到你的手，一旦被查出來就是萬劫不復",
+          "effects": {
+            "player": { "fame": 3, "politicalCapital": 2, "stigma": 3, "integrity": -2 },
+            "issueHeat": { "corruption": 6 },
+            "popMood": { "whitecollar": 2 },
+            "tagGain": ["TAG_MUCKRAKER"]
+          }
+        }
+      ],
+      "_designNote": "黑資料的四種處理方式，道德、利益與風險三軸各自拉扯"
+    }
+  ]
+}

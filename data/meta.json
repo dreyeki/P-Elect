@@ -1,0 +1,10 @@
+{
+  "gameName": "選舉人生：福爾摩沙",
+  "dataVersion": "0.2.0",
+  "saveSchemaVersion": 1,
+  "startDate": { "year": 2026, "month": 1 },
+  "endDate": { "year": 2050, "month": 12 },
+  "weekTurnLeadMonths": 2,
+  "baseAP": 2,
+  "popsPerDistrict": 30
+}

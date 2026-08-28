@@ -1,0 +1,100 @@
+// @ts-check
+import { html, raw, esc } from '../../util/dom.js';
+import { card, row, tile } from '../components.js';
+import { barRows } from '../charts.js';
+import * as F from '../../util/format.js';
+import { word, biWord } from '../../util/scale.js';
+import { partyColor } from '../app.js';
+
+export const CAMPAIGN_ACTIONS = [
+  { id: 'street', name: '掃街拜票', ap: 1, cost: 50000, fatigue: 12, desc: '一條街一條街走，握到手酸為止。' },
+  { id: 'rally', name: '大型造勢', ap: 2, cost: 2000000, fatigue: 20, desc: '把場子做大，讓支持者覺得自己不孤單。' },
+  { id: 'tv', name: '電視廣告', ap: 1, cost: 5000000, fatigue: 5, desc: '砸錢買曝光，最快也最貴的辦法。' },
+  { id: 'online', name: '網路投放', ap: 1, cost: 800000, fatigue: 5, desc: '精準打到年輕人，成本比電視低得多。' },
+  { id: 'debate', name: '政見發表', ap: 1, cost: 200000, fatigue: 12, desc: '中間選民會看，講好講壞差很多。' },
+  { id: 'negative', name: '負面文宣', ap: 1, cost: 1500000, fatigue: 12, desc: '打對手，也一定會濺到自己身上。' },
+  { id: 'allocate', name: '配票操作', ap: 2, cost: 500000, fatigue: 15, desc: '複數選區才用得上，算錯就一起落選。' },
+  { id: 'temple', name: '拜廟與地方拜會', ap: 1, cost: 300000, fatigue: 12, desc: '長輩看的是你有沒有來，不是你講了什麼。' },
+];
+
+export function electionPage(s, data) {
+  const e = s.election;
+  if (!e) return card('選舉', '<div class="xs muted">目前沒有選舉。選前兩個月時間會自動變成一週一回合，到時候這裡才會亮起來。</div>');
+  if (e.phase === 'decide') return decidePhase(s, data, e);
+  if (e.phase === 'primary') return primaryPhase(s, data, e);
+  if (e.phase === 'campaign') return campaignPhase(s, data, e);
+  if (e.phase === 'result') return resultPhase(s, data, e);
+  return '';
+}
+
+function decidePhase(s, data, e) {
+  return card('要不要出來選', `
+    <div class="small dim" style="line-height:1.8;margin-bottom:12px">
+      登記期限就要到了。以你現在的知名度與資源，能選的位子有這些。不選也是一種選擇，
+      有些人就是靠著等對的那一次，一路等到最後。
+    </div>
+    ${e.options.map((r, i) => `
+      <button class="opt" data-act="pick-run" data-idx="${i}">
+        <div class="opt-t">${esc(r.name)}</div>
+        <div class="opt-h">保證金 ${esc(F.money(r.level.deposit ?? 0))}${r.level.system === 'SNTV' ? '・複數選區單記不可讓渡' : ''}</div>
+      </button>`).join('')}
+    <button class="opt" data-act="pick-run" data-idx="-1">
+      <div class="opt-t">這一次先不選</div>
+      <div class="opt-h">把資源留到下一次，繼續經營基層。</div>
+    </button>`);
+}
+
+function primaryPhase(s, data, e) {
+  return card('黨內初選', `
+    <div class="small dim" style="line-height:1.8">${esc(e.primaryMsg ?? '')}</div>
+    ${e.primaryWon === false ? `
+      <div class="btn-row">
+        <button class="btn" data-act="primary-accept">接受結果，留下來輔選</button>
+        <button class="btn danger" data-act="primary-bolt">脫黨參選</button>
+      </div>` : `<button class="btn primary full" data-act="primary-next" style="margin-top:10px">進入選戰</button>`}`);
+}
+
+function campaignPhase(s, data, e) {
+  const left = (s.player.ap ?? 2) - s.player.apUsed;
+  const poll = e.poll ?? [];
+  return html`
+    ${card(e.run.name, `
+      ${row('競選經費', `<span class="num ${s.finance.campaign < 500000 ? 'tone-warn' : ''}">${F.money(s.finance.campaign)}</span>`)}
+      ${row('距離投票', `<span class="num">${e.weeksLeft} 週</span>`)}
+      ${row('動員強度', `<span class="word">${esc(word('grassroots', e.mobilization ?? 0))}</span>`)}`)}
+
+    ${card('選情預估', poll.length ? barRows(poll.map((p) => ({
+      label: p.name, value: p.share * 100, text: (p.share * 100).toFixed(1) + '%',
+      color: p.isPlayer ? 'var(--gold)' : partyColor(p.party),
+    }))) + `<div class="xs muted" style="margin-top:8px;line-height:1.7">
+        這只是估算。投票日當天還有一個誰也算不準的數字，通常是往上爆冷，不是往下。</div>`
+      : '<div class="xs muted">還沒有民調。</div>')}
+
+    ${card(`競選行動（剩 ${left} 點）`, CAMPAIGN_ACTIONS.map((a) => {
+      const dis = a.ap > left || s.finance.campaign < a.cost;
+      return `<button class="opt ${dis ? 'locked' : ''}" data-act="campaign-action" data-id="${a.id}" ${dis ? 'disabled' : ''}>
+        <div style="display:flex;justify-content:space-between;align-items:baseline;gap:8px">
+          <span class="opt-t">${esc(a.name)}</span>
+          <span class="xs muted">${a.ap} AP・${F.money(a.cost)}</span>
+        </div>
+        <div class="opt-h">${esc(a.desc)}</div></button>`;
+    }).join('') + `<button class="btn primary full" data-act="end-turn" style="margin-top:6px">結束這一週</button>`)}`;
+}
+
+function resultPhase(s, data, e) {
+  const r = e.outcome;
+  const my = r.results.find((x) => x.candidate.isPlayer);
+  return html`
+    ${card('', `<div class="result-big">
+      <div class="rb ${r.won ? 'tone-good' : 'tone-bad'}">${r.won ? '當　選' : '落　選'}</div>
+      <div class="small muted" style="margin-top:8px">${esc(e.run.name)}</div>
+      <div class="num" style="margin-top:6px">${F.int(my?.votes ?? 0)} 票　${((my?.share ?? 0) * 100).toFixed(2)}%</div>
+    </div>`)}
+    ${card('開票結果', barRows(r.results.map((x) => ({
+      label: x.candidate.isPlayer ? s.player.name : x.candidate.name,
+      value: x.share * 100, text: (x.share * 100).toFixed(1) + '%',
+      color: x.candidate.isPlayer ? 'var(--gold)' : partyColor(x.candidate.party),
+    }))))}
+    ${card('', `<div class="small dim" style="line-height:1.8">${esc(e.resultText ?? '')}</div>
+      <button class="btn primary full" data-act="close-election" style="margin-top:12px">繼續</button>`)}`;
+}

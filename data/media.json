@@ -1,0 +1,77 @@
+{
+  "_note": "12 家媒體。bias −5（綠）~ +5（藍）整數；credibility/reach/fakeNewsFactor 0~5 整數；playerRelation −5~5 整數。biasMode：fixed 立場固定、follower 跟隨當前聲量較高的一方、government 恆等於執政方。genFactor 為各世代觸及倍率（具體數值）。",
+  "media": [
+    {
+      "id": "UNION_DAILY", "name": "聯日報", "type": "newspaper",
+      "bias": 3, "credibility": 3, "reach": 3, "playerRelation": 0, "biasMode": "fixed",
+      "genFactor": { "youth": 0.6, "middle": 1, "senior": 1.4 }, "fakeNewsFactor": 1,
+      "desc": "創刊逾七十年的老牌報系，社論版是藍營論述的定調場域，讀者以退休公教與中高齡企業主為主。查證流程嚴謹、錯誤率低，但議題選擇明顯偏向穩定與秩序，年輕族群的觸及率逐年下滑。"
+    },
+    {
+      "id": "TBS", "name": "TBS", "type": "tv",
+      "bias": 3, "credibility": 2, "reach": 4, "playerRelation": 0, "biasMode": "fixed",
+      "genFactor": { "youth": 0.8, "middle": 1.1, "senior": 1.3 }, "fakeNewsFactor": 2,
+      "desc": "以政論談話節目撐起收視的新聞台，晚間三小時的名嘴輪番轟炸能把一則爆料燒成一週議題。新聞部與談話性節目立場落差大，前者尚稱平衡，後者則是藍營支持者每晚的情緒出口。"
+    },
+    {
+      "id": "XILIN_TV", "name": "西林電視", "type": "tv",
+      "bias": 0, "credibility": 2, "reach": 4, "playerRelation": 0, "biasMode": "follower",
+      "genFactor": { "youth": 0.9, "middle": 1.1, "senior": 1.2 }, "fakeNewsFactor": 2,
+      "desc": "收視至上的商業台，每季依當前輿論聲量重新校準立場，誰的聲勢大就往誰那邊靠。它跟風而不領風，因此是判斷風向是否已經轉變的最好指標，也是最容易被聲量操作影響的一家。"
+    },
+    {
+      "id": "LIBERTY_FRONT", "name": "自由前線報", "type": "newspaper",
+      "bias": -3, "credibility": 3, "reach": 3, "playerRelation": 0, "biasMode": "fixed",
+      "genFactor": { "youth": 0.7, "middle": 1, "senior": 1.3 }, "fakeNewsFactor": 1,
+      "desc": "本土立場鮮明的大報，頭版標題向來直接，兩岸與國安議題上的動員力在綠營內部無人可及。調查報導的資源投入僅次於財經專業媒體，但涉及本土執政者的弊案時篇幅明顯縮水。"
+    },
+    {
+      "id": "PUBLIC_CAST", "name": "公立傳播", "type": "public",
+      "bias": 0, "credibility": 4, "reach": 3, "playerRelation": 0, "biasMode": "government",
+      "genFactor": { "youth": 1, "middle": 1, "senior": 1.1 }, "fakeNewsFactor": 0,
+      "desc": "由國家預算支持的公共媒體，紀錄片與國際新聞品質是全台最高，公信力也居各家之冠。董事會由執政方主導提名，立場因而隨政黨輪替緩慢偏移，每次輪替後公信力都會被消耗一截。"
+    },
+    {
+      "id": "CLEAR_NEWS", "name": "明淨新聞", "type": "tv",
+      "bias": -3, "credibility": 3, "reach": 4, "playerRelation": 0, "biasMode": "fixed",
+      "genFactor": { "youth": 0.9, "middle": 1.1, "senior": 1.2 }, "fakeNewsFactor": 1,
+      "desc": "綠營色彩明確的全天候新聞台，地方採訪中心密度高，南部縣市的即時畫面幾乎都由它先發。SNG 連線與跑馬燈的節奏極快，也因此常在事實查證完成前就把框架定了下來。"
+    },
+    {
+      "id": "ISLAND_VOICE", "name": "島嶼之聲", "type": "online",
+      "bias": -4, "credibility": 2, "reach": 3, "playerRelation": 0, "biasMode": "fixed",
+      "genFactor": { "youth": 1.5, "middle": 1.1, "senior": 0.5 }, "fakeNewsFactor": 3,
+      "desc": "網路原生的獨立媒體，靠訂閱與小額募款維生，人力精簡但議題嗅覺敏銳、標題極具穿透力。深綠讀者黏著度高，同溫層效應強，遇到不利本土陣營的消息時往往選擇不報而非反駁。"
+    },
+    {
+      "id": "FOCUS_WEEKLY", "name": "焦週刊", "type": "magazine",
+      "bias": -2, "credibility": 2, "reach": 3, "playerRelation": 0, "biasMode": "fixed",
+      "genFactor": { "youth": 1.2, "middle": 1.2, "senior": 0.7 }, "fakeNewsFactor": 3,
+      "desc": "以跟監偷拍與內幕爆料為主業的週刊，每週二封面故事一出，政壇就得先看它決定當週議程。手上的獨家真假參半，卻是政治人物最怕的一家，也是各方派系放消息互鬥的首選管道。"
+    },
+    {
+      "id": "GENIUS_FINANCE", "name": "天才財經", "type": "finance",
+      "bias": 0, "credibility": 4, "reach": 2, "playerRelation": 0, "biasMode": "fixed",
+      "genFactor": { "youth": 0.8, "middle": 1.3, "senior": 0.9 }, "fakeNewsFactor": 0,
+      "desc": "專攻產業與資本市場的專業媒體，記者多有產業背景，供應鏈與財報分析的深度無人能及。政治立場刻意保持中性，但對財政紀律與投資環境的評論具有實質影響力，法人與外資都在看。"
+    },
+    {
+      "id": "PTC_FORUM", "name": "PTC論壇", "type": "forum",
+      "bias": 2, "credibility": 1, "reach": 3, "playerRelation": 0, "biasMode": "fixed",
+      "genFactor": { "youth": 1.6, "middle": 1, "senior": 0.4 }, "fakeNewsFactor": 5,
+      "desc": "匿名討論區型態的網路社群，看板生態各異，政治板近年整體風向偏向質疑執政者。爆料常比傳統媒體早幾小時，但缺乏查證機制，境外帳號與帶風向的操作在此最難辨識也最有效。"
+    },
+    {
+      "id": "BYTOK", "name": "ByTok", "type": "shortvideo",
+      "bias": 2, "credibility": 1, "reach": 4, "playerRelation": 0, "biasMode": "fixed",
+      "genFactor": { "youth": 2, "middle": 1, "senior": 0.4 }, "fakeNewsFactor": 5,
+      "desc": "演算法驅動的短影音平台，十五秒剪輯就能把一句失言送進上百萬支手機，青年觸及率無人能敵。內容審核鬆散且來源不明的帳號極多，是假訊息傳播係數最高的兩個管道之一。"
+    },
+    {
+      "id": "TED_SOCIAL", "name": "TeD", "type": "social",
+      "bias": -2, "credibility": 1, "reach": 4, "playerRelation": 0, "biasMode": "fixed",
+      "genFactor": { "youth": 2, "middle": 1.1, "senior": 0.4 }, "fakeNewsFactor": 3,
+      "desc": "以短文串接為主的社群平台，年輕使用者密度極高，一則貼文的轉傳速度遠快過任何電視快報。輿論風向轉變常在此最先出現，情緒性動員強烈，理性討論的空間則被留言互嗆快速吃掉。"
+    }
+  ]
+}

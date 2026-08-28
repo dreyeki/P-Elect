@@ -1,0 +1,23 @@
+{
+  "roles": [
+    { "id":"manager","name":"競選經理","desc":"選戰期間替你排行程、算票、盯對手，把你從候選人變成一部機器。",
+      "effects":{"campaignAP":1,"campaignActionMult":0.12},"baseSalary":110000 },
+    { "id":"policy","name":"政策幕僚","desc":"替你把法案讀完、把數字查清楚，讓你在質詢台上不會被打回票。",
+      "effects":{"lawQuality":0.15,"interpellationPrep":1,"eventInsight":1},"baseSalary":90000 },
+    { "id":"spokesperson","name":"發言人","desc":"替你擋掉不該回答的問題，也替你把該講的話講得漂亮。",
+      "effects":{"mediaFrame":0.15,"crisisMitigation":0.25},"baseSalary":95000 },
+    { "id":"organizer","name":"組織部長","desc":"認識全縣的里長跟宮廟主委，知道哪一場一定要到、哪一場可以請人代。",
+      "effects":{"grassrootsGrowth":0.4,"officeCostMult":-0.25},"baseSalary":85000 },
+    { "id":"finance","name":"財務長","desc":"替你把每一筆錢的來路寫得乾乾淨淨，也替你想辦法多找幾筆。",
+      "effects":{"donationCap":0.3,"stigmaReduction":0.35,"declarationFix":1},"baseSalary":100000 },
+    { "id":"legal","name":"法律顧問","desc":"你被告的時候他在，你想告人的時候他也在，還會提醒你哪些事不能碰。",
+      "effects":{"investigationResist":0.3,"litigationCostMult":-0.4},"baseSalary":120000 }
+  ],
+  "recruitTiers": [
+    { "minFame":0,"abilityRange":[0,2],"salaryMult":0.7 },
+    { "minFame":2,"abilityRange":[1,3],"salaryMult":1.0 },
+    { "minFame":3,"abilityRange":[2,4],"salaryMult":1.5 },
+    { "minFame":4,"abilityRange":[3,5],"salaryMult":2.4 }
+  ],
+  "slotsByRole": { "citizen":1,"aide":1,"village":2,"councilor":2,"legislator":4,"mayor":5,"minister":5,"president":6 }
+}

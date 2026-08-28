@@ -1,0 +1,2615 @@
+{
+  "_source": "基準年：人口與行政區為2025年內政部戶政司統計；縣市生產毛額與產業結構為2023年主計總處資料推估；議會席次與縣市長政治色彩為2022年地方公職人員選舉結果；區域立委席次為2020年選區重劃後配置（73席，原住民6席另計）。政黨名稱與代碼為虛構。抽象量（infrastructure/culture）為0~5整數之遊戲平衡設定。",
+  "regions": [
+    {
+      "_source": "人口/席次：2025年內政部戶政統計與2022年地方公職人員選舉；經濟：2023年縣市生產毛額與工商普查推估；抽象量（建設/文化）為遊戲平衡設定",
+      "id": "TPE",
+      "name": "臺北市",
+      "type": "直轄市",
+      "councilSeats": 63,
+      "legislatorSeats": 8,
+      "population": {
+        "total": 2470000,
+        "ageStructure": {
+          "young": 0.14,
+          "working": 0.63,
+          "elder": 0.23
+        },
+        "education": {
+          "basic": 0.18,
+          "senior": 0.3,
+          "tertiary": 0.52
+        },
+        "ethnicity": {
+          "hoklo": 0.62,
+          "hakka": 0.14,
+          "mainlander": 0.18,
+          "indigenous": 0.005,
+          "newImmigrant": 0.055
+        },
+        "netMigration": -4200,
+        "birthRate": 0.0058,
+        "deathRate": 0.0079
+      },
+      "economy": {
+        "gdp": 4800,
+        "gdpGrowth": 0.021,
+        "perCapitaIncome": 830000,
+        "unemployment": 0.034,
+        "industryMix": {
+          "primary": 0.001,
+          "secondary": 0.12,
+          "tertiary": 0.879
+        },
+        "sectors": {
+          "semiconductor": 0.05,
+          "electronics": 0.07,
+          "petrochemical": 0.01,
+          "steel": 0.005,
+          "machinery": 0.02,
+          "food": 0.03,
+          "textile": 0.01,
+          "finance": 0.22,
+          "retail": 0.15,
+          "tourism": 0.06,
+          "logistics": 0.05,
+          "agriculture": 0.001,
+          "fishery": 0,
+          "publicSector": 0.18,
+          "other": 0.144
+        },
+        "giniIndex": 0.352,
+        "housingPriceIndex": 168,
+        "rentBurden": 0.38
+      },
+      "infrastructure": {
+        "transport": 5,
+        "energy": 4,
+        "water": 4,
+        "digital": 5,
+        "housing": 2,
+        "medical": 5,
+        "education": 5,
+        "disasterResilience": 3
+      },
+      "culture": {
+        "identityLocal": 3,
+        "identityChinese": 2,
+        "religiosity": 2,
+        "civicEngagement": 4,
+        "mediaSaturation": 5,
+        "youthCulture": 4,
+        "festivals": [
+          "大稻埕煙火",
+          "臺北燈節"
+        ]
+      },
+      "trade": {
+        "exportValue": 68,
+        "importValue": 91,
+        "topExportPartners": [
+          "USA",
+          "CHN",
+          "JPN"
+        ],
+        "exportGoods": {
+          "electronics": 0.42,
+          "machinery": 0.14,
+          "chemicals": 0.08,
+          "services": 0.36
+        },
+        "portCapacity": 0
+      },
+      "finance": {
+        "ownRevenue": 1420,
+        "allocationFund": 380,
+        "subsidy": 120,
+        "personnelCost": 690,
+        "debt": 1450,
+        "debtCeiling": 2200
+      },
+      "politics": {
+        "mayorParty": "CRP",
+        "mayorApproval": 54,
+        "councilComposition": {
+          "PDA": 20,
+          "CRP": 26,
+          "TPL": 8,
+          "NGF": 4,
+          "IND": 5
+        }
+      }
+    },
+    {
+      "_source": "人口/席次：2025年內政部戶政統計與2022年地方公職人員選舉；經濟：2023年縣市生產毛額與工商普查推估；抽象量（建設/文化）為遊戲平衡設定",
+      "id": "NTP",
+      "name": "新北市",
+      "type": "直轄市",
+      "councilSeats": 66,
+      "legislatorSeats": 12,
+      "population": {
+        "total": 3990000,
+        "ageStructure": {
+          "young": 0.145,
+          "working": 0.675,
+          "elder": 0.18
+        },
+        "education": {
+          "basic": 0.23,
+          "senior": 0.36,
+          "tertiary": 0.41
+        },
+        "ethnicity": {
+          "hoklo": 0.66,
+          "hakka": 0.13,
+          "mainlander": 0.145,
+          "indigenous": 0.01,
+          "newImmigrant": 0.055
+        },
+        "netMigration": 2600,
+        "birthRate": 0.0055,
+        "deathRate": 0.0075
+      },
+      "economy": {
+        "gdp": 3150,
+        "gdpGrowth": 0.026,
+        "perCapitaIncome": 620000,
+        "unemployment": 0.037,
+        "industryMix": {
+          "primary": 0.003,
+          "secondary": 0.35,
+          "tertiary": 0.647
+        },
+        "sectors": {
+          "semiconductor": 0.03,
+          "electronics": 0.14,
+          "petrochemical": 0.015,
+          "steel": 0.025,
+          "machinery": 0.11,
+          "food": 0.045,
+          "textile": 0.03,
+          "finance": 0.07,
+          "retail": 0.13,
+          "tourism": 0.04,
+          "logistics": 0.07,
+          "agriculture": 0.005,
+          "fishery": 0.005,
+          "publicSector": 0.1,
+          "other": 0.185
+        },
+        "giniIndex": 0.331,
+        "housingPriceIndex": 138,
+        "rentBurden": 0.33
+      },
+      "infrastructure": {
+        "transport": 5,
+        "energy": 4,
+        "water": 4,
+        "digital": 5,
+        "housing": 2,
+        "medical": 4,
+        "education": 4,
+        "disasterResilience": 3
+      },
+      "culture": {
+        "identityLocal": 3,
+        "identityChinese": 2,
+        "religiosity": 3,
+        "civicEngagement": 3,
+        "mediaSaturation": 4,
+        "youthCulture": 3,
+        "festivals": [
+          "平溪天燈節",
+          "野柳神明淨港"
+        ]
+      },
+      "trade": {
+        "exportValue": 42,
+        "importValue": 38,
+        "topExportPartners": [
+          "CHN",
+          "USA",
+          "JPN"
+        ],
+        "exportGoods": {
+          "electronics": 0.48,
+          "machinery": 0.25,
+          "chemicals": 0.11,
+          "services": 0.16
+        },
+        "portCapacity": 3
+      },
+      "finance": {
+        "ownRevenue": 900,
+        "allocationFund": 480,
+        "subsidy": 260,
+        "personnelCost": 640,
+        "debt": 1250,
+        "debtCeiling": 2050
+      },
+      "politics": {
+        "mayorParty": "CRP",
+        "mayorApproval": 62,
+        "councilComposition": {
+          "PDA": 22,
+          "CRP": 28,
+          "TPL": 7,
+          "NGF": 3,
+          "GSP": 1,
+          "IND": 5
+        }
+      }
+    },
+    {
+      "_source": "人口/席次：2025年內政部戶政統計與2022年地方公職人員選舉；經濟：2023年縣市生產毛額與工商普查推估；抽象量（建設/文化）為遊戲平衡設定",
+      "id": "TYC",
+      "name": "桃園市",
+      "type": "直轄市",
+      "councilSeats": 63,
+      "legislatorSeats": 6,
+      "population": {
+        "total": 2350000,
+        "ageStructure": {
+          "young": 0.165,
+          "working": 0.69,
+          "elder": 0.145
+        },
+        "education": {
+          "basic": 0.235,
+          "senior": 0.36,
+          "tertiary": 0.405
+        },
+        "ethnicity": {
+          "hoklo": 0.545,
+          "hakka": 0.3,
+          "mainlander": 0.095,
+          "indigenous": 0.02,
+          "newImmigrant": 0.04
+        },
+        "netMigration": 17500,
+        "birthRate": 0.0072,
+        "deathRate": 0.0062
+      },
+      "economy": {
+        "gdp": 3350,
+        "gdpGrowth": 0.032,
+        "perCapitaIncome": 640000,
+        "unemployment": 0.036,
+        "industryMix": {
+          "primary": 0.008,
+          "secondary": 0.53,
+          "tertiary": 0.462
+        },
+        "sectors": {
+          "semiconductor": 0.06,
+          "electronics": 0.2,
+          "petrochemical": 0.06,
+          "steel": 0.04,
+          "machinery": 0.13,
+          "food": 0.06,
+          "textile": 0.04,
+          "finance": 0.03,
+          "retail": 0.08,
+          "tourism": 0.03,
+          "logistics": 0.09,
+          "agriculture": 0.008,
+          "fishery": 0.002,
+          "publicSector": 0.07,
+          "other": 0.1
+        },
+        "giniIndex": 0.325,
+        "housingPriceIndex": 102,
+        "rentBurden": 0.27
+      },
+      "infrastructure": {
+        "transport": 4,
+        "energy": 5,
+        "water": 4,
+        "digital": 4,
+        "housing": 3,
+        "medical": 4,
+        "education": 4,
+        "disasterResilience": 3
+      },
+      "culture": {
+        "identityLocal": 3,
+        "identityChinese": 3,
+        "religiosity": 3,
+        "civicEngagement": 3,
+        "mediaSaturation": 3,
+        "youthCulture": 3,
+        "festivals": [
+          "桃園地景藝術節",
+          "龍潭客家桐花祭"
+        ]
+      },
+      "trade": {
+        "exportValue": 58,
+        "importValue": 52,
+        "topExportPartners": [
+          "CHN",
+          "USA",
+          "ASEAN"
+        ],
+        "exportGoods": {
+          "electronics": 0.52,
+          "machinery": 0.23,
+          "chemicals": 0.16,
+          "services": 0.09
+        },
+        "portCapacity": 3
+      },
+      "finance": {
+        "ownRevenue": 760,
+        "allocationFund": 330,
+        "subsidy": 190,
+        "personnelCost": 420,
+        "debt": 700,
+        "debtCeiling": 1400
+      },
+      "politics": {
+        "mayorParty": "CRP",
+        "mayorApproval": 58,
+        "councilComposition": {
+          "PDA": 20,
+          "CRP": 27,
+          "TPL": 6,
+          "NGF": 2,
+          "IND": 8
+        }
+      }
+    },
+    {
+      "_source": "人口/席次：2025年內政部戶政統計與2022年地方公職人員選舉；經濟：2023年縣市生產毛額與工商普查推估；抽象量（建設/文化）為遊戲平衡設定",
+      "id": "TCH",
+      "name": "臺中市",
+      "type": "直轄市",
+      "councilSeats": 65,
+      "legislatorSeats": 8,
+      "population": {
+        "total": 2850000,
+        "ageStructure": {
+          "young": 0.155,
+          "working": 0.68,
+          "elder": 0.165
+        },
+        "education": {
+          "basic": 0.25,
+          "senior": 0.355,
+          "tertiary": 0.395
+        },
+        "ethnicity": {
+          "hoklo": 0.75,
+          "hakka": 0.13,
+          "mainlander": 0.085,
+          "indigenous": 0.01,
+          "newImmigrant": 0.025
+        },
+        "netMigration": 6800,
+        "birthRate": 0.0062,
+        "deathRate": 0.007
+      },
+      "economy": {
+        "gdp": 3050,
+        "gdpGrowth": 0.03,
+        "perCapitaIncome": 640000,
+        "unemployment": 0.035,
+        "industryMix": {
+          "primary": 0.01,
+          "secondary": 0.45,
+          "tertiary": 0.54
+        },
+        "sectors": {
+          "semiconductor": 0.07,
+          "electronics": 0.12,
+          "petrochemical": 0.025,
+          "steel": 0.045,
+          "machinery": 0.18,
+          "food": 0.055,
+          "textile": 0.045,
+          "finance": 0.055,
+          "retail": 0.11,
+          "tourism": 0.045,
+          "logistics": 0.05,
+          "agriculture": 0.01,
+          "fishery": 0.003,
+          "publicSector": 0.085,
+          "other": 0.102
+        },
+        "giniIndex": 0.334,
+        "housingPriceIndex": 112,
+        "rentBurden": 0.29
+      },
+      "infrastructure": {
+        "transport": 4,
+        "energy": 4,
+        "water": 4,
+        "digital": 4,
+        "housing": 3,
+        "medical": 4,
+        "education": 4,
+        "disasterResilience": 3
+      },
+      "culture": {
+        "identityLocal": 3,
+        "identityChinese": 3,
+        "religiosity": 3,
+        "civicEngagement": 3,
+        "mediaSaturation": 4,
+        "youthCulture": 4,
+        "festivals": [
+          "大甲媽祖遶境",
+          "臺中爵士音樂節"
+        ]
+      },
+      "trade": {
+        "exportValue": 46,
+        "importValue": 34,
+        "topExportPartners": [
+          "USA",
+          "CHN",
+          "EU"
+        ],
+        "exportGoods": {
+          "electronics": 0.38,
+          "machinery": 0.4,
+          "chemicals": 0.11,
+          "services": 0.11
+        },
+        "portCapacity": 4
+      },
+      "finance": {
+        "ownRevenue": 780,
+        "allocationFund": 420,
+        "subsidy": 240,
+        "personnelCost": 560,
+        "debt": 1180,
+        "debtCeiling": 1750
+      },
+      "politics": {
+        "mayorParty": "CRP",
+        "mayorApproval": 66,
+        "councilComposition": {
+          "PDA": 22,
+          "CRP": 27,
+          "TPL": 6,
+          "NGF": 2,
+          "IND": 8
+        }
+      }
+    },
+    {
+      "_source": "人口/席次：2025年內政部戶政統計與2022年地方公職人員選舉；經濟：2023年縣市生產毛額與工商普查推估；抽象量（建設/文化）為遊戲平衡設定",
+      "id": "TNN",
+      "name": "臺南市",
+      "type": "直轄市",
+      "councilSeats": 57,
+      "legislatorSeats": 6,
+      "population": {
+        "total": 1845000,
+        "ageStructure": {
+          "young": 0.135,
+          "working": 0.655,
+          "elder": 0.21
+        },
+        "education": {
+          "basic": 0.3,
+          "senior": 0.36,
+          "tertiary": 0.34
+        },
+        "ethnicity": {
+          "hoklo": 0.86,
+          "hakka": 0.045,
+          "mainlander": 0.055,
+          "indigenous": 0.008,
+          "newImmigrant": 0.032
+        },
+        "netMigration": -1800,
+        "birthRate": 0.0048,
+        "deathRate": 0.009
+      },
+      "economy": {
+        "gdp": 2350,
+        "gdpGrowth": 0.045,
+        "perCapitaIncome": 580000,
+        "unemployment": 0.036,
+        "industryMix": {
+          "primary": 0.025,
+          "secondary": 0.52,
+          "tertiary": 0.455
+        },
+        "sectors": {
+          "semiconductor": 0.15,
+          "electronics": 0.11,
+          "petrochemical": 0.03,
+          "steel": 0.055,
+          "machinery": 0.09,
+          "food": 0.07,
+          "textile": 0.04,
+          "finance": 0.03,
+          "retail": 0.085,
+          "tourism": 0.05,
+          "logistics": 0.045,
+          "agriculture": 0.025,
+          "fishery": 0.012,
+          "publicSector": 0.08,
+          "other": 0.128
+        },
+        "giniIndex": 0.336,
+        "housingPriceIndex": 92,
+        "rentBurden": 0.25
+      },
+      "infrastructure": {
+        "transport": 3,
+        "energy": 5,
+        "water": 3,
+        "digital": 4,
+        "housing": 4,
+        "medical": 4,
+        "education": 4,
+        "disasterResilience": 3
+      },
+      "culture": {
+        "identityLocal": 5,
+        "identityChinese": 1,
+        "religiosity": 4,
+        "civicEngagement": 4,
+        "mediaSaturation": 3,
+        "youthCulture": 3,
+        "festivals": [
+          "鹽水蜂炮",
+          "東山迎佛祖"
+        ]
+      },
+      "trade": {
+        "exportValue": 52,
+        "importValue": 30,
+        "topExportPartners": [
+          "CHN",
+          "USA",
+          "KOR"
+        ],
+        "exportGoods": {
+          "electronics": 0.62,
+          "machinery": 0.18,
+          "chemicals": 0.13,
+          "services": 0.07
+        },
+        "portCapacity": 2
+      },
+      "finance": {
+        "ownRevenue": 400,
+        "allocationFund": 320,
+        "subsidy": 230,
+        "personnelCost": 430,
+        "debt": 1050,
+        "debtCeiling": 1300
+      },
+      "politics": {
+        "mayorParty": "PDA",
+        "mayorApproval": 52,
+        "councilComposition": {
+          "PDA": 28,
+          "CRP": 14,
+          "TPL": 3,
+          "TWR": 2,
+          "NGF": 1,
+          "IND": 9
+        }
+      }
+    },
+    {
+      "_source": "人口/席次：2025年內政部戶政統計與2022年地方公職人員選舉；經濟：2023年縣市生產毛額與工商普查推估；抽象量（建設/文化）為遊戲平衡設定",
+      "id": "KHH",
+      "name": "高雄市",
+      "type": "直轄市",
+      "councilSeats": 65,
+      "legislatorSeats": 8,
+      "population": {
+        "total": 2720000,
+        "ageStructure": {
+          "young": 0.135,
+          "working": 0.665,
+          "elder": 0.2
+        },
+        "education": {
+          "basic": 0.28,
+          "senior": 0.36,
+          "tertiary": 0.36
+        },
+        "ethnicity": {
+          "hoklo": 0.81,
+          "hakka": 0.09,
+          "mainlander": 0.065,
+          "indigenous": 0.012,
+          "newImmigrant": 0.023
+        },
+        "netMigration": -2400,
+        "birthRate": 0.0049,
+        "deathRate": 0.0088
+      },
+      "economy": {
+        "gdp": 2700,
+        "gdpGrowth": 0.028,
+        "perCapitaIncome": 610000,
+        "unemployment": 0.039,
+        "industryMix": {
+          "primary": 0.012,
+          "secondary": 0.45,
+          "tertiary": 0.538
+        },
+        "sectors": {
+          "semiconductor": 0.055,
+          "electronics": 0.065,
+          "petrochemical": 0.12,
+          "steel": 0.13,
+          "machinery": 0.085,
+          "food": 0.045,
+          "textile": 0.02,
+          "finance": 0.045,
+          "retail": 0.095,
+          "tourism": 0.05,
+          "logistics": 0.115,
+          "agriculture": 0.012,
+          "fishery": 0.015,
+          "publicSector": 0.085,
+          "other": 0.063
+        },
+        "giniIndex": 0.338,
+        "housingPriceIndex": 98,
+        "rentBurden": 0.26
+      },
+      "infrastructure": {
+        "transport": 4,
+        "energy": 5,
+        "water": 4,
+        "digital": 4,
+        "housing": 4,
+        "medical": 4,
+        "education": 4,
+        "disasterResilience": 3
+      },
+      "culture": {
+        "identityLocal": 5,
+        "identityChinese": 1,
+        "religiosity": 4,
+        "civicEngagement": 4,
+        "mediaSaturation": 4,
+        "youthCulture": 4,
+        "festivals": [
+          "內門宋江陣",
+          "高雄燈會藝術節"
+        ]
+      },
+      "trade": {
+        "exportValue": 60,
+        "importValue": 55,
+        "topExportPartners": [
+          "CHN",
+          "USA",
+          "ASEAN"
+        ],
+        "exportGoods": {
+          "electronics": 0.3,
+          "machinery": 0.24,
+          "chemicals": 0.38,
+          "services": 0.08
+        },
+        "portCapacity": 5
+      },
+      "finance": {
+        "ownRevenue": 560,
+        "allocationFund": 450,
+        "subsidy": 300,
+        "personnelCost": 610,
+        "debt": 2400,
+        "debtCeiling": 2600
+      },
+      "politics": {
+        "mayorParty": "PDA",
+        "mayorApproval": 64,
+        "councilComposition": {
+          "PDA": 32,
+          "CRP": 17,
+          "TPL": 4,
+          "TWR": 2,
+          "NGF": 2,
+          "IND": 8
+        }
+      }
+    },
+    {
+      "_source": "人口/席次：2025年內政部戶政統計與2022年地方公職人員選舉；經濟：2023年縣市生產毛額與工商普查推估；抽象量（建設/文化）為遊戲平衡設定",
+      "id": "KEE",
+      "name": "基隆市",
+      "type": "市",
+      "councilSeats": 32,
+      "legislatorSeats": 1,
+      "population": {
+        "total": 358000,
+        "ageStructure": {
+          "young": 0.13,
+          "working": 0.655,
+          "elder": 0.215
+        },
+        "education": {
+          "basic": 0.29,
+          "senior": 0.375,
+          "tertiary": 0.335
+        },
+        "ethnicity": {
+          "hoklo": 0.68,
+          "hakka": 0.07,
+          "mainlander": 0.2,
+          "indigenous": 0.008,
+          "newImmigrant": 0.042
+        },
+        "netMigration": -1200,
+        "birthRate": 0.0045,
+        "deathRate": 0.0095
+      },
+      "economy": {
+        "gdp": 235,
+        "gdpGrowth": 0.014,
+        "perCapitaIncome": 570000,
+        "unemployment": 0.04,
+        "industryMix": {
+          "primary": 0.005,
+          "secondary": 0.23,
+          "tertiary": 0.765
+        },
+        "sectors": {
+          "semiconductor": 0.005,
+          "electronics": 0.025,
+          "petrochemical": 0.02,
+          "steel": 0.015,
+          "machinery": 0.03,
+          "food": 0.045,
+          "textile": 0.01,
+          "finance": 0.04,
+          "retail": 0.13,
+          "tourism": 0.09,
+          "logistics": 0.24,
+          "agriculture": 0.003,
+          "fishery": 0.035,
+          "publicSector": 0.19,
+          "other": 0.122
+        },
+        "giniIndex": 0.33,
+        "housingPriceIndex": 72,
+        "rentBurden": 0.24
+      },
+      "infrastructure": {
+        "transport": 3,
+        "energy": 3,
+        "water": 3,
+        "digital": 3,
+        "housing": 3,
+        "medical": 3,
+        "education": 3,
+        "disasterResilience": 2
+      },
+      "culture": {
+        "identityLocal": 3,
+        "identityChinese": 3,
+        "religiosity": 3,
+        "civicEngagement": 3,
+        "mediaSaturation": 3,
+        "youthCulture": 2,
+        "festivals": [
+          "雞籠中元祭",
+          "基隆鎖管季"
+        ]
+      },
+      "trade": {
+        "exportValue": 6,
+        "importValue": 9,
+        "topExportPartners": [
+          "JPN",
+          "CHN",
+          "USA"
+        ],
+        "exportGoods": {
+          "electronics": 0.25,
+          "machinery": 0.15,
+          "chemicals": 0.1,
+          "services": 0.5
+        },
+        "portCapacity": 4
+      },
+      "finance": {
+        "ownRevenue": 75,
+        "allocationFund": 60,
+        "subsidy": 45,
+        "personnelCost": 90,
+        "debt": 130,
+        "debtCeiling": 200
+      },
+      "politics": {
+        "mayorParty": "CRP",
+        "mayorApproval": 45,
+        "councilComposition": {
+          "PDA": 9,
+          "CRP": 14,
+          "TPL": 3,
+          "NGF": 1,
+          "IND": 5
+        }
+      }
+    },
+    {
+      "_source": "人口/席次：2025年內政部戶政統計與2022年地方公職人員選舉；經濟：2023年縣市生產毛額與工商普查推估；抽象量（建設/文化）為遊戲平衡設定",
+      "id": "HSC",
+      "name": "新竹市",
+      "type": "市",
+      "councilSeats": 33,
+      "legislatorSeats": 1,
+      "population": {
+        "total": 456000,
+        "ageStructure": {
+          "young": 0.175,
+          "working": 0.69,
+          "elder": 0.135
+        },
+        "education": {
+          "basic": 0.195,
+          "senior": 0.305,
+          "tertiary": 0.5
+        },
+        "ethnicity": {
+          "hoklo": 0.6,
+          "hakka": 0.26,
+          "mainlander": 0.11,
+          "indigenous": 0.008,
+          "newImmigrant": 0.022
+        },
+        "netMigration": 3900,
+        "birthRate": 0.008,
+        "deathRate": 0.0055
+      },
+      "economy": {
+        "gdp": 1750,
+        "gdpGrowth": 0.055,
+        "perCapitaIncome": 880000,
+        "unemployment": 0.031,
+        "industryMix": {
+          "primary": 0.002,
+          "secondary": 0.64,
+          "tertiary": 0.358
+        },
+        "sectors": {
+          "semiconductor": 0.52,
+          "electronics": 0.13,
+          "petrochemical": 0.005,
+          "steel": 0.005,
+          "machinery": 0.04,
+          "food": 0.02,
+          "textile": 0.005,
+          "finance": 0.035,
+          "retail": 0.07,
+          "tourism": 0.02,
+          "logistics": 0.025,
+          "agriculture": 0.002,
+          "fishery": 0.002,
+          "publicSector": 0.065,
+          "other": 0.056
+        },
+        "giniIndex": 0.348,
+        "housingPriceIndex": 128,
+        "rentBurden": 0.31
+      },
+      "infrastructure": {
+        "transport": 3,
+        "energy": 4,
+        "water": 2,
+        "digital": 5,
+        "housing": 2,
+        "medical": 4,
+        "education": 5,
+        "disasterResilience": 3
+      },
+      "culture": {
+        "identityLocal": 3,
+        "identityChinese": 2,
+        "religiosity": 2,
+        "civicEngagement": 3,
+        "mediaSaturation": 3,
+        "youthCulture": 4,
+        "festivals": [
+          "新竹城隍夜巡",
+          "新竹米粉摃丸節"
+        ]
+      },
+      "trade": {
+        "exportValue": 65,
+        "importValue": 30,
+        "topExportPartners": [
+          "USA",
+          "CHN",
+          "KOR"
+        ],
+        "exportGoods": {
+          "electronics": 0.85,
+          "machinery": 0.09,
+          "chemicals": 0.03,
+          "services": 0.03
+        },
+        "portCapacity": 1
+      },
+      "finance": {
+        "ownRevenue": 190,
+        "allocationFund": 65,
+        "subsidy": 40,
+        "personnelCost": 95,
+        "debt": 60,
+        "debtCeiling": 260
+      },
+      "politics": {
+        "mayorParty": "TPL",
+        "mayorApproval": 41,
+        "councilComposition": {
+          "PDA": 9,
+          "CRP": 11,
+          "TPL": 6,
+          "NGF": 2,
+          "IND": 5
+        }
+      }
+    },
+    {
+      "_source": "人口/席次：2025年內政部戶政統計與2022年地方公職人員選舉；經濟：2023年縣市生產毛額與工商普查推估；抽象量（建設/文化）為遊戲平衡設定",
+      "id": "CYI",
+      "name": "嘉義市",
+      "type": "市",
+      "councilSeats": 24,
+      "legislatorSeats": 1,
+      "population": {
+        "total": 260000,
+        "ageStructure": {
+          "young": 0.145,
+          "working": 0.66,
+          "elder": 0.195
+        },
+        "education": {
+          "basic": 0.265,
+          "senior": 0.35,
+          "tertiary": 0.385
+        },
+        "ethnicity": {
+          "hoklo": 0.88,
+          "hakka": 0.04,
+          "mainlander": 0.055,
+          "indigenous": 0.005,
+          "newImmigrant": 0.02
+        },
+        "netMigration": -600,
+        "birthRate": 0.0052,
+        "deathRate": 0.0085
+      },
+      "economy": {
+        "gdp": 190,
+        "gdpGrowth": 0.016,
+        "perCapitaIncome": 570000,
+        "unemployment": 0.038,
+        "industryMix": {
+          "primary": 0.005,
+          "secondary": 0.3,
+          "tertiary": 0.695
+        },
+        "sectors": {
+          "semiconductor": 0.01,
+          "electronics": 0.035,
+          "petrochemical": 0.005,
+          "steel": 0.01,
+          "machinery": 0.055,
+          "food": 0.09,
+          "textile": 0.015,
+          "finance": 0.045,
+          "retail": 0.2,
+          "tourism": 0.065,
+          "logistics": 0.04,
+          "agriculture": 0.008,
+          "fishery": 0.002,
+          "publicSector": 0.25,
+          "other": 0.17
+        },
+        "giniIndex": 0.332,
+        "housingPriceIndex": 74,
+        "rentBurden": 0.23
+      },
+      "infrastructure": {
+        "transport": 3,
+        "energy": 3,
+        "water": 3,
+        "digital": 3,
+        "housing": 4,
+        "medical": 4,
+        "education": 4,
+        "disasterResilience": 3
+      },
+      "culture": {
+        "identityLocal": 4,
+        "identityChinese": 1,
+        "religiosity": 4,
+        "civicEngagement": 4,
+        "mediaSaturation": 3,
+        "youthCulture": 3,
+        "festivals": [
+          "嘉義管樂節",
+          "諸羅城慶典"
+        ]
+      },
+      "trade": {
+        "exportValue": 2,
+        "importValue": 2.5,
+        "topExportPartners": [
+          "CHN",
+          "JPN",
+          "ASEAN"
+        ],
+        "exportGoods": {
+          "electronics": 0.3,
+          "machinery": 0.25,
+          "chemicals": 0.12,
+          "services": 0.33
+        },
+        "portCapacity": 0
+      },
+      "finance": {
+        "ownRevenue": 55,
+        "allocationFund": 45,
+        "subsidy": 35,
+        "personnelCost": 70,
+        "debt": 85,
+        "debtCeiling": 140
+      },
+      "politics": {
+        "mayorParty": "CRP",
+        "mayorApproval": 57,
+        "councilComposition": {
+          "PDA": 9,
+          "CRP": 9,
+          "TPL": 2,
+          "IND": 4
+        }
+      }
+    },
+    {
+      "_source": "人口/席次：2025年內政部戶政統計與2022年地方公職人員選舉；經濟：2023年縣市生產毛額與工商普查推估；抽象量（建設/文化）為遊戲平衡設定",
+      "id": "HSQ",
+      "name": "新竹縣",
+      "type": "縣",
+      "councilSeats": 37,
+      "legislatorSeats": 2,
+      "population": {
+        "total": 592000,
+        "ageStructure": {
+          "young": 0.175,
+          "working": 0.685,
+          "elder": 0.14
+        },
+        "education": {
+          "basic": 0.225,
+          "senior": 0.335,
+          "tertiary": 0.44
+        },
+        "ethnicity": {
+          "hoklo": 0.34,
+          "hakka": 0.57,
+          "mainlander": 0.06,
+          "indigenous": 0.02,
+          "newImmigrant": 0.01
+        },
+        "netMigration": 8600,
+        "birthRate": 0.0075,
+        "deathRate": 0.006
+      },
+      "economy": {
+        "gdp": 1300,
+        "gdpGrowth": 0.048,
+        "perCapitaIncome": 780000,
+        "unemployment": 0.03,
+        "industryMix": {
+          "primary": 0.008,
+          "secondary": 0.7,
+          "tertiary": 0.292
+        },
+        "sectors": {
+          "semiconductor": 0.42,
+          "electronics": 0.16,
+          "petrochemical": 0.005,
+          "steel": 0.01,
+          "machinery": 0.06,
+          "food": 0.03,
+          "textile": 0.015,
+          "finance": 0.025,
+          "retail": 0.06,
+          "tourism": 0.025,
+          "logistics": 0.03,
+          "agriculture": 0.008,
+          "fishery": 0.001,
+          "publicSector": 0.06,
+          "other": 0.091
+        },
+        "giniIndex": 0.356,
+        "housingPriceIndex": 118,
+        "rentBurden": 0.29
+      },
+      "infrastructure": {
+        "transport": 3,
+        "energy": 4,
+        "water": 2,
+        "digital": 4,
+        "housing": 3,
+        "medical": 3,
+        "education": 3,
+        "disasterResilience": 3
+      },
+      "culture": {
+        "identityLocal": 3,
+        "identityChinese": 3,
+        "religiosity": 3,
+        "civicEngagement": 2,
+        "mediaSaturation": 3,
+        "youthCulture": 3,
+        "festivals": [
+          "新埔義民祭",
+          "北埔膨風茶節"
+        ]
+      },
+      "trade": {
+        "exportValue": 38,
+        "importValue": 16,
+        "topExportPartners": [
+          "USA",
+          "CHN",
+          "JPN"
+        ],
+        "exportGoods": {
+          "electronics": 0.82,
+          "machinery": 0.11,
+          "chemicals": 0.04,
+          "services": 0.03
+        },
+        "portCapacity": 0
+      },
+      "finance": {
+        "ownRevenue": 175,
+        "allocationFund": 100,
+        "subsidy": 70,
+        "personnelCost": 130,
+        "debt": 130,
+        "debtCeiling": 300
+      },
+      "politics": {
+        "mayorParty": "CRP",
+        "mayorApproval": 53,
+        "councilComposition": {
+          "PDA": 7,
+          "CRP": 18,
+          "TPL": 3,
+          "NGF": 1,
+          "IND": 8
+        }
+      }
+    },
+    {
+      "_source": "人口/席次：2025年內政部戶政統計與2022年地方公職人員選舉；經濟：2023年縣市生產毛額與工商普查推估；抽象量（建設/文化）為遊戲平衡設定",
+      "id": "MIA",
+      "name": "苗栗縣",
+      "type": "縣",
+      "councilSeats": 38,
+      "legislatorSeats": 2,
+      "population": {
+        "total": 531000,
+        "ageStructure": {
+          "young": 0.13,
+          "working": 0.64,
+          "elder": 0.23
+        },
+        "education": {
+          "basic": 0.33,
+          "senior": 0.37,
+          "tertiary": 0.3
+        },
+        "ethnicity": {
+          "hoklo": 0.34,
+          "hakka": 0.59,
+          "mainlander": 0.04,
+          "indigenous": 0.015,
+          "newImmigrant": 0.015
+        },
+        "netMigration": -1500,
+        "birthRate": 0.0044,
+        "deathRate": 0.0098
+      },
+      "economy": {
+        "gdp": 580,
+        "gdpGrowth": 0.022,
+        "perCapitaIncome": 560000,
+        "unemployment": 0.037,
+        "industryMix": {
+          "primary": 0.03,
+          "secondary": 0.57,
+          "tertiary": 0.4
+        },
+        "sectors": {
+          "semiconductor": 0.18,
+          "electronics": 0.13,
+          "petrochemical": 0.03,
+          "steel": 0.035,
+          "machinery": 0.11,
+          "food": 0.055,
+          "textile": 0.03,
+          "finance": 0.02,
+          "retail": 0.075,
+          "tourism": 0.045,
+          "logistics": 0.03,
+          "agriculture": 0.03,
+          "fishery": 0.005,
+          "publicSector": 0.09,
+          "other": 0.135
+        },
+        "giniIndex": 0.34,
+        "housingPriceIndex": 62,
+        "rentBurden": 0.21
+      },
+      "infrastructure": {
+        "transport": 2,
+        "energy": 3,
+        "water": 3,
+        "digital": 3,
+        "housing": 4,
+        "medical": 2,
+        "education": 3,
+        "disasterResilience": 2
+      },
+      "culture": {
+        "identityLocal": 3,
+        "identityChinese": 3,
+        "religiosity": 4,
+        "civicEngagement": 2,
+        "mediaSaturation": 2,
+        "youthCulture": 2,
+        "festivals": [
+          "苗栗火旁龍",
+          "三義木雕藝術節"
+        ]
+      },
+      "trade": {
+        "exportValue": 12,
+        "importValue": 9,
+        "topExportPartners": [
+          "CHN",
+          "USA",
+          "JPN"
+        ],
+        "exportGoods": {
+          "electronics": 0.6,
+          "machinery": 0.2,
+          "chemicals": 0.14,
+          "services": 0.06
+        },
+        "portCapacity": 1
+      },
+      "finance": {
+        "ownRevenue": 95,
+        "allocationFund": 95,
+        "subsidy": 75,
+        "personnelCost": 130,
+        "debt": 400,
+        "debtCeiling": 320
+      },
+      "politics": {
+        "mayorParty": "IND",
+        "mayorApproval": 49,
+        "councilComposition": {
+          "PDA": 6,
+          "CRP": 19,
+          "TPL": 2,
+          "IND": 11
+        }
+      }
+    },
+    {
+      "_source": "人口/席次：2025年內政部戶政統計與2022年地方公職人員選舉；經濟：2023年縣市生產毛額與工商普查推估；抽象量（建設/文化）為遊戲平衡設定",
+      "id": "CHA",
+      "name": "彰化縣",
+      "type": "縣",
+      "councilSeats": 54,
+      "legislatorSeats": 4,
+      "population": {
+        "total": 1235000,
+        "ageStructure": {
+          "young": 0.14,
+          "working": 0.655,
+          "elder": 0.205
+        },
+        "education": {
+          "basic": 0.34,
+          "senior": 0.365,
+          "tertiary": 0.295
+        },
+        "ethnicity": {
+          "hoklo": 0.88,
+          "hakka": 0.06,
+          "mainlander": 0.03,
+          "indigenous": 0.005,
+          "newImmigrant": 0.025
+        },
+        "netMigration": -3800,
+        "birthRate": 0.005,
+        "deathRate": 0.0088
+      },
+      "economy": {
+        "gdp": 900,
+        "gdpGrowth": 0.02,
+        "perCapitaIncome": 550000,
+        "unemployment": 0.036,
+        "industryMix": {
+          "primary": 0.055,
+          "secondary": 0.5,
+          "tertiary": 0.445
+        },
+        "sectors": {
+          "semiconductor": 0.02,
+          "electronics": 0.09,
+          "petrochemical": 0.025,
+          "steel": 0.07,
+          "machinery": 0.19,
+          "food": 0.105,
+          "textile": 0.09,
+          "finance": 0.025,
+          "retail": 0.085,
+          "tourism": 0.035,
+          "logistics": 0.035,
+          "agriculture": 0.055,
+          "fishery": 0.012,
+          "publicSector": 0.085,
+          "other": 0.078
+        },
+        "giniIndex": 0.328,
+        "housingPriceIndex": 70,
+        "rentBurden": 0.22
+      },
+      "infrastructure": {
+        "transport": 3,
+        "energy": 3,
+        "water": 3,
+        "digital": 3,
+        "housing": 4,
+        "medical": 3,
+        "education": 3,
+        "disasterResilience": 2
+      },
+      "culture": {
+        "identityLocal": 4,
+        "identityChinese": 2,
+        "religiosity": 5,
+        "civicEngagement": 3,
+        "mediaSaturation": 2,
+        "youthCulture": 2,
+        "festivals": [
+          "鹿港慶端陽",
+          "田尾公路花園花卉節"
+        ]
+      },
+      "trade": {
+        "exportValue": 14,
+        "importValue": 11,
+        "topExportPartners": [
+          "USA",
+          "CHN",
+          "EU"
+        ],
+        "exportGoods": {
+          "electronics": 0.26,
+          "machinery": 0.48,
+          "chemicals": 0.14,
+          "services": 0.12
+        },
+        "portCapacity": 1
+      },
+      "finance": {
+        "ownRevenue": 190,
+        "allocationFund": 210,
+        "subsidy": 160,
+        "personnelCost": 290,
+        "debt": 320,
+        "debtCeiling": 600
+      },
+      "politics": {
+        "mayorParty": "CRP",
+        "mayorApproval": 60,
+        "councilComposition": {
+          "PDA": 17,
+          "CRP": 22,
+          "TPL": 3,
+          "IND": 12
+        }
+      }
+    },
+    {
+      "_source": "人口/席次：2025年內政部戶政統計與2022年地方公職人員選舉；經濟：2023年縣市生產毛額與工商普查推估；抽象量（建設/文化）為遊戲平衡設定",
+      "id": "NAN",
+      "name": "南投縣",
+      "type": "縣",
+      "councilSeats": 37,
+      "legislatorSeats": 2,
+      "population": {
+        "total": 469000,
+        "ageStructure": {
+          "young": 0.125,
+          "working": 0.62,
+          "elder": 0.255
+        },
+        "education": {
+          "basic": 0.375,
+          "senior": 0.35,
+          "tertiary": 0.275
+        },
+        "ethnicity": {
+          "hoklo": 0.76,
+          "hakka": 0.13,
+          "mainlander": 0.05,
+          "indigenous": 0.045,
+          "newImmigrant": 0.015
+        },
+        "netMigration": -2200,
+        "birthRate": 0.0041,
+        "deathRate": 0.0108
+      },
+      "economy": {
+        "gdp": 265,
+        "gdpGrowth": 0.012,
+        "perCapitaIncome": 500000,
+        "unemployment": 0.038,
+        "industryMix": {
+          "primary": 0.07,
+          "secondary": 0.38,
+          "tertiary": 0.55
+        },
+        "sectors": {
+          "semiconductor": 0.01,
+          "electronics": 0.045,
+          "petrochemical": 0.005,
+          "steel": 0.015,
+          "machinery": 0.06,
+          "food": 0.11,
+          "textile": 0.02,
+          "finance": 0.02,
+          "retail": 0.095,
+          "tourism": 0.165,
+          "logistics": 0.025,
+          "agriculture": 0.07,
+          "fishery": 0.003,
+          "publicSector": 0.2,
+          "other": 0.157
+        },
+        "giniIndex": 0.345,
+        "housingPriceIndex": 58,
+        "rentBurden": 0.21
+      },
+      "infrastructure": {
+        "transport": 2,
+        "energy": 3,
+        "water": 3,
+        "digital": 2,
+        "housing": 4,
+        "medical": 2,
+        "education": 3,
+        "disasterResilience": 2
+      },
+      "culture": {
+        "identityLocal": 4,
+        "identityChinese": 2,
+        "religiosity": 4,
+        "civicEngagement": 2,
+        "mediaSaturation": 2,
+        "youthCulture": 2,
+        "festivals": [
+          "日月潭萬人泳渡",
+          "南投世界茶葉博覽會"
+        ]
+      },
+      "trade": {
+        "exportValue": 3,
+        "importValue": 3,
+        "topExportPartners": [
+          "CHN",
+          "JPN",
+          "USA"
+        ],
+        "exportGoods": {
+          "electronics": 0.22,
+          "machinery": 0.3,
+          "chemicals": 0.15,
+          "services": 0.33
+        },
+        "portCapacity": 0
+      },
+      "finance": {
+        "ownRevenue": 80,
+        "allocationFund": 105,
+        "subsidy": 90,
+        "personnelCost": 145,
+        "debt": 180,
+        "debtCeiling": 300
+      },
+      "politics": {
+        "mayorParty": "CRP",
+        "mayorApproval": 55,
+        "councilComposition": {
+          "PDA": 11,
+          "CRP": 16,
+          "TPL": 2,
+          "IND": 8
+        }
+      }
+    },
+    {
+      "_source": "人口/席次：2025年內政部戶政統計與2022年地方公職人員選舉；經濟：2023年縣市生產毛額與工商普查推估；抽象量（建設/文化）為遊戲平衡設定",
+      "id": "YUN",
+      "name": "雲林縣",
+      "type": "縣",
+      "councilSeats": 43,
+      "legislatorSeats": 2,
+      "population": {
+        "total": 655000,
+        "ageStructure": {
+          "young": 0.12,
+          "working": 0.61,
+          "elder": 0.27
+        },
+        "education": {
+          "basic": 0.4,
+          "senior": 0.35,
+          "tertiary": 0.25
+        },
+        "ethnicity": {
+          "hoklo": 0.9,
+          "hakka": 0.04,
+          "mainlander": 0.025,
+          "indigenous": 0.005,
+          "newImmigrant": 0.03
+        },
+        "netMigration": -3600,
+        "birthRate": 0.0038,
+        "deathRate": 0.0118
+      },
+      "economy": {
+        "gdp": 690,
+        "gdpGrowth": 0.018,
+        "perCapitaIncome": 500000,
+        "unemployment": 0.037,
+        "industryMix": {
+          "primary": 0.09,
+          "secondary": 0.55,
+          "tertiary": 0.36
+        },
+        "sectors": {
+          "semiconductor": 0.005,
+          "electronics": 0.03,
+          "petrochemical": 0.3,
+          "steel": 0.03,
+          "machinery": 0.07,
+          "food": 0.13,
+          "textile": 0.025,
+          "finance": 0.015,
+          "retail": 0.055,
+          "tourism": 0.02,
+          "logistics": 0.03,
+          "agriculture": 0.09,
+          "fishery": 0.025,
+          "publicSector": 0.09,
+          "other": 0.085
+        },
+        "giniIndex": 0.342,
+        "housingPriceIndex": 55,
+        "rentBurden": 0.2
+      },
+      "infrastructure": {
+        "transport": 2,
+        "energy": 5,
+        "water": 3,
+        "digital": 2,
+        "housing": 4,
+        "medical": 2,
+        "education": 3,
+        "disasterResilience": 2
+      },
+      "culture": {
+        "identityLocal": 4,
+        "identityChinese": 2,
+        "religiosity": 5,
+        "civicEngagement": 3,
+        "mediaSaturation": 2,
+        "youthCulture": 1,
+        "festivals": [
+          "北港朝天宮媽祖遶境",
+          "雲林國際偶戲節"
+        ]
+      },
+      "trade": {
+        "exportValue": 12,
+        "importValue": 14,
+        "topExportPartners": [
+          "CHN",
+          "ASEAN",
+          "USA"
+        ],
+        "exportGoods": {
+          "electronics": 0.15,
+          "machinery": 0.15,
+          "chemicals": 0.62,
+          "services": 0.08
+        },
+        "portCapacity": 3
+      },
+      "finance": {
+        "ownRevenue": 105,
+        "allocationFund": 145,
+        "subsidy": 120,
+        "personnelCost": 180,
+        "debt": 250,
+        "debtCeiling": 380
+      },
+      "politics": {
+        "mayorParty": "CRP",
+        "mayorApproval": 58,
+        "councilComposition": {
+          "PDA": 14,
+          "CRP": 17,
+          "TPL": 2,
+          "IND": 10
+        }
+      }
+    },
+    {
+      "_source": "人口/席次：2025年內政部戶政統計與2022年地方公職人員選舉；經濟：2023年縣市生產毛額與工商普查推估；抽象量（建設/文化）為遊戲平衡設定",
+      "id": "CYQ",
+      "name": "嘉義縣",
+      "type": "縣",
+      "councilSeats": 37,
+      "legislatorSeats": 2,
+      "population": {
+        "total": 483000,
+        "ageStructure": {
+          "young": 0.115,
+          "working": 0.605,
+          "elder": 0.28
+        },
+        "education": {
+          "basic": 0.395,
+          "senior": 0.35,
+          "tertiary": 0.255
+        },
+        "ethnicity": {
+          "hoklo": 0.89,
+          "hakka": 0.045,
+          "mainlander": 0.03,
+          "indigenous": 0.008,
+          "newImmigrant": 0.027
+        },
+        "netMigration": -2600,
+        "birthRate": 0.0036,
+        "deathRate": 0.0122
+      },
+      "economy": {
+        "gdp": 300,
+        "gdpGrowth": 0.013,
+        "perCapitaIncome": 470000,
+        "unemployment": 0.039,
+        "industryMix": {
+          "primary": 0.13,
+          "secondary": 0.33,
+          "tertiary": 0.54
+        },
+        "sectors": {
+          "semiconductor": 0.015,
+          "electronics": 0.045,
+          "petrochemical": 0.01,
+          "steel": 0.02,
+          "machinery": 0.055,
+          "food": 0.13,
+          "textile": 0.02,
+          "finance": 0.015,
+          "retail": 0.07,
+          "tourism": 0.11,
+          "logistics": 0.03,
+          "agriculture": 0.13,
+          "fishery": 0.055,
+          "publicSector": 0.145,
+          "other": 0.15
+        },
+        "giniIndex": 0.35,
+        "housingPriceIndex": 52,
+        "rentBurden": 0.2
+      },
+      "infrastructure": {
+        "transport": 2,
+        "energy": 3,
+        "water": 3,
+        "digital": 2,
+        "housing": 4,
+        "medical": 2,
+        "education": 2,
+        "disasterResilience": 2
+      },
+      "culture": {
+        "identityLocal": 5,
+        "identityChinese": 1,
+        "religiosity": 5,
+        "civicEngagement": 3,
+        "mediaSaturation": 2,
+        "youthCulture": 1,
+        "festivals": [
+          "阿里山櫻花季",
+          "東石海之夏"
+        ]
+      },
+      "trade": {
+        "exportValue": 3,
+        "importValue": 3,
+        "topExportPartners": [
+          "JPN",
+          "CHN",
+          "ASEAN"
+        ],
+        "exportGoods": {
+          "electronics": 0.2,
+          "machinery": 0.22,
+          "chemicals": 0.18,
+          "services": 0.4
+        },
+        "portCapacity": 1
+      },
+      "finance": {
+        "ownRevenue": 75,
+        "allocationFund": 115,
+        "subsidy": 100,
+        "personnelCost": 150,
+        "debt": 190,
+        "debtCeiling": 320
+      },
+      "politics": {
+        "mayorParty": "PDA",
+        "mayorApproval": 56,
+        "councilComposition": {
+          "PDA": 15,
+          "CRP": 12,
+          "TPL": 2,
+          "IND": 8
+        }
+      }
+    },
+    {
+      "_source": "人口/席次：2025年內政部戶政統計與2022年地方公職人員選舉；經濟：2023年縣市生產毛額與工商普查推估；抽象量（建設/文化）為遊戲平衡設定",
+      "id": "PIF",
+      "name": "屏東縣",
+      "type": "縣",
+      "councilSeats": 55,
+      "legislatorSeats": 2,
+      "population": {
+        "total": 786000,
+        "ageStructure": {
+          "young": 0.13,
+          "working": 0.63,
+          "elder": 0.24
+        },
+        "education": {
+          "basic": 0.37,
+          "senior": 0.355,
+          "tertiary": 0.275
+        },
+        "ethnicity": {
+          "hoklo": 0.74,
+          "hakka": 0.11,
+          "mainlander": 0.045,
+          "indigenous": 0.075,
+          "newImmigrant": 0.03
+        },
+        "netMigration": -3900,
+        "birthRate": 0.0042,
+        "deathRate": 0.0105
+      },
+      "economy": {
+        "gdp": 440,
+        "gdpGrowth": 0.015,
+        "perCapitaIncome": 490000,
+        "unemployment": 0.041,
+        "industryMix": {
+          "primary": 0.11,
+          "secondary": 0.33,
+          "tertiary": 0.56
+        },
+        "sectors": {
+          "semiconductor": 0.01,
+          "electronics": 0.04,
+          "petrochemical": 0.015,
+          "steel": 0.025,
+          "machinery": 0.05,
+          "food": 0.12,
+          "textile": 0.015,
+          "finance": 0.015,
+          "retail": 0.07,
+          "tourism": 0.12,
+          "logistics": 0.03,
+          "agriculture": 0.11,
+          "fishery": 0.075,
+          "publicSector": 0.17,
+          "other": 0.135
+        },
+        "giniIndex": 0.352,
+        "housingPriceIndex": 56,
+        "rentBurden": 0.21
+      },
+      "infrastructure": {
+        "transport": 2,
+        "energy": 4,
+        "water": 3,
+        "digital": 2,
+        "housing": 4,
+        "medical": 3,
+        "education": 3,
+        "disasterResilience": 2
+      },
+      "culture": {
+        "identityLocal": 5,
+        "identityChinese": 1,
+        "religiosity": 4,
+        "civicEngagement": 3,
+        "mediaSaturation": 2,
+        "youthCulture": 2,
+        "festivals": [
+          "東港迎王平安祭典",
+          "黑鮪魚文化觀光季"
+        ]
+      },
+      "trade": {
+        "exportValue": 5,
+        "importValue": 5,
+        "topExportPartners": [
+          "JPN",
+          "CHN",
+          "ASEAN"
+        ],
+        "exportGoods": {
+          "electronics": 0.2,
+          "machinery": 0.22,
+          "chemicals": 0.18,
+          "services": 0.4
+        },
+        "portCapacity": 2
+      },
+      "finance": {
+        "ownRevenue": 115,
+        "allocationFund": 175,
+        "subsidy": 155,
+        "personnelCost": 235,
+        "debt": 210,
+        "debtCeiling": 480
+      },
+      "politics": {
+        "mayorParty": "PDA",
+        "mayorApproval": 59,
+        "councilComposition": {
+          "PDA": 24,
+          "CRP": 16,
+          "TPL": 2,
+          "TWR": 1,
+          "IND": 12
+        }
+      }
+    },
+    {
+      "_source": "人口/席次：2025年內政部戶政統計與2022年地方公職人員選舉；經濟：2023年縣市生產毛額與工商普查推估；抽象量（建設/文化）為遊戲平衡設定",
+      "id": "ILA",
+      "name": "宜蘭縣",
+      "type": "縣",
+      "councilSeats": 34,
+      "legislatorSeats": 1,
+      "population": {
+        "total": 447000,
+        "ageStructure": {
+          "young": 0.135,
+          "working": 0.64,
+          "elder": 0.225
+        },
+        "education": {
+          "basic": 0.335,
+          "senior": 0.36,
+          "tertiary": 0.305
+        },
+        "ethnicity": {
+          "hoklo": 0.85,
+          "hakka": 0.06,
+          "mainlander": 0.055,
+          "indigenous": 0.02,
+          "newImmigrant": 0.015
+        },
+        "netMigration": -700,
+        "birthRate": 0.0046,
+        "deathRate": 0.0098
+      },
+      "economy": {
+        "gdp": 320,
+        "gdpGrowth": 0.014,
+        "perCapitaIncome": 530000,
+        "unemployment": 0.038,
+        "industryMix": {
+          "primary": 0.06,
+          "secondary": 0.34,
+          "tertiary": 0.6
+        },
+        "sectors": {
+          "semiconductor": 0.008,
+          "electronics": 0.045,
+          "petrochemical": 0.01,
+          "steel": 0.03,
+          "machinery": 0.055,
+          "food": 0.095,
+          "textile": 0.015,
+          "finance": 0.02,
+          "retail": 0.08,
+          "tourism": 0.175,
+          "logistics": 0.03,
+          "agriculture": 0.06,
+          "fishery": 0.045,
+          "publicSector": 0.17,
+          "other": 0.162
+        },
+        "giniIndex": 0.336,
+        "housingPriceIndex": 78,
+        "rentBurden": 0.24
+      },
+      "infrastructure": {
+        "transport": 3,
+        "energy": 3,
+        "water": 4,
+        "digital": 3,
+        "housing": 4,
+        "medical": 3,
+        "education": 3,
+        "disasterResilience": 3
+      },
+      "culture": {
+        "identityLocal": 4,
+        "identityChinese": 2,
+        "religiosity": 3,
+        "civicEngagement": 4,
+        "mediaSaturation": 3,
+        "youthCulture": 3,
+        "festivals": [
+          "頭城搶孤",
+          "宜蘭國際童玩節"
+        ]
+      },
+      "trade": {
+        "exportValue": 3,
+        "importValue": 4,
+        "topExportPartners": [
+          "JPN",
+          "CHN",
+          "USA"
+        ],
+        "exportGoods": {
+          "electronics": 0.18,
+          "machinery": 0.26,
+          "chemicals": 0.25,
+          "services": 0.31
+        },
+        "portCapacity": 2
+      },
+      "finance": {
+        "ownRevenue": 90,
+        "allocationFund": 100,
+        "subsidy": 85,
+        "personnelCost": 140,
+        "debt": 400,
+        "debtCeiling": 350
+      },
+      "politics": {
+        "mayorParty": "CRP",
+        "mayorApproval": 44,
+        "councilComposition": {
+          "PDA": 13,
+          "CRP": 13,
+          "TPL": 2,
+          "NGF": 1,
+          "IND": 5
+        }
+      }
+    },
+    {
+      "_source": "人口/席次：2025年內政部戶政統計與2022年地方公職人員選舉；經濟：2023年縣市生產毛額與工商普查推估；抽象量（建設/文化）為遊戲平衡設定",
+      "id": "HUA",
+      "name": "花蓮縣",
+      "type": "縣",
+      "councilSeats": 33,
+      "legislatorSeats": 1,
+      "population": {
+        "total": 315000,
+        "ageStructure": {
+          "young": 0.14,
+          "working": 0.63,
+          "elder": 0.23
+        },
+        "education": {
+          "basic": 0.34,
+          "senior": 0.355,
+          "tertiary": 0.305
+        },
+        "ethnicity": {
+          "hoklo": 0.53,
+          "hakka": 0.12,
+          "mainlander": 0.05,
+          "indigenous": 0.28,
+          "newImmigrant": 0.02
+        },
+        "netMigration": -1100,
+        "birthRate": 0.0048,
+        "deathRate": 0.0105
+      },
+      "economy": {
+        "gdp": 215,
+        "gdpGrowth": 0.011,
+        "perCapitaIncome": 510000,
+        "unemployment": 0.042,
+        "industryMix": {
+          "primary": 0.08,
+          "secondary": 0.33,
+          "tertiary": 0.59
+        },
+        "sectors": {
+          "semiconductor": 0.003,
+          "electronics": 0.02,
+          "petrochemical": 0.008,
+          "steel": 0.03,
+          "machinery": 0.035,
+          "food": 0.075,
+          "textile": 0.008,
+          "finance": 0.015,
+          "retail": 0.07,
+          "tourism": 0.23,
+          "logistics": 0.025,
+          "agriculture": 0.09,
+          "fishery": 0.03,
+          "publicSector": 0.2,
+          "other": 0.161
+        },
+        "giniIndex": 0.362,
+        "housingPriceIndex": 66,
+        "rentBurden": 0.23
+      },
+      "infrastructure": {
+        "transport": 2,
+        "energy": 3,
+        "water": 4,
+        "digital": 2,
+        "housing": 4,
+        "medical": 2,
+        "education": 2,
+        "disasterResilience": 1
+      },
+      "culture": {
+        "identityLocal": 3,
+        "identityChinese": 2,
+        "religiosity": 3,
+        "civicEngagement": 2,
+        "mediaSaturation": 2,
+        "youthCulture": 2,
+        "festivals": [
+          "太魯閣峽谷音樂節",
+          "阿美族豐年祭"
+        ]
+      },
+      "trade": {
+        "exportValue": 2,
+        "importValue": 3,
+        "topExportPartners": [
+          "CHN",
+          "JPN",
+          "ASEAN"
+        ],
+        "exportGoods": {
+          "electronics": 0.15,
+          "machinery": 0.18,
+          "chemicals": 0.27,
+          "services": 0.4
+        },
+        "portCapacity": 2
+      },
+      "finance": {
+        "ownRevenue": 70,
+        "allocationFund": 85,
+        "subsidy": 80,
+        "personnelCost": 125,
+        "debt": 190,
+        "debtCeiling": 280
+      },
+      "politics": {
+        "mayorParty": "CRP",
+        "mayorApproval": 61,
+        "councilComposition": {
+          "PDA": 6,
+          "CRP": 17,
+          "TPL": 2,
+          "IND": 8
+        }
+      }
+    },
+    {
+      "_source": "人口/席次：2025年內政部戶政統計與2022年地方公職人員選舉；經濟：2023年縣市生產毛額與工商普查推估；抽象量（建設/文化）為遊戲平衡設定",
+      "id": "TTT",
+      "name": "臺東縣",
+      "type": "縣",
+      "councilSeats": 30,
+      "legislatorSeats": 1,
+      "population": {
+        "total": 209000,
+        "ageStructure": {
+          "young": 0.135,
+          "working": 0.615,
+          "elder": 0.25
+        },
+        "education": {
+          "basic": 0.375,
+          "senior": 0.35,
+          "tertiary": 0.275
+        },
+        "ethnicity": {
+          "hoklo": 0.48,
+          "hakka": 0.09,
+          "mainlander": 0.05,
+          "indigenous": 0.355,
+          "newImmigrant": 0.025
+        },
+        "netMigration": -1400,
+        "birthRate": 0.0046,
+        "deathRate": 0.0115
+      },
+      "economy": {
+        "gdp": 120,
+        "gdpGrowth": 0.01,
+        "perCapitaIncome": 470000,
+        "unemployment": 0.043,
+        "industryMix": {
+          "primary": 0.13,
+          "secondary": 0.2,
+          "tertiary": 0.67
+        },
+        "sectors": {
+          "semiconductor": 0.002,
+          "electronics": 0.01,
+          "petrochemical": 0.003,
+          "steel": 0.008,
+          "machinery": 0.02,
+          "food": 0.07,
+          "textile": 0.005,
+          "finance": 0.012,
+          "retail": 0.06,
+          "tourism": 0.26,
+          "logistics": 0.02,
+          "agriculture": 0.13,
+          "fishery": 0.045,
+          "publicSector": 0.23,
+          "other": 0.125
+        },
+        "giniIndex": 0.368,
+        "housingPriceIndex": 52,
+        "rentBurden": 0.22
+      },
+      "infrastructure": {
+        "transport": 1,
+        "energy": 2,
+        "water": 4,
+        "digital": 2,
+        "housing": 5,
+        "medical": 1,
+        "education": 2,
+        "disasterResilience": 2
+      },
+      "culture": {
+        "identityLocal": 3,
+        "identityChinese": 2,
+        "religiosity": 3,
+        "civicEngagement": 2,
+        "mediaSaturation": 1,
+        "youthCulture": 2,
+        "festivals": [
+          "臺灣國際熱氣球嘉年華",
+          "卑南族大獵祭"
+        ]
+      },
+      "trade": {
+        "exportValue": 0.5,
+        "importValue": 1,
+        "topExportPartners": [
+          "JPN",
+          "CHN",
+          "ASEAN"
+        ],
+        "exportGoods": {
+          "electronics": 0.12,
+          "machinery": 0.12,
+          "chemicals": 0.08,
+          "services": 0.68
+        },
+        "portCapacity": 1
+      },
+      "finance": {
+        "ownRevenue": 45,
+        "allocationFund": 65,
+        "subsidy": 70,
+        "personnelCost": 95,
+        "debt": 90,
+        "debtCeiling": 200
+      },
+      "politics": {
+        "mayorParty": "CRP",
+        "mayorApproval": 57,
+        "councilComposition": {
+          "PDA": 5,
+          "CRP": 16,
+          "TPL": 1,
+          "IND": 8
+        }
+      }
+    },
+    {
+      "_source": "人口/席次：2025年內政部戶政統計與2022年地方公職人員選舉；經濟：2023年縣市生產毛額與工商普查推估；抽象量（建設/文化）為遊戲平衡設定",
+      "id": "PEN",
+      "name": "澎湖縣",
+      "type": "縣",
+      "councilSeats": 19,
+      "legislatorSeats": 1,
+      "population": {
+        "total": 106000,
+        "ageStructure": {
+          "young": 0.145,
+          "working": 0.645,
+          "elder": 0.21
+        },
+        "education": {
+          "basic": 0.34,
+          "senior": 0.36,
+          "tertiary": 0.3
+        },
+        "ethnicity": {
+          "hoklo": 0.94,
+          "hakka": 0.02,
+          "mainlander": 0.025,
+          "indigenous": 0.003,
+          "newImmigrant": 0.012
+        },
+        "netMigration": 320,
+        "birthRate": 0.0055,
+        "deathRate": 0.0092
+      },
+      "economy": {
+        "gdp": 58,
+        "gdpGrowth": 0.016,
+        "perCapitaIncome": 500000,
+        "unemployment": 0.035,
+        "industryMix": {
+          "primary": 0.09,
+          "secondary": 0.13,
+          "tertiary": 0.78
+        },
+        "sectors": {
+          "semiconductor": 0.001,
+          "electronics": 0.005,
+          "petrochemical": 0.002,
+          "steel": 0.003,
+          "machinery": 0.008,
+          "food": 0.045,
+          "textile": 0.003,
+          "finance": 0.012,
+          "retail": 0.065,
+          "tourism": 0.32,
+          "logistics": 0.03,
+          "agriculture": 0.02,
+          "fishery": 0.11,
+          "publicSector": 0.29,
+          "other": 0.086
+        },
+        "giniIndex": 0.34,
+        "housingPriceIndex": 60,
+        "rentBurden": 0.22
+      },
+      "infrastructure": {
+        "transport": 2,
+        "energy": 2,
+        "water": 2,
+        "digital": 2,
+        "housing": 4,
+        "medical": 2,
+        "education": 2,
+        "disasterResilience": 2
+      },
+      "culture": {
+        "identityLocal": 4,
+        "identityChinese": 2,
+        "religiosity": 4,
+        "civicEngagement": 3,
+        "mediaSaturation": 1,
+        "youthCulture": 1,
+        "festivals": [
+          "澎湖國際海上花火節",
+          "澎湖武轎巡境"
+        ]
+      },
+      "trade": {
+        "exportValue": 0.2,
+        "importValue": 0.4,
+        "topExportPartners": [
+          "CHN",
+          "JPN",
+          "ASEAN"
+        ],
+        "exportGoods": {
+          "electronics": 0.08,
+          "machinery": 0.06,
+          "chemicals": 0.04,
+          "services": 0.82
+        },
+        "portCapacity": 1
+      },
+      "finance": {
+        "ownRevenue": 30,
+        "allocationFund": 40,
+        "subsidy": 45,
+        "personnelCost": 60,
+        "debt": 25,
+        "debtCeiling": 130
+      },
+      "politics": {
+        "mayorParty": "PDA",
+        "mayorApproval": 55,
+        "councilComposition": {
+          "PDA": 7,
+          "CRP": 6,
+          "TPL": 1,
+          "IND": 5
+        }
+      }
+    },
+    {
+      "_source": "人口/席次：2025年內政部戶政統計與2022年地方公職人員選舉；經濟：2023年縣市生產毛額與工商普查推估；抽象量（建設/文化）為遊戲平衡設定",
+      "id": "KIN",
+      "name": "金門縣",
+      "type": "縣",
+      "councilSeats": 19,
+      "legislatorSeats": 1,
+      "population": {
+        "total": 145000,
+        "ageStructure": {
+          "young": 0.16,
+          "working": 0.69,
+          "elder": 0.15
+        },
+        "education": {
+          "basic": 0.3,
+          "senior": 0.355,
+          "tertiary": 0.345
+        },
+        "ethnicity": {
+          "hoklo": 0.9,
+          "hakka": 0.003,
+          "mainlander": 0.06,
+          "indigenous": 0.002,
+          "newImmigrant": 0.035
+        },
+        "netMigration": 850,
+        "birthRate": 0.0068,
+        "deathRate": 0.0062
+      },
+      "economy": {
+        "gdp": 68,
+        "gdpGrowth": 0.012,
+        "perCapitaIncome": 560000,
+        "unemployment": 0.03,
+        "industryMix": {
+          "primary": 0.06,
+          "secondary": 0.15,
+          "tertiary": 0.79
+        },
+        "sectors": {
+          "semiconductor": 0.001,
+          "electronics": 0.005,
+          "petrochemical": 0.002,
+          "steel": 0.003,
+          "machinery": 0.008,
+          "food": 0.15,
+          "textile": 0.003,
+          "finance": 0.015,
+          "retail": 0.09,
+          "tourism": 0.26,
+          "logistics": 0.025,
+          "agriculture": 0.025,
+          "fishery": 0.02,
+          "publicSector": 0.31,
+          "other": 0.083
+        },
+        "giniIndex": 0.322,
+        "housingPriceIndex": 68,
+        "rentBurden": 0.2
+      },
+      "infrastructure": {
+        "transport": 2,
+        "energy": 3,
+        "water": 2,
+        "digital": 3,
+        "housing": 4,
+        "medical": 2,
+        "education": 3,
+        "disasterResilience": 3
+      },
+      "culture": {
+        "identityLocal": 1,
+        "identityChinese": 5,
+        "religiosity": 4,
+        "civicEngagement": 2,
+        "mediaSaturation": 2,
+        "youthCulture": 1,
+        "festivals": [
+          "金門迎城隍",
+          "金門高粱文化節"
+        ]
+      },
+      "trade": {
+        "exportValue": 0.3,
+        "importValue": 0.6,
+        "topExportPartners": [
+          "CHN",
+          "ASEAN",
+          "JPN"
+        ],
+        "exportGoods": {
+          "electronics": 0.1,
+          "machinery": 0.08,
+          "chemicals": 0.06,
+          "services": 0.76
+        },
+        "portCapacity": 1
+      },
+      "finance": {
+        "ownRevenue": 120,
+        "allocationFund": 25,
+        "subsidy": 30,
+        "personnelCost": 65,
+        "debt": 5,
+        "debtCeiling": 150
+      },
+      "politics": {
+        "mayorParty": "IND",
+        "mayorApproval": 51,
+        "councilComposition": {
+          "PDA": 1,
+          "CRP": 8,
+          "TPL": 1,
+          "CUA": 2,
+          "IND": 7
+        }
+      }
+    },
+    {
+      "_source": "人口/席次：2025年內政部戶政統計與2022年地方公職人員選舉；經濟：2023年縣市生產毛額與工商普查推估；抽象量（建設/文化）為遊戲平衡設定",
+      "id": "LIE",
+      "name": "連江縣",
+      "type": "縣",
+      "councilSeats": 9,
+      "legislatorSeats": 1,
+      "population": {
+        "total": 14000,
+        "ageStructure": {
+          "young": 0.155,
+          "working": 0.69,
+          "elder": 0.155
+        },
+        "education": {
+          "basic": 0.29,
+          "senior": 0.36,
+          "tertiary": 0.35
+        },
+        "ethnicity": {
+          "hoklo": 0.85,
+          "hakka": 0.005,
+          "mainlander": 0.1,
+          "indigenous": 0.002,
+          "newImmigrant": 0.043
+        },
+        "netMigration": 120,
+        "birthRate": 0.0062,
+        "deathRate": 0.0058
+      },
+      "economy": {
+        "gdp": 9,
+        "gdpGrowth": 0.009,
+        "perCapitaIncome": 570000,
+        "unemployment": 0.028,
+        "industryMix": {
+          "primary": 0.07,
+          "secondary": 0.13,
+          "tertiary": 0.8
+        },
+        "sectors": {
+          "semiconductor": 0.001,
+          "electronics": 0.003,
+          "petrochemical": 0.002,
+          "steel": 0.002,
+          "machinery": 0.005,
+          "food": 0.06,
+          "textile": 0.002,
+          "finance": 0.01,
+          "retail": 0.07,
+          "tourism": 0.25,
+          "logistics": 0.025,
+          "agriculture": 0.02,
+          "fishery": 0.09,
+          "publicSector": 0.38,
+          "other": 0.08
+        },
+        "giniIndex": 0.318,
+        "housingPriceIndex": 55,
+        "rentBurden": 0.19
+      },
+      "infrastructure": {
+        "transport": 1,
+        "energy": 2,
+        "water": 2,
+        "digital": 2,
+        "housing": 4,
+        "medical": 1,
+        "education": 2,
+        "disasterResilience": 2
+      },
+      "culture": {
+        "identityLocal": 1,
+        "identityChinese": 5,
+        "religiosity": 3,
+        "civicEngagement": 2,
+        "mediaSaturation": 1,
+        "youthCulture": 1,
+        "festivals": [
+          "馬祖擺暝文化祭",
+          "媽祖在馬祖昇天祭"
+        ]
+      },
+      "trade": {
+        "exportValue": 0.05,
+        "importValue": 0.1,
+        "topExportPartners": [
+          "CHN",
+          "JPN",
+          "ASEAN"
+        ],
+        "exportGoods": {
+          "electronics": 0.06,
+          "machinery": 0.06,
+          "chemicals": 0.04,
+          "services": 0.84
+        },
+        "portCapacity": 1
+      },
+      "finance": {
+        "ownRevenue": 12,
+        "allocationFund": 8,
+        "subsidy": 25,
+        "personnelCost": 20,
+        "debt": 2,
+        "debtCeiling": 45
+      },
+      "politics": {
+        "mayorParty": "CRP",
+        "mayorApproval": 63,
+        "councilComposition": {
+          "CRP": 4,
+          "CUA": 1,
+          "IND": 4
+        }
+      }
+    }
+  ]
+}

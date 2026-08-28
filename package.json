@@ -1,0 +1,13 @@
+{
+  "name": "p-election",
+  "version": "0.2.0",
+  "private": true,
+  "type": "module",
+  "description": "選舉人生：福爾摩沙 — 台灣政治生涯模擬器",
+  "scripts": {
+    "test": "node --test tests/",
+    "sim": "node tests/headless.mjs",
+    "check": "node tools/validate-data.js",
+    "serve": "python3 -m http.server 8080"
+  }
+}

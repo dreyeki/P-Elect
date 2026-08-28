@@ -1,0 +1,619 @@
+{
+  "events": [
+    {
+      "id": "EVT_ECON_CHIP_BOOM",
+      "category": "economy",
+      "weight": 55,
+      "cooldown": 14,
+      "trigger": "world.SEMI.cycle > 0.6 && central.fiscal.gdpGrowth > 0.02",
+      "requires": { "minTurn": 4, "roles": ["legislator", "mayor", "councilor", "citizen"] },
+      "headline": "台基電子宣布南科三期擴廠，用地變更成最大瓶頸",
+      "body": "台基電子昨日下午在法人說明會上證實，將於南部科學園區投入新台幣八千億元興建三座先進製程廠房。園區管理局坦承，周邊農地變更與環境影響評估的審查時程，是整體投產進度最難掌握的變數。環保團體則質疑開發單位的用水回收與排放承諾寫得過於空泛，要求在動工前公開完整的環評資料。",
+      "options": [
+        {
+          "text": "全力協調用地變更，要求環評併行審查",
+          "hint": "產業界與地方稅收都會受惠，環境團體的抗爭恐怕躲不掉",
+          "effects": {
+            "corpMood": { "semiconductor": 10, "machinery": 4 },
+            "popSoL": { "techpro": 2 },
+            "valuePressure": { "environment": -0.6, "marketFreedom": 0.3 },
+            "player": { "fame": 3, "politicalCapital": -1 },
+            "issueHeat": { "economy": 4, "environment": 3 },
+            "central": { "fiscal.gdpGrowth": 0.003 }
+          }
+        },
+        {
+          "text": "要求業者先簽署用水回收與空污減量協議",
+          "hint": "兩邊都會嫌你不夠乾脆，但你會被當成講道理的協調者",
+          "effects": {
+            "corpMood": { "semiconductor": -3 },
+            "valuePressure": { "environment": 0.4 },
+            "player": { "integrity": 2, "fatigue": 2 },
+            "popMood": { "whitecollar": 1, "techpro": -1 },
+            "issueHeat": { "environment": 3 }
+          }
+        },
+        {
+          "text": "召開三場公聽會，把爭議交回地方居民決定",
+          "hint": "程序正義的分數會很漂亮，投資時程卻可能拖到面目全非",
+          "effects": {
+            "valuePressure": { "directDemocracy": 0.7, "centralization": -0.3 },
+            "corpMood": { "semiconductor": -8 },
+            "player": { "fame": 1, "integrity": 1 },
+            "issueHeat": { "economy": 2 },
+            "central": { "economy.fdi": -0.01 }
+          }
+        },
+        {
+          "text": "主張把三期產能分散到中部與東部縣市",
+          "hint": "其他縣市會替你叫好，園區周邊的地方派系卻會記你一筆",
+          "effects": {
+            "corpMood": { "semiconductor": -12 },
+            "popSoL": { "farmer": 1 },
+            "valuePressure": { "centralization": -0.5 },
+            "player": { "politicalCapital": -2, "fame": 2 },
+            "region": { "_all": { "economy.gdpGrowth": 0.001 } },
+            "grassroots": { "_home": -1 }
+          }
+        }
+      ],
+      "_designNote": "測試玩家在產業擴張紅利與環境成本、區域平衡之間的取捨"
+    },
+    {
+      "id": "EVT_ECON_PANEL_LAYOFF",
+      "category": "economy",
+      "weight": 50,
+      "cooldown": 12,
+      "trigger": "world.SEMI.cycle < 0.35 && central.economy.unemployment > 0.038",
+      "requires": { "minTurn": 6, "roles": ["legislator", "mayor", "councilor", "citizen"] },
+      "headline": "聯達科技面板廠傳出裁員兩千人，中部產業鏈同步緊縮",
+      "body": "聯達科技昨天向勞工主管機關通報大量解僱計畫，預計在三個月內資遣中部兩座面板廠共兩千一百名員工。廠區周邊的協力廠商與餐飲業者表示，訂單與來客數在過去半年已經腰斬，資遣消息只是壓垮最後一根稻草。勞工團體要求政府啟動就業安定基金，並質疑公司一邊裁員一邊發放高額董監事酬勞的正當性。",
+      "options": [
+        {
+          "text": "推動擴大就業安定基金與職訓補貼方案",
+          "hint": "勞工端的評價會明顯回升，代價是預算科目要挪出一個大洞",
+          "effects": {
+            "popSoL": { "bluecollar": 2, "service": 1 },
+            "popMood": { "bluecollar": 4, "service": 2 },
+            "central": { "fiscal.balance": -0.004, "economy.unemployment": -0.002 },
+            "player": { "fame": 2, "politicalCapital": -2 },
+            "issueHeat": { "employment": 5 },
+            "tagGain": ["TAG_LABOR_FRIEND"]
+          }
+        },
+        {
+          "text": "召開勞資協商會，逼公司延後資遣並保留年資",
+          "hint": "你會親自站到談判桌前，企業界對你的耐性也會跟著見底",
+          "effects": {
+            "popMood": { "bluecollar": 5 },
+            "corpMood": { "electronics": -8, "_all": -2 },
+            "player": { "fatigue": 4, "fame": 2 },
+            "valuePressure": { "marketFreedom": -0.5 },
+            "issueHeat": { "employment": 4 }
+          }
+        },
+        {
+          "text": "主張以租稅減免換取企業保留在地產線",
+          "hint": "企業會給你掌聲，但你得承受圖利財團的質疑聲浪",
+          "effects": {
+            "corpMood": { "electronics": 9, "machinery": 3 },
+            "central": { "fiscal.taxRevenue": -0.005 },
+            "valuePressure": { "marketFreedom": 0.6 },
+            "player": { "funds": 2, "integrity": -1 },
+            "popMood": { "bluecollar": -2 },
+            "tagGain": ["TAG_BIZ_DARLING"]
+          }
+        },
+        {
+          "text": "在議場公開質詢董監事酬勞與裁員的落差",
+          "hint": "新聞版面幾乎是保證的，實際能救回的工作機會卻不多",
+          "effects": {
+            "player": { "fame": 5, "politicalCapital": 1 },
+            "corpMood": { "electronics": -10 },
+            "popMood": { "bluecollar": 3, "capitalist": -3 },
+            "issueHeat": { "employment": 6 },
+            "tagGain": ["TAG_FIREBRAND"]
+          }
+        }
+      ],
+      "_designNote": "景氣下行期的勞資對立，讓玩家選擇財政、對抗、讓利或聲量四條不同代價的路"
+    },
+    {
+      "id": "EVT_ECON_CPI_SPIKE",
+      "category": "economy",
+      "weight": 60,
+      "cooldown": 10,
+      "trigger": "central.economy.cpi > 0.028 && issueHeat.prices > 40",
+      "requires": { "minTurn": 3, "roles": ["legislator", "mayor", "councilor", "citizen"] },
+      "headline": "民生物價連三月走揚，早餐店與自助餐同步調漲",
+      "body": "主計機關公布的消費者物價指數顯示，外食費與蔬果類價格年增率同時突破百分之五的警戒線。北中南多個傳統市場的攤商反映，運費、包材與人力成本在半年內全面上漲，調價已經是不得不然的選擇。消費者團體則指出，家庭實質可支配所得已連續兩季縮水，呼籲政府儘速提出具體的平抑措施。",
+      "options": [
+        {
+          "text": "推動大宗物資關稅減免與凍漲協調機制",
+          "hint": "短期物價壓得住，財政缺口與市場扭曲會慢慢浮出檯面",
+          "effects": {
+            "central": { "economy.cpi": -0.004, "fiscal.taxRevenue": -0.004 },
+            "popSoL": { "_all": 1 },
+            "popMood": { "retiree": 2, "service": 2 },
+            "valuePressure": { "marketFreedom": -0.5 },
+            "player": { "fame": 3 },
+            "issueHeat": { "prices": -4 }
+          }
+        },
+        {
+          "text": "發放弱勢家庭與長者的定額物價補貼",
+          "hint": "最需要的人拿得到錢，中產階級會覺得自己又被跳過了",
+          "effects": {
+            "popSoL": { "retiree": 3, "service": 2, "bluecollar": 2 },
+            "popMood": { "whitecollar": -2, "retiree": 4 },
+            "central": { "fiscal.balance": -0.005 },
+            "player": { "fame": 2, "politicalCapital": -1 },
+            "issueHeat": { "prices": -3 }
+          }
+        },
+        {
+          "text": "主張讓價格回歸市場，改以擴大稅前扣除因應",
+          "hint": "經濟學家會替你背書，攤商與主婦的怒氣則要自己承受",
+          "effects": {
+            "valuePressure": { "marketFreedom": 0.8 },
+            "corpMood": { "retail": 6, "food": 5 },
+            "popMood": { "service": -3, "retiree": -3, "capitalist": 3 },
+            "player": { "integrity": 2, "fame": -1 },
+            "issueHeat": { "prices": 3 }
+          }
+        }
+      ],
+      "_designNote": "通膨事件的三條路：干預市場、補貼特定群體、堅持市場機制，各自得罪不同人"
+    },
+    {
+      "id": "EVT_ECON_HOUSING_SURGE",
+      "category": "economy",
+      "weight": 55,
+      "cooldown": 14,
+      "trigger": "central.economy.housePriceIndex > 1.15 && issueHeat.housing > 35",
+      "requires": { "minTurn": 5, "roles": ["legislator", "mayor", "councilor", "citizen"] },
+      "headline": "捷運延伸線沿線房價一年漲三成，首購族被迫外移",
+      "body": "房仲業者的成交統計指出，捷運延伸線沿線的中古屋單價在一年內上漲將近三成，其中預售案的漲幅更為驚人。當地里長表示，年輕家庭陸續搬往更外圍的重劃區，國小新生人數連續兩年出現雙位數的下滑。建商公會則反駁，營建成本與土地取得費用同步墊高，房價不可能單靠打炒房政策壓下來。",
+      "options": [
+        {
+          "text": "推動囤房稅加重與預售屋換約全面禁止",
+          "hint": "無殼族會替你歡呼，建商與持有多屋的地方頭人不會忘記這筆帳",
+          "effects": {
+            "central": { "economy.housePriceIndex": -0.03 },
+            "popMood": { "whitecollar": 4, "student": 3, "capitalist": -5 },
+            "corpMood": { "finance": -6 },
+            "valuePressure": { "marketFreedom": -0.7 },
+            "player": { "fame": 4, "funds": -2 },
+            "issueHeat": { "housing": 6 },
+            "grassroots": { "_home": -1 }
+          }
+        },
+        {
+          "text": "在沿線推動大規模社會住宅與只租不售基地",
+          "hint": "方向不容易被罵，但土地與預算得從別的建設案身上挖過來",
+          "effects": {
+            "central": { "fiscal.balance": -0.006 },
+            "region": { "_player": { "economy.housingSupply": 0.03 } },
+            "popSoL": { "service": 1, "student": 2 },
+            "popMood": { "student": 3, "whitecollar": 2 },
+            "player": { "fame": 3, "politicalCapital": -2, "fatigue": 3 },
+            "issueHeat": { "housing": 4 },
+            "tagGain": ["TAG_DOER"]
+          }
+        },
+        {
+          "text": "主張以放寬容積與加速供給來解決問題",
+          "hint": "建商與土地所有人會成為你的朋友，居住正義團體則會盯上你",
+          "effects": {
+            "corpMood": { "finance": 7, "steel": 4 },
+            "valuePressure": { "marketFreedom": 0.6, "environment": -0.4 },
+            "player": { "funds": 4, "integrity": -1 },
+            "popMood": { "capitalist": 4, "student": -3 },
+            "issueHeat": { "housing": 3 }
+          }
+        },
+        {
+          "text": "要求央行針對第二戶以上調降貸款成數",
+          "hint": "工具乾淨俐落，卻會誤傷那些正要換屋的中產家庭",
+          "effects": {
+            "central": { "economy.housePriceIndex": -0.02, "economy.creditGrowth": -0.01 },
+            "corpMood": { "finance": -4 },
+            "popMood": { "whitecollar": -1, "student": 2 },
+            "valuePressure": { "centralization": 0.3 },
+            "player": { "integrity": 1 },
+            "issueHeat": { "housing": 3 }
+          }
+        }
+      ],
+      "_designNote": "居住議題的四種工具：稅制、供給、放寬、金融管制，代價分別落在派系、財政、清廉與中產身上"
+    },
+    {
+      "id": "EVT_ECON_STOCK_PLUNGE",
+      "category": "economy",
+      "weight": 45,
+      "cooldown": 16,
+      "trigger": "central.economy.stockIndex < 0.88 && world.USA.stance < 20",
+      "requires": { "minTurn": 8, "roles": ["legislator", "mayor", "councilor", "citizen"] },
+      "headline": "外資單週賣超創新高，加權指數三天跌掉一成二",
+      "body": "受到國際科技股修正與地緣風險升高的雙重夾擊，加權股價指數在三個交易日內累計下跌超過一成二。券商公會統計，融資追繳通知的張數創下近五年新高，散戶投資人的恐慌情緒明顯升溫。財經官員強調基本面並未惡化，但在野立委已經要求政府說明國安基金是否要進場護盤。",
+      "options": [
+        {
+          "text": "公開支持國安基金進場並要求限制放空",
+          "hint": "股民短期會感謝你，長期的市場信譽與外資評價要付代價",
+          "effects": {
+            "central": { "economy.stockIndex": 0.04, "fiscal.balance": -0.003 },
+            "popMood": { "whitecollar": 3, "smallbiz": 2, "capitalist": 1 },
+            "corpMood": { "finance": 4 },
+            "valuePressure": { "marketFreedom": -0.6, "centralization": 0.3 },
+            "player": { "fame": 3, "integrity": -1 },
+            "issueHeat": { "economy": 5 }
+          }
+        },
+        {
+          "text": "呼籲政府不干預，改推長期投資稅制優惠",
+          "hint": "專業評價會漂亮許多，被套牢的散戶不會給你好臉色",
+          "effects": {
+            "valuePressure": { "marketFreedom": 0.7 },
+            "corpMood": { "finance": 6, "_all": 2 },
+            "popMood": { "whitecollar": -3, "capitalist": 4 },
+            "player": { "integrity": 2, "fame": -2 },
+            "central": { "fiscal.taxRevenue": -0.003 },
+            "tagGain": ["TAG_SCHOLAR"]
+          }
+        },
+        {
+          "text": "要求金管單位徹查特定法人的異常交易",
+          "hint": "查得出來你會是英雄，查不出來就變成擾亂市場的人",
+          "effects": {
+            "player": { "fame": 4, "politicalCapital": -1, "stigma": 1 },
+            "corpMood": { "finance": -9 },
+            "issueHeat": { "economy": 4, "corruption": 3 },
+            "popMood": { "whitecollar": 2 },
+            "tagGain": ["TAG_MUCKRAKER"]
+          }
+        }
+      ],
+      "_designNote": "金融震盪下護盤、放任、追查三條路，分別損耗市場信譽、民粹支持與政治資本"
+    },
+    {
+      "id": "EVT_ECON_FACTORY_EXODUS",
+      "category": "economy",
+      "weight": 45,
+      "cooldown": 18,
+      "trigger": "central.economy.laborCost > 1.1 && world.ASEAN.stance > 30",
+      "requires": { "minTurn": 10, "roles": ["legislator", "mayor", "councilor"] },
+      "headline": "鴻宇精密確定移轉三成產線，彰化廠區將轉為研發基地",
+      "body": "鴻宇精密昨天在股東會上宣布，將把三成的組裝產線移往越南與墨西哥，彰化廠區則轉型為研發與試量產基地。公司強調在地員工不會被大規模資遣，但工會指出夜班與加班費消失後，實質薪資形同縮水兩成以上。地方政府擔憂連帶影響上百家協力廠商，已要求經濟主管機關提出產業鏈的因應對策。",
+      "options": [
+        {
+          "text": "爭取設立在地供應鏈轉型基金與貸款保證",
+          "hint": "協力廠商會記住你的名字，中央財政的白眼也會落在你身上",
+          "effects": {
+            "central": { "fiscal.balance": -0.004 },
+            "corpMood": { "machinery": 7, "electronics": 3 },
+            "popSoL": { "smallbiz": 2, "bluecollar": 1 },
+            "player": { "fame": 3, "politicalCapital": -2 },
+            "issueHeat": { "employment": 4 },
+            "grassroots": { "_home": 1 }
+          }
+        },
+        {
+          "text": "推動立法要求外移企業返還既有投資獎勵",
+          "hint": "聽起來很解氣，未來想來投資的人也會把這條算進成本",
+          "effects": {
+            "corpMood": { "_all": -6, "machinery": -9 },
+            "central": { "economy.fdi": -0.015, "fiscal.taxRevenue": 0.002 },
+            "popMood": { "bluecollar": 5 },
+            "valuePressure": { "marketFreedom": -0.8 },
+            "player": { "fame": 4 },
+            "tagGain": ["TAG_FIREBRAND"]
+          }
+        },
+        {
+          "text": "協助廠區轉型研發，爭取國家型計畫進駐",
+          "hint": "長線佈局的路子，短期內看不到能拿去剪綵的成果",
+          "effects": {
+            "central": { "economy.rdShare": 0.004 },
+            "corpMood": { "machinery": 5 },
+            "popSoL": { "techpro": 2, "bluecollar": -1 },
+            "player": { "fatigue": 3, "integrity": 2 },
+            "issueHeat": { "economy": 2 },
+            "tagGain": ["TAG_DOER"]
+          }
+        }
+      ],
+      "_designNote": "產業外移的補貼、懲罰、轉型三種思路，分別付出財政、外資信心與短期政績"
+    },
+    {
+      "id": "EVT_ECON_FDI_COURT",
+      "category": "economy",
+      "weight": 40,
+      "cooldown": 20,
+      "trigger": "world.USA.stance > 45 && central.economy.fdi > 0.02",
+      "requires": { "minTurn": 12, "roles": ["legislator", "mayor", "citizen"] },
+      "headline": "外商評估在台設亞太研發中心，開出用地與電力兩大條件",
+      "body": "一家歐系半導體設備商向投資主管機關表達設立亞太研發中心的意願，初期規劃引進三百名高階工程人員。對方要求政府在十八個月內解決專用變電站與大面積產業用地的問題，並希望比照國內業者適用相同的租稅優惠。工商團體樂觀其成，但地方民代擔心優惠條件一旦開了先例，後續的談判籌碼就會全部消失。",
+      "options": [
+        {
+          "text": "全案比照國內業者，給予同等租稅與用地條件",
+          "hint": "外資進得來，本地業者卻會開始排隊要求同樣的待遇",
+          "effects": {
+            "central": { "economy.fdi": 0.02, "fiscal.taxRevenue": -0.004 },
+            "corpMood": { "semiconductor": 6, "machinery": 5 },
+            "popSoL": { "techpro": 3 },
+            "valuePressure": { "marketFreedom": 0.5 },
+            "player": { "fame": 3 },
+            "world": { "EU": { "stance": 3 } }
+          }
+        },
+        {
+          "text": "要求對方承諾在地採購比例與技術移轉",
+          "hint": "談成了是漂亮的成績，談不成就是你把案子談跑的",
+          "effects": {
+            "corpMood": { "machinery": 8, "electronics": 4 },
+            "central": { "economy.fdi": 0.008 },
+            "player": { "fatigue": 3, "integrity": 2, "fame": 2 },
+            "valuePressure": { "marketFreedom": -0.3 },
+            "issueHeat": { "economy": 3 }
+          }
+        },
+        {
+          "text": "主張優惠應該回頭適用所有在地中小企業",
+          "hint": "中小企業主會把你當自己人，這個外資案大概也就這樣了",
+          "effects": {
+            "popSoL": { "smallbiz": 3 },
+            "popMood": { "smallbiz": 5, "techpro": -2 },
+            "central": { "fiscal.taxRevenue": -0.006, "economy.fdi": -0.01 },
+            "player": { "fame": 2, "politicalCapital": -1 },
+            "corpMood": { "_all": 3, "semiconductor": -5 },
+            "grassroots": { "_home": 1 }
+          }
+        }
+      ],
+      "_designNote": "外資談判中的讓利、附加條件與內需優先，考驗玩家對招商成本的認知"
+    },
+    {
+      "id": "EVT_ECON_LABOR_SHORTAGE",
+      "category": "economy",
+      "weight": 50,
+      "cooldown": 12,
+      "trigger": "central.economy.laborShortage > 0.06 && values.immigration < 0.4",
+      "requires": { "minTurn": 6, "roles": ["legislator", "mayor", "councilor", "citizen"] },
+      "headline": "工具機與長照同時喊缺工，移工配額成為攻防焦點",
+      "body": "全國工業總會與長照機構業者罕見地在同一場記者會上發聲，指出製造業與照顧服務業的缺工人數合計已超過十二萬。業者要求主管機關放寬移工配額並簡化聘僱程序，否則產線與機構床位只能被迫縮減。勞工團體則反對以擴大移工作為唯一解方，主張先改善本地勞工的薪資與輪班條件。",
+      "options": [
+        {
+          "text": "支持分階段放寬移工配額並強化查核",
+          "hint": "產業界的壓力立刻減輕，本土勞工與保守選民會不太諒解",
+          "effects": {
+            "central": { "economy.laborShortage": -0.02 },
+            "corpMood": { "machinery": 7, "food": 4 },
+            "valuePressure": { "immigration": 0.7 },
+            "popMood": { "bluecollar": -3, "smallbiz": 4 },
+            "player": { "fame": 2, "politicalCapital": -1 },
+            "issueHeat": { "employment": 4 }
+          }
+        },
+        {
+          "text": "要求先調高缺工職類的本勞薪資下限",
+          "hint": "勞工團體會全力支持你，中小企業主的哀嚎聲也會同時出現",
+          "effects": {
+            "popSoL": { "bluecollar": 2, "service": 2 },
+            "popMood": { "bluecollar": 5, "smallbiz": -4 },
+            "corpMood": { "machinery": -6, "food": -5 },
+            "central": { "economy.laborCost": 0.02 },
+            "valuePressure": { "marketFreedom": -0.5 },
+            "tagGain": ["TAG_LABOR_FRIEND"]
+          }
+        },
+        {
+          "text": "推動自動化設備投資抵減與智慧製造補助",
+          "hint": "體質改善要等好幾年，眼前的缺工窟窿還是補不起來",
+          "effects": {
+            "central": { "fiscal.taxRevenue": -0.003, "economy.productivity": 0.004 },
+            "corpMood": { "machinery": 5, "electronics": 3 },
+            "popSoL": { "techpro": 1, "bluecollar": -1 },
+            "player": { "integrity": 1, "fame": 1 },
+            "issueHeat": { "employment": 2 },
+            "tagGain": ["TAG_SCHOLAR"]
+          }
+        }
+      ],
+      "_designNote": "缺工議題把移民價值觀、勞動成本與產業升級三條線同時攤開"
+    },
+    {
+      "id": "EVT_ECON_MINWAGE_REVIEW",
+      "category": "economy",
+      "weight": 55,
+      "cooldown": 12,
+      "trigger": "month in [8,9] && central.economy.cpi > 0.015",
+      "requires": { "minTurn": 8, "roles": ["legislator", "mayor", "councilor"] },
+      "headline": "基本工資審議會前夕，勞資雙方喊價相差超過兩千元",
+      "body": "基本工資審議委員會開議在即，勞方代表提出月薪調升八個百分點的訴求，資方則主張凍漲或只做象徵性調整。餐飲與零售業者指出，人事成本已占營收三成以上，大幅調升將直接反映在售價與人力縮編上。勞工陣線則以近三年物價漲幅為據，強調不調薪等於變相減薪。",
+      "options": [
+        {
+          "text": "公開支持勞方版本，主張一次調足八個百分點",
+          "hint": "基層勞工會把你視為戰友，服務業老闆的怨氣要自己扛",
+          "effects": {
+            "popSoL": { "bluecollar": 3, "service": 3 },
+            "popMood": { "bluecollar": 6, "service": 5, "smallbiz": -5 },
+            "corpMood": { "retail": -8, "food": -7 },
+            "central": { "economy.laborCost": 0.03, "economy.cpi": 0.003 },
+            "player": { "fame": 3 },
+            "tagGain": ["TAG_LABOR_FRIEND"]
+          }
+        },
+        {
+          "text": "主張以物價指數連動的公式取代政治喊價",
+          "hint": "制度化的說法很難被攻擊，兩邊也都覺得你在打太極",
+          "effects": {
+            "valuePressure": { "marketFreedom": 0.3 },
+            "player": { "integrity": 3, "fame": -1 },
+            "popMood": { "whitecollar": 2, "bluecollar": -1 },
+            "corpMood": { "_all": 2 },
+            "issueHeat": { "employment": 2 },
+            "tagGain": ["TAG_SCHOLAR"]
+          }
+        },
+        {
+          "text": "推動小規模事業的僱用補貼配套後再調薪",
+          "hint": "小店家會鬆一口氣，這筆補貼的財源得從別處生出來",
+          "effects": {
+            "central": { "fiscal.balance": -0.004, "economy.laborCost": 0.015 },
+            "popSoL": { "service": 2 },
+            "popMood": { "smallbiz": 4, "bluecollar": 2 },
+            "corpMood": { "retail": 3, "food": 3 },
+            "player": { "fame": 2, "fatigue": 2 },
+            "grassroots": { "_home": 1 }
+          }
+        }
+      ],
+      "_designNote": "基本工資的經典三方賽局，玩家必須在勞方、制度與小商家之間選一邊站"
+    },
+    {
+      "id": "EVT_ECON_TARIFF_SHOCK",
+      "category": "economy",
+      "weight": 45,
+      "cooldown": 20,
+      "trigger": "world.USA.stance < 35 && central.economy.exportGrowth < 0.01",
+      "requires": { "minTurn": 10, "roles": ["legislator", "mayor", "citizen"] },
+      "headline": "美方擬對電子零組件加徵關稅，兩兆產值出口受波及",
+      "body": "美國貿易主管機關公告即將對部分電子零組件加徵百分之十五的關稅，我方受影響的年出口值粗估超過新台幣兩兆元。經濟部門連夜召開緊急會議，工具機與被動元件業者則已開始評估把最終組裝移往第三地的可行性。在野黨批評政府過度依賴單一市場，執政團隊則強調談判管道仍然暢通。",
+      "options": [
+        {
+          "text": "主張以擴大採購與投資承諾換取豁免清單",
+          "hint": "談判桌上有機會止血，國內產業會質疑是誰在買單",
+          "effects": {
+            "world": { "USA": { "stance": 6 } },
+            "central": { "fiscal.balance": -0.005, "economy.exportGrowth": 0.006 },
+            "valuePressure": { "unification": -0.3 },
+            "corpMood": { "electronics": 5 },
+            "player": { "fame": 2, "politicalCapital": -2 },
+            "tagGain": ["TAG_PROUS"]
+          }
+        },
+        {
+          "text": "推動新南向與歐洲市場的出口分散方案",
+          "hint": "分散風險是對的方向，短期內補不上被關稅打掉的訂單",
+          "effects": {
+            "world": { "ASEAN": { "stance": 5 }, "EU": { "stance": 4 } },
+            "central": { "economy.exportGrowth": 0.002, "fiscal.balance": -0.002 },
+            "corpMood": { "logistics": 4, "electronics": 2 },
+            "player": { "integrity": 2, "fatigue": 2 },
+            "issueHeat": { "economy": 3 }
+          }
+        },
+        {
+          "text": "在議場要求對等反制並檢討對美讓步清單",
+          "hint": "強硬姿態能換來聲量，外交部門的臉色不會太好看",
+          "effects": {
+            "player": { "fame": 5, "favorNational": -2 },
+            "world": { "USA": { "stance": -6 } },
+            "valuePressure": { "militaryAutonomy": 0.5 },
+            "popMood": { "bluecollar": 3, "capitalist": -3 },
+            "issueHeat": { "economy": 5 },
+            "tagGain": ["TAG_FIREBRAND"]
+          }
+        }
+      ],
+      "_designNote": "貿易衝擊下的讓步、分散與反制，牽動大國關係與國內產業評價"
+    },
+    {
+      "id": "EVT_ECON_SME_CREDIT",
+      "category": "economy",
+      "weight": 40,
+      "cooldown": 14,
+      "trigger": "central.economy.creditGrowth < 0.01 && central.economy.unemployment > 0.035",
+      "requires": { "minTurn": 6, "roles": ["legislator", "mayor", "councilor", "citizen"] },
+      "headline": "銀行緊縮中小企業放款，傳統產業周轉壓力急速升高",
+      "body": "泰安金控與富民金控近月同步調高中小企業的授信門檻，多家傳統產業業者反映續貸遭到大幅砍額。中小企業總會估計，全國約有三成的會員廠商在下一季會面臨周轉困難，紡織與金屬加工兩個行業的情況最為嚴重。金融主管機關表示尊重銀行的風險控管，但已要求公股行庫評估提高信用保證的成數。",
+      "options": [
+        {
+          "text": "要求公股行庫擴大信保成數並設專案窗口",
+          "hint": "中小企業馬上有感，壞帳風險就掛在國家的資產負債表上",
+          "effects": {
+            "central": { "economy.creditGrowth": 0.008, "fiscal.contingentRisk": 0.004 },
+            "popSoL": { "smallbiz": 2 },
+            "popMood": { "smallbiz": 5 },
+            "corpMood": { "finance": -3, "machinery": 4 },
+            "player": { "fame": 3, "politicalCapital": -1 },
+            "grassroots": { "_home": 1 }
+          }
+        },
+        {
+          "text": "推動地方產業聯合擔保與互助基金試辦",
+          "hint": "地方色彩濃厚的做法，規模小到未必救得了體質差的廠商",
+          "effects": {
+            "region": { "_player": { "economy.smeSupport": 0.03 } },
+            "popMood": { "smallbiz": 3 },
+            "player": { "fatigue": 3, "integrity": 2, "fame": 1 },
+            "corpMood": { "machinery": 2 },
+            "grassroots": { "_home": 2 },
+            "tagGain": ["TAG_DOER"]
+          }
+        },
+        {
+          "text": "支持金融機構自主風控，改推淘汰轉型輔導",
+          "hint": "金融體質守得住，被淘汰的老廠員工會恨得牙癢癢",
+          "effects": {
+            "corpMood": { "finance": 8 },
+            "valuePressure": { "marketFreedom": 0.7 },
+            "popMood": { "smallbiz": -5, "bluecollar": -2, "capitalist": 3 },
+            "central": { "economy.unemployment": 0.003 },
+            "player": { "integrity": 2, "fame": -2 },
+            "issueHeat": { "employment": 3 }
+          }
+        }
+      ],
+      "_designNote": "信用緊縮下的國家承擔、地方互助與市場淘汰三種立場"
+    },
+    {
+      "id": "EVT_ECON_TOURISM_SLUMP",
+      "category": "economy",
+      "weight": 40,
+      "cooldown": 14,
+      "trigger": "central.economy.tourismIndex < 0.9 && issueHeat.economy > 30",
+      "requires": { "minTurn": 5, "roles": ["legislator", "mayor", "councilor"] },
+      "headline": "老街商圈來客腰斬，旅宿業者聯名要求振興補助",
+      "body": "受到出國旅遊人數暴增與國旅價格爭議的影響，中南部主要老街商圈的假日來客數比去年同期減少將近一半。旅宿公會統計，中小型民宿的平均住房率跌破四成，已有業者開始退租與資遣員工。地方觀光主管機關考慮發放住宿抵用券，但學者警告補助只會拖延業者調整體質的時機。",
+      "options": [
+        {
+          "text": "爭取國旅住宿抵用券與商圈活動補助預算",
+          "hint": "業者短期會活過來，補助一停可能又打回原形",
+          "effects": {
+            "central": { "fiscal.balance": -0.003, "economy.tourismIndex": 0.05 },
+            "corpMood": { "tourism": 8, "retail": 4 },
+            "popSoL": { "service": 2, "smallbiz": 1 },
+            "player": { "fame": 3, "politicalCapital": -1 },
+            "grassroots": { "_home": 1 }
+          }
+        },
+        {
+          "text": "推動旅宿定價透明化與品質分級制度",
+          "hint": "消費者會覺得你在做對的事，被評級刷下來的業者不會客氣",
+          "effects": {
+            "corpMood": { "tourism": -5 },
+            "popMood": { "whitecollar": 3, "smallbiz": -3 },
+            "valuePressure": { "marketFreedom": -0.3 },
+            "player": { "integrity": 3, "fatigue": 2 },
+            "central": { "economy.tourismIndex": 0.02 },
+            "tagGain": ["TAG_DOER"]
+          }
+        },
+        {
+          "text": "主張把預算改投入交通與環境等基礎建設",
+          "hint": "體質改善的路走得慢，這個旺季的業者恐怕撐不到那天",
+          "effects": {
+            "region": { "_player": { "infra.quality": 0.03 } },
+            "corpMood": { "tourism": -3, "steel": 3 },
+            "popSoL": { "_all": 1 },
+            "player": { "integrity": 2, "fame": 1 },
+            "issueHeat": { "economy": 2 },
+            "central": { "fiscal.balance": -0.004 }
+          }
+        }
+      ],
+      "_designNote": "觀光低潮的短期振興、體質管制與長期建設三選一"
+    }
+  ]
+}

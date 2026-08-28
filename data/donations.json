@@ -1,0 +1,22 @@
+{
+  "sources": [
+    { "id":"small","name":"小額群眾","amountRange":[50000,1200000],"stigma":0,"investigationRisk":0.0,
+      "requires":{"favorNational":2},"conditionChance":0.0,
+      "flavor":["支持者在網路上發起的小額募款，一筆一筆匯進來的。","地方支持者自己揪團辦的餐會，收據都開得清清楚楚。"] },
+    { "id":"corporate","name":"企業獻金","amountRange":[3000000,30000000],"stigma":0.2,"investigationRisk":0.08,
+      "requires":{"corpMood":3},"conditionChance":0.85,
+      "flavor":["對方的公關經理親自把支票送到服務處，順便留下一份產業建言書。","餐會上坐你隔壁的是他們的董事，整晚只聊了一件事。"] },
+    { "id":"faction","name":"派系金脈","amountRange":[2000000,15000000],"stigma":0.1,"investigationRisk":0.05,
+      "requires":{"factionFavor":3},"conditionChance":0.75,
+      "flavor":["派系大老說這筆錢是給年輕人用的，不用急著還。","前輩把信封推過來的時候，順口提了一個人的名字。"] },
+    { "id":"shadow","name":"地下金流","amountRange":[20000000,150000000],"stigma":1.0,"investigationRisk":0.28,
+      "requires":{"stigma":1},"conditionChance":1.0,
+      "flavor":["中間人只留了一個手機號碼，錢是用現金分三次送到的。","對方說他什麼都不要，只希望你記得今天晚上這頓飯。"] }
+  ],
+  "conditionTypes": [
+    { "id":"lawStance","desc":"希望你在 {target} 上站在他們那一邊","deadlineRange":[12,36] },
+    { "id":"appointment","desc":"希望你在人事上照顧他們推薦的人","deadlineRange":[6,24] },
+    { "id":"budget","desc":"希望你把預算往他們經營的地方挪一點","deadlineRange":[12,24] },
+    { "id":"silence","desc":"希望你別再碰某一個議題","deadlineRange":[12,48] }
+  ]
+}

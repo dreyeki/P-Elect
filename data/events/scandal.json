@@ -1,0 +1,586 @@
+{
+  "events": [
+    {
+      "id": "EVT_SCA_DONATION_PROBE",
+      "category": "scandal",
+      "weight": 50,
+      "cooldown": 16,
+      "trigger": "player.funds > 400 && issueHeat.corruption > 25",
+      "requires": { "minTurn": 8, "roles": ["legislator", "mayor", "councilor"] },
+      "headline": "焦週刊爆料政治獻金專戶收受工程業者百萬捐款",
+      "body": "焦週刊以封面故事揭露，你的政治獻金專戶在半年內收受同一家營造集團旗下六家子公司的捐款，總額接近九百萬元。報導指出這家集團在同一期間標下三件由你所屬機關監督的工程案，時間點的重疊引發外界質疑。你的辦公室主任表示所有捐款都依法申報，也強調捐款與工程發包分屬完全不同的決策體系。",
+      "options": [
+        {
+          "text": "召開記者會逐筆公開帳目並主動退回捐款",
+          "hint": "止血的效果最好，你的競選金庫會馬上瘦掉一大圈",
+          "effects": {
+            "player": { "funds": -8, "integrity": 4, "fame": 2 },
+            "popMood": { "whitecollar": 4, "student": 3 },
+            "corpMood": { "steel": -4 },
+            "issueHeat": { "corruption": -3 },
+            "tagGain": ["TAG_CLEAN"]
+          }
+        },
+        {
+          "text": "強調合法申報，反控報導出自對手的操作",
+          "hint": "支持者會覺得你有骨氣，中間選民的疑慮不會就此消失",
+          "effects": {
+            "player": { "stigma": 2, "fame": 3, "politicalCapital": -1, "partyPrestige": 1 },
+            "popMood": { "_all": -2 },
+            "issueHeat": { "corruption": 4 },
+            "valuePressure": { "directDemocracy": -0.2 }
+          }
+        },
+        {
+          "text": "主動請求監察機關與檢調全面清查專戶",
+          "hint": "姿態拿得最高，調查一開就是好幾個月的新聞連載",
+          "effects": {
+            "player": { "integrity": 5, "fame": 1, "fatigue": 4, "stigma": 1 },
+            "issueHeat": { "corruption": 6 },
+            "popMood": { "whitecollar": 3, "publicsvc": 2 },
+            "tagGain": ["TAG_CLEAN"]
+          }
+        },
+        {
+          "text": "推動政治獻金即時揭露的修法作為回應",
+          "hint": "把個案轉成制度議題很漂亮，黨內同志會恨死你這一手",
+          "effects": {
+            "player": { "partyPrestige": -3, "integrity": 4, "fame": 3 },
+            "central": { "politics.donationTransparency": 0.05 },
+            "valuePressure": { "directDemocracy": 0.5 },
+            "issueHeat": { "corruption": 5 },
+            "popMood": { "whitecollar": 4, "student": 3 }
+          }
+        }
+      ],
+      "_designNote": "政治獻金爭議的退款、反擊、自清與制度化四種回應，金錢與信譽互換"
+    },
+    {
+      "id": "EVT_SCA_INFLUENCE_CALL",
+      "category": "scandal",
+      "weight": 50,
+      "cooldown": 14,
+      "trigger": "player.politicalCapital > 20 && issueHeat.corruption > 20",
+      "requires": { "minTurn": 6, "roles": ["legislator", "mayor", "councilor"] },
+      "headline": "錄音檔外流疑似關說環評，通聯內容遭斷章取義爭議",
+      "body": "自由前線報公布一段長度四十二秒的錄音，內容是你的助理與環保局科長討論某開發案的審查時程。錄音中出現「幫忙看一下能不能排前面」的說法，你的辦公室強調那只是替陳情民眾詢問進度的例行服務。環保團體則要求公開該案的完整審查紀錄，並質疑排序是否曾因外力而更動過。",
+      "options": [
+        {
+          "text": "公布完整錄音與該案的全部陳情往來紀錄",
+          "hint": "透明能換回信任，其他案件的陳情紀錄也會一起被翻出來",
+          "effects": {
+            "player": { "integrity": 4, "fame": 2, "stigma": 1 },
+            "popMood": { "whitecollar": 4, "student": 2 },
+            "issueHeat": { "corruption": 3 },
+            "corpMood": { "_all": -2 },
+            "tagGain": ["TAG_CLEAN"]
+          }
+        },
+        {
+          "text": "承認選民服務的分寸失當並公開道歉",
+          "hint": "低頭認錯能快速降溫，對手會把這段影片存到選舉前一天",
+          "effects": {
+            "player": { "fame": -2, "integrity": 2, "stigma": 1, "partyPrestige": -1 },
+            "popMood": { "_all": 1, "whitecollar": 2 },
+            "issueHeat": { "corruption": -2 },
+            "grassroots": { "_home": -1 }
+          }
+        },
+        {
+          "text": "強調選民服務天經地義，反問誰沒有陳情過",
+          "hint": "基層樁腳會用力點頭，都會區的中間選民會皺起眉頭",
+          "effects": {
+            "player": { "fame": 2, "integrity": -2, "stigma": 2 },
+            "popMood": { "farmer": 3, "smallbiz": 3, "whitecollar": -4, "student": -4 },
+            "grassroots": { "_home": 2 },
+            "issueHeat": { "corruption": 4 }
+          }
+        },
+        {
+          "text": "推動陳情紀錄全面上網的透明化制度",
+          "hint": "轉守為攻的高招，所有靠陳情吃飯的同業都會被你得罪",
+          "effects": {
+            "central": { "politics.lobbyTransparency": 0.05 },
+            "player": { "integrity": 5, "partyPrestige": -3, "fame": 3 },
+            "valuePressure": { "directDemocracy": 0.6 },
+            "popMood": { "whitecollar": 5, "publicsvc": -3 },
+            "issueHeat": { "corruption": 4 }
+          }
+        }
+      ],
+      "_designNote": "關說疑雲的透明、認錯、硬拗與制度反攻，基層與都會的評價完全相反"
+    },
+    {
+      "id": "EVT_SCA_ASSET_DECLARE",
+      "category": "scandal",
+      "weight": 45,
+      "cooldown": 18,
+      "trigger": "player.personalAssets > 3000 && turn > 12",
+      "requires": { "minTurn": 12, "roles": ["legislator", "mayor", "councilor"] },
+      "headline": "財產申報漏列配偶名下三筆土地，監察機關要求說明",
+      "body": "監察機關的例行查核發現，你的財產申報表漏列了配偶名下位於重劃區的三筆土地，公告現值合計約四千兩百萬元。你的會計師表示那是家族繼承後尚未辦妥分割登記的持分，作業上確實有疏漏。在野陣營則質疑土地正好緊鄰你曾經力推的道路開發案，要求說明取得時間與資金來源。",
+      "options": [
+        {
+          "text": "立即補正申報並公開土地取得的完整金流",
+          "hint": "把話說死能斷絕想像，家族的財務細節會攤在陽光下",
+          "effects": {
+            "player": { "integrity": 4, "fame": 1, "stigma": 1, "fatigue": 3 },
+            "popMood": { "whitecollar": 3, "student": 2 },
+            "issueHeat": { "corruption": -2 },
+            "tagGain": ["TAG_CLEAN"]
+          }
+        },
+        {
+          "text": "宣布把爭議土地信託並承諾任內不得處分",
+          "hint": "利益衝突的疑慮能被切斷，家人不見得會同意這個決定",
+          "effects": {
+            "player": { "personalAssets": -500, "integrity": 3, "fame": 3 },
+            "popMood": { "whitecollar": 4, "retiree": 2 },
+            "issueHeat": { "corruption": -3 },
+            "valuePressure": { "directDemocracy": 0.3 }
+          }
+        },
+        {
+          "text": "強調是登記程序疏漏，要求對手停止人身攻擊",
+          "hint": "最省力的處理方式，這個標籤大概會跟著你到下次選舉",
+          "effects": {
+            "player": { "stigma": 3, "fame": 1, "integrity": -1, "partyPrestige": -2 },
+            "popMood": { "whitecollar": -3, "student": -3, "farmer": 1 },
+            "issueHeat": { "corruption": 4 }
+          }
+        }
+      ],
+      "_designNote": "財產申報疑雲的自清、信託與硬撐，清廉度與家庭資產直接互換"
+    },
+    {
+      "id": "EVT_SCA_FAMILY_BUSINESS",
+      "category": "scandal",
+      "weight": 45,
+      "cooldown": 16,
+      "trigger": "player.personalAssets > 2000 && issueHeat.corruption > 20",
+      "requires": { "minTurn": 10, "roles": ["legislator", "mayor", "councilor"] },
+      "headline": "胞弟公司三年標下市府九件標案，議會要求說明評選過程",
+      "body": "西林電視取得的採購資料顯示，你胞弟擔任負責人的工程顧問公司在三年內標得九件市府標案，總金額約一億八千萬元。市府採購單位強調全案都採公開招標，評選委員名單也依規定由外部專家庫抽選產生。在野議員則指出其中五案的投標廠商都僅有兩家，質疑規格條件被量身訂做過。",
+      "options": [
+        {
+          "text": "要求胞弟公司自即日起退出所有市府標案",
+          "hint": "瓜田李下的問題一次解決，家族內部的怨言不會少",
+          "effects": {
+            "player": { "integrity": 5, "personalAssets": -300, "fame": 2, "fatigue": 2 },
+            "popMood": { "whitecollar": 5, "student": 3 },
+            "issueHeat": { "corruption": -3 },
+            "tagGain": ["TAG_CLEAN"]
+          }
+        },
+        {
+          "text": "支持議會成立專案小組全面調閱採購卷宗",
+          "hint": "接受檢驗的姿態最漂亮，公務體系會覺得被你賣了",
+          "effects": {
+            "player": { "integrity": 4, "fame": 2, "politicalCapital": -2, "stigma": 1 },
+            "popMood": { "publicsvc": -4, "whitecollar": 4 },
+            "issueHeat": { "corruption": 5 },
+            "central": { "politics.procurementAudit": 0.04 }
+          }
+        },
+        {
+          "text": "強調親屬不應被剝奪投標權，要求依法辦理",
+          "hint": "法律上完全站得住，觀感上你會被釘在牆上很久",
+          "effects": {
+            "player": { "stigma": 3, "integrity": -2, "funds": 3 },
+            "corpMood": { "steel": 4, "machinery": 3 },
+            "popMood": { "whitecollar": -5, "student": -4, "smallbiz": -2 },
+            "issueHeat": { "corruption": 5 },
+            "valuePressure": { "marketFreedom": 0.3 }
+          }
+        },
+        {
+          "text": "推動採購規格外部審查與親屬迴避的規範",
+          "hint": "制度化的回應最難挑毛病，很多同僚會因此少一條財路",
+          "effects": {
+            "central": { "politics.procurementAudit": 0.06 },
+            "player": { "integrity": 4, "partyPrestige": -3, "fame": 3 },
+            "popMood": { "whitecollar": 4, "publicsvc": -2 },
+            "corpMood": { "steel": -3, "machinery": -3 },
+            "issueHeat": { "corruption": 3 }
+          }
+        }
+      ],
+      "_designNote": "家族企業標案的切割、受檢、辯護與制度化，家族資產與清廉度直接拉扯"
+    },
+    {
+      "id": "EVT_SCA_DUI_AIDE",
+      "category": "scandal",
+      "weight": 45,
+      "cooldown": 12,
+      "trigger": "issueHeat.security > 20 && turn > 6",
+      "requires": { "minTurn": 6, "roles": ["legislator", "mayor", "councilor"] },
+      "headline": "服務處主任酒駕遭攔查，公務車輛使用紀錄也一併曝光",
+      "body": "你的服務處主任在凌晨遭警方攔查，酒測值達到每公升零點六八毫克並已被移送法辦。當時駕駛的車輛登記在服務處名下，行車紀錄顯示該車在過去半年有多次深夜的私人行程。這名主任跟著你已經超過十二年，是選區內動員能力最強也最被信任的核心幕僚。",
+      "options": [
+        {
+          "text": "當日宣布解除職務並主動公開車輛使用紀錄",
+          "hint": "止血最徹底，選區裡最能跑的那雙腿也跟著沒了",
+          "effects": {
+            "player": { "integrity": 5, "fame": 2, "politicalCapital": -2 },
+            "grassroots": { "_home": -2 },
+            "popMood": { "whitecollar": 4, "student": 3 },
+            "issueHeat": { "corruption": -2 },
+            "tagGain": ["TAG_CLEAN"]
+          }
+        },
+        {
+          "text": "先予停職並要求他完成戒酒治療與社會服務",
+          "hint": "留了餘地也留了風險，兩邊的人都不會覺得你處理得夠好",
+          "effects": {
+            "player": { "integrity": 1, "stigma": 1, "fame": -1 },
+            "grassroots": { "_home": -1 },
+            "popMood": { "whitecollar": -1, "farmer": 1 },
+            "issueHeat": { "security": 3 }
+          }
+        },
+        {
+          "text": "強調用人不必連坐，全案交由司法程序處理",
+          "hint": "老班底會更死忠，酒駕零容忍的社會氛圍會反噬到你身上",
+          "effects": {
+            "player": { "stigma": 3, "integrity": -2, "fame": 1 },
+            "grassroots": { "_home": 2 },
+            "popMood": { "_all": -3, "student": -5 },
+            "issueHeat": { "security": 5 }
+          }
+        },
+        {
+          "text": "推動民代辦公室用車與人事的公開申報制度",
+          "hint": "把火燒向整個體制，你會同時得罪所有黨派的同事",
+          "effects": {
+            "central": { "politics.staffTransparency": 0.05 },
+            "player": { "integrity": 4, "partyPrestige": -4, "fame": 4 },
+            "popMood": { "whitecollar": 5, "student": 4 },
+            "valuePressure": { "directDemocracy": 0.5 },
+            "issueHeat": { "corruption": 4 }
+          }
+        }
+      ],
+      "_designNote": "幕僚失格的切割、留任、護短與制度化，基層動員力與清廉形象直接互斥"
+    },
+    {
+      "id": "EVT_SCA_AFFAIR_RUMOR",
+      "category": "scandal",
+      "weight": 40,
+      "cooldown": 20,
+      "trigger": "player.fame > 40 && issueHeat.corruption > 15",
+      "requires": { "minTurn": 10, "roles": ["legislator", "mayor", "councilor"] },
+      "headline": "周刊刊出深夜同車照片，當事人稱是選區行程的正常往返",
+      "body": "焦週刊刊出一組你與某位企業公關主管深夜同車的照片，指稱兩人多次在同一棟大樓進出。你的辦公室說明那是選區座談後的順路接送，該名主管也是二十年的舊識與里鄰的義工幹部。你的配偶並未對外發言，但當天已取消原訂陪同出席的公益活動行程。",
+      "options": [
+        {
+          "text": "與配偶一同出面說明並公布當日完整行程",
+          "hint": "最能平息輿論的做法，把家人推到鏡頭前的代價很沉重",
+          "effects": {
+            "player": { "fame": 2, "integrity": 2, "fatigue": 4, "stigma": 1 },
+            "popMood": { "retiree": 3, "whitecollar": 2 },
+            "issueHeat": { "corruption": -2 },
+            "grassroots": { "_home": 1 }
+          }
+        },
+        {
+          "text": "對周刊提告求償並要求刊登更正啟事",
+          "hint": "強硬能嚇阻後續跟進，訴訟期間新聞會被反覆炒作",
+          "effects": {
+            "player": { "fame": 3, "funds": -3, "stigma": 1, "fatigue": 3 },
+            "popMood": { "whitecollar": -1, "student": -2 },
+            "issueHeat": { "corruption": 3 },
+            "tagGain": ["TAG_FIREBRAND"]
+          }
+        },
+        {
+          "text": "完全不予回應，把行程重心轉回選區服務",
+          "hint": "不餵養新聞週期是老方法，謠言會在基層自己長出版本",
+          "effects": {
+            "player": { "fame": -2, "stigma": 2, "integrity": 1 },
+            "grassroots": { "_home": 1 },
+            "popMood": { "farmer": 1, "student": -2 },
+            "issueHeat": { "corruption": 1 }
+          }
+        }
+      ],
+      "_designNote": "私德爭議的正面說明、法律對抗與冷處理，家庭與聲量各有代價"
+    },
+    {
+      "id": "EVT_SCA_THESIS_DOUBT",
+      "category": "scandal",
+      "weight": 40,
+      "cooldown": 18,
+      "trigger": "player.fame > 35 && issueHeat.education > 20",
+      "requires": { "minTurn": 8, "roles": ["legislator", "mayor", "councilor", "citizen"] },
+      "headline": "碩士論文比對相似度過高，校方成立學術倫理審定小組",
+      "body": "有網友將你十四年前的在職專班碩士論文送交比對系統，結果顯示與另一本同年度論文的相似度達到百分之四十一。校方已依規定成立學術倫理審定小組，預計三個月內作出正式認定。你的指導教授接受訪問時表示，當年在職專班的引註規範確實比現在寬鬆許多，但也承認比例偏高。",
+      "options": [
+        {
+          "text": "主動申請撤銷學位並公開全部原始資料",
+          "hint": "止血最乾脆，你的學經歷從此會少掉一個重要的頭銜",
+          "effects": {
+            "player": { "integrity": 5, "fame": -3, "stigma": 1 },
+            "popMood": { "student": 4, "whitecollar": 3, "publicsvc": 2 },
+            "issueHeat": { "education": -2 },
+            "tagGain": ["TAG_CLEAN"]
+          }
+        },
+        {
+          "text": "尊重校方審定，在結果出爐前完全不作辯解",
+          "hint": "程序上無可挑剔，這三個月你會被反覆拿出來鞭",
+          "effects": {
+            "player": { "integrity": 3, "fame": -1, "fatigue": 3, "stigma": 1 },
+            "popMood": { "publicsvc": 2, "whitecollar": 1 },
+            "issueHeat": { "education": 4 }
+          }
+        },
+        {
+          "text": "強調當年規範不同，反控是政治動機的追殺",
+          "hint": "支持者會覺得你被欺負，學界與年輕世代會直接判你出局",
+          "effects": {
+            "player": { "stigma": 3, "fame": 2, "integrity": -3 },
+            "popMood": { "student": -6, "publicsvc": -4, "farmer": 2 },
+            "grassroots": { "_home": 1 },
+            "issueHeat": { "education": 5 }
+          }
+        },
+        {
+          "text": "推動在職專班論文全面公開的學術透明修法",
+          "hint": "轉守為攻的一招，很多同僚的舊帳會被你一起掀開",
+          "effects": {
+            "central": { "education.academicIntegrity": 0.05 },
+            "player": { "integrity": 3, "partyPrestige": -3, "fame": 3 },
+            "popMood": { "student": 4, "publicsvc": 3 },
+            "issueHeat": { "education": 5 },
+            "tagGain": ["TAG_SCHOLAR"]
+          }
+        }
+      ],
+      "_designNote": "論文爭議的認錯、沉默、反擊與制度化，學歷資本與清廉形象互相交換"
+    },
+    {
+      "id": "EVT_SCA_SMUGGLING",
+      "category": "scandal",
+      "weight": 40,
+      "cooldown": 18,
+      "trigger": "issueHeat.corruption > 25 && world.CHN.stance < 40",
+      "requires": { "minTurn": 10, "roles": ["legislator", "mayor", "councilor"] },
+      "headline": "後援會幹部涉走私農產遭起訴，貨櫃紀錄牽出多筆政治捐款",
+      "body": "海關與檢調破獲一起走私農產案，被起訴的三人中有一位是你選區後援會的常務幹部。起訴書指出這批貨在報關時偽稱為飼料原料，實際上是遭到管制的境外水果，累計金額約六千萬元。檢調同時發現該公司在過去兩年曾對三個不同政黨的候選人捐款，其中包括你的政治獻金專戶。",
+      "options": [
+        {
+          "text": "立即開除該幹部並退還相關的全部捐款",
+          "hint": "切割得乾淨俐落，後援會的動員系統會出現明顯裂痕",
+          "effects": {
+            "player": { "integrity": 5, "funds": -5, "fame": 2 },
+            "grassroots": { "_home": -2 },
+            "popMood": { "whitecollar": 4, "farmer": 3 },
+            "issueHeat": { "corruption": -2 },
+            "tagGain": ["TAG_CLEAN"]
+          }
+        },
+        {
+          "text": "推動邊境查驗人力與科技設備的全面升級",
+          "hint": "把焦點導向政策很聰明，關務體系的抵抗會超乎你的想像",
+          "effects": {
+            "central": { "safety.borderControl": 0.05, "fiscal.balance": -0.003 },
+            "player": { "fame": 3, "integrity": 3, "politicalCapital": -2 },
+            "popMood": { "farmer": 5, "publicsvc": -3 },
+            "corpMood": { "logistics": -4, "food": 4 },
+            "issueHeat": { "corruption": 3 }
+          }
+        },
+        {
+          "text": "強調捐款合法且與案情無關，靜待司法認定",
+          "hint": "最省力的一步，媒體會每個開庭日都把你的名字寫進去",
+          "effects": {
+            "player": { "stigma": 2, "fame": -1, "funds": 2 },
+            "grassroots": { "_home": 1 },
+            "popMood": { "whitecollar": -3, "student": -3 },
+            "issueHeat": { "corruption": 4 }
+          }
+        }
+      ],
+      "_designNote": "走私案沾邊的切割、政策轉向與觀望，動員系統與清廉形象直接對價"
+    },
+    {
+      "id": "EVT_SCA_LAND_REZONE",
+      "category": "scandal",
+      "weight": 45,
+      "cooldown": 16,
+      "trigger": "issueHeat.housing > 25 && issueHeat.corruption > 20",
+      "requires": { "minTurn": 10, "roles": ["legislator", "mayor", "councilor"] },
+      "headline": "重劃區變更案通過前夕，多筆土地在半年內完成移轉",
+      "body": "明淨新聞比對地籍資料後發現，某重劃區在都市計畫變更公告前的半年內，有十七筆土地集中移轉給三家新設立的投資公司。這三家公司的登記地址完全相同，其中一位董事曾任你所屬黨部的財務委員。都市計畫委員會強調審議程序完全依法，變更方向也早在五年前的通盤檢討中就已揭露。",
+      "options": [
+        {
+          "text": "要求全案暫緩並調閱歷次審議的完整會議紀錄",
+          "hint": "監督的姿態最正確，開發案延宕的損失會有人記在帳上",
+          "effects": {
+            "player": { "integrity": 4, "fame": 3, "politicalCapital": -2 },
+            "corpMood": { "finance": -6, "steel": -4 },
+            "popMood": { "whitecollar": 4, "student": 3, "capitalist": -4 },
+            "issueHeat": { "corruption": 5, "housing": 4 },
+            "tagGain": ["TAG_MUCKRAKER"]
+          }
+        },
+        {
+          "text": "推動變更案前的土地移轉揭露與冷卻期制度",
+          "hint": "制度堵得住下一次，這一次的既得利益完全動不了",
+          "effects": {
+            "central": { "politics.landTransparency": 0.05 },
+            "player": { "integrity": 4, "partyPrestige": -3, "fame": 2 },
+            "valuePressure": { "marketFreedom": -0.4, "directDemocracy": 0.4 },
+            "corpMood": { "finance": -4 },
+            "popMood": { "whitecollar": 4 }
+          }
+        },
+        {
+          "text": "強調程序合法，主張不應以揣測妨礙地方發展",
+          "hint": "地方派系與開發商會領你的情，你的清白也就這樣賣掉了",
+          "effects": {
+            "player": { "funds": 6, "integrity": -3, "stigma": 2 },
+            "corpMood": { "finance": 7, "steel": 5 },
+            "popMood": { "whitecollar": -5, "student": -4, "capitalist": 4 },
+            "grassroots": { "_home": 2 },
+            "issueHeat": { "corruption": 4 },
+            "tagGain": ["TAG_GREEDY"]
+          }
+        }
+      ],
+      "_designNote": "土地變更弊案的追查、制度化與護航，金錢與清廉的兌換率最直接"
+    },
+    {
+      "id": "EVT_SCA_EXPENSE_AUDIT",
+      "category": "scandal",
+      "weight": 40,
+      "cooldown": 14,
+      "trigger": "player.funds < 100 && issueHeat.corruption > 20",
+      "requires": { "minTurn": 8, "roles": ["legislator", "councilor", "mayor"] },
+      "headline": "助理費核銷遭檢舉，八名助理的勞保投保紀錄成關鍵",
+      "body": "審計單位接獲檢舉，指出你辦公室登記的八名助理中有三人的勞保投保單位並非在你的服務處。你的辦公室說明那三位是負責選區活動的兼職人力，因為投保年資的銜接才維持在原單位。檢察官已調閱近三年的核銷單據，同時傳喚了兩名離職助理到案說明工作內容。",
+      "options": [
+        {
+          "text": "全面清查核銷制度並主動繳回有爭議的款項",
+          "hint": "自清最快，辦公室的人事與活動預算會立刻捉襟見肘",
+          "effects": {
+            "player": { "funds": -6, "integrity": 5, "fatigue": 3 },
+            "popMood": { "whitecollar": 4, "publicsvc": 2 },
+            "issueHeat": { "corruption": -3 },
+            "tagGain": ["TAG_CLEAN"]
+          }
+        },
+        {
+          "text": "說明是行之有年的慣例，要求檢調一併查其他人",
+          "hint": "同業會私下感謝你把水攪渾，觀感上你等於承認了慣例",
+          "effects": {
+            "player": { "stigma": 2, "fame": 2, "integrity": -1, "partyPrestige": -1 },
+            "popMood": { "whitecollar": -3, "publicsvc": -2 },
+            "issueHeat": { "corruption": 5 }
+          }
+        },
+        {
+          "text": "推動助理費改為定額公費並強制公開用途",
+          "hint": "制度改革能一勞永逸，幾乎所有民代都會把你視為公敵",
+          "effects": {
+            "central": { "politics.staffTransparency": 0.06 },
+            "player": { "integrity": 5, "partyPrestige": -4, "fame": 3 },
+            "popMood": { "whitecollar": 5, "student": 4 },
+            "valuePressure": { "directDemocracy": 0.5 },
+            "issueHeat": { "corruption": 4 }
+          }
+        }
+      ],
+      "_designNote": "助理費爭議的自清、法不責眾與制度改革，黨內人望是最主要的成本"
+    },
+    {
+      "id": "EVT_SCA_MEDIA_DEAL",
+      "category": "scandal",
+      "weight": 40,
+      "cooldown": 16,
+      "trigger": "player.fame > 45 && issueHeat.corruption > 20",
+      "requires": { "minTurn": 12, "roles": ["legislator", "mayor", "councilor"] },
+      "headline": "市政宣導預算集中三家媒體，置入行銷的界線遭到質疑",
+      "body": "公立傳播的調查報導指出，過去兩年的市政宣導預算有七成三集中流向立場相近的三家媒體。其中兩檔談話性節目在領取標案期間，曾多次以專題形式讚揚同一批政策成果。承辦單位強調採購都經過公開評選，節目內容則是媒體自主的編輯權，與標案本身沒有任何關係。",
+      "options": [
+        {
+          "text": "推動政策宣導標案的比例揭露與內容標示",
+          "hint": "新聞自由的疑慮能被處理，配合的媒體會開始對你冷淡",
+          "effects": {
+            "central": { "politics.mediaTransparency": 0.05 },
+            "player": { "integrity": 5, "fame": -2, "politicalCapital": -1 },
+            "popMood": { "whitecollar": 5, "student": 4 },
+            "valuePressure": { "progressivism": 0.4, "directDemocracy": 0.4 },
+            "issueHeat": { "corruption": 3 },
+            "tagGain": ["TAG_CLEAN"]
+          }
+        },
+        {
+          "text": "要求宣導預算改採比例分配給所有立場媒體",
+          "hint": "看似公平的分配，各家媒體都只會嫌自己分到得太少",
+          "effects": {
+            "central": { "politics.mediaTransparency": 0.02 },
+            "player": { "fame": 1, "integrity": 2, "fatigue": 2 },
+            "popMood": { "whitecollar": 2 },
+            "issueHeat": { "corruption": 1 }
+          }
+        },
+        {
+          "text": "強調評選合法，批評對手才是媒體操作的老手",
+          "hint": "友好媒體會繼續替你抬轎，這筆帳遲早會被翻出來算",
+          "effects": {
+            "player": { "fame": 4, "integrity": -3, "stigma": 2 },
+            "popMood": { "whitecollar": -4, "student": -4, "retiree": 2 },
+            "issueHeat": { "corruption": 4 },
+            "valuePressure": { "progressivism": -0.3 }
+          }
+        }
+      ],
+      "_designNote": "置入行銷爭議的透明化、平均分配與反擊，媒體資源與公信力的取捨"
+    },
+    {
+      "id": "EVT_SCA_OLD_PHOTO",
+      "category": "scandal",
+      "weight": 35,
+      "cooldown": 20,
+      "trigger": "player.fame > 30 && turn > 14",
+      "requires": { "minTurn": 14, "roles": ["legislator", "mayor", "councilor", "citizen"] },
+      "headline": "二十年前飯局合照曝光，同桌兩人現已因案在押",
+      "body": "PTC論壇有人翻出一張二十年前的尾牙合照，照片中你與兩位如今因組織犯罪被羈押的人物同桌。你的團隊查證後說明那是當年地方商圈的年終聚餐，出席者超過六十人，你當時只是受邀的來賓。被點名的兩人的律師也發出聲明，強調當事人在那個時間點並沒有任何前科紀錄。",
+      "options": [
+        {
+          "text": "公開當年活動的完整名單與邀請函作說明",
+          "hint": "事實能被說清楚，其他同桌者也會被媒體一一去敲門",
+          "effects": {
+            "player": { "integrity": 3, "fame": 1, "fatigue": 2 },
+            "popMood": { "whitecollar": 3, "smallbiz": -2 },
+            "issueHeat": { "corruption": -2 },
+            "grassroots": { "_home": -1 }
+          }
+        },
+        {
+          "text": "以一張照片不能定罪為由，公開嘲諷對手手法",
+          "hint": "情緒上很痛快，會被說成迴避問題也是必然的",
+          "effects": {
+            "player": { "fame": 3, "stigma": 1, "integrity": -1 },
+            "popMood": { "farmer": 2, "smallbiz": 2, "student": -3 },
+            "issueHeat": { "corruption": 3 },
+            "tagGain": ["TAG_FIREBRAND"]
+          }
+        },
+        {
+          "text": "藉機宣布公開所有任內的餐敘與接待紀錄",
+          "hint": "高標準能反守為攻，往後每一頓飯都會被放大檢視",
+          "effects": {
+            "player": { "integrity": 5, "fame": 3, "fatigue": 3, "politicalCapital": -1 },
+            "central": { "politics.lobbyTransparency": 0.04 },
+            "popMood": { "whitecollar": 5, "student": 4 },
+            "valuePressure": { "directDemocracy": 0.4 },
+            "tagGain": ["TAG_CLEAN"]
+          }
+        }
+      ],
+      "_designNote": "陳年舊照的說明、反擊與自我加碼，透明承諾會成為未來的枷鎖"
+    }
+  ]
+}

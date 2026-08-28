@@ -1,0 +1,78 @@
+{
+  "_source": "以 2025 年主計總處、財政部、經濟部能源署、國防部公開統計為基底，遊戲化改編",
+  "fiscal": {
+    "gdp": 26840,
+    "gdpGrowth": 0.028,
+    "inflation": 0.019,
+    "unemployment": 0.035,
+    "revenueBase": 3200,
+    "expenditure": 3350,
+    "debtOutstanding": 68000,
+    "debtCeilingRatio": 0.405,
+    "creditRating": "AA"
+  },
+  "monetary": {
+    "policyRate": 0.02,
+    "exchangeRateUSD": 31.2,
+    "foreignReserves": 590,
+    "m2Growth": 0.055
+  },
+  "energy": {
+    "mix": {
+      "coal": 0.28,
+      "lng": 0.42,
+      "nuclear": 0.06,
+      "renewable": 0.2,
+      "other": 0.04
+    },
+    "reserveMargin": 0.09,
+    "electricityPrice": 3.15,
+    "tpecDeficit": 420,
+    "carbonIntensity": 0.48
+  },
+  "defense": {
+    "budgetRatio": 0.031,
+    "readiness": 3,
+    "conscriptionMonths": 12,
+    "reserveStrength": 3,
+    "asymmetricCapability": 2,
+    "domesticProduction": 2
+  },
+  "diplomacy": {
+    "diplomaticAllies": 12,
+    "usRelation": 3,
+    "prcRelation": -2,
+    "japanRelation": 3,
+    "euRelation": 1,
+    "intlOrgParticipation": 1
+  },
+  "society": {
+    "birthRate": 0.87,
+    "agingRatio": 0.196,
+    "giniIndex": 0.341,
+    "housingAffordability": 9.8,
+    "healthcareSustainability": 2,
+    "pensionSustainability": 2,
+    "crimeRate": 100,
+    "socialTrust": 2,
+    "foodSelfSufficiency": 0.31,
+    "infiltration": 2
+  },
+  "government": {
+    "presidentParty": "PDA",
+    "presidentApproval": 51,
+    "premierApproval": 45,
+    "cabinetCohesion": 3,
+    "legislature": {
+      "PDA": 51,
+      "CRP": 52,
+      "TPL": 8,
+      "NGF": 2,
+      "TWR": 0,
+      "GSP": 0,
+      "CUA": 0,
+      "IND": 0
+    }
+  },
+  "stockIndex": 22000
+}

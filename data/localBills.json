@@ -1,0 +1,1192 @@
+{
+  "bills": [
+    {
+      "id": "BILL_LOCAL_TAX",
+      "name": "地方稅捐自治條例",
+      "defaultTier": 1,
+      "controversy": 2,
+      "desc": "訂定本縣市房屋稅差別稅率與地價稅加成標準，是地方自有財源與房市調控的主要工具。",
+      "tiers": [
+        {
+          "name": "降稅減免",
+          "desc": "調降非自住房屋稅率並放寬自住認定，減輕持有成本以吸引置產與遷入。",
+          "effects": {
+            "region": {
+              "finance.ownRevenue": -0.12,
+              "economy.housingPriceIndex": 3
+            },
+            "popSoL": {
+              "smallbiz": 0.3,
+              "capitalist": 0.25,
+              "retiree": 0.15,
+              "student": -0.15
+            },
+            "infrastructure": {
+              "housing": -0.1
+            },
+            "grassrootsEffect": 0.15
+          },
+          "cost": {
+            "annual": -180
+          }
+        },
+        {
+          "name": "現行",
+          "desc": "維持既有房屋稅與地價稅稅率級距，稅基與稅率均不作調整。",
+          "effects": {
+            "region": {},
+            "popSoL": {},
+            "infrastructure": {},
+            "grassrootsEffect": 0
+          },
+          "cost": {
+            "annual": 0
+          }
+        },
+        {
+          "name": "加成課徵",
+          "desc": "非自住住宅稅率往上加成一級，並取消部分土地稅減免，充實地方建設財源。",
+          "effects": {
+            "region": {
+              "finance.ownRevenue": 0.14,
+              "economy.housingPriceIndex": -2
+            },
+            "popSoL": {
+              "capitalist": -0.3,
+              "smallbiz": -0.15,
+              "student": 0.2,
+              "whitecollar": 0.15
+            },
+            "infrastructure": {
+              "housing": 0.2
+            },
+            "grassrootsEffect": -0.15
+          },
+          "cost": {
+            "annual": 210
+          }
+        },
+        {
+          "name": "高稅率累進",
+          "desc": "全國歸戶第三戶以上採高稅率累進課徵，並對空置房屋加徵，稅收專款興建社宅。",
+          "effects": {
+            "region": {
+              "finance.ownRevenue": 0.26,
+              "economy.housingPriceIndex": -6,
+              "economy.rentBurden": -0.05
+            },
+            "popSoL": {
+              "capitalist": -0.6,
+              "smallbiz": -0.3,
+              "retiree": -0.2,
+              "student": 0.4,
+              "whitecollar": 0.3
+            },
+            "infrastructure": {
+              "housing": 0.4
+            },
+            "grassrootsEffect": -0.3
+          },
+          "cost": {
+            "annual": 380
+          }
+        }
+      ]
+    },
+    {
+      "id": "BILL_URBAN_PLANNING",
+      "name": "都市計畫變更與容積獎勵",
+      "defaultTier": 1,
+      "controversy": 3,
+      "desc": "審定都市計畫通盤檢討與容積獎勵上限，決定都市更新速度、房價走勢與居住密度。",
+      "tiers": [
+        {
+          "name": "保守",
+          "desc": "嚴格限縮容積獎勵項目並提高退縮與綠覆率要求，都更速度慢但居住環境品質較高。",
+          "effects": {
+            "region": {
+              "economy.gdpGrowth": -0.04,
+              "economy.housingPriceIndex": 2
+            },
+            "popSoL": {
+              "capitalist": -0.3,
+              "smallbiz": -0.2,
+              "retiree": 0.15
+            },
+            "infrastructure": {
+              "housing": -0.2,
+              "transport": -0.1
+            },
+            "grassrootsEffect": -0.1
+          },
+          "cost": {
+            "annual": 20
+          }
+        },
+        {
+          "name": "現行",
+          "desc": "維持既有容積獎勵項目與審議程序，都更案件依個案逐一審查。",
+          "effects": {
+            "region": {},
+            "popSoL": {},
+            "infrastructure": {},
+            "grassrootsEffect": 0
+          },
+          "cost": {
+            "annual": 0
+          }
+        },
+        {
+          "name": "大幅獎勵",
+          "desc": "大幅放寬危老與都更容積獎勵並簡化審議，建設量能爆發但公共設施承載壓力升高。",
+          "effects": {
+            "region": {
+              "economy.gdpGrowth": 0.1,
+              "economy.housingPriceIndex": 7,
+              "finance.ownRevenue": 0.06
+            },
+            "popSoL": {
+              "capitalist": 0.55,
+              "smallbiz": 0.3,
+              "bluecollar": 0.25,
+              "student": -0.25,
+              "retiree": -0.2
+            },
+            "infrastructure": {
+              "housing": 0.5,
+              "transport": -0.3,
+              "water": -0.2
+            },
+            "grassrootsEffect": 0.25
+          },
+          "cost": {
+            "annual": -60
+          }
+        }
+      ]
+    },
+    {
+      "id": "BILL_MASS_TRANSIT",
+      "name": "大眾運輸建設案",
+      "defaultTier": 1,
+      "controversy": 3,
+      "desc": "決定本縣市大眾運輸的投資規模與路網型式，工期長達十年以上且牽動長期地方負債。",
+      "tiers": [
+        {
+          "name": "不新增",
+          "desc": "不編列新的軌道或幹線公車預算，通勤條件維持現狀，財政壓力最小。",
+          "effects": {
+            "region": {},
+            "popSoL": {
+              "whitecollar": -0.1,
+              "student": -0.1
+            },
+            "infrastructure": {
+              "transport": -0.1
+            },
+            "grassrootsEffect": -0.1
+          },
+          "cost": {
+            "annual": 0
+          }
+        },
+        {
+          "name": "公車路網優化",
+          "desc": "增設幹線公車專用道與轉乘優惠，投資規模小但三年內即可見到通勤改善。",
+          "effects": {
+            "region": {
+              "economy.gdpGrowth": 0.02
+            },
+            "popSoL": {
+              "whitecollar": 0.2,
+              "student": 0.25,
+              "service": 0.2,
+              "retiree": 0.15
+            },
+            "infrastructure": {
+              "transport": 0.3
+            },
+            "grassrootsEffect": 0.15
+          },
+          "cost": {
+            "annual": -45
+          }
+        },
+        {
+          "name": "輕軌系統",
+          "desc": "興建輕軌路網銜接既有車站，工期約八年，沿線土地增值但施工期交通黑暗期漫長。",
+          "effects": {
+            "region": {
+              "economy.gdpGrowth": 0.06,
+              "economy.housingPriceIndex": 5,
+              "finance.debt": 0.1
+            },
+            "popSoL": {
+              "whitecollar": 0.3,
+              "student": 0.3,
+              "service": 0.25,
+              "smallbiz": -0.2,
+              "capitalist": 0.25
+            },
+            "infrastructure": {
+              "transport": 0.6
+            },
+            "grassrootsEffect": 0.25
+          },
+          "cost": {
+            "annual": -220
+          }
+        },
+        {
+          "name": "捷運系統",
+          "desc": "推動高運量捷運路線，工期十五年以上，財政負擔沉重但長期改寫都市發展結構。",
+          "effects": {
+            "region": {
+              "economy.gdpGrowth": 0.12,
+              "economy.housingPriceIndex": 11,
+              "finance.debt": 0.28,
+              "economy.unemployment": -0.05
+            },
+            "popSoL": {
+              "whitecollar": 0.45,
+              "student": 0.4,
+              "service": 0.35,
+              "bluecollar": 0.3,
+              "smallbiz": -0.3,
+              "capitalist": 0.4
+            },
+            "infrastructure": {
+              "transport": 1,
+              "digital": 0.1
+            },
+            "grassrootsEffect": 0.35
+          },
+          "cost": {
+            "annual": -680
+          }
+        }
+      ]
+    },
+    {
+      "id": "BILL_SOCIAL_HOUSING_LOCAL",
+      "name": "社會住宅興建計畫",
+      "defaultTier": 1,
+      "controversy": 3,
+      "desc": "決定本縣市社會住宅的興建戶數與租金定價，直接影響青年居住負擔與地方舉債水位。",
+      "tiers": [
+        {
+          "name": "不興建",
+          "desc": "不編列社宅興建預算，僅維持既有租金補貼受理窗口，土地留作其他開發使用。",
+          "effects": {
+            "region": {
+              "economy.housingPriceIndex": 2
+            },
+            "popSoL": {
+              "student": -0.25,
+              "whitecollar": -0.15,
+              "capitalist": 0.2
+            },
+            "infrastructure": {
+              "housing": -0.2
+            },
+            "grassrootsEffect": -0.15
+          },
+          "cost": {
+            "annual": 0
+          }
+        },
+        {
+          "name": "兩千戶",
+          "desc": "以既有公有土地興建兩千戶社宅，規模有限但可作為示範並累積興辦經驗。",
+          "effects": {
+            "region": {
+              "finance.debt": 0.04,
+              "economy.rentBurden": -0.02
+            },
+            "popSoL": {
+              "student": 0.25,
+              "whitecollar": 0.2,
+              "service": 0.15
+            },
+            "infrastructure": {
+              "housing": 0.3
+            },
+            "grassrootsEffect": 0.15
+          },
+          "cost": {
+            "annual": -90
+          }
+        },
+        {
+          "name": "八千戶",
+          "desc": "八千戶大規模興建並搭配包租代管，需徵收部分私有土地，鄰避抗爭風險升高。",
+          "effects": {
+            "region": {
+              "finance.debt": 0.14,
+              "economy.rentBurden": -0.06,
+              "economy.housingPriceIndex": -3
+            },
+            "popSoL": {
+              "student": 0.45,
+              "whitecollar": 0.35,
+              "service": 0.3,
+              "bluecollar": 0.25,
+              "capitalist": -0.3
+            },
+            "infrastructure": {
+              "housing": 0.6
+            },
+            "grassrootsEffect": 0.1
+          },
+          "cost": {
+            "annual": -320
+          }
+        },
+        {
+          "name": "兩萬戶",
+          "desc": "兩萬戶只租不售的公共住宅計畫，地方負債急速攀升，房市與地主反彈極為強烈。",
+          "effects": {
+            "region": {
+              "finance.debt": 0.34,
+              "economy.rentBurden": -0.12,
+              "economy.housingPriceIndex": -8,
+              "economy.gdpGrowth": 0.05
+            },
+            "popSoL": {
+              "student": 0.65,
+              "whitecollar": 0.5,
+              "service": 0.4,
+              "bluecollar": 0.35,
+              "capitalist": -0.65,
+              "smallbiz": -0.25
+            },
+            "infrastructure": {
+              "housing": 1,
+              "transport": 0.1
+            },
+            "grassrootsEffect": -0.1
+          },
+          "cost": {
+            "annual": -760
+          }
+        }
+      ]
+    },
+    {
+      "id": "BILL_CHILDCARE_ELDERCARE",
+      "name": "托育與長照補助條例",
+      "defaultTier": 0,
+      "controversy": 2,
+      "desc": "訂定本縣市托育與長照的補助額度與公共服務據點配置，攸關生育意願與女性就業。",
+      "tiers": [
+        {
+          "name": "現行",
+          "desc": "維持中央基準的托育補助與長照據點密度，地方僅作行政協助不另加碼。",
+          "effects": {
+            "region": {},
+            "popSoL": {},
+            "infrastructure": {},
+            "grassrootsEffect": 0
+          },
+          "cost": {
+            "annual": 0
+          }
+        },
+        {
+          "name": "加碼補助",
+          "desc": "地方加碼托育津貼並增設公共托育家園與日照中心，育兒與照顧負擔明顯減輕。",
+          "effects": {
+            "region": {
+              "economy.unemployment": -0.04
+            },
+            "popSoL": {
+              "service": 0.3,
+              "whitecollar": 0.3,
+              "retiree": 0.35,
+              "bluecollar": 0.25,
+              "techpro": 0.2
+            },
+            "infrastructure": {
+              "medical": 0.3,
+              "education": 0.2
+            },
+            "grassrootsEffect": 0.3
+          },
+          "cost": {
+            "annual": -140
+          }
+        },
+        {
+          "name": "全額公共化",
+          "desc": "零到六歲托育與長照服務全面公共化且近乎免費，財政負擔沉重但社會支持度極高。",
+          "effects": {
+            "region": {
+              "economy.unemployment": -0.09,
+              "finance.debt": 0.1
+            },
+            "popSoL": {
+              "service": 0.5,
+              "whitecollar": 0.45,
+              "retiree": 0.6,
+              "bluecollar": 0.4,
+              "techpro": 0.35,
+              "capitalist": -0.15
+            },
+            "infrastructure": {
+              "medical": 0.6,
+              "education": 0.4
+            },
+            "grassrootsEffect": 0.4
+          },
+          "cost": {
+            "annual": -420
+          }
+        }
+      ]
+    },
+    {
+      "id": "BILL_SCHOOL_MEALS",
+      "name": "教育補助與營養午餐",
+      "defaultTier": 0,
+      "controversy": 1,
+      "desc": "訂定本縣市中小學學雜費補助與營養午餐的負擔方式與食材採購標準，牽動家庭支出。",
+      "tiers": [
+        {
+          "name": "部分補助",
+          "desc": "僅對低收與中低收家庭補助午餐費用，其餘家庭依既有標準自行負擔。",
+          "effects": {
+            "region": {},
+            "popSoL": {},
+            "infrastructure": {},
+            "grassrootsEffect": 0
+          },
+          "cost": {
+            "annual": 0
+          }
+        },
+        {
+          "name": "全面免費",
+          "desc": "全縣市中小學營養午餐一律免費，減輕家庭負擔並確保學童基本營養攝取。",
+          "effects": {
+            "region": {},
+            "popSoL": {
+              "bluecollar": 0.3,
+              "service": 0.25,
+              "farmer": 0.25,
+              "whitecollar": 0.2,
+              "student": 0.3
+            },
+            "infrastructure": {
+              "education": 0.3
+            },
+            "grassrootsEffect": 0.3
+          },
+          "cost": {
+            "annual": -110
+          }
+        },
+        {
+          "name": "免費加有機食材",
+          "desc": "午餐免費並全面採用在地有機或產銷履歷食材，農民受惠但採購成本大幅上升。",
+          "effects": {
+            "region": {
+              "economy.gdpGrowth": 0.02
+            },
+            "popSoL": {
+              "farmer": 0.55,
+              "bluecollar": 0.3,
+              "service": 0.25,
+              "whitecollar": 0.25,
+              "student": 0.35
+            },
+            "infrastructure": {
+              "education": 0.4
+            },
+            "grassrootsEffect": 0.35
+          },
+          "cost": {
+            "annual": -230
+          }
+        }
+      ]
+    },
+    {
+      "id": "BILL_AIR_POLLUTION",
+      "name": "環保稽查與空污自治條例",
+      "defaultTier": 1,
+      "controversy": 4,
+      "desc": "訂定本縣市固定污染源的排放標準、稽查密度與生煤使用管制，牽動空氣品質與工業成本。",
+      "tiers": [
+        {
+          "name": "寬鬆",
+          "desc": "放寬地方加嚴標準並降低稽查頻率，企業營運成本下降但空品與健康風險升高。",
+          "effects": {
+            "region": {
+              "economy.gdpGrowth": 0.05,
+              "economy.unemployment": -0.04
+            },
+            "popSoL": {
+              "bluecollar": 0.2,
+              "capitalist": 0.35,
+              "smallbiz": 0.25,
+              "retiree": -0.3,
+              "student": -0.25,
+              "_all": -0.1
+            },
+            "infrastructure": {
+              "medical": -0.2
+            },
+            "grassrootsEffect": -0.2
+          },
+          "cost": {
+            "annual": 30
+          }
+        },
+        {
+          "name": "現行",
+          "desc": "維持既有排放標準與例行稽查頻率，重大違規才啟動連續處罰程序。",
+          "effects": {
+            "region": {},
+            "popSoL": {},
+            "infrastructure": {},
+            "grassrootsEffect": 0
+          },
+          "cost": {
+            "annual": 0
+          }
+        },
+        {
+          "name": "嚴格管制",
+          "desc": "地方標準加嚴並提高稽查密度與罰鍰上限，要求排放大戶加裝連續監測設備。",
+          "effects": {
+            "region": {
+              "economy.gdpGrowth": -0.05,
+              "economy.unemployment": 0.04
+            },
+            "popSoL": {
+              "bluecollar": -0.2,
+              "capitalist": -0.4,
+              "smallbiz": -0.3,
+              "retiree": 0.3,
+              "student": 0.3,
+              "_all": 0.12
+            },
+            "infrastructure": {
+              "medical": 0.3
+            },
+            "grassrootsEffect": 0.15
+          },
+          "cost": {
+            "annual": -70
+          }
+        },
+        {
+          "name": "生煤禁令",
+          "desc": "分期禁止轄內使用生煤與石油焦，空品顯著改善但重工業與電廠面臨停工壓力。",
+          "effects": {
+            "region": {
+              "economy.gdpGrowth": -0.14,
+              "economy.unemployment": 0.12,
+              "finance.ownRevenue": -0.08
+            },
+            "popSoL": {
+              "bluecollar": -0.5,
+              "capitalist": -0.7,
+              "smallbiz": -0.4,
+              "retiree": 0.45,
+              "student": 0.45,
+              "_all": 0.2
+            },
+            "infrastructure": {
+              "medical": 0.5,
+              "energy": -0.4
+            },
+            "grassrootsEffect": -0.05
+          },
+          "cost": {
+            "annual": -160
+          }
+        }
+      ]
+    },
+    {
+      "id": "BILL_INDUSTRIAL_PARK",
+      "name": "工業區與科學園區開發案",
+      "defaultTier": 0,
+      "controversy": 4,
+      "desc": "審議本縣市新設產業園區的用地徵收與開發規模，牽動就業機會、農地流失與環境負荷。",
+      "tiers": [
+        {
+          "name": "不開發",
+          "desc": "不新設產業園區，維持既有農地與綠帶，就業成長有限但土地爭議也最少。",
+          "effects": {
+            "region": {},
+            "popSoL": {},
+            "infrastructure": {},
+            "grassrootsEffect": 0
+          },
+          "cost": {
+            "annual": 0
+          }
+        },
+        {
+          "name": "中型園區",
+          "desc": "開發百公頃級園區並以既有工業用地變更為主，就業成長明顯而爭議相對可控。",
+          "effects": {
+            "region": {
+              "economy.gdpGrowth": 0.09,
+              "economy.unemployment": -0.08,
+              "finance.ownRevenue": 0.07
+            },
+            "popSoL": {
+              "bluecollar": 0.35,
+              "techpro": 0.3,
+              "smallbiz": 0.25,
+              "capitalist": 0.35,
+              "farmer": -0.3
+            },
+            "infrastructure": {
+              "transport": 0.2,
+              "water": -0.2,
+              "energy": -0.1
+            },
+            "grassrootsEffect": 0.2
+          },
+          "cost": {
+            "annual": -190
+          }
+        },
+        {
+          "name": "大型園區",
+          "desc": "徵收數百公頃農地興建大型科學園區，經濟效益龐大但土地徵收抗爭與水電排擠嚴重。",
+          "effects": {
+            "region": {
+              "economy.gdpGrowth": 0.2,
+              "economy.unemployment": -0.16,
+              "finance.ownRevenue": 0.16,
+              "economy.housingPriceIndex": 8,
+              "finance.debt": 0.12
+            },
+            "popSoL": {
+              "bluecollar": 0.5,
+              "techpro": 0.55,
+              "smallbiz": 0.35,
+              "capitalist": 0.6,
+              "farmer": -0.7,
+              "retiree": -0.25
+            },
+            "infrastructure": {
+              "transport": 0.4,
+              "water": -0.5,
+              "energy": -0.4,
+              "digital": 0.3
+            },
+            "grassrootsEffect": -0.15
+          },
+          "cost": {
+            "annual": -520
+          }
+        }
+      ]
+    },
+    {
+      "id": "BILL_TOURISM_FESTIVAL",
+      "name": "觀光與節慶活動預算",
+      "defaultTier": 1,
+      "controversy": 2,
+      "desc": "決定本縣市觀光行銷與大型節慶活動的預算規模，牽動服務業產值與蚊子建設風險。",
+      "tiers": [
+        {
+          "name": "縮減",
+          "desc": "大幅刪減節慶與行銷預算，財政壓力減輕但觀光人潮與地方能見度同步下滑。",
+          "effects": {
+            "region": {
+              "economy.gdpGrowth": -0.03
+            },
+            "popSoL": {
+              "service": -0.3,
+              "smallbiz": -0.25
+            },
+            "infrastructure": {
+              "transport": 0
+            },
+            "grassrootsEffect": -0.2
+          },
+          "cost": {
+            "annual": 60
+          }
+        },
+        {
+          "name": "現行",
+          "desc": "維持既有節慶檔期與觀光行銷規模，人潮與預算大致維持過去水準。",
+          "effects": {
+            "region": {},
+            "popSoL": {},
+            "infrastructure": {},
+            "grassrootsEffect": 0
+          },
+          "cost": {
+            "annual": 0
+          }
+        },
+        {
+          "name": "大型節慶",
+          "desc": "增辦跨年、燈會等大型節慶並擴大媒體行銷，短期人潮明顯提升。",
+          "effects": {
+            "region": {
+              "economy.gdpGrowth": 0.05,
+              "finance.ownRevenue": 0.04
+            },
+            "popSoL": {
+              "service": 0.35,
+              "smallbiz": 0.3,
+              "farmer": 0.15,
+              "retiree": -0.1
+            },
+            "infrastructure": {
+              "transport": -0.1
+            },
+            "grassrootsEffect": 0.3
+          },
+          "cost": {
+            "annual": -95
+          }
+        },
+        {
+          "name": "國際級活動",
+          "desc": "爭辦國際級展會與大型賽事並興建配套場館，效益不確定且蚊子館風險相當高。",
+          "effects": {
+            "region": {
+              "economy.gdpGrowth": 0.08,
+              "finance.ownRevenue": 0.06,
+              "finance.debt": 0.12
+            },
+            "popSoL": {
+              "service": 0.5,
+              "smallbiz": 0.4,
+              "whitecollar": 0.15,
+              "retiree": -0.2,
+              "student": 0.15
+            },
+            "infrastructure": {
+              "transport": 0.2,
+              "digital": 0.1
+            },
+            "grassrootsEffect": 0.25
+          },
+          "cost": {
+            "annual": -330
+          }
+        }
+      ]
+    },
+    {
+      "id": "BILL_AGRI_WATER",
+      "name": "農漁業補助與水利工程",
+      "defaultTier": 1,
+      "controversy": 2,
+      "desc": "決定本縣市農漁業補助額度與灌溉排水設施投資，牽動農民收入與地層下陷防治成效。",
+      "tiers": [
+        {
+          "name": "縮減",
+          "desc": "刪減地方農漁補助並停止新增水利工程，財源移作他用但農漁民反彈強烈。",
+          "effects": {
+            "region": {
+              "economy.gdpGrowth": -0.02
+            },
+            "popSoL": {
+              "farmer": -0.55,
+              "retiree": -0.15
+            },
+            "infrastructure": {
+              "water": -0.3,
+              "disasterResilience": -0.2
+            },
+            "grassrootsEffect": -0.35
+          },
+          "cost": {
+            "annual": 70
+          }
+        },
+        {
+          "name": "現行",
+          "desc": "維持既有農漁補助項目與灌溉設施的例行維護更新工程規模。",
+          "effects": {
+            "region": {},
+            "popSoL": {},
+            "infrastructure": {},
+            "grassrootsEffect": 0
+          },
+          "cost": {
+            "annual": 0
+          }
+        },
+        {
+          "name": "加碼",
+          "desc": "擴大農機與資材補助並推動管路灌溉與海水養殖設施，減緩超抽地下水的壓力。",
+          "effects": {
+            "region": {
+              "economy.gdpGrowth": 0.03
+            },
+            "popSoL": {
+              "farmer": 0.55,
+              "retiree": 0.15,
+              "smallbiz": 0.15
+            },
+            "infrastructure": {
+              "water": 0.5,
+              "disasterResilience": 0.2
+            },
+            "grassrootsEffect": 0.35
+          },
+          "cost": {
+            "annual": -185
+          }
+        }
+      ]
+    },
+    {
+      "id": "BILL_FLOOD_DISASTER",
+      "name": "治水與防災特別預算",
+      "defaultTier": 1,
+      "controversy": 2,
+      "desc": "決定本縣市排水系統、滯洪池與坡地防災的投資規模，直接影響颱風豪雨的災損程度。",
+      "tiers": [
+        {
+          "name": "不編列",
+          "desc": "不編列治水特別預算，僅倚賴中央補助與既有設施，淹水風險維持高檔。",
+          "effects": {
+            "region": {},
+            "popSoL": {
+              "farmer": -0.2,
+              "smallbiz": -0.15
+            },
+            "infrastructure": {
+              "disasterResilience": -0.3,
+              "water": -0.2
+            },
+            "grassrootsEffect": -0.2
+          },
+          "cost": {
+            "annual": 0
+          }
+        },
+        {
+          "name": "常態預算",
+          "desc": "維持年度例行的排水疏濬與抽水站維護，防災能力大致跟上既有降雨型態。",
+          "effects": {
+            "region": {},
+            "popSoL": {},
+            "infrastructure": {},
+            "grassrootsEffect": 0
+          },
+          "cost": {
+            "annual": -40
+          }
+        },
+        {
+          "name": "大型治水計畫",
+          "desc": "舉債推動滯洪池、雨水下水道與海堤的整體性工程，防洪能力顯著提升。",
+          "effects": {
+            "region": {
+              "finance.debt": 0.18,
+              "economy.gdpGrowth": 0.04,
+              "economy.unemployment": -0.03
+            },
+            "popSoL": {
+              "farmer": 0.4,
+              "smallbiz": 0.3,
+              "bluecollar": 0.25,
+              "retiree": 0.2,
+              "_all": 0.15
+            },
+            "infrastructure": {
+              "disasterResilience": 0.9,
+              "water": 0.4
+            },
+            "grassrootsEffect": 0.35
+          },
+          "cost": {
+            "annual": -430
+          }
+        }
+      ]
+    },
+    {
+      "id": "BILL_PARKING_TRAFFIC",
+      "name": "停車與交通管理自治條例",
+      "defaultTier": 1,
+      "controversy": 3,
+      "desc": "訂定本縣市路邊停車收費費率與交通違規取締強度，牽動市民日常感受與地方規費收入。",
+      "tiers": [
+        {
+          "name": "免費停車",
+          "desc": "路邊停車全面免費並放寬取締，市民短期滿意但路況壅塞與違停亂象明顯惡化。",
+          "effects": {
+            "region": {
+              "finance.ownRevenue": -0.06
+            },
+            "popSoL": {
+              "service": 0.2,
+              "smallbiz": 0.25,
+              "bluecollar": 0.2,
+              "whitecollar": 0.15
+            },
+            "infrastructure": {
+              "transport": -0.4
+            },
+            "grassrootsEffect": 0.3
+          },
+          "cost": {
+            "annual": -95
+          }
+        },
+        {
+          "name": "現行",
+          "desc": "維持既有停車費率與取締強度，重點路段收費而次要道路多維持免費。",
+          "effects": {
+            "region": {},
+            "popSoL": {},
+            "infrastructure": {},
+            "grassrootsEffect": 0
+          },
+          "cost": {
+            "annual": 0
+          }
+        },
+        {
+          "name": "高費率與全面收費",
+          "desc": "市區路邊全面收費且費率調高，並加嚴違停拖吊，路況改善但民怨明顯升高。",
+          "effects": {
+            "region": {
+              "finance.ownRevenue": 0.1
+            },
+            "popSoL": {
+              "service": -0.25,
+              "smallbiz": -0.3,
+              "bluecollar": -0.25,
+              "whitecollar": -0.15,
+              "student": 0.1
+            },
+            "infrastructure": {
+              "transport": 0.4
+            },
+            "grassrootsEffect": -0.35
+          },
+          "cost": {
+            "annual": 150
+          }
+        }
+      ]
+    },
+    {
+      "id": "BILL_CULTURAL_HERITAGE",
+      "name": "文化資產保存與場館興建",
+      "defaultTier": 1,
+      "controversy": 3,
+      "desc": "決定本縣市古蹟指定強度與文化場館投資規模，牽動都更速度與地方文化認同的養成。",
+      "tiers": [
+        {
+          "name": "保存優先",
+          "desc": "擴大古蹟與歷史建築指定範圍並嚴審周邊開發，文化資產受保護但都更幾近停滯。",
+          "effects": {
+            "region": {
+              "economy.gdpGrowth": -0.04,
+              "economy.housingPriceIndex": -2
+            },
+            "popSoL": {
+              "student": 0.25,
+              "techpro": 0.2,
+              "capitalist": -0.35,
+              "smallbiz": -0.2,
+              "retiree": 0.15
+            },
+            "infrastructure": {
+              "housing": -0.3,
+              "education": 0.3
+            },
+            "grassrootsEffect": -0.1
+          },
+          "cost": {
+            "annual": -120
+          }
+        },
+        {
+          "name": "平衡",
+          "desc": "以個案審議兼顧保存與開發，並將部分老屋轉型為社區型文化場館。",
+          "effects": {
+            "region": {},
+            "popSoL": {},
+            "infrastructure": {},
+            "grassrootsEffect": 0
+          },
+          "cost": {
+            "annual": -35
+          }
+        },
+        {
+          "name": "開發優先",
+          "desc": "放寬古蹟指定並加速容積移轉，都更效率大幅提升但文化團體抗爭不斷。",
+          "effects": {
+            "region": {
+              "economy.gdpGrowth": 0.07,
+              "economy.housingPriceIndex": 4,
+              "finance.ownRevenue": 0.05
+            },
+            "popSoL": {
+              "capitalist": 0.45,
+              "smallbiz": 0.3,
+              "bluecollar": 0.2,
+              "student": -0.3,
+              "techpro": -0.25
+            },
+            "infrastructure": {
+              "housing": 0.4,
+              "education": -0.2
+            },
+            "grassrootsEffect": 0.1
+          },
+          "cost": {
+            "annual": 60
+          }
+        }
+      ]
+    },
+    {
+      "id": "BILL_NEIGHBORHOOD_FUND",
+      "name": "里鄰建設配合款",
+      "defaultTier": 1,
+      "controversy": 2,
+      "desc": "訂定每里每年可運用的小型工程配合款額度，是基層樁腳網絡與貪腐風險的交會點。",
+      "tiers": [
+        {
+          "name": "每里五十萬",
+          "desc": "配合款壓縮至每里五十萬元，小型工程量體有限，基層動員能量隨之削弱。",
+          "effects": {
+            "region": {},
+            "popSoL": {
+              "retiree": -0.15,
+              "smallbiz": -0.15
+            },
+            "infrastructure": {
+              "transport": -0.1
+            },
+            "grassrootsEffect": -0.35
+          },
+          "cost": {
+            "annual": 40
+          }
+        },
+        {
+          "name": "每里兩百萬",
+          "desc": "維持每里兩百萬元的既有額度，人行道與排水溝等小型工程得以常態辦理。",
+          "effects": {
+            "region": {},
+            "popSoL": {},
+            "infrastructure": {},
+            "grassrootsEffect": 0
+          },
+          "cost": {
+            "annual": 0
+          }
+        },
+        {
+          "name": "每里五百萬",
+          "desc": "配合款大幅加碼至每里五百萬元，基層人脈迅速鞏固但蚊子建設與弊案風險升高。",
+          "effects": {
+            "region": {
+              "finance.debt": 0.06
+            },
+            "popSoL": {
+              "retiree": 0.3,
+              "smallbiz": 0.3,
+              "farmer": 0.25,
+              "bluecollar": 0.2,
+              "student": -0.15
+            },
+            "infrastructure": {
+              "transport": 0.3,
+              "water": 0.2
+            },
+            "grassrootsEffect": 0.5
+          },
+          "cost": {
+            "annual": -260
+          }
+        }
+      ]
+    },
+    {
+      "id": "BILL_UTILITY_RATES",
+      "name": "地方公用事業費率",
+      "defaultTier": 1,
+      "controversy": 3,
+      "desc": "審定本縣市自來水、公車與垃圾清運等公用事業費率，牽動市民負擔與事業單位虧損。",
+      "tiers": [
+        {
+          "name": "凍漲",
+          "desc": "公用事業費率全面凍結，市民負擔不變但虧損由地方預算補貼且設施更新延宕。",
+          "effects": {
+            "region": {
+              "finance.ownRevenue": -0.05,
+              "finance.debt": 0.06
+            },
+            "popSoL": {
+              "bluecollar": 0.2,
+              "service": 0.2,
+              "retiree": 0.25,
+              "farmer": 0.15,
+              "_all": 0.1
+            },
+            "infrastructure": {
+              "water": -0.3,
+              "transport": -0.2
+            },
+            "grassrootsEffect": 0.25
+          },
+          "cost": {
+            "annual": -150
+          }
+        },
+        {
+          "name": "微調",
+          "desc": "費率隨物價小幅調整，虧損縮小且基本管線與車輛汰換得以按期推動。",
+          "effects": {
+            "region": {},
+            "popSoL": {},
+            "infrastructure": {},
+            "grassrootsEffect": 0
+          },
+          "cost": {
+            "annual": 0
+          }
+        },
+        {
+          "name": "反映成本",
+          "desc": "費率全面反映營運成本並取消部分優惠，財務健全但漲價衝擊庶民日常感受。",
+          "effects": {
+            "region": {
+              "finance.ownRevenue": 0.11,
+              "finance.debt": -0.05
+            },
+            "popSoL": {
+              "bluecollar": -0.3,
+              "service": -0.25,
+              "retiree": -0.35,
+              "farmer": -0.25,
+              "_all": -0.15
+            },
+            "infrastructure": {
+              "water": 0.4,
+              "transport": 0.3
+            },
+            "grassrootsEffect": -0.3
+          },
+          "cost": {
+            "annual": 190
+          }
+        }
+      ]
+    }
+  ]
+}

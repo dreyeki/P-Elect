@@ -1,0 +1,15 @@
+{
+  "name": "選舉人生：福爾摩沙",
+  "short_name": "選舉人生",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "orientation": "portrait",
+  "background_color": "#0e1116",
+  "theme_color": "#0e1116",
+  "lang": "zh-Hant",
+  "description": "從二〇二六年的政治素人開始，在一個每一項數字都會回頭咬你的台灣，走到權力的頂端——或者摔下去。",
+  "icons": [
+    { "src": "./icon.svg", "sizes": "any", "type": "image/svg+xml", "purpose": "any maskable" }
+  ]
+}

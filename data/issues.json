@@ -1,0 +1,65 @@
+{
+  "_note": "12 大議題。heat 為 2026 開局熱度（0~5 整數），每月回合自然衰減 decay。strataWeight 為 10 個職業階層對該議題的敏感度倍率（0.5~1.5 具體數值）。",
+  "issues": [
+    {
+      "id": "economy", "name": "經濟", "heat": 3, "decay": 0.25,
+      "strataWeight": { "farmer": 0.9, "bluecollar": 1.1, "service": 1.0, "whitecollar": 1.0, "techpro": 0.9, "smallbiz": 1.2, "capitalist": 1.0, "publicsvc": 0.8, "student": 0.7, "retiree": 0.8 },
+      "desc": "出口訂單、股市與整體景氣感受，是所有議題的底色，經濟差的時候其他政績都會被打折計算。"
+    },
+    {
+      "id": "prices", "name": "物價", "heat": 4, "decay": 0.25,
+      "strataWeight": { "farmer": 1.1, "bluecollar": 1.3, "service": 1.2, "whitecollar": 1.1, "techpro": 0.8, "smallbiz": 1.2, "capitalist": 0.6, "publicsvc": 1.0, "student": 1.1, "retiree": 1.3 },
+      "desc": "便當、電價與房租的漲幅是最貼身的政治感受，退休族與藍領對每一次調漲的反應都最劇烈。"
+    },
+    {
+      "id": "housing", "name": "房價", "heat": 4, "decay": 0.2,
+      "strataWeight": { "farmer": 0.6, "bluecollar": 1.1, "service": 1.2, "whitecollar": 1.4, "techpro": 1.3, "smallbiz": 1.0, "capitalist": 0.8, "publicsvc": 1.1, "student": 1.2, "retiree": 0.6 },
+      "desc": "都會區買不起也租不好的結構問題，青年與白領的憤怒最深，有房族則對打房政策反向動員。"
+    },
+    {
+      "id": "employment", "name": "就業", "heat": 2, "decay": 0.25,
+      "strataWeight": { "farmer": 0.8, "bluecollar": 1.4, "service": 1.2, "whitecollar": 1.1, "techpro": 1.0, "smallbiz": 1.0, "capitalist": 0.7, "publicsvc": 0.6, "student": 1.3, "retiree": 0.5 },
+      "desc": "關廠裁員與畢業生起薪是最容易被具體事件引爆的議題，單一大廠出事就足以炸開整個區域。"
+    },
+    {
+      "id": "security", "name": "治安", "heat": 2, "decay": 0.3,
+      "strataWeight": { "farmer": 1.0, "bluecollar": 1.1, "service": 1.1, "whitecollar": 1.0, "techpro": 0.8, "smallbiz": 1.1, "capitalist": 0.9, "publicsvc": 1.0, "student": 0.9, "retiree": 1.3 },
+      "desc": "詐騙、毒品與隨機傷人事件的感受度遠高於統計數字，長者與服務業對此的恐懼最為敏感。"
+    },
+    {
+      "id": "energy", "name": "能源", "heat": 3, "decay": 0.25,
+      "strataWeight": { "farmer": 1.0, "bluecollar": 1.1, "service": 1.0, "whitecollar": 0.9, "techpro": 1.2, "smallbiz": 1.2, "capitalist": 1.4, "publicsvc": 0.8, "student": 0.8, "retiree": 0.9 },
+      "desc": "供電穩定與電價調整同時牽動科技業擴廠與小吃店成本，一次全國停電能改寫整場選戰的主軸。"
+    },
+    {
+      "id": "environment", "name": "環境", "heat": 2, "decay": 0.25,
+      "strataWeight": { "farmer": 1.3, "bluecollar": 1.0, "service": 0.9, "whitecollar": 1.0, "techpro": 1.0, "smallbiz": 0.8, "capitalist": 0.7, "publicsvc": 0.9, "student": 1.3, "retiree": 1.0 },
+      "desc": "空污、水污染與開發爭議在地方層級最為激烈，農漁民與學生族群的動員意願明顯高於平均。"
+    },
+    {
+      "id": "crossStrait", "name": "兩岸", "heat": 3, "decay": 0.2,
+      "strataWeight": { "farmer": 1.0, "bluecollar": 0.9, "service": 1.0, "whitecollar": 1.1, "techpro": 1.0, "smallbiz": 1.1, "capitalist": 1.3, "publicsvc": 1.2, "student": 1.1, "retiree": 1.2 },
+      "desc": "軍演、農產禁令與交流政策的總和，是台灣政治唯一能同時牽動安全感與荷包的超級議題。"
+    },
+    {
+      "id": "defense", "name": "國防", "heat": 2, "decay": 0.25,
+      "strataWeight": { "farmer": 0.8, "bluecollar": 0.9, "service": 0.9, "whitecollar": 1.0, "techpro": 1.0, "smallbiz": 0.9, "capitalist": 1.0, "publicsvc": 1.4, "student": 1.2, "retiree": 1.1 },
+      "desc": "役期、軍購與後備制度直接影響青年與其家庭，軍公教階層對國防預算的變動也格外關注。"
+    },
+    {
+      "id": "corruption", "name": "貪腐", "heat": 2, "decay": 0.3,
+      "strataWeight": { "farmer": 1.0, "bluecollar": 1.0, "service": 1.0, "whitecollar": 1.1, "techpro": 1.1, "smallbiz": 1.2, "capitalist": 0.8, "publicsvc": 1.1, "student": 1.2, "retiree": 1.0 },
+      "desc": "工程綁標與關說收賄的每一次曝光都直接扣除清廉印象，是中間選民最不容易原諒的一類事件。"
+    },
+    {
+      "id": "healthcare", "name": "醫療", "heat": 2, "decay": 0.25,
+      "strataWeight": { "farmer": 1.2, "bluecollar": 1.1, "service": 1.0, "whitecollar": 1.0, "techpro": 0.9, "smallbiz": 1.0, "capitalist": 0.8, "publicsvc": 1.0, "student": 0.7, "retiree": 1.5 },
+      "desc": "健保財務、急診壅塞與長照量能牽動每一個有長輩的家庭，退休族的敏感度是全體階層最高。"
+    },
+    {
+      "id": "education", "name": "教育", "heat": 1, "decay": 0.25,
+      "strataWeight": { "farmer": 0.9, "bluecollar": 1.0, "service": 1.0, "whitecollar": 1.2, "techpro": 1.1, "smallbiz": 1.0, "capitalist": 0.8, "publicsvc": 1.3, "student": 1.4, "retiree": 0.7 },
+      "desc": "課綱爭議、私校退場與大學學費是低頻但高強度的議題，一旦點燃就會綁定價值觀路線之爭。"
+    }
+  ]
+}

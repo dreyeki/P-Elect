@@ -1,0 +1,29 @@
+#app{display:flex;flex-direction:column;min-height:100dvh;max-width:560px;margin:0 auto;
+  background:var(--bg);position:relative}
+.topbar{position:sticky;top:0;z-index:30;background:linear-gradient(180deg,var(--bg-2),var(--bg-2) 88%,transparent);
+  border-bottom:1px solid var(--line);padding:10px 14px 8px}
+.tb-row{display:flex;align-items:baseline;gap:8px;justify-content:space-between}
+.tb-date{font-size:var(--fs-l);font-weight:700;letter-spacing:.02em}
+.tb-role{font-size:var(--fs-xs);color:var(--fg-2)}
+.tb-meta{display:flex;gap:14px;align-items:center;margin-top:5px;font-size:var(--fs-xs);color:var(--fg-2);flex-wrap:wrap}
+.ap-dots{display:inline-flex;gap:3px;vertical-align:-1px}
+.ap-dots i{width:9px;height:9px;border-radius:50%;background:var(--line-2);display:block}
+.ap-dots i.on{background:var(--accent)}
+.view{flex:1;padding:14px 14px calc(76px + var(--safe-b));overflow-x:hidden}
+.navbar{position:fixed;bottom:0;left:50%;transform:translateX(-50%);width:100%;max-width:560px;z-index:40;
+  display:grid;grid-template-columns:repeat(7,1fr);background:var(--bg-2);
+  border-top:1px solid var(--line);padding-bottom:var(--safe-b)}
+.navbar button{padding:7px 2px 8px;display:flex;flex-direction:column;align-items:center;gap:2px;
+  font-size:var(--fs-xs);color:var(--fg-3);border-top:2px solid transparent}
+.navbar button.on{color:var(--accent);border-top-color:var(--accent);background:var(--bg-3)}
+.navbar .ico{font-size:16px;line-height:1}
+.navbar .dot{position:absolute;transform:translate(14px,-4px);width:7px;height:7px;border-radius:50%;background:var(--bad)}
+.boot{position:fixed;inset:0;display:grid;place-items:center;background:var(--bg);z-index:100}
+.boot-inner{text-align:center;padding:24px;max-width:340px}
+.boot-title{font-size:30px;font-weight:800;letter-spacing:.08em;line-height:1.3}
+.boot-title span{display:block;font-size:15px;font-weight:500;color:var(--fg-3);letter-spacing:.32em;margin-top:6px}
+.boot-sub{color:var(--fg-3);font-size:var(--fs-s);margin:16px 0 22px}
+.boot-bar{height:3px;background:var(--bg-3);border-radius:2px;overflow:hidden}
+.boot-bar i{display:block;height:100%;width:0;background:var(--accent);transition:width .25s}
+.boot-msg{margin-top:12px;font-size:var(--fs-xs);color:var(--fg-3);font-family:var(--mono)}
+@media (min-width:600px){.view{padding-bottom:calc(80px + var(--safe-b))}}

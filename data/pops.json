@@ -1,0 +1,459 @@
+{
+  "strata": [
+    {
+      "id": "farmer",
+      "name": "農漁民",
+      "baseIncome": 420000,
+      "ideology": {
+        "centralization": -1,
+        "unification": 0,
+        "marketFreedom": -2,
+        "progressivism": -2,
+        "immigration": -1,
+        "environment": -1,
+        "militaryAutonomy": 0,
+        "directDemocracy": 0
+      },
+      "issueWeights": {
+        "economy": 0.22,
+        "prices": 0.12,
+        "housing": 0.03,
+        "employment": 0.1,
+        "security": 0.05,
+        "energy": 0.06,
+        "environment": 0.1,
+        "crossStrait": 0.08,
+        "defense": 0.03,
+        "corruption": 0.07,
+        "healthcare": 0.09,
+        "education": 0.05
+      },
+      "awareness": 2,
+      "turnoutBase": 0.74
+    },
+    {
+      "id": "bluecollar",
+      "name": "藍領勞工",
+      "baseIncome": 580000,
+      "ideology": {
+        "centralization": 0,
+        "unification": 0,
+        "marketFreedom": -3,
+        "progressivism": -1,
+        "immigration": -2,
+        "environment": 0,
+        "militaryAutonomy": 1,
+        "directDemocracy": 1
+      },
+      "issueWeights": {
+        "economy": 0.24,
+        "prices": 0.14,
+        "housing": 0.1,
+        "employment": 0.18,
+        "security": 0.05,
+        "energy": 0.04,
+        "environment": 0.04,
+        "crossStrait": 0.04,
+        "defense": 0.03,
+        "corruption": 0.06,
+        "healthcare": 0.05,
+        "education": 0.03
+      },
+      "awareness": 2,
+      "turnoutBase": 0.66
+    },
+    {
+      "id": "service",
+      "name": "服務業",
+      "baseIncome": 520000,
+      "ideology": {
+        "centralization": 0,
+        "unification": 0,
+        "marketFreedom": -1,
+        "progressivism": 1,
+        "immigration": 0,
+        "environment": 0,
+        "militaryAutonomy": 0,
+        "directDemocracy": 1
+      },
+      "issueWeights": {
+        "economy": 0.26,
+        "prices": 0.16,
+        "housing": 0.12,
+        "employment": 0.14,
+        "security": 0.05,
+        "energy": 0.03,
+        "environment": 0.03,
+        "crossStrait": 0.05,
+        "defense": 0.02,
+        "corruption": 0.06,
+        "healthcare": 0.05,
+        "education": 0.03
+      },
+      "awareness": 2,
+      "turnoutBase": 0.63
+    },
+    {
+      "id": "whitecollar",
+      "name": "白領受薪",
+      "baseIncome": 780000,
+      "ideology": {
+        "centralization": 1,
+        "unification": 0,
+        "marketFreedom": 1,
+        "progressivism": 2,
+        "immigration": 1,
+        "environment": 1,
+        "militaryAutonomy": 0,
+        "directDemocracy": 1
+      },
+      "issueWeights": {
+        "economy": 0.2,
+        "prices": 0.12,
+        "housing": 0.18,
+        "employment": 0.1,
+        "security": 0.05,
+        "energy": 0.04,
+        "environment": 0.05,
+        "crossStrait": 0.05,
+        "defense": 0.04,
+        "corruption": 0.08,
+        "healthcare": 0.05,
+        "education": 0.04
+      },
+      "awareness": 3,
+      "turnoutBase": 0.7
+    },
+    {
+      "id": "techpro",
+      "name": "專業技術",
+      "baseIncome": 1450000,
+      "ideology": {
+        "centralization": 1,
+        "unification": -1,
+        "marketFreedom": 2,
+        "progressivism": 2,
+        "immigration": 2,
+        "environment": 1,
+        "militaryAutonomy": 1,
+        "directDemocracy": 1
+      },
+      "issueWeights": {
+        "economy": 0.2,
+        "prices": 0.08,
+        "housing": 0.16,
+        "employment": 0.08,
+        "security": 0.04,
+        "energy": 0.08,
+        "environment": 0.06,
+        "crossStrait": 0.08,
+        "defense": 0.05,
+        "corruption": 0.07,
+        "healthcare": 0.05,
+        "education": 0.05
+      },
+      "awareness": 3,
+      "turnoutBase": 0.72
+    },
+    {
+      "id": "smallbiz",
+      "name": "小企業主",
+      "baseIncome": 900000,
+      "ideology": {
+        "centralization": -1,
+        "unification": 1,
+        "marketFreedom": 3,
+        "progressivism": -1,
+        "immigration": 0,
+        "environment": -2,
+        "militaryAutonomy": 0,
+        "directDemocracy": 0
+      },
+      "issueWeights": {
+        "economy": 0.28,
+        "prices": 0.14,
+        "housing": 0.08,
+        "employment": 0.12,
+        "security": 0.06,
+        "energy": 0.06,
+        "environment": 0.04,
+        "crossStrait": 0.07,
+        "defense": 0.02,
+        "corruption": 0.06,
+        "healthcare": 0.04,
+        "education": 0.03
+      },
+      "awareness": 3,
+      "turnoutBase": 0.71
+    },
+    {
+      "id": "capitalist",
+      "name": "大資本",
+      "baseIncome": 6800000,
+      "ideology": {
+        "centralization": 1,
+        "unification": 2,
+        "marketFreedom": 4,
+        "progressivism": 0,
+        "immigration": 2,
+        "environment": -2,
+        "militaryAutonomy": -1,
+        "directDemocracy": -2
+      },
+      "issueWeights": {
+        "economy": 0.3,
+        "prices": 0.06,
+        "housing": 0.04,
+        "employment": 0.08,
+        "security": 0.06,
+        "energy": 0.1,
+        "environment": 0.05,
+        "crossStrait": 0.12,
+        "defense": 0.05,
+        "corruption": 0.04,
+        "healthcare": 0.03,
+        "education": 0.07
+      },
+      "awareness": 4,
+      "turnoutBase": 0.76
+    },
+    {
+      "id": "publicsvc",
+      "name": "軍公教",
+      "baseIncome": 820000,
+      "ideology": {
+        "centralization": 2,
+        "unification": 1,
+        "marketFreedom": -1,
+        "progressivism": -1,
+        "immigration": -1,
+        "environment": 0,
+        "militaryAutonomy": 1,
+        "directDemocracy": -1
+      },
+      "issueWeights": {
+        "economy": 0.16,
+        "prices": 0.12,
+        "housing": 0.1,
+        "employment": 0.06,
+        "security": 0.08,
+        "energy": 0.04,
+        "environment": 0.04,
+        "crossStrait": 0.08,
+        "defense": 0.1,
+        "corruption": 0.08,
+        "healthcare": 0.08,
+        "education": 0.06
+      },
+      "awareness": 4,
+      "turnoutBase": 0.78
+    },
+    {
+      "id": "student",
+      "name": "學生",
+      "baseIncome": 180000,
+      "ideology": {
+        "centralization": -1,
+        "unification": -2,
+        "marketFreedom": -2,
+        "progressivism": 4,
+        "immigration": 2,
+        "environment": 3,
+        "militaryAutonomy": 1,
+        "directDemocracy": 3
+      },
+      "issueWeights": {
+        "economy": 0.14,
+        "prices": 0.1,
+        "housing": 0.14,
+        "employment": 0.16,
+        "security": 0.03,
+        "energy": 0.05,
+        "environment": 0.1,
+        "crossStrait": 0.06,
+        "defense": 0.04,
+        "corruption": 0.08,
+        "healthcare": 0.02,
+        "education": 0.08
+      },
+      "awareness": 3,
+      "turnoutBase": 0.58
+    },
+    {
+      "id": "retiree",
+      "name": "退休族",
+      "baseIncome": 380000,
+      "ideology": {
+        "centralization": 1,
+        "unification": 1,
+        "marketFreedom": -1,
+        "progressivism": -3,
+        "immigration": -2,
+        "environment": 0,
+        "militaryAutonomy": -1,
+        "directDemocracy": -1
+      },
+      "issueWeights": {
+        "economy": 0.14,
+        "prices": 0.16,
+        "housing": 0.04,
+        "employment": 0.04,
+        "security": 0.12,
+        "energy": 0.05,
+        "environment": 0.03,
+        "crossStrait": 0.08,
+        "defense": 0.05,
+        "corruption": 0.07,
+        "healthcare": 0.16,
+        "education": 0.06
+      },
+      "awareness": 3,
+      "turnoutBase": 0.8
+    }
+  ],
+  "generations": [
+    {
+      "id": "youth",
+      "name": "青年",
+      "ageRange": [
+        18,
+        34
+      ],
+      "share": 0.24,
+      "ideologyShift": {
+        "progressivism": 2,
+        "unification": -1.5,
+        "environment": 1,
+        "directDemocracy": 1,
+        "immigration": 1
+      },
+      "awarenessShift": -0.3,
+      "turnoutShift": -0.1
+    },
+    {
+      "id": "middle",
+      "name": "中壯",
+      "ageRange": [
+        35,
+        54
+      ],
+      "share": 0.38,
+      "ideologyShift": {},
+      "awarenessShift": 0.2,
+      "turnoutShift": 0.02
+    },
+    {
+      "id": "senior",
+      "name": "樂齡",
+      "ageRange": [
+        55,
+        95
+      ],
+      "share": 0.38,
+      "ideologyShift": {
+        "progressivism": -2,
+        "unification": 1.5,
+        "immigration": -1,
+        "directDemocracy": -1
+      },
+      "awarenessShift": 0.4,
+      "turnoutShift": 0.08
+    }
+  ],
+  "identityByLean": {
+    "_comment": "依選區 lean(-5..5) 線性內插得到 identityMix",
+    "green": {
+      "localist": 0.68,
+      "chinese": 0.06,
+      "dual": 0.2,
+      "apathetic": 0.06
+    },
+    "neutral": {
+      "localist": 0.46,
+      "chinese": 0.14,
+      "dual": 0.32,
+      "apathetic": 0.08
+    },
+    "blue": {
+      "localist": 0.26,
+      "chinese": 0.3,
+      "dual": 0.36,
+      "apathetic": 0.08
+    }
+  },
+  "strataShareByUrbanity": {
+    "0": {
+      "farmer": 0.26,
+      "bluecollar": 0.14,
+      "service": 0.12,
+      "whitecollar": 0.06,
+      "techpro": 0.02,
+      "smallbiz": 0.07,
+      "capitalist": 0.004,
+      "publicsvc": 0.08,
+      "student": 0.06,
+      "retiree": 0.186
+    },
+    "1": {
+      "farmer": 0.19,
+      "bluecollar": 0.17,
+      "service": 0.13,
+      "whitecollar": 0.08,
+      "techpro": 0.03,
+      "smallbiz": 0.08,
+      "capitalist": 0.005,
+      "publicsvc": 0.08,
+      "student": 0.07,
+      "retiree": 0.165
+    },
+    "2": {
+      "farmer": 0.11,
+      "bluecollar": 0.21,
+      "service": 0.16,
+      "whitecollar": 0.11,
+      "techpro": 0.04,
+      "smallbiz": 0.09,
+      "capitalist": 0.006,
+      "publicsvc": 0.08,
+      "student": 0.08,
+      "retiree": 0.114
+    },
+    "3": {
+      "farmer": 0.05,
+      "bluecollar": 0.2,
+      "service": 0.19,
+      "whitecollar": 0.15,
+      "techpro": 0.07,
+      "smallbiz": 0.1,
+      "capitalist": 0.008,
+      "publicsvc": 0.08,
+      "student": 0.09,
+      "retiree": 0.062
+    },
+    "4": {
+      "farmer": 0.02,
+      "bluecollar": 0.15,
+      "service": 0.21,
+      "whitecollar": 0.2,
+      "techpro": 0.11,
+      "smallbiz": 0.1,
+      "capitalist": 0.012,
+      "publicsvc": 0.08,
+      "student": 0.1,
+      "retiree": 0.018
+    },
+    "5": {
+      "farmer": 0.005,
+      "bluecollar": 0.09,
+      "service": 0.21,
+      "whitecollar": 0.25,
+      "techpro": 0.15,
+      "smallbiz": 0.1,
+      "capitalist": 0.018,
+      "publicsvc": 0.08,
+      "student": 0.11,
+      "retiree": -0.013
+    },
+    "_comment": "urbanity 0..5 各對應一組職業階層分佈，總和 1.0"
+  }
+}

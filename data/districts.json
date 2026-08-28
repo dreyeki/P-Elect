@@ -1,0 +1,2922 @@
+{
+  "_source": "2022 年縣市議員選舉區劃分為基準，遊戲化改編",
+  "_note": "seats 為該選區應選席次；原住民選區以 type 標記",
+  "districts": [
+    {
+      "id": "TPE-01",
+      "regionId": "TPE",
+      "name": "臺北市第一選舉區",
+      "areas": [
+        "北投區",
+        "士林區"
+      ],
+      "seats": 13,
+      "type": "general",
+      "population": 503000,
+      "urbanity": 4,
+      "lean": 0
+    },
+    {
+      "id": "TPE-02",
+      "regionId": "TPE",
+      "name": "臺北市第二選舉區",
+      "areas": [
+        "內湖區",
+        "南港區"
+      ],
+      "seats": 10,
+      "type": "general",
+      "population": 384000,
+      "urbanity": 4,
+      "lean": 1
+    },
+    {
+      "id": "TPE-03",
+      "regionId": "TPE",
+      "name": "臺北市第三選舉區",
+      "areas": [
+        "松山區",
+        "信義區"
+      ],
+      "seats": 10,
+      "type": "general",
+      "population": 390000,
+      "urbanity": 5,
+      "lean": 2
+    },
+    {
+      "id": "TPE-04",
+      "regionId": "TPE",
+      "name": "臺北市第四選舉區",
+      "areas": [
+        "中山區",
+        "大同區"
+      ],
+      "seats": 8,
+      "type": "general",
+      "population": 334000,
+      "urbanity": 5,
+      "lean": -1
+    },
+    {
+      "id": "TPE-05",
+      "regionId": "TPE",
+      "name": "臺北市第五選舉區",
+      "areas": [
+        "中正區",
+        "萬華區"
+      ],
+      "seats": 8,
+      "type": "general",
+      "population": 324000,
+      "urbanity": 5,
+      "lean": 0
+    },
+    {
+      "id": "TPE-06",
+      "regionId": "TPE",
+      "name": "臺北市第六選舉區",
+      "areas": [
+        "大安區",
+        "文山區"
+      ],
+      "seats": 12,
+      "type": "general",
+      "population": 528000,
+      "urbanity": 5,
+      "lean": 3
+    },
+    {
+      "id": "TPE-P1",
+      "regionId": "TPE",
+      "name": "臺北市平地原住民選舉區",
+      "areas": [
+        "全市"
+      ],
+      "seats": 1,
+      "type": "plainIndigenous",
+      "population": 9000,
+      "urbanity": 3,
+      "lean": 3,
+      "_estimated": true
+    },
+    {
+      "id": "TPE-M1",
+      "regionId": "TPE",
+      "name": "臺北市山地原住民選舉區",
+      "areas": [
+        "全市"
+      ],
+      "seats": 1,
+      "type": "mountainIndigenous",
+      "population": 8000,
+      "urbanity": 2,
+      "lean": 4,
+      "_estimated": true
+    },
+    {
+      "id": "NTP-01",
+      "regionId": "NTP",
+      "name": "新北市第一選舉區",
+      "areas": [
+        "淡水區",
+        "八里區",
+        "三芝區",
+        "石門區"
+      ],
+      "seats": 4,
+      "type": "general",
+      "population": 262000,
+      "urbanity": 3,
+      "lean": 0,
+      "_estimated": true
+    },
+    {
+      "id": "NTP-02",
+      "regionId": "NTP",
+      "name": "新北市第二選舉區",
+      "areas": [
+        "蘆洲區",
+        "五股區",
+        "泰山區",
+        "林口區"
+      ],
+      "seats": 8,
+      "type": "general",
+      "population": 486000,
+      "urbanity": 4,
+      "lean": -1,
+      "_estimated": true
+    },
+    {
+      "id": "NTP-03",
+      "regionId": "NTP",
+      "name": "新北市第三選舉區",
+      "areas": [
+        "三重區"
+      ],
+      "seats": 6,
+      "type": "general",
+      "population": 374000,
+      "urbanity": 5,
+      "lean": -2,
+      "_estimated": true
+    },
+    {
+      "id": "NTP-04",
+      "regionId": "NTP",
+      "name": "新北市第四選舉區",
+      "areas": [
+        "新莊區"
+      ],
+      "seats": 7,
+      "type": "general",
+      "population": 413000,
+      "urbanity": 4,
+      "lean": -1,
+      "_estimated": true
+    },
+    {
+      "id": "NTP-05",
+      "regionId": "NTP",
+      "name": "新北市第五選舉區",
+      "areas": [
+        "板橋區"
+      ],
+      "seats": 9,
+      "type": "general",
+      "population": 541000,
+      "urbanity": 5,
+      "lean": 0,
+      "_estimated": true
+    },
+    {
+      "id": "NTP-06",
+      "regionId": "NTP",
+      "name": "新北市第六選舉區",
+      "areas": [
+        "中和區"
+      ],
+      "seats": 7,
+      "type": "general",
+      "population": 403000,
+      "urbanity": 5,
+      "lean": 1,
+      "_estimated": true
+    },
+    {
+      "id": "NTP-07",
+      "regionId": "NTP",
+      "name": "新北市第七選舉區",
+      "areas": [
+        "永和區"
+      ],
+      "seats": 4,
+      "type": "general",
+      "population": 216000,
+      "urbanity": 5,
+      "lean": 3,
+      "_estimated": true
+    },
+    {
+      "id": "NTP-08",
+      "regionId": "NTP",
+      "name": "新北市第八選舉區",
+      "areas": [
+        "土城區",
+        "樹林區",
+        "三峽區",
+        "鶯歌區"
+      ],
+      "seats": 9,
+      "type": "general",
+      "population": 618000,
+      "urbanity": 4,
+      "lean": 0,
+      "_estimated": true
+    },
+    {
+      "id": "NTP-09",
+      "regionId": "NTP",
+      "name": "新北市第九選舉區",
+      "areas": [
+        "新店區",
+        "深坑區",
+        "石碇區",
+        "坪林區",
+        "烏來區"
+      ],
+      "seats": 5,
+      "type": "general",
+      "population": 338000,
+      "urbanity": 3,
+      "lean": 3,
+      "_estimated": true
+    },
+    {
+      "id": "NTP-10",
+      "regionId": "NTP",
+      "name": "新北市第十選舉區",
+      "areas": [
+        "汐止區",
+        "瑞芳區",
+        "金山區",
+        "萬里區",
+        "平溪區",
+        "雙溪區",
+        "貢寮區"
+      ],
+      "seats": 5,
+      "type": "general",
+      "population": 301000,
+      "urbanity": 3,
+      "lean": 1,
+      "_estimated": true
+    },
+    {
+      "id": "NTP-P1",
+      "regionId": "NTP",
+      "name": "新北市平地原住民選舉區",
+      "areas": [
+        "全市"
+      ],
+      "seats": 1,
+      "type": "plainIndigenous",
+      "population": 30000,
+      "urbanity": 3,
+      "lean": 3,
+      "_estimated": true
+    },
+    {
+      "id": "NTP-M1",
+      "regionId": "NTP",
+      "name": "新北市山地原住民選舉區",
+      "areas": [
+        "全市"
+      ],
+      "seats": 1,
+      "type": "mountainIndigenous",
+      "population": 28000,
+      "urbanity": 2,
+      "lean": 4,
+      "_estimated": true
+    },
+    {
+      "id": "TYC-01",
+      "regionId": "TYC",
+      "name": "桃園市第一選舉區",
+      "areas": [
+        "桃園區"
+      ],
+      "seats": 13,
+      "type": "general",
+      "population": 449000,
+      "urbanity": 4,
+      "lean": 1,
+      "_estimated": true
+    },
+    {
+      "id": "TYC-02",
+      "regionId": "TYC",
+      "name": "桃園市第二選舉區",
+      "areas": [
+        "龜山區"
+      ],
+      "seats": 5,
+      "type": "general",
+      "population": 174000,
+      "urbanity": 3,
+      "lean": 2,
+      "_estimated": true
+    },
+    {
+      "id": "TYC-03",
+      "regionId": "TYC",
+      "name": "桃園市第三選舉區",
+      "areas": [
+        "八德區"
+      ],
+      "seats": 5,
+      "type": "general",
+      "population": 200000,
+      "urbanity": 3,
+      "lean": 1,
+      "_estimated": true
+    },
+    {
+      "id": "TYC-04",
+      "regionId": "TYC",
+      "name": "桃園市第四選舉區",
+      "areas": [
+        "大溪區",
+        "復興區"
+      ],
+      "seats": 3,
+      "type": "general",
+      "population": 105000,
+      "urbanity": 2,
+      "lean": 2,
+      "_estimated": true
+    },
+    {
+      "id": "TYC-05",
+      "regionId": "TYC",
+      "name": "桃園市第五選舉區",
+      "areas": [
+        "中壢區"
+      ],
+      "seats": 11,
+      "type": "general",
+      "population": 396000,
+      "urbanity": 4,
+      "lean": 1,
+      "_estimated": true
+    },
+    {
+      "id": "TYC-06",
+      "regionId": "TYC",
+      "name": "桃園市第六選舉區",
+      "areas": [
+        "平鎮區"
+      ],
+      "seats": 6,
+      "type": "general",
+      "population": 220000,
+      "urbanity": 3,
+      "lean": 1,
+      "_estimated": true
+    },
+    {
+      "id": "TYC-07",
+      "regionId": "TYC",
+      "name": "桃園市第七選舉區",
+      "areas": [
+        "楊梅區"
+      ],
+      "seats": 4,
+      "type": "general",
+      "population": 171000,
+      "urbanity": 3,
+      "lean": 2,
+      "_estimated": true
+    },
+    {
+      "id": "TYC-08",
+      "regionId": "TYC",
+      "name": "桃園市第八選舉區",
+      "areas": [
+        "龍潭區"
+      ],
+      "seats": 3,
+      "type": "general",
+      "population": 117000,
+      "urbanity": 2,
+      "lean": 2,
+      "_estimated": true
+    },
+    {
+      "id": "TYC-09",
+      "regionId": "TYC",
+      "name": "桃園市第九選舉區",
+      "areas": [
+        "蘆竹區"
+      ],
+      "seats": 4,
+      "type": "general",
+      "population": 161000,
+      "urbanity": 3,
+      "lean": 1,
+      "_estimated": true
+    },
+    {
+      "id": "TYC-10",
+      "regionId": "TYC",
+      "name": "桃園市第十選舉區",
+      "areas": [
+        "大園區"
+      ],
+      "seats": 2,
+      "type": "general",
+      "population": 87000,
+      "urbanity": 2,
+      "lean": 0,
+      "_estimated": true
+    },
+    {
+      "id": "TYC-11",
+      "regionId": "TYC",
+      "name": "桃園市第十一選舉區",
+      "areas": [
+        "觀音區"
+      ],
+      "seats": 2,
+      "type": "general",
+      "population": 65000,
+      "urbanity": 2,
+      "lean": 0,
+      "_estimated": true
+    },
+    {
+      "id": "TYC-12",
+      "regionId": "TYC",
+      "name": "桃園市第十二選舉區",
+      "areas": [
+        "新屋區"
+      ],
+      "seats": 2,
+      "type": "general",
+      "population": 45000,
+      "urbanity": 1,
+      "lean": 2,
+      "_estimated": true
+    },
+    {
+      "id": "TYC-P1",
+      "regionId": "TYC",
+      "name": "桃園市平地原住民選舉區",
+      "areas": [
+        "全市"
+      ],
+      "seats": 2,
+      "type": "plainIndigenous",
+      "population": 50000,
+      "urbanity": 3,
+      "lean": 3,
+      "_estimated": true
+    },
+    {
+      "id": "TYC-M1",
+      "regionId": "TYC",
+      "name": "桃園市山地原住民選舉區",
+      "areas": [
+        "全市"
+      ],
+      "seats": 1,
+      "type": "mountainIndigenous",
+      "population": 30000,
+      "urbanity": 2,
+      "lean": 4,
+      "_estimated": true
+    },
+    {
+      "id": "TCH-01",
+      "regionId": "TCH",
+      "name": "臺中市第一選舉區",
+      "areas": [
+        "大甲區",
+        "大安區",
+        "外埔區",
+        "后里區"
+      ],
+      "seats": 4,
+      "type": "general",
+      "population": 178000,
+      "urbanity": 2,
+      "lean": 1,
+      "_estimated": true
+    },
+    {
+      "id": "TCH-02",
+      "regionId": "TCH",
+      "name": "臺中市第二選舉區",
+      "areas": [
+        "清水區",
+        "梧棲區",
+        "沙鹿區",
+        "大肚區",
+        "龍井區"
+      ],
+      "seats": 7,
+      "type": "general",
+      "population": 368000,
+      "urbanity": 3,
+      "lean": 0,
+      "_estimated": true
+    },
+    {
+      "id": "TCH-03",
+      "regionId": "TCH",
+      "name": "臺中市第三選舉區",
+      "areas": [
+        "神岡區",
+        "大雅區",
+        "潭子區"
+      ],
+      "seats": 5,
+      "type": "general",
+      "population": 264000,
+      "urbanity": 3,
+      "lean": 1,
+      "_estimated": true
+    },
+    {
+      "id": "TCH-04",
+      "regionId": "TCH",
+      "name": "臺中市第四選舉區",
+      "areas": [
+        "西屯區",
+        "南屯區"
+      ],
+      "seats": 9,
+      "type": "general",
+      "population": 406000,
+      "urbanity": 5,
+      "lean": 0,
+      "_estimated": true
+    },
+    {
+      "id": "TCH-05",
+      "regionId": "TCH",
+      "name": "臺中市第五選舉區",
+      "areas": [
+        "北屯區"
+      ],
+      "seats": 7,
+      "type": "general",
+      "population": 289000,
+      "urbanity": 4,
+      "lean": 0,
+      "_estimated": true
+    },
+    {
+      "id": "TCH-06",
+      "regionId": "TCH",
+      "name": "臺中市第六選舉區",
+      "areas": [
+        "北區",
+        "中區"
+      ],
+      "seats": 4,
+      "type": "general",
+      "population": 160000,
+      "urbanity": 5,
+      "lean": 0,
+      "_estimated": true
+    },
+    {
+      "id": "TCH-07",
+      "regionId": "TCH",
+      "name": "臺中市第七選舉區",
+      "areas": [
+        "西區",
+        "南區"
+      ],
+      "seats": 5,
+      "type": "general",
+      "population": 240000,
+      "urbanity": 5,
+      "lean": -1,
+      "_estimated": true
+    },
+    {
+      "id": "TCH-08",
+      "regionId": "TCH",
+      "name": "臺中市第八選舉區",
+      "areas": [
+        "東區",
+        "烏日區"
+      ],
+      "seats": 3,
+      "type": "general",
+      "population": 150000,
+      "urbanity": 4,
+      "lean": 0,
+      "_estimated": true
+    },
+    {
+      "id": "TCH-09",
+      "regionId": "TCH",
+      "name": "臺中市第九選舉區",
+      "areas": [
+        "太平區"
+      ],
+      "seats": 5,
+      "type": "general",
+      "population": 196000,
+      "urbanity": 3,
+      "lean": 0,
+      "_estimated": true
+    },
+    {
+      "id": "TCH-10",
+      "regionId": "TCH",
+      "name": "臺中市第十選舉區",
+      "areas": [
+        "大里區",
+        "霧峰區"
+      ],
+      "seats": 6,
+      "type": "general",
+      "population": 274000,
+      "urbanity": 3,
+      "lean": -1,
+      "_estimated": true
+    },
+    {
+      "id": "TCH-11",
+      "regionId": "TCH",
+      "name": "臺中市第十一選舉區",
+      "areas": [
+        "豐原區"
+      ],
+      "seats": 5,
+      "type": "general",
+      "population": 162000,
+      "urbanity": 4,
+      "lean": 1,
+      "_estimated": true
+    },
+    {
+      "id": "TCH-12",
+      "regionId": "TCH",
+      "name": "臺中市第十二選舉區",
+      "areas": [
+        "東勢區",
+        "石岡區",
+        "新社區",
+        "和平區"
+      ],
+      "seats": 3,
+      "type": "general",
+      "population": 94000,
+      "urbanity": 1,
+      "lean": 2,
+      "_estimated": true
+    },
+    {
+      "id": "TCH-P1",
+      "regionId": "TCH",
+      "name": "臺中市平地原住民選舉區",
+      "areas": [
+        "全市"
+      ],
+      "seats": 1,
+      "type": "plainIndigenous",
+      "population": 20000,
+      "urbanity": 3,
+      "lean": 3,
+      "_estimated": true
+    },
+    {
+      "id": "TCH-M1",
+      "regionId": "TCH",
+      "name": "臺中市山地原住民選舉區",
+      "areas": [
+        "全市"
+      ],
+      "seats": 1,
+      "type": "mountainIndigenous",
+      "population": 19000,
+      "urbanity": 2,
+      "lean": 4,
+      "_estimated": true
+    },
+    {
+      "id": "TNN-01",
+      "regionId": "TNN",
+      "name": "臺南市第一選舉區",
+      "areas": [
+        "新營區",
+        "鹽水區",
+        "柳營區",
+        "白河區",
+        "東山區",
+        "後壁區"
+      ],
+      "seats": 6,
+      "type": "general",
+      "population": 190000,
+      "urbanity": 2,
+      "lean": -3
+    },
+    {
+      "id": "TNN-02",
+      "regionId": "TNN",
+      "name": "臺南市第二選舉區",
+      "areas": [
+        "麻豆區",
+        "下營區",
+        "六甲區",
+        "官田區",
+        "大內區"
+      ],
+      "seats": 3,
+      "type": "general",
+      "population": 118000,
+      "urbanity": 2,
+      "lean": -3
+    },
+    {
+      "id": "TNN-03",
+      "regionId": "TNN",
+      "name": "臺南市第三選舉區",
+      "areas": [
+        "佳里區",
+        "學甲區",
+        "西港區",
+        "七股區",
+        "將軍區",
+        "北門區"
+      ],
+      "seats": 5,
+      "type": "general",
+      "population": 156000,
+      "urbanity": 2,
+      "lean": -3
+    },
+    {
+      "id": "TNN-04",
+      "regionId": "TNN",
+      "name": "臺南市第四選舉區",
+      "areas": [
+        "新化區",
+        "善化區",
+        "新市區",
+        "安定區",
+        "山上區",
+        "左鎮區",
+        "玉井區",
+        "楠西區",
+        "南化區"
+      ],
+      "seats": 6,
+      "type": "general",
+      "population": 201000,
+      "urbanity": 2,
+      "lean": -3
+    },
+    {
+      "id": "TNN-05",
+      "regionId": "TNN",
+      "name": "臺南市第五選舉區",
+      "areas": [
+        "永康區"
+      ],
+      "seats": 7,
+      "type": "general",
+      "population": 240000,
+      "urbanity": 4,
+      "lean": -3
+    },
+    {
+      "id": "TNN-06",
+      "regionId": "TNN",
+      "name": "臺南市第六選舉區",
+      "areas": [
+        "仁德區",
+        "歸仁區",
+        "關廟區",
+        "龍崎區"
+      ],
+      "seats": 5,
+      "type": "general",
+      "population": 182000,
+      "urbanity": 3,
+      "lean": -3
+    },
+    {
+      "id": "TNN-07",
+      "regionId": "TNN",
+      "name": "臺南市第七選舉區",
+      "areas": [
+        "東區"
+      ],
+      "seats": 6,
+      "type": "general",
+      "population": 185000,
+      "urbanity": 5,
+      "lean": -2
+    },
+    {
+      "id": "TNN-08",
+      "regionId": "TNN",
+      "name": "臺南市第八選舉區",
+      "areas": [
+        "南區"
+      ],
+      "seats": 4,
+      "type": "general",
+      "population": 122000,
+      "urbanity": 4,
+      "lean": -3
+    },
+    {
+      "id": "TNN-09",
+      "regionId": "TNN",
+      "name": "臺南市第九選舉區",
+      "areas": [
+        "安南區"
+      ],
+      "seats": 5,
+      "type": "general",
+      "population": 190000,
+      "urbanity": 3,
+      "lean": -4
+    },
+    {
+      "id": "TNN-10",
+      "regionId": "TNN",
+      "name": "臺南市第十選舉區",
+      "areas": [
+        "北區",
+        "中西區"
+      ],
+      "seats": 5,
+      "type": "general",
+      "population": 201000,
+      "urbanity": 5,
+      "lean": -3
+    },
+    {
+      "id": "TNN-11",
+      "regionId": "TNN",
+      "name": "臺南市第十一選舉區",
+      "areas": [
+        "安平區"
+      ],
+      "seats": 3,
+      "type": "general",
+      "population": 67000,
+      "urbanity": 4,
+      "lean": -2
+    },
+    {
+      "id": "TNN-P1",
+      "regionId": "TNN",
+      "name": "臺南市平地原住民選舉區",
+      "areas": [
+        "全市"
+      ],
+      "seats": 1,
+      "type": "plainIndigenous",
+      "population": 6000,
+      "urbanity": 3,
+      "lean": 0,
+      "_estimated": true
+    },
+    {
+      "id": "TNN-M1",
+      "regionId": "TNN",
+      "name": "臺南市山地原住民選舉區",
+      "areas": [
+        "全市"
+      ],
+      "seats": 1,
+      "type": "mountainIndigenous",
+      "population": 5000,
+      "urbanity": 2,
+      "lean": 4,
+      "_estimated": true
+    },
+    {
+      "id": "KHH-01",
+      "regionId": "KHH",
+      "name": "高雄市第一選舉區",
+      "areas": [
+        "旗山區",
+        "美濃區",
+        "六龜區",
+        "甲仙區",
+        "杉林區",
+        "內門區",
+        "桃源區",
+        "那瑪夏區",
+        "茂林區"
+      ],
+      "seats": 3,
+      "type": "general",
+      "population": 134000,
+      "urbanity": 1,
+      "lean": -1,
+      "_estimated": true
+    },
+    {
+      "id": "KHH-02",
+      "regionId": "KHH",
+      "name": "高雄市第二選舉區",
+      "areas": [
+        "岡山區",
+        "路竹區",
+        "湖內區",
+        "茄萣區",
+        "阿蓮區",
+        "田寮區",
+        "永安區",
+        "燕巢區",
+        "彌陀區",
+        "梓官區",
+        "橋頭區"
+      ],
+      "seats": 9,
+      "type": "general",
+      "population": 383000,
+      "urbanity": 2,
+      "lean": -2,
+      "_estimated": true
+    },
+    {
+      "id": "KHH-03",
+      "regionId": "KHH",
+      "name": "高雄市第三選舉區",
+      "areas": [
+        "楠梓區",
+        "左營區"
+      ],
+      "seats": 8,
+      "type": "general",
+      "population": 367000,
+      "urbanity": 4,
+      "lean": -2,
+      "_estimated": true
+    },
+    {
+      "id": "KHH-04",
+      "regionId": "KHH",
+      "name": "高雄市第四選舉區",
+      "areas": [
+        "鼓山區",
+        "鹽埕區",
+        "旗津區"
+      ],
+      "seats": 4,
+      "type": "general",
+      "population": 183000,
+      "urbanity": 4,
+      "lean": -2,
+      "_estimated": true
+    },
+    {
+      "id": "KHH-05",
+      "regionId": "KHH",
+      "name": "高雄市第五選舉區",
+      "areas": [
+        "三民區"
+      ],
+      "seats": 8,
+      "type": "general",
+      "population": 332000,
+      "urbanity": 5,
+      "lean": -2,
+      "_estimated": true
+    },
+    {
+      "id": "KHH-06",
+      "regionId": "KHH",
+      "name": "高雄市第六選舉區",
+      "areas": [
+        "新興區",
+        "前金區",
+        "苓雅區"
+      ],
+      "seats": 6,
+      "type": "general",
+      "population": 230000,
+      "urbanity": 5,
+      "lean": -2,
+      "_estimated": true
+    },
+    {
+      "id": "KHH-07",
+      "regionId": "KHH",
+      "name": "高雄市第七選舉區",
+      "areas": [
+        "前鎮區",
+        "小港區"
+      ],
+      "seats": 7,
+      "type": "general",
+      "population": 327000,
+      "urbanity": 4,
+      "lean": -3,
+      "_estimated": true
+    },
+    {
+      "id": "KHH-08",
+      "regionId": "KHH",
+      "name": "高雄市第八選舉區",
+      "areas": [
+        "鳳山區"
+      ],
+      "seats": 9,
+      "type": "general",
+      "population": 357000,
+      "urbanity": 4,
+      "lean": -2,
+      "_estimated": true
+    },
+    {
+      "id": "KHH-09",
+      "regionId": "KHH",
+      "name": "高雄市第九選舉區",
+      "areas": [
+        "大寮區",
+        "林園區",
+        "大樹區"
+      ],
+      "seats": 5,
+      "type": "general",
+      "population": 218000,
+      "urbanity": 3,
+      "lean": -2,
+      "_estimated": true
+    },
+    {
+      "id": "KHH-10",
+      "regionId": "KHH",
+      "name": "高雄市第十選舉區",
+      "areas": [
+        "鳥松區",
+        "仁武區",
+        "大社區"
+      ],
+      "seats": 4,
+      "type": "general",
+      "population": 167000,
+      "urbanity": 3,
+      "lean": -2,
+      "_estimated": true
+    },
+    {
+      "id": "KHH-P1",
+      "regionId": "KHH",
+      "name": "高雄市平地原住民選舉區",
+      "areas": [
+        "全市"
+      ],
+      "seats": 1,
+      "type": "plainIndigenous",
+      "population": 12000,
+      "urbanity": 3,
+      "lean": 0,
+      "_estimated": true
+    },
+    {
+      "id": "KHH-M1",
+      "regionId": "KHH",
+      "name": "高雄市山地原住民選舉區",
+      "areas": [
+        "全市"
+      ],
+      "seats": 1,
+      "type": "mountainIndigenous",
+      "population": 20000,
+      "urbanity": 2,
+      "lean": 4,
+      "_estimated": true
+    },
+    {
+      "id": "KEE-01",
+      "regionId": "KEE",
+      "name": "基隆市第一選舉區",
+      "areas": [
+        "中正區"
+      ],
+      "seats": 4,
+      "type": "general",
+      "population": 50000,
+      "urbanity": 4,
+      "lean": 1,
+      "_estimated": true
+    },
+    {
+      "id": "KEE-02",
+      "regionId": "KEE",
+      "name": "基隆市第二選舉區",
+      "areas": [
+        "信義區"
+      ],
+      "seats": 4,
+      "type": "general",
+      "population": 46000,
+      "urbanity": 4,
+      "lean": 0,
+      "_estimated": true
+    },
+    {
+      "id": "KEE-03",
+      "regionId": "KEE",
+      "name": "基隆市第三選舉區",
+      "areas": [
+        "仁愛區"
+      ],
+      "seats": 4,
+      "type": "general",
+      "population": 37000,
+      "urbanity": 4,
+      "lean": 1,
+      "_estimated": true
+    },
+    {
+      "id": "KEE-04",
+      "regionId": "KEE",
+      "name": "基隆市第四選舉區",
+      "areas": [
+        "中山區"
+      ],
+      "seats": 4,
+      "type": "general",
+      "population": 43000,
+      "urbanity": 4,
+      "lean": 0,
+      "_estimated": true
+    },
+    {
+      "id": "KEE-05",
+      "regionId": "KEE",
+      "name": "基隆市第五選舉區",
+      "areas": [
+        "安樂區"
+      ],
+      "seats": 7,
+      "type": "general",
+      "population": 84000,
+      "urbanity": 4,
+      "lean": 0,
+      "_estimated": true
+    },
+    {
+      "id": "KEE-06",
+      "regionId": "KEE",
+      "name": "基隆市第六選舉區",
+      "areas": [
+        "暖暖區"
+      ],
+      "seats": 3,
+      "type": "general",
+      "population": 37000,
+      "urbanity": 3,
+      "lean": 0,
+      "_estimated": true
+    },
+    {
+      "id": "KEE-07",
+      "regionId": "KEE",
+      "name": "基隆市第七選舉區",
+      "areas": [
+        "七堵區"
+      ],
+      "seats": 4,
+      "type": "general",
+      "population": 54000,
+      "urbanity": 3,
+      "lean": 0,
+      "_estimated": true
+    },
+    {
+      "id": "KEE-P1",
+      "regionId": "KEE",
+      "name": "基隆市平地原住民選舉區",
+      "areas": [
+        "全市"
+      ],
+      "seats": 1,
+      "type": "plainIndigenous",
+      "population": 6000,
+      "urbanity": 3,
+      "lean": 3,
+      "_estimated": true
+    },
+    {
+      "id": "KEE-M1",
+      "regionId": "KEE",
+      "name": "基隆市山地原住民選舉區",
+      "areas": [
+        "全市"
+      ],
+      "seats": 1,
+      "type": "mountainIndigenous",
+      "population": 6000,
+      "urbanity": 2,
+      "lean": 4,
+      "_estimated": true
+    },
+    {
+      "id": "HSC-01",
+      "regionId": "HSC",
+      "name": "新竹市第一選舉區",
+      "areas": [
+        "東區"
+      ],
+      "seats": 16,
+      "type": "general",
+      "population": 217000,
+      "urbanity": 5,
+      "lean": 1
+    },
+    {
+      "id": "HSC-02",
+      "regionId": "HSC",
+      "name": "新竹市第二選舉區",
+      "areas": [
+        "北區"
+      ],
+      "seats": 11,
+      "type": "general",
+      "population": 149000,
+      "urbanity": 4,
+      "lean": 1
+    },
+    {
+      "id": "HSC-03",
+      "regionId": "HSC",
+      "name": "新竹市第三選舉區",
+      "areas": [
+        "香山區"
+      ],
+      "seats": 5,
+      "type": "general",
+      "population": 77000,
+      "urbanity": 3,
+      "lean": 0
+    },
+    {
+      "id": "HSC-P1",
+      "regionId": "HSC",
+      "name": "新竹市平地原住民選舉區",
+      "areas": [
+        "全市"
+      ],
+      "seats": 1,
+      "type": "plainIndigenous",
+      "population": 5000,
+      "urbanity": 3,
+      "lean": 3,
+      "_estimated": true
+    },
+    {
+      "id": "HSC-M1",
+      "regionId": "HSC",
+      "name": "新竹市山地原住民選舉區",
+      "areas": [
+        "全市"
+      ],
+      "seats": 1,
+      "type": "mountainIndigenous",
+      "population": 4000,
+      "urbanity": 2,
+      "lean": 4,
+      "_estimated": true
+    },
+    {
+      "id": "CYI-01",
+      "regionId": "CYI",
+      "name": "嘉義市第一選舉區",
+      "areas": [
+        "東區"
+      ],
+      "seats": 10,
+      "type": "general",
+      "population": 113000,
+      "urbanity": 4,
+      "lean": -1
+    },
+    {
+      "id": "CYI-02",
+      "regionId": "CYI",
+      "name": "嘉義市第二選舉區",
+      "areas": [
+        "西區"
+      ],
+      "seats": 12,
+      "type": "general",
+      "population": 147000,
+      "urbanity": 4,
+      "lean": -1
+    },
+    {
+      "id": "CYI-A1",
+      "regionId": "CYI",
+      "name": "嘉義市原住民選舉區",
+      "areas": [
+        "全市"
+      ],
+      "seats": 1,
+      "type": "indigenous",
+      "population": 3000,
+      "urbanity": 3,
+      "lean": 2,
+      "_estimated": true
+    },
+    {
+      "id": "HSQ-01",
+      "regionId": "HSQ",
+      "name": "新竹縣第一選舉區",
+      "areas": [
+        "竹北市"
+      ],
+      "seats": 12,
+      "type": "general",
+      "population": 203000,
+      "urbanity": 4,
+      "lean": 2,
+      "_estimated": true
+    },
+    {
+      "id": "HSQ-02",
+      "regionId": "HSQ",
+      "name": "新竹縣第二選舉區",
+      "areas": [
+        "湖口鄉",
+        "新豐鄉"
+      ],
+      "seats": 8,
+      "type": "general",
+      "population": 130000,
+      "urbanity": 3,
+      "lean": 3,
+      "_estimated": true
+    },
+    {
+      "id": "HSQ-03",
+      "regionId": "HSQ",
+      "name": "新竹縣第三選舉區",
+      "areas": [
+        "新埔鎮",
+        "關西鎮"
+      ],
+      "seats": 4,
+      "type": "general",
+      "population": 56000,
+      "urbanity": 2,
+      "lean": 3,
+      "_estimated": true
+    },
+    {
+      "id": "HSQ-04",
+      "regionId": "HSQ",
+      "name": "新竹縣第四選舉區",
+      "areas": [
+        "芎林鄉",
+        "橫山鄉",
+        "尖石鄉"
+      ],
+      "seats": 3,
+      "type": "general",
+      "population": 49000,
+      "urbanity": 1,
+      "lean": 3,
+      "_estimated": true
+    },
+    {
+      "id": "HSQ-05",
+      "regionId": "HSQ",
+      "name": "新竹縣第五選舉區",
+      "areas": [
+        "竹東鎮",
+        "五峰鄉"
+      ],
+      "seats": 5,
+      "type": "general",
+      "population": 97000,
+      "urbanity": 3,
+      "lean": 3,
+      "_estimated": true
+    },
+    {
+      "id": "HSQ-06",
+      "regionId": "HSQ",
+      "name": "新竹縣第六選舉區",
+      "areas": [
+        "寶山鄉",
+        "北埔鄉",
+        "峨眉鄉"
+      ],
+      "seats": 2,
+      "type": "general",
+      "population": 28000,
+      "urbanity": 1,
+      "lean": 3,
+      "_estimated": true
+    },
+    {
+      "id": "HSQ-P1",
+      "regionId": "HSQ",
+      "name": "新竹縣平地原住民選舉區",
+      "areas": [
+        "全縣"
+      ],
+      "seats": 1,
+      "type": "plainIndigenous",
+      "population": 7000,
+      "urbanity": 1,
+      "lean": 3,
+      "_estimated": true
+    },
+    {
+      "id": "HSQ-M1",
+      "regionId": "HSQ",
+      "name": "新竹縣山地原住民選舉區",
+      "areas": [
+        "全縣"
+      ],
+      "seats": 2,
+      "type": "mountainIndigenous",
+      "population": 16000,
+      "urbanity": 0,
+      "lean": 4,
+      "_estimated": true
+    },
+    {
+      "id": "MIA-01",
+      "regionId": "MIA",
+      "name": "苗栗縣第一選舉區",
+      "areas": [
+        "竹南鎮"
+      ],
+      "seats": 5,
+      "type": "general",
+      "population": 87000,
+      "urbanity": 3,
+      "lean": 2,
+      "_estimated": true
+    },
+    {
+      "id": "MIA-02",
+      "regionId": "MIA",
+      "name": "苗栗縣第二選舉區",
+      "areas": [
+        "頭份市",
+        "三灣鄉",
+        "南庄鄉"
+      ],
+      "seats": 8,
+      "type": "general",
+      "population": 118000,
+      "urbanity": 3,
+      "lean": 3,
+      "_estimated": true
+    },
+    {
+      "id": "MIA-03",
+      "regionId": "MIA",
+      "name": "苗栗縣第三選舉區",
+      "areas": [
+        "苗栗市",
+        "頭屋鄉",
+        "造橋鄉"
+      ],
+      "seats": 7,
+      "type": "general",
+      "population": 107000,
+      "urbanity": 3,
+      "lean": 3,
+      "_estimated": true
+    },
+    {
+      "id": "MIA-04",
+      "regionId": "MIA",
+      "name": "苗栗縣第四選舉區",
+      "areas": [
+        "公館鄉",
+        "大湖鄉",
+        "獅潭鄉",
+        "泰安鄉"
+      ],
+      "seats": 4,
+      "type": "general",
+      "population": 54000,
+      "urbanity": 1,
+      "lean": 3,
+      "_estimated": true
+    },
+    {
+      "id": "MIA-05",
+      "regionId": "MIA",
+      "name": "苗栗縣第五選舉區",
+      "areas": [
+        "後龍鎮",
+        "西湖鄉",
+        "通霄鎮"
+      ],
+      "seats": 5,
+      "type": "general",
+      "population": 70000,
+      "urbanity": 2,
+      "lean": 2,
+      "_estimated": true
+    },
+    {
+      "id": "MIA-06",
+      "regionId": "MIA",
+      "name": "苗栗縣第六選舉區",
+      "areas": [
+        "苑裡鎮"
+      ],
+      "seats": 3,
+      "type": "general",
+      "population": 43000,
+      "urbanity": 2,
+      "lean": 2,
+      "_estimated": true
+    },
+    {
+      "id": "MIA-07",
+      "regionId": "MIA",
+      "name": "苗栗縣第七選舉區",
+      "areas": [
+        "銅鑼鄉",
+        "三義鄉",
+        "卓蘭鎮"
+      ],
+      "seats": 4,
+      "type": "general",
+      "population": 46000,
+      "urbanity": 1,
+      "lean": 3,
+      "_estimated": true
+    },
+    {
+      "id": "MIA-P1",
+      "regionId": "MIA",
+      "name": "苗栗縣平地原住民選舉區",
+      "areas": [
+        "全縣"
+      ],
+      "seats": 1,
+      "type": "plainIndigenous",
+      "population": 5000,
+      "urbanity": 1,
+      "lean": 3,
+      "_estimated": true
+    },
+    {
+      "id": "MIA-M1",
+      "regionId": "MIA",
+      "name": "苗栗縣山地原住民選舉區",
+      "areas": [
+        "全縣"
+      ],
+      "seats": 1,
+      "type": "mountainIndigenous",
+      "population": 5000,
+      "urbanity": 0,
+      "lean": 4,
+      "_estimated": true
+    },
+    {
+      "id": "CHA-01",
+      "regionId": "CHA",
+      "name": "彰化縣第一選舉區",
+      "areas": [
+        "彰化市"
+      ],
+      "seats": 10,
+      "type": "general",
+      "population": 234000,
+      "urbanity": 4,
+      "lean": 0,
+      "_estimated": true
+    },
+    {
+      "id": "CHA-02",
+      "regionId": "CHA",
+      "name": "彰化縣第二選舉區",
+      "areas": [
+        "芬園鄉",
+        "花壇鄉",
+        "大村鄉"
+      ],
+      "seats": 4,
+      "type": "general",
+      "population": 104000,
+      "urbanity": 2,
+      "lean": 0,
+      "_estimated": true
+    },
+    {
+      "id": "CHA-03",
+      "regionId": "CHA",
+      "name": "彰化縣第三選舉區",
+      "areas": [
+        "和美鎮",
+        "線西鄉",
+        "伸港鄉"
+      ],
+      "seats": 6,
+      "type": "general",
+      "population": 142000,
+      "urbanity": 2,
+      "lean": -1,
+      "_estimated": true
+    },
+    {
+      "id": "CHA-04",
+      "regionId": "CHA",
+      "name": "彰化縣第四選舉區",
+      "areas": [
+        "鹿港鎮",
+        "福興鄉",
+        "秀水鄉"
+      ],
+      "seats": 7,
+      "type": "general",
+      "population": 156000,
+      "urbanity": 2,
+      "lean": 0,
+      "_estimated": true
+    },
+    {
+      "id": "CHA-05",
+      "regionId": "CHA",
+      "name": "彰化縣第五選舉區",
+      "areas": [
+        "員林市"
+      ],
+      "seats": 6,
+      "type": "general",
+      "population": 124000,
+      "urbanity": 3,
+      "lean": 0,
+      "_estimated": true
+    },
+    {
+      "id": "CHA-06",
+      "regionId": "CHA",
+      "name": "彰化縣第六選舉區",
+      "areas": [
+        "社頭鄉",
+        "永靖鄉",
+        "田尾鄉"
+      ],
+      "seats": 4,
+      "type": "general",
+      "population": 109000,
+      "urbanity": 2,
+      "lean": 0,
+      "_estimated": true
+    },
+    {
+      "id": "CHA-07",
+      "regionId": "CHA",
+      "name": "彰化縣第七選舉區",
+      "areas": [
+        "溪湖鎮",
+        "埔心鄉",
+        "埔鹽鄉"
+      ],
+      "seats": 5,
+      "type": "general",
+      "population": 119000,
+      "urbanity": 2,
+      "lean": 0,
+      "_estimated": true
+    },
+    {
+      "id": "CHA-08",
+      "regionId": "CHA",
+      "name": "彰化縣第八選舉區",
+      "areas": [
+        "田中鎮",
+        "二水鄉",
+        "北斗鎮",
+        "溪州鄉"
+      ],
+      "seats": 5,
+      "type": "general",
+      "population": 116000,
+      "urbanity": 2,
+      "lean": -1,
+      "_estimated": true
+    },
+    {
+      "id": "CHA-09",
+      "regionId": "CHA",
+      "name": "彰化縣第九選舉區",
+      "areas": [
+        "二林鎮",
+        "芳苑鄉",
+        "大城鄉",
+        "竹塘鄉",
+        "埤頭鄉"
+      ],
+      "seats": 6,
+      "type": "general",
+      "population": 140000,
+      "urbanity": 1,
+      "lean": -1,
+      "_estimated": true
+    },
+    {
+      "id": "CHA-P1",
+      "regionId": "CHA",
+      "name": "彰化縣平地原住民選舉區",
+      "areas": [
+        "全縣"
+      ],
+      "seats": 1,
+      "type": "plainIndigenous",
+      "population": 6000,
+      "urbanity": 1,
+      "lean": 3,
+      "_estimated": true
+    },
+    {
+      "id": "NAN-01",
+      "regionId": "NAN",
+      "name": "南投縣第一選舉區",
+      "areas": [
+        "南投市"
+      ],
+      "seats": 7,
+      "type": "general",
+      "population": 91000,
+      "urbanity": 3,
+      "lean": 1,
+      "_estimated": true
+    },
+    {
+      "id": "NAN-02",
+      "regionId": "NAN",
+      "name": "南投縣第二選舉區",
+      "areas": [
+        "中寮鄉",
+        "名間鄉"
+      ],
+      "seats": 4,
+      "type": "general",
+      "population": 48000,
+      "urbanity": 1,
+      "lean": 2,
+      "_estimated": true
+    },
+    {
+      "id": "NAN-03",
+      "regionId": "NAN",
+      "name": "南投縣第三選舉區",
+      "areas": [
+        "草屯鎮"
+      ],
+      "seats": 7,
+      "type": "general",
+      "population": 91000,
+      "urbanity": 3,
+      "lean": 2,
+      "_estimated": true
+    },
+    {
+      "id": "NAN-04",
+      "regionId": "NAN",
+      "name": "南投縣第四選舉區",
+      "areas": [
+        "埔里鎮",
+        "國姓鄉"
+      ],
+      "seats": 6,
+      "type": "general",
+      "population": 91000,
+      "urbanity": 2,
+      "lean": 2,
+      "_estimated": true
+    },
+    {
+      "id": "NAN-05",
+      "regionId": "NAN",
+      "name": "南投縣第五選舉區",
+      "areas": [
+        "魚池鄉",
+        "水里鄉",
+        "信義鄉",
+        "仁愛鄉"
+      ],
+      "seats": 4,
+      "type": "general",
+      "population": 56000,
+      "urbanity": 1,
+      "lean": 2,
+      "_estimated": true
+    },
+    {
+      "id": "NAN-06",
+      "regionId": "NAN",
+      "name": "南投縣第六選舉區",
+      "areas": [
+        "竹山鎮",
+        "鹿谷鄉",
+        "集集鎮"
+      ],
+      "seats": 6,
+      "type": "general",
+      "population": 74000,
+      "urbanity": 2,
+      "lean": 2,
+      "_estimated": true
+    },
+    {
+      "id": "NAN-P1",
+      "regionId": "NAN",
+      "name": "南投縣平地原住民選舉區",
+      "areas": [
+        "全縣"
+      ],
+      "seats": 1,
+      "type": "plainIndigenous",
+      "population": 8000,
+      "urbanity": 1,
+      "lean": 3,
+      "_estimated": true
+    },
+    {
+      "id": "NAN-M1",
+      "regionId": "NAN",
+      "name": "南投縣山地原住民選舉區",
+      "areas": [
+        "全縣"
+      ],
+      "seats": 2,
+      "type": "mountainIndigenous",
+      "population": 22000,
+      "urbanity": 0,
+      "lean": 4,
+      "_estimated": true
+    },
+    {
+      "id": "YUN-01",
+      "regionId": "YUN",
+      "name": "雲林縣第一選舉區",
+      "areas": [
+        "斗六市"
+      ],
+      "seats": 9,
+      "type": "general",
+      "population": 115000,
+      "urbanity": 3,
+      "lean": -1,
+      "_estimated": true
+    },
+    {
+      "id": "YUN-02",
+      "regionId": "YUN",
+      "name": "雲林縣第二選舉區",
+      "areas": [
+        "林內鄉",
+        "古坑鄉",
+        "莿桐鄉"
+      ],
+      "seats": 4,
+      "type": "general",
+      "population": 76000,
+      "urbanity": 1,
+      "lean": -2,
+      "_estimated": true
+    },
+    {
+      "id": "YUN-03",
+      "regionId": "YUN",
+      "name": "雲林縣第三選舉區",
+      "areas": [
+        "斗南鎮",
+        "大埤鄉"
+      ],
+      "seats": 4,
+      "type": "general",
+      "population": 63000,
+      "urbanity": 2,
+      "lean": -2,
+      "_estimated": true
+    },
+    {
+      "id": "YUN-04",
+      "regionId": "YUN",
+      "name": "雲林縣第四選舉區",
+      "areas": [
+        "虎尾鎮",
+        "土庫鎮"
+      ],
+      "seats": 7,
+      "type": "general",
+      "population": 99000,
+      "urbanity": 2,
+      "lean": -2,
+      "_estimated": true
+    },
+    {
+      "id": "YUN-05",
+      "regionId": "YUN",
+      "name": "雲林縣第五選舉區",
+      "areas": [
+        "褒忠鄉",
+        "東勢鄉",
+        "元長鄉"
+      ],
+      "seats": 3,
+      "type": "general",
+      "population": 47000,
+      "urbanity": 1,
+      "lean": -2,
+      "_estimated": true
+    },
+    {
+      "id": "YUN-06",
+      "regionId": "YUN",
+      "name": "雲林縣第六選舉區",
+      "areas": [
+        "西螺鎮",
+        "二崙鄉",
+        "崙背鄉"
+      ],
+      "seats": 5,
+      "type": "general",
+      "population": 99000,
+      "urbanity": 1,
+      "lean": -2,
+      "_estimated": true
+    },
+    {
+      "id": "YUN-07",
+      "regionId": "YUN",
+      "name": "雲林縣第七選舉區",
+      "areas": [
+        "麥寮鄉",
+        "臺西鄉"
+      ],
+      "seats": 3,
+      "type": "general",
+      "population": 54000,
+      "urbanity": 1,
+      "lean": -2,
+      "_estimated": true
+    },
+    {
+      "id": "YUN-08",
+      "regionId": "YUN",
+      "name": "雲林縣第八選舉區",
+      "areas": [
+        "四湖鄉",
+        "口湖鄉",
+        "水林鄉"
+      ],
+      "seats": 4,
+      "type": "general",
+      "population": 68000,
+      "urbanity": 1,
+      "lean": -3,
+      "_estimated": true
+    },
+    {
+      "id": "YUN-09",
+      "regionId": "YUN",
+      "name": "雲林縣第九選舉區",
+      "areas": [
+        "北港鎮"
+      ],
+      "seats": 3,
+      "type": "general",
+      "population": 40000,
+      "urbanity": 2,
+      "lean": -2,
+      "_estimated": true
+    },
+    {
+      "id": "YUN-P1",
+      "regionId": "YUN",
+      "name": "雲林縣平地原住民選舉區",
+      "areas": [
+        "全縣"
+      ],
+      "seats": 1,
+      "type": "plainIndigenous",
+      "population": 4000,
+      "urbanity": 1,
+      "lean": 3,
+      "_estimated": true
+    },
+    {
+      "id": "CYQ-01",
+      "regionId": "CYQ",
+      "name": "嘉義縣第一選舉區",
+      "areas": [
+        "民雄鄉",
+        "大林鎮",
+        "溪口鄉"
+      ],
+      "seats": 8,
+      "type": "general",
+      "population": 115000,
+      "urbanity": 2,
+      "lean": -3,
+      "_estimated": true
+    },
+    {
+      "id": "CYQ-02",
+      "regionId": "CYQ",
+      "name": "嘉義縣第二選舉區",
+      "areas": [
+        "梅山鄉",
+        "竹崎鄉",
+        "番路鄉",
+        "阿里山鄉",
+        "大埔鄉"
+      ],
+      "seats": 4,
+      "type": "general",
+      "population": 65000,
+      "urbanity": 1,
+      "lean": -2,
+      "_estimated": true
+    },
+    {
+      "id": "CYQ-03",
+      "regionId": "CYQ",
+      "name": "嘉義縣第三選舉區",
+      "areas": [
+        "新港鄉",
+        "六腳鄉"
+      ],
+      "seats": 4,
+      "type": "general",
+      "population": 51000,
+      "urbanity": 1,
+      "lean": -3,
+      "_estimated": true
+    },
+    {
+      "id": "CYQ-04",
+      "regionId": "CYQ",
+      "name": "嘉義縣第四選舉區",
+      "areas": [
+        "朴子市",
+        "東石鄉"
+      ],
+      "seats": 5,
+      "type": "general",
+      "population": 65000,
+      "urbanity": 2,
+      "lean": -3,
+      "_estimated": true
+    },
+    {
+      "id": "CYQ-05",
+      "regionId": "CYQ",
+      "name": "嘉義縣第五選舉區",
+      "areas": [
+        "布袋鎮",
+        "義竹鄉",
+        "鹿草鄉"
+      ],
+      "seats": 4,
+      "type": "general",
+      "population": 57000,
+      "urbanity": 1,
+      "lean": -3,
+      "_estimated": true
+    },
+    {
+      "id": "CYQ-06",
+      "regionId": "CYQ",
+      "name": "嘉義縣第六選舉區",
+      "areas": [
+        "太保市",
+        "水上鄉"
+      ],
+      "seats": 6,
+      "type": "general",
+      "population": 89000,
+      "urbanity": 2,
+      "lean": -3,
+      "_estimated": true
+    },
+    {
+      "id": "CYQ-07",
+      "regionId": "CYQ",
+      "name": "嘉義縣第七選舉區",
+      "areas": [
+        "中埔鄉"
+      ],
+      "seats": 4,
+      "type": "general",
+      "population": 41000,
+      "urbanity": 1,
+      "lean": -2,
+      "_estimated": true
+    },
+    {
+      "id": "CYQ-P1",
+      "regionId": "CYQ",
+      "name": "嘉義縣平地原住民選舉區",
+      "areas": [
+        "全縣"
+      ],
+      "seats": 1,
+      "type": "plainIndigenous",
+      "population": 4000,
+      "urbanity": 1,
+      "lean": 3,
+      "_estimated": true
+    },
+    {
+      "id": "CYQ-M1",
+      "regionId": "CYQ",
+      "name": "嘉義縣山地原住民選舉區",
+      "areas": [
+        "全縣"
+      ],
+      "seats": 1,
+      "type": "mountainIndigenous",
+      "population": 3000,
+      "urbanity": 0,
+      "lean": 4,
+      "_estimated": true
+    },
+    {
+      "id": "PIF-01",
+      "regionId": "PIF",
+      "name": "屏東縣第一選舉區",
+      "areas": [
+        "屏東市"
+      ],
+      "seats": 13,
+      "type": "general",
+      "population": 185000,
+      "urbanity": 4,
+      "lean": -2,
+      "_estimated": true
+    },
+    {
+      "id": "PIF-02",
+      "regionId": "PIF",
+      "name": "屏東縣第二選舉區",
+      "areas": [
+        "九如鄉",
+        "里港鄉",
+        "高樹鄉",
+        "三地門鄉",
+        "霧臺鄉"
+      ],
+      "seats": 5,
+      "type": "general",
+      "population": 72000,
+      "urbanity": 1,
+      "lean": -2,
+      "_estimated": true
+    },
+    {
+      "id": "PIF-03",
+      "regionId": "PIF",
+      "name": "屏東縣第三選舉區",
+      "areas": [
+        "鹽埔鄉",
+        "長治鄉",
+        "麟洛鄉",
+        "瑪家鄉"
+      ],
+      "seats": 4,
+      "type": "general",
+      "population": 68000,
+      "urbanity": 2,
+      "lean": -2,
+      "_estimated": true
+    },
+    {
+      "id": "PIF-04",
+      "regionId": "PIF",
+      "name": "屏東縣第四選舉區",
+      "areas": [
+        "內埔鄉",
+        "竹田鄉",
+        "萬巒鄉",
+        "泰武鄉",
+        "來義鄉"
+      ],
+      "seats": 6,
+      "type": "general",
+      "population": 94000,
+      "urbanity": 1,
+      "lean": -2,
+      "_estimated": true
+    },
+    {
+      "id": "PIF-05",
+      "regionId": "PIF",
+      "name": "屏東縣第五選舉區",
+      "areas": [
+        "萬丹鄉"
+      ],
+      "seats": 3,
+      "type": "general",
+      "population": 43000,
+      "urbanity": 2,
+      "lean": -3,
+      "_estimated": true
+    },
+    {
+      "id": "PIF-06",
+      "regionId": "PIF",
+      "name": "屏東縣第六選舉區",
+      "areas": [
+        "潮州鎮",
+        "崁頂鄉"
+      ],
+      "seats": 4,
+      "type": "general",
+      "population": 64000,
+      "urbanity": 2,
+      "lean": -3,
+      "_estimated": true
+    },
+    {
+      "id": "PIF-07",
+      "regionId": "PIF",
+      "name": "屏東縣第七選舉區",
+      "areas": [
+        "東港鎮",
+        "新園鄉",
+        "琉球鄉"
+      ],
+      "seats": 5,
+      "type": "general",
+      "population": 74000,
+      "urbanity": 2,
+      "lean": -3,
+      "_estimated": true
+    },
+    {
+      "id": "PIF-08",
+      "regionId": "PIF",
+      "name": "屏東縣第八選舉區",
+      "areas": [
+        "林邊鄉",
+        "南州鄉",
+        "新埤鄉",
+        "佳冬鄉"
+      ],
+      "seats": 4,
+      "type": "general",
+      "population": 55000,
+      "urbanity": 1,
+      "lean": -3,
+      "_estimated": true
+    },
+    {
+      "id": "PIF-09",
+      "regionId": "PIF",
+      "name": "屏東縣第九選舉區",
+      "areas": [
+        "枋寮鄉",
+        "枋山鄉",
+        "春日鄉",
+        "獅子鄉"
+      ],
+      "seats": 3,
+      "type": "general",
+      "population": 38000,
+      "urbanity": 1,
+      "lean": -2,
+      "_estimated": true
+    },
+    {
+      "id": "PIF-10",
+      "regionId": "PIF",
+      "name": "屏東縣第十選舉區",
+      "areas": [
+        "恆春鎮",
+        "車城鄉",
+        "滿州鄉",
+        "牡丹鄉"
+      ],
+      "seats": 4,
+      "type": "general",
+      "population": 47000,
+      "urbanity": 1,
+      "lean": -2,
+      "_estimated": true
+    },
+    {
+      "id": "PIF-P1",
+      "regionId": "PIF",
+      "name": "屏東縣平地原住民選舉區",
+      "areas": [
+        "全縣"
+      ],
+      "seats": 2,
+      "type": "plainIndigenous",
+      "population": 20000,
+      "urbanity": 1,
+      "lean": 3,
+      "_estimated": true
+    },
+    {
+      "id": "PIF-M1",
+      "regionId": "PIF",
+      "name": "屏東縣山地原住民選舉區",
+      "areas": [
+        "全縣"
+      ],
+      "seats": 2,
+      "type": "mountainIndigenous",
+      "population": 40000,
+      "urbanity": 0,
+      "lean": 4,
+      "_estimated": true
+    },
+    {
+      "id": "ILA-01",
+      "regionId": "ILA",
+      "name": "宜蘭縣第一選舉區",
+      "areas": [
+        "宜蘭市"
+      ],
+      "seats": 7,
+      "type": "general",
+      "population": 92000,
+      "urbanity": 3,
+      "lean": -2,
+      "_estimated": true
+    },
+    {
+      "id": "ILA-02",
+      "regionId": "ILA",
+      "name": "宜蘭縣第二選舉區",
+      "areas": [
+        "壯圍鄉",
+        "員山鄉"
+      ],
+      "seats": 4,
+      "type": "general",
+      "population": 55000,
+      "urbanity": 1,
+      "lean": -2,
+      "_estimated": true
+    },
+    {
+      "id": "ILA-03",
+      "regionId": "ILA",
+      "name": "宜蘭縣第三選舉區",
+      "areas": [
+        "頭城鎮",
+        "礁溪鄉"
+      ],
+      "seats": 4,
+      "type": "general",
+      "population": 62000,
+      "urbanity": 2,
+      "lean": -1,
+      "_estimated": true
+    },
+    {
+      "id": "ILA-04",
+      "regionId": "ILA",
+      "name": "宜蘭縣第四選舉區",
+      "areas": [
+        "羅東鎮"
+      ],
+      "seats": 5,
+      "type": "general",
+      "population": 70000,
+      "urbanity": 3,
+      "lean": -2,
+      "_estimated": true
+    },
+    {
+      "id": "ILA-05",
+      "regionId": "ILA",
+      "name": "宜蘭縣第五選舉區",
+      "areas": [
+        "五結鄉",
+        "冬山鄉"
+      ],
+      "seats": 6,
+      "type": "general",
+      "population": 87000,
+      "urbanity": 2,
+      "lean": -2,
+      "_estimated": true
+    },
+    {
+      "id": "ILA-06",
+      "regionId": "ILA",
+      "name": "宜蘭縣第六選舉區",
+      "areas": [
+        "三星鄉",
+        "大同鄉"
+      ],
+      "seats": 2,
+      "type": "general",
+      "population": 24000,
+      "urbanity": 1,
+      "lean": -1,
+      "_estimated": true
+    },
+    {
+      "id": "ILA-07",
+      "regionId": "ILA",
+      "name": "宜蘭縣第七選舉區",
+      "areas": [
+        "蘇澳鎮",
+        "南澳鄉"
+      ],
+      "seats": 3,
+      "type": "general",
+      "population": 42000,
+      "urbanity": 2,
+      "lean": -2,
+      "_estimated": true
+    },
+    {
+      "id": "ILA-P1",
+      "regionId": "ILA",
+      "name": "宜蘭縣平地原住民選舉區",
+      "areas": [
+        "全縣"
+      ],
+      "seats": 1,
+      "type": "plainIndigenous",
+      "population": 5000,
+      "urbanity": 1,
+      "lean": 3,
+      "_estimated": true
+    },
+    {
+      "id": "ILA-M1",
+      "regionId": "ILA",
+      "name": "宜蘭縣山地原住民選舉區",
+      "areas": [
+        "全縣"
+      ],
+      "seats": 2,
+      "type": "mountainIndigenous",
+      "population": 12000,
+      "urbanity": 0,
+      "lean": 4,
+      "_estimated": true
+    },
+    {
+      "id": "HUA-01",
+      "regionId": "HUA",
+      "name": "花蓮縣第一選舉區",
+      "areas": [
+        "花蓮市"
+      ],
+      "seats": 8,
+      "type": "general",
+      "population": 71000,
+      "urbanity": 3,
+      "lean": 3,
+      "_estimated": true
+    },
+    {
+      "id": "HUA-02",
+      "regionId": "HUA",
+      "name": "花蓮縣第二選舉區",
+      "areas": [
+        "新城鄉",
+        "秀林鄉"
+      ],
+      "seats": 3,
+      "type": "general",
+      "population": 25000,
+      "urbanity": 1,
+      "lean": 3,
+      "_estimated": true
+    },
+    {
+      "id": "HUA-03",
+      "regionId": "HUA",
+      "name": "花蓮縣第三選舉區",
+      "areas": [
+        "吉安鄉"
+      ],
+      "seats": 7,
+      "type": "general",
+      "population": 59000,
+      "urbanity": 3,
+      "lean": 3,
+      "_estimated": true
+    },
+    {
+      "id": "HUA-04",
+      "regionId": "HUA",
+      "name": "花蓮縣第四選舉區",
+      "areas": [
+        "壽豐鄉",
+        "鳳林鎮",
+        "萬榮鄉"
+      ],
+      "seats": 2,
+      "type": "general",
+      "population": 24000,
+      "urbanity": 1,
+      "lean": 3,
+      "_estimated": true
+    },
+    {
+      "id": "HUA-05",
+      "regionId": "HUA",
+      "name": "花蓮縣第五選舉區",
+      "areas": [
+        "光復鄉",
+        "豐濱鄉",
+        "瑞穗鄉"
+      ],
+      "seats": 2,
+      "type": "general",
+      "population": 19000,
+      "urbanity": 0,
+      "lean": 3,
+      "_estimated": true
+    },
+    {
+      "id": "HUA-06",
+      "regionId": "HUA",
+      "name": "花蓮縣第六選舉區",
+      "areas": [
+        "玉里鎮",
+        "卓溪鄉",
+        "富里鄉"
+      ],
+      "seats": 5,
+      "type": "general",
+      "population": 27000,
+      "urbanity": 1,
+      "lean": 2,
+      "_estimated": true
+    },
+    {
+      "id": "HUA-P1",
+      "regionId": "HUA",
+      "name": "花蓮縣平地原住民選舉區",
+      "areas": [
+        "全縣"
+      ],
+      "seats": 3,
+      "type": "plainIndigenous",
+      "population": 50000,
+      "urbanity": 1,
+      "lean": 3,
+      "_estimated": true
+    },
+    {
+      "id": "HUA-M1",
+      "regionId": "HUA",
+      "name": "花蓮縣山地原住民選舉區",
+      "areas": [
+        "全縣"
+      ],
+      "seats": 3,
+      "type": "mountainIndigenous",
+      "population": 45000,
+      "urbanity": 0,
+      "lean": 4,
+      "_estimated": true
+    },
+    {
+      "id": "TTT-01",
+      "regionId": "TTT",
+      "name": "臺東縣第一選舉區",
+      "areas": [
+        "臺東市"
+      ],
+      "seats": 9,
+      "type": "general",
+      "population": 65000,
+      "urbanity": 3,
+      "lean": 3,
+      "_estimated": true
+    },
+    {
+      "id": "TTT-02",
+      "regionId": "TTT",
+      "name": "臺東縣第二選舉區",
+      "areas": [
+        "卑南鄉",
+        "延平鄉"
+      ],
+      "seats": 2,
+      "type": "general",
+      "population": 13000,
+      "urbanity": 1,
+      "lean": 3,
+      "_estimated": true
+    },
+    {
+      "id": "TTT-03",
+      "regionId": "TTT",
+      "name": "臺東縣第三選舉區",
+      "areas": [
+        "鹿野鄉",
+        "關山鎮",
+        "海端鄉",
+        "池上鄉"
+      ],
+      "seats": 3,
+      "type": "general",
+      "population": 18000,
+      "urbanity": 0,
+      "lean": 3,
+      "_estimated": true
+    },
+    {
+      "id": "TTT-04",
+      "regionId": "TTT",
+      "name": "臺東縣第四選舉區",
+      "areas": [
+        "成功鎮",
+        "東河鄉",
+        "長濱鄉"
+      ],
+      "seats": 3,
+      "type": "general",
+      "population": 18000,
+      "urbanity": 0,
+      "lean": 3,
+      "_estimated": true
+    },
+    {
+      "id": "TTT-05",
+      "regionId": "TTT",
+      "name": "臺東縣第五選舉區",
+      "areas": [
+        "太麻里鄉",
+        "金峰鄉",
+        "大武鄉",
+        "達仁鄉"
+      ],
+      "seats": 2,
+      "type": "general",
+      "population": 15000,
+      "urbanity": 0,
+      "lean": 3,
+      "_estimated": true
+    },
+    {
+      "id": "TTT-06",
+      "regionId": "TTT",
+      "name": "臺東縣第六選舉區",
+      "areas": [
+        "綠島鄉",
+        "蘭嶼鄉"
+      ],
+      "seats": 1,
+      "type": "general",
+      "population": 5000,
+      "urbanity": 0,
+      "lean": 2,
+      "_estimated": true
+    },
+    {
+      "id": "TTT-P1",
+      "regionId": "TTT",
+      "name": "臺東縣平地原住民選舉區",
+      "areas": [
+        "全縣"
+      ],
+      "seats": 5,
+      "type": "plainIndigenous",
+      "population": 42000,
+      "urbanity": 1,
+      "lean": 3,
+      "_estimated": true
+    },
+    {
+      "id": "TTT-M1",
+      "regionId": "TTT",
+      "name": "臺東縣山地原住民選舉區",
+      "areas": [
+        "全縣"
+      ],
+      "seats": 5,
+      "type": "mountainIndigenous",
+      "population": 38000,
+      "urbanity": 0,
+      "lean": 4,
+      "_estimated": true
+    },
+    {
+      "id": "PEN-01",
+      "regionId": "PEN",
+      "name": "澎湖縣第一選舉區",
+      "areas": [
+        "馬公市"
+      ],
+      "seats": 10,
+      "type": "general",
+      "population": 65000,
+      "urbanity": 3,
+      "lean": -1,
+      "_estimated": true
+    },
+    {
+      "id": "PEN-02",
+      "regionId": "PEN",
+      "name": "澎湖縣第二選舉區",
+      "areas": [
+        "湖西鄉"
+      ],
+      "seats": 3,
+      "type": "general",
+      "population": 15000,
+      "urbanity": 1,
+      "lean": -1,
+      "_estimated": true
+    },
+    {
+      "id": "PEN-03",
+      "regionId": "PEN",
+      "name": "澎湖縣第三選舉區",
+      "areas": [
+        "白沙鄉"
+      ],
+      "seats": 2,
+      "type": "general",
+      "population": 9000,
+      "urbanity": 1,
+      "lean": -1,
+      "_estimated": true
+    },
+    {
+      "id": "PEN-04",
+      "regionId": "PEN",
+      "name": "澎湖縣第四選舉區",
+      "areas": [
+        "西嶼鄉"
+      ],
+      "seats": 2,
+      "type": "general",
+      "population": 9000,
+      "urbanity": 1,
+      "lean": -1,
+      "_estimated": true
+    },
+    {
+      "id": "PEN-05",
+      "regionId": "PEN",
+      "name": "澎湖縣第五選舉區",
+      "areas": [
+        "望安鄉",
+        "七美鄉"
+      ],
+      "seats": 2,
+      "type": "general",
+      "population": 8000,
+      "urbanity": 0,
+      "lean": -1,
+      "_estimated": true
+    },
+    {
+      "id": "KIN-01",
+      "regionId": "KIN",
+      "name": "金門縣第一選舉區",
+      "areas": [
+        "金城鎮"
+      ],
+      "seats": 6,
+      "type": "general",
+      "population": 45000,
+      "urbanity": 3,
+      "lean": 5,
+      "_estimated": true
+    },
+    {
+      "id": "KIN-02",
+      "regionId": "KIN",
+      "name": "金門縣第二選舉區",
+      "areas": [
+        "金湖鎮"
+      ],
+      "seats": 4,
+      "type": "general",
+      "population": 33000,
+      "urbanity": 2,
+      "lean": 5,
+      "_estimated": true
+    },
+    {
+      "id": "KIN-03",
+      "regionId": "KIN",
+      "name": "金門縣第三選舉區",
+      "areas": [
+        "金沙鎮"
+      ],
+      "seats": 3,
+      "type": "general",
+      "population": 23000,
+      "urbanity": 1,
+      "lean": 5,
+      "_estimated": true
+    },
+    {
+      "id": "KIN-04",
+      "regionId": "KIN",
+      "name": "金門縣第四選舉區",
+      "areas": [
+        "金寧鄉"
+      ],
+      "seats": 4,
+      "type": "general",
+      "population": 33000,
+      "urbanity": 2,
+      "lean": 5,
+      "_estimated": true
+    },
+    {
+      "id": "KIN-05",
+      "regionId": "KIN",
+      "name": "金門縣第五選舉區",
+      "areas": [
+        "烈嶼鄉",
+        "烏坵鄉"
+      ],
+      "seats": 2,
+      "type": "general",
+      "population": 8000,
+      "urbanity": 0,
+      "lean": 5,
+      "_estimated": true
+    },
+    {
+      "id": "LIE-01",
+      "regionId": "LIE",
+      "name": "連江縣第一選舉區",
+      "areas": [
+        "南竿鄉"
+      ],
+      "seats": 5,
+      "type": "general",
+      "population": 8000,
+      "urbanity": 2,
+      "lean": 5,
+      "_estimated": true
+    },
+    {
+      "id": "LIE-02",
+      "regionId": "LIE",
+      "name": "連江縣第二選舉區",
+      "areas": [
+        "北竿鄉"
+      ],
+      "seats": 2,
+      "type": "general",
+      "population": 3000,
+      "urbanity": 1,
+      "lean": 5,
+      "_estimated": true
+    },
+    {
+      "id": "LIE-03",
+      "regionId": "LIE",
+      "name": "連江縣第三選舉區",
+      "areas": [
+        "莒光鄉"
+      ],
+      "seats": 1,
+      "type": "general",
+      "population": 1000,
+      "urbanity": 0,
+      "lean": 5,
+      "_estimated": true
+    },
+    {
+      "id": "LIE-04",
+      "regionId": "LIE",
+      "name": "連江縣第四選舉區",
+      "areas": [
+        "東引鄉"
+      ],
+      "seats": 1,
+      "type": "general",
+      "population": 1000,
+      "urbanity": 0,
+      "lean": 5,
+      "_estimated": true
+    }
+  ]
+}

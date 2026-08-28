@@ -1,0 +1,24 @@
+{
+  "starts": [
+    { "id":"rookie","name":"政治素人","difficulty":5,
+      "desc":"你沒有職位、沒有頭銜、沒有人認識你。你有的是一個想改變的地方，跟一張選舉公報上的空位。",
+      "ageRange":[26,32],"role":"citizen","party":null,
+      "fame":0,"campaignFunds":0,"assetMult":1.0,"partyPrestige":0,
+      "grassrootsHome":1,"factionFavor":0,
+      "path":"里長 → 議員 → 立委 → 縣市長 → 總統，全程約十五到二十年" },
+    { "id":"aide","name":"議員助理","difficulty":4,
+      "desc":"你替老闆寫了五年的質詢稿，選民服務都是你在跑。老闆說明年可能不選了，位子看你有沒有本事接。",
+      "ageRange":[28,35],"role":"aide","party":"ASK",
+      "fame":1,"campaignFunds":500000,"assetMult":1.2,"partyPrestige":1,
+      "grassrootsHome":2,"factionFavor":2,
+      "path":"接班參選議員或立委，再一路往上爬" }
+  ],
+  "partyChoice": [
+    { "id":"major","name":"加入大黨","desc":"資源多、限制多、要排隊。你會拿到組織與提名機會，但你的一舉一動都要看黨中央臉色。",
+      "options":["PDA","CRP"],"effects":{"partyPrestige":0,"campaignFunds":300000,"grassrootsBonus":1} },
+    { "id":"minor","name":"加入小黨","desc":"出頭快、天花板低、資源少。你可能兩年內就變成全國知名人物，也可能永遠只有那幾席。",
+      "options":["TPL","NGF","TWR","GSP","CUA"],"effects":{"partyPrestige":1,"campaignFunds":100000,"fame":1} },
+    { "id":"independent","name":"無黨籍","desc":"完全自由，也完全沒有靠山。沒有政黨補助、沒有提名保障，每一票都得自己去掙。",
+      "options":[],"effects":{"campaignFunds":0,"boldnessBonus":0,"grassrootsBonus":0} }
+  ]
+}
