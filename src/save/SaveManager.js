@@ -17,6 +17,7 @@ export function serialize(state) {
   out.pops = state.pops.toJSON();
   out.modifiers = state.modifiers.toJSON();
   out.people = packPeople(state.people);
+  out.assets = packAssets(state.assets);
   return {
     saveSchemaVersion: CURRENT_SCHEMA,
     dataVersion: state.meta.dataVersion,
@@ -27,12 +28,34 @@ export function serialize(state) {
   };
 }
 
+/**
+ * 私有財產的存檔壓縮。
+ * 房價與部位市值每個回合都在跑小數，存到元以下沒有任何意義，
+ * 而那些小數點會讓存檔多出好幾 KB。
+ */
+function packAssets(A) {
+  if (!A) return null;
+  const r = (v) => Math.round(v ?? 0);
+  return {
+    ...A,
+    house: A.house ? { ...A.house, value: r(A.house.value), mortgage: r(A.house.mortgage) } : null,
+    loans: (A.loans ?? []).map((l) => ({ ...l, balance: r(l.balance) })),
+    holdings: (A.holdings ?? []).map((h) => ({ ...h, value: r(h.value), cost: r(h.cost) })),
+  };
+}
+
 export function deserialize(save, data = DATA) {
   const s = migrate(save);
   const st = s.state;
   st.pops = Pops.fromJSON(st.pops);
   st.modifiers = new ModifierStack(st.modifiers ?? []);
   if (data) unpackPeople(st.people, data);
+  // 舊存檔沒有這一本帳。補一個空的比在每個呼叫點寫 ?. 安全。
+  st.assets ??= { house: null, loans: [], holdings: [], scamHistory: [], loanHistory: [], scamOffer: null };
+  st.assets.loans ??= [];
+  st.assets.holdings ??= [];
+  st.assets.scamHistory ??= [];
+  st.assets.loanHistory ??= [];
   return st;
 }
 

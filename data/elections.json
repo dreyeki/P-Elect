@@ -134,7 +134,9 @@
       "deposit": 20000,
       "fameNeed": 0,
       "costMult": 0.15,
-      "budgetGuide": "20 萬～50 萬"
+      "budgetGuide": "20 萬～50 萬",
+      "nonPartisan": true,
+      "_partyNote": "村里長依法是無黨籍職位，選票上不印黨籍。對手是同一條街上的人，他們背後可能有廟、有宗親、有里民大會，但不會有黨部。"
     },
     "townshipRep": {
       "name": "鄉鎮市民代表",
@@ -143,7 +145,8 @@
       "deposit": 20000,
       "fameNeed": 0,
       "costMult": 0.2,
-      "budgetGuide": "30 萬～80 萬"
+      "budgetGuide": "30 萬～80 萬",
+      "nonPartisan": true
     },
     "townshipHead": {
       "name": "鄉鎮市長",
@@ -159,10 +162,11 @@
       "turnoutFactor": 0.9,
       "scope": "district",
       "deposit": 200000,
-      "fameNeed": 1,
+      "fameNeed": 0,
       "system": "SNTV",
       "costMult": 1.0,
-      "budgetGuide": "100 萬～300 萬"
+      "budgetGuide": "100 萬～300 萬",
+      "_fameNote": "縣市議員不設知名度門檻。台灣每一屆的議員選舉都有一堆沒有人認識的參選人，他們登記、印文宣、拿到幾百票然後消失——那是這一行真正的入口。真正擋住素人的是二十萬的保證金，不是名氣。"
     },
     "mayor": {
       "name": "縣市長",

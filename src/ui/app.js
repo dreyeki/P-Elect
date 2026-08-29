@@ -10,7 +10,7 @@ export const app = {
 };
 
 const NAV = [
-  { id: 'turn', ico: '📰', name: '回合' },
+  { id: 'turn', ico: '🏠', name: '首頁' },
   { id: 'politics', ico: '🏛️', name: '政治' },
   { id: 'data', ico: '📊', name: '數據' },
   { id: 'map', ico: '🗺️', name: '選區' },

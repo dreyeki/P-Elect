@@ -2,6 +2,7 @@
 import { clamp, clamp05 } from '../core/Formula.js';
 import { officeCost } from './DistrictSystem.js';
 import { bumpCounter } from './Effects.js';
+import { declarable } from './AssetSystem.js';
 
 const SALARY = { citizen: 0, aide: 45000, village: 50000, councilor: 120000, legislator: 190000, mayor: 240000, minister: 220000, president: 470000 };
 const LIVING = { citizen: 50000, aide: 55000, village: 60000, councilor: 90000, legislator: 140000, mayor: 180000, minister: 170000, president: 250000 };
@@ -81,16 +82,24 @@ function checkConditionKept(state, d) {
   return state.flags['cond_' + d.id] === true;
 }
 
+/**
+ * 年度財產申報。
+ *
+ * 申報的是全部身家，不是帳戶餘額——房子、投資、貸款都要寫進去。
+ * 這一點很重要：一個把現金換成房子的人，帳面現金會掉一大截，
+ * 但他的財產一塊錢都沒有少，不該因此被監察機關來函詢問。
+ */
 function declare(state, news) {
   const f = state.finance;
-  const diff = Math.abs(f.personal - f.lastDeclaredAssets) / Math.max(1, Math.abs(f.lastDeclaredAssets));
+  const now = declarable(state);
+  const diff = Math.abs(now - f.lastDeclaredAssets) / Math.max(1, Math.abs(f.lastDeclaredAssets));
   if (diff > 0.20) {
     state.player.stigma = clamp05(state.player.stigma + 0.6);
     news.push({ kind: 'finance', text: '今年的財產申報和去年的差距大到監察機關主動來函詢問，媒體很快就拿到了那份對照表，你的辦公室整個下午都在接電話。' });
   } else if (diff > 0.05) {
     news.push({ kind: 'finance', text: '有記者比對了你這兩年的財產申報，寫了一則不算大但也不小的報導，標題把差額放在最前面。' });
   }
-  f.lastDeclaredAssets = f.personal;
+  f.lastDeclaredAssets = now;
   f.declaredYear = state.meta.year;
 }
 

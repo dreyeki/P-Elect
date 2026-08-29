@@ -14,6 +14,8 @@ const { advance } = await import('../src/core/TurnEngine.js');
 const { initScales, word } = await import('../src/util/scale.js');
 const Events = await import('../src/systems/EventSystem.js');
 const { Rng } = await import('../src/core/Rng.js');
+const F = await import('../src/util/format.js');
+const Asset = await import('../src/systems/AssetSystem.js');
 
 const t0 = Date.now();
 const data = await loadData();
@@ -48,7 +50,7 @@ const elapsed = Date.now() - t1;
 console.log(`\n跑了 ${turns} 回合，共 ${elapsed} ms（平均 ${(elapsed / turns).toFixed(1)} ms／回合，最慢 ${maxTurnMs} ms）`);
 console.log(`事件觸發 ${evCount} 次；NaN 次數 ${nanCount}`);
 console.log(`\n=== ${state.meta.year} 年 ${state.meta.month} 月 ===`);
-console.log('GDP        ', Math.round(state.central.fiscal.gdp), '十億');
+console.log('GDP        ', F.bil(state.central.fiscal.gdp));
 console.log('成長率     ', (state.central.fiscal.gdpGrowth * 100).toFixed(2) + '%');
 console.log('失業率     ', (state.central.fiscal.unemployment * 100).toFixed(2) + '%');
 console.log('通膨       ', (state.central.fiscal.inflation * 100).toFixed(2) + '%');
@@ -57,7 +59,11 @@ console.log('國債佔比   ', ((state.central.fiscal.debtToGdp ?? 0) * 100).toF
 console.log('平均生活水準', state.flags.avgSol?.toFixed(2), '→', word('sol', state.flags.avgSol));
 console.log('民調       ', (state.flags.approval ?? 0).toFixed(1) + '%');
 console.log('玩家       ', `知名度 ${word('fame', state.player.fame)}｜清廉 ${word('integrity', state.player.integrity)}｜汙名 ${word('stigma', state.player.stigma)}｜疲勞 ${word('fatigue', state.player.fatigueRaw / 24)}`);
-console.log('私產       ', Math.round(state.finance.personal).toLocaleString(), '元；競選經費', Math.round(state.finance.campaign).toLocaleString(), '元');
+console.log('私產       ', F.money(state.finance.personal), '；競選經費', F.money(state.finance.campaign));
+console.log('身家       ', F.money(Asset.netWorth(state)),
+  '（房產', state.assets?.house ? F.money(state.assets.house.value) : '無',
+  '、負債', F.money(Asset.totalDebt(state)),
+  '、投資', state.assets?.holdings?.length ?? 0, '筆）');
 console.log('標籤       ', state.tags.join('、') || '（無）');
 console.log('價值觀     ', Object.entries(state.values).map(([k, v]) => `${k}:${v.toFixed(2)}`).join(' '));
 const { nationalSupport } = await import('../src/systems/PopSystem.js');

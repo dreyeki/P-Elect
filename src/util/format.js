@@ -15,8 +15,33 @@ export function money(v) {
 }
 /** 億元為單位的財政數字 */
 export const yi = (v) => nf.format(Math.round(v ?? 0)) + ' 億';
-/** 十億新台幣為單位的 GDP */
-export const bil = (v) => nf.format(Math.round(v ?? 0)) + ' 十億';
+
+/**
+ * 以億為輸入單位的大數字，輸出成台灣人真的會講的量詞。
+ *
+ * 台灣沒有人用「十億」當單位——報紙寫的是「三兆兩千億」，
+ * 主計總處寫的也是「兆」。一萬億以上就換成兆，剩下的尾數才用億，
+ * 一億以下才降到萬。這個函式的輸入是「億元」，因為財政與產值的
+ * 資料本來就是以億為單位存的，換算放在這裡比散在各頁面安全。
+ */
+export function yiBig(vInYi, opt = {}) {
+  const unit = opt.unit ?? '元';
+  const n = vInYi ?? 0;
+  const neg = n < 0 ? '-' : '';
+  const abs = Math.abs(n);
+  if (abs >= 10000) {
+    const zhao = Math.floor(abs / 10000);
+    const rest = Math.round(abs - zhao * 10000);
+    // 尾數不到一千億就不寫，「三兆」比「三兆七億」好讀也更接近實際用法
+    if (rest < 1000) return `${neg}${nf.format(zhao)} 兆${unit}`;
+    return `${neg}${nf.format(zhao)} 兆 ${nf.format(rest)} 億${unit}`;
+  }
+  if (abs >= 1) return `${neg}${nf.format(Math.round(abs))} 億${unit}`;
+  return `${neg}${nf.format(Math.round(abs * 10000))} 萬${unit}`;
+}
+
+/** 舊介面：輸入是十億元，內部換算成億再交給 yiBig */
+export const bil = (v) => yiBig((v ?? 0) * 10);
 
 export function signed(v, d = 0) {
   const n = v ?? 0;
@@ -50,4 +75,19 @@ export function genderLean(malePct, femalePct, flat = 0.3) {
     text: `${male ? '男' : '女'}+${amount.toFixed(1)}`,
     cls: male ? 'g-m' : 'g-f',
   };
+}
+
+/**
+ * 選區名稱加代稱。
+ *
+ * 「臺北市第五選舉區」沒有人這樣講話，大家講的是中正萬華。
+ * 正式名稱要留著，因為公文、選票與新聞稿上寫的是那個；
+ * 括號裡的代稱才是玩家腦袋裡真正用來定位的那一組字。
+ */
+export function distName(d, opt = {}) {
+  if (!d) return '';
+  const alias = d.alias;
+  if (!alias || alias === d.name) return d.name;
+  if (opt.aliasOnly) return alias;
+  return `${d.name}(${alias})`;
 }

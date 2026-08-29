@@ -8,6 +8,7 @@ import { latestPublic, latestAny } from '../../systems/PollSystem.js';
 import { biWord } from '../../util/scale.js';
 import * as People from '../../systems/PeopleSystem.js';
 import { ledger } from '../../systems/FavorSystem.js';
+import * as ImageSys from '../../systems/ImageSystem.js';
 import { app } from '../app.js';
 
 export function turnPage(s, data) {
@@ -26,6 +27,8 @@ export function turnPage(s, data) {
 
     ${raw(pend.length ? card(`待決事項 ${pend.length}`, pend.join('')) : '')}
 
+    ${raw(imageBlock(s, data))}
+
     ${card('本回合行動', actionList(s, data), `<span class="xs muted">剩 ${apOf(s, data) - s.player.apUsed} 點</span>`)}
 
     ${card('民調與風向', pollBlock(s, data))}
@@ -36,6 +39,37 @@ export function turnPage(s, data) {
 
     ${card('新聞', news.length ? news.map(newsRow).join('') : '<div class="xs muted">島上這幾天很安靜，沒有什麼值得上報的事。</div>')}
   `;
+}
+
+/**
+ * 主打形象。
+ * 這一格放在首頁最上面，因為那是選民記住你的那一句話——
+ * 玩家每個回合做的每一件事，都應該看著這句話決定要不要做。
+ */
+function imageBlock(s, data) {
+  const p = s.player;
+  const img = data.images.playerImages.find((x) => x.id === p.image);
+  if (!img) {
+    if (p.fame < 1) return '';
+    return card('主打形象', `<div class="xs muted" style="line-height:1.75">
+      你還沒有決定要讓人記住哪一句話。現在提到你，每個人講的都不一樣，
+      這在選舉的時候是一件很致命的事。</div>`);
+  }
+  const left = ImageSys.monthsUntilReview(s, data);
+  const years = ((s.meta.turn - (p.imageSince ?? s.meta.turn)) / 12);
+  const mature = years >= 2 ? '已經立起來了' : years >= 1 ? '還在長' : '才剛掛上去';
+  return card('主打形象', `
+    <div class="row" style="display:block">
+      <div style="display:flex;justify-content:space-between;align-items:baseline">
+        <span class="row-k"><b>${esc(img.name)}</b></span>
+        <span class="row-v xs ${left > 0 ? 'muted' : 'tone-warn'}">${
+          left > 0 ? `${left} 個月後可以重新決定` : '可以重新決定了'}</span>
+      </div>
+      <div class="small" style="margin-top:5px;line-height:1.75">「${esc(img.slogan)}」</div>
+      <div class="xs muted" style="margin-top:5px;line-height:1.7">
+        打了 ${years.toFixed(1)} 年，${mature}。${esc(img.backfire?.text ?? '')}
+      </div>
+    </div>`);
 }
 
 /**
@@ -112,6 +146,15 @@ function pending(s, data) {
       <span class="pi">🧑‍💼</span>
       <span><span class="ph">${esc(r.name)} 想來當你的${esc(r.roleName)}</span>
       <span class="pb">能力 ${esc(word('ability', r.ability))}，月薪開 ${esc(F.money(r.salary))}。</span></span></button>`);
+  }
+  // 有人拿著一份印刷精美的資料來找你。
+  // 遊戲不會標示這是不是詐騙，但每一段話裡都留了線索。
+  if (s.assets?.scamOffer) {
+    const o = s.assets.scamOffer;
+    out.push(`<button class="pending" data-act="open-scam">
+      <span class="pi">📈</span>
+      <span><span class="ph">有人來介紹一個投資機會</span>
+      <span class="pb">${esc(o.pitch.slice(0, 46))}…</span></span></button>`);
   }
   if (s.election?.phase === 'decide') {
     out.push(`<button class="pending" data-act="nav-election">

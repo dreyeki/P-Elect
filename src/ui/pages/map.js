@@ -94,7 +94,7 @@ function topDistricts(s, data) {
   return list.map((d) => {
     const dd = data.byId.district[d.id];
     return `<button class="lawrow" data-act="open-district" data-id="${esc(d.id)}" style="width:100%;text-align:left">
-      <span class="ln"><span class="lt">${esc(dd.name)}</span>
+      <span class="ln"><span class="lt">${esc(F.distName(dd))}</span>
       <span class="lc">${esc(word('grassroots', d.playerGrassroots))}・好感 ${esc(biWord('favor', d.playerFavor))}</span></span>
       ${d.serviceOffice ? '<span class="chip">服務處</span>' : ''}
     </button>`;
@@ -169,7 +169,7 @@ function regionDetail(s, data, rid) {
     ${card('選區', ds.map((d) => {
       const dd = data.byId.district[d.id];
       return `<button class="lawrow" data-act="open-district" data-id="${esc(d.id)}" style="width:100%;text-align:left">
-        <span class="ln"><span class="lt">${esc(dd.name)}</span>
+        <span class="ln"><span class="lt">${esc(F.distName(dd))}</span>
         <span class="lc">${esc(dd.areas.join('、'))}｜應選 ${dd.seats} 席</span></span>
         <span class="chip">${esc(word('grassroots', d.playerGrassroots))}</span></button>`;
     }).join(''))}`;
@@ -193,7 +193,7 @@ function districtDetail(s, data, did) {
   const top = groups.slice(0, 6);
   return html`
     <button class="btn ghost" data-act="map-back" style="margin-bottom:10px">← 回到地圖</button>
-    ${card(dd.name, `
+    ${card(F.distName(dd), `
       ${row('涵蓋', esc(dd.areas.join('、')))}
       ${row('人口', `<span class="num">${F.int(dd.population)}</span>`)}
       ${row('應選席次', `<span class="num">${dd.seats}</span>`)}

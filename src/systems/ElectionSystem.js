@@ -14,9 +14,25 @@ export function monthsUntilElection(state, data) {
   return { months: null, sched: null };
 }
 
+/**
+ * 這個回合要不要切成一週。
+ *
+ * 週回合是選戰的節奏，不是月曆上的一段日期。
+ * 一個沒有登記參選的人並不在那個節奏裡——他還是照常跑攤、開會、上節目，
+ * 沒有理由陪著別人的選舉把每個月拆成四次點擊。
+ * 所以只有玩家自己真的在選（初選或正式選戰）的時候才放慢。
+ */
 export function shouldUseWeekScale(state, data) {
-  const { months } = monthsUntilElection(state, data);
-  return months !== null && months <= data.meta.weekTurnLeadMonths;
+  const e = state.election;
+  if (!e) return false;
+  return e.phase === 'primary' || e.phase === 'campaign';
+}
+
+/** 決定要選了，時間立刻改用週來算，不必再等一個月 */
+export function enterCampaignScale(state) {
+  if (state.meta.scale === 'week') return;
+  state.meta.scale = 'week';
+  state.meta.weekIndex = 0;
 }
 
 /** 玩家可參選的職位 */
@@ -65,14 +81,19 @@ export function makeOpponents(state, data, run, rng) {
   const homeD = data.byId.district[run.scopeId] ?? data.byId.district[state.player.homeDistrict];
   const n = run.type === 'councilor' ? Math.max(3, (homeD?.seats ?? 5) + 3)
     : run.type === 'president' ? 2 : rng.int(1, 3);
-  const out = People.candidatesFor(state, data, run, rng, n)
+  let out = People.candidatesFor(state, data, run, rng, n)
     .filter((c) => c.party !== state.player.party || run.type === 'councilor');
+  // 村里長依法是無黨籍職位，選票上不印黨籍。
+  // 對手背後可能有廟、有宗親、有里民大會，但不會有黨部與派系。
+  if (run.level?.nonPartisan) out = out.map((c) => ({ ...c, party: 'IND', faction: null, parachute: false }));
   // 同黨的人在初選之後就不會再出現在正式選票上，所以偶爾要補足人數
   while (out.length < n) {
     const npc = makePolitician(data, rng, {
-      party: rng.pick(data.partyIds.filter((x) => x !== state.player.party)),
+      party: run.level?.nonPartisan ? null
+        : rng.pick(data.partyIds.filter((x) => x !== state.player.party)),
       fame: clamp(rng.int(1, 4) + (run.type === 'president' ? 1 : 0), 0, 5),
     });
+    if (run.level?.nonPartisan) npc.party = 'IND';
     npc.grassroots = clamp05(rng.range(1, 4));
     out.push(npc);
   }
@@ -323,8 +344,14 @@ export function partyListSeats(support, seatCount = 34, threshold = 0.05) {
  */
 export function buildPrimary(state, data, run, rng) {
   const p = state.player;
+  if (!run) return { skip: true, msg: '沒有指定要選哪一個位子。' };
   if (!p.party) {
     return { skip: true, msg: '你沒有政黨，不需要初選，直接登記參選就可以。' };
+  }
+  // 村里長不掛黨籍，黨部也就沒有東西可以提名。
+  // 你想選就去登記，沒有人會在中常會上討論這件事。
+  if (run.level?.nonPartisan) {
+    return { skip: true, msg: '村里長不掛黨籍，沒有初選這回事。你自己去公所登記就可以了。' };
   }
   const party = state.parties[p.party];
   const d = state.districts[p.homeDistrict];

@@ -12,6 +12,27 @@ export function current(state, data) {
   return id ? data.playerImages[id] : null;
 }
 
+/**
+ * 形象還能撐多久。
+ *
+ * 一句話要立起來需要兩年，兩年之內反覆換只會讓人覺得你沒有中心思想。
+ * 所以主打形象這個行動兩年才開一次：沒有形象的時候隨時可以決定，
+ * 立了以後就要等到期。到期之後續打同一個不用錢，改打別的才要。
+ */
+export function reviewMonths(data) { return data.images?.reviewMonths ?? 24; }
+
+export function monthsSinceSet(state) {
+  if (!state.player.image) return Infinity;
+  return state.meta.turn - (state.player.imageSince ?? state.meta.turn);
+}
+export function monthsUntilReview(state, data) {
+  if (!state.player.image) return 0;
+  return Math.max(0, reviewMonths(data) - monthsSinceSet(state));
+}
+export function canSet(state, data) {
+  return !state.player.image || monthsUntilReview(state, data) <= 0;
+}
+
 export function available(state, data) {
   const p = state.player;
   const age = state.meta.year - p.birthYear;
@@ -34,7 +55,10 @@ export function adopt(state, data, imageId) {
   if (!entry.ok) return { ok: false, msg: entry.why + '，現在打這個沒有人會信。' };
   const cost = data.images.switchCost ?? {};
   const first = !state.player.image;
-  if (!first) {
+  const renew = !first && state.player.image === imageId;
+  // 續打同一個形象不用付政治資本。你什麼都沒有改，
+  // 只是又站上去把同一句話再講一次，這件事本來就不該收錢。
+  if (!first && !renew) {
     if (state.player.politicalCapital < (cost.politicalCapital ?? 80)) {
       return { ok: false, msg: '換形象要重新溝通、重新投放、重新說服，政治資本不夠。' };
     }
@@ -42,13 +66,19 @@ export function adopt(state, data, imageId) {
     state.player.favorNational = clampBi(state.player.favorNational - (cost.favorPenalty ?? 0.6));
     state.player.imageSwitches = (state.player.imageSwitches ?? 0) + 1;
   }
+  const wasSince = state.player.imageSince ?? state.meta.turn;
   state.player.image = imageId;
-  state.player.imageSince = state.meta.turn;
+  // 續打的時候不把年資歸零，形象的成熟度是連續累積的
+  state.player.imageSince = renew ? wasSince : state.meta.turn;
+  state.player.imageReviewedAt = state.meta.turn;
   return {
     ok: true,
+    renew,
     msg: first
       ? `從今天起，你就是那個講「${entry.img.slogan}」的人。`
-      : `你換了主打形象。原本相信你的那些人會有一段時間覺得陌生，這是要付的代價。`,
+      : renew
+        ? `你決定繼續打同一句話。第三年再講一次的時候，聽起來會跟第一年不一樣。`
+        : `你換了主打形象。原本相信你的那些人會有一段時間覺得陌生，這是要付的代價。`,
   };
 }
 

@@ -8,6 +8,7 @@ import * as Gov from '../systems/GovernmentSystem.js';
 import * as People from '../systems/PeopleSystem.js';
 import * as Social from '../systems/SocialSystem.js';
 import * as Semi from '../systems/SemiconductorSystem.js';
+import * as Asset from '../systems/AssetSystem.js';
 import { makePolitician } from '../systems/NameGen.js';
 
 export const ROLE_ORDER = ['citizen', 'aide', 'village', 'councilor', 'legislator', 'mayor', 'minister', 'president'];
@@ -146,7 +147,7 @@ function makePlayer(data, setup, rng) {
     birthYear: data.meta.startDate.year - age,
     homeDistrict: setup.homeDistrict,
     background: setup.backgroundId,
-    education: setup.education,
+    education: setup.education, eduTerms: 0,
     role: start.role, party: setup.party ?? null,
     office: null,
     attrs,
@@ -168,8 +169,14 @@ function applyStart(state, data, setup, rng) {
   const start = data.starts.starts.find((s) => s.id === setup.startId);
   const bg = data.backgrounds.backgrounds.find((b) => b.id === setup.backgroundId);
   state.finance.personal = Math.round(bg.personalAssets * start.assetMult);
-  state.finance.lastDeclaredAssets = state.finance.personal;
   state.finance.campaign = start.campaignFunds;
+
+  // 開局送一間房，同時送一筆三百萬的貸款。
+  // 在台灣，這個年紀還在租屋的參選人非常少；而那間房子背著的貸款，
+  // 會在往後很多時候逼玩家做出跟他的理念不一致的決定。
+  Asset.ensure(state);
+  Asset.grantHouse(state, data, rng);
+  state.finance.lastDeclaredAssets = Asset.declarable(state);
 
   const home = state.districts[setup.homeDistrict];
   if (home) {

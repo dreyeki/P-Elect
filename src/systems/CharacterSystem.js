@@ -1,6 +1,7 @@
 // @ts-check
 import { clamp, clamp05 } from '../core/Formula.js';
 import { take as takeFirst } from './FirstTimeSystem.js';
+import { canSet as imageDue } from './ImageSystem.js';
 
 /**
  * 行動選單。
@@ -32,9 +33,16 @@ export const ACTIONS = [
   { id: 'presser', name: '開記者會', ap: 1, fatigue: 8,
     unlock: { fame: 1 }, unlockText: '知名度到「略有耳聞」才會有記者來',
     desc: '主動設定議題，把大家的注意力拉到你想談的那件事上。' },
-  { id: 'fundraise', name: '募款餐會', ap: 1, fatigue: 8,
-    unlock: { fame: 1 }, unlockText: '沒人認識你的時候，餐會是開不成的',
-    desc: '選舉是很花錢的事，而錢從來不會憑空出現在專戶裡。' },
+  { id: 'fundraise', name: '募款', ap: 1, fatigue: 6, deferred: true,
+    desc: '餐會、小額捐、拜訪建商。三種管道測量的是三件不同的事，價錢也不一樣。' },
+  { id: 'rally', name: '舉辦造勢', ap: 2, fatigue: 16, deferred: true,
+    unlock: { fame: 1, funds: 120000 }, unlockText: '要有一點知名度，專戶裡也要租得起場地',
+    desc: '租場地、動員人、準備講稿。空著一半的場子比不辦還糟，因為鏡頭一定會拍那一半。' },
+  { id: 'fastForward', name: '快轉半年', ap: 0, fatigue: 0, deferred: true,
+    unlock: { noOffice: true }, unlockText: '有公職在身的人，沒有半年可以跳過去',
+    desc: '把接下來半年一次過完。這半年你要拿去換錢、換身體、換學歷，還是換基層？' },
+  { id: 'finances', name: '處理私人財務', ap: 0, fatigue: 0, deferred: true,
+    desc: '貸款、增貸、投資。這一本帳不會直接決定選票，但它決定很多事情的價錢。' },
   { id: 'commissionPoll', name: '委託民調', ap: 1, fatigue: 4, deferred: true,
     unlock: { fame: 1, funds: 200000 }, unlockText: '要有一點知名度，專戶也要有二十萬',
     desc: '公開民調不會告訴你想知道的事。自己出錢做的那一份才會。' },
@@ -56,8 +64,8 @@ export const ACTIONS = [
     unlockText: '要有公職身分才排得到行程',
     desc: '出去一趟很累，但回來以後你講的話會不太一樣。' },
   { id: 'setImage', name: '主打形象', ap: 1, fatigue: 4, deferred: true,
-    unlock: { fame: 1 }, unlockText: '沒人認識你的時候，主打什麼都沒有意義',
-    desc: '決定你要讓人記住哪一句話。形象會放大你的優勢，也會放大你的弱點。' },
+    unlock: { fame: 1, imageDue: true }, unlockText: '沒人認識你的時候，主打什麼都沒有意義',
+    desc: '決定你要讓人記住哪一句話。一句話要立起來要兩年，這兩年之內不用再決定一次。' },
   { id: 'retire', name: '退出政壇', ap: 0, fatigue: 0, deferred: true,
     unlock: { minTurn: 12 }, unlockText: '才剛開始就要走，這句話沒有份量',
     desc: '把位子交出去，把服務處收掉，然後看看自己這些年到底留下了什麼。' },
@@ -80,6 +88,18 @@ export function actionState(state, data, a) {
   if (u.invites != null && (state.socialInvites ?? []).length < u.invites) return { unlocked: false, why: a.unlockText };
   if (u.boldness != null && p.attrs.boldness < u.boldness) return { unlocked: false, why: a.unlockText };
   if (u.minTurn != null && state.meta.turn < u.minTurn) return { unlocked: false, why: a.unlockText };
+  // 形象兩年才需要重新決定一次。中間這段時間不是不能改，是不該改——
+  // 把選項收起來，玩家就不會每個月都在那裡猶豫一件本來就該放著的事。
+  // 有公職的人每個月都有非做不可的事，快轉這個選項對他沒有意義
+  if (u.noOffice) {
+    const blocked = data.fastForward?.blockedRoles ?? [];
+    if (blocked.includes(p.role) || state.election || state.meta.scale === 'week') {
+      return { unlocked: false, why: a.unlockText };
+    }
+  }
+  if (u.imageDue && !imageDue(state, data)) {
+    return { unlocked: false, why: '這句話才剛立起來，現在改只會讓人覺得你沒有中心思想' };
+  }
   return { unlocked: true };
 }
 
@@ -171,11 +191,17 @@ export function doAction(state, data, actionId, payload = {}) {
   return spendAP(state, data, a.ap, a.fatigue, { action: a, payload });
 }
 
-/** 真的做下去了，這時才扣行動點 */
-export function commit(state, data, actionId) {
+/**
+ * 真的做下去了，這時才扣行動點。
+ *
+ * firstKey 是給選單型行動用的：募款底下有三種管道，
+ * 第一次辦餐會跟第一次去拜訪建商是兩件完全不同的事，
+ * 專屬文本自然也不該共用同一個計數器。
+ */
+export function commit(state, data, actionId, firstKey = null) {
   const a = ACTIONS.find((x) => x.id === actionId);
   if (!a) return { ok: false, msg: '沒有這個行動。' };
-  return spendAP(state, data, a.ap, a.fatigue, { action: a });
+  return spendAP(state, data, a.ap, a.fatigue, { action: a, firstKey });
 }
 
 /**
@@ -192,7 +218,7 @@ export function spendAP(state, data, ap, fatigue = 0, extra = {}) {
   }
   // 行動點真的被扣掉的這一刻，才算這個行動做過一次。
   // 打開選單看一看不算——deferred 的行動走的是 commit()，也會到這裡。
-  const first = extra.action ? takeFirst(state, data, extra.action.id) : null;
+  const first = extra.action ? takeFirst(state, data, extra.firstKey ?? extra.action.id) : null;
   // 放進 flags 讓任何一個結果視窗都撿得到——deferred 的行動有八個不同的收尾點，
   // 逐一把回傳值接過去只會漏掉其中幾個。
   if (first) state.flags.pendingFirst = first;

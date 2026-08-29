@@ -30,6 +30,8 @@ const D = {
   invitations: read('data/invitations.json'), semiconductor: read('data/semiconductor.json'),
   social: read('data/social.json'), reactions: read('data/reactions.json'),
   firstTimes: read('data/firstTimes.json'),
+  rally: read('data/rally.json'), personalFinance: read('data/personalFinance.json'),
+  fundraising: read('data/fundraising.json'), fastForward: read('data/fastForward.json'),
 };
 D.byIdInv = Object.fromEntries(D.invitations.kinds.map((x) => [x.id, x]));
 D.byIdCorp = Object.fromEntries(D.corps.corporations.map((x) => [x.id, x]));
@@ -397,9 +399,12 @@ D.starts.defaults?.name === '龍天台' && D.starts.defaults?.age === 35
 
 // 每個行動的前兩次都要有專屬文本，每次三種變體
 const FT = D.firstTimes;
+// 募款是選單型的行動，專屬文本掛在下面三條管道各自的計數器上；
+// 造勢自己有一組。快轉半年與私人財務不扣行動點，也就沒有「第一次」這回事。
 const actionIds = ['canvass', 'theory', 'invitations', 'livestream', 'streetSpeech', 'talkshow',
-  'showPrep', 'presser', 'fundraise', 'commissionPoll', 'faction', 'trainStaff', 'draftLaw',
-  'prepQuestion', 'visit', 'setImage', 'retire', 'dealmaking'];
+  'showPrep', 'presser', 'commissionPoll', 'faction', 'trainStaff', 'draftLaw',
+  'prepQuestion', 'visit', 'setImage', 'retire', 'dealmaking',
+  'rally', 'FUND_DINNER', 'FUND_SMALL', 'FUND_DEVELOPER'];
 const ftMiss = actionIds.filter((id) => !FT.actions[id]);
 ftMiss.length ? fail(`${ftMiss.length} 個行動沒有第一次的文本：${ftMiss.join('、')}`)
   : pass(`全部 ${actionIds.length} 個行動都有專屬的第一次文本`);
@@ -484,6 +489,103 @@ execOpts.length && execOpts.every((x) => x.o.gate?.office?.includes('mayor'))
 const ms = D.tuning.milestones;
 ms.theoriesForJudgment === 1 && ms.showsForEloquence === 5 && ms.canvassForSociability === 5
   ? pass('屬性成長里程碑符合指定：理論 1 次、節目 5 次、跑攤 5 次') : fail('屬性成長的門檻不符');
+
+/* ═══════════ v0.6.0 ═══════════ */
+console.log('\n── v0.6.0 ──');
+
+// 掃街不花錢
+(D.tuning.canvass?.cost ?? -1) === 0
+  ? pass('掃街的成本是零，破產的候選人還是出得了門') : fail('掃街還在扣錢');
+
+// 選區代稱
+const aliasMiss = D.districts.districts.filter((d) => !d.alias || d.alias.length < 2);
+const aliasSame = D.districts.districts.filter((d) => d.alias === d.name);
+!aliasMiss.length && !aliasSame.length
+  ? pass(`${D.districts.districts.length} 個選區都有兩個字以上的代稱，而且都不等於正式名稱`)
+  : fail(`${aliasMiss.length} 個沒有代稱、${aliasSame.length} 個代稱等於本名`);
+D.districts.districts.find((d) => d.id === 'KHH-01')?.alias === '旗美'
+  ? pass('高雄市第一選舉區的代稱是旗美') : fail('KHH-01 的代稱不對');
+
+// 造勢：場地要從便宜到貴排得出一條線，而且最大的場子真的要幾千萬
+const venues = D.rally.venues;
+const sortedByCap = [...venues].sort((a, b) => a.capacity - b.capacity);
+sortedByCap[0].cost < sortedByCap[sortedByCap.length - 1].cost
+  ? pass(`${venues.length} 種場地從 ${venues[0].name} 到 ${venues[venues.length - 1].name}，容量與租金同向`)
+  : fail('場地的容量與租金沒有同向');
+Math.max(...venues.map((v) => v.cost)) >= 10000000
+  ? pass(`最大的場子要 ${(Math.max(...venues.map((v) => v.cost)) / 10000).toFixed(0)} 萬，符合台灣的實際價碼`)
+  : fail('造勢的經費還是太便宜，不符合現實');
+const mobs = D.rally.mobilize;
+mobs.every((m, i) => i === 0 || m.yield >= mobs[i - 1].yield)
+  ? pass('動員方式的效率由低到高排好了') : fail('動員效率沒有排序');
+mobs.filter((m) => m.stigma > 0).length >= 2
+  ? pass(`${mobs.filter((m) => m.stigma > 0).length} 種動員方式帶著汙名，人不是白來的`) : fail('動員手法沒有代價');
+D.rally.outcomes.length === 4 && D.rally.outcomes.every((o) => o.text.length > 60)
+  ? pass('四種到場率結果各有一段夠長的敘述') : fail('造勢結果的敘述太短或數量不對');
+
+// 私人財務
+const PF = D.personalFinance;
+PF.housing.baseValueRange[0] >= 6000000 && PF.housing.baseValueRange[1] <= 7000000
+  ? pass(`開局的房子值 ${PF.housing.baseValueRange.map((x) => x / 10000).join('～')} 萬，貸款 ${PF.housing.mortgage / 10000} 萬`)
+  : fail('開局房產的價值範圍不符');
+PF.loans.some((l) => l.id === 'LOAN_FARM') && PF.loans.some((l) => l.id === 'LOAN_BANK')
+  ? pass('農會與銀行兩條借錢的路都在') : fail('缺少農會或銀行貸款');
+const roleScaled = PF.loans.filter((l) => l.byRole);
+roleScaled.every((l) => l.byRole.president > l.byRole.citizen)
+  ? pass(`${roleScaled.length} 種貸款的額度都隨職位放大`) : fail('貸款額度沒有隨職位放大');
+const sndc = PF.investments.find((x) => x.id === 'INV_SANDISC');
+sndc?.unlock?.judgment === 4 && sndc?.scriptedRun?.totalMultiple >= 9
+  ? pass(`判斷四解鎖的那一檔，開局那段行情漲 ${sndc.scriptedRun.totalMultiple} 倍`) : fail('SNDC 的解鎖或行情設定不符');
+const etf = PF.investments.find((x) => x.trackIndex);
+etf?.excessReturn > 0
+  ? pass(`台灣五十的超額報酬 ${(etf.excessReturn * 100).toFixed(1)}%，長期贏過大盤`) : fail('ETF 沒有設定超額報酬');
+PF.scams.length >= 3 && PF.scams.every((x) => x.unlock?.judgmentMax <= 2 && x.pitch && x.bust)
+  ? pass(`${PF.scams.length} 種詐騙標的都只對判斷二以下的人出現，而且推銷與爆掉各有一段`)
+  : fail('詐騙標的的門檻或文本不完整');
+
+// 募款三管道：金額越大越髒
+const chs = D.fundraising.channels;
+chs.length === 3 ? pass(`募款三管道：${chs.map((c) => c.name).join('、')}`) : fail('募款管道不是三種');
+const byMid = [...chs].sort((a, b) => (a.baseRange[0] + a.baseRange[1]) - (b.baseRange[0] + b.baseRange[1]));
+byMid.every((c, i) => i === 0 || c.stigmaChance >= byMid[i - 1].stigmaChance)
+  ? pass('金額越大的管道，汙名機率越高——這條線是這個系統的整個重點')
+  : fail('金額與汙名沒有同向');
+chs.find((c) => c.id === 'FUND_SMALL')?.stigmaChance === 0
+  ? pass('小額捐一點汙名都不帶') : fail('小額捐不該有汙名');
+
+// 快轉半年
+const FFD = D.fastForward;
+FFD.months === 6 && FFD.options.length >= 4
+  ? pass(`快轉一次 ${FFD.months} 個月，有 ${FFD.options.length} 種過法`) : fail('快轉的設定不完整');
+FFD.blockedRoles.includes('legislator') && FFD.blockedRoles.includes('mayor')
+  ? pass('有公職在身的人跳不過去，因為他每個月都有非做不可的事') : fail('快轉沒有擋住有公職的人');
+Object.values(FFD.education.steps).every((x) => x.terms >= 3 && x.tuitionPerTerm > 0)
+  ? pass('每一階學位都要念好幾個學期，而且學費不是零') : fail('學位的學期或學費設定不對');
+
+// 團隊職位逐步解鎖
+const roles = D.staffRoles.roles;
+const aide = roles.find((r) => r.id === 'aide');
+aide.unlock.fame === 0 && roles.filter((r) => (r.unlock?.fame ?? 0) === 0).length === 1
+  ? pass('只有隨行助理不需要知名度，其他職位都要等') : fail('開局願意來的職位不只助理');
+roles.find((r) => r.id === 'manager').unlock.fame >= 3
+  ? pass('競選經理是最後才會到位的那一個') : fail('競選經理的門檻太低');
+roles.every((r) => r.unlockNote && r.unlockNote.length >= 15)
+  ? pass('每個職位都寫了為什麼現在還沒有人願意來') : fail('有職位缺少解鎖說明');
+
+// 主打形象兩年一次
+D.images.reviewMonths === 24
+  ? pass('主打形象每二十四個月才需要重新決定一次') : fail('形象的重新決定週期不是兩年');
+
+// 村里長是無黨籍選舉，議員不設知名度門檻
+D.elections.levels.villageHead.nonPartisan === true
+  ? pass('村里長依法無黨籍，選票上不印黨籍，也就不會有派系對手') : fail('村里長還掛著黨籍');
+D.elections.levels.councilor.fameNeed === 0
+  ? pass('縣市議員不設知名度門檻，開局第一場就選得到') : fail('議員還擋著素人');
+
+// 錢的單位
+const unitFiles = ['src/ui/pages/map.js', 'src/ui/pages/data.js'];
+const unitLeak = unitFiles.filter((f) => /十億/.test(fs.readFileSync(path.join(ROOT, f), 'utf8')));
+!unitLeak.length ? pass('畫面上不再用十億當金錢單位') : fail(`還在用十億：${unitLeak.join('、')}`);
 
 console.log(`\n${errors ? `✗ ${errors} 項錯誤` : '✓ 全部通過'}${warns ? `，${warns} 項警告` : ''}`);
 process.exit(errors ? 1 : 0);

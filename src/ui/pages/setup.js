@@ -3,6 +3,7 @@ import { html, raw, esc } from '../../util/dom.js';
 import { randomSeedString } from '../../core/Rng.js';
 import { word } from '../../util/scale.js';
 import { loadSetupPrefs, hasSetupPrefs } from '../../save/SaveManager.js';
+import * as F from '../../util/format.js';
 
 export const ATTRS = [
   ['stamina', '體力', '疲勞恢復得快，比較不會倒下'],
@@ -243,7 +244,7 @@ function stepHome(data) {
       </select></div>
     <div class="pick">${raw(ds.map((x) => `
       <button data-act="setup-district" data-id="${esc(x.id)}" class="${d.homeDistrict === x.id ? 'on' : ''}">
-        <div class="pt">${esc(x.name)}</div>
+        <div class="pt">${esc(F.distName(x))}</div>
         <div class="pd">${esc(x.areas.join('、'))}｜人口 ${x.population.toLocaleString()}｜應選 ${x.seats} 席</div>
       </button>`).join(''))}</div>
     <div class="xs muted" style="margin-top:10px;line-height:1.75">
@@ -300,7 +301,7 @@ function stepSeed(data) {
       ${row('起點', esc(data.starts.starts.find((s) => s.id === d.startId)?.name ?? ''))}
       ${row('出身', esc(data.backgrounds.backgrounds.find((b) => b.id === d.backgroundId)?.name ?? '（未選）'))}
       ${row('屬性點', `${Object.values(d.attrs).reduce((a, b) => a + b, 0)} / ${attrBudget(data).cap}`)}
-      ${row('家鄉', esc(data.byId.district[d.homeDistrict]?.name ?? '（未選）'))}
+      ${row('家鄉', esc(F.distName(data.byId.district[d.homeDistrict]) || '（未選）'))}
       ${row('種子', esc(d.seedStr))}
     </div>
     <div class="xs muted" style="margin-top:10px;line-height:1.75">

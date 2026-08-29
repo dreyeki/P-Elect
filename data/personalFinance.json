@@ -1,0 +1,251 @@
+{
+  "_note": [
+    "私人財務。政治人物的錢分成三個帳戶：個人財產、競選專戶、政治獻金專戶。",
+    "這個檔案管的是第一個——那是他自己的錢，也是他最不願意公開的那一本。",
+    "開局送一間房子，因為在台灣這個年紀還在租屋的參選人非常少，",
+    "而且那間房子背著的貸款，會逼玩家在很多時候做出跟他理念不一致的決定。"
+  ],
+  "housing": {
+    "_note": "開局的自有住宅。價值依家鄉的房價指數調整，貸款餘額固定三百萬。",
+    "baseValueRange": [
+      6000000,
+      7000000
+    ],
+    "mortgage": 3000000,
+    "mortgageRate": 0.021,
+    "termYears": 20,
+    "appreciationPerYear": 0.025,
+    "descOwn": "父母在你三十歲那年幫忙付了頭期款，剩下的你自己揹。這間房子是你敢辭掉工作出來選的唯一原因。",
+    "refinance": {
+      "_note": "增貸。房價漲了就借得出來，但每一塊都要還，而且利率比原始房貸高。",
+      "maxLTV": 0.8,
+      "rate": 0.028,
+      "minAmount": 500000,
+      "desc": "拿房子去加借。銀行很願意借給有公職身分的人，這件事本身就說明了很多事。"
+    }
+  },
+  "loans": [
+    {
+      "id": "LOAN_FARM",
+      "name": "農會信用部貸款",
+      "rate": 0.032,
+      "termYears": 7,
+      "approvalDays": 3,
+      "baseCap": 1500000,
+      "byRole": {
+        "citizen": 1.0,
+        "aide": 1.0,
+        "village": 1.6,
+        "councilor": 2.6,
+        "legislator": 4.0,
+        "mayor": 6.0,
+        "minister": 5.0,
+        "president": 6.0
+      },
+      "grassrootsBonus": 0.35,
+      "favorCost": 0.6,
+      "desc": "總幹事說手續他來處理，額度看你在地方上的份量。利率不算低，但撥款可以快到你不敢相信。",
+      "note": "農會的錢帶著人情。借的時候沒有人提條件，要用的時候才會有人打電話來。"
+    },
+    {
+      "id": "LOAN_BANK",
+      "name": "銀行信用貸款",
+      "rate": 0.048,
+      "termYears": 5,
+      "approvalDays": 14,
+      "baseCap": 1000000,
+      "byRole": {
+        "citizen": 1.0,
+        "aide": 1.2,
+        "village": 1.5,
+        "councilor": 2.4,
+        "legislator": 3.6,
+        "mayor": 5.0,
+        "minister": 5.0,
+        "president": 5.0
+      },
+      "incomeMultiplier": 22,
+      "desc": "跑徵信、看扣繳憑單、問你名下有沒有其他負債。流程最乾淨，利率最高，額度看你的職位與收入。",
+      "note": "銀行不問你的政治立場，只問你還得起還不起。這在這一行反而是一種清爽。"
+    },
+    {
+      "id": "LOAN_MORTGAGE_TOP",
+      "name": "房屋增貸",
+      "rate": 0.028,
+      "termYears": 15,
+      "approvalDays": 21,
+      "requiresHouse": true,
+      "desc": "拿自住的房子去加借。額度看房價漲了多少，還有你已經欠了多少。",
+      "note": "這是最便宜的錢，也是最危險的錢——它把你的家跟你的選舉綁在同一張紙上。"
+    }
+  ],
+  "loanRules": {
+    "_note": [
+      "總負債超過年收入的十二倍會被列入警示，超過二十倍銀行就不再放款。",
+      "選舉落敗而且負債過高的人，會開始收到催收電話——那是很多政治生涯真正的終點。"
+    ],
+    "warnRatio": 12,
+    "refuseRatio": 20,
+    "monthlyIncomeByRole": {
+      "citizen": 45000,
+      "aide": 52000,
+      "village": 55000,
+      "councilor": 120000,
+      "legislator": 190000,
+      "mayor": 220000,
+      "minister": 200000,
+      "president": 480000
+    },
+    "defaultStigma": 1.2,
+    "collectionCallChance": 0.12
+  },
+  "investments": [
+    {
+      "id": "INV_DEPOSIT",
+      "name": "銀行定存",
+      "kind": "safe",
+      "annualReturn": 0.016,
+      "volatility": 0,
+      "minAmount": 100000,
+      "unlock": {},
+      "desc": "一年一點六趴，跟通膨賽跑然後輸掉。它唯一的優點是不會讓你半夜睡不著。"
+    },
+    {
+      "id": "INV_ETF50",
+      "name": "台灣五十指數基金",
+      "kind": "etf",
+      "trackIndex": true,
+      "excessReturn": 0.021,
+      "volatility": 0.16,
+      "minAmount": 100000,
+      "unlock": {},
+      "desc": "買下這座島最大的五十家公司。長期表現比加權指數再好一點，因為它汰弱留強。",
+      "_devNote": "excessReturn 是相對加權指數的超額報酬，正值代表長期贏過大盤。"
+    },
+    {
+      "id": "INV_BOND",
+      "name": "政府公債",
+      "kind": "safe",
+      "annualReturn": 0.023,
+      "volatility": 0.03,
+      "minAmount": 500000,
+      "unlock": {},
+      "desc": "借錢給自己所屬的那個政府，然後收利息。有些人覺得這件事有點奇怪。"
+    },
+    {
+      "id": "INV_SANDISC",
+      "name": "山碟記憶（美股 SNDC）",
+      "kind": "moonshot",
+      "annualReturn": 0.35,
+      "volatility": 0.85,
+      "minAmount": 200000,
+      "unlock": {
+        "judgment": 4
+      },
+      "scriptedRun": {
+        "_note": "開局那幾個月的記憶體超級循環。這是一次性的行情，錯過就沒有了。",
+        "startTurn": 2,
+        "endTurn": 11,
+        "totalMultiple": 9.6
+      },
+      "desc": "美股上市的記憶體廠，前兩年幾乎沒有人看好。你在財報的附註裡看到一段別人沒有注意到的話。",
+      "note": "判斷四以上才會出現在你的選單裡。看得出來的人不多，而且看得出來也不一定敢下手。"
+    },
+    {
+      "id": "INV_REIT",
+      "name": "不動產投資信託",
+      "kind": "etf",
+      "annualReturn": 0.038,
+      "volatility": 0.09,
+      "minAmount": 300000,
+      "unlock": {
+        "judgment": 3
+      },
+      "desc": "把錢放進一籃子的商辦與物流中心。配息穩定，代價是你以後很難支持囤房稅。",
+      "conflictOfInterest": {
+        "law": "LAW_HOUSING_TAX",
+        "stigma": 0.4
+      }
+    }
+  ],
+  "scams": [
+    {
+      "id": "SCAM_FX",
+      "name": "海外外匯保證金專案",
+      "kind": "scam",
+      "promisedReturn": 0.42,
+      "minAmount": 500000,
+      "unlock": {
+        "judgmentMax": 2
+      },
+      "ruinChance": 0.82,
+      "ruinTurns": [
+        3,
+        9
+      ],
+      "pitch": "對方拿出一份印刷精美的資料，說這是新加坡持牌機構的內部產品，年化四十二趴，本金保證。你問了三個問題，他每一題都答得很順。",
+      "bust": "那家公司的網站在某一天早上打不開了。你打過去的電話變成空號，帶你進去的那個朋友也聯絡不上。你去報案的時候，警員問你有沒有留下匯款紀錄，然後嘆了一口氣。"
+    },
+    {
+      "id": "SCAM_MINE",
+      "name": "東南亞礦業原始股",
+      "kind": "scam",
+      "promisedReturn": 0.6,
+      "minAmount": 1000000,
+      "unlock": {
+        "judgmentMax": 2
+      },
+      "ruinChance": 0.88,
+      "ruinTurns": [
+        4,
+        12
+      ],
+      "pitch": "一位西裝筆挺的顧問給你看了礦場的空拍照跟一份英文的可行性報告。他說明年就要在那邊掛牌，現在進去是原始股的價格。",
+      "bust": "掛牌的日期一延再延，最後那個顧問說公司決定改成私募，你的股份被稀釋到剩下不到一成。你想找人問清楚，發現當初簽的文件上根本沒有寫他的名字。"
+    },
+    {
+      "id": "SCAM_CRYPTO",
+      "name": "區塊鏈生態鏈幣",
+      "kind": "scam",
+      "promisedReturn": 1.2,
+      "minAmount": 300000,
+      "unlock": {
+        "judgmentMax": 2
+      },
+      "ruinChance": 0.9,
+      "ruinTurns": [
+        2,
+        6
+      ],
+      "pitch": "介紹人是選區裡一位很熱心的年輕支持者，他說這個項目的白皮書寫得非常紮實，而且創辦團隊都是國外名校出來的。他自己也放了不少錢進去。",
+      "bust": "幣價在一個週末跌掉九成七，官方的社群帳號刪除了所有貼文。那位很熱心的年輕支持者從此沒有再出現在服務處，你後來才知道他自己也賠光了。"
+    },
+    {
+      "id": "SCAM_PRESALE",
+      "name": "重劃區預售屋轉單",
+      "kind": "scam",
+      "promisedReturn": 0.35,
+      "minAmount": 800000,
+      "unlock": {
+        "judgmentMax": 2
+      },
+      "ruinChance": 0.7,
+      "ruinTurns": [
+        6,
+        16
+      ],
+      "pitch": "有人告訴你那塊地明年就要變更為住宅區，現在買預售的紅單，變更公告一出來就能轉手。他手上有一份看起來很像內部文件的東西。",
+      "bust": "都市計畫的變更案在委員會被退回，理由是交通衝擊評估不足。你手上的紅單沒有人接，建商的解約條款寫得非常清楚：訂金不退。"
+    }
+  ],
+  "scamRules": {
+    "_note": [
+      "判斷二以下才會看到這些選項。這不是懲罰玩家，是模擬一件真實的事：",
+      "看不出破綻的人，看到的世界裡就是有這些機會。",
+      "遊戲不會標示哪一個是詐騙，但每一段話裡都留了線索。"
+    ],
+    "offerChancePerTurn": 0.1,
+    "stigmaOnBust": 0.5,
+    "newsOnBust": true
+  }
+}

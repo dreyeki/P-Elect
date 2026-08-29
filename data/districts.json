@@ -15,7 +15,8 @@
       "population": 503000,
       "urbanity": 4,
       "lean": -0.997,
-      "whiteLean": 0.33
+      "whiteLean": 0.33,
+      "alias": "北投士林"
     },
     {
       "id": "TPE-02",
@@ -30,7 +31,8 @@
       "population": 384000,
       "urbanity": 4,
       "lean": -0.097,
-      "whiteLean": 0.33
+      "whiteLean": 0.33,
+      "alias": "內湖南港"
     },
     {
       "id": "TPE-03",
@@ -45,7 +47,8 @@
       "population": 390000,
       "urbanity": 5,
       "lean": 0.803,
-      "whiteLean": 0.33
+      "whiteLean": 0.33,
+      "alias": "松山信義"
     },
     {
       "id": "TPE-04",
@@ -60,7 +63,8 @@
       "population": 334000,
       "urbanity": 5,
       "lean": -1.897,
-      "whiteLean": 0.33
+      "whiteLean": 0.33,
+      "alias": "中山大同"
     },
     {
       "id": "TPE-05",
@@ -75,7 +79,8 @@
       "population": 324000,
       "urbanity": 5,
       "lean": -0.997,
-      "whiteLean": 0.33
+      "whiteLean": 0.33,
+      "alias": "中正萬華"
     },
     {
       "id": "TPE-06",
@@ -90,7 +95,8 @@
       "population": 528000,
       "urbanity": 5,
       "lean": 1.703,
-      "whiteLean": 0.33
+      "whiteLean": 0.33,
+      "alias": "大安文山"
     },
     {
       "id": "TPE-P1",
@@ -105,7 +111,8 @@
       "urbanity": 3,
       "lean": 1.703,
       "_estimated": true,
-      "whiteLean": 0.33
+      "whiteLean": 0.33,
+      "alias": "平原"
     },
     {
       "id": "TPE-M1",
@@ -120,7 +127,8 @@
       "urbanity": 2,
       "lean": 2.603,
       "_estimated": true,
-      "whiteLean": 0.33
+      "whiteLean": 0.33,
+      "alias": "山原"
     },
     {
       "id": "NTP-01",
@@ -138,7 +146,8 @@
       "urbanity": 3,
       "lean": -0.706,
       "_estimated": true,
-      "whiteLean": 0.185
+      "whiteLean": 0.185,
+      "alias": "淡水"
     },
     {
       "id": "NTP-02",
@@ -156,7 +165,8 @@
       "urbanity": 4,
       "lean": -1.616,
       "_estimated": true,
-      "whiteLean": 0.185
+      "whiteLean": 0.185,
+      "alias": "蘆洲"
     },
     {
       "id": "NTP-03",
@@ -171,7 +181,8 @@
       "urbanity": 5,
       "lean": -2.506,
       "_estimated": true,
-      "whiteLean": 0.185
+      "whiteLean": 0.185,
+      "alias": "三重"
     },
     {
       "id": "NTP-04",
@@ -186,7 +197,8 @@
       "urbanity": 4,
       "lean": -1.616,
       "_estimated": true,
-      "whiteLean": 0.185
+      "whiteLean": 0.185,
+      "alias": "新莊"
     },
     {
       "id": "NTP-05",
@@ -201,7 +213,8 @@
       "urbanity": 5,
       "lean": -0.706,
       "_estimated": true,
-      "whiteLean": 0.185
+      "whiteLean": 0.185,
+      "alias": "板橋"
     },
     {
       "id": "NTP-06",
@@ -216,7 +229,8 @@
       "urbanity": 5,
       "lean": 0.194,
       "_estimated": true,
-      "whiteLean": 0.185
+      "whiteLean": 0.185,
+      "alias": "中和"
     },
     {
       "id": "NTP-07",
@@ -231,7 +245,8 @@
       "urbanity": 5,
       "lean": 1.994,
       "_estimated": true,
-      "whiteLean": 0.185
+      "whiteLean": 0.185,
+      "alias": "永和"
     },
     {
       "id": "NTP-08",
@@ -249,7 +264,8 @@
       "urbanity": 4,
       "lean": -0.706,
       "_estimated": true,
-      "whiteLean": 0.185
+      "whiteLean": 0.185,
+      "alias": "土城"
     },
     {
       "id": "NTP-09",
@@ -268,7 +284,8 @@
       "urbanity": 3,
       "lean": 1.994,
       "_estimated": true,
-      "whiteLean": 0.185
+      "whiteLean": 0.185,
+      "alias": "新深"
     },
     {
       "id": "NTP-10",
@@ -289,7 +306,8 @@
       "urbanity": 3,
       "lean": 0.194,
       "_estimated": true,
-      "whiteLean": 0.185
+      "whiteLean": 0.185,
+      "alias": "汐瑞"
     },
     {
       "id": "NTP-P1",
@@ -304,7 +322,8 @@
       "urbanity": 3,
       "lean": 1.994,
       "_estimated": true,
-      "whiteLean": 0.185
+      "whiteLean": 0.185,
+      "alias": "平原"
     },
     {
       "id": "NTP-M1",
@@ -319,7 +338,8 @@
       "urbanity": 2,
       "lean": 2.894,
       "_estimated": true,
-      "whiteLean": 0.185
+      "whiteLean": 0.185,
+      "alias": "山原"
     },
     {
       "id": "TYC-01",
@@ -334,7 +354,8 @@
       "urbanity": 4,
       "lean": -0.749,
       "_estimated": true,
-      "whiteLean": 0.455
+      "whiteLean": 0.455,
+      "alias": "桃園"
     },
     {
       "id": "TYC-02",
@@ -349,7 +370,8 @@
       "urbanity": 3,
       "lean": 0.15,
       "_estimated": true,
-      "whiteLean": 0.455
+      "whiteLean": 0.455,
+      "alias": "龜山"
     },
     {
       "id": "TYC-03",
@@ -364,7 +386,8 @@
       "urbanity": 3,
       "lean": -0.749,
       "_estimated": true,
-      "whiteLean": 0.455
+      "whiteLean": 0.455,
+      "alias": "八德"
     },
     {
       "id": "TYC-04",
@@ -380,7 +403,8 @@
       "urbanity": 2,
       "lean": 0.15,
       "_estimated": true,
-      "whiteLean": 0.455
+      "whiteLean": 0.455,
+      "alias": "大溪復興"
     },
     {
       "id": "TYC-05",
@@ -395,7 +419,8 @@
       "urbanity": 4,
       "lean": -0.749,
       "_estimated": true,
-      "whiteLean": 0.455
+      "whiteLean": 0.455,
+      "alias": "中壢"
     },
     {
       "id": "TYC-06",
@@ -410,7 +435,8 @@
       "urbanity": 3,
       "lean": -0.749,
       "_estimated": true,
-      "whiteLean": 0.455
+      "whiteLean": 0.455,
+      "alias": "平鎮"
     },
     {
       "id": "TYC-07",
@@ -425,7 +451,8 @@
       "urbanity": 3,
       "lean": 0.15,
       "_estimated": true,
-      "whiteLean": 0.455
+      "whiteLean": 0.455,
+      "alias": "楊梅"
     },
     {
       "id": "TYC-08",
@@ -440,7 +467,8 @@
       "urbanity": 2,
       "lean": 0.15,
       "_estimated": true,
-      "whiteLean": 0.455
+      "whiteLean": 0.455,
+      "alias": "龍潭"
     },
     {
       "id": "TYC-09",
@@ -455,7 +483,8 @@
       "urbanity": 3,
       "lean": -0.749,
       "_estimated": true,
-      "whiteLean": 0.455
+      "whiteLean": 0.455,
+      "alias": "蘆竹"
     },
     {
       "id": "TYC-10",
@@ -470,7 +499,8 @@
       "urbanity": 2,
       "lean": -1.65,
       "_estimated": true,
-      "whiteLean": 0.455
+      "whiteLean": 0.455,
+      "alias": "大園"
     },
     {
       "id": "TYC-11",
@@ -485,7 +515,8 @@
       "urbanity": 2,
       "lean": -1.65,
       "_estimated": true,
-      "whiteLean": 0.455
+      "whiteLean": 0.455,
+      "alias": "觀音"
     },
     {
       "id": "TYC-12",
@@ -500,7 +531,8 @@
       "urbanity": 1,
       "lean": 0.15,
       "_estimated": true,
-      "whiteLean": 0.455
+      "whiteLean": 0.455,
+      "alias": "新屋"
     },
     {
       "id": "TYC-P1",
@@ -515,7 +547,8 @@
       "urbanity": 3,
       "lean": 1.051,
       "_estimated": true,
-      "whiteLean": 0.455
+      "whiteLean": 0.455,
+      "alias": "平原"
     },
     {
       "id": "TYC-M1",
@@ -530,7 +563,8 @@
       "urbanity": 2,
       "lean": 1.95,
       "_estimated": true,
-      "whiteLean": 0.455
+      "whiteLean": 0.455,
+      "alias": "山原"
     },
     {
       "id": "TCH-01",
@@ -548,7 +582,8 @@
       "urbanity": 2,
       "lean": 0.131,
       "_estimated": true,
-      "whiteLean": 0.552
+      "whiteLean": 0.552,
+      "alias": "大甲"
     },
     {
       "id": "TCH-02",
@@ -567,7 +602,8 @@
       "urbanity": 3,
       "lean": -0.769,
       "_estimated": true,
-      "whiteLean": 0.552
+      "whiteLean": 0.552,
+      "alias": "海線"
     },
     {
       "id": "TCH-03",
@@ -584,7 +620,8 @@
       "urbanity": 3,
       "lean": 0.131,
       "_estimated": true,
-      "whiteLean": 0.552
+      "whiteLean": 0.552,
+      "alias": "神岡"
     },
     {
       "id": "TCH-04",
@@ -600,7 +637,8 @@
       "urbanity": 5,
       "lean": -0.769,
       "_estimated": true,
-      "whiteLean": 0.552
+      "whiteLean": 0.552,
+      "alias": "西屯南屯"
     },
     {
       "id": "TCH-05",
@@ -615,7 +653,8 @@
       "urbanity": 4,
       "lean": -0.769,
       "_estimated": true,
-      "whiteLean": 0.552
+      "whiteLean": 0.552,
+      "alias": "北屯"
     },
     {
       "id": "TCH-06",
@@ -631,7 +670,8 @@
       "urbanity": 5,
       "lean": -0.769,
       "_estimated": true,
-      "whiteLean": 0.552
+      "whiteLean": 0.552,
+      "alias": "北中"
     },
     {
       "id": "TCH-07",
@@ -647,7 +687,8 @@
       "urbanity": 5,
       "lean": -1.669,
       "_estimated": true,
-      "whiteLean": 0.552
+      "whiteLean": 0.552,
+      "alias": "西南"
     },
     {
       "id": "TCH-08",
@@ -663,7 +704,8 @@
       "urbanity": 4,
       "lean": -0.769,
       "_estimated": true,
-      "whiteLean": 0.552
+      "whiteLean": 0.552,
+      "alias": "東烏"
     },
     {
       "id": "TCH-09",
@@ -678,7 +720,8 @@
       "urbanity": 3,
       "lean": -0.769,
       "_estimated": true,
-      "whiteLean": 0.552
+      "whiteLean": 0.552,
+      "alias": "太平"
     },
     {
       "id": "TCH-10",
@@ -694,7 +737,8 @@
       "urbanity": 3,
       "lean": -1.669,
       "_estimated": true,
-      "whiteLean": 0.552
+      "whiteLean": 0.552,
+      "alias": "大里霧峰"
     },
     {
       "id": "TCH-11",
@@ -709,7 +753,8 @@
       "urbanity": 4,
       "lean": 0.131,
       "_estimated": true,
-      "whiteLean": 0.552
+      "whiteLean": 0.552,
+      "alias": "豐原"
     },
     {
       "id": "TCH-12",
@@ -727,7 +772,8 @@
       "urbanity": 1,
       "lean": 1.031,
       "_estimated": true,
-      "whiteLean": 0.552
+      "whiteLean": 0.552,
+      "alias": "東石"
     },
     {
       "id": "TCH-P1",
@@ -742,7 +788,8 @@
       "urbanity": 3,
       "lean": 1.931,
       "_estimated": true,
-      "whiteLean": 0.552
+      "whiteLean": 0.552,
+      "alias": "平原"
     },
     {
       "id": "TCH-M1",
@@ -757,7 +804,8 @@
       "urbanity": 2,
       "lean": 2.831,
       "_estimated": true,
-      "whiteLean": 0.552
+      "whiteLean": 0.552,
+      "alias": "山原"
     },
     {
       "id": "TNN-01",
@@ -776,7 +824,8 @@
       "population": 190000,
       "urbanity": 2,
       "lean": -1.604,
-      "whiteLean": -0.61
+      "whiteLean": -0.61,
+      "alias": "新鹽"
     },
     {
       "id": "TNN-02",
@@ -794,7 +843,8 @@
       "population": 118000,
       "urbanity": 2,
       "lean": -1.604,
-      "whiteLean": -0.61
+      "whiteLean": -0.61,
+      "alias": "麻下"
     },
     {
       "id": "TNN-03",
@@ -813,7 +863,8 @@
       "population": 156000,
       "urbanity": 2,
       "lean": -1.604,
-      "whiteLean": -0.61
+      "whiteLean": -0.61,
+      "alias": "佳學"
     },
     {
       "id": "TNN-04",
@@ -835,7 +886,8 @@
       "population": 201000,
       "urbanity": 2,
       "lean": -1.604,
-      "whiteLean": -0.61
+      "whiteLean": -0.61,
+      "alias": "新善"
     },
     {
       "id": "TNN-05",
@@ -849,7 +901,8 @@
       "population": 240000,
       "urbanity": 4,
       "lean": -1.604,
-      "whiteLean": -0.61
+      "whiteLean": -0.61,
+      "alias": "永康"
     },
     {
       "id": "TNN-06",
@@ -866,7 +919,8 @@
       "population": 182000,
       "urbanity": 3,
       "lean": -1.604,
-      "whiteLean": -0.61
+      "whiteLean": -0.61,
+      "alias": "仁歸"
     },
     {
       "id": "TNN-07",
@@ -880,7 +934,8 @@
       "population": 185000,
       "urbanity": 5,
       "lean": -0.704,
-      "whiteLean": -0.61
+      "whiteLean": -0.61,
+      "alias": "東區"
     },
     {
       "id": "TNN-08",
@@ -894,7 +949,8 @@
       "population": 122000,
       "urbanity": 4,
       "lean": -1.604,
-      "whiteLean": -0.61
+      "whiteLean": -0.61,
+      "alias": "南區"
     },
     {
       "id": "TNN-09",
@@ -908,7 +964,8 @@
       "population": 190000,
       "urbanity": 3,
       "lean": -2.504,
-      "whiteLean": -0.61
+      "whiteLean": -0.61,
+      "alias": "安南"
     },
     {
       "id": "TNN-10",
@@ -923,7 +980,8 @@
       "population": 201000,
       "urbanity": 5,
       "lean": -1.604,
-      "whiteLean": -0.61
+      "whiteLean": -0.61,
+      "alias": "北中"
     },
     {
       "id": "TNN-11",
@@ -937,7 +995,8 @@
       "population": 67000,
       "urbanity": 4,
       "lean": -0.704,
-      "whiteLean": -0.61
+      "whiteLean": -0.61,
+      "alias": "安平"
     },
     {
       "id": "TNN-P1",
@@ -952,7 +1011,8 @@
       "urbanity": 3,
       "lean": 1.096,
       "_estimated": true,
-      "whiteLean": -0.61
+      "whiteLean": -0.61,
+      "alias": "平原"
     },
     {
       "id": "TNN-M1",
@@ -967,7 +1027,8 @@
       "urbanity": 2,
       "lean": 4.696,
       "_estimated": true,
-      "whiteLean": -0.61
+      "whiteLean": -0.61,
+      "alias": "山原"
     },
     {
       "id": "KHH-01",
@@ -990,7 +1051,8 @@
       "urbanity": 1,
       "lean": -0.169,
       "_estimated": true,
-      "whiteLean": -0.908
+      "whiteLean": -0.908,
+      "alias": "旗美"
     },
     {
       "id": "KHH-02",
@@ -1015,7 +1077,8 @@
       "urbanity": 2,
       "lean": -1.069,
       "_estimated": true,
-      "whiteLean": -0.908
+      "whiteLean": -0.908,
+      "alias": "岡山"
     },
     {
       "id": "KHH-03",
@@ -1031,7 +1094,8 @@
       "urbanity": 4,
       "lean": -1.069,
       "_estimated": true,
-      "whiteLean": -0.908
+      "whiteLean": -0.908,
+      "alias": "楠梓左營"
     },
     {
       "id": "KHH-04",
@@ -1048,7 +1112,8 @@
       "urbanity": 4,
       "lean": -1.069,
       "_estimated": true,
-      "whiteLean": -0.908
+      "whiteLean": -0.908,
+      "alias": "鼓山"
     },
     {
       "id": "KHH-05",
@@ -1063,7 +1128,8 @@
       "urbanity": 5,
       "lean": -1.069,
       "_estimated": true,
-      "whiteLean": -0.908
+      "whiteLean": -0.908,
+      "alias": "三民"
     },
     {
       "id": "KHH-06",
@@ -1080,7 +1146,8 @@
       "urbanity": 5,
       "lean": -1.069,
       "_estimated": true,
-      "whiteLean": -0.908
+      "whiteLean": -0.908,
+      "alias": "苓雅"
     },
     {
       "id": "KHH-07",
@@ -1096,7 +1163,8 @@
       "urbanity": 4,
       "lean": -1.969,
       "_estimated": true,
-      "whiteLean": -0.908
+      "whiteLean": -0.908,
+      "alias": "前鎮小港"
     },
     {
       "id": "KHH-08",
@@ -1111,7 +1179,8 @@
       "urbanity": 4,
       "lean": -1.069,
       "_estimated": true,
-      "whiteLean": -0.908
+      "whiteLean": -0.908,
+      "alias": "鳳山"
     },
     {
       "id": "KHH-09",
@@ -1128,7 +1197,8 @@
       "urbanity": 3,
       "lean": -1.069,
       "_estimated": true,
-      "whiteLean": -0.908
+      "whiteLean": -0.908,
+      "alias": "大林"
     },
     {
       "id": "KHH-10",
@@ -1145,7 +1215,8 @@
       "urbanity": 3,
       "lean": -1.069,
       "_estimated": true,
-      "whiteLean": -0.908
+      "whiteLean": -0.908,
+      "alias": "鳥仁"
     },
     {
       "id": "KHH-P1",
@@ -1160,7 +1231,8 @@
       "urbanity": 3,
       "lean": 0.731,
       "_estimated": true,
-      "whiteLean": -0.908
+      "whiteLean": -0.908,
+      "alias": "平原"
     },
     {
       "id": "KHH-M1",
@@ -1175,7 +1247,8 @@
       "urbanity": 2,
       "lean": 4.331,
       "_estimated": true,
-      "whiteLean": -0.908
+      "whiteLean": -0.908,
+      "alias": "山原"
     },
     {
       "id": "KEE-01",
@@ -1190,7 +1263,8 @@
       "urbanity": 4,
       "lean": 0.497,
       "_estimated": true,
-      "whiteLean": 0.105
+      "whiteLean": 0.105,
+      "alias": "中正"
     },
     {
       "id": "KEE-02",
@@ -1205,7 +1279,8 @@
       "urbanity": 4,
       "lean": -0.403,
       "_estimated": true,
-      "whiteLean": 0.105
+      "whiteLean": 0.105,
+      "alias": "信義"
     },
     {
       "id": "KEE-03",
@@ -1220,7 +1295,8 @@
       "urbanity": 4,
       "lean": 0.497,
       "_estimated": true,
-      "whiteLean": 0.105
+      "whiteLean": 0.105,
+      "alias": "仁愛"
     },
     {
       "id": "KEE-04",
@@ -1235,7 +1311,8 @@
       "urbanity": 4,
       "lean": -0.403,
       "_estimated": true,
-      "whiteLean": 0.105
+      "whiteLean": 0.105,
+      "alias": "中山"
     },
     {
       "id": "KEE-05",
@@ -1250,7 +1327,8 @@
       "urbanity": 4,
       "lean": -0.403,
       "_estimated": true,
-      "whiteLean": 0.105
+      "whiteLean": 0.105,
+      "alias": "安樂"
     },
     {
       "id": "KEE-06",
@@ -1265,7 +1343,8 @@
       "urbanity": 3,
       "lean": -0.403,
       "_estimated": true,
-      "whiteLean": 0.105
+      "whiteLean": 0.105,
+      "alias": "暖暖"
     },
     {
       "id": "KEE-07",
@@ -1280,7 +1359,8 @@
       "urbanity": 3,
       "lean": -0.403,
       "_estimated": true,
-      "whiteLean": 0.105
+      "whiteLean": 0.105,
+      "alias": "七堵"
     },
     {
       "id": "KEE-P1",
@@ -1295,7 +1375,8 @@
       "urbanity": 3,
       "lean": 2.297,
       "_estimated": true,
-      "whiteLean": 0.105
+      "whiteLean": 0.105,
+      "alias": "平原"
     },
     {
       "id": "KEE-M1",
@@ -1310,7 +1391,8 @@
       "urbanity": 2,
       "lean": 3.197,
       "_estimated": true,
-      "whiteLean": 0.105
+      "whiteLean": 0.105,
+      "alias": "山原"
     },
     {
       "id": "HSC-01",
@@ -1324,7 +1406,8 @@
       "population": 217000,
       "urbanity": 5,
       "lean": -0.343,
-      "whiteLean": 1.417
+      "whiteLean": 1.417,
+      "alias": "東區"
     },
     {
       "id": "HSC-02",
@@ -1338,7 +1421,8 @@
       "population": 149000,
       "urbanity": 4,
       "lean": -0.343,
-      "whiteLean": 1.417
+      "whiteLean": 1.417,
+      "alias": "北區"
     },
     {
       "id": "HSC-03",
@@ -1352,7 +1436,8 @@
       "population": 77000,
       "urbanity": 3,
       "lean": -1.241,
-      "whiteLean": 1.417
+      "whiteLean": 1.417,
+      "alias": "香山"
     },
     {
       "id": "HSC-P1",
@@ -1367,7 +1452,8 @@
       "urbanity": 3,
       "lean": 1.457,
       "_estimated": true,
-      "whiteLean": 1.417
+      "whiteLean": 1.417,
+      "alias": "平原"
     },
     {
       "id": "HSC-M1",
@@ -1382,7 +1468,8 @@
       "urbanity": 2,
       "lean": 2.359,
       "_estimated": true,
-      "whiteLean": 1.417
+      "whiteLean": 1.417,
+      "alias": "山原"
     },
     {
       "id": "CYI-01",
@@ -1396,7 +1483,8 @@
       "population": 113000,
       "urbanity": 4,
       "lean": -1.018,
-      "whiteLean": -0.025
+      "whiteLean": -0.025,
+      "alias": "東區"
     },
     {
       "id": "CYI-02",
@@ -1410,7 +1498,8 @@
       "population": 147000,
       "urbanity": 4,
       "lean": -1.018,
-      "whiteLean": -0.025
+      "whiteLean": -0.025,
+      "alias": "西區"
     },
     {
       "id": "CYI-A1",
@@ -1425,7 +1514,8 @@
       "urbanity": 3,
       "lean": 1.682,
       "_estimated": true,
-      "whiteLean": -0.025
+      "whiteLean": -0.025,
+      "alias": "原民"
     },
     {
       "id": "HSQ-01",
@@ -1440,7 +1530,8 @@
       "urbanity": 4,
       "lean": -0.679,
       "_estimated": true,
-      "whiteLean": 1.075
+      "whiteLean": 1.075,
+      "alias": "竹北"
     },
     {
       "id": "HSQ-02",
@@ -1456,7 +1547,8 @@
       "urbanity": 3,
       "lean": 0.221,
       "_estimated": true,
-      "whiteLean": 1.075
+      "whiteLean": 1.075,
+      "alias": "湖口新豐"
     },
     {
       "id": "HSQ-03",
@@ -1472,7 +1564,8 @@
       "urbanity": 2,
       "lean": 0.221,
       "_estimated": true,
-      "whiteLean": 1.075
+      "whiteLean": 1.075,
+      "alias": "新埔關西"
     },
     {
       "id": "HSQ-04",
@@ -1489,7 +1582,8 @@
       "urbanity": 1,
       "lean": 0.221,
       "_estimated": true,
-      "whiteLean": 1.075
+      "whiteLean": 1.075,
+      "alias": "芎橫"
     },
     {
       "id": "HSQ-05",
@@ -1505,7 +1599,8 @@
       "urbanity": 3,
       "lean": 0.221,
       "_estimated": true,
-      "whiteLean": 1.075
+      "whiteLean": 1.075,
+      "alias": "竹東五峰"
     },
     {
       "id": "HSQ-06",
@@ -1522,7 +1617,8 @@
       "urbanity": 1,
       "lean": 0.221,
       "_estimated": true,
-      "whiteLean": 1.075
+      "whiteLean": 1.075,
+      "alias": "寶北"
     },
     {
       "id": "HSQ-P1",
@@ -1537,7 +1633,8 @@
       "urbanity": 1,
       "lean": 0.221,
       "_estimated": true,
-      "whiteLean": 1.075
+      "whiteLean": 1.075,
+      "alias": "平原"
     },
     {
       "id": "HSQ-M1",
@@ -1552,7 +1649,8 @@
       "urbanity": 0,
       "lean": 1.121,
       "_estimated": true,
-      "whiteLean": 1.075
+      "whiteLean": 1.075,
+      "alias": "山原"
     },
     {
       "id": "MIA-01",
@@ -1567,7 +1665,8 @@
       "urbanity": 3,
       "lean": -0.524,
       "_estimated": true,
-      "whiteLean": 0.025
+      "whiteLean": 0.025,
+      "alias": "竹南"
     },
     {
       "id": "MIA-02",
@@ -1584,7 +1683,8 @@
       "urbanity": 3,
       "lean": 0.376,
       "_estimated": true,
-      "whiteLean": 0.025
+      "whiteLean": 0.025,
+      "alias": "頭三"
     },
     {
       "id": "MIA-03",
@@ -1601,7 +1701,8 @@
       "urbanity": 3,
       "lean": 0.376,
       "_estimated": true,
-      "whiteLean": 0.025
+      "whiteLean": 0.025,
+      "alias": "苗頭"
     },
     {
       "id": "MIA-04",
@@ -1619,7 +1720,8 @@
       "urbanity": 1,
       "lean": 0.376,
       "_estimated": true,
-      "whiteLean": 0.025
+      "whiteLean": 0.025,
+      "alias": "公大"
     },
     {
       "id": "MIA-05",
@@ -1636,7 +1738,8 @@
       "urbanity": 2,
       "lean": -0.524,
       "_estimated": true,
-      "whiteLean": 0.025
+      "whiteLean": 0.025,
+      "alias": "後西"
     },
     {
       "id": "MIA-06",
@@ -1651,7 +1754,8 @@
       "urbanity": 2,
       "lean": -0.524,
       "_estimated": true,
-      "whiteLean": 0.025
+      "whiteLean": 0.025,
+      "alias": "苑裡"
     },
     {
       "id": "MIA-07",
@@ -1668,7 +1772,8 @@
       "urbanity": 1,
       "lean": 0.376,
       "_estimated": true,
-      "whiteLean": 0.025
+      "whiteLean": 0.025,
+      "alias": "銅三"
     },
     {
       "id": "MIA-P1",
@@ -1683,7 +1788,8 @@
       "urbanity": 1,
       "lean": 0.376,
       "_estimated": true,
-      "whiteLean": 0.025
+      "whiteLean": 0.025,
+      "alias": "平原"
     },
     {
       "id": "MIA-M1",
@@ -1698,7 +1804,8 @@
       "urbanity": 0,
       "lean": 1.276,
       "_estimated": true,
-      "whiteLean": 0.025
+      "whiteLean": 0.025,
+      "alias": "山原"
     },
     {
       "id": "CHA-01",
@@ -1713,7 +1820,8 @@
       "urbanity": 4,
       "lean": -0.6,
       "_estimated": true,
-      "whiteLean": 0.255
+      "whiteLean": 0.255,
+      "alias": "彰化"
     },
     {
       "id": "CHA-02",
@@ -1730,7 +1838,8 @@
       "urbanity": 2,
       "lean": -0.6,
       "_estimated": true,
-      "whiteLean": 0.255
+      "whiteLean": 0.255,
+      "alias": "芬花"
     },
     {
       "id": "CHA-03",
@@ -1747,7 +1856,8 @@
       "urbanity": 2,
       "lean": -1.5,
       "_estimated": true,
-      "whiteLean": 0.255
+      "whiteLean": 0.255,
+      "alias": "和線"
     },
     {
       "id": "CHA-04",
@@ -1764,7 +1874,8 @@
       "urbanity": 2,
       "lean": -0.6,
       "_estimated": true,
-      "whiteLean": 0.255
+      "whiteLean": 0.255,
+      "alias": "鹿福"
     },
     {
       "id": "CHA-05",
@@ -1779,7 +1890,8 @@
       "urbanity": 3,
       "lean": -0.6,
       "_estimated": true,
-      "whiteLean": 0.255
+      "whiteLean": 0.255,
+      "alias": "員林"
     },
     {
       "id": "CHA-06",
@@ -1796,7 +1908,8 @@
       "urbanity": 2,
       "lean": -0.6,
       "_estimated": true,
-      "whiteLean": 0.255
+      "whiteLean": 0.255,
+      "alias": "社永"
     },
     {
       "id": "CHA-07",
@@ -1813,7 +1926,8 @@
       "urbanity": 2,
       "lean": -0.6,
       "_estimated": true,
-      "whiteLean": 0.255
+      "whiteLean": 0.255,
+      "alias": "溪埔"
     },
     {
       "id": "CHA-08",
@@ -1831,7 +1945,8 @@
       "urbanity": 2,
       "lean": -1.5,
       "_estimated": true,
-      "whiteLean": 0.255
+      "whiteLean": 0.255,
+      "alias": "田二"
     },
     {
       "id": "CHA-09",
@@ -1850,7 +1965,8 @@
       "urbanity": 1,
       "lean": -1.5,
       "_estimated": true,
-      "whiteLean": 0.255
+      "whiteLean": 0.255,
+      "alias": "二芳"
     },
     {
       "id": "CHA-P1",
@@ -1865,7 +1981,8 @@
       "urbanity": 1,
       "lean": 2.1,
       "_estimated": true,
-      "whiteLean": 0.255
+      "whiteLean": 0.255,
+      "alias": "平原"
     },
     {
       "id": "NAN-01",
@@ -1880,7 +1997,8 @@
       "urbanity": 3,
       "lean": -1.147,
       "_estimated": true,
-      "whiteLean": -0.39
+      "whiteLean": -0.39,
+      "alias": "南投"
     },
     {
       "id": "NAN-02",
@@ -1896,7 +2014,8 @@
       "urbanity": 1,
       "lean": -0.257,
       "_estimated": true,
-      "whiteLean": -0.39
+      "whiteLean": -0.39,
+      "alias": "中寮名間"
     },
     {
       "id": "NAN-03",
@@ -1911,7 +2030,8 @@
       "urbanity": 3,
       "lean": -0.257,
       "_estimated": true,
-      "whiteLean": -0.39
+      "whiteLean": -0.39,
+      "alias": "草屯"
     },
     {
       "id": "NAN-04",
@@ -1927,7 +2047,8 @@
       "urbanity": 2,
       "lean": -0.257,
       "_estimated": true,
-      "whiteLean": -0.39
+      "whiteLean": -0.39,
+      "alias": "埔里國姓"
     },
     {
       "id": "NAN-05",
@@ -1945,7 +2066,8 @@
       "urbanity": 1,
       "lean": -0.257,
       "_estimated": true,
-      "whiteLean": -0.39
+      "whiteLean": -0.39,
+      "alias": "魚水"
     },
     {
       "id": "NAN-06",
@@ -1962,7 +2084,8 @@
       "urbanity": 2,
       "lean": -0.257,
       "_estimated": true,
-      "whiteLean": -0.39
+      "whiteLean": -0.39,
+      "alias": "竹鹿"
     },
     {
       "id": "NAN-P1",
@@ -1977,7 +2100,8 @@
       "urbanity": 1,
       "lean": 0.653,
       "_estimated": true,
-      "whiteLean": -0.39
+      "whiteLean": -0.39,
+      "alias": "平原"
     },
     {
       "id": "NAN-M1",
@@ -1992,7 +2116,8 @@
       "urbanity": 0,
       "lean": 1.543,
       "_estimated": true,
-      "whiteLean": -0.39
+      "whiteLean": -0.39,
+      "alias": "山原"
     },
     {
       "id": "YUN-01",
@@ -2007,7 +2132,8 @@
       "urbanity": 3,
       "lean": -0.574,
       "_estimated": true,
-      "whiteLean": -0.095
+      "whiteLean": -0.095,
+      "alias": "斗六"
     },
     {
       "id": "YUN-02",
@@ -2024,7 +2150,8 @@
       "urbanity": 1,
       "lean": -1.474,
       "_estimated": true,
-      "whiteLean": -0.095
+      "whiteLean": -0.095,
+      "alias": "林古"
     },
     {
       "id": "YUN-03",
@@ -2040,7 +2167,8 @@
       "urbanity": 2,
       "lean": -1.474,
       "_estimated": true,
-      "whiteLean": -0.095
+      "whiteLean": -0.095,
+      "alias": "斗南大埤"
     },
     {
       "id": "YUN-04",
@@ -2056,7 +2184,8 @@
       "urbanity": 2,
       "lean": -1.474,
       "_estimated": true,
-      "whiteLean": -0.095
+      "whiteLean": -0.095,
+      "alias": "虎尾土庫"
     },
     {
       "id": "YUN-05",
@@ -2073,7 +2202,8 @@
       "urbanity": 1,
       "lean": -1.474,
       "_estimated": true,
-      "whiteLean": -0.095
+      "whiteLean": -0.095,
+      "alias": "褒東"
     },
     {
       "id": "YUN-06",
@@ -2090,7 +2220,8 @@
       "urbanity": 1,
       "lean": -1.474,
       "_estimated": true,
-      "whiteLean": -0.095
+      "whiteLean": -0.095,
+      "alias": "西二"
     },
     {
       "id": "YUN-07",
@@ -2106,7 +2237,8 @@
       "urbanity": 1,
       "lean": -1.474,
       "_estimated": true,
-      "whiteLean": -0.095
+      "whiteLean": -0.095,
+      "alias": "麥寮臺西"
     },
     {
       "id": "YUN-08",
@@ -2123,7 +2255,8 @@
       "urbanity": 1,
       "lean": -2.374,
       "_estimated": true,
-      "whiteLean": -0.095
+      "whiteLean": -0.095,
+      "alias": "四口"
     },
     {
       "id": "YUN-09",
@@ -2138,7 +2271,8 @@
       "urbanity": 2,
       "lean": -1.474,
       "_estimated": true,
-      "whiteLean": -0.095
+      "whiteLean": -0.095,
+      "alias": "北港"
     },
     {
       "id": "YUN-P1",
@@ -2153,7 +2287,8 @@
       "urbanity": 1,
       "lean": 3.026,
       "_estimated": true,
-      "whiteLean": -0.095
+      "whiteLean": -0.095,
+      "alias": "平原"
     },
     {
       "id": "CYQ-01",
@@ -2170,7 +2305,8 @@
       "urbanity": 2,
       "lean": -1.804,
       "_estimated": true,
-      "whiteLean": -0.598
+      "whiteLean": -0.598,
+      "alias": "民大"
     },
     {
       "id": "CYQ-02",
@@ -2189,7 +2325,8 @@
       "urbanity": 1,
       "lean": -0.904,
       "_estimated": true,
-      "whiteLean": -0.598
+      "whiteLean": -0.598,
+      "alias": "梅竹"
     },
     {
       "id": "CYQ-03",
@@ -2205,7 +2342,8 @@
       "urbanity": 1,
       "lean": -1.804,
       "_estimated": true,
-      "whiteLean": -0.598
+      "whiteLean": -0.598,
+      "alias": "新港六腳"
     },
     {
       "id": "CYQ-04",
@@ -2221,7 +2359,8 @@
       "urbanity": 2,
       "lean": -1.804,
       "_estimated": true,
-      "whiteLean": -0.598
+      "whiteLean": -0.598,
+      "alias": "朴子東石"
     },
     {
       "id": "CYQ-05",
@@ -2238,7 +2377,8 @@
       "urbanity": 1,
       "lean": -1.804,
       "_estimated": true,
-      "whiteLean": -0.598
+      "whiteLean": -0.598,
+      "alias": "布義"
     },
     {
       "id": "CYQ-06",
@@ -2254,7 +2394,8 @@
       "urbanity": 2,
       "lean": -1.804,
       "_estimated": true,
-      "whiteLean": -0.598
+      "whiteLean": -0.598,
+      "alias": "太保水上"
     },
     {
       "id": "CYQ-07",
@@ -2269,7 +2410,8 @@
       "urbanity": 1,
       "lean": -0.904,
       "_estimated": true,
-      "whiteLean": -0.598
+      "whiteLean": -0.598,
+      "alias": "中埔"
     },
     {
       "id": "CYQ-P1",
@@ -2284,7 +2426,8 @@
       "urbanity": 1,
       "lean": 3.596,
       "_estimated": true,
-      "whiteLean": -0.598
+      "whiteLean": -0.598,
+      "alias": "平原"
     },
     {
       "id": "CYQ-M1",
@@ -2299,7 +2442,8 @@
       "urbanity": 0,
       "lean": 4.496,
       "_estimated": true,
-      "whiteLean": -0.598
+      "whiteLean": -0.598,
+      "alias": "山原"
     },
     {
       "id": "PIF-01",
@@ -2314,7 +2458,8 @@
       "urbanity": 4,
       "lean": -1.41,
       "_estimated": true,
-      "whiteLean": -1.275
+      "whiteLean": -1.275,
+      "alias": "屏東"
     },
     {
       "id": "PIF-02",
@@ -2333,7 +2478,8 @@
       "urbanity": 1,
       "lean": -1.41,
       "_estimated": true,
-      "whiteLean": -1.275
+      "whiteLean": -1.275,
+      "alias": "九里"
     },
     {
       "id": "PIF-03",
@@ -2351,7 +2497,8 @@
       "urbanity": 2,
       "lean": -1.41,
       "_estimated": true,
-      "whiteLean": -1.275
+      "whiteLean": -1.275,
+      "alias": "鹽長"
     },
     {
       "id": "PIF-04",
@@ -2370,7 +2517,8 @@
       "urbanity": 1,
       "lean": -1.41,
       "_estimated": true,
-      "whiteLean": -1.275
+      "whiteLean": -1.275,
+      "alias": "內竹"
     },
     {
       "id": "PIF-05",
@@ -2385,7 +2533,8 @@
       "urbanity": 2,
       "lean": -2.31,
       "_estimated": true,
-      "whiteLean": -1.275
+      "whiteLean": -1.275,
+      "alias": "萬丹"
     },
     {
       "id": "PIF-06",
@@ -2401,7 +2550,8 @@
       "urbanity": 2,
       "lean": -2.31,
       "_estimated": true,
-      "whiteLean": -1.275
+      "whiteLean": -1.275,
+      "alias": "潮州崁頂"
     },
     {
       "id": "PIF-07",
@@ -2418,7 +2568,8 @@
       "urbanity": 2,
       "lean": -2.31,
       "_estimated": true,
-      "whiteLean": -1.275
+      "whiteLean": -1.275,
+      "alias": "東新"
     },
     {
       "id": "PIF-08",
@@ -2436,7 +2587,8 @@
       "urbanity": 1,
       "lean": -2.31,
       "_estimated": true,
-      "whiteLean": -1.275
+      "whiteLean": -1.275,
+      "alias": "林南"
     },
     {
       "id": "PIF-09",
@@ -2454,7 +2606,8 @@
       "urbanity": 1,
       "lean": -1.41,
       "_estimated": true,
-      "whiteLean": -1.275
+      "whiteLean": -1.275,
+      "alias": "枋寮"
     },
     {
       "id": "PIF-10",
@@ -2472,7 +2625,8 @@
       "urbanity": 1,
       "lean": -1.41,
       "_estimated": true,
-      "whiteLean": -1.275
+      "whiteLean": -1.275,
+      "alias": "恆車"
     },
     {
       "id": "PIF-P1",
@@ -2487,7 +2641,8 @@
       "urbanity": 1,
       "lean": 3.09,
       "_estimated": true,
-      "whiteLean": -1.275
+      "whiteLean": -1.275,
+      "alias": "平原"
     },
     {
       "id": "PIF-M1",
@@ -2502,7 +2657,8 @@
       "urbanity": 0,
       "lean": 3.99,
       "_estimated": true,
-      "whiteLean": -1.275
+      "whiteLean": -1.275,
+      "alias": "山原"
     },
     {
       "id": "ILA-01",
@@ -2517,7 +2673,8 @@
       "urbanity": 3,
       "lean": -1.769,
       "_estimated": true,
-      "whiteLean": -0.073
+      "whiteLean": -0.073,
+      "alias": "宜蘭"
     },
     {
       "id": "ILA-02",
@@ -2533,7 +2690,8 @@
       "urbanity": 1,
       "lean": -1.769,
       "_estimated": true,
-      "whiteLean": -0.073
+      "whiteLean": -0.073,
+      "alias": "壯圍員山"
     },
     {
       "id": "ILA-03",
@@ -2549,7 +2707,8 @@
       "urbanity": 2,
       "lean": -0.869,
       "_estimated": true,
-      "whiteLean": -0.073
+      "whiteLean": -0.073,
+      "alias": "頭城礁溪"
     },
     {
       "id": "ILA-04",
@@ -2564,7 +2723,8 @@
       "urbanity": 3,
       "lean": -1.769,
       "_estimated": true,
-      "whiteLean": -0.073
+      "whiteLean": -0.073,
+      "alias": "羅東"
     },
     {
       "id": "ILA-05",
@@ -2580,7 +2740,8 @@
       "urbanity": 2,
       "lean": -1.769,
       "_estimated": true,
-      "whiteLean": -0.073
+      "whiteLean": -0.073,
+      "alias": "五結冬山"
     },
     {
       "id": "ILA-06",
@@ -2596,7 +2757,8 @@
       "urbanity": 1,
       "lean": -0.869,
       "_estimated": true,
-      "whiteLean": -0.073
+      "whiteLean": -0.073,
+      "alias": "三星大同"
     },
     {
       "id": "ILA-07",
@@ -2612,7 +2774,8 @@
       "urbanity": 2,
       "lean": -1.769,
       "_estimated": true,
-      "whiteLean": -0.073
+      "whiteLean": -0.073,
+      "alias": "蘇澳南澳"
     },
     {
       "id": "ILA-P1",
@@ -2627,7 +2790,8 @@
       "urbanity": 1,
       "lean": 2.731,
       "_estimated": true,
-      "whiteLean": -0.073
+      "whiteLean": -0.073,
+      "alias": "平原"
     },
     {
       "id": "ILA-M1",
@@ -2642,7 +2806,8 @@
       "urbanity": 0,
       "lean": 3.631,
       "_estimated": true,
-      "whiteLean": -0.073
+      "whiteLean": -0.073,
+      "alias": "山原"
     },
     {
       "id": "HUA-01",
@@ -2657,7 +2822,8 @@
       "urbanity": 3,
       "lean": 1.043,
       "_estimated": true,
-      "whiteLean": -0.87
+      "whiteLean": -0.87,
+      "alias": "花蓮"
     },
     {
       "id": "HUA-02",
@@ -2673,7 +2839,8 @@
       "urbanity": 1,
       "lean": 1.043,
       "_estimated": true,
-      "whiteLean": -0.87
+      "whiteLean": -0.87,
+      "alias": "新城秀林"
     },
     {
       "id": "HUA-03",
@@ -2688,7 +2855,8 @@
       "urbanity": 3,
       "lean": 1.043,
       "_estimated": true,
-      "whiteLean": -0.87
+      "whiteLean": -0.87,
+      "alias": "吉安"
     },
     {
       "id": "HUA-04",
@@ -2705,7 +2873,8 @@
       "urbanity": 1,
       "lean": 1.043,
       "_estimated": true,
-      "whiteLean": -0.87
+      "whiteLean": -0.87,
+      "alias": "壽鳳"
     },
     {
       "id": "HUA-05",
@@ -2722,7 +2891,8 @@
       "urbanity": 0,
       "lean": 1.043,
       "_estimated": true,
-      "whiteLean": -0.87
+      "whiteLean": -0.87,
+      "alias": "光豐"
     },
     {
       "id": "HUA-06",
@@ -2739,7 +2909,8 @@
       "urbanity": 1,
       "lean": 0.143,
       "_estimated": true,
-      "whiteLean": -0.87
+      "whiteLean": -0.87,
+      "alias": "玉卓"
     },
     {
       "id": "HUA-P1",
@@ -2754,7 +2925,8 @@
       "urbanity": 1,
       "lean": 1.043,
       "_estimated": true,
-      "whiteLean": -0.87
+      "whiteLean": -0.87,
+      "alias": "平原"
     },
     {
       "id": "HUA-M1",
@@ -2769,7 +2941,8 @@
       "urbanity": 0,
       "lean": 1.943,
       "_estimated": true,
-      "whiteLean": -0.87
+      "whiteLean": -0.87,
+      "alias": "山原"
     },
     {
       "id": "TTT-01",
@@ -2784,7 +2957,8 @@
       "urbanity": 3,
       "lean": 0.647,
       "_estimated": true,
-      "whiteLean": -1.233
+      "whiteLean": -1.233,
+      "alias": "臺東"
     },
     {
       "id": "TTT-02",
@@ -2800,7 +2974,8 @@
       "urbanity": 1,
       "lean": 0.647,
       "_estimated": true,
-      "whiteLean": -1.233
+      "whiteLean": -1.233,
+      "alias": "卑南延平"
     },
     {
       "id": "TTT-03",
@@ -2818,7 +2993,8 @@
       "urbanity": 0,
       "lean": 0.647,
       "_estimated": true,
-      "whiteLean": -1.233
+      "whiteLean": -1.233,
+      "alias": "鹿關"
     },
     {
       "id": "TTT-04",
@@ -2835,7 +3011,8 @@
       "urbanity": 0,
       "lean": 0.647,
       "_estimated": true,
-      "whiteLean": -1.233
+      "whiteLean": -1.233,
+      "alias": "成東"
     },
     {
       "id": "TTT-05",
@@ -2853,7 +3030,8 @@
       "urbanity": 0,
       "lean": 0.647,
       "_estimated": true,
-      "whiteLean": -1.233
+      "whiteLean": -1.233,
+      "alias": "太金"
     },
     {
       "id": "TTT-06",
@@ -2869,7 +3047,8 @@
       "urbanity": 0,
       "lean": -0.253,
       "_estimated": true,
-      "whiteLean": -1.233
+      "whiteLean": -1.233,
+      "alias": "綠島蘭嶼"
     },
     {
       "id": "TTT-P1",
@@ -2884,7 +3063,8 @@
       "urbanity": 1,
       "lean": 0.647,
       "_estimated": true,
-      "whiteLean": -1.233
+      "whiteLean": -1.233,
+      "alias": "平原"
     },
     {
       "id": "TTT-M1",
@@ -2899,7 +3079,8 @@
       "urbanity": 0,
       "lean": 1.547,
       "_estimated": true,
-      "whiteLean": -1.233
+      "whiteLean": -1.233,
+      "alias": "山原"
     },
     {
       "id": "PEN-01",
@@ -2914,7 +3095,8 @@
       "urbanity": 3,
       "lean": -0.46,
       "_estimated": true,
-      "whiteLean": -0.673
+      "whiteLean": -0.673,
+      "alias": "馬公"
     },
     {
       "id": "PEN-02",
@@ -2929,7 +3111,8 @@
       "urbanity": 1,
       "lean": -0.46,
       "_estimated": true,
-      "whiteLean": -0.673
+      "whiteLean": -0.673,
+      "alias": "湖西"
     },
     {
       "id": "PEN-03",
@@ -2944,7 +3127,8 @@
       "urbanity": 1,
       "lean": -0.46,
       "_estimated": true,
-      "whiteLean": -0.673
+      "whiteLean": -0.673,
+      "alias": "白沙"
     },
     {
       "id": "PEN-04",
@@ -2959,7 +3143,8 @@
       "urbanity": 1,
       "lean": -0.46,
       "_estimated": true,
-      "whiteLean": -0.673
+      "whiteLean": -0.673,
+      "alias": "西嶼"
     },
     {
       "id": "PEN-05",
@@ -2975,7 +3160,8 @@
       "urbanity": 0,
       "lean": -0.46,
       "_estimated": true,
-      "whiteLean": -0.673
+      "whiteLean": -0.673,
+      "alias": "望安七美"
     },
     {
       "id": "KIN-01",
@@ -2990,7 +3176,8 @@
       "urbanity": 3,
       "lean": 3.168,
       "_estimated": true,
-      "whiteLean": -0.468
+      "whiteLean": -0.468,
+      "alias": "金城"
     },
     {
       "id": "KIN-02",
@@ -3005,7 +3192,8 @@
       "urbanity": 2,
       "lean": 3.168,
       "_estimated": true,
-      "whiteLean": -0.468
+      "whiteLean": -0.468,
+      "alias": "金湖"
     },
     {
       "id": "KIN-03",
@@ -3020,7 +3208,8 @@
       "urbanity": 1,
       "lean": 3.168,
       "_estimated": true,
-      "whiteLean": -0.468
+      "whiteLean": -0.468,
+      "alias": "金沙"
     },
     {
       "id": "KIN-04",
@@ -3035,7 +3224,8 @@
       "urbanity": 2,
       "lean": 3.168,
       "_estimated": true,
-      "whiteLean": -0.468
+      "whiteLean": -0.468,
+      "alias": "金寧"
     },
     {
       "id": "KIN-05",
@@ -3051,7 +3241,8 @@
       "urbanity": 0,
       "lean": 3.168,
       "_estimated": true,
-      "whiteLean": -0.468
+      "whiteLean": -0.468,
+      "alias": "烈嶼烏坵"
     },
     {
       "id": "LIE-01",
@@ -3066,7 +3257,8 @@
       "urbanity": 2,
       "lean": 3.414,
       "_estimated": true,
-      "whiteLean": -0.453
+      "whiteLean": -0.453,
+      "alias": "南竿"
     },
     {
       "id": "LIE-02",
@@ -3081,7 +3273,8 @@
       "urbanity": 1,
       "lean": 3.414,
       "_estimated": true,
-      "whiteLean": -0.453
+      "whiteLean": -0.453,
+      "alias": "北竿"
     },
     {
       "id": "LIE-03",
@@ -3096,7 +3289,8 @@
       "urbanity": 0,
       "lean": 3.414,
       "_estimated": true,
-      "whiteLean": -0.453
+      "whiteLean": -0.453,
+      "alias": "莒光"
     },
     {
       "id": "LIE-04",
@@ -3111,7 +3305,9 @@
       "urbanity": 0,
       "lean": 3.414,
       "_estimated": true,
-      "whiteLean": -0.453
+      "whiteLean": -0.453,
+      "alias": "東引"
     }
-  ]
+  ],
+  "_aliasNote": "districts[].alias 是給玩家辨識用的通稱，寫在選區全名後面的括號裡。多數由所轄行政區機械推導（取前兩個行政區的首字，兩區都是兩個字時直接併起來），六都幾個有明確通稱的則手動指定。這不是官方名稱，只是為了讓一百九十五個選區分得出來。"
 }

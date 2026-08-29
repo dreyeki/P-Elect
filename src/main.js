@@ -44,6 +44,10 @@ import * as Invite from './systems/InvitationSystem.js';
 import * as SocialSys from './systems/SocialSystem.js';
 import * as Semi from './systems/SemiconductorSystem.js';
 import * as Firsts from './systems/FirstTimeSystem.js';
+import * as Rally from './systems/RallySystem.js';
+import * as Asset from './systems/AssetSystem.js';
+import * as Fund from './systems/FundraiseSystem.js';
+import * as FF from './systems/FastForwardSystem.js';
 import { applyEffects, bumpCounter } from './systems/Effects.js';
 import { clamp, clamp05, clampBi } from './core/Formula.js';
 
@@ -283,6 +287,57 @@ function handle(act, ds) {
         + `\n\n目前追蹤數：${F.int(r.followers)}`));
       render();
     },
+
+    /* 募款、造勢、私人財務 */
+    'open-fundraise': openFundraise,
+    'do-fund': () => doFundraise(ds.id),
+    'open-rally': () => openRally(),
+    'rally-pick': () => {
+      ui.rallyPlan ??= { venue: null, mobilize: 'M_NONE', speech: 'S_NONE' };
+      ui.rallyPlan[ds.slot] = ds.id;
+      openRally(ui.rallyPlan);
+    },
+    'do-rally': doRally,
+    'open-finances': () => openFinances(),
+    'open-ff': openFastForward,
+    'do-ff': () => doFastForward(ds.id),
+    'fin-tab': () => openFinances(ds.id),
+    'do-borrow': () => {
+      const r = Asset.borrow(s, DATA, ds.id, +ds.amt);
+      toast(r.msg);
+      if (r.ok && r.warn) toast('你的負債已經超過年收入的十二倍，這件事會被寫進財產申報。');
+      openFinances(); render();
+    },
+    'do-repay': () => { const r = Asset.repay(s, DATA, ds.id); toast(r.msg); openFinances(); render(); },
+    'do-invest': () => {
+      const r = Asset.buy(s, DATA, ds.id, +ds.amt);
+      closeModal();
+      if (!r.ok) { toast(r.msg); return openFinances(); }
+      openModal(textModal(DATA.byId.investment[ds.id]?.name ?? '投資', r.msg));
+      render();
+    },
+    'do-sell': () => { const r = Asset.sell(s, DATA, ds.id); toast(r.msg); openFinances(); render(); },
+    'open-scam': () => {
+      const off = Asset.ensure(s).scamOffer;
+      if (!off) return toast('那個人沒有再打電話來。');
+      openModal(`<div class="modal-h">${esc(off.name)}</div>
+        <div class="modal-b" style="line-height:1.95">${esc(off.pitch)}</div>
+        <div class="xs muted" style="line-height:1.75;margin-bottom:8px">
+          他說最低要 ${esc(F.money(off.minAmount))} 起。你手上現在有 ${esc(F.money(s.finance.personal))}。</div>
+        <button class="opt" data-act="scam-take"><div class="opt-t">投進去</div>
+          <div class="opt-h">用一半的現金，這種機會不會等人</div></button>
+        <button class="opt" data-act="scam-skip"><div class="opt-t">說再看看</div>
+          <div class="opt-h">你沒有把話講死，但你也沒有打算回這通電話</div></button>`);
+    },
+    'scam-take': () => {
+      const off = Asset.ensure(s).scamOffer;
+      if (!off) return closeModal();
+      const r = Asset.buy(s, DATA, off.id, Math.max(off.minAmount, s.finance.personal * 0.5));
+      Asset.ensure(s).scamOffer = null;
+      closeModal();
+      openModal(textModal(off.name, r.ok ? r.msg : r.msg)); render();
+    },
+    'scam-skip': () => { Asset.ensure(s).scamOffer = null; closeModal(); toast('你說再考慮看看，然後就沒有再回電話。'); render(); },
 
     /* 人情牽制 */
     'open-favor': () => openFavor(ds.id),
@@ -556,13 +611,16 @@ function joinParty(pid) {
 }
 
 /* ─────────── 回合推進 ─────────── */
+/**
+ * 結束回合。
+ *
+ * 不再攔玩家。待決事項擺著不處理本來就是一種選擇——
+ * 那個選擇有代價，但代價應該長在世界裡，不是長在一個要按兩次的對話框裡。
+ * 沒處理的事情就這樣過去了，玩家永遠不會知道原本可以怎樣，這才是真的。
+ */
 function endTurn() {
   const s = app.state;
-  if (s.pendingEvents.length) {
-    return confirmModal('還有事情沒處理',
-      '待決事項如果不處理，事情會自己往壞的方向走，而且你不會知道原本可以怎樣。',
-      '直接結束回合', () => { s.pendingEvents = []; askRest(); });
-  }
+  if (s.pendingEvents.length) s.pendingEvents = [];
   askRest();
 }
 
@@ -654,7 +712,9 @@ function resolveAction(s, id, arg, rng) {
       const organizer = Team.teamBonus(s, DATA, 'grassrootsGrowth');
       const r = Canvass.run(s, DATA, did, rng);
       District.grow(s, did, organizer * (DATA.tuning?.grassroots?.organizerBonus ?? 0.25));
-      s.finance.campaign -= 30000;
+      // 掃街不再花錢。跑攤的成本本來就是鞋子跟時間，
+      // 而一個破產的候選人如果連跑攤都做不到，這局就沒有回頭的路了。
+      s.finance.campaign -= DATA.tuning?.canvass?.cost ?? 0;
       showCanvassReport(s, did, rng, r);
       return '';
     }
@@ -687,12 +747,18 @@ function resolveAction(s, id, arg, rng) {
     case 'prepQuestion':
       Interp.prepare(s);
       return `你把資料讀熟了。現在的準備程度是「${word('prep', s.flags.interpPrep)}」。`;
-    case 'fundraise': {
-      const amt = Math.round((rng.range(300000, 1800000) * (0.6 + p.fame * 0.35)) / 10000) * 10000;
-      s.finance.campaign += amt;
-      if (rng.bool(0.18)) { p.stigma = clamp05(p.stigma + 0.15); return `募到 ${F.money(amt)}。席間有幾個人講的話，你聽了以後假裝沒聽到。`; }
-      return `募款餐會辦得還算順利，專戶入帳 ${F.money(amt)}。`;
-    }
+    case 'fundraise':
+      openFundraise();
+      return '';
+    case 'rally':
+      openRally();
+      return '';
+    case 'finances':
+      openFinances();
+      return '';
+    case 'fastForward':
+      openFastForward();
+      return '';
     case 'faction': {
       if (!p.party) return '你沒有政黨，沒有派系大老可以拜會。';
       const party = s.parties[p.party];
@@ -756,7 +822,9 @@ function checkElection() {
     }
     return;
   }
-  if (months !== null && months <= 2 && s.meta.scale === 'week' && !s.flags['elecDone_' + sched.year]) {
+  // 問要不要參選這件事不需要先切成週回合——
+  // 沒有要選的人不該為了被問一句話就把接下來兩個月的時間切碎。
+  if (months !== null && months <= (DATA.meta.weekTurnLeadMonths ?? 2) && !s.flags['elecDone_' + sched.year]) {
     const runs = Election.availableRuns(s, DATA, sched);
     if (!runs.length) { s.flags['elecDone_' + sched.year] = true; return; }
     s.election = { phase: 'decide', sched, options: runs, weeksLeft: 8 };
@@ -774,6 +842,7 @@ function pickRun(ds) {
   s.meta.rngCounter = rng.counter;
   s.election.run = run;
   s.election.primary = pri;
+  Election.enterCampaignScale(s);
   if (pri.skip) {
     s.election.phase = 'campaign';
     s.election.primaryWon = true;
@@ -1094,7 +1163,7 @@ function openCommission() {
   const scopes = [
     { id: 'nation', name: '全國', note: '看整體政黨版圖與自己的全國聲量' },
     { id: 'region', name: homeD ? DATA.byId.region[homeD.regionId].name : '本縣市', note: '縣市長選舉或跨選區布局要看這個' },
-    { id: 'district', name: homeD?.name ?? '本選區', note: '議員選舉最實用，直接看得到自己在哪個位置' },
+    { id: 'district', name: homeD ? F.distName(homeD, { aliasOnly: true }) : '本選區', note: '議員選舉最實用，直接看得到自己在哪個位置' },
   ];
   const rows = DATA.pollsters.pollsters.filter((ps) => ps.commission > 0).map((ps) => {
     const opts = scopes.filter((sc) => ps.scopes.includes(sc.id)).map((sc) => {
@@ -1408,7 +1477,7 @@ function showCanvassReport(s, did, rng, res) {
   }
   const ms = res?.milestone ? `<div class="xs" style="color:var(--good);line-height:1.7;margin-bottom:8px">${esc(res.milestone.text)}</div>` : '';
 
-  openModal(`<div class="modal-h">${esc(res?.scene?.name ?? dd.name)}・${esc(dd.name)}</div>
+  openModal(`<div class="modal-h">${esc(res?.scene?.name ?? dd.name)}・${esc(F.distName(dd, { aliasOnly: true }))}</div>
     ${firstTimeBanner(s)}
     <div class="modal-b" style="line-height:1.95">${esc(res?.lead ?? '')}</div>
     <div class="modal-b" style="line-height:1.95;border-left:3px solid var(--accent);padding-left:10px">${esc(res?.text ?? '')}</div>
@@ -1511,6 +1580,324 @@ function openStream(kind) {
       <div class="opt-t">不帶論述，隨口講</div>
       <div class="opt-h">全靠臨場反應，講得好不好完全看你自己</div></button>
     <button class="btn ghost full" data-act="modal-close">算了</button>`);
+}
+
+/* ─────────── 募款 ─────────── */
+/**
+ * 三種管道測量的是三件不同的事：
+ * 餐會測你這幾年有沒有經營人脈，小額捐測有多少人真的在乎你，
+ * 拜訪建商測的是你願意欠多少。金額的大小剛好跟乾淨的程度相反。
+ */
+function openFundraise() {
+  const s = app.state;
+  const rows = Fund.available(s, DATA).map(({ c, st }) => {
+    const lo = Math.round(c.baseRange[0] / 10000), hi = Math.round(c.baseRange[1] / 10000);
+    const risk = c.stigmaChance >= 0.5 ? '<span class="chip warn xs">汙名風險高</span>'
+      : c.stigmaChance > 0 ? '<span class="chip xs">有汙名風險</span>'
+        : '<span class="chip ok xs">乾淨</span>';
+    if (!st.ok) {
+      return `<button class="opt locked" disabled>
+        <div class="opt-t">${esc(c.name)}　<span class="xs muted">${esc(String(lo))}～${esc(String(hi))} 萬</span></div>
+        <div class="opt-h">${esc(st.why)}</div></button>`;
+    }
+    return `<button class="opt" data-act="do-fund" data-id="${esc(c.id)}">
+      <div class="opt-t">${esc(c.name)}　<span class="xs muted">約 ${lo}～${hi} 萬</span>　${raw(risk)}</div>
+      <div class="opt-h">${esc(c.desc)}</div>
+      <div class="opt-h xs muted">${esc(c.note ?? '')}</div></button>`;
+  }).join('');
+  openModal(`<div class="modal-h">募款</div>
+    <div class="modal-b" style="line-height:1.9">
+      專戶現在有 ${esc(F.money(s.finance.campaign))}。錢從來不會憑空出現在裡面，
+      而每一種進來的方式，都會在別的地方留下痕跡。</div>
+    ${rows}
+    <button class="btn ghost full" data-act="modal-close">這個月先不募</button>`);
+}
+
+function doFundraise(id) {
+  const s = app.state;
+  const rng = new Rng(s.meta.seed, s.meta.rngCounter);
+  const r = Fund.run(s, DATA, id, rng);
+  s.meta.rngCounter = rng.counter;
+  if (!r.ok) { closeModal(); return toast(r.msg); }
+  // 專屬文本用管道自己的計數器：第一次辦餐會跟第一次去拜訪建商不是同一件事
+  const paid = Char.commit(s, DATA, 'fundraise', id);
+  if (!paid.ok) { closeModal(); return toast(paid.msg); }
+  closeModal();
+  const lines = [r.text, `專戶入帳 ${F.money(r.amount)}。`];
+  if (r.condition) lines.push(r.condition.text);
+  if (r.stigma) lines.push('這一場的某些畫面，往後會被翻出來用。');
+  openModal(`<div class="modal-h">${esc(r.name)}</div>
+    ${firstTimeBanner(s)}
+    <div class="modal-b" style="line-height:1.95;white-space:pre-wrap">${esc(lines.join('\n\n'))}</div>
+    <button class="btn primary full" data-act="modal-close">好</button>`);
+  render();
+}
+
+/* ─────────── 造勢 ─────────── */
+/**
+ * 三個決定：場地、動員、講稿。
+ * 場地決定上限，動員決定實際到場，講稿決定他們回去以後會講什麼。
+ * 玩家在按下去之前就看得到報價與預估人數——這一場砸不砸得起，
+ * 是他自己算出來的，不是遊戲事後才告訴他的。
+ */
+function openRally(plan) {
+  const s = app.state;
+  const P = plan ?? (ui.rallyPlan ??= { venue: null, mobilize: 'M_NONE', speech: 'S_NONE' });
+  ui.rallyPlan = P;
+
+  const venueRows = Rally.venues(DATA).map((v) => {
+    const st = Rally.venueState(s, DATA, v.id);
+    const on = P.venue === v.id;
+    if (!st.ok) {
+      return `<button class="opt locked" disabled>
+        <div class="opt-t">${esc(v.name)}　<span class="xs muted">容納 ${F.int(v.capacity)} 人・${F.money(v.cost)}</span></div>
+        <div class="opt-h">${esc(st.why)}</div></button>`;
+    }
+    return `<button class="opt ${on ? 'on' : ''}" data-act="rally-pick" data-slot="venue" data-id="${esc(v.id)}">
+      <div class="opt-t">${on ? '● ' : ''}${esc(v.name)}　<span class="xs muted">容納 ${F.int(v.capacity)} 人・${F.money(v.cost)}</span></div>
+      <div class="opt-h">${esc(v.desc)}</div></button>`;
+  }).join('');
+
+  const mobRows = Rally.mobilizeOptions(DATA).map((m) => {
+    const on = P.mobilize === m.id;
+    const tag = m.stigma >= 0.5 ? '<span class="chip warn xs">會被拍</span>'
+      : m.stigma > 0 ? '<span class="chip xs">要還人情</span>' : '';
+    return `<button class="opt ${on ? 'on' : ''}" data-act="rally-pick" data-slot="mobilize" data-id="${esc(m.id)}">
+      <div class="opt-t">${on ? '● ' : ''}${esc(m.name)}　<span class="xs muted">每人 ${F.money(m.costPerHead)}</span>　${raw(tag)}</div>
+      <div class="opt-h">${esc(m.desc)}</div></button>`;
+  }).join('');
+
+  const spRows = Rally.speechOptions(DATA).map((sp) => {
+    const st = Rally.speechState(s, DATA, sp.id);
+    const on = P.speech === sp.id;
+    if (!st.ok) {
+      return `<button class="opt locked" disabled>
+        <div class="opt-t">${esc(sp.name)}</div><div class="opt-h">${esc(st.why)}</div></button>`;
+    }
+    return `<button class="opt ${on ? 'on' : ''}" data-act="rally-pick" data-slot="speech" data-id="${esc(sp.id)}">
+      <div class="opt-t">${on ? '● ' : ''}${esc(sp.name)}</div>
+      <div class="opt-h">${esc(sp.desc)}</div></button>`;
+  }).join('');
+
+  const q = P.venue ? Rally.quote(s, DATA, P) : null;
+  const afford = q && s.finance.campaign >= q.total;
+  const quoteBox = q
+    ? `<div class="modal-b" style="line-height:1.9">
+        場地 ${esc(F.money(q.venueCost))}　動員 ${esc(F.money(q.mobCost))}
+        <br><b>合計 ${esc(F.money(q.total))}</b>　預估到場約 ${F.int(q.target)} 人／容納 ${F.int(q.capacity)} 人
+        <br><span class="xs ${afford ? 'muted' : 'tone-bad'}">專戶餘額 ${esc(F.money(s.finance.campaign))}${afford ? '' : '，這一場付不出來'}</span>
+      </div>`
+    : '<div class="modal-b xs muted">先挑一個場地。場地的大小決定了這一場的天花板，也決定了空掉的時候有多難看。</div>';
+
+  openModal(`<div class="modal-h">舉辦造勢</div>
+    <div class="modal-b" style="line-height:1.9">
+      真正被評分的不是人數，是到場率。兩千人在路口空地是爆滿，兩千人在巨蛋是災難。</div>
+    <div class="modal-sub">場地</div>${venueRows}
+    <div class="modal-sub">動員</div>${mobRows}
+    <div class="modal-sub">講稿</div>${spRows}
+    ${quoteBox}
+    <button class="btn primary full" data-act="do-rally" ${afford ? '' : 'disabled'}>就這樣辦（2 AP）</button>
+    <button class="btn ghost full" data-act="modal-close">再想想</button>`);
+}
+
+function doRally() {
+  const s = app.state;
+  const P = ui.rallyPlan;
+  if (!P?.venue) return toast('還沒有挑場地。');
+  const rng = new Rng(s.meta.seed, s.meta.rngCounter);
+  const r = Rally.run(s, DATA, P, rng);
+  s.meta.rngCounter = rng.counter;
+  if (!r.ok) { closeModal(); return toast(r.msg); }
+  const paid = Char.commit(s, DATA, 'rally');
+  if (!paid.ok) { closeModal(); return toast(paid.msg); }
+  ui.rallyPlan = null;
+  closeModal();
+  const lines = [
+    r.weatherText,
+    r.text,
+    `到場約 ${F.int(r.attendance)} 人，場地容納 ${F.int(r.capacity)} 人，到場率 ${(r.fillRate * 100).toFixed(0)}%。這一場花了 ${F.money(r.cost)}。`,
+  ];
+  if (r.stigmaText) lines.push(r.stigmaText);
+  openModal(`<div class="modal-h">${esc(r.venue.name)}造勢晚會</div>
+    ${firstTimeBanner(s)}
+    <div class="modal-b" style="line-height:1.95;white-space:pre-wrap">${esc(lines.filter(Boolean).join('\n\n'))}</div>
+    <button class="btn primary full" data-act="modal-close">好</button>`);
+  render();
+}
+
+/* ─────────── 快轉半年 ─────────── */
+/**
+ * 一個沒有職位的人，一個月能做的事情就是那幾件。
+ * 連按十二次結束回合不會讓故事變好，所以給他一個一次過完半年的選項——
+ * 前提是他得決定這半年要拿去換什麼。
+ */
+function openFastForward() {
+  const s = app.state;
+  const gate = FF.state(s, DATA);
+  if (!gate.ok) return openModal(textModal('現在跳不過去', gate.why));
+  const deg = FF.nextDegree(s, DATA);
+  const rows = FF.options(DATA).map((o) => {
+    let extra = '';
+    if (o.id === 'FF_STUDY') {
+      if (!deg) {
+        return `<button class="opt locked" disabled>
+          <div class="opt-t">${esc(o.name)}</div>
+          <div class="opt-h">${esc(DATA.fastForward.education.topText)}</div></button>`;
+      }
+      extra = `念${deg.degree}，這學期學費 ${F.money(deg.step.tuitionPerTerm)}，還要 ${deg.left} 個學期`;
+      if (s.finance.personal < deg.step.tuitionPerTerm) {
+        return `<button class="opt locked" disabled>
+          <div class="opt-t">${esc(o.name)}</div>
+          <div class="opt-h">${esc(extra)}——你現在付不出這筆學費</div></button>`;
+      }
+    }
+    if (o.id === 'FF_GROUND') extra = `每個月自掏腰包 ${F.money(o.costPerMonth)}，基層會明顯往上長`;
+    if (o.id === 'FF_WORK') extra = `半年大約進帳 ${F.money(55000 * o.incomeMult * 6)}`;
+    if (o.id === 'FF_REST') extra = '疲勞歸零，但半年沒有露面，認得你的人會變少';
+    return `<button class="opt" data-act="do-ff" data-id="${esc(o.id)}">
+      <div class="opt-t">${esc(o.name)}</div>
+      <div class="opt-h">${esc(o.desc)}</div>
+      <div class="opt-h xs muted">${esc(extra)}</div></button>`;
+  }).join('');
+  openModal(`<div class="modal-h">快轉半年</div>
+    <div class="modal-b" style="line-height:1.9">
+      接下來六個月會一次過完。世界不會因為你沒有在看就停下來——
+      別人的生涯照樣在累積，經濟照樣在跑，沒有你的選舉一樣會開票。</div>
+    ${rows}
+    <button class="btn ghost full" data-act="modal-close">還是一個月一個月來</button>`);
+}
+
+function doFastForward(id) {
+  const s = app.state;
+  const rng = new Rng(s.meta.seed, s.meta.rngCounter);
+  const r = FF.run(s, DATA, id, (st, d) => {
+    const out = advance(st, d);
+    checkElection();
+    return out;
+  }, rng);
+  s.meta.rngCounter = rng.counter;
+  if (!r.ok) { closeModal(); return toast(r.msg); }
+  s.player.apUsed = 0;
+  s.player.ap = Char.apOf(s, DATA);
+  autosave();
+  ui.mapArg = { mode: ui.mapMode };
+  closeModal();
+  const parts = [r.text];
+  if (r.interruptText) parts.push(r.interruptText);
+  if (r.gains.length) parts.push('這半年的結果：' + r.gains.join('、') + '。');
+  if (r.news.length) parts.push('這段時間的新聞：\n・' + r.news.join('\n・'));
+  openModal(`<div class="modal-h">${esc(r.name)}・${r.months} 個月</div>
+    <div class="modal-b" style="line-height:1.95;white-space:pre-wrap">${esc(parts.join('\n\n'))}</div>
+    <button class="btn primary full" data-act="modal-close">好</button>`);
+  render();
+}
+
+/* ─────────── 私人財務 ─────────── */
+/**
+ * 貸款、增貸、投資。
+ * 這一頁不花行動點，因為打電話問額度不佔一個月——
+ * 真正貴的是後面那些每個月都要還的錢。
+ */
+function openFinances(tab) {
+  const s = app.state;
+  const A = Asset.ensure(s);
+  const t = tab ?? ui.finTab ?? 'loan';
+  ui.finTab = t;
+  const ratio = Asset.debtRatio(s, DATA);
+  const rules = DATA.personalFinance.loanRules ?? {};
+  const ratioCls = ratio >= (rules.refuseRatio ?? 20) ? 'tone-bad'
+    : ratio >= (rules.warnRatio ?? 12) ? 'tone-warn' : 'tone-ok';
+
+  const head = `<div class="modal-b" style="line-height:1.9">
+    現金 ${esc(F.money(s.finance.personal))}　房產 ${esc(A.house ? F.money(A.house.value) : '無')}
+    <br>總負債 ${esc(F.money(Asset.totalDebt(s)))}　淨資產 <b>${esc(F.money(Asset.netWorth(s)))}</b>
+    <br><span class="xs ${ratioCls}">負債是年收入的 ${ratio.toFixed(1)} 倍${
+      ratio >= (rules.refuseRatio ?? 20) ? '，銀行已經不再放款'
+        : ratio >= (rules.warnRatio ?? 12) ? '，你已經被列入警示' : ''}</span></div>`;
+
+  const tabs = `<div class="tabs">
+    <button data-act="fin-tab" data-id="loan" class="${t === 'loan' ? 'on' : ''}">貸款</button>
+    <button data-act="fin-tab" data-id="invest" class="${t === 'invest' ? 'on' : ''}">投資</button>
+    <button data-act="fin-tab" data-id="hold" class="${t === 'hold' ? 'on' : ''}">持有部位</button>
+  </div>`;
+
+  let body = '';
+  if (t === 'loan') {
+    body = DATA.personalFinance.loans.map((l) => {
+      const st = Asset.loanState(s, DATA, l.id);
+      if (!st.ok) {
+        return `<button class="opt locked" disabled>
+          <div class="opt-t">${esc(l.name)}</div><div class="opt-h">${esc(st.why)}</div></button>`;
+      }
+      const cap = st.cap;
+      const half = Math.round(cap / 2 / 10000) * 10000;
+      return `<div class="opt" style="cursor:default">
+        <div class="opt-t">${esc(l.name)}　<span class="xs muted">年利率 ${(l.rate * 100).toFixed(1)}%・${l.termYears} 年</span></div>
+        <div class="opt-h">${esc(l.desc)}</div>
+        <div class="opt-h xs muted">${esc(l.note ?? '')}</div>
+        <div class="opt-h">可借額度 <b>${esc(F.money(cap))}</b>${st.warn ? '　<span class="tone-warn xs">已被列入警示</span>' : ''}</div>
+        <div class="btn-row">
+          ${half >= 100000 ? `<button class="btn xs" data-act="do-borrow" data-id="${esc(l.id)}" data-amt="${half}">借 ${esc(F.money(half))}</button>` : ''}
+          <button class="btn xs" data-act="do-borrow" data-id="${esc(l.id)}" data-amt="${cap}">借滿 ${esc(F.money(cap))}</button>
+        </div></div>`;
+    }).join('');
+    if (A.loans.length) {
+      body += `<div class="modal-sub">目前的貸款</div>` + A.loans.map((l) => `
+        <div class="row" style="display:block">
+          <div style="display:flex;justify-content:space-between">
+            <span class="row-k">${esc(l.name)}</span>
+            <span class="row-v xs">餘額 ${esc(F.money(l.balance))}</span>
+          </div>
+          <div class="xs muted" style="margin-top:2px">每月要還 ${esc(F.money(l.monthly))}</div>
+          <button class="btn ghost xs" data-act="do-repay" data-id="${esc(l.id)}" style="margin-top:5px">一次還清</button>
+        </div>`).join('');
+    }
+  } else if (t === 'invest') {
+    body = Asset.investOptions(s, DATA).map((inv) => {
+      const min = Math.round((inv.minAmount ?? 100000) / 10000);
+      const can = s.finance.personal >= (inv.minAmount ?? 100000);
+      const amt = Math.max(inv.minAmount ?? 100000,
+        Math.round(s.finance.personal * 0.4 / 10000) * 10000);
+      return `<div class="opt" style="cursor:default">
+        <div class="opt-t">${esc(inv.name)}　<span class="xs muted">最低 ${min} 萬</span></div>
+        <div class="opt-h">${esc(inv.desc)}</div>
+        ${inv.note ? `<div class="opt-h xs muted">${esc(inv.note)}</div>` : ''}
+        <div class="btn-row">
+          <button class="btn xs" data-act="do-invest" data-id="${esc(inv.id)}" data-amt="${inv.minAmount ?? 100000}" ${can ? '' : 'disabled'}>投 ${min} 萬</button>
+          ${can && amt > (inv.minAmount ?? 100000) ? `<button class="btn xs" data-act="do-invest" data-id="${esc(inv.id)}" data-amt="${amt}">投 ${esc(F.money(amt))}</button>` : ''}
+        </div></div>`;
+    }).join('');
+    body += `<div class="xs muted" style="margin-top:8px;line-height:1.75">
+      這一頁不會告訴你哪一個是好的。判斷高的人看得到別人看不到的機會，
+      判斷低的人看到的世界裡也一樣有很多機會——差別在哪一種是真的。</div>`;
+  } else {
+    body = A.holdings.length ? A.holdings.map((h) => {
+      const pnl = h.value - h.cost;
+      const pct = h.cost ? pnl / h.cost * 100 : 0;
+      return `<div class="row" style="display:block">
+        <div style="display:flex;justify-content:space-between">
+          <span class="row-k">${esc(h.name)}</span>
+          <span class="row-v ${pnl >= 0 ? 'tone-ok' : 'tone-bad'}">${esc(F.money(h.value))}（${pct >= 0 ? '+' : ''}${pct.toFixed(0)}%）</span>
+        </div>
+        <div class="xs muted" style="margin-top:2px">成本 ${esc(F.money(h.cost))}</div>
+        <button class="btn ghost xs" data-act="do-sell" data-id="${esc(h.id)}" style="margin-top:5px">賣出</button>
+      </div>`;
+    }).join('') : '<div class="xs muted">你手上沒有任何投資部位。</div>';
+    if (A.house) {
+      body = `<div class="row" style="display:block">
+        <div style="display:flex;justify-content:space-between">
+          <span class="row-k">自用住宅</span>
+          <span class="row-v">${esc(F.money(A.house.value))}</span>
+        </div>
+        <div class="xs muted" style="margin-top:2px;line-height:1.7">
+          房貸餘額 ${esc(F.money(A.house.mortgage))}・${esc(A.house.desc ?? '')}</div>
+      </div>` + body;
+    }
+  }
+
+  openModal(`<div class="modal-h">私人財務</div>
+    ${head}${tabs}${body}
+    <button class="btn ghost full" data-act="modal-close" style="margin-top:8px">關上</button>`);
 }
 
 /* ─────────── 人情牽制 ─────────── */

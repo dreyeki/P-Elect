@@ -1,0 +1,59 @@
+{
+  "_note": [
+    "募款。台灣的選舉經費有三個來源：政治獻金、政黨補助、自己的錢。",
+    "這個檔案管第一個。三種管道的金額、風險與附帶條件差很多——",
+    "小額捐最乾淨也最慢，建商最快也最貴，餐會在中間。",
+    "每一種都有自己的上限：那個上限不是法規寫的，是你的人脈長成什麼樣子。"
+  ],
+  "channels": [
+    {
+      "id": "FUND_DINNER", "name": "募款餐會", "ap": 1, "fatigue": 8,
+      "unlock": { "fame": 1 },
+      "cost": 60000,
+      "baseRange": [300000, 1800000],
+      "fameWeight": 0.35, "sociabilityWeight": 0.12, "grassrootsWeight": 0.08,
+      "stigmaChance": 0.18, "stigmaAmount": 0.15,
+      "desc": "訂一間餐廳，發一百二十張邀請函，來的人自己決定要包多少。",
+      "flavorGood": "席開十二桌，坐滿了十一桌。有幾位老朋友包得比行情多，你知道那不是因為你的政見。",
+      "flavorBad": "來的人比回覆的少了三分之一，扣掉場地費之後這一場幾乎沒有賺。你在門口送客的時候笑得很自然。",
+      "note": "最傳統的一種，也是最看你這幾年有沒有經營人脈的一種。"
+    },
+    {
+      "id": "FUND_SMALL", "name": "支持者小額捐", "ap": 1, "fatigue": 5,
+      "unlock": {},
+      "cost": 0,
+      "baseRange": [30000, 260000],
+      "fameWeight": 0.2, "followerWeight": 0.45, "enthusiasmWeight": 0.25,
+      "stigmaChance": 0, "stigmaAmount": 0,
+      "desc": "開一個線上募款頁面，寫一封信給名單上的每一個人，然後等。",
+      "flavorGood": "三天之內收到四百多筆，多數是五百塊跟一千塊。有一位捐了兩百塊，附註寫著「我只有這些，加油」，你把那一句印出來貼在牆上。",
+      "flavorBad": "頁面開了一個禮拜，收到十七筆。你把信重寫了一次，發現問題不在信寫得好不好。",
+      "note": "金額最小、乾淨程度最高、也最誠實——它直接反映有多少人真的在乎你。"
+    },
+    {
+      "id": "FUND_DEVELOPER", "name": "拜訪建商", "ap": 1, "fatigue": 10,
+      "unlock": { "fame": 2 },
+      "cost": 0,
+      "baseRange": [1500000, 8000000],
+      "fameWeight": 0.3, "roleWeight": 0.4,
+      "stigmaChance": 0.55, "stigmaAmount": 0.45,
+      "conditionChance": 0.6,
+      "desc": "約在他們的接待中心，二十八樓，落地窗外面就是他們正在推的案子。",
+      "flavorGood": "談了四十分鐘，他沒有提任何條件，只說希望以後有機會多交流。支票在你離開的時候由助理轉交，金額比你預期的多一個位數。",
+      "flavorBad": "他很客氣地聽你講完，然後說今年公司的預算已經編完了。走出來的時候你看見另一位候選人的車正好開進地下停車場。",
+      "conditions": [
+        { "id": "COND_ZONING", "text": "他提到手上有一塊農地正在申請變更，希望你「多了解一下」。", "stigma": 0.4, "favor": -1.2 },
+        { "id": "COND_HEIGHT", "text": "他問你對容積獎勵的看法，問得很仔細，仔細到不像在閒聊。", "stigma": 0.3, "favor": -0.9 },
+        { "id": "COND_NONE", "text": "他什麼都沒有提。這種情況你反而更不安，因為代價一定存在，只是還沒有出現。", "stigma": 0.15, "favor": -0.6 }
+      ],
+      "note": "最快的錢，也是最貴的錢。汙名印象只增不減，這件事在收下支票的那一刻就決定了。"
+    }
+  ],
+  "tuning": {
+    "_note": "金額 = 基準區間隨機值 × (1 + 各項權重加總)。權重都是 0~5 的抽象量除以五之後乘上係數。",
+    "campaignSeasonMult": 1.6,
+    "partyBonus": 0.15,
+    "financeStaffBonus": 0.25,
+    "cooldownTurns": { "FUND_DINNER": 2, "FUND_SMALL": 1, "FUND_DEVELOPER": 3 }
+  }
+}

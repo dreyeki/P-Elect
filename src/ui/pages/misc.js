@@ -3,9 +3,10 @@ import { html, raw, esc } from '../../util/dom.js';
 import { card, tile, row, attrLine, wordTile } from '../components.js';
 import * as F from '../../util/format.js';
 import { word, biWord } from '../../util/scale.js';
-import { slots } from '../../systems/TeamSystem.js';
+import { slots, roleAvailable } from '../../systems/TeamSystem.js';
 import { ROLE_NAME } from '../../core/GameState.js';
 import { officeCost } from '../../systems/DistrictSystem.js';
+import * as Asset from '../../systems/AssetSystem.js';
 
 /* ───────── 團隊 ───────── */
 export function teamPage(s, data) {
@@ -50,12 +51,15 @@ export function teamPage(s, data) {
 
     ${card('職位效果', data.staffRoles.roles.map((r) => {
       const has = s.team.find((t) => t.role === r.id);
+      const open = has || roleAvailable(s, r);
       return `<div class="row" style="display:block">
         <div style="display:flex;justify-content:space-between">
-          <span class="row-k">${esc(r.name)}</span>
-          <span class="row-v xs ${has ? 'tone-ok' : 'muted'}">${has ? esc(has.name) : '從缺'}</span>
+          <span class="row-k ${open ? '' : 'muted'}">${esc(r.name)}</span>
+          <span class="row-v xs ${has ? 'tone-ok' : open ? 'muted' : 'tone-warn'}">${
+            has ? esc(has.name) : open ? '從缺' : '還沒有人願意來'}</span>
         </div>
         <div class="xs muted" style="margin-top:2px;line-height:1.6">${esc(r.desc)}</div>
+        ${open ? '' : `<div class="xs muted" style="margin-top:3px;line-height:1.6">${esc(r.unlockNote ?? '')}</div>`}
       </div>`;
     }).join(''))}`;
 }
@@ -67,8 +71,10 @@ export function financePage(s, data) {
   const office = officeCost(s, data);
   return html`
     ${card('三個帳戶', `<div class="grid2">
-      ${tile('私有財產', `<span class="num ${f.personal < 0 ? 'tone-bad' : ''}">${F.money(f.personal)}</span>`)}
+      ${tile('現金', `<span class="num ${f.personal < 0 ? 'tone-bad' : ''}">${F.money(f.personal)}</span>`)}
       ${tile('競選經費', `<span class="num ${f.campaign < 100000 ? 'tone-warn' : ''}">${F.money(f.campaign)}</span>`)}
+      ${tile('淨資產', `<span class="num ${Asset.netWorth(s) < 0 ? 'tone-bad' : ''}">${F.money(Asset.netWorth(s))}</span>`, '房產與投資扣掉負債')}
+      ${tile('總負債', `<span class="num ${Asset.totalDebt(s) > 0 ? 'tone-warn' : ''}">${F.money(Asset.totalDebt(s))}</span>`, `年收入的 ${Asset.debtRatio(s, data).toFixed(1)} 倍`)}
     </div>
     <div class="xs muted" style="margin-top:8px;line-height:1.7">
       私產可以轉進競選專戶，反過來不行——那叫挪用，而且會留下紀錄。
@@ -78,10 +84,13 @@ export function financePage(s, data) {
       <button class="btn" data-act="transfer" data-amt="2000000">轉 200 萬進專戶</button>
     </div>`)}
 
+    ${raw(assetBlock(s, data))}
+
     ${card('每回合固定支出', `
       ${row('幕僚薪資', `<span class="num">${F.money(salaries)}</span>`)}
       ${row('服務處與組織維持', `<span class="num">${F.money(office)}</span>`)}
       ${row('個人生活開支', `<span class="num">${F.money(livingOf(s))}</span>`)}
+      ${raw(debtPaymentRow(s))}
       ${row('職務薪俸', `<span class="num tone-ok">＋${F.money(salaryOf(s))}</span>`)}`)}
 
     ${raw(f.pending.length ? card('待決獻金', f.pending.map((d) => `
@@ -105,11 +114,60 @@ export function financePage(s, data) {
 
     ${card('財產申報', `
       ${row('上次申報', `<span class="num">${F.money(f.lastDeclaredAssets)}</span>`, '')}
-      ${row('目前實際', `<span class="num">${F.money(f.personal)}</span>`)}
+      ${row('目前實際', `<span class="num">${F.money(Asset.netWorth(s))}</span>`)}
       <div class="xs muted" style="margin-top:6px;line-height:1.7">
         每年十二月自動申報。差距超過兩成會有人來問，那個時候再解釋就來不及了。
       </div>`)}`;
 }
+/**
+ * 房子、貸款、投資。
+ * 這一格是玩家在按下每一個「要不要收這筆錢」之前，最該看一眼的地方。
+ */
+function assetBlock(s, data) {
+  const A = s.assets;
+  if (!A) return '';
+  const rows = [];
+  if (A.house) {
+    rows.push(`<div class="row" style="display:block">
+      <div style="display:flex;justify-content:space-between">
+        <span class="row-k">自用住宅</span>
+        <span class="row-v"><span class="num">${esc(F.money(A.house.value))}</span></span>
+      </div>
+      <div class="xs muted" style="margin-top:2px;line-height:1.7">
+        房貸餘額 ${esc(F.money(A.house.mortgage))}${A.house.mortgage > 0
+          ? `・每月扣 ${esc(F.money(Asset.monthlyPayment(A.house.mortgage, A.house.rate, Math.max(1, A.house.termYears))))}`
+          : '・已經還完了'}</div>
+    </div>`);
+  }
+  for (const l of A.loans ?? []) {
+    rows.push(`<div class="row"><span class="row-k">${esc(l.name)}</span>
+      <span class="row-v"><span class="num tone-warn">${esc(F.money(l.balance))}</span>
+      <span class="xs muted">　月付 ${esc(F.money(l.monthly))}</span></span></div>`);
+  }
+  for (const h of A.holdings ?? []) {
+    const pnl = h.value - h.cost;
+    const pct = h.cost ? pnl / h.cost * 100 : 0;
+    rows.push(`<div class="row"><span class="row-k">${esc(h.name)}</span>
+      <span class="row-v"><span class="num ${pnl >= 0 ? 'tone-ok' : 'tone-bad'}">${esc(F.money(h.value))}</span>
+      <span class="xs muted">　${pct >= 0 ? '+' : ''}${pct.toFixed(0)}%</span></span></div>`);
+  }
+  if (!rows.length) return '';
+  return card('私有財產', rows.join('') + `
+    <button class="btn ghost full" data-act="open-finances" style="margin-top:8px">貸款與投資</button>`);
+}
+
+function debtPaymentRow(s) {
+  const A = s.assets;
+  if (!A) return '';
+  let pay = (A.loans ?? []).reduce((a, l) => a + l.monthly, 0);
+  if (A.house?.mortgage > 0) {
+    pay += Asset.monthlyPayment(A.house.mortgage, A.house.rate, Math.max(1, A.house.termYears));
+  }
+  if (pay <= 0) return '';
+  return `<div class="row"><span class="row-k">房貸與貸款月付</span>
+    <span class="row-v"><span class="num tone-warn">${esc(F.money(pay))}</span></span></div>`;
+}
+
 const SALARY = { citizen: 0, aide: 45000, village: 50000, councilor: 120000, legislator: 190000, mayor: 240000, minister: 220000, president: 470000 };
 const LIVING = { citizen: 50000, aide: 55000, village: 60000, councilor: 90000, legislator: 140000, mayor: 180000, minister: 170000, president: 250000 };
 const salaryOf = (s) => SALARY[s.player.role] ?? 0;

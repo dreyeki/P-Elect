@@ -1,0 +1,156 @@
+// @ts-check
+/**
+ * 造勢。
+ *
+ * 這是台灣選舉最貴、也最看得見的一件事。
+ * 一場造勢由三個決定組成：場地、動員、講稿。
+ * 場地決定容納上限與租金，動員決定實際到場人數，講稿決定他們回去以後會講什麼。
+ *
+ * 真正被評分的不是人數，是到場率——
+ * 兩千人在路口空地是爆滿，兩千人在巨蛋是災難。
+ * 空著一半的場子比不辦還糟，因為鏡頭一定會拍那一半。
+ */
+import { clamp, clamp05, clampBi } from '../core/Formula.js';
+import * as Theory from './TheorySystem.js';
+
+export function venues(data) { return data.rally?.venues ?? []; }
+export function mobilizeOptions(data) { return data.rally?.mobilize ?? []; }
+export function speechOptions(data) { return data.rally?.speech ?? []; }
+
+/** 這個場地租不租得到 */
+export function venueState(state, data, venueId) {
+  const v = venues(data).find((x) => x.id === venueId);
+  if (!v) return { ok: false, why: '沒有這個場地。' };
+  if (state.player.fame < (v.minFame ?? 0)) {
+    return { ok: false, why: '這種規模的場子，以你現在的知名度租下來只會空給別人看。' };
+  }
+  return { ok: true };
+}
+
+export function speechState(state, data, speechId) {
+  const sp = speechOptions(data).find((x) => x.id === speechId);
+  if (!sp) return { ok: false, why: '沒有這個選項。' };
+  if (sp.needStaff && !state.team.length) return { ok: false, why: '你沒有幕僚可以幫你寫稿。' };
+  if (sp.needTheory && !(state.theories ?? []).length) {
+    return { ok: false, why: '你手上還沒有一套組織好的理論可以當骨架。' };
+  }
+  return { ok: true };
+}
+
+/** 這一場的預估開銷。玩家在按下去之前就該看到這個數字。 */
+export function quote(state, data, plan) {
+  const v = venues(data).find((x) => x.id === plan.venue);
+  const mo = mobilizeOptions(data).find((x) => x.id === plan.mobilize);
+  if (!v || !mo) return null;
+  const target = Math.round(v.capacity * (mo.yield ?? 0.2));
+  const mobCost = Math.round(target * (mo.costPerHead ?? 0));
+  return {
+    venueCost: v.cost, mobCost, total: v.cost + mobCost,
+    capacity: v.capacity, target,
+  };
+}
+
+/**
+ * 辦一場。
+ *
+ * attendance = 場地容量 × 動員效率 × (0.5 + 基層/10) × (0.6 + 知名度/8) × 天氣
+ * 每一項都是玩家自己養出來的：基層是跑攤跑出來的，知名度是上節目上出來的，
+ * 動員效率是他願意花多少錢。只有天氣不是。
+ */
+export function run(state, data, plan, rng) {
+  const T = data.rally?.tuning ?? {};
+  const v = venues(data).find((x) => x.id === plan.venue);
+  const mo = mobilizeOptions(data).find((x) => x.id === plan.mobilize);
+  const sp = speechOptions(data).find((x) => x.id === plan.speech);
+  if (!v || !mo || !sp) return { ok: false, msg: '這場造勢的規劃還沒有填完。' };
+
+  const vs = venueState(state, data, plan.venue);
+  if (!vs.ok) return { ok: false, msg: vs.why };
+  const ss = speechState(state, data, plan.speech);
+  if (!ss.ok) return { ok: false, msg: ss.why };
+
+  const q = quote(state, data, plan);
+  if (state.finance.campaign < q.total) {
+    return { ok: false, msg: `這一場要 ${Math.round(q.total / 10000)} 萬，專戶裡不夠。造勢是選舉裡最誠實的一件事：沒有錢就是辦不起來。` };
+  }
+
+  const p = state.player;
+  const home = state.districts[p.homeDistrict];
+  const grass = home?.playerGrassroots ?? 0;
+  const rain = rng.bool(v.rainRisk ?? 0);
+  const weatherMult = rain ? (T.rainAttendanceMult ?? 0.55) : 1;
+
+  let attendance = v.capacity
+    * (mo.yield ?? 0.2)
+    * (0.5 + grass * (T.grassrootsWeight ?? 0.1))
+    * (0.6 + p.fame * (T.fameWeight ?? 0.125))
+    * weatherMult
+    * rng.range(0.85, 1.15);
+  attendance = Math.max(0, Math.round(Math.min(attendance, v.capacity * 1.05)));
+  const fillRate = attendance / v.capacity;
+
+  const outcome = (data.rally?.outcomes ?? []).find((o) => fillRate >= o.min)
+    ?? { q: -1, text: '這場造勢沒有辦成。' };
+
+  /* 扣錢、扣體力 */
+  state.finance.campaign -= q.total;
+  p.fatigueRaw = clamp(p.fatigueRaw + (T.baseFatigue ?? 16) + (sp.fatigue ?? 0), 0, 120);
+
+  /* 成績。到場率是唯一的度量，因為鏡頭拍的就是那個。 */
+  const speechQ = sp.quality ?? 0;
+  const eloq = p.attrs.eloquence / 5;
+  const score = (fillRate - 0.5) * 2 + speechQ * 0.35 * (0.5 + eloq);
+
+  p.fame = clamp05(p.fame + Math.max(0, score) * (T.fameGainPerFill ?? 0.55) * 0.5);
+  p.favorNational = clampBi(p.favorNational + score * (T.favorGainPerFill ?? 0.5) * 0.3);
+  if (home) {
+    home.playerGrassroots = clamp05(home.playerGrassroots + Math.max(0, score) * (T.grassrootsPerFill ?? 0.25) * 0.4);
+    home.playerFavor = clampBi(home.playerFavor + score * 0.3);
+  }
+  // 到場的人回去以後會跟別人講。熱情是這樣傳開的，也是這樣消失的。
+  bumpEnthusiasm(state, data, score * (T.enthusiasmPerFill ?? 0.6) * 0.35);
+
+  /* 動員手法的代價 */
+  let stigmaText = '';
+  if (mo.stigma > 0 && rng.bool(mo.stigma * 0.7)) {
+    p.stigma = clamp05(p.stigma + mo.stigma * 0.5);
+    stigmaText = mo.id === 'M_PAID'
+      ? '有人拍到了發放車馬費的那張桌子，照片在當天晚上就傳了出去。'
+      : mo.id === 'M_ASSOC'
+        ? '幾位理事長在台下坐第一排，那個畫面在地方上的意思，跟在電視上的意思不一樣。'
+        : '有記者算了一下停在外面的遊覽車數量，然後把那個數字寫進了報導裡。';
+  }
+  if (mo.id === 'M_ASSOC') {
+    state.player.favorOwed = (state.player.favorOwed ?? 0) + 0.8;
+  }
+
+  /* 用理論當骨架的演說會把那套理論再打磨一次——
+     一套講過的理論跟一套只寫在筆記本裡的理論，不是同一套東西。 */
+  if (sp.needTheory) {
+    const best = Theory.held(state).slice().sort((a, b) => b.level - a.level)[0];
+    if (best) Theory.use(state, data, best.id);
+  }
+
+  state.flags.rallyCount = (state.flags.rallyCount ?? 0) + 1;
+  state.flags.lastRallyTurn = state.meta.turn;
+
+  return {
+    ok: true,
+    attendance, capacity: v.capacity, fillRate, rain,
+    cost: q.total, venue: v, mobilize: mo, speech: sp,
+    q: outcome.q, text: outcome.text,
+    weatherText: rain ? data.rally?.weatherText?.rain : data.rally?.weatherText?.clear,
+    stigmaText,
+    mediaGain: (v.prestige ?? 0) * (T.mediaPerPrestige ?? 0.12) * Math.max(0, score),
+  };
+}
+
+function bumpEnthusiasm(state, data, amount) {
+  if (!amount) return;
+  const P = state.pops;
+  const di = data.districts.districts.findIndex((x) => x.id === state.player.homeDistrict);
+  for (let i = 0; i < P.n; i++) {
+    if (P.district[i] !== di) continue;
+    P.enthusiasm[i] = clamp(P.enthusiasm[i] + amount, 0, 5);
+  }
+}

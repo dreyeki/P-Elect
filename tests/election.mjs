@@ -20,15 +20,38 @@ const state = createGame(data, {
   ideology: { centralization: 0, unification: -2, marketFreedom: -1, progressivism: 2, immigration: 0, environment: 1, militaryAutonomy: 1, directDemocracy: 2 },
 });
 
-// 週回合切換
+// 沒有在選的人不該被放慢成一週一次（v0.6.0）
 let weekSeen = false;
-for (let i = 0; i < 14; i++) { advance(state, data); if (state.meta.scale === 'week') weekSeen = true; }
-ok(weekSeen, `選前兩個月自動切換為週回合（目前 ${state.meta.scale}，${state.meta.year}/${state.meta.month}）`);
+for (let i = 0; i < 9; i++) { advance(state, data); if (state.meta.scale === 'week') weekSeen = true; }
+ok(!weekSeen && state.meta.scale === 'month',
+  `選前兩個月還沒登記參選，回合維持一個月（目前 ${state.meta.scale}，${state.meta.year}/${state.meta.month}）`);
 
 // 可參選職位
-const { sched } = E.monthsUntilElection(state, data);
+const { months, sched } = E.monthsUntilElection(state, data);
+ok(months <= 2, `已經走到選前 ${months} 個月`);
 const runs = E.availableRuns(state, data, sched);
 ok(runs.length > 0, `可參選職位 ${runs.length} 個：${runs.map((r) => r.name).join('、')}`);
+// 開局第一場選舉就選得到議員（v0.6.0）
+ok(runs.some((r) => r.type === 'councilor'), '素人在第一場選舉就選得到縣市議員');
+
+// 真的決定要選了，時間才切成週
+state.election = { phase: 'campaign' };
+E.enterCampaignScale(state);
+ok(state.meta.scale === 'week', '登記參選之後才切成週回合');
+advance(state, data);
+ok(state.meta.scale === 'week', '選戰期間維持週回合');
+state.election = null;
+advance(state, data);
+ok(state.meta.scale === 'month', '選完之後自己切回月回合');
+
+// 村里長是無黨籍選舉：沒有初選，對手也沒有黨籍（v0.6.0）
+const villageRun = { type: 'villageHead', scopeId: state.player.homeDistrict,
+  name: '村里長', level: data.elections.levels.villageHead };
+const vPri = E.buildPrimary(state, data, villageRun, new Rng(1, 0));
+ok(vPri.skip, `村里長不用初選：${vPri.msg}`);
+const vOpps = E.makeOpponents(state, data, villageRun, new Rng(2, 0));
+ok(vOpps.length > 0 && vOpps.every((c) => c.party === 'IND'),
+  `村里長的 ${vOpps.length} 位對手全部都是無黨籍，背後沒有派系`);
 
 // 初選：多競爭者、可以先去談
 const rng = new Rng(state.meta.seed, 4242);

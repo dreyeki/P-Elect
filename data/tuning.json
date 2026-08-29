@@ -241,5 +241,12 @@
     "spawnMult": 1.0,
     "threatDisplayMin": 1.2
   },
-  "_canvassGigNote": "常駐通告的上限在 data/canvass.json 的 standingGig.maxSlots。行動點鎖死兩點之後，那個數字不能大於一。"
+  "_canvassGigNote": "常駐通告的上限在 data/canvass.json 的 standingGig.maxSlots。行動點鎖死兩點之後，那個數字不能大於一。",
+  "canvass": {
+    "_note": [
+      "掃街不花錢。這是刻意的設計：破產的候選人還是要能出去見人，",
+      "否則財務一旦崩掉，玩家就只剩下按結束回合這一個選項。"
+    ],
+    "cost": 0
+  }
 }

@@ -7,6 +7,7 @@ const FILES = [
   'tuning', 'theories', 'images', 'cabinet',
   'china', 'people', 'canvass', 'favors', 'invitations', 'semiconductor', 'social',
   'reactions', 'firstTimes',
+  'rally', 'personalFinance', 'fundraising', 'fastForward',
 ];
 const EVENT_FILES = ['economy', 'energy', 'crossStrait', 'disaster', 'society', 'scandal', 'party', 'personal'];
 
@@ -73,6 +74,13 @@ function index(d) {
     invitation: Object.fromEntries(d.invitations.kinds.map((x) => [x.id, x])),
     semiSegment: Object.fromEntries(d.semiconductor.segments.map((x) => [x.id, x])),
     mediaAttack: Object.fromEntries(d.reactions.events.map((x) => [x.id, x])),
+    venue: Object.fromEntries(d.rally.venues.map((x) => [x.id, x])),
+    mobilize: Object.fromEntries(d.rally.mobilize.map((x) => [x.id, x])),
+    speechOpt: Object.fromEntries(d.rally.speech.map((x) => [x.id, x])),
+    loan: Object.fromEntries(d.personalFinance.loans.map((x) => [x.id, x])),
+    investment: Object.fromEntries([...d.personalFinance.investments, ...d.personalFinance.scams].map((x) => [x.id, x])),
+    fundChannel: Object.fromEntries(d.fundraising.channels.map((x) => [x.id, x])),
+    ffOption: Object.fromEntries(d.fastForward.options.map((x) => [x.id, x])),
   };
   d.strataIds = d.pops.strata.map((s) => s.id);
   d.genIds = d.pops.generations.map((g) => g.id);

@@ -63,10 +63,36 @@ export function tick(state, ctx) {
   return { news };
 }
 
+/**
+ * 這個職位現在有沒有人願意來。
+ *
+ * 素人的團隊裡不會出現競選經理。願意跟一個沒有人認識的人的，
+ * 只有隨行助理——那個位子要的不是你的份量，是你付得起的車票錢。
+ * 知名度、職位、現有團隊規模三個條件都到了，這個職位才會出現在名單上。
+ */
+export function roleAvailable(state, role) {
+  const u = role.unlock;
+  if (!u) return true;
+  const p = state.player;
+  if (u.fame != null && p.fame < u.fame) return false;
+  if (u.minTeam != null && state.team.length < u.minTeam) return false;
+  if (u.roles && !u.roles.includes(p.role)) return false;
+  return true;
+}
+
+/** 目前有可能來應徵的職位，UI 也用這個列「還沒有人願意來的位子」 */
+export function openRoles(state, data) {
+  const taken = new Set(state.team.map((t) => t.role));
+  return data.staffRoles.roles.filter((r) => !taken.has(r.id) && roleAvailable(state, r));
+}
+export function lockedRoles(state, data) {
+  const taken = new Set(state.team.map((t) => t.role));
+  return data.staffRoles.roles.filter((r) => !taken.has(r.id) && !roleAvailable(state, r));
+}
+
 export function makeCandidate(state, data, rng) {
   const p = state.player;
-  const taken = new Set(state.team.map((t) => t.role));
-  const roles = data.staffRoles.roles.filter((r) => !taken.has(r.id));
+  const roles = openRoles(state, data);
   if (!roles.length) return null;
   const role = rng.pick(roles);
   const tier = [...data.staffRoles.recruitTiers].reverse().find((t) => p.fame >= t.minFame)

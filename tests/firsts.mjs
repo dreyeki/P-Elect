@@ -34,9 +34,13 @@ for (let i = 0; i < 4; i++) {
 }
 ok(JSON.stringify(seq) === '[1,2,null,null]', `跑攤第一、二次有專屬文本，第三次之後沒有：${JSON.stringify(seq)}`);
 
-/* ── 2. 十八個行動全部都有 ── */
+/* ── 2. 每一個會扣行動點的行動全部都有 ── */
 s = mk();
-const ids = Char.ACTIONS.map((a) => a.id);
+// 選單型行動的專屬文本掛在下層的管道上（募款底下三種），
+// 純檢視型的行動不扣行動點，也就不會有「第一次」這件事。
+const MENU_ACTIONS = { fundraise: ['FUND_DINNER', 'FUND_SMALL', 'FUND_DEVELOPER'] };
+const VIEW_ONLY = ['finances', 'fastForward'];
+const ids = Char.ACTIONS.map((a) => a.id).filter((id) => !VIEW_ONLY.includes(id) && !MENU_ACTIONS[id]);
 const missing = [];
 for (const id of ids) {
   s.player.apUsed = 0;
@@ -53,6 +57,24 @@ for (const id of ids) {
 }
 ok(noSecond.length === 1 && noSecond[0] === 'retire',
   `第二次也都有文本，只有退出政壇沒有（那是終局，同一局不會有第二次）`);
+
+/* ── 2b. 選單型行動的每一條管道各有自己的計數器 ── */
+s = mk();
+for (const [action, keys] of Object.entries(MENU_ACTIONS)) {
+  const bad = [];
+  for (const k of keys) {
+    s.player.apUsed = 0;
+    const r1 = Char.commit(s, data, action, k);
+    s.player.apUsed = 0;
+    const r2 = Char.commit(s, data, action, k);
+    if (!r1.first?.text || !r2.first?.text) bad.push(k);
+    if (r1.first?.text === r2.first?.text) bad.push(k + '(兩次一樣)');
+  }
+  ok(!bad.length, `${action} 底下 ${keys.length} 條管道各有自己的前兩次文本${bad.length ? '：' + bad.join('、') : ''}`);
+}
+// 走管道的時候不該去動 fundraise 這個行動本身的計數器，
+// 否則第一次辦餐會會把第一次拜訪建商的文本吃掉
+ok(!(s.actionCount?.fundraise), '選單本身不會被算成做過一次');
 
 /* ── 3. 三種變體，不同種子會拿到不同段 ── */
 const seen = new Set();

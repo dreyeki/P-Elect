@@ -39,8 +39,10 @@ const mk = () => createGame(data, {
 let s = mk();
 ok(Math.abs(s.finance.personal - 350000) < 1, `開局私產 ${s.finance.personal.toLocaleString()} 元（記者出身）`);
 const open0 = Char.availableActions(s, data).map((a) => a.id);
-ok(open0.length === 2 && open0.includes('canvass') && open0.includes('theory'),
+// 素人開局能做的事：跑攤、進修、募款（只有小額捐開得成）、快轉半年、看自己的帳
+ok(open0.length === 5 && ['canvass', 'theory', 'fundraise', 'fastForward', 'finances'].every((x) => open0.includes(x)),
   `開局只有 ${open0.length} 個行動：${open0.join('、')}`);
+ok(!open0.includes('rally'), '造勢開局是鎖住的——素人租不起場地，租了也只是空給別人看');
 ok(!open0.includes('talkshow') && !open0.includes('presser'), '政論節目與記者會開局是鎖住的');
 ok(s.court?.justices.length === 15, `十五位大法官已就任`);
 ok(!!s.presidency?.name, `總統：${s.presidency?.name}（滿意度 ${s.presidency?.approval}%）`);

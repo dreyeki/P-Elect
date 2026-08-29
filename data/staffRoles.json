@@ -8,7 +8,19 @@
         "campaignAP": 1,
         "campaignActionMult": 0.12
       },
-      "baseSalary": 110000
+      "baseSalary": 110000,
+      "unlock": {
+        "fame": 3.5,
+        "minTeam": 4,
+        "roles": [
+          "councilor",
+          "legislator",
+          "mayor",
+          "minister",
+          "president"
+        ]
+      },
+      "unlockNote": "競選經理是整個團隊裡最後才會到位的人，因為他挑的是能贏的人。"
     },
     {
       "id": "policy",
@@ -19,7 +31,12 @@
         "interpellationPrep": 1,
         "eventInsight": 1
       },
-      "baseSalary": 90000
+      "baseSalary": 90000,
+      "unlock": {
+        "fame": 2,
+        "minTeam": 2
+      },
+      "unlockNote": "寫政策的人只會去有機會執行政策的地方。"
     },
     {
       "id": "spokesperson",
@@ -29,7 +46,12 @@
         "mediaFrame": 0.15,
         "crisisMitigation": 0.25
       },
-      "baseSalary": 95000
+      "baseSalary": 95000,
+      "unlock": {
+        "fame": 2.5,
+        "minTeam": 2
+      },
+      "unlockNote": "沒有記者會問問題的時候，發言人是一個沒有內容的職稱。"
     },
     {
       "id": "organizer",
@@ -39,7 +61,12 @@
         "grassrootsGrowth": 0.4,
         "officeCostMult": -0.25
       },
-      "baseSalary": 85000
+      "baseSalary": 85000,
+      "unlock": {
+        "fame": 1.5,
+        "minTeam": 1
+      },
+      "unlockNote": "組織部長要有地方可以組織，也要有值得他來的人。"
     },
     {
       "id": "finance",
@@ -50,7 +77,12 @@
         "stigmaReduction": 0.35,
         "declarationFix": 1
       },
-      "baseSalary": 100000
+      "baseSalary": 100000,
+      "unlock": {
+        "fame": 2.5,
+        "minTeam": 3
+      },
+      "unlockNote": "帳目要大到需要專人管，才會有專人願意來管。"
     },
     {
       "id": "legal",
@@ -60,7 +92,19 @@
         "investigationResist": 0.3,
         "litigationCostMult": -0.4
       },
-      "baseSalary": 120000
+      "baseSalary": 120000,
+      "unlock": {
+        "fame": 3,
+        "minTeam": 3,
+        "roles": [
+          "councilor",
+          "legislator",
+          "mayor",
+          "minister",
+          "president"
+        ]
+      },
+      "unlockNote": "律師的時間很貴，他要看得到你將來用得上他的地方。"
     },
     {
       "id": "aide",
@@ -70,7 +114,12 @@
         "scheduleSlack": 0.2,
         "grassrootsGrowth": 0.15
       },
-      "baseSalary": 52000
+      "baseSalary": 52000,
+      "unlock": {
+        "fame": 0,
+        "minTeam": 0
+      },
+      "unlockNote": "隨行助理是唯一一種不需要你有份量就有人願意做的職位。"
     },
     {
       "id": "service",
@@ -80,7 +129,20 @@
         "grassrootsGrowth": 0.3,
         "favorGrowth": 0.2
       },
-      "baseSalary": 48000
+      "baseSalary": 48000,
+      "unlock": {
+        "fame": 1,
+        "minTeam": 1,
+        "roles": [
+          "village",
+          "councilor",
+          "legislator",
+          "mayor",
+          "minister",
+          "president"
+        ]
+      },
+      "unlockNote": "要先有服務處或公職，選民服務才有東西可以服務。"
     }
   ],
   "recruitTiers": [
@@ -205,5 +267,10 @@
     "stigmaOnDiscovery": 1.2,
     "stigmaIfFired": 0.5,
     "loyaltyPenalty": 1
-  }
+  },
+  "_unlockNote": [
+    "團隊職位是逐步解鎖的。一個沒有人認識的素人，不會有競選經理主動找上門——",
+    "願意來的只有隨行助理，因為那個位子要的不是你的份量，是你的車票錢。",
+    "知名度、職位與現有團隊規模三個條件都到了，那個職位才會出現在應徵者名單裡。"
+  ]
 }
