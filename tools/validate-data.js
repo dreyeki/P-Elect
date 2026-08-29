@@ -287,6 +287,49 @@ for (const sc of cv.scenes) {
 }
 cvShort.length ? fail(`跑攤文本有 ${cvShort.length} 個句子少於 7 字`) : pass('跑攤文本的句長全部達標');
 
+// 掛著「第一次」敘述的那兩回，素人在每一種都市化程度都要有足夠的場景可以抽
+const MEMBER_ONLY = (sc, b) => sc.requires === 'member' || sc.branches[b].requires === 'member'
+  || sc.requires === 'office' || sc.branches[b].requires === 'office';
+const rookieShort = [];
+for (let u = 0; u <= 5; u++) {
+  const pool = cv.scenes.filter((x) => u >= x.urbanity[0] - 2 && u <= x.urbanity[1] + 2);
+  for (let b = 0; b < 3; b++) {
+    const n = pool.filter((sc) => !sc.branches[b].assumesHistory && !MEMBER_ONLY(sc, b)).length;
+    if (n < 6) rookieShort.push(`都市化 ${u} 的分支 ${b} 只剩 ${n} 個`);
+  }
+}
+rookieShort.length ? fail(`素人前兩次可用的場景太少：${rookieShort.join('、')}`)
+  : pass('掛著第一次敘述的那兩回，素人在每一種都市化程度都有足夠的場景可抽');
+
+// 上面寫第一次、下面寫上次你來——這種矛盾要在資料層就擋掉
+const histWords = /上次|上一次|認出你|三個月來收到|每次選舉前|連續站了.*天|人在哪裡/;
+const unflagged = [];
+for (const sc of cv.scenes) {
+  sc.branches.forEach((b, i) => {
+    if (histWords.test(b.text) && !b.assumesHistory) unflagged.push(`${sc.id}/${i}`);
+  });
+}
+unflagged.length ? fail(`這些段落假設你來過卻沒有標記 assumesHistory：${unflagged.join('、')}`)
+  : pass('所有假設你來過的段落都標記了 assumesHistory');
+
+// 服務處與議事堂同理
+const officeWords = /服務處|議事堂/;
+const unGated = [];
+for (const sc of cv.scenes) {
+  sc.branches.forEach((b, i) => {
+    if (officeWords.test(b.text) && !b.requires && !sc.requires) unGated.push(`${sc.id}/${i}`);
+  });
+  if (officeWords.test(sc.lead) && !sc.requires) unGated.push(`${sc.id}/lead`);
+}
+unGated.length ? fail(`這些段落假設你有服務處或民代身分卻沒有上門檻：${unGated.join('、')}`)
+  : pass('所有假設服務處或議事堂的段落都上了身分門檻');
+
+// 跑攤的第一次敘述不能綁定場合：底下那一段可能是任何一種場合
+const ftCan = ["1", "2"].flatMap((o) => D.firstTimes.actions.canvass[o] ?? []);
+const venueBound = ftCan.filter((t) => /市場|早市|攤商|攤販|服務處|議事堂/.test(t));
+venueBound.length ? fail(`跑攤的第一次敘述綁定了場合：${venueBound[0].slice(0, 20)}…`)
+  : pass('跑攤的第一次敘述不綁定場合，配得上任何一種場合');
+
 // 選區人物
 const pe = D.people;
 pe.perDistrict.min === 3 && pe.perDistrict.max === 7

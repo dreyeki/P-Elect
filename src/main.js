@@ -1355,7 +1355,7 @@ function showCanvassReport(s, did, rng, res) {
     '幾乎沒有人想跟你講話，遞出去的名片大多被隨手放在攤子上。',
     '多數人客氣地點了頭，但你看得出來他們並不真的記得你是誰。',
     '有人願意停下來聽你講兩句，也有人擺了擺手就走開了。',
-    '不少人主動叫得出你的名字，有幾個還說上次的事情謝謝你。',
+    '不少人主動叫得出你的名字，也有人說在電視上看過你。',
     '走到哪裡都有人過來握手，有位阿姨硬塞了一袋水果給你。',
     '整條街的人都在喊你的名字，助理得幫你擋著才走得動。',
   ];
@@ -1367,7 +1367,10 @@ function showCanvassReport(s, did, rng, res) {
     '有支持者已經在問要不要幫忙掛看板，那種熱度是裝不出來的。',
     '志工的名單一個早上就滿了，有人自己印了名片在幫你發。',
   ];
-  const feelIdx = clamp(Math.round(blur(fav) + 2.5), 0, 5);
+  // 前兩次跑攤時上方掛著「第一次」的敘述，這裡就不能寫成走到哪裡都有人喊你的名字。
+  const visits = s.actionCount?.canvass ?? 0;
+  const capFeel = visits <= (DATA.firstTimes?.occurrences ?? 2) ? 3 : 5;
+  const feelIdx = clamp(Math.round(blur(fav) + 2.5), 0, capFeel);
   const heatIdx = clamp(Math.round(blur(enth)), 0, 5);
 
   // 哪一群人特別冷淡或特別熱情，同樣是感覺不是數字
@@ -1380,7 +1383,9 @@ function showCanvassReport(s, did, rng, res) {
 
   const lines = [FEEL[feelIdx], HEAT[heatIdx]];
   if (best && worst && best.sid !== worst.sid) {
-    lines.push(`${best.name}那邊的反應明顯比較好；${worst.name}的攤位你去了兩次，氣氛都不太熱。`);
+    // 不要寫「你去了兩次」也不要寫「攤位」：第一次跑攤的人沒有去過兩次，
+    // 而且今天的場合可能是告別式或捷運站出口，不是每一種都有攤位。
+    lines.push(`${best.name}那邊的反應明顯比較好；碰到${worst.name}的時候氣氛就冷了下來，話講不到兩句就被帶開。`);
   }
   if (angry) {
     lines.push(`有幾位${angry.name}拉著你講了很久，語氣裡的火氣是真的，不是抱怨而已。`);

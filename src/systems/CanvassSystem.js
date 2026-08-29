@@ -26,6 +26,31 @@ export function scenesFor(data, district, gigs = new Set(), slack = 0) {
   });
 }
 
+const MEMBER_ROLES = ['councilor', 'legislator', 'mayor', 'minister', 'president'];
+
+/**
+ * 這一段話現在說得通嗎。
+ *
+ * 兩件事會讓它說不通：
+ * 一是它假設有人記得你來過，但畫面上方正掛著「第一次」的敘述——兩段會互相打臉；
+ * 二是它假設你有服務處或民代身分，而你其實兩個都沒有。
+ * 沒有服務處的人留不下服務處的電話，不是民代的人也沒有議事堂可以站上去。
+ */
+export function textFits(state, sc, branchIndex, firstTimeActive) {
+  const b = sc.branches[branchIndex];
+  if (!b) return false;
+  if (b.assumesHistory && firstTimeActive) return false;
+  for (const req of [sc.requires, b.requires]) {
+    if (req === 'office') {
+      const d = state.districts[state.player.homeDistrict];
+      const hasOffice = d?.serviceOffice || MEMBER_ROLES.includes(state.player.role);
+      if (!hasOffice) return false;
+    }
+    if (req === 'member' && !MEMBER_ROLES.includes(state.player.role)) return false;
+  }
+  return true;
+}
+
 /**
  * 這一次跑得怎麼樣。不是純擲骰，屬性與基層都真的算進去。
  * 回傳 0（漂亮）／1（普通）／2（出狀況）。
@@ -53,15 +78,17 @@ export function rollBranch(state, data, districtId, rng) {
  * 玩家在鄉下選區跑不到二十次就開始看到重複的段落。
  * 表現本身不受影響，被調整的只是「這一次發生在哪裡」。
  */
-export function pickScene(state, data, districtId, rng, branchIndex) {
+export function pickScene(state, data, districtId, rng, branchIndex, firstTimeActive = false) {
   const d = data.byId.district[districtId];
   const recent = state.flags.canvassRecent ??= [];
   const seen = new Set(recent);
   const gigs = new Set((state.canvassGigs ?? []).map((g) => g.sceneId));
+  const fits = (sc, bi) => textFits(state, sc, bi, firstTimeActive);
 
-  // 第一步：本地就有的場合，還沒出現過這個結果的。絕大多數情況在這裡就結束了。
+  // 第一步：本地就有、說得通、而且還沒出現過這個結果的場合。
+  // 絕大多數情況在這裡就結束了。
   for (const slack of [0, 1, 2]) {
-    const pool = scenesFor(data, d, gigs, slack);
+    const pool = scenesFor(data, d, gigs, slack).filter((sc) => fits(sc, branchIndex));
     const fresh = pool.filter((sc) => !seen.has(sc.id + ':' + branchIndex));
     if (fresh.length) return { scene: rng.pick(fresh), branchIndex };
   }
@@ -69,29 +96,38 @@ export function pickScene(state, data, districtId, rng, branchIndex) {
   // 第二步：這個結果在附近每一種場合都發生過了。
   // 與其讓玩家看第二次同樣的段落，不如讓這一次的結果往旁邊挪一格——
   // 跑遍所有場子都是同一種收穫，本來也不太合理。
-  const pool = scenesFor(data, d, gigs, 2);
-  if (!pool.length) return { scene: data.canvass.scenes[0], branchIndex };
+  const wide = scenesFor(data, d, gigs, 2);
   const order = branchIndex === 1 ? [0, 2] : [1, branchIndex === 0 ? 2 : 0];
   for (const bi of order) {
+    const pool = wide.filter((sc) => fits(sc, bi));
     const fresh = pool.filter((sc) => !seen.has(sc.id + ':' + bi));
     if (fresh.length) return { scene: rng.pick(fresh), branchIndex: bi };
   }
 
-  // 第三步：真的全部跑遍了，挑最久沒看過的那一段
+  // 第三步：真的全部跑遍了，挑最久沒看過而且說得通的那一段
+  const usable = wide.filter((sc) => fits(sc, branchIndex));
+  const pool = usable.length ? usable : wide.filter((sc) => fits(sc, 1));
+  if (!pool.length) return { scene: data.canvass.scenes[0], branchIndex: 1 };
+  const bi = usable.length ? branchIndex : 1;
   let oldest = pool[0], oldestPos = Infinity;
   for (const sc of pool) {
-    const pos = recent.lastIndexOf(sc.id + ':' + branchIndex);
+    const pos = recent.lastIndexOf(sc.id + ':' + bi);
     if (pos < oldestPos) { oldestPos = pos; oldest = sc; }
   }
-  return { scene: oldest, branchIndex };
+  return { scene: oldest, branchIndex: bi };
 }
 
 /**
  * 跑一攤。回傳這一次的文本與結果，並記進不重複佇列。
  */
 export function run(state, data, districtId, rng) {
+  // 前兩次跑攤時，畫面上方掛著「第一次」「第二次」的專屬敘述。
+  // 那兩次底下就不能出現有人記得你來過的段落，否則兩段會互相打臉。
+  // 門檻直接讀 firstTimes 的設定，兩邊才不會各改各的而失去同步。
+  const visits = state.actionCount?.canvass ?? 0;
+  const firstTimeActive = visits <= (data.firstTimes?.occurrences ?? 2);
   const rolled = rollBranch(state, data, districtId, rng);
-  const { scene, branchIndex: bi } = pickScene(state, data, districtId, rng, rolled);
+  const { scene, branchIndex: bi } = pickScene(state, data, districtId, rng, rolled, firstTimeActive);
   const br = scene.branches[bi];
   const key = scene.id + ':' + bi;
 

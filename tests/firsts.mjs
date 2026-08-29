@@ -10,6 +10,7 @@ const { createGame } = await import('../src/core/GameState.js');
 const { initScales } = await import('../src/util/scale.js');
 const Char = await import('../src/systems/CharacterSystem.js');
 const Firsts = await import('../src/systems/FirstTimeSystem.js');
+const { Rng } = await import('../src/core/Rng.js');
 const { endTurnLabel } = await import('../src/ui/pages/turn.js');
 
 const data = await loadData(); initScales(data.scales);
@@ -121,6 +122,86 @@ ok(endTurnLabel(s, data, 2).includes('週'), `選戰倒數也是寫週：${endTu
 s.meta.scale = 'month'; s.election = null; s.player.fatigueRaw = 0; s.meta.month = 12;
 ok(endTurnLabel(s, data, 0).includes('月'), `月回合維持寫月：${endTurnLabel(s, data, 0)}`);
 ok(!endTurnLabel(s, data, 0).includes('件事沒處理'), '按鈕上不再催促還有幾件事沒處理');
+
+/* ── 9. 上面寫「第一次」的時候，下面不能有人記得你來過 ── */
+const Canvass = await import('../src/systems/CanvassSystem.js');
+const HIST = /上次|上一次|認出你|三個月來收到|每次選舉前|連續站了|人在哪裡/;
+{
+  // 掛著第一次敘述的那兩回，抽一百次都不能抽到假設你來過的段落
+  let bad = [], nth = [];
+  for (let i = 0; i < 100; i++) {
+    const g = mk('CV' + i);
+    g.player.apUsed = 0;
+    const r1 = Char.doAction(g, data, 'canvass');
+    const c1 = Canvass.run(g, data, g.player.homeDistrict, new Rng(3, i));
+    nth.push(r1.first?.nth);
+    if (c1.scene.branches[c1.branchIndex].assumesHistory) bad.push(`第一次抽到 ${c1.scene.id}/${c1.branchIndex}`);
+    g.player.apUsed = 0;
+    Char.doAction(g, data, 'canvass');
+    const c2 = Canvass.run(g, data, g.player.homeDistrict, new Rng(4, i));
+    if (c2.scene.branches[c2.branchIndex].assumesHistory) bad.push(`第二次抽到 ${c2.scene.id}/${c2.branchIndex}`);
+  }
+  ok(nth.every((x) => x === 1), '一百局的第一次都掛上了第一次的敘述');
+  ok(!bad.length, `一百局的前兩次跑攤，沒有一次抽到假設你來過的段落${bad.length ? '：' + bad[0] : ''}`);
+
+  // 第三次之後就放行，那時候「上次」是真的
+  const g = mk('CVLATE');
+  let sawHist = false;
+  for (let i = 0; i < 80; i++) {
+    g.player.apUsed = 0;
+    Char.doAction(g, data, 'canvass');
+    const c = Canvass.run(g, data, g.player.homeDistrict, new Rng(9, i));
+    if (i >= 2 && c.scene.branches[c.branchIndex].assumesHistory) sawHist = true;
+  }
+  ok(sawHist, '跑久了以後，那些「有人記得你」的段落會回來');
+}
+
+/* ── 10. 沒有服務處、不是民代的人，不會拿到假設他有的段落 ── */
+{
+  const rookie = mk('ROOKIE');
+  rookie.player.role = 'citizen';
+  rookie.districts[rookie.player.homeDistrict].serviceOffice = false;
+  const bad = [];
+  for (const sc of data.canvass.scenes) {
+    for (let b = 0; b < 3; b++) {
+      if (!Canvass.textFits(rookie, sc, b, false)) continue;
+      const t = sc.branches[b].text + (sc.lead ?? '');
+      if (/服務處|議事堂/.test(t)) bad.push(`${sc.id}/${b}`);
+    }
+  }
+  ok(!bad.length, `素人不會拿到提到服務處或議事堂的段落${bad.length ? '：' + bad.join('、') : ''}`);
+
+  const member = mk('MEMBER');
+  member.player.role = 'legislator';
+  const okMember = data.canvass.scenes.some((sc) =>
+    sc.branches.some((b, i) => b.requires === 'member' && Canvass.textFits(member, sc, i, false)));
+  ok(okMember, '當上民代之後，那些要議事堂的段落就開得出來');
+
+  const withOffice = mk('OFFICE');
+  withOffice.districts[withOffice.player.homeDistrict].serviceOffice = true;
+  const okOffice = data.canvass.scenes.some((sc) =>
+    sc.branches.some((b, i) => b.requires === 'office' && Canvass.textFits(withOffice, sc, i, false)));
+  ok(okOffice, '掛牌服務處之後，那些要服務處的段落也開得出來');
+}
+
+/* ── 10b. 跑攤回報那幾句感覺也不能假設你來過或假設有攤位 ── */
+{
+  const src = fs.readFileSync(path.join(ROOT, 'src/main.js'), 'utf8');
+  const block = src.slice(src.indexOf('function showCanvassReport'), src.indexOf('/** 一段純文字的結果視窗'));
+  const lines = [...block.matchAll(/'([^']{12,})'/g)].map((m) => m[1])
+    .filter((t) => /[，。]/.test(t) && !t.startsWith('//'));
+  const bad = lines.filter((t) => /上次|上一次|你去了兩次|去了兩次/.test(t));
+  ok(!bad.length, `跑攤回報的感覺句沒有假設你來過${bad.length ? '：' + bad[0] : ''}`);
+  ok(!block.includes('的攤位你去了兩次'), '階層比較那一句不再寫成「那個攤位你去了兩次」');
+}
+
+/* ── 11. 跑攤的第一次敘述不能綁定場合 ── */
+{
+  const venue = /市場|早市|攤商|攤販|服務處|議事堂/;
+  const texts = ['1', '2'].flatMap((o) => data.firstTimes.actions.canvass[o]);
+  const hit = texts.filter((t) => venue.test(t));
+  ok(!hit.length, `跑攤的六段第一次敘述都不綁定場合${hit.length ? '：' + hit[0].slice(0, 24) : ''}`);
+}
 
 console.log(fails ? `\n${fails} 項失敗` : '\n第一次文本與行動點全部通過');
 process.exit(fails ? 1 : 0);
