@@ -43,6 +43,7 @@ import * as Favor from './systems/FavorSystem.js';
 import * as Invite from './systems/InvitationSystem.js';
 import * as SocialSys from './systems/SocialSystem.js';
 import * as Semi from './systems/SemiconductorSystem.js';
+import * as Firsts from './systems/FirstTimeSystem.js';
 import { applyEffects, bumpCounter } from './systems/Effects.js';
 import { clamp, clamp05, clampBi } from './core/Formula.js';
 
@@ -291,7 +292,7 @@ function handle(act, ds) {
       closeModal();
       openModal(textModal(ds.id === 'streetSpeech' ? '街頭宣講' : '直播結束',
         r.text + (r.milestone ? '\n\n' + r.milestone.text : '')
-        + `\n\n目前追蹤數：${F.num(r.followers)}`));
+        + `\n\n目前追蹤數：${F.int(r.followers)}`));
       render();
     },
 
@@ -395,8 +396,11 @@ function handle(act, ds) {
       const paid = Char.commit(s, DATA, 'setImage');
       if (!paid.ok) { closeModal(); return toast(paid.msg); }
       const r = ImageSys.adopt(s, DATA, d.id);
-      if (!r.ok) s.player.apUsed = Math.max(0, s.player.apUsed - 1);   // 沒換成就不扣
-      closeModal(); toast(r.msg); render();
+      // 沒換成就不扣行動點，也不算做過一次
+      if (!r.ok) { s.player.apUsed = Math.max(0, s.player.apUsed - 1); Firsts.refund(s, 'setImage'); }
+      closeModal();
+      if (!flushFirstTime(r.msg)) toast(r.msg);
+      render();
     },
     'open-retire': openRetire,
     'confirm-retire': doRetire,
@@ -410,8 +414,10 @@ function handle(act, ds) {
       const paid = Char.commit(s, DATA, 'commissionPoll');
       if (!paid.ok) { closeModal(); return toast(paid.msg); }
       const r = Poll.commission(s, DATA, d.id, d.scope);
-      if (!r.ok) s.player.apUsed = Math.max(0, s.player.apUsed - 1);
-      closeModal(); toast(r.msg); render();
+      if (!r.ok) { s.player.apUsed = Math.max(0, s.player.apUsed - 1); Firsts.refund(s, 'commissionPoll'); }
+      closeModal();
+      if (!flushFirstTime(r.msg)) toast(r.msg);
+      render();
     },
     'open-poll': (d) => openPoll(+d.idx),
 
@@ -593,12 +599,14 @@ function askRest() {
       <div class="opt-t">${esc(o.name)}</div>
       <div class="opt-h">${esc(o.text.slice(0, 34))}…</div>
     </button>`).join('');
-  openModal(`<div class="modal-h">這個月還剩下幾天</div>
+  // 選戰期間一回合是一週，這一格的用字要跟著換
+  const week = s.meta.scale === 'week';
+  openModal(`<div class="modal-h">${week ? '這一週還剩下幾天' : '這個月還剩下幾天'}</div>
     <div class="modal-b">你還有 ${left} 點行動點沒用掉。剩下的時間總得做點什麼——
     這一行沒有人真的能休息，但至少可以選擇怎麼耗掉它。</div>
     ${opts}
     <button class="btn ghost full" data-act="do-rest" data-id="none" style="margin-top:6px">
-      不休息，直接進下個月</button>`);
+      不休息，直接進${week ? '下一週' : '下個月'}</button>`);
 }
 
 function doRest(id) {
@@ -635,7 +643,8 @@ function doAction(id, arg) {
   const msg = resolveAction(s, id, arg, rng);
   s.meta.rngCounter = rng.counter;
   s.player.ap = Char.apOf(s, DATA);
-  if (msg) toast(msg);
+  // 前兩次的專屬敘述若還沒有被任何結果視窗撿走，就自己開一個
+  if (!flushFirstTime(msg) && msg) toast(msg);
   if (r.overdraftHit) toast('你把行程硬排了進去，代價是接下來幾天幾乎沒有闔眼。');
   render();
 }
@@ -919,6 +928,10 @@ function runElection() {
   const s = app.state;
   const rng = new Rng(s.meta.seed, s.meta.rngCounter);
   const run = s.election.run;
+  // applyResult 會把 s.election 清成 null，所以年份要在那之前先抓下來。
+  // 沒有抓的話寫出去的旗標會是 elecDone_undefined，
+  // 於是玩家在開完票之後，下一週又會被問一次要不要參選。
+  const sched = s.election.sched;
   const cands = candidates(s);
   const r = Election.computeVotes(s, DATA, run, cands, rng);
   s.meta.rngCounter = rng.counter;
@@ -927,10 +940,9 @@ function runElection() {
   const won = winners.some((c) => c.isPlayer);
   const my = r.results.find((x) => x.candidate.isPlayer);
   const outcome = { won, results: r.results };
-  Election.applyResult(s, DATA, run, outcome);
-  s.flags['elecDone_' + s.election?.sched?.year] = true;
+  Election.applyResult(s, DATA, run, outcome, sched);
   s.election = {
-    phase: 'result', run, outcome,
+    phase: 'result', run, outcome, sched,
     resultText: won
       ? `你以 ${F.int(my.votes)} 票當選。開票那天晚上，服務處外面擠滿了人，你講到一半聲音就啞了。`
       : `你以 ${F.int(my.votes)} 票落選，差距是 ${F.int(Math.abs(r.results[0].votes - my.votes))} 票。有些支持者到最後都沒有離開。`,
@@ -1062,6 +1074,7 @@ function doShow(showId, theoryId) {
   s.meta.rngCounter = rng.counter;
   if (!r.ok) { closeModal(); return toast(r.msg); }
   openModal(`<div class="modal-h">${esc(r.show.name)}</div>
+    ${firstTimeBanner(s)}
     <div style="text-align:center;margin:6px 0 14px">
       <div class="xs muted">表現</div>
       <div class="tile-v ${r.perf >= 4 ? 'tone-good' : r.perf >= 3 ? 'tone-ok' : r.perf >= 2 ? 'tone-mid' : 'tone-bad'}"
@@ -1136,7 +1149,153 @@ function openPoll(idx) {
     ${row('你的支持度', p.playerListed
       ? `<span class="num">${p.playerApproval.toFixed(1)}%</span>`
       : '<span class="xs muted">知名度不足，未列入</span>')}
+    ${pollExtra(s, p)}
+    ${ministerRows(p)}
     <button class="btn primary full" data-act="modal-close" style="margin-top:12px">關閉</button>`);
+}
+
+/**
+ * 每一家民調公司的招牌題組。
+ *
+ * 同一個世界，九種切法——切法本身就是一種立場。
+ * 這些數字在 v0.5.0 就算出來了，但一直沒有地方顯示，等於白算。
+ */
+function pollExtra(s, p) {
+  const e = p.extra;
+  if (!e) return '';
+  const head = `<div class="sec-t">${esc(p.specialty?.name ?? '專屬題組')}</div>
+    <div class="xs muted" style="line-height:1.7;margin-bottom:8px">${esc(p.specialty?.desc ?? '')}</div>`;
+
+  if (e.kind === 'crosstab') {
+    return head + e.groups.map((g) => `
+      <div class="ctrow">
+        <span class="ct-n">${esc(g.name)}</span>
+        <span class="ct-v" style="color:${partyColor(pidOf(s, g.top))}">${esc(g.top ?? '—')}</span>
+        <span class="ct-v">${g.topShare.toFixed(1)}%</span>
+        <span class="ct-v">佔 ${g.share.toFixed(1)}%</span>
+      </div>`).join('')
+      + `<div class="xs muted" style="margin-top:6px;line-height:1.7">
+          每一列是該族群裡領先的政黨、他的得票率，以及這個族群佔全體選民的比例。</div>`;
+  }
+
+  if (e.kind === 'issueSalience') {
+    return head + e.rows.map((r) => `
+      <div class="votebar"><span class="vn">${esc(r.name)}</span>
+        <span class="vb"><i style="width:${Math.min(100, r.pct * 4).toFixed(1)}%"></i></span>
+        <span class="vp">${r.pct.toFixed(1)}%</span></div>`).join('')
+      + `<div class="xs muted" style="margin-top:6px;line-height:1.7">
+          他們不問你支持誰，先問你在意什麼。議題的順序比支持度更能預測選舉。</div>`;
+  }
+
+  if (e.kind === 'identity') {
+    const IN = { localist: '台灣人', chinese: '中國人', dual: '都是', apathetic: '不願回答' };
+    const id = e.identity.map((x) => `
+      <div class="ctrow"><span class="ct-n">${esc(IN[x.id] ?? x.id)}</span>
+        <span class="ct-v" style="grid-column:2/-1;text-align:right">${x.pct.toFixed(1)}%</span></div>`).join('');
+    const cn = e.china.map((d) => `
+      <div class="ctrow"><span class="ct-n">${esc(d.negName)} ↔ ${esc(d.posName)}</span>
+        <span class="ct-v" style="grid-column:2/-1;text-align:right">${esc(biWord(cnScale(d.id), d.value))}</span></div>`).join('');
+    const rs = e.reasons.slice().sort((a, b) => b.pct - a.pct).map((r) => `
+      <div class="ctrow"><span class="ct-n">${esc(r.name)}</span>
+        <span class="ct-v" style="grid-column:2/-1;text-align:right">${r.pct.toFixed(1)}%</span></div>`).join('');
+    return head + '<div class="xs muted" style="margin:6px 0 4px">國家認同</div>' + id
+      + '<div class="xs muted" style="margin:10px 0 4px">兩岸態度七個面向</div>' + cn
+      + '<div class="xs muted" style="margin:10px 0 4px">在意的理由</div>' + rs
+      + `<div class="xs muted" style="margin-top:6px;line-height:1.7">
+          理由不等於方向：主張友中有利經濟的跟主張抗中才保得住經濟的，在這張表上是同一類。</div>`;
+  }
+
+  if (e.kind === 'genderAge') {
+    const body = e.rows.map((r) => {
+      const L = F.genderLean(r.male, r.female);
+      return `<div class="gaprow">
+        <span class="ct-n" style="color:${partyColor(r.id)}">${esc(r.name)}</span>
+        <span class="g-lean ${L.cls}">${esc(L.text)}</span>
+        <span class="g-raw">男 ${r.male.toFixed(1)}　女 ${r.female.toFixed(1)}</span>
+      </div>`;
+    }).join('');
+    const y = e.youthGap;
+    const yl = y ? F.genderLean(y.gap, 0) : null;
+    return head + body + (y ? `
+      <div class="xs muted" style="margin-top:8px;line-height:1.8">
+        青年世代的落差最大的是${esc(y.party ?? '')}，${esc(yl?.text ?? '')}。
+        這個數字十年前只有現在的一半，而且還在拉開。</div>` : '');
+  }
+
+  if (e.kind === 'regionBreak') {
+    return head + e.rows.map((r) => `
+      <div class="ctrow"><span class="ct-n">${esc(r.label)}</span>
+        <span class="ct-v" style="color:${partyColor(pidOf(s, r.top))}">${esc(r.top ?? '—')}</span>
+        <span class="ct-v">${r.topShare.toFixed(1)}%</span>
+        <span class="ct-v">佔 ${r.share.toFixed(1)}%</span>
+      </div>`).join('')
+      + `<div class="xs muted" style="margin-top:6px;line-height:1.7">
+          他們只做分區，因為他們相信全國平均是一個沒有意義的數字。</div>`;
+  }
+
+  if (e.kind === 'headToHead') {
+    return head + e.rows.map((r) => `
+      <div class="votebar"><span class="vn" style="color:${partyColor(r.id)}">${esc(r.name)}</span>
+        <span class="vb"><i style="width:${r.pct.toFixed(1)}%;background:${partyColor(r.id)}"></i></span>
+        <span class="vp">${r.pct.toFixed(1)}%</span></div>`).join('')
+      + `<div class="xs muted" style="margin-top:6px;line-height:1.7">
+          兩人對決的題型永遠比多人競逐好看，端看好看的是誰家的人。</div>`;
+  }
+
+  if (e.kind === 'trend') {
+    return head + e.rows.map((r) => {
+      const up = r.delta >= 0.05, down = r.delta <= -0.05;
+      return `<div class="ctrow">
+        <span class="ct-n" style="color:${partyColor(r.id)}">${esc(r.name)}</span>
+        <span class="ct-v">${r.now.toFixed(1)}%</span>
+        <span class="ct-v ${up ? 'tone-good' : down ? 'tone-bad' : 'muted'}" style="grid-column:3/-1;text-align:right">
+          ${r.delta >= 0 ? '▲' : '▼'} ${Math.abs(r.delta).toFixed(1)}</span>
+      </div>`;
+    }).join('')
+      + `<div class="xs muted" style="margin-top:6px;line-height:1.7">
+          他們每個月問同一批題目，賣的是變化量而不是絕對值。</div>`;
+  }
+
+  if (e.kind === 'quickTake') {
+    return head + `<div class="modal-b" style="line-height:1.9">${esc(e.question)}</div>
+      <div class="grid3">
+        ${tileLite('符合期待', e.yes)}
+        ${tileLite('不符期待', e.no)}
+        ${tileLite('沒有意見', e.unsure)}
+      </div>
+      <div class="xs muted" style="margin-top:6px;line-height:1.7">
+        當天問當天發。速度是他們唯一的賣點，也是他們唯一的問題。</div>`;
+  }
+
+  if (e.kind === 'openWeb') {
+    return head + `<div class="warnline" style="line-height:1.8">${esc(e.warning)}</div>`;
+  }
+  return '';
+}
+
+const tileLite = (label, v) => `<div class="tile sm"><div class="tile-k">${esc(label)}</div>
+  <div class="tile-v"><span class="num">${(v ?? 0).toFixed(0)}%</span></div></div>`;
+
+/** 從簡稱反查政黨代號，只為了上色 */
+function pidOf(s, shortName) {
+  return Object.values(s.parties).find((x) => (x.shortName ?? x.name) === shortName)?.id ?? 'IND';
+}
+const cnScale = (id) => 'cn' + id.charAt(0).toUpperCase() + id.slice(1);
+
+/** 部會首長的滿意度。子樣本小，誤差比頭條數字大不少。 */
+function ministerRows(p) {
+  if (!p.ministers?.length) return '';
+  const top = p.ministers.slice(0, 5), bottom = p.ministers.slice(-3).reverse();
+  const line = (m) => `<div class="ctrow">
+    <span class="ct-n">${esc(m.name)}<span class="xs muted">　${esc(m.holder)}</span></span>
+    <span class="ct-v ${m.approval < 25 ? 'tone-bad' : m.approval > 55 ? 'tone-ok' : ''}"
+      style="grid-column:2/-1;text-align:right">${m.approval.toFixed(0)}%</span></div>`;
+  return `<div class="sec-t">部會首長滿意度</div>
+    <div class="xs muted" style="line-height:1.7;margin-bottom:6px">
+      子樣本較小，誤差約 ±${(p.ministers[0].moe ?? 5).toFixed(1)}%。</div>
+    ${top.map(line).join('')}
+    <div class="xs muted" style="margin:8px 0 4px">最後三名</div>
+    ${bottom.map(line).join('')}`;
 }
 
 function openNominate(idx) {
@@ -1250,6 +1409,7 @@ function showCanvassReport(s, did, rng, res) {
   const ms = res?.milestone ? `<div class="xs" style="color:var(--good);line-height:1.7;margin-bottom:8px">${esc(res.milestone.text)}</div>` : '';
 
   openModal(`<div class="modal-h">${esc(res?.scene?.name ?? dd.name)}・${esc(dd.name)}</div>
+    ${firstTimeBanner(s)}
     <div class="modal-b" style="line-height:1.95">${esc(res?.lead ?? '')}</div>
     <div class="modal-b" style="line-height:1.95;border-left:3px solid var(--accent);padding-left:10px">${esc(res?.text ?? '')}</div>
     <div class="small" style="line-height:1.9;margin:10px 0">${lines.map(esc).join('<br>')}</div>
@@ -1260,9 +1420,37 @@ function showCanvassReport(s, did, rng, res) {
     <button class="btn primary full" data-act="modal-close">好</button>`);
 }
 
+/**
+ * 前兩次做這件事的專屬敘述。
+ * 撿走就清掉，所以同一段不會在兩個視窗裡各出現一次。
+ */
+function firstTimeBanner(s) {
+  const f = s?.flags?.pendingFirst;
+  if (!f) return '';
+  s.flags.pendingFirst = null;
+  return `<div class="firstbox">
+    <div class="firstbox-t">${esc(f.name)}・第${f.nth === 1 ? '一' : '二'}次</div>
+    <div class="firstbox-b">${esc(f.text)}</div>
+  </div>`;
+}
+
+/** 沒有任何結果視窗接手的時候，第一次的敘述自己開一個 */
+function flushFirstTime(extraMsg) {
+  const s = app.state;
+  if (!s?.flags?.pendingFirst) return false;
+  const f = s.flags.pendingFirst;
+  const banner = firstTimeBanner(s);
+  openModal(`<div class="modal-h">${esc(f.name)}</div>
+    ${banner}
+    ${extraMsg ? `<div class="modal-b" style="line-height:1.95">${esc(extraMsg)}</div>` : ''}
+    <button class="btn primary full" data-act="modal-close">好</button>`);
+  return true;
+}
+
 /** 一段純文字的結果視窗，很多新系統共用 */
 function textModal(title, body) {
   return `<div class="modal-h">${esc(title)}</div>
+    ${firstTimeBanner(app.state)}
     <div class="modal-b" style="line-height:1.95;white-space:pre-wrap">${esc(body ?? '')}</div>
     <button class="btn primary full" data-act="modal-close">好</button>`;
 }
@@ -1437,7 +1625,9 @@ function doTheory(id) {
   const r = Theory.research(s, DATA, rng, id);
   s.meta.rngCounter = rng.counter;
   closeModal();
-  if (r.milestone) openModal(textModal('整理完成', r.msg + '\n\n' + r.milestone.text));
+  const body = r.msg + (r.milestone ? '\n\n' + r.milestone.text : '');
+  if (s.flags.pendingFirst) openModal(textModal('組織理論', body));
+  else if (r.milestone) openModal(textModal('整理完成', body));
   else toast(r.msg);
   render();
 }
@@ -1480,6 +1670,7 @@ function openRetire() {
 
 function doRetire() {
   const s = app.state;
+  Char.commit(s, DATA, 'retire');   // 行動點是零，但這一步要被記下來
   const rng = new Rng(s.meta.seed, s.meta.rngCounter);
   const sum = Ending.summarize(s, DATA);
   const ep = Ending.epilogue(s, DATA, sum, rng);
@@ -1488,6 +1679,8 @@ function doRetire() {
   closeModal();
   ui.endingView = true;
   go('turn');
+  // 收拾辦公室的那一段先講完，再讓玩家看結算
+  flushFirstTime();
 }
 
 function endingPage(s) {

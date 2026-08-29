@@ -21,16 +21,13 @@
     }
   },
   "actionPoints": {
-    "_note": "行動點的加成與超支。超支是讓玩家可以硬撐，但要付疲勞的代價。",
-    "bonusMayor": 1,
-    "bonusStamina5": 1,
-    "bonusCampaignManager": 1,
-    "penaltyFatigue4": 1,
+    "_note": "每回合的行動點固定兩點，不因為職位、團隊、體力或疲勞而變動。把這個數字鎖死，玩家的每一次取捨才是真的取捨——一個縣市長一個月能親自做的事情並不比素人多，差別在於他做的每一件事份量比較重。fixed 就是那個數字；硬撐的空間在 maxOverdraft，那是把身體先借出去用，不是變得比較有時間。",
     "allowOverdraft": true,
     "maxOverdraft": 2,
     "overdraftFatiguePerPoint": 14,
     "overdraftFatigueChance": 0.55,
-    "overdraftNote": "超支一點行動點，有 55% 的機率累積 14 點疲勞。硬撐得起來，但撐久了會住院。"
+    "overdraftNote": "超支一點行動點，有 55% 的機率累積 14 點疲勞。硬撐得起來，但撐久了會住院。",
+    "fixed": 2
   },
   "fatigue": {
     "_note": "疲勞與過勞住院。恢復量越高越不容易倒，住院門檻越低越容易倒。",
@@ -243,5 +240,6 @@
     ],
     "spawnMult": 1.0,
     "threatDisplayMin": 1.2
-  }
+  },
+  "_canvassGigNote": "常駐通告的上限在 data/canvass.json 的 standingGig.maxSlots。行動點鎖死兩點之後，那個數字不能大於一。"
 }

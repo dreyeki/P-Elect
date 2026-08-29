@@ -212,14 +212,24 @@ svg.chart{width:100%;height:auto;display:block}
 .ctrow .ct-n{color:var(--fg-2);overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
 .ctrow .ct-v{text-align:right;color:var(--fg-1)}
 
-.gaprow{display:grid;grid-template-columns:1fr 56px 56px 60px;gap:6px;align-items:center;
-  padding:6px 0;border-bottom:1px solid var(--line);font-size:var(--fs-xs)}
+.gaprow{display:grid;grid-template-columns:auto 72px 1fr;gap:8px;align-items:baseline;
+  padding:7px 0;border-bottom:1px solid var(--line);font-size:var(--fs-xs)}
 .gaprow:last-of-type{border-bottom:none}
-.gaprow .g-v{text-align:right}
-.gaprow .g-m{color:#5b8fd6}
-.gaprow .g-f{color:#d1699a}
+.gaprow .ct-n{font-weight:700;font-size:var(--fs-s);white-space:nowrap}
+.gaprow .g-lean{font-weight:700;font-size:var(--fs-s);letter-spacing:.04em;white-space:nowrap}
+.gaprow .g-raw{text-align:right;color:var(--fg-3);white-space:nowrap}
+.g-m{color:#5b8fd6}
+.g-f{color:#d1699a}
+.g-none{color:var(--fg-3);font-weight:400}
 
 /* ── v0.5.1：沿用上一局設定的提示 ─────────────────────── */
 .restoreline{display:flex;align-items:center;justify-content:center;gap:6px;flex-wrap:wrap;
   font-size:var(--fs-xs);color:var(--fg-3);background:var(--bg-3);border:1px solid var(--line);
   border-radius:8px;padding:8px 10px;margin-bottom:12px;line-height:1.6}
+
+/* ── v0.5.2：前兩次做一件事的專屬敘述 ────────────────── */
+.firstbox{border:1px solid var(--accent);border-radius:10px;padding:10px 12px;margin:0 0 12px;
+  background:color-mix(in srgb, var(--accent) 8%, transparent)}
+.firstbox-t{font-size:var(--fs-xs);letter-spacing:.12em;color:var(--accent);
+  font-weight:700;margin-bottom:6px}
+.firstbox-b{font-size:var(--fs-s);line-height:2;color:var(--fg-1)}

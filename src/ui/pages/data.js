@@ -224,19 +224,23 @@ function genderBlock(s, data) {
     return { pid, name: p.shortName ?? p.name, color: p.color, m, f, gap: m - f };
   }).sort((a, b) => (b.m + b.f) - (a.m + a.f)).slice(0, 6);
 
-  const body = rows.map((r) => `
-    <div class="gaprow">
+  const body = rows.map((r) => {
+    const L = F.genderLean(r.m, r.f);
+    return `<div class="gaprow">
       <span class="ct-n" style="color:${r.color}">${esc(r.name)}</span>
-      <span class="g-v g-m">男 ${r.m.toFixed(1)}</span>
-      <span class="g-v g-f">女 ${r.f.toFixed(1)}</span>
-      <span class="g-v ${Math.abs(r.gap) > 4 ? 'tone-warn' : 'muted'}">${r.gap >= 0 ? '+' : ''}${r.gap.toFixed(1)}</span>
-    </div>`).join('');
+      <span class="g-lean ${L.cls}">${esc(L.text)}</span>
+      <span class="g-raw">男 ${r.m.toFixed(1)}　女 ${r.f.toFixed(1)}</span>
+    </div>`;
+  }).join('');
 
   const G = data.pops.gender;
   const worst = rows.slice().sort((a, b) => Math.abs(b.gap) - Math.abs(a.gap))[0];
+  const wl = worst ? F.genderLean(worst.m, worst.f) : null;
   return card('男女的差距', body + `
     <div class="xs muted" style="margin-top:8px;line-height:1.8">
-      落差最大的是${esc(worst?.name ?? '')}，相差 ${Math.abs(worst?.gap ?? 0).toFixed(1)} 個百分點。
+      每一列寫的是哪一邊比較挺、差幾個百分點：${esc(wl?.text ?? '')}就是說
+      ${esc(worst?.name ?? '')}在${wl?.side === 'male' ? '男性' : '女性'}那邊多拿了
+      ${(wl?.amount ?? 0).toFixed(1)} 個百分點。<br>
       這道落差在青年世代會被放大到 ${((G.gapByGeneration?.youth ?? 1.75)).toFixed(2)} 倍，
       到了樂齡世代則縮到 ${((G.gapByGeneration?.senior ?? 0.45)).toFixed(2)} 倍——
       也就是說，這件事是新的，而且還在擴大。

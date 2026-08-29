@@ -97,5 +97,50 @@ for (const l of data.elections.legislatorDistricts) for (const p of l.parts) cov
 const badCov = Object.entries(cov).filter(([, v]) => Math.abs(v - 1) > 0.08);
 ok(badCov.length === 0, `所有一般選區的權重加總都接近 1（異常 ${badCov.length} 個）`);
 
+
+/* ─────────── v0.5.2：開完票之後不能再被問一次 ─────────── */
+console.log('\n── 選舉季的收尾 ──');
+const mkE = (seed) => createGame(data, {
+  seedStr: seed, name: '王明德', gender: 'x', startId: 'aide',
+  backgroundId: 'local', education: '大學', homeDistrict: 'TNN-04', party: 'PDA',
+  ideology: {}, china: {},
+});
+{
+  const s2 = mkE('DONE1');
+  s2.meta.year = 2026; s2.meta.month = 11; s2.meta.scale = 'week';
+  const sched = { year: 2026, month: 11 };
+  const run = { type: 'village', scopeId: s2.player.homeDistrict, name: '里長', level: { deposit: 0 } };
+  s2.election = { phase: 'campaign', sched, run, weeksLeft: 0 };
+  const outcome = { won: true, results: [{ candidate: { isPlayer: true, name: s2.player.name }, votes: 1200, share: 0.42 }] };
+  E.applyResult(s2, data, run, outcome, sched);
+  ok(s2.election === null, '結算之後 election 被清掉');
+  ok(s2.flags['elecDone_2026'] === true, '2026 年的選舉被標記成已經結束');
+  ok(!('elecDone_undefined' in s2.flags), '不會寫出 elecDone_undefined 這種旗標');
+  ok(s2.player.role === 'village', `當選之後身分變成里長：${s2.player.role}`);
+
+  // 模擬 checkElection 的判斷：同一年不該再被問第二次
+  const wouldAskAgain = (st) => {
+    const { months, sched: sc } = E.monthsUntilElection(st, data);
+    if (!sc) return false;
+    if (st.election) return false;
+    return months !== null && months <= 2 && st.meta.scale === 'week' && !st.flags['elecDone_' + sc.year];
+  };
+  ok(!wouldAskAgain(s2), '開完票的下一週不會再跳一次「是否參選」');
+
+  // 沒有結算過的世界仍然應該問
+  const s3 = mkE('DONE2');
+  s3.meta.year = 2026; s3.meta.month = 11; s3.meta.scale = 'week'; s3.election = null;
+  const nxt = E.monthsUntilElection(s3, data);
+  ok(nxt.sched ? !s3.flags['elecDone_' + nxt.sched.year] : true, '還沒選過的年度不會被誤標成已結束');
+
+  // 落選也一樣要收尾
+  const s4 = mkE('DONE3');
+  s4.election = { phase: 'campaign', sched, run, weeksLeft: 0 };
+  E.applyResult(s4, data, run,
+    { won: false, results: [{ candidate: { isPlayer: true }, votes: 300, share: 0.11 }] }, sched);
+  ok(s4.flags['elecDone_2026'] === true, '落選同樣會結束這一年的選舉季');
+  ok(!wouldAskAgain(s4), '落選之後也不會再被問一次');
+}
+
 console.log(fails ? `\n${fails} 項失敗` : '\n選舉系統全部通過');
 process.exit(fails ? 1 : 0);

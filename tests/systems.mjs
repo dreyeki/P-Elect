@@ -432,6 +432,16 @@ const gs = s.flags.genderSupport;
 ok(gs && gs.male && gs.female, '支持度分男女兩份算出來了');
 const maxGap = Math.max(...data.partyIds.map((p) => Math.abs((gs.male[p] ?? 0) - (gs.female[p] ?? 0)))) * 100;
 ok(maxGap > 1, `男女支持度最大落差 ${maxGap.toFixed(2)} 個百分點`);
+// 呈現方式：玩家看到的是「哪一邊比較挺、差多少」，不是兩個要自己相減的數字
+const F = await import('../src/util/format.js');
+ok(F.genderLean(46.9, 52.4).text === '女+5.5', `女性較挺寫成「${F.genderLean(46.9, 52.4).text}」`);
+ok(F.genderLean(54.0, 46.0).text === '男+8.0', `男性較挺寫成「${F.genderLean(54.0, 46.0).text}」`);
+ok(F.genderLean(30.1, 30.2).text === '幾無差異', '差距小到看不出來就不給方向');
+ok(F.genderLean(46.9, 52.4).cls === 'g-f' && F.genderLean(54.0, 46.0).cls === 'g-m',
+  '兩個方向用不同顏色標示');
+const leansAll = data.partyIds.map((pid) => F.genderLean((gs.male[pid] ?? 0) * 100, (gs.female[pid] ?? 0) * 100));
+ok(leansAll.every((L) => /^(男|女)\+\d+\.\d$|^幾無差異$/.test(L.text)),
+  `實際跑出來的七個政黨都寫得出來：${leansAll.map((L) => L.text).join('、')}`);
 ok(Object.keys(s.flags.chinaMood).length === 7, '兩岸七個維度都有全國讀數');
 const reasons = new Set();
 for (let i = 0; i < s.pops.n; i += 17) reasons.add(s.pops.chinaReason[i]);
@@ -452,6 +462,42 @@ if (idPoll) ok(idPoll.extra.china.length === 7 && idPoll.extra.reasons.length ==
 if (ctPoll) ok(ctPoll.extra.groups.length === 9, '燦爛島的交叉表有九個族群');
 const withMin = (s.polls ?? []).find((x) => x.ministers?.length);
 ok(withMin && withMin.ministers.length === 18, '部會首長的滿意度也是問出來的，一共十八個部會');
+
+// 九種題組的欄位都要齊全，畫面才畫得出來。
+// 政智選研每六回合才發一次，靠實機瀏覽不一定碰得到，所以在這裡逐一產生驗證。
+const { makePoll } = Poll;
+const { biWord } = await import('../src/util/scale.js');
+const shapeBad = [];
+const need = {
+  crosstab: (e) => e.groups?.length === 9 && e.groups.every((g) => g.name && g.top != null
+    && Number.isFinite(g.topShare) && Number.isFinite(g.share) && Number.isFinite(g.turnout)),
+  issueSalience: (e) => e.rows?.length >= 5 && e.rows.every((r) => r.name && Number.isFinite(r.pct)),
+  identity: (e) => e.identity?.length === 4 && e.identity.every((x) => x.id && Number.isFinite(x.pct))
+    && e.china?.length === 7 && e.china.every((d) => d.negName && d.posName && Number.isFinite(d.value))
+    && e.reasons?.length === 5 && e.reasons.every((r) => r.name && Number.isFinite(r.pct)),
+  genderAge: (e) => e.rows?.length && e.rows.every((r) => r.name && Number.isFinite(r.male) && Number.isFinite(r.female))
+    && e.youthGap && Number.isFinite(e.youthGap.gap),
+  regionBreak: (e) => e.rows?.length === 2 && e.rows.every((r) => r.label && Number.isFinite(r.topShare)),
+  headToHead: (e) => e.rows?.length === 2 && e.rows.every((r) => r.name && Number.isFinite(r.pct)),
+  trend: (e) => e.rows?.length && e.rows.every((r) => r.name && Number.isFinite(r.now) && Number.isFinite(r.delta)),
+  quickTake: (e) => typeof e.question === 'string' && Number.isFinite(e.yes),
+  openWeb: (e) => typeof e.warning === 'string' && e.warning.length > 10,
+};
+for (const ps of data.pollsters.pollsters) {
+  const poll = makePoll(s, data, new Rng(77, ps.id.length), ps, 'nation', null, false);
+  const e = poll.extra;
+  if (!e || e.kind !== ps.specialty.id) { shapeBad.push(`${ps.short} 沒有產出 ${ps.specialty.id}`); continue; }
+  if (!need[e.kind](e)) shapeBad.push(`${ps.short} 的 ${e.kind} 欄位不齊`);
+}
+shapeBad.length ? ok(false, `題組欄位有問題：${shapeBad.join('；')}`)
+  : ok(true, `九家民調的招牌題組欄位全部齊全，畫面畫得出來`);
+
+// 國家認同那一份會用四字語詞呈現兩岸七維，刻度名稱要對得上
+const zz = data.pollsters.pollsters.find((x) => x.specialty.id === 'identity');
+const zPoll = makePoll(s, data, new Rng(5, 1), zz, 'nation', null, false);
+const cnWords = zPoll.extra.china.map((d) => biWord('cn' + d.id.charAt(0).toUpperCase() + d.id.slice(1), d.value));
+ok(cnWords.every((w) => [...w].length === 4),
+  `兩岸七維都對得上四字刻度：${cnWords.join('、')}`);
 
 console.log(fails ? `\n${fails} 項失敗` : '\n新系統全部通過');
 process.exit(fails ? 1 : 0);

@@ -410,8 +410,14 @@ export function resolvePrimary(state, data, pri, rng) {
   };
 }
 
-/** 選後結算 */
-export function applyResult(state, data, run, outcome) {
+/**
+ * 選後結算。
+ *
+ * sched 一定要傳進來：這個函式的最後一行會把 state.election 清成 null，
+ * 呼叫端如果想在之後才去讀 state.election.sched.year 就只會拿到 undefined，
+ * 那一年的旗標寫不出去，玩家開完票的下一週又會被問一次要不要參選。
+ */
+export function applyResult(state, data, run, outcome, sched = null) {
   const p = state.player;
   if (outcome.won) {
     p.role = run.type === 'councilor' ? 'councilor' : run.type === 'legislator' ? 'legislator'
@@ -430,6 +436,9 @@ export function applyResult(state, data, run, outcome) {
   if (my && my.share >= data.elections.subsidyThreshold) {
     state.finance.campaign += my.votes * data.elections.subsidyPerVote;
   }
+  // 這一年的選舉到此為止，不管選上還是落選
+  const year = sched?.year ?? state.election?.sched?.year;
+  if (year != null) state.flags['elecDone_' + year] = true;
   state.election = null;
   return outcome;
 }

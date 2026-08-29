@@ -29,6 +29,7 @@ const D = {
   canvass: read('data/canvass.json'), favors: read('data/favors.json'),
   invitations: read('data/invitations.json'), semiconductor: read('data/semiconductor.json'),
   social: read('data/social.json'), reactions: read('data/reactions.json'),
+  firstTimes: read('data/firstTimes.json'),
 };
 D.byIdInv = Object.fromEntries(D.invitations.kinds.map((x) => [x.id, x]));
 D.byIdCorp = Object.fromEntries(D.corps.corporations.map((x) => [x.id, x]));
@@ -351,6 +352,50 @@ const costOk = D.starts.starts.some((x) => x.attrCost > 0)
 costOk ? pass('比較好的開局要付屬性點') : fail('開局選項沒有屬性成本');
 D.starts.defaults?.name === '龍天台' && D.starts.defaults?.age === 35
   ? pass('開局預設為龍天台、35 歲') : fail('開局預設值不符');
+
+// 每個行動的前兩次都要有專屬文本，每次三種變體
+const FT = D.firstTimes;
+const actionIds = ['canvass', 'theory', 'invitations', 'livestream', 'streetSpeech', 'talkshow',
+  'showPrep', 'presser', 'fundraise', 'commissionPoll', 'faction', 'trainStaff', 'draftLaw',
+  'prepQuestion', 'visit', 'setImage', 'retire', 'dealmaking'];
+const ftMiss = actionIds.filter((id) => !FT.actions[id]);
+ftMiss.length ? fail(`${ftMiss.length} 個行動沒有第一次的文本：${ftMiss.join('、')}`)
+  : pass(`全部 ${actionIds.length} 個行動都有專屬的第一次文本`);
+
+let ftBad = [], ftTotal = 0;
+for (const [id, pack] of Object.entries(FT.actions)) {
+  const occ = Object.keys(pack).filter((k) => /^\d+$/.test(k));
+  // 退出政壇是終局，同一局裡不會有第二次，所以只需要第一次
+  const want = id === 'retire' ? 1 : FT.occurrences;
+  if (occ.length !== want) ftBad.push(`${id} 有 ${occ.length} 次而不是 ${want} 次`);
+  for (const o of occ) {
+    if (pack[o].length !== FT.variants) ftBad.push(`${id} 第 ${o} 次只有 ${pack[o].length} 種變體`);
+    ftTotal += pack[o].length;
+    if (new Set(pack[o]).size !== pack[o].length) ftBad.push(`${id} 第 ${o} 次的變體有重複`);
+  }
+  if (!pack.name) ftBad.push(`${id} 沒有 name`);
+}
+ftBad.length ? fail(`第一次文本的結構有問題：${ftBad.slice(0, 4).join('；')}`)
+  : pass(`第一次文本共 ${ftTotal} 段，每次都有 ${FT.variants} 種不重複的變體`);
+
+// 同一個行動的六段文本彼此不能重複
+let ftDup = [];
+for (const [id, pack] of Object.entries(FT.actions)) {
+  const all = Object.keys(pack).filter((k) => /^\d+$/.test(k)).flatMap((o) => pack[o]);
+  if (new Set(all).size !== all.length) ftDup.push(id);
+}
+ftDup.length ? fail(`這些行動的第一次與第二次有重複的文本：${ftDup.join('、')}`)
+  : pass('每個行動的第一次與第二次沒有任何一段重複');
+
+// 句長
+const ftShort = [];
+for (const pack of Object.values(FT.actions)) {
+  for (const o of Object.keys(pack).filter((k) => /^\d+$/.test(k))) {
+    for (const t of pack[o]) for (const sen of sentences(t)) if (len(sen) < 7) ftShort.push(sen);
+  }
+}
+ftShort.length ? fail(`第一次文本有 ${ftShort.length} 個句子少於 7 字：${ftShort.slice(0, 3).join('、')}`)
+  : pass('第一次文本的句長全部達標');
 
 // 政黨路線的屬性成本要有差別，否則「選比較好的開局要付代價」這件事等於沒做
 const pcCosts = D.starts.partyChoice.map((c) => c.attrCost ?? 0);

@@ -193,27 +193,31 @@ function actionList(s, data) {
     <div class="xs muted" style="margin-top:8px;line-height:1.6">${esc(hint)}</div>
     ${gigBlock}
     ${lockedBlock}
-    <button class="btn primary full" data-act="end-turn" style="margin-top:10px">${esc(endTurnLabel(s, data, left, pendCount(s)))}</button>`;
-}
-
-function pendCount(s) {
-  return (s.pendingEvents?.length ?? 0) + (s.favorPending?.length ?? 0)
-    + (s.mediaAttack ? 1 : 0) + (s.flags.graftCase ? 1 : 0);
+    <button class="btn primary full" data-act="end-turn" style="margin-top:10px">${esc(endTurnLabel(s, data, left))}</button>`;
 }
 
 /**
  * 結束回合的按鈕不該永遠寫同一句話。
- * 還有事沒處理、還有行動點沒用、在住院、在選戰倒數——
+ * 在住院、在選戰倒數、還有行動點沒用——
  * 這幾種情況下玩家按下去的意義完全不同，那句話就該不一樣。
+ *
+ * 刻意不提「還有幾件事沒處理」：待決事項就在畫面上方列著，
+ * 在按鈕上再念一次只會讓人覺得被催促。
  */
-export function endTurnLabel(s, data, left, pend) {
+export function endTurnLabel(s, data, left) {
   if (s.player.hospitalTurns > 0) return '躺著讓時間過去';
   if (s.election?.phase === 'campaign') {
     const w = s.election.weeksLeft ?? 0;
     return w <= 1 ? '撐完投票前的最後一週' : `結束這一週（投票倒數 ${w} 週）`;
   }
-  if (s.meta.scale === 'week') return '結束這一週';
-  if (pend > 0) return `還有 ${pend} 件事沒處理，直接結束這個月`;
+  // 選戰期間一回合是一週。這一段要放在所有以「月」為單位的說法前面，
+  // 否則玩家會在只剩三週的時候看到「結束十二月」。
+  const week = s.meta.scale === 'week';
+  if (week) {
+    if (left >= 2) return `還剩 ${left} 點沒用，結束這一週`;
+    if ((s.player.fatigueRaw ?? 0) >= 60) return '真的撐不住了，結束這一週';
+    return '結束這一週';
+  }
   if (left >= 2) return `還剩 ${left} 點沒用，就這樣結束`;
   if (left === 1) return '把剩下的一點時間留給自己';
   if ((s.player.fatigueRaw ?? 0) >= 60) return '真的撐不住了，結束這個月';

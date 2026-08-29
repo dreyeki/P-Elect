@@ -1,5 +1,6 @@
 // @ts-check
 import { clamp, clamp05 } from '../core/Formula.js';
+import { take as takeFirst } from './FirstTimeSystem.js';
 
 /**
  * 行動選單。
@@ -89,15 +90,20 @@ export function lockedActions(state, data) {
   return ACTIONS.map((a) => ({ a, st: actionState(state, data, a) })).filter((x) => !x.st.unlocked);
 }
 
+/**
+ * 每回合的行動點。
+ *
+ * 固定兩點，不因為職位、團隊、體力或疲勞而變動。
+ * 一個縣市長一個月能親自做的事情，並不會比一個素人多——
+ * 差別在於他做的每一件事份量比較重，而不是他能做比較多件。
+ * 把這個數字鎖死，玩家的每一次取捨才是真的取捨。
+ *
+ * 硬撐的空間留在 maxAPWithOverdraft，那是另一回事：
+ * 那不是你變得比較有時間，是你把身體先借出去用。
+ */
 export function apOf(state, data) {
-  const T = data.tuning?.actionPoints ?? {};
-  const p = state.player;
-  let ap = data.tuning?.start?.baseAP ?? data.meta.baseAP;
-  if (['mayor', 'minister', 'president'].includes(p.role)) ap += T.bonusMayor ?? 1;
-  if (state.meta.scale === 'week' && state.team.some((t) => t.role === 'manager')) ap += T.bonusCampaignManager ?? 1;
-  if (p.attrs.stamina >= 5) ap += T.bonusStamina5 ?? 1;
-  if (fatigueLevel(state) >= 4) ap -= T.penaltyFatigue4 ?? 1;
-  return Math.max(1, ap);
+  return Math.max(1, data.tuning?.actionPoints?.fixed
+    ?? data.tuning?.start?.baseAP ?? data.meta.baseAP);
 }
 
 /** 可以硬撐的上限：行動點用完之後還能再借幾點 */
@@ -184,6 +190,13 @@ export function spendAP(state, data, ap, fatigue = 0, extra = {}) {
   if (p.apUsed + ap > hardMax) {
     return { ok: false, msg: '真的撐不住了，這個月再怎麼硬排也排不下。' };
   }
+  // 行動點真的被扣掉的這一刻，才算這個行動做過一次。
+  // 打開選單看一看不算——deferred 的行動走的是 commit()，也會到這裡。
+  const first = extra.action ? takeFirst(state, data, extra.action.id) : null;
+  // 放進 flags 讓任何一個結果視窗都撿得到——deferred 的行動有八個不同的收尾點，
+  // 逐一把回傳值接過去只會漏掉其中幾個。
+  if (first) state.flags.pendingFirst = first;
+
   const before = Math.max(0, p.apUsed - normal);
   p.apUsed += ap;
   const after = Math.max(0, p.apUsed - normal);
@@ -198,7 +211,7 @@ export function spendAP(state, data, ap, fatigue = 0, extra = {}) {
     }
     p.fatigueRaw = clamp(p.fatigueRaw + overdraftHit, 0, 120);
   }
-  return { ok: true, over, overdraftHit, ...extra };
+  return { ok: true, over, overdraftHit, first, ...extra };
 }
 
 /**

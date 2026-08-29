@@ -6,7 +6,7 @@ const FILES = [
   'tags', 'staffRoles', 'donations', 'pollsters', 'shows', 'constitution',
   'tuning', 'theories', 'images', 'cabinet',
   'china', 'people', 'canvass', 'favors', 'invitations', 'semiconductor', 'social',
-  'reactions',
+  'reactions', 'firstTimes',
 ];
 const EVENT_FILES = ['economy', 'energy', 'crossStrait', 'disaster', 'society', 'scandal', 'party', 'personal'];
 
