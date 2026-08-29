@@ -81,20 +81,24 @@ store.set('p-election:setup', '這不是 JSON');
 initDraft(data);
 ok(setupDraft.name === '龍天台', '壞掉的紀錄不會讓建角畫面壞掉');
 
-/* ── 4. 政黨路線真的會扣屬性點 ── */
+/* ── 4. 屬性成本只看起點與出身，選政黨不收錢 ── */
 store.clear();
 initDraft(data);
 setupDraft.startId = 'rookie'; setupDraft.backgroundId = 'activist';
-setupDraft.partyMode = null;
-const capNone = attrBudget(data).cap;
-setupDraft.partyMode = 'major';
-const capMajor = attrBudget(data).cap;
-setupDraft.partyMode = 'independent';
-const capIndep = attrBudget(data).cap;
-ok(capMajor === capNone - 2, `選大黨路線要付 2 點：${capNone} → ${capMajor}`);
-ok(capIndep === capNone, `無黨籍不用付：${capIndep}`);
-setupDraft.startId = 'aide'; setupDraft.backgroundId = 'heir'; setupDraft.partyMode = 'major';
-ok(attrBudget(data).cap === 16 - 3 - 4 - 2, `最舒服的開局合計扣 9 點，剩 ${attrBudget(data).cap} 點`);
+const capBase = attrBudget(data).cap;
+ok(capBase === 16, `素人加社運出身不扣點，全額 ${capBase} 點`);
+setupDraft.startId = 'aide';
+ok(attrBudget(data).cap === 16 - 3, `議助起點扣 3 點，剩 ${attrBudget(data).cap} 點`);
+setupDraft.backgroundId = 'heir';
+ok(attrBudget(data).cap === 16 - 3 - 4, `再加企業二代共扣 7 點，剩 ${attrBudget(data).cap} 點`);
+// 政黨在建角階段完全不影響額度
+const before = attrBudget(data).cap;
+for (const mode of ['major', 'minor', 'independent', null]) {
+  setupDraft.partyMode = mode;
+  if (attrBudget(data).cap !== before) { ok(false, `選 ${mode} 竟然改變了屬性額度`); break; }
+}
+ok(attrBudget(data).cap === before, '不管選哪一種政黨，屬性額度都不變');
+ok(data.starts.partyChoice.every((c) => (c.attrCost ?? 0) === 0), '三種政黨選項的 attrCost 都是零');
 
 /* ── 5. 新開一局要立刻存得起來 ── */
 store.clear();

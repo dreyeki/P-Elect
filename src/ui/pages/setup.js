@@ -74,16 +74,18 @@ export function initDraft(data, { usePrefs = true } = {}) {
 
 /**
  * 開局選項要付的屬性點。
- * 有職位、有政黨、有錢的開局比較舒服，那份舒服要從你本人的能力裡扣。
- * 這樣所有開局才會站在同一條線上，而不是有一個明顯的最佳解。
+ * 有職位、有錢的開局比較舒服，那份舒服要從你本人的能力裡扣。
+ *
+ * 政黨不算在裡面。加入哪一個黨是開局之後的第一個決定，不是建角的一部分——
+ * 而且那個決定的代價本來就寫在遊戲裡：大黨要排隊，小黨天花板低。
+ * 再從屬性點扣一次是收兩次錢。
  */
 export function attrBudget(data) {
   const d = setupDraft;
   const total = data.tuning?.start?.attributePoints ?? 16;
   const st = data.starts.starts.find((x) => x.id === d.startId);
   const bg = data.backgrounds.backgrounds.find((x) => x.id === d.backgroundId);
-  const pc = data.starts.partyChoice.find((x) => x.id === d.partyMode);
-  const cost = (st?.attrCost ?? 0) + (bg?.attrCost ?? 0) + (pc?.attrCost ?? 0);
+  const cost = (st?.attrCost ?? 0) + (bg?.attrCost ?? 0);
   return { total, cost, cap: Math.max(6, total - cost) };
 }
 
@@ -98,7 +100,7 @@ export function setupPage(data) {
   const nav = `<div class="btn-row" style="margin-bottom:14px">${steps.map((n, i) =>
     `<button class="btn ${d.step === i ? 'primary' : 'ghost'}" data-act="setup-step" data-id="${i}">${n}</button>`).join('')}</div>`;
   const body = [stepStart, stepBg, stepAttrs, stepHome, stepIdeo, stepSeed][d.step](data);
-  const ready = d.backgroundId && d.homeDistrict && d.name.trim() && d.partyMode;
+  const ready = d.backgroundId && d.homeDistrict && d.name.trim();
   return html`
     <div style="text-align:center;margin-bottom:16px">
       <div style="font-size:24px;font-weight:800;letter-spacing:.06em">選舉人生</div>
@@ -122,7 +124,6 @@ export function setupPage(data) {
 function missingText(d) {
   const miss = [];
   if (!d.name.trim()) miss.push('姓名');
-  if (!d.partyMode) miss.push('政黨路線');
   if (!d.backgroundId) miss.push('出身背景');
   if (!d.homeDistrict) miss.push('家鄉選區');
   return `還沒有決定：${miss.join('、')}。`;
@@ -168,20 +169,6 @@ function stepStart(data) {
         </select></div>
       <div class="xs muted" style="margin-top:6px;line-height:1.7">
         年齡會影響體力恢復與住院風險，也決定「青年世代」這個形象你還掛不掛得上去。
-      </div>
-    </div>
-    <div class="setup-step">
-      <h3>你打算靠哪一邊</h3>
-      <div class="pick">${raw(data.starts.partyChoice.map((c) => `
-        <button data-act="setup-partymode" data-id="${esc(c.id)}" class="${d.partyMode === c.id ? 'on' : ''}">
-          <div class="pt">${esc(c.name)}
-            ${c.attrCost ? `<span class="chip warn xs">屬性 −${c.attrCost}</span>` : ''}</div>
-          <div class="pd">${esc(c.desc)}</div>
-          <div class="pd" style="margin-top:4px;color:var(--fg-2)">${esc(c.costNote ?? '')}</div>
-        </button>`).join(''))}</div>
-      <div class="xs muted" style="margin-top:10px;line-height:1.75">
-        這裡決定的是路線，開局之後還要再挑是哪一個黨。
-        大黨的組織與提名管道很值錢，值錢的東西要用別的地方換——所以它先從你的屬性點裡扣。
       </div>
     </div>`;
 }
@@ -312,13 +299,13 @@ function stepSeed(data) {
       ${row('姓名', esc(d.name || '（未填）'))}
       ${row('起點', esc(data.starts.starts.find((s) => s.id === d.startId)?.name ?? ''))}
       ${row('出身', esc(data.backgrounds.backgrounds.find((b) => b.id === d.backgroundId)?.name ?? '（未選）'))}
-      ${row('政黨路線', esc(data.starts.partyChoice.find((c) => c.id === d.partyMode)?.name ?? '（未選）'))}
       ${row('屬性點', `${Object.values(d.attrs).reduce((a, b) => a + b, 0)} / ${attrBudget(data).cap}`)}
       ${row('家鄉', esc(data.byId.district[d.homeDistrict]?.name ?? '（未選）'))}
       ${row('種子', esc(d.seedStr))}
     </div>
     <div class="xs muted" style="margin-top:10px;line-height:1.75">
       開局後的第一件事，是決定要加入大黨、加入小黨，還是誰都不靠。
+      那個決定不花屬性點，但它會塑造你接下來八年的整個玩法。
     </div>
   </div>`;
 }

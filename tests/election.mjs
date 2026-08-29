@@ -6,6 +6,7 @@ const { createGame } = await import('../src/core/GameState.js');
 const { advance } = await import('../src/core/TurnEngine.js');
 const { initScales, word } = await import('../src/util/scale.js');
 const E = await import('../src/systems/ElectionSystem.js');
+const Ending = await import('../src/systems/EndingSystem.js');
 const { Rng } = await import('../src/core/Rng.js');
 const { clamp05 } = await import('../src/core/Formula.js');
 
@@ -140,6 +141,46 @@ const mkE = (seed) => createGame(data, {
     { won: false, results: [{ candidate: { isPlayer: true }, votes: 300, share: 0.11 }] }, sched);
   ok(s4.flags['elecDone_2026'] === true, '落選同樣會結束這一年的選舉季');
   ok(!wouldAskAgain(s4), '落選之後也不會再被問一次');
+}
+
+/* ─────────── v0.5.4：初選落敗之後的三條路 ─────────── */
+console.log('\n── 初選落敗之後 ──');
+{
+  const base = () => {
+    const g = mkE('QUIT');
+    g.meta.year = 2026; g.meta.month = 11; g.meta.scale = 'week';
+    g.election = {
+      phase: 'primary', sched: { year: 2026, month: 11 },
+      run: { type: 'councilor', name: '市議員', level: {} },
+      primaryWon: false,
+      primaryField: [{ name: '洪菁宜', isPlayer: false, share: 0.53 }, { name: g.player.name, isPlayer: true, share: 0.47 }],
+    };
+    return g;
+  };
+  // 留下來輔選
+  const a = base();
+  a.flags['elecDone_' + a.election.sched.year] = true;
+  E.afterPrimaryLoss(a, data, new Rng(1, 0));
+  a.election = null;
+  ok(a.flags['elecDone_2026'] === true && !a.flags.retired, '留下來輔選：選舉季收掉，人還在');
+
+  // 心灰意冷退出：選舉季要一起收掉，否則結算完還會被問一次要不要參選
+  const b = base();
+  b.flags['elecDone_' + b.election.sched.year] = true;
+  b.flags.quitAfterPrimary = true;
+  b.election = null;
+  const sum = Ending.summarize(b, data);
+  const ep = Ending.epilogue(b, data, sum, new Rng(2, 0));
+  ok(b.flags['elecDone_2026'] === true, '心灰意冷退出：這一年的選舉季也收掉了');
+  ok(sum && Ending.TIER_NAME[sum.tier], `結算得出等第：${Ending.TIER_NAME[sum.tier]}`);
+  ok(ep.paras.length > 0, `事後談有 ${ep.paras.length} 段`);
+  ok(b.flags.quitAfterPrimary === true, '結算頁看得到「是在開票那晚決定的」這個標記');
+  const wouldAsk = (st) => {
+    const { months, sched: sc } = E.monthsUntilElection(st, data);
+    if (!sc || st.election) return false;
+    return months !== null && months <= 2 && st.meta.scale === 'week' && !st.flags['elecDone_' + sc.year];
+  };
+  ok(!wouldAsk(b), '退出之後不會再被問一次要不要參選');
 }
 
 console.log(fails ? `\n${fails} 項失敗` : '\n選舉系統全部通過');

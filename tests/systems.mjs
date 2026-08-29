@@ -226,6 +226,17 @@ ok(sumGood.tier === 'legend', `做了很多事的人：「${Ending.TIER_NAME[sum
 ok(epGood.paras.every((p) => p.aligned), '有成就的事後談，每一段都往玩家相信的方向走');
 ok(!epGood.regret, '有成就就不會出現那句遺憾');
 
+// 一條立場都沒有的人也要有事後談，而且要讀得出來他是沒有立場而不是立場相反
+const sNo = mk();
+for (const ax of data.values.axes) sNo.player.ideology[ax.id] = 0;
+const sumNo = Ending.summarize(sNo, data);
+const epNo = Ending.epilogue(sNo, data, sumNo, new Rng(4, 0));
+ok(epNo.noConviction && epNo.paras.length === 3,
+  `沒有任何鮮明立場的人，事後談仍然有 ${epNo.paras.length} 段`);
+ok(epNo.paras.every((x) => x.noStance), '那幾段會標明「你從來沒有表示過意見」');
+ok(epNo.regret && epNo.regret.includes('轉台'),
+  '沒有立場的人拿到的是專屬的那一句遺憾，不是「我相信的不是這樣」');
+
 // 行動點超支
 s = mk();
 const ap = Char.apOf(s, data);

@@ -128,13 +128,23 @@ export function epilogue(state, data, sum, rng) {
   // 挑三條玩家立場最鮮明的軸來講
   const axes = data.values.axes
     .map((ax) => ({ ax, mine: p.ideology[ax.id] ?? 0 }))
-    .filter((x) => Math.abs(x.mine) >= 1)
+    .filter((x) => Math.abs(x.mine) >= 1 && AXIS_STORY[x.ax.id])
     .sort((a, b) => Math.abs(b.mine) - Math.abs(a.mine))
     .slice(0, 3);
 
+  // 一條鮮明的軸都沒有——這種人也是存在的，而且不少。
+  // 不要替他編出立場來，改成講這個國家在他不表態的那些年裡自己走到哪裡去了。
+  const noConviction = axes.length === 0;
+  const drifted = noConviction
+    ? data.values.axes
+      .map((ax) => ({ ax, moved: (sum.valueEnd[ax.id] ?? 0) - (sum.valueStart[ax.id] ?? 0) }))
+      .filter((x) => AXIS_STORY[x.ax.id])
+      .sort((a, b) => Math.abs(b.moved) - Math.abs(a.moved))
+      .slice(0, 3)
+    : [];
+
   for (const { ax, mine } of axes) {
     const story = AXIS_STORY[ax.id];
-    if (!story) continue;
     // 有成就 → 往玩家的方向；沒成就 → 往相反方向
     const dir = goodEnding ? Math.sign(mine) : -Math.sign(mine);
     const lines = dir > 0 ? story.pos : story.neg;
@@ -142,6 +152,15 @@ export function epilogue(state, data, sum, rng) {
       axis: ax.id, axisName: dir > 0 ? ax.posName : ax.negName,
       aligned: dir === Math.sign(mine),
       text: rng.pick(lines),
+    });
+  }
+  for (const { ax, moved } of drifted) {
+    const story = AXIS_STORY[ax.id];
+    const dir = moved >= 0 ? 1 : -1;
+    paras.push({
+      axis: ax.id, axisName: dir > 0 ? ax.posName : ax.negName,
+      aligned: false, noStance: true,
+      text: rng.pick(dir > 0 ? story.pos : story.neg),
     });
   }
 
@@ -159,11 +178,13 @@ export function epilogue(state, data, sum, rng) {
       ? '他推過的那幾條法還在運作，只是條文上早就看不出來是誰提的了。'
       : '他當年在意的那些事，後來由別人以完全相反的方式解決了。';
 
-  const regret = !goodEnding && axes.length
-    ? `他偶爾會在電視上看到這些新聞。年輕的時候他相信的不是這樣，但他已經沒有位子可以說話了。`
-    : null;
+  const regret = noConviction
+    ? `他偶爾會在電視上看到這些新聞，然後轉台。這些事情往哪個方向走，他年輕的時候就沒有想過，現在更沒有理由開始想。`
+    : (!goodEnding && axes.length
+      ? `他偶爾會在電視上看到這些新聞。年輕的時候他相信的不是這樣，但他已經沒有位子可以說話了。`
+      : null);
 
-  return { opener, paras, closer, regret, goodEnding };
+  return { opener, paras, closer, regret, goodEnding, noConviction };
 }
 
 export const TIER_NAME = {

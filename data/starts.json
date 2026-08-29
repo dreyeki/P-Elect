@@ -17,7 +17,7 @@
       "partyPrestige": 0,
       "grassrootsHome": 1,
       "factionFavor": 0,
-      "path": "從里長到立委，每步登高都舉步維艱",
+      "path": "里長 → 議員 → 立委 → 縣市長 → 總統，全程約十五到二十年",
       "attrCost": 0,
       "costNote": "沒有任何人幫你，所以也沒有任何東西要先付出去。"
     },
@@ -57,8 +57,8 @@
         "campaignFunds": 150000,
         "grassrootsBonus": 1
       },
-      "attrCost": 2,
-      "costNote": "大黨的組織與提名管道很值錢，值錢的東西要用別的地方換。"
+      "attrCost": 0,
+      "costNote": "加入哪一個黨不花屬性點。這個決定的代價寫在遊戲本身：大黨要排隊，小黨天花板低。"
     },
     {
       "id": "minor",
@@ -76,8 +76,8 @@
         "campaignFunds": 50000,
         "fame": 1
       },
-      "attrCost": 1,
-      "costNote": "小黨給你的舞台比實力大一點，這個差額要先付。"
+      "attrCost": 0,
+      "costNote": "加入哪一個黨不花屬性點。這個決定的代價寫在遊戲本身：大黨要排隊，小黨天花板低。"
     },
     {
       "id": "independent",
@@ -90,7 +90,7 @@
         "grassrootsBonus": 0
       },
       "attrCost": 0,
-      "costNote": "沒有人給你任何東西，所以你什麼都不必先付。"
+      "costNote": "加入哪一個黨不花屬性點。這個決定的代價寫在遊戲本身：大黨要排隊，小黨天花板低。"
     }
   ],
   "defaults": {
@@ -102,5 +102,5 @@
     "startId": "rookie",
     "homeRegion": "KHH"
   },
-  "_note": "starts[].attrCost、backgrounds[].attrCost 與 partyChoice[].attrCost 會從屬性點數的總額裡先扣掉。選一個比較舒服的開局，代價是你本人比較弱——這樣所有開局才會站在同一條線上。"
+  "_note": "starts[].attrCost 與 backgrounds[].attrCost 會從屬性點數的總額裡先扣掉。選一個比較舒服的開局，代價是你本人比較弱——這樣所有開局才會站在同一條線上。政黨不在這個清單裡：加入哪一個黨是開局之後的第一個決定，不是建角的一部分。"
 }

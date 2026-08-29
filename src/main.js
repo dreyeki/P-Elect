@@ -115,18 +115,6 @@ function handle(act, ds) {
     'setup-edu': () => { setupDraft.education = ds.value; },
     'setup-region': () => { setupDraft.homeRegion = ds.value; setupDraft.homeDistrict = null; reSetup(); },
     'setup-age': () => { setupDraft.age = +ds.value; reSetup(); },
-    'setup-partymode': () => {
-      setupDraft.partyMode = ds.id;
-      // 路線換了，屬性額度也會跟著變，超支的話從最高的那幾項退回來
-      const cap = attrBudget(DATA).cap;
-      let used = Object.values(setupDraft.attrs).reduce((a, b) => a + b, 0);
-      while (used > cap) {
-        const k = ATTRS.map(([x]) => x).sort((a, b) => setupDraft.attrs[b] - setupDraft.attrs[a])[0];
-        if (setupDraft.attrs[k] <= 0) break;
-        setupDraft.attrs[k] -= 1; used -= 1;
-      }
-      reSetup();
-    },
     'setup-reset': () => {
       SaveMgr.clearSetupPrefs();
       initDraft(DATA, { usePrefs: false });
@@ -444,6 +432,15 @@ function handle(act, ds) {
       render();
     },
     'primary-bolt': boltParty,
+    'primary-quit': () => openPrimaryQuit(),
+    'confirm-primary-quit': () => {
+      // 初選落敗之後退出，這一年的選舉季也要一起收掉，
+      // 不然結算頁看完之後排程還會再問一次要不要參選。
+      s.flags['elecDone_' + s.election.sched.year] = true;
+      s.flags.quitAfterPrimary = true;
+      s.election = null;
+      doRetire();
+    },
     'primary-next': () => {
       s.election.phase = 'campaign';
       s.finance.campaign -= s.election.run.level.deposit ?? 0;
@@ -509,13 +506,11 @@ function autosave(okMsg) {
 
 function askPartyChoice() {
   const s = app.state;
-  const mode = setupDraft.partyMode;
   const last = setupDraft.party;
-  // 建角時已經選過路線的話，這裡就只問是哪一個黨
-  const routes = mode ? DATA.starts.partyChoice.filter((c) => c.id === mode) : DATA.starts.partyChoice;
+  const routes = DATA.starts.partyChoice;
   const opts = routes.map((c) => {
     if (c.id === 'independent') {
-      return `<button class="opt ${last === null && mode === 'independent' ? 'on' : ''}" data-act="choose-party" data-pid="">
+      return `<button class="opt ${last === null && setupDraft.chosePartyOnce ? 'on' : ''}" data-act="choose-party" data-pid="">
         <div class="opt-t">${esc(c.name)}</div><div class="opt-h">${esc(c.desc)}</div></button>`;
     }
     return c.options.map((pid) => {
@@ -525,9 +520,8 @@ function askPartyChoice() {
         <div class="opt-h">${esc(c.name)}｜${esc(c.desc)}</div></button>`;
     }).join('');
   }).join('');
-  const head = mode
-    ? `你在建角的時候選了「${esc(routes[0]?.name ?? '')}」這條路，現在要決定是哪一個。`
-    : '這個決定會塑造你接下來八年的整個玩法。大黨有資源但要排隊，小黨出頭快但天花板低，無黨籍什麼都得自己來。';
+  const head = '這個決定會塑造你接下來八年的整個玩法。'
+    + '大黨有資源但要排隊，小黨出頭快但天花板低，無黨籍什麼都得自己來。';
   openModal(`<div class="modal-h">你要靠哪一邊</div>
     <div class="modal-b">${head}</div>${opts}`);
   const orig = handle;
@@ -538,6 +532,7 @@ function askPartyChoice() {
     const pid = t.dataset.pid || null;
     joinParty(pid);
     setupDraft.party = pid;
+    setupDraft.chosePartyOnce = true;
     SaveMgr.saveSetupPrefs(setupDraft);
     autosave();
     closeModal(); render();
@@ -1656,6 +1651,29 @@ function openImage() {
 }
 
 /* ─────────── 退出政壇 ─────────── */
+/**
+ * 初選落敗之後的退場。
+ *
+ * 這一條路跟從行動選單走的退出政壇是同一個結算，
+ * 但講法不一樣：那邊是想清楚了才走，這邊是在開票那個晚上決定不做了。
+ * 多數真的離開的人是後面這一種。
+ */
+function openPrimaryQuit() {
+  const s = app.state;
+  const won = s.election?.primaryField?.find((x) => !x.isPlayer);
+  openModal(`<div class="modal-h">心灰意冷</div>
+    <div class="modal-b" style="line-height:1.95">
+      開票結束之後，服務處的人陸續走光了，只剩下最早跟著你的那兩三個還在收椅子。
+      你想起這幾年缺席的那些婚禮、那些沒有接的電話、那些講到一半就被打斷的話。
+      ${won ? `明天早上${esc(won.name)}會站在你原本要站的那個位置上，` : '明天早上有人會站在你原本要站的那個位置上，'}
+      而你要決定的是：還要不要再來一次。<br><br>
+      這個決定不能反悔。你會看到自己這些年的結算，
+      還有這個國家在你離開之後變成的樣子——不管你喜不喜歡那個樣子。
+    </div>
+    <button class="btn danger full" data-act="confirm-primary-quit">不選了，就到這裡</button>
+    <button class="btn ghost full" data-act="modal-close" style="margin-top:8px">先回去睡一覺再說</button>`);
+}
+
 function openRetire() {
   const s = app.state;
   openModal(`<div class="modal-h">退出政壇</div>
@@ -1687,7 +1705,7 @@ function endingPage(s) {
   const { sum, ep } = s.flags.retired;
   const paras = ep.paras.map((p) => `
     <div class="row" style="display:block">
-      <div class="xs muted">${esc(p.axisName)}</div>
+      <div class="xs muted">${esc(p.axisName)}${p.noStance ? '　<span class="xs">（你從來沒有表示過意見）</span>' : ''}</div>
       <div class="small" style="line-height:1.9;margin-top:4px;${p.aligned ? '' : 'color:var(--fg-2)'}">
         ${esc(p.text)}</div>
     </div>`).join('');
@@ -1708,6 +1726,12 @@ function endingPage(s) {
       <div class="word ${sum.tier === 'legend' ? 'tone-good' : sum.tier === 'forgotten' ? 'tone-bad' : ''}"
         style="font-size:19px;margin-top:6px">${esc(Ending.TIER_NAME[sum.tier])}</div>
     </div>
+
+    ${raw(s.flags.quitAfterPrimary ? card('', `<div class="small" style="line-height:2">
+      你是在初選開票的那個晚上決定不做了的。<br>
+      對外的說法是要把時間還給家人，那句話有一半是真的。
+      真正的原因你只跟收椅子的那兩個人講過，而他們到現在都沒有跟任何人提起。
+    </div>`) : '')}
 
     ${card('這些年', `
       ${row('從政年數', `<span class="num">${sum.years} 年</span>`)}

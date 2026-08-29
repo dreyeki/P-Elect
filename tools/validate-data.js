@@ -347,9 +347,8 @@ D.budget.specialBudgets.some((x) => x.id === 'SB_CASH2027')
 
 // 開局要付屬性點
 const costOk = D.starts.starts.some((x) => x.attrCost > 0)
-  && D.backgrounds.backgrounds.some((x) => x.attrCost > 0)
-  && D.starts.partyChoice.some((x) => x.attrCost > 0);
-costOk ? pass('比較好的開局要付屬性點') : fail('開局選項沒有屬性成本');
+  && D.backgrounds.backgrounds.some((x) => x.attrCost > 0);
+costOk ? pass('比較好的起點與出身要付屬性點') : fail('起點或出身沒有屬性成本');
 D.starts.defaults?.name === '龍天台' && D.starts.defaults?.age === 35
   ? pass('開局預設為龍天台、35 歲') : fail('開局預設值不符');
 
@@ -397,13 +396,10 @@ for (const pack of Object.values(FT.actions)) {
 ftShort.length ? fail(`第一次文本有 ${ftShort.length} 個句子少於 7 字：${ftShort.slice(0, 3).join('、')}`)
   : pass('第一次文本的句長全部達標');
 
-// 政黨路線的屬性成本要有差別，否則「選比較好的開局要付代價」這件事等於沒做
-const pcCosts = D.starts.partyChoice.map((c) => c.attrCost ?? 0);
-new Set(pcCosts).size > 1 && Math.max(...pcCosts) > 0
-  ? pass(`政黨路線的屬性成本有差別：${D.starts.partyChoice.map((c) => `${c.name} −${c.attrCost ?? 0}`).join('、')}`)
-  : fail('政黨路線沒有屬性成本差異');
-D.starts.partyChoice.every((c) => c.costNote)
-  ? pass('每一種政黨路線都寫了為什麼要付這個代價') : fail('政黨路線缺少 costNote');
+// 加入哪一個黨不收屬性點：那是開局之後的決定，代價寫在遊戲本身
+D.starts.partyChoice.every((c) => (c.attrCost ?? 0) === 0)
+  ? pass('選政黨不扣屬性點，代價寫在遊戲本身而不是建角畫面')
+  : fail('政黨選項仍在扣屬性點');
 
 // 幕僚的雷
 const gf = D.staffRoles.graft;

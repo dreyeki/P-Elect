@@ -116,6 +116,11 @@ function primaryPhase(s, data, e) {
       <div class="btn-row">
         <button class="btn" data-act="primary-accept">接受結果，留下來輔選</button>
         <button class="btn danger" data-act="primary-bolt">脫黨參選</button>
+      </div>
+      <button class="btn ghost full" data-act="primary-quit" style="margin-top:8px">心灰意冷</button>
+      <div class="xs muted" style="margin-top:8px;line-height:1.7">
+        沒有人規定你一定要繼續。有些人是在這種晚上決定不做了的，
+        而且他們多半不是輸給對手，是輸給那個要再來一次的念頭。
       </div>` : `<button class="btn primary full" data-act="primary-next">進入選戰</button>`)}`;
 }
 

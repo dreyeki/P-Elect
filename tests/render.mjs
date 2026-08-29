@@ -37,6 +37,26 @@ const cases = [
   ['data/world', () => dataPage(state, data, 'world')],
   ['data/history', () => dataPage(state, data, 'history')],
   ['data/semi', () => dataPage(state, data, 'semi')],
+  ['election/primaryLost', () => {
+    const saved = state.election;
+    state.election = {
+      phase: 'primary', sched: { year: 2026, month: 11 },
+      run: { type: 'councilor', name: '市議員', level: {} },
+      primaryWon: false,
+      primaryMsg: '你以 46.7% 落敗，洪菁宜拿到了提名。',
+      primaryField: [
+        { name: '洪菁宜', isPlayer: false, share: 0.533 },
+        { name: state.player.name, isPlayer: true, share: 0.467 },
+      ],
+    };
+    const html = electionPage(state, data);
+    state.election = saved;
+    if (!html.includes('心灰意冷')) throw new Error('初選落敗頁少了「心灰意冷」這個選項');
+    if (!html.includes('primary-accept') || !html.includes('primary-bolt')) {
+      throw new Error('初選落敗頁少了原本的兩個選項');
+    }
+    return html;
+  }],
   ['map', () => mapPage(state, data, { mode: 'favor' })],
   ['map/region', () => mapPage(state, data, { region: 'TCH' })],
   ['map/district', () => mapPage(state, data, { district: 'TCH-03' })],
