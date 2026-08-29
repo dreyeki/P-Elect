@@ -15,6 +15,14 @@ jobs:
         run: node tests/render.mjs
       - name: 選舉系統
         run: node tests/election.mjs
+      - name: 系統整合
+        run: node tests/systems.mjs
+      - name: 建角與存檔
+        run: node tests/setup.mjs
+      - name: 前兩次文本與行動點
+        run: node tests/firsts.mjs
+      - name: 造勢、私人財務、募款、快轉
+        run: node tests/v060.mjs
       - name: 長線模擬（120 回合）
         run: node tests/headless.mjs CISEED 120
       - name: 單檔版可以順利打包
