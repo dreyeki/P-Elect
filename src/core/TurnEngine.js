@@ -21,15 +21,28 @@ import * as Election from '../systems/ElectionSystem.js';
 import * as Poll from '../systems/PollSystem.js';
 import * as Show from '../systems/ShowSystem.js';
 import * as Court from '../systems/CourtSystem.js';
+import * as Gov from '../systems/GovernmentSystem.js';
+import * as Theory from '../systems/TheorySystem.js';
+import * as Image from '../systems/ImageSystem.js';
+import * as People from '../systems/PeopleSystem.js';
+import * as Favor from '../systems/FavorSystem.js';
+import * as Invite from '../systems/InvitationSystem.js';
+import * as Social from '../systems/SocialSystem.js';
+import * as Semi from '../systems/SemiconductorSystem.js';
+import * as Canvass from '../systems/CanvassSystem.js';
 import { apOf } from '../systems/CharacterSystem.js';
 
 const PIPELINE = [
   ['world', World.tick], ['economy', Economy.tick], ['corp', Corp.tick],
   ['pop', Pop.tick], ['value', Value.tick], ['district', District.tick],
   ['party', Party.tick], ['council', Council.tick], ['budget', Budget.tick],
+  ['semi', Semi.tick],
   ['finance', Finance.tick], ['team', Team.tick], ['character', Character.tick],
+  ['people', People.tick], ['favor', Favor.tick], ['invite', Invite.tick],
+  ['canvassGig', Canvass.tickGigs], ['social', Social.tick],
   ['scandal', Scandal.tick], ['legis', Legis.tick], ['interp', Interp.tick],
-  ['court', Court.tick], ['media', Media.tick],
+  ['court', Court.tick], ['gov', Gov.tick], ['image', Image.tick],
+  ['theory', Theory.tick], ['media', Media.tick],
   ['poll', Poll.tick], ['show', Show.tick],
 ];
 
@@ -62,8 +75,9 @@ export function advance(state, data) {
   state.pendingEvents = events;
   state.news = [...news, ...state.news].slice(0, 120);
 
-  // 玩家回合重置
-  state.player.apUsed = 0;
+  // 玩家回合重置。常駐通告會先把它該用的行動點扣掉——
+  // 固定要跑的場子不會因為新的一個月到了就不用跑。
+  state.player.apUsed = Canvass.gigAPCost(state, data);
   state.player.ap = apOf(state, data);
 
   // 歷史指標

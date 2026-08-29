@@ -1,0 +1,290 @@
+{
+  "_note": [
+    "人情牽制。台灣政治真正的貨幣不是錢也不是政治資本，是誰欠誰。",
+    "debt 是有號的：正值代表對方欠你，負值代表你欠對方。",
+    "欠人情不會消失得很快，但會慢慢淡掉——除非中間又發生了什麼事。",
+    "手上握著別人的人情時，幫助事件會自己跳出來；欠別人人情的時候，",
+    "跳出來的就是請託，而且拒絕請託會讓那筆人情變成怨。"
+  ],
+  "decayPerTurn": 0.035,
+  "maxDebt": 5,
+  "kinds": [
+    {
+      "id": "FAV_STUMP",
+      "name": "站台助講",
+      "give": 1.4,
+      "apCost": 1,
+      "fatigue": 10,
+      "desc": "在別人的造勢場合上台講十分鐘，把自己的支持者借給他一個晚上。這是最貴也最有效的一種人情。"
+    },
+    {
+      "id": "FAV_ENDORSE",
+      "name": "掛名推薦",
+      "give": 0.7,
+      "apCost": 0,
+      "fatigue": 0,
+      "desc": "讓對方在文宣上印你的名字跟照片。成本很低，但如果他出事，你的名字也會跟著被翻出來。"
+    },
+    {
+      "id": "FAV_INTRO",
+      "name": "引薦人脈",
+      "give": 0.9,
+      "apCost": 1,
+      "fatigue": 6,
+      "desc": "把自己認識的人介紹給對方。這種人情很難量化，但被介紹的雙方都會記得是誰牽的線。"
+    },
+    {
+      "id": "FAV_MONEY",
+      "name": "資金相挺",
+      "give": 1.1,
+      "apCost": 0,
+      "fatigue": 0,
+      "desc": "在對方最缺錢的時候匯一筆過去。金額不必大，時間點才是重點。"
+    },
+    {
+      "id": "FAV_COVER",
+      "name": "危機相挺",
+      "give": 2.0,
+      "apCost": 1,
+      "fatigue": 12,
+      "desc": "在對方被圍剿的時候公開站出來說話。這種時候願意站出來的人，他一輩子都會記得。"
+    }
+  ],
+  "helpEvents": [
+    {
+      "id": "FH_FUNDRAISE",
+      "minDebt": 1.2,
+      "cost": 1.0,
+      "weight": 30,
+      "headline": "{name}主動打電話來，說有幾個朋友想認識你",
+      "body": "電話那頭的語氣很輕鬆，說是幾個做生意的朋友聽過你的事情，想找個時間吃頓飯。他沒有明講飯局的目的，但你們兩個都知道那是什麼場合。上一次你站台站到晚上十一點，這一通電話就是那一晚的利息。",
+      "effect": {
+        "campaignFundsRange": [
+          800000,
+          3200000
+        ],
+        "stigma": 0.1
+      },
+      "resultText": "那頓飯吃了三個小時，散場的時候有三張支票放在你的公事包裡。回程的車上你沒有講話，因為有些人情一旦收下就不能再退回去了。"
+    },
+    {
+      "id": "FH_PRIMARY",
+      "minDebt": 2.0,
+      "cost": 2.0,
+      "weight": 22,
+      "requires": {
+        "primarySeason": true
+      },
+      "headline": "{name}說他去跟幾個人講過了，初選那邊你可以放心",
+      "body": "他沒有說去跟誰講，也沒有說講了什麼，只是要你把心思放在拜票上面就好。你想問得更清楚一點，他笑了一下說這種事情知道太多對你沒有好處。掛掉電話之後你在辦公室坐了很久，一半是鬆一口氣，一半是不太舒服。",
+      "effect": {
+        "primaryMemberBonus": 0.22,
+        "stigma": 0.15
+      },
+      "resultText": "黨部那邊的態度確實變了。你不知道中間發生了什麼，也開始懷疑自己是不是不該知道。"
+    },
+    {
+      "id": "FH_GRASSROOTS",
+      "minDebt": 1.0,
+      "cost": 0.8,
+      "weight": 26,
+      "headline": "{name}把他在你選區的樁腳名單給了你一份",
+      "body": "那是一份手寫的名單，上面有里長、社區發展協會理事長跟幾個宮廟的委員，每一個名字旁邊都註記了要怎麼稱呼。他說這些人他經營了十幾年，交給你之前已經一個一個打過招呼了。這種東西沒有辦法用錢買，也沒有辦法自己在兩年之內長出來。",
+      "effect": {
+        "grassrootsHome": 0.55,
+        "favorHome": 0.4
+      },
+      "resultText": "接下來的兩週你把名單上的人跑了一遍，每一個都知道你是誰介紹來的。"
+    },
+    {
+      "id": "FH_MEDIA",
+      "minDebt": 1.3,
+      "cost": 0.9,
+      "weight": 20,
+      "headline": "{name}說明天那條新聞，他已經幫你講過話了",
+      "body": "你還沒看到那條新聞，他就已經打電話來了。他說跟那位主筆是二十年的交情，該講的都講了，明天出來的版本會溫和很多。你道謝的時候他打斷你，說這種事情不用謝，記著就好。",
+      "effect": {
+        "stigmaReduce": 0.35,
+        "fame": 0.15
+      },
+      "resultText": "隔天那條新聞確實只放在內頁的角落，標題也收斂得多。你把這件事記在心裡，跟他要你記著的那件事放在一起。"
+    },
+    {
+      "id": "FH_STUMPBACK",
+      "minDebt": 1.6,
+      "cost": 1.4,
+      "weight": 24,
+      "requires": {
+        "campaignSeason": true
+      },
+      "headline": "{name}說你的場子他一定會到，時間你排就好",
+      "body": "他沒有等你開口就先講了這句話，語氣像是在講一件早就講好的事。他的行程排到三個月以後，卻願意為你空出一個晚上，這件事在圈子裡本身就是一種訊號。你的幕僚聽到消息的時候，第一個反應是問他要什麼。",
+      "effect": {
+        "campaignBoost": 0.06,
+        "fame": 0.3,
+        "enthusiasm": 0.3
+      },
+      "resultText": "那一晚他講了十五分鐘，講的都是你的事而不是他自己的事。台下的反應比你自己上台的時候還好。"
+    },
+    {
+      "id": "FH_WARNING",
+      "minDebt": 1.1,
+      "cost": 0.7,
+      "weight": 18,
+      "headline": "{name}約你在一家很不起眼的咖啡店見面",
+      "body": "他選的地方連招牌都沒有換過，坐下來之後第一句話就是要你最近小心一點。他說有人在查你服務處的帳，查了大概兩個月，是誰交代的他不方便講。講完他就起身結帳，整場談話不到十分鐘。",
+      "effect": {
+        "scandalShield": 1,
+        "politicalCapital": -5
+      },
+      "resultText": "你回去把服務處的帳目重新看了一遍，找到兩筆確實說不清楚的支出，然後在事情爆開之前把它們處理掉了。"
+    }
+  ],
+  "requestEvents": [
+    {
+      "id": "FR_JOBPLACE",
+      "minOwed": 1.2,
+      "cost": 1.0,
+      "weight": 28,
+      "headline": "{name}的姪子今年畢業，他問你那邊有沒有位子",
+      "body": "他把話講得很輕，說孩子讀的是相關科系，人也很老實，只是想找個穩定的地方做事。這種請託沒有任何一條法律禁止，但你也很清楚它跟一般的求職不是同一件事。你上一次需要他的時候，他一句話都沒有多問就答應了。",
+      "options": [
+        {
+          "text": "安排進服務處，位子跟薪水都照規矩來",
+          "effects": {
+            "favorSettle": 1.0,
+            "campaignFundsDelta": -420000,
+            "stigma": 0.1
+          }
+        },
+        {
+          "text": "幫他引薦到別的地方，自己不沾手",
+          "effects": {
+            "favorSettle": 0.5,
+            "politicalCapital": -8
+          }
+        },
+        {
+          "text": "婉拒，說最近實在沒有辦法",
+          "effects": {
+            "favorSettle": 0,
+            "favorFlip": -1.2,
+            "integrity": 0.3
+          }
+        }
+      ]
+    },
+    {
+      "id": "FR_CASE",
+      "minOwed": 1.6,
+      "cost": 1.4,
+      "weight": 24,
+      "headline": "{name}希望你去替一件案子講一通電話",
+      "body": "他說那是承辦人員的認定問題，只要有人去問一下，事情就會回到該有的樣子。他強調自己絕對不是要關說，只是希望承辦知道這件案子有人在看。你聽得出來那條線在哪裡，也聽得出來他已經預設你會答應。",
+      "options": [
+        {
+          "text": "打那通電話，用最委婉的方式問一下進度",
+          "effects": {
+            "favorSettle": 1.4,
+            "stigma": 0.5,
+            "scandalRisk": 0.12
+          }
+        },
+        {
+          "text": "改成用書面正式行文，留下完整紀錄",
+          "effects": {
+            "favorSettle": 0.6,
+            "stigma": 0.1,
+            "integrity": 0.2
+          }
+        },
+        {
+          "text": "直接跟他說這一通我不能打",
+          "effects": {
+            "favorSettle": 0,
+            "favorFlip": -1.8,
+            "integrity": 0.6
+          }
+        }
+      ]
+    },
+    {
+      "id": "FR_STUMP",
+      "minOwed": 1.0,
+      "cost": 1.2,
+      "weight": 26,
+      "requires": {
+        "campaignSeason": true
+      },
+      "headline": "{name}要你去他的場子站台，日期已經印在文宣上了",
+      "body": "文宣是今天早上才送到你辦公室的，上面已經印了你的名字跟照片。他打電話來的時候語氣很自然，好像這件事你們早就講好了。你確實欠他一個人情，只是沒有想到他會用這種方式來提。",
+      "options": [
+        {
+          "text": "去，而且講得比他自己還賣力",
+          "effects": {
+            "favorSettle": 1.2,
+            "apCost": 1,
+            "fatigue": 12,
+            "fame": 0.2
+          }
+        },
+        {
+          "text": "去露個臉，講三分鐘就走",
+          "effects": {
+            "favorSettle": 0.5,
+            "apCost": 1,
+            "fatigue": 6
+          }
+        },
+        {
+          "text": "推說行程衝突，請幕僚代為致意",
+          "effects": {
+            "favorSettle": 0,
+            "favorFlip": -1.0
+          }
+        }
+      ]
+    },
+    {
+      "id": "FR_VOTE",
+      "minOwed": 1.8,
+      "cost": 1.6,
+      "weight": 20,
+      "requires": {
+        "roles": [
+          "councilor",
+          "legislator"
+        ]
+      },
+      "headline": "{name}希望你在那個案子上投下贊成票",
+      "body": "他知道你在這個議題上的立場，所以一開口就先說他理解你的難處。接著他提醒你去年那件事情如果不是他出面，現在的局面會非常難看。他沒有把話說死，但每一句話都在把你往那個方向推。",
+      "options": [
+        {
+          "text": "照他的意思投，然後在說明裡留下伏筆",
+          "effects": {
+            "favorSettle": 1.6,
+            "integrity": -0.5,
+            "stigma": 0.3
+          }
+        },
+        {
+          "text": "投棄權，兩邊都不算得罪",
+          "effects": {
+            "favorSettle": 0.6,
+            "integrity": -0.2,
+            "politicalCapital": -10
+          }
+        },
+        {
+          "text": "照自己的立場投，事後親自去跟他解釋",
+          "effects": {
+            "favorSettle": 0,
+            "favorFlip": -2.0,
+            "integrity": 0.8,
+            "fame": 0.15
+          }
+        }
+      ]
+    }
+  ]
+}

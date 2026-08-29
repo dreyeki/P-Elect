@@ -1,5 +1,5 @@
 {
-  "_note": "7 個常設政黨與 20 個派系。platform 8 軸與 issuePerformance 12 議題皆為 −5~5 整數；cohesion/publicImage/grassrootsBonus 為整數；identityAppeal、seatShare、ideologyShift 為具體數值。立委席次總和 113。",
+  "_note": "7 個常設政黨與 20 個派系。platform 8 軸與 issuePerformance 12 議題皆為 −5~5 整數；cohesion/publicImage/grassrootsBonus 為整數；identityAppeal、seatShare、ideologyShift 為具體數值。立委席次總和 113。 platform 有 13 條軸，對應 values.json；chinaStance 是七維的兩岸立場，對應 china.json；chinaReason 是這個黨主要訴諸哪一種說法，動員時對同理由的選民效果加倍。",
   "parties": [
     {
       "id": "PDA",
@@ -11,10 +11,15 @@
         "unification": -3,
         "marketFreedom": 0,
         "progressivism": 3,
+        "genderRoles": 3,
         "immigration": 2,
         "environment": 2,
+        "equality": 1,
         "militaryAutonomy": 2,
-        "directDemocracy": 2
+        "directDemocracy": 2,
+        "punishment": 1,
+        "fiscalExpansion": 2,
+        "investmentPriority": 2
       },
       "identityAppeal": {
         "localist": 0.8,
@@ -122,22 +127,37 @@
           "desc": "產業工會與自主工聯出身的少數派，是黨內唯一會公開反對自家勞動法案的力量。人數不多但在關鍵表決時具有否決能量，每逢工時與基本工資修法就會與新潮流線正面對撞。"
         }
       ],
-      "scale": 1.02
+      "scale": 0.976,
+      "chinaStance": {
+        "friendly": -2.5,
+        "strength": -0.5,
+        "morality": -2.2,
+        "culture": -1.0,
+        "openness": -2.0,
+        "usTrust": 2.2,
+        "japanTrust": 2.4
+      },
+      "chinaReason": "democracy"
     },
     {
       "id": "CRP",
       "name": "中華國民黨",
-      "shortName": "華復",
+      "shortName": "國民",
       "color": "#1F4E9C",
       "platform": {
         "centralization": 3,
         "unification": 2,
         "marketFreedom": 3,
         "progressivism": -2,
+        "genderRoles": -1,
         "immigration": -1,
         "environment": -1,
+        "equality": -1,
         "militaryAutonomy": -2,
-        "directDemocracy": -1
+        "directDemocracy": -1,
+        "punishment": 3,
+        "fiscalExpansion": -1,
+        "investmentPriority": 2
       },
       "identityAppeal": {
         "localist": -0.4,
@@ -245,7 +265,17 @@
           "desc": "中部與東部經營三代以上的政治家族，靠工程分包、農會信用部與婚喪紅白帖維繫綿密的人情網。對中央路線之爭興趣缺缺，只在乎預算分配與地方人事，換黨合作也不是不能談的事。"
         }
       ],
-      "scale": 0.92
+      "scale": 1.0312,
+      "chinaStance": {
+        "friendly": 2.4,
+        "strength": 1.6,
+        "morality": 0.4,
+        "culture": 2.6,
+        "openness": 2.0,
+        "usTrust": -0.6,
+        "japanTrust": 0.2
+      },
+      "chinaReason": "economy"
     },
     {
       "id": "TPL",
@@ -257,10 +287,15 @@
         "unification": 0,
         "marketFreedom": 2,
         "progressivism": 1,
+        "genderRoles": 1,
         "immigration": 0,
         "environment": 0,
+        "equality": 0,
         "militaryAutonomy": 0,
-        "directDemocracy": 3
+        "directDemocracy": 3,
+        "punishment": 2,
+        "fiscalExpansion": -2,
+        "investmentPriority": 2
       },
       "identityAppeal": {
         "localist": 0.1,
@@ -337,7 +372,17 @@
           "desc": "從直播主與網路名人轉戰政壇的一群，選票基礎完全建立在演算法而非地面組織上。擅長把複雜議題壓縮成十五秒的憤怒，也因此在需要細膩協商的法案上經常成為黨團的負債。"
         }
       ],
-      "scale": 0.8
+      "scale": 0.6541,
+      "chinaStance": {
+        "friendly": 0.6,
+        "strength": 1.0,
+        "morality": -0.6,
+        "culture": 1.0,
+        "openness": 0.4,
+        "usTrust": 0.2,
+        "japanTrust": 0.6
+      },
+      "chinaReason": "economy"
     },
     {
       "id": "NGF",
@@ -349,10 +394,15 @@
         "unification": -4,
         "marketFreedom": -3,
         "progressivism": 5,
+        "genderRoles": 5,
         "immigration": 3,
         "environment": 4,
+        "equality": 4,
         "militaryAutonomy": 3,
-        "directDemocracy": 4
+        "directDemocracy": 4,
+        "punishment": -2,
+        "fiscalExpansion": 2,
+        "investmentPriority": -2
       },
       "identityAppeal": {
         "localist": 0.7,
@@ -429,7 +479,17 @@
           "desc": "以大學校園與青年公共社團為基地的組織部門，是全黨最主要的志工與連署人力來源。訴求投票年齡下修與校園民主，但流動率極高，畢業潮一到組織就得從零重建一次。"
         }
       ],
-      "scale": 0.055
+      "scale": 0.0518,
+      "chinaStance": {
+        "friendly": -3.6,
+        "strength": -1.6,
+        "morality": -3.0,
+        "culture": -1.8,
+        "openness": -3.0,
+        "usTrust": 1.4,
+        "japanTrust": 2.6
+      },
+      "chinaReason": "democracy"
     },
     {
       "id": "TWR",
@@ -441,10 +501,15 @@
         "unification": -5,
         "marketFreedom": 1,
         "progressivism": 3,
+        "genderRoles": 3,
         "immigration": 1,
         "environment": 1,
+        "equality": 1,
         "militaryAutonomy": 5,
-        "directDemocracy": 3
+        "directDemocracy": 3,
+        "punishment": 1,
+        "fiscalExpansion": 1,
+        "investmentPriority": 1
       },
       "identityAppeal": {
         "localist": 1.0,
@@ -506,7 +571,17 @@
           "desc": "由海外歸國學者與國防研究者組成，產出全民防衛與不對稱戰力的政策白皮書供大黨採用。習慣以專業形象淡化街頭色彩，主張先進入體制再談路線，與街頭派的緊張關係從未真正緩解。"
         }
       ],
-      "scale": 0.045
+      "scale": 0.0424,
+      "chinaStance": {
+        "friendly": -4.6,
+        "strength": -2.4,
+        "morality": -3.8,
+        "culture": -3.2,
+        "openness": -4.2,
+        "usTrust": 1.8,
+        "japanTrust": 3.2
+      },
+      "chinaReason": "security"
     },
     {
       "id": "GSP",
@@ -518,10 +593,15 @@
         "unification": -2,
         "marketFreedom": -4,
         "progressivism": 4,
+        "genderRoles": 4,
         "immigration": 2,
         "environment": 5,
+        "equality": 5,
         "militaryAutonomy": 1,
-        "directDemocracy": 4
+        "directDemocracy": 4,
+        "punishment": -3,
+        "fiscalExpansion": 1,
+        "investmentPriority": -3
       },
       "identityAppeal": {
         "localist": 0.5,
@@ -583,7 +663,17 @@
           "desc": "以碳定價與能源轉型路徑為核心訴求的新生代，習慣用國際比較與模型數據說服都會白領。主張與產業界對話而非對抗，因而被老幹部批評為把運動變成顧問業的一群人。"
         }
       ],
-      "scale": 0.032
+      "scale": 0.0301,
+      "chinaStance": {
+        "friendly": -2.0,
+        "strength": -1.2,
+        "morality": -2.4,
+        "culture": -0.6,
+        "openness": -1.6,
+        "usTrust": 0.4,
+        "japanTrust": 1.6
+      },
+      "chinaReason": "democracy"
     },
     {
       "id": "CUA",
@@ -595,10 +685,15 @@
         "unification": 5,
         "marketFreedom": 1,
         "progressivism": -5,
+        "genderRoles": -5,
         "immigration": -3,
         "environment": -2,
+        "equality": -1,
         "militaryAutonomy": -4,
-        "directDemocracy": -2
+        "directDemocracy": -2,
+        "punishment": 5,
+        "fiscalExpansion": -2,
+        "investmentPriority": 1
       },
       "identityAppeal": {
         "localist": -0.8,
@@ -660,7 +755,17 @@
           "desc": "由榮民團體與外省同鄉會延續下來的組織，平均年齡逼近八十，卻是投票率最高的一群人。掌握若干兩岸民間交流管道，也因此長期被媒體與情治單位盯上，任何金流都會被放大檢視。"
         }
       ],
-      "scale": 0.038
+      "scale": 0.0358,
+      "chinaStance": {
+        "friendly": 4.8,
+        "strength": 3.2,
+        "morality": 2.6,
+        "culture": 4.6,
+        "openness": 4.0,
+        "usTrust": -3.4,
+        "japanTrust": -2.6
+      },
+      "chinaReason": "ethnic"
     }
   ]
 }

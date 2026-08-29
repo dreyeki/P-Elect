@@ -1,35 +1,335 @@
 {
   "categories": [
-    { "id":"welfare","name":"社會福利","share":0.245,"rigid":0.55,"affects":{"popSoL":{"retiree":0.5,"bluecollar":0.3,"farmer":0.3},"society.pensionSustainability":0.3} },
-    { "id":"education","name":"教育科學文化","share":0.190,"rigid":0.60,"affects":{"infrastructure":{"education":0.4},"valuePressure":{"progressivism":0.2}} },
-    { "id":"defense","name":"國防","share":0.155,"rigid":0.40,"affects":{"defense.readiness":0.5,"defense.asymmetricCapability":0.3} },
-    { "id":"economy","name":"經濟發展","share":0.120,"rigid":0.20,"affects":{"gdpGrowthBonus":0.004,"corpMood":{"_all":0.3}} },
-    { "id":"general","name":"一般政務","share":0.095,"rigid":0.75,"affects":{"adminEfficiency":0.4} },
-    { "id":"interest","name":"債務付息","share":0.060,"rigid":1.00,"affects":{} },
-    { "id":"localGrant","name":"補助地方","share":0.055,"rigid":0.50,"affects":{"regionFinance":1.0} },
-    { "id":"transport","name":"交通建設","share":0.040,"rigid":0.25,"affects":{"infrastructure":{"transport":0.4}} },
-    { "id":"environment","name":"環境保護","share":0.020,"rigid":0.30,"affects":{"energy.carbonIntensity":-0.01,"valuePressure":{"environment":0.2}} },
-    { "id":"agriculture","name":"農業","share":0.015,"rigid":0.45,"affects":{"popSoL":{"farmer":0.4},"society.foodSelfSufficiency":0.01} },
-    { "id":"justice","name":"司法","share":0.005,"rigid":0.70,"affects":{"society.crimeRate":-2,"society.socialTrust":0.2} },
-    { "id":"reserve","name":"預備金","share":0.005,"rigid":0.00,"affects":{"disasterBuffer":1.0} }
+    {
+      "id": "welfare",
+      "name": "社會福利",
+      "share": 0.245,
+      "rigid": 0.55,
+      "affects": {
+        "popSoL": {
+          "retiree": 0.5,
+          "bluecollar": 0.3,
+          "farmer": 0.3
+        },
+        "society.pensionSustainability": 0.3
+      }
+    },
+    {
+      "id": "education",
+      "name": "教育科學文化",
+      "share": 0.19,
+      "rigid": 0.6,
+      "affects": {
+        "infrastructure": {
+          "education": 0.4
+        },
+        "valuePressure": {
+          "progressivism": 0.2
+        }
+      }
+    },
+    {
+      "id": "defense",
+      "name": "國防",
+      "share": 0.155,
+      "rigid": 0.4,
+      "affects": {
+        "defense.readiness": 0.5,
+        "defense.asymmetricCapability": 0.3
+      }
+    },
+    {
+      "id": "economy",
+      "name": "經濟發展",
+      "share": 0.12,
+      "rigid": 0.2,
+      "affects": {
+        "gdpGrowthBonus": 0.004,
+        "corpMood": {
+          "_all": 0.3
+        }
+      }
+    },
+    {
+      "id": "general",
+      "name": "一般政務",
+      "share": 0.095,
+      "rigid": 0.75,
+      "affects": {
+        "adminEfficiency": 0.4
+      }
+    },
+    {
+      "id": "interest",
+      "name": "債務付息",
+      "share": 0.06,
+      "rigid": 1.0,
+      "affects": {}
+    },
+    {
+      "id": "localGrant",
+      "name": "補助地方",
+      "share": 0.055,
+      "rigid": 0.5,
+      "affects": {
+        "regionFinance": 1.0
+      }
+    },
+    {
+      "id": "transport",
+      "name": "交通建設",
+      "share": 0.04,
+      "rigid": 0.25,
+      "affects": {
+        "infrastructure": {
+          "transport": 0.4
+        }
+      }
+    },
+    {
+      "id": "environment",
+      "name": "環境保護",
+      "share": 0.02,
+      "rigid": 0.3,
+      "affects": {
+        "energy.carbonIntensity": -0.01,
+        "valuePressure": {
+          "environment": 0.2
+        }
+      }
+    },
+    {
+      "id": "agriculture",
+      "name": "農業",
+      "share": 0.015,
+      "rigid": 0.45,
+      "affects": {
+        "popSoL": {
+          "farmer": 0.4
+        },
+        "society.foodSelfSufficiency": 0.01
+      }
+    },
+    {
+      "id": "justice",
+      "name": "司法",
+      "share": 0.005,
+      "rigid": 0.7,
+      "affects": {
+        "society.crimeRate": -2,
+        "society.socialTrust": 0.2
+      }
+    },
+    {
+      "id": "reserve",
+      "name": "預備金",
+      "share": 0.005,
+      "rigid": 0.0,
+      "affects": {
+        "disasterBuffer": 1.0
+      }
+    }
   ],
   "taxes": [
-    { "id":"income","name":"綜合所得稅","baseShare":0.22,"lawId":"LAW_INCOME_TAX" },
-    { "id":"corporate","name":"營利事業所得稅","baseShare":0.20,"lawId":"LAW_CORP_TAX" },
-    { "id":"business","name":"營業稅","baseShare":0.14,"lawId":null },
-    { "id":"commodity","name":"貨物稅","baseShare":0.06,"lawId":null },
-    { "id":"tariff","name":"關稅","baseShare":0.04,"lawId":null },
-    { "id":"securities","name":"證券交易稅","baseShare":0.05,"lawId":null },
-    { "id":"landvalue","name":"土地增值稅","baseShare":0.04,"lawId":null },
-    { "id":"house","name":"房屋稅與地價稅","baseShare":0.07,"lawId":"LAW_HOUSE_TAX" },
-    { "id":"estate","name":"遺產及贈與稅","baseShare":0.02,"lawId":null },
-    { "id":"tobacco","name":"菸酒稅","baseShare":0.02,"lawId":null },
-    { "id":"fees","name":"規費與其他","baseShare":0.09,"lawId":null },
-    { "id":"soe","name":"國營事業盈餘","baseShare":0.05,"lawId":null }
+    {
+      "id": "income",
+      "name": "綜合所得稅",
+      "baseShare": 0.22,
+      "lawId": "LAW_INCOME_TAX"
+    },
+    {
+      "id": "corporate",
+      "name": "營利事業所得稅",
+      "baseShare": 0.2,
+      "lawId": "LAW_CORP_TAX"
+    },
+    {
+      "id": "business",
+      "name": "營業稅",
+      "baseShare": 0.14,
+      "lawId": null
+    },
+    {
+      "id": "commodity",
+      "name": "貨物稅",
+      "baseShare": 0.06,
+      "lawId": null
+    },
+    {
+      "id": "tariff",
+      "name": "關稅",
+      "baseShare": 0.04,
+      "lawId": null
+    },
+    {
+      "id": "securities",
+      "name": "證券交易稅",
+      "baseShare": 0.05,
+      "lawId": null
+    },
+    {
+      "id": "landvalue",
+      "name": "土地增值稅",
+      "baseShare": 0.04,
+      "lawId": null
+    },
+    {
+      "id": "house",
+      "name": "房屋稅與地價稅",
+      "baseShare": 0.07,
+      "lawId": "LAW_HOUSE_TAX"
+    },
+    {
+      "id": "estate",
+      "name": "遺產及贈與稅",
+      "baseShare": 0.02,
+      "lawId": null
+    },
+    {
+      "id": "tobacco",
+      "name": "菸酒稅",
+      "baseShare": 0.02,
+      "lawId": null
+    },
+    {
+      "id": "fees",
+      "name": "規費與其他",
+      "baseShare": 0.09,
+      "lawId": null
+    },
+    {
+      "id": "soe",
+      "name": "國營事業盈餘",
+      "baseShare": 0.05,
+      "lawId": null
+    }
   ],
   "specialBudgets": [
-    { "id":"SB_INFRA","name":"前瞻建設特別預算","amount":4200,"years":4,"effects":{"infrastructure":{"transport":0.8,"digital":0.6}} },
-    { "id":"SB_DEFENSE","name":"海空戰力提升特別預算","amount":2400,"years":5,"effects":{"defense.asymmetricCapability":1.0,"defense.readiness":0.6}},
-    { "id":"SB_RESILIENCE","name":"全社會韌性特別預算","amount":1500,"years":3,"effects":{"infrastructure":{"disasterResilience":1.0},"society.socialTrust":0.4} }
-  ]
+    {
+      "id": "SB_INFRA",
+      "name": "前瞻建設特別預算",
+      "amount": 4200,
+      "years": 4,
+      "effects": {
+        "infrastructure": {
+          "transport": 0.8,
+          "digital": 0.6
+        }
+      }
+    },
+    {
+      "id": "SB_DEFENSE",
+      "name": "海空戰力提升特別預算",
+      "amount": 2400,
+      "years": 5,
+      "effects": {
+        "defense.asymmetricCapability": 1.0,
+        "defense.readiness": 0.6
+      }
+    },
+    {
+      "id": "SB_RESILIENCE",
+      "name": "全社會韌性特別預算",
+      "amount": 1500,
+      "years": 3,
+      "effects": {
+        "infrastructure": {
+          "disasterResilience": 1.0
+        },
+        "society.socialTrust": 0.4
+      }
+    },
+    {
+      "id": "SB_CASH2027",
+      "name": "全民現金普發特別預算",
+      "amount": 2360,
+      "years": 1,
+      "year": 2027,
+      "desc": "每人一萬元、全民不排富。發下去的那一個月消費會很好看，但這筆錢是借來的，而且它不會留下任何一項可以用二十年的東西。",
+      "effects": {
+        "popSoL": {
+          "_all": 0.35
+        },
+        "society.socialTrust": 0.3
+      },
+      "politics": {
+        "approvalBoost": 6,
+        "approvalDecayTurns": 8,
+        "corpMood": 0.3,
+        "valuePressure": {
+          "fiscalExpansion": 0.6,
+          "investmentPriority": -0.3
+        }
+      }
+    },
+    {
+      "id": "SB_CHILD5000",
+      "name": "零到十八歲育兒補助",
+      "amount": 1980,
+      "years": 4,
+      "year": 2027,
+      "desc": "每名未滿十八歲的孩子每月五千元，不排富也不設條件。這是目前為止規模最大的一項普及式給付，它會變成往後每一年的固定支出。",
+      "effects": {
+        "popSoL": {
+          "service": 0.4,
+          "whitecollar": 0.4,
+          "bluecollar": 0.5
+        },
+        "society.birthRate": 0.02
+      },
+      "politics": {
+        "approvalBoost": 4,
+        "approvalDecayTurns": 16,
+        "valuePressure": {
+          "equality": 0.5,
+          "fiscalExpansion": 0.5
+        },
+        "rigidCost": 0.012
+      }
+    }
+  ],
+  "authority": {
+    "_note": [
+      "預算是行政部門編的，立法院跟地方議會只能審。",
+      "這一條在遊戲裡是硬規則：不在行政部門的玩家改不了配置，",
+      "他們能做的是刪減、凍結、附帶決議——那才是民代真正的權力。"
+    ],
+    "canAllocate": [
+      "mayor",
+      "minister",
+      "president"
+    ],
+    "canReview": [
+      "councilor",
+      "legislator"
+    ],
+    "reviewActions": [
+      {
+        "id": "cut",
+        "name": "刪減",
+        "desc": "直接把這一科目的預算砍掉一部分，砍掉的錢不會回到別的地方。",
+        "maxRatio": 0.15,
+        "politicalCapital": 8,
+        "corpMood": -0.1
+      },
+      {
+        "id": "freeze",
+        "name": "凍結",
+        "desc": "錢還在但不准動，要等行政部門來做專案報告之後才解凍。這是民代最常用的一招。",
+        "maxRatio": 0.3,
+        "politicalCapital": 5,
+        "leverage": 1
+      },
+      {
+        "id": "resolution",
+        "name": "附帶決議",
+        "desc": "不動錢，但要求行政部門照著你寫的方式執行。沒有強制力，可是寫進紀錄之後很難完全不理。",
+        "maxRatio": 0,
+        "politicalCapital": 3,
+        "fame": 0.08
+      }
+    ],
+    "cutFatigue": 6,
+    "executiveBacklash": 0.35
+  }
 }

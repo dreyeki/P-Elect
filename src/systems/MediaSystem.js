@@ -38,9 +38,113 @@ export function tick(state, ctx) {
   for (const k in frame) frame[k] = clampBi(frame[k] / Math.max(1, reachSum));
   state.flags.mediaFrame = frame;
 
+  // 媒體攻擊：越知名越容易被盯上
+  const atk = rollAttack(state, ctx);
+
   // 民調
   state.flags.approval = approval(state, data, rng);
-  return {};
+  return { news: atk.news };
+}
+
+/**
+ * 媒體攻擊。
+ *
+ * 這不是意外，是這一行的常態：站得越高，願意花人力查你的媒體就越多。
+ * 退出兩大黨的人會被該黨親近的媒體同時圍剿，那一波的強度是平常的兩倍多，
+ * 而且會持續好幾個回合——媒體不會因為你解釋過一次就放過你。
+ */
+export function rollAttack(state, ctx) {
+  const { data, rng, scaleMult } = ctx;
+  const M = data.reactions?.mediaAttack;
+  if (!M) return { news: [] };
+  const p = state.player;
+  const news = [];
+
+  const boltUntil = state.flags.boltAttackUntil ?? 0;
+  const bolting = state.meta.turn <= boltUntil;
+  let chance = (M.baseChance + p.fame * M.famePerLevel + p.stigma * M.stigmaPerLevel) * scaleMult;
+  if (bolting) chance *= M.boltMultiplier;
+  if (p.image) chance *= M.imageBackfireMult;
+  if (state.flags.scandalShield > 0) chance *= 1 - M.shieldReduction;
+  if (!rng.bool(clamp(chance, 0, 0.6))) return { news };
+
+  const pool = data.reactions.events.filter((e) => {
+    if (e.requiresBolt && !bolting) return false;
+    if (e.requiresImage && !p.image) return false;
+    if (e.minFame != null && p.fame < e.minFame) return false;
+    return true;
+  });
+  if (!pool.length) return { news };
+  const ev = rng.weighted(pool, (e) => e.weight);
+
+  // 挑一家對你最不友善的媒體來當發動者
+  const media = Object.values(state.media).sort((a, b) =>
+    (a.playerRelation - b.playerRelation) || (b.reach - a.reach));
+  const m1 = media[0], m2 = media[1] ?? m1;
+
+  state.mediaAttack = {
+    id: ev.id,
+    headline: ev.headline.replace('{media}', m1?.name ?? '一家電視台').replace('{media2}', m2?.name ?? '另一家報紙'),
+    body: ev.body.replace('{media}', m1?.name ?? '一家電視台').replace('{media2}', m2?.name ?? '另一家報紙'),
+    effects: ev.effects,
+    mediaId: m1?.id ?? null,
+    turn: state.meta.turn,
+  };
+  news.push({ kind: 'scandal', text: state.mediaAttack.headline + '。' });
+  return { news };
+}
+
+/** 玩家對媒體攻擊的回應 */
+export function respondAttack(state, data, responseId, rng) {
+  const atk = state.mediaAttack;
+  if (!atk) return { msg: '' };
+  const R = data.reactions.responses.find((x) => x.id === responseId);
+  if (!R) return { msg: '' };
+  const p = state.player;
+  const e = R.effects;
+
+  // 先吃下攻擊本身的傷害，回應只能減輕不能免除
+  const base = atk.effects ?? {};
+  if (base.stigma) p.stigma = clamp05(p.stigma + base.stigma);
+  if (base.fame) p.fame = clamp05(p.fame + base.fame);
+  if (base.favorNational) p.favorNational = clampBi(p.favorNational + base.favorNational);
+  if (base.fatigue) p.fatigueRaw = clamp(p.fatigueRaw + base.fatigue, 0, 120);
+  if (base.imageDamage) state.flags.imageDamage = (state.flags.imageDamage ?? 0) + base.imageDamage;
+  if (base.pollDistrust) state.flags.pollDistrust = (state.flags.pollDistrust ?? 0) + base.pollDistrust;
+
+  if (e.stigmaReduce) p.stigma = clamp05(p.stigma - e.stigmaReduce);
+  if (e.fame) p.fame = clamp05(p.fame + e.fame);
+  if (e.stigma) p.stigma = clamp05(p.stigma + e.stigma);
+  if (e.fatigue) p.fatigueRaw = clamp(p.fatigueRaw + e.fatigue, 0, 120);
+  if (e.campaignFunds) state.finance.campaign += e.campaignFunds;
+  if (e.favorNational) p.favorNational = clampBi(p.favorNational + e.favorNational);
+  if (e.enthusiasm) state.flags.enthusiasmBoost = (state.flags.enthusiasmBoost ?? 0) + e.enthusiasm;
+  if (e.mediaRelation && atk.mediaId && state.media[atk.mediaId]) {
+    state.media[atk.mediaId].playerRelation = clampBi(state.media[atk.mediaId].playerRelation + e.mediaRelation);
+  }
+  if (e.favorCost) {
+    const who = Object.values(state.people ?? {}).filter((x) => x.favor > 0).sort((a, b) => b.favor - a.favor)[0];
+    if (who) who.favor = Math.max(0, who.favor - e.favorCost);
+  }
+
+  const msgs = {
+    RESP_CLARIFY: '你把資料一頁一頁攤在桌上講了四十分鐘。願意聽完的記者不多，但至少留下了完整的紀錄。',
+    RESP_LEGAL: '律師函發出去了，對方在晚間新聞裡把那封信也一起播了出來。',
+    RESP_IGNORE: '你什麼都沒有說。這則新聞在第三天自己消失了，跟著消失的還有一點點你原本有的東西。',
+    RESP_COUNTER: '你反過來質疑對方的金主，同溫層很滿意。中間選民看到的是兩個人在互相潑水。',
+    RESP_FRIENDLY: '隔天有另一個版本出現在別家的版面上。這通電話你欠了誰，只有你自己知道。',
+  };
+  state.mediaAttack = null;
+  return { msg: msgs[responseId] ?? '' };
+}
+
+/** 脫黨之後被兩大黨親近媒體同時圍剿的那一段時間 */
+export function startBoltBacklash(state, data) {
+  const M = data.reactions?.mediaAttack;
+  state.flags.boltAttackUntil = state.meta.turn + (M?.boltDurationTurns ?? 10);
+  for (const m of Object.values(state.media)) {
+    m.playerRelation = clampBi(m.playerRelation - 1.2);
+  }
 }
 
 function biasOfParty(state, pid) {

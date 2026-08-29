@@ -1,15 +1,21 @@
 // @ts-check
 import { Pops } from '../core/Pops.js';
 import { ModifierStack } from '../core/Modifier.js';
+import { packPeople, unpackPeople } from '../systems/PeopleSystem.js';
 import { migrate, CURRENT_SCHEMA } from './migrations.js';
 
 const KEY = 'p-election:save:';
 const SLOTS = ['auto', '1', '2', '3'];
 
+// 讀檔時要把省下來的欄位補回去，需要資料檔查表。開機時設一次就好。
+let DATA = null;
+export function setData(d) { DATA = d; }
+
 export function serialize(state) {
   const out = { ...state };
   out.pops = state.pops.toJSON();
   out.modifiers = state.modifiers.toJSON();
+  out.people = packPeople(state.people);
   return {
     saveSchemaVersion: CURRENT_SCHEMA,
     dataVersion: state.meta.dataVersion,
@@ -20,11 +26,12 @@ export function serialize(state) {
   };
 }
 
-export function deserialize(save) {
+export function deserialize(save, data = DATA) {
   const s = migrate(save);
   const st = s.state;
   st.pops = Pops.fromJSON(st.pops);
   st.modifiers = new ModifierStack(st.modifiers ?? []);
+  if (data) unpackPeople(st.people, data);
   return st;
 }
 
@@ -43,7 +50,7 @@ export function load(slot = 'auto') {
   let raw = null;
   try { raw = localStorage.getItem(KEY + slot); } catch { return null; }
   if (!raw) return null;
-  try { return deserialize(JSON.parse(raw)); }
+  try { return deserialize(JSON.parse(raw), DATA); }
   catch (e) { console.error('[save] 讀檔失敗', e); return null; }
 }
 
@@ -73,5 +80,5 @@ export function exportFile(state) {
 
 export async function importFile(file) {
   const text = await file.text();
-  return deserialize(JSON.parse(text));
+  return deserialize(JSON.parse(text), DATA);
 }

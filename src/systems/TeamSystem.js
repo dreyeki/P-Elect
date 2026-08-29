@@ -9,9 +9,28 @@ export function tick(state, ctx) {
   const news = [];
   const p = state.player;
 
+  const G = data.staffRoles.graft ?? {};
   for (const t of state.team) {
     // 汙名高的老闆會磨損忠誠
     if (p.stigma >= 3 && rng.bool(0.06 * scaleMult)) t.loyalty = clamp05(t.loyalty - 0.5);
+
+    // ── 有些人本來就帶著問題進來，只是你當初沒有多問
+    const risk = t.graftRisk ?? 0;
+    if (risk > 0 && rng.bool(risk / 12 * scaleMult)) {
+      const amt = Math.round(rng.range(G.amountRange?.[0] ?? 300000, G.amountRange?.[1] ?? 4200000) / 10000) * 10000;
+      t.graftTaken = (t.graftTaken ?? 0) + amt;
+      t.graftSince ??= state.meta.turn;
+    }
+    // 收了錢的事情不會馬上被發現，它會先累積再爆
+    if (t.graftTaken > 0 && rng.bool((G.discoveryChancePerTurn ?? 0.035) * scaleMult)) {
+      state.flags.graftCase = {
+        staffId: t.id, name: t.name, roleName: t.roleName,
+        amount: t.graftTaken, since: t.graftSince, turn: state.meta.turn,
+      };
+      t.graftTaken = 0;
+      news.push({ kind: 'scandal', text: `檢調在偵辦另一件案子的時候，查到你辦公室的${t.roleName}${t.name}名下有一筆來源說不清楚的金流。你在新聞跳出來的那一刻才知道這件事。` });
+    }
+
     // 高野心且長期沒有回報
     t.tenure = (t.tenure ?? 0) + scaleMult;
     if (t.ambition >= 4 && t.tenure > 36 && rng.bool(0.05 * scaleMult)) {
@@ -56,6 +75,8 @@ export function makeCandidate(state, data, rng) {
   // 汙名會嚇跑好人才
   if (p.stigma >= 3) ability = clamp05(ability - 1);
   if (p.attrs.sociability >= 4) ability = clamp05(ability + 1);
+  // 每個人都帶著一段來歷。它讀起來像人物設定，但有些來歷是有代價的。
+  const bg = rng.pick(data.staffRoles.backgrounds ?? [{ id: 'BG_NONE', text: '', graftRisk: 0 }]);
   return {
     id: 'staff_' + state.meta.turn + '_' + role.id,
     name: makeName(data, rng, state.meta.year - rng.int(28, 55)),
@@ -63,8 +84,40 @@ export function makeCandidate(state, data, rng) {
     ability, loyalty: clamp05(rng.int(1, 3) + (p.attrs.sociability >= 3 ? 1 : 0)),
     ambition: rng.int(0, 5),
     salary: Math.round(role.baseSalary * tier.salaryMult * (0.8 + ability * 0.12) / 1000) * 1000,
+    background: bg.id, backgroundText: bg.text,
+    graftRisk: bg.graftRisk ?? 0, graftTaken: 0,
     knownSecrets: 0, tenure: 0,
   };
+}
+
+/**
+ * 處理一件幕僚收贓款的案子。
+ * 切割會讓剩下的人看著你，扛下來會讓你自己沾上。兩條路都要付錢。
+ */
+export function resolveGraft(state, data, mode) {
+  const c = state.flags.graftCase;
+  if (!c) return { msg: '' };
+  const G = data.staffRoles.graft ?? {};
+  const p = state.player;
+  state.flags.graftCase = null;
+
+  if (mode === 'fire') {
+    fire(state, c.staffId, false);
+    p.stigma = clamp05(p.stigma + (G.stigmaIfFired ?? 0.5));
+    for (const t of state.team) t.loyalty = clamp05(t.loyalty - (G.loyaltyPenalty ?? 1));
+    return { msg: `你在記者會上宣布已經解除${c.name}的職務並且會全力配合調查。當天下午辦公室裡沒有人講話，他們都在想同一件事：下一次會不會是自己。` };
+  }
+  if (mode === 'cover') {
+    p.stigma = clamp05(p.stigma + (G.stigmaOnDiscovery ?? 1.2));
+    state.flags.pendingScandalRisk = (state.flags.pendingScandalRisk ?? 0) + 0.25;
+    return { msg: `你選擇把人留下來，對外的說法是尚未確定的事情不應該先定罪。這句話在法律上沒有錯，在新聞上完全沒有用。` };
+  }
+  // 主動送辦
+  fire(state, c.staffId, false);
+  p.integrity = clamp05(p.integrity + 0.6);
+  p.stigma = clamp05(p.stigma + 0.2);
+  state.finance.campaign -= Math.round(c.amount * 0.5);
+  return { msg: `你自己把資料整理好送進地檢署，並且宣布這筆錢由服務處先行返還。這一步讓你少了一些錢，但那些原本要寫你的人，稿子改了方向。` };
 }
 
 export function hire(state, cand) {

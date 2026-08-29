@@ -1,0 +1,208 @@
+{
+  "_note": [
+    "半導體產業的細部模型。這一個產業佔台灣出口超過四成、佔加權指數超過四成，",
+    "把它壓成 sectors.semiconductor 一個小數是嚴重的失真——所以它在這裡單獨展開。",
+    "五個版圖各有自己的技術水準、產能、獲利率與研發強度，彼此之間有上下游依存。",
+    "公司名稱是虛構的，但對應的現實位置寫在 realWorldHint 裡，玩家一看就知道是誰。",
+    "技術與產能不會因為一句口號就改變，它們的移動速度以年為單位。"
+  ],
+  "segments": [
+    {
+      "id": "FOUNDRY",
+      "name": "晶片製造",
+      "shortName": "晶圓代工",
+      "realWorldHint": "先進製程的晶圓代工，全球市佔超過六成的那一類公司",
+      "corps": [
+        "TSEC",
+        "LIANDA"
+      ],
+      "globalShare": 0.63,
+      "techLevel": 4.6,
+      "margin": 0.53,
+      "rndIntensity": 0.082,
+      "exportShare": 0.42,
+      "employment": 168000,
+      "capexShare": 0.61,
+      "chinaExposure": 0.11,
+      "usExposure": 0.28,
+      "desc": "台灣真正的護城河。先進製程的良率與量產能力是二十年砸出來的，短期之內沒有人追得上，但它同時也是全世界最想拿走的一塊。"
+    },
+    {
+      "id": "MEMORY",
+      "name": "記憶體製造",
+      "shortName": "記憶體",
+      "realWorldHint": "以外商在台設廠為主的動態隨機存取記憶體與快閃記憶體產線",
+      "corps": [
+        "MEIGUANG",
+        "LIXIN"
+      ],
+      "globalShare": 0.14,
+      "techLevel": 3.2,
+      "margin": 0.21,
+      "rndIntensity": 0.061,
+      "exportShare": 0.09,
+      "employment": 41000,
+      "capexShare": 0.14,
+      "chinaExposure": 0.26,
+      "usExposure": 0.35,
+      "desc": "景氣循環最劇烈的一塊，價格由全球供需決定而不是由技術決定。外商佔了主要產能，這讓它在政治上比代工廠更難施力。"
+    },
+    {
+      "id": "COMPONENT",
+      "name": "電子組件",
+      "shortName": "電子零組件",
+      "realWorldHint": "電源管理、被動元件與散熱模組的隱形冠軍",
+      "corps": [
+        "TAIDA",
+        "HONGYU"
+      ],
+      "globalShare": 0.31,
+      "techLevel": 3.6,
+      "margin": 0.19,
+      "rndIntensity": 0.048,
+      "exportShare": 0.23,
+      "employment": 224000,
+      "capexShare": 0.11,
+      "chinaExposure": 0.44,
+      "usExposure": 0.19,
+      "desc": "雇用人數最多的一塊，也是最貼近一般勞工的一塊。它在中國的生產比重最高，所以每一次兩岸關係緊張，第一個喊痛的都是這裡。"
+    },
+    {
+      "id": "DESIGN",
+      "name": "晶片設計",
+      "shortName": "IC 設計",
+      "realWorldHint": "手機系統單晶片與網通晶片的設計公司",
+      "corps": [
+        "LIANFA",
+        "RUIYE"
+      ],
+      "globalShare": 0.19,
+      "techLevel": 4.1,
+      "margin": 0.38,
+      "rndIntensity": 0.235,
+      "exportShare": 0.17,
+      "employment": 62000,
+      "capexShare": 0.05,
+      "chinaExposure": 0.51,
+      "usExposure": 0.22,
+      "desc": "研發強度最高的一塊，一家公司裡有七成的人在寫程式或跑模擬。它的客戶大量集中在對岸的手機與家電品牌，這件事在董事會裡沒有人願意大聲討論。"
+    },
+    {
+      "id": "EQUIP",
+      "name": "上游設備",
+      "shortName": "設備材料",
+      "realWorldHint": "光罩盒、晶圓載具、特用化學與檢測設備的供應鏈",
+      "corps": [
+        "JIADENG",
+        "HANWEI"
+      ],
+      "globalShare": 0.06,
+      "techLevel": 2.4,
+      "margin": 0.24,
+      "rndIntensity": 0.094,
+      "exportShare": 0.04,
+      "employment": 28000,
+      "capexShare": 0.09,
+      "chinaExposure": 0.18,
+      "usExposure": 0.41,
+      "desc": "整條產業鏈最脆弱的一環。最關鍵的曝光機與檢測設備完全握在別人手上，這是每一份國安報告都會提到卻始終沒有解決的事。"
+    }
+  ],
+  "cycle": {
+    "_note": "產業景氣循環。amplitude 是振幅，period 是週期（月），phase 是開局的相位。",
+    "FOUNDRY": {
+      "amplitude": 0.16,
+      "period": 46,
+      "phase": 0.3
+    },
+    "MEMORY": {
+      "amplitude": 0.52,
+      "period": 32,
+      "phase": 0.62
+    },
+    "COMPONENT": {
+      "amplitude": 0.22,
+      "period": 40,
+      "phase": 0.45
+    },
+    "DESIGN": {
+      "amplitude": 0.28,
+      "period": 38,
+      "phase": 0.35
+    },
+    "EQUIP": {
+      "amplitude": 0.19,
+      "period": 44,
+      "phase": 0.5
+    }
+  },
+  "policyLevers": {
+    "_note": "價值觀與法律會怎麼影響這個產業。數字是每年的變動量。",
+    "investmentPriority": {
+      "techLevel": 0.06,
+      "rndIntensity": 0.004,
+      "employment": 0.008
+    },
+    "fiscalExpansion": {
+      "capex": 0.02
+    },
+    "environment": {
+      "margin": -0.004,
+      "capex": -0.012
+    },
+    "marketFreedom": {
+      "margin": 0.005
+    },
+    "equality": {
+      "margin": -0.006,
+      "employment": 0.004
+    },
+    "unification": {
+      "chinaExposure": 0.012,
+      "usExposure": -0.01
+    }
+  },
+  "risks": [
+    {
+      "id": "SEMI_TALENT",
+      "name": "人才斷層",
+      "threshold": {
+        "rndIntensity": 0.06
+      },
+      "desc": "每年缺的工程師比畢業的還多，缺口先被高薪掩蓋，然後被外商挖角挖成結構性的問題。"
+    },
+    {
+      "id": "SEMI_POWER",
+      "name": "供電風險",
+      "threshold": {
+        "reserveMargin": 0.07
+      },
+      "desc": "一座先進晶圓廠的用電相當於一個縣的住宅用電，跳電三秒就是幾億元的報廢晶圓。"
+    },
+    {
+      "id": "SEMI_WATER",
+      "name": "用水風險",
+      "threshold": {
+        "reservoir": 40
+      },
+      "desc": "製程用水的等級比自來水高上好幾階，枯水期一到，農業用水就會被拿去換。"
+    },
+    {
+      "id": "SEMI_EXPORTCTRL",
+      "name": "出口管制",
+      "threshold": {
+        "usRelation": 0
+      },
+      "desc": "先進製程賣給誰不是廠商決定的，這件事每一次翻新都會把整條供應鏈重排一次。"
+    },
+    {
+      "id": "SEMI_OVERSEAS",
+      "name": "產能外移",
+      "threshold": {
+        "corpMood": -1
+      },
+      "desc": "客戶要求就近設廠，補貼也給得很大方，於是最先進的那一段開始出現在別的國家的土地上。"
+    }
+  ],
+  "_corpNote": "segments[].corps 指向 corporations.json 裡的公司。外商（foreign:true）不列入加權指數。"
+}

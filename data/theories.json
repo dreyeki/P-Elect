@@ -1,0 +1,230 @@
+{
+  "_note": [
+    "組織理論。政治人物的專業不是屬性條，是他手上有沒有一套講得出來的東西。",
+    "理論要花回合研究，研究完可以在政論節目上引用、在選舉時當政見提出、在質詢時當論據。",
+    "每次使用都會讓它更完善——講過十次的東西，一定比第一次講的圓熟。",
+    "axis 是這套理論會把國家價值觀往哪個方向推；strataAppeal 是哪些人聽了會買單。"
+  ],
+  "theories": [
+    {
+      "id": "TH_HOUSING_SOCIAL", "name": "只租不售的社宅路線", "field": "housing", "difficulty": 3,
+      "axis": { "marketFreedom": -1.4, "progressivism": 0.6 },
+      "strataAppeal": { "whitecollar": 1.6, "student": 1.5, "service": 1.2, "capitalist": -1.4, "smallbiz": -0.6 },
+      "desc": "主張把公共住宅完全排除在買賣市場之外，用長期只租不售把居住從資產裡拆出來。",
+      "claims": [
+        "把房子當資產來炒，跟把房子當居所來住，是兩套不相容的制度設計。",
+        "只租不售的社宅一旦達到一定存量，租金天花板自然就出現了，不需要再管制。",
+        "現在的問題不是蓋得不夠多，而是蓋出來的東西最後都變成了投資標的。"
+      ]
+    },
+    {
+      "id": "TH_HOUSING_SUPPLY", "name": "供給導向的住宅鬆綁", "field": "housing", "difficulty": 3,
+      "axis": { "marketFreedom": 1.5, "environment": -0.5 },
+      "strataAppeal": { "capitalist": 1.7, "smallbiz": 1.3, "techpro": 0.8, "student": -0.9, "bluecollar": -0.6 },
+      "desc": "主張房價高是因為供給被容積、程序與土地取得綁死，鬆綁比補貼更有效。",
+      "claims": [
+        "每一道多出來的審查程序，最後都會變成消費者要付的價格。",
+        "補貼需求而不增加供給，錢會全部流進賣方的口袋裡。",
+        "都市要往上長，還是要讓年輕人往外搬，這是一個要講清楚的選擇。"
+      ]
+    },
+    {
+      "id": "TH_ENERGY_NUCLEAR", "name": "核能延役的過渡論", "field": "energy", "difficulty": 4,
+      "axis": { "environment": -1.0, "marketFreedom": 0.4 },
+      "strataAppeal": { "techpro": 1.5, "capitalist": 1.6, "publicsvc": 0.7, "student": -1.3, "farmer": -0.5 },
+      "desc": "主張在再生能源真正撐得起基載之前，既有機組延役是成本最低的過渡手段。",
+      "claims": [
+        "備轉容量率低於百分之六的那幾個夏天，不是靠道德立場撐過去的。",
+        "把過渡期的成本算清楚，比爭論終極目標更有實際意義。",
+        "工業用電的穩定度直接決定了半導體業願不願意留在這座島上。"
+      ]
+    },
+    {
+      "id": "TH_ENERGY_RENEW", "name": "分散式綠能與需量管理", "field": "energy", "difficulty": 4,
+      "axis": { "environment": 1.4, "centralization": -0.6 },
+      "strataAppeal": { "student": 1.5, "whitecollar": 1.1, "farmer": 0.9, "capitalist": -0.9 },
+      "desc": "主張把電網從集中式大機組轉向分散式綠能加需量反應，用彈性取代備轉容量。",
+      "claims": [
+        "電網的韌性來自節點的數量，不是單一機組的裝置容量。",
+        "需量反應每省下一度電，成本都比新蓋一度電便宜得多。",
+        "屋頂與農地的光電要怎麼配置，是土地正義的問題，不只是能源問題。"
+      ]
+    },
+    {
+      "id": "TH_LABOR_HOURS", "name": "工時縮減與生產力重估", "field": "labor", "difficulty": 3,
+      "axis": { "marketFreedom": -1.6 },
+      "strataAppeal": { "bluecollar": 1.8, "service": 1.6, "whitecollar": 1.2, "smallbiz": -1.4, "capitalist": -1.6 },
+      "desc": "主張長工時並沒有換到等比例的產出，縮減工時反而能逼出生產力的改善。",
+      "claims": [
+        "台灣的年總工時排在世界前段，但每工時產值並沒有跟著排在前段。",
+        "工時的長短從來不是勞資之間的自然結果，而是制度替雙方畫出來的線。",
+        "把加班變便宜，企業就沒有動機去改善流程。"
+      ]
+    },
+    {
+      "id": "TH_LABOR_FLEX", "name": "彈性化與中小企業存續", "field": "labor", "difficulty": 3,
+      "axis": { "marketFreedom": 1.6 },
+      "strataAppeal": { "smallbiz": 1.8, "capitalist": 1.5, "bluecollar": -1.5, "service": -1.2 },
+      "desc": "主張一體適用的工時規範壓垮的是中小企業，分業分級的彈性才是務實解方。",
+      "claims": [
+        "同一套排班規則套在半導體廠跟巷口的早餐店身上，本身就不合理。",
+        "被罰到倒閉的店，員工一個工作機會都不會剩下。",
+        "彈性不等於剝削，關鍵在於誰有議價能力，那要靠工會而不是靠罰則。"
+      ]
+    },
+    {
+      "id": "TH_DEFENSE_ASYM", "name": "不對稱戰力優先論", "field": "defense", "difficulty": 5,
+      "axis": { "militaryAutonomy": 1.3 },
+      "strataAppeal": { "techpro": 1.4, "student": 1.0, "publicsvc": 0.8, "retiree": -0.7 },
+      "desc": "主張把有限的國防預算集中在存活性高、單價低、數量大的載具與彈藥上。",
+      "claims": [
+        "在對方飛彈數量是我們數倍的前提下，大型平台的存活性是必須先回答的問題。",
+        "嚇阻力來自對方無法確定能不能成功，不是來自我們的裝備看起來有多壯觀。",
+        "彈藥存量與後勤韌性，遠比採購清單上的品項名稱重要。"
+      ]
+    },
+    {
+      "id": "TH_DEFENSE_ALLY", "name": "同盟嵌合與聯合作戰", "field": "defense", "difficulty": 5,
+      "axis": { "militaryAutonomy": -1.3 },
+      "strataAppeal": { "publicsvc": 1.3, "capitalist": 0.9, "whitecollar": 0.7, "student": -0.5 },
+      "desc": "主張把有限資源投入與盟軍的介面整合，讓外部力量在關鍵時刻真的接得上。",
+      "claims": [
+        "情資、通訊與後勤的介面如果接不上，援助到了門口也進不來。",
+        "自主研發跟同盟採購不是二選一，問題在於哪一項的交付時程來得及。",
+        "台灣的戰略價值來自它在整個區域架構裡的位置，不是來自單獨作戰的能力。"
+      ]
+    },
+    {
+      "id": "TH_CROSS_EXCHANGE", "name": "交流促穩定論", "field": "crossStrait", "difficulty": 4,
+      "axis": { "unification": 1.2 },
+      "strataAppeal": { "smallbiz": 1.5, "capitalist": 1.3, "farmer": 1.1, "student": -1.4 },
+      "desc": "主張經貿與人員往來會提高衝突的成本，往來越密集，動武的門檻越高。",
+      "claims": [
+        "觀光與農產外銷的中斷，最先受傷的從來不是台北的辦公室。",
+        "把對話管道全部關掉，誤判的機率只會上升不會下降。",
+        "穩定不等於接受任何條件，但沒有穩定就沒有談判的餘裕。"
+      ]
+    },
+    {
+      "id": "TH_CROSS_RESILIENCE", "name": "去風險與供應鏈重組", "field": "crossStrait", "difficulty": 4,
+      "axis": { "unification": -1.3, "marketFreedom": -0.4 },
+      "strataAppeal": { "student": 1.4, "techpro": 1.2, "smallbiz": -1.1, "capitalist": -0.8 },
+      "desc": "主張過度集中的經濟依賴本身就是安全問題，應以成本換取韌性。",
+      "claims": [
+        "當單一市場佔出口比重過高，對方就取得了一個不需要開火的槓桿。",
+        "分散市場的短期成本是實際的，但那筆錢是保費不是損失。",
+        "關鍵物資的存量與替代來源，應該用國安標準管理而不是用商業標準。"
+      ]
+    },
+    {
+      "id": "TH_WELFARE_PENSION", "name": "年金確定提撥改制", "field": "welfare", "difficulty": 5,
+      "axis": { "marketFreedom": 0.9 },
+      "strataAppeal": { "youthProxy": 1.4, "whitecollar": 1.0, "techpro": 0.9, "retiree": -1.8, "publicsvc": -1.6 },
+      "desc": "主張把現行的確定給付制逐步轉為確定提撥制，讓世代之間的帳算得清楚。",
+      "claims": [
+        "現行制度的本質是今天的工作者替昨天的承諾買單，而人口結構已經撐不住了。",
+        "把破產的日期往後推，跟解決問題不是同一件事。",
+        "改制的痛在轉換期，不改的痛在二十年後，而且更大。"
+      ]
+    },
+    {
+      "id": "TH_WELFARE_LONGCARE", "name": "長照公共化", "field": "welfare", "difficulty": 4,
+      "axis": { "marketFreedom": -1.3, "progressivism": 0.7 },
+      "strataAppeal": { "retiree": 1.7, "service": 1.2, "bluecollar": 1.1, "capitalist": -0.9 },
+      "desc": "主張長照應該從補貼制走向保險制，讓照顧不再是家庭內部的自行承擔。",
+      "claims": [
+        "照顧責任落在家裡的時候，最先離開職場的通常是女性。",
+        "補貼制的問題是給了錢卻沒有服務量能，錢花下去買不到人。",
+        "長照支出看起來是負擔，但它同時釋放出的勞動力是有產值的。"
+      ]
+    },
+    {
+      "id": "TH_ECON_INDUSTRY", "name": "產業縱深與去單一化", "field": "economy", "difficulty": 4,
+      "axis": { "marketFreedom": -0.6, "centralization": 0.8 },
+      "strataAppeal": { "bluecollar": 1.2, "smallbiz": 1.3, "farmer": 0.8, "techpro": -0.6 },
+      "desc": "主張過度集中在單一產業的經濟結構很脆弱，應主動培養第二與第三支柱。",
+      "claims": [
+        "當一個產業扛起四成出口的時候，它的景氣循環就等於國家的景氣循環。",
+        "資源全部往最賺錢的地方集中，看起來是效率，長期是風險。",
+        "區域發展失衡跟產業單一化是同一個問題的兩個面向。"
+      ]
+    },
+    {
+      "id": "TH_ECON_TALENT", "name": "人才引進與薪資結構", "field": "economy", "difficulty": 4,
+      "axis": { "immigration": 1.5, "marketFreedom": 0.7 },
+      "strataAppeal": { "techpro": 1.6, "capitalist": 1.4, "whitecollar": 0.6, "bluecollar": -1.2 },
+      "desc": "主張薪資停滯的根源是高階人力供給不足與產業升級停滯，開放是解方不是威脅。",
+      "claims": [
+        "本地人才被挖走的速度，比我們補進來的速度快。",
+        "移工壓低的是特定職類的薪資，高階人才引進拉高的是整體的產值。",
+        "把門關起來保護的，通常是既有的位子，不是未來的機會。"
+      ]
+    },
+    {
+      "id": "TH_EDU_VOCATIONAL", "name": "技職體系重建", "field": "education", "difficulty": 3,
+      "axis": { "progressivism": -0.5, "centralization": 0.6 },
+      "strataAppeal": { "bluecollar": 1.5, "smallbiz": 1.3, "farmer": 1.0, "whitecollar": -0.4 },
+      "desc": "主張大學過度擴張稀釋了技職體系，應把資源導回可就業的技術養成。",
+      "claims": [
+        "一個社會不需要人人都有學士學位，但需要每個行業都有夠好的師傅。",
+        "缺工跟高學歷失業同時存在，本身就說明了教育跟產業之間斷掉了。",
+        "技職教育被當成次等選項的那一天起，這個問題就注定會發生。"
+      ]
+    },
+    {
+      "id": "TH_ENV_CARBON", "name": "碳定價與邊境調整", "field": "environment", "difficulty": 5,
+      "axis": { "environment": 1.5, "marketFreedom": 0.5 },
+      "strataAppeal": { "techpro": 1.2, "student": 1.4, "whitecollar": 0.8, "capitalist": -1.3, "smallbiz": -1.0 },
+      "desc": "主張用價格訊號而非行政管制來減碳，並與國際邊境調整機制接軌。",
+      "claims": [
+        "沒有價格的排放，任何減量承諾都只是一份公文。",
+        "歐盟的邊境調整已經上路，我們不收，錢就是被別人收走。",
+        "碳費怎麼用比碳費多少更關鍵，那筆錢應該回到轉型最痛的產業身上。"
+      ]
+    },
+    {
+      "id": "TH_GOV_LOCAL", "name": "財政收支重劃與地方自主", "field": "governance", "difficulty": 4,
+      "axis": { "centralization": -1.6 },
+      "strataAppeal": { "farmer": 1.2, "smallbiz": 1.1, "bluecollar": 0.7, "publicsvc": -0.5 },
+      "desc": "主張現行的統籌分配制度讓地方永遠在向中央要錢，應把財源與責任一起下放。",
+      "claims": [
+        "地方首長把時間花在跑中央要補助，那是制度的失敗不是個人的問題。",
+        "沒有財源的自治只是名義上的自治。",
+        "責任跟錢要放在同一個人身上，選民才知道該找誰負責。"
+      ]
+    },
+    {
+      "id": "TH_GOV_TRANSPARENCY", "name": "遊說登記與政治獻金透明", "field": "corruption", "difficulty": 3,
+      "axis": { "directDemocracy": 1.3 },
+      "strataAppeal": { "student": 1.5, "whitecollar": 1.3, "techpro": 1.1, "capitalist": -1.2 },
+      "desc": "主張政商往來不可能消滅，但可以強制攤在陽光下，讓代價由選民評價。",
+      "claims": [
+        "禁止不了的事情要登記，登記不了的事情才需要禁止。",
+        "政治獻金的問題從來不是金額，是那筆錢換到了什麼而沒有人知道。",
+        "透明的成本由政治人物承擔，不透明的成本由整個社會承擔。"
+      ]
+    },
+    {
+      "id": "TH_HEALTH_NHI", "name": "健保財務結構改革", "field": "healthcare", "difficulty": 5,
+      "axis": { "marketFreedom": 0.6 },
+      "strataAppeal": { "retiree": -0.8, "whitecollar": 0.9, "techpro": 0.8, "publicsvc": 0.6 },
+      "desc": "主張健保的問題不在費率而在支付制度，論量計酬本身就在鼓勵浪費。",
+      "claims": [
+        "每隔幾年就調一次費率，這件事本身就證明了結構沒有被處理。",
+        "同一個病人在三家醫院做同一項檢查，錢是誰在付。",
+        "分級醫療講了二十年做不到，是因為沒有人願意承擔那個政治代價。"
+      ]
+    },
+    {
+      "id": "TH_SECURITY_INFILTRATION", "name": "境外代理人登記制", "field": "security", "difficulty": 4,
+      "axis": { "unification": -1.4, "directDemocracy": -0.4 },
+      "strataAppeal": { "student": 1.3, "publicsvc": 1.0, "smallbiz": -0.9, "farmer": -0.6 },
+      "desc": "主張與其事後追訴滲透，不如比照國際慣例建立事前登記與揭露義務。",
+      "claims": [
+        "民主社會不能禁止言論，但可以要求揭露誰在付錢。",
+        "事後追訴的舉證門檻高到幾乎無法運作，這是實務上的死路。",
+        "登記制的代價是行政負擔，不登記的代價是整個資訊環境。"
+      ]
+    }
+  ]
+}

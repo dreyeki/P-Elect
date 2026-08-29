@@ -1,0 +1,125 @@
+{
+  "_note": [
+    "主打形象。政治人物不是靠屬性被記住的，是靠一句話被記住的。",
+    "玩家與政黨各自可以主打一個形象。形象會放大特定族群的好感，也會放大相對應的反噬——",
+    "打清廉的人一旦沾上汙名，跌得比誰都重；打台獨的人一旦被抓到跟對岸往來，就再也解釋不清。",
+    "requires 是掛上這個形象的門檻，contradicts 是掛上去以後不能同時成立的事。"
+  ],
+  "playerImages": [
+    {
+      "id": "IMG_CLEAN", "name": "清廉", "slogan": "我沒有拿過不該拿的錢",
+      "desc": "把操守當成主要賣點。門檻很高，維持很難，但一旦立起來，對手很難用別的東西打倒你。",
+      "requires": { "integrity": 3, "stigmaMax": 1 },
+      "strata": { "whitecollar": 1.3, "student": 1.4, "publicsvc": 1.2, "techpro": 1.1 },
+      "axis": { "directDemocracy": 0.5 },
+      "backfire": { "onStigmaGain": 2.2, "text": "打清廉的人只要沾上一次，整個形象就會垮掉，而且沒有第二次機會。" }
+    },
+    {
+      "id": "IMG_TECHNOCRAT", "name": "科學務實", "slogan": "先看數據，再談立場",
+      "desc": "把專業與證據當賣點。中間選民與科技業買單，但很難激起熱情，鐵票區覺得你不夠有溫度。",
+      "requires": { "judgment": 3 },
+      "strata": { "techpro": 1.7, "whitecollar": 1.4, "capitalist": 1.1, "farmer": 0.6, "retiree": 0.7 },
+      "axis": { "progressivism": 0.4 },
+      "backfire": { "onInterpellationFail": 1.8, "text": "主打專業的人一旦講錯數字，那個畫面比任何攻擊都有效。" }
+    },
+    {
+      "id": "IMG_INDEPENDENCE", "name": "台灣獨立", "slogan": "這座島的名字應該由我們自己決定",
+      "desc": "旗幟鮮明的本土路線。深綠支持者的熱情極高，但中間與淺藍會直接把你排除在選項之外。",
+      "requires": { "boldness": 3 },
+      "strata": { "student": 1.6, "service": 1.1, "publicsvc": 0.7, "capitalist": 0.5, "smallbiz": 0.6 },
+      "axis": { "unification": -1.2 },
+      "identityBoost": { "localist": 0.35, "chinese": -0.45 },
+      "backfire": { "onProCnChoice": 2.5, "text": "打台獨的人只要被抓到跟對岸的往來，支持者的失望是不可逆的。" }
+    },
+    {
+      "id": "IMG_STABILITY", "name": "和平穩定", "slogan": "不要把日子過成隨時要打仗的樣子",
+      "desc": "訴求兩岸緩和與生活安定。中小企業、農漁民與長輩買單，年輕人會覺得你在迴避問題。",
+      "requires": {},
+      "strata": { "smallbiz": 1.5, "farmer": 1.4, "retiree": 1.4, "student": 0.5, "techpro": 0.8 },
+      "axis": { "unification": 0.9 },
+      "identityBoost": { "chinese": 0.3, "dual": 0.2, "localist": -0.25 },
+      "backfire": { "onPrcPressure": 2.0, "text": "打和平的人遇到對岸軍演，會被問一句「那現在呢」，而且答不好。" }
+    },
+    {
+      "id": "IMG_ECONOMY", "name": "拚經濟", "slogan": "先把大家的口袋顧好",
+      "desc": "把經濟成長與招商當唯一主軸。商界與中小企業支持，但勞工與環保團體會盯著你。",
+      "requires": {},
+      "strata": { "capitalist": 1.7, "smallbiz": 1.5, "techpro": 1.2, "bluecollar": 0.8, "student": 0.7 },
+      "axis": { "marketFreedom": 1.0, "environment": -0.5 },
+      "backfire": { "onRecession": 2.2, "text": "打經濟的人碰上景氣下行，連唯一的賣點都沒有了。" }
+    },
+    {
+      "id": "IMG_LABOR", "name": "勞工代言", "slogan": "有人要替加班的人講話",
+      "desc": "站在受僱者這一邊。藍領與服務業的熱情很高，商界會全力反對你。",
+      "requires": {},
+      "strata": { "bluecollar": 1.8, "service": 1.6, "whitecollar": 1.2, "capitalist": 0.4, "smallbiz": 0.6 },
+      "axis": { "marketFreedom": -1.1 },
+      "backfire": { "onProBizVote": 2.4, "text": "打勞工的人只要投錯一次票，工會的人會記得比誰都久。" }
+    },
+    {
+      "id": "IMG_YOUTH", "name": "青年世代", "slogan": "這一代該有自己的位子了",
+      "desc": "以世代交替為訴求。年輕族群的熱情極高，但長輩會覺得你在挑釁，資歷也會被質疑。",
+      "requires": { "ageMax": 48 },
+      "strata": { "student": 2.0, "whitecollar": 1.3, "techpro": 1.2, "retiree": 0.5, "publicsvc": 0.7 },
+      "axis": { "progressivism": 0.9, "directDemocracy": 0.6 },
+      "backfire": { "onAging": 1.5, "text": "打世代交替的人自己過了五十歲以後，這句話就開始變得尷尬。" }
+    },
+    {
+      "id": "IMG_SERVICE", "name": "地方服務", "slogan": "有事情找我，我一定到",
+      "desc": "以選民服務與地方經營為主軸。基層組織成長最快，但全國知名度很難拉起來。",
+      "requires": {},
+      "strata": { "retiree": 1.5, "farmer": 1.4, "bluecollar": 1.2, "smallbiz": 1.2, "student": 0.7 },
+      "grassrootsBonus": 0.4,
+      "fameGrowthMult": 0.6,
+      "backfire": { "onAbsence": 1.6, "text": "打服務的人只要有幾場婚喪喜慶沒到，話很快就會傳開。" }
+    },
+    {
+      "id": "IMG_FIGHTER", "name": "強硬對抗", "slogan": "該吵的時候就要吵",
+      "desc": "以戰鬥姿態為賣點。同溫層極度買單，中間選民會怕你，議場衝突的機率大增。",
+      "requires": { "boldness": 4 },
+      "strata": { "student": 1.4, "bluecollar": 1.2, "retiree": 0.7, "whitecollar": 0.8 },
+      "moderatePenalty": 0.04,
+      "fameGrowthMult": 1.4,
+      "backfire": { "onModerateSwing": 1.8, "text": "打對抗的人在需要協商的時候，會發現沒有人願意跟你坐下來。" }
+    },
+    {
+      "id": "IMG_PROFESSIONAL", "name": "專業問政", "slogan": "我把每一條條文都讀完了",
+      "desc": "以法案品質與問政實績為賣點。同僚與媒體尊敬你，但選民不見得知道你做了什麼。",
+      "requires": { "judgment": 3 },
+      "strata": { "whitecollar": 1.4, "techpro": 1.3, "publicsvc": 1.3, "farmer": 0.7 },
+      "lawQualityBonus": 0.18,
+      "fameGrowthMult": 0.75,
+      "backfire": { "onEmptyRecord": 1.5, "text": "打專業的人如果一條法案都沒推成，那個形象就是空的。" }
+    },
+    {
+      "id": "IMG_GRASSROOTS", "name": "庶民親和", "slogan": "我跟大家一樣",
+      "desc": "強調自己就是一般人。廣泛的好感度加成，但菁英與專業族群會覺得你不夠格。",
+      "requires": {},
+      "strata": { "_all": 1.15, "bluecollar": 1.4, "service": 1.3, "farmer": 1.3, "techpro": 0.7, "capitalist": 0.5 },
+      "backfire": { "onWealthReveal": 2.0, "text": "打庶民的人一旦被翻出財產申報，那個落差本身就是新聞。" }
+    },
+    {
+      "id": "IMG_REFORMER", "name": "改革者", "slogan": "現在這套東西必須被換掉",
+      "desc": "以推翻現狀為主軸。改革派選民熱情高，但你會同時得罪體制內的所有人。",
+      "requires": { "boldness": 3 },
+      "strata": { "student": 1.5, "whitecollar": 1.2, "techpro": 1.1, "publicsvc": 0.6, "retiree": 0.7 },
+      "axis": { "progressivism": 0.8, "directDemocracy": 0.7 },
+      "factionPenalty": 0.5,
+      "backfire": { "onCompromise": 1.9, "text": "打改革的人只要跟舊勢力握一次手，就會被說成跟他們是一夥的。" }
+    }
+  ],
+  "partyImages": [
+    { "id": "PIMG_NATIVE", "name": "本土政權", "axis": { "unification": -1.0 }, "identityBoost": { "localist": 0.3 } },
+    { "id": "PIMG_STABLE", "name": "穩健執政", "axis": {}, "cohesionBonus": 0.4 },
+    { "id": "PIMG_REFORM", "name": "改革力量", "axis": { "progressivism": 0.8 }, "strata": { "student": 1.4, "whitecollar": 1.2 } },
+    { "id": "PIMG_ECONOMY", "name": "經濟優先", "axis": { "marketFreedom": 0.9 }, "strata": { "capitalist": 1.5, "smallbiz": 1.3 } },
+    { "id": "PIMG_JUSTICE", "name": "公平正義", "axis": { "marketFreedom": -0.9 }, "strata": { "bluecollar": 1.4, "service": 1.3 } },
+    { "id": "PIMG_CLEAN", "name": "清廉政治", "axis": { "directDemocracy": 0.5 }, "strata": { "_all": 1.1 } },
+    { "id": "PIMG_UNITY", "name": "兩岸和解", "axis": { "unification": 1.0 }, "identityBoost": { "chinese": 0.3 } }
+  ],
+  "switchCost": {
+    "politicalCapital": 80,
+    "favorPenalty": 0.6,
+    "_note": "換形象要付政治資本，而且會讓原本相信你的人失望一次。頻繁更換的人會被說成沒有中心思想。"
+  }
+}

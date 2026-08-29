@@ -29,10 +29,23 @@ const { sched } = E.monthsUntilElection(state, data);
 const runs = E.availableRuns(state, data, sched);
 ok(runs.length > 0, `可參選職位 ${runs.length} 個：${runs.map((r) => r.name).join('、')}`);
 
-// 初選
+// 初選：多競爭者、可以先去談
 const rng = new Rng(state.meta.seed, 4242);
-const pri = E.primary(state, data, runs[0], rng);
-ok(typeof pri.won === 'boolean', `初選結果：${pri.won ? '出線' : '落敗'}`);
+const pri = E.buildPrimary(state, data, runs[0], rng);
+ok(!pri.skip && pri.rivals.length >= 1, `初選對手 ${pri.rivals.length} 位：${pri.rivals.map((r) => `${r.name}（${r.factionName}）`).join('、')}`);
+const beforeMember = pri.me.member;
+state.player.politicalCapital = 200;
+const fac = state.parties[state.player.party].factions[0];
+fac.favor = 5;
+const lob = E.lobbyFaction(state, data, pri, fac.id, new Rng(3, 0));
+ok(lob.ok, `拜會派系：${lob.msg}`);
+ok(pri.lobbied.length === 1, '談過的派系不能再談第二次');
+const lob2 = E.lobbyFaction(state, data, pri, fac.id, new Rng(3, 0));
+ok(!lob2.ok, '重複拜會會被擋下來');
+const res = E.resolvePrimary(state, data, pri, rng);
+ok(typeof res.won === 'boolean' && res.field.length === pri.rivals.length + 1,
+  `初選開票：${res.field.map((x) => `${x.name} ${(x.share * 100).toFixed(1)}%`).join('　')}`);
+ok(Math.abs(res.field.reduce((a, x) => a + x.share, 0) - 1) < 1e-6, '初選得票率總和為 1');
 
 // 對手與計票
 const run = runs.find((r) => r.type === 'councilor') ?? runs[0];

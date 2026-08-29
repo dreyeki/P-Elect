@@ -2,10 +2,12 @@
 import { clampBi } from '../core/Formula.js';
 import { N_AXIS } from '../core/Pops.js';
 
-const MAX_STEP = 0.02;   // 月回合每軸最大移動
+const DEFAULT_MAX_STEP = 0.02;   // 月回合每軸最大移動（可由 tuning.json 覆寫）
 
 export function tick(state, ctx) {
   const { data, scaleMult } = ctx;
+  const TV = data.tuning?.values ?? {};
+  const MAX_STEP = TV.maxStepPerTurn ?? DEFAULT_MAX_STEP;
   const P = state.pops;
 
   // POP 意識形態的人口加權平均
@@ -20,8 +22,8 @@ export function tick(state, ctx) {
   data.axisIds.forEach((axId, a) => {
     const popMean = sums[a] / Math.max(1, w);
     const lawPressure = state.modifiers.get(`value.${axId}`, 0);
-    const popPull = (popMean - state.values[axId]) * 0.02;
-    const step = clampBi(lawPressure * 0.012 + popPull) ;
+    const popPull = (popMean - state.values[axId]) * (TV.popPullCoefficient ?? 0.02);
+    const step = clampBi(lawPressure * (TV.lawPressureCoefficient ?? 0.012) + popPull);
     const capped = Math.max(-MAX_STEP, Math.min(MAX_STEP, step)) * scaleMult;
     state.values[axId] = clampBi(state.values[axId] + capped);
 
@@ -34,7 +36,7 @@ export function tick(state, ctx) {
   return {};
 }
 
-export function isConsensus(state, axId) { return (state.flags['consensus_' + axId] ?? 0) >= 60; }
+export function isConsensus(state, axId, data) { return (state.flags['consensus_' + axId] ?? 0) >= (data?.tuning?.values?.consensusTurns ?? 60); }
 
 /** 目前所在的 bracket，供 UI 說明 */
 export function bracketOf(data, axId, value) {

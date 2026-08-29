@@ -9,14 +9,20 @@ import { clamp, clamp05 } from '../core/Formula.js';
 export const ACTIONS = [
   { id: 'canvass', name: '選區跑攤', ap: 1, fatigue: 8,
     desc: '婚喪喜慶、市場、宮廟，一場一場跑。基層是這樣一點一點長出來的。' },
-  { id: 'study', name: '進修讀書', ap: 1, fatigue: 8,
-    desc: '在這一行，能靜下來讀完一本書本身就是一種奢侈。' },
-  { id: 'family', name: '陪伴家人', ap: 1, fatigue: -20,
-    desc: '你已經很久沒有好好吃一頓飯了，家裡的人也已經很久沒有抱怨了。' },
-  { id: 'rest', name: '休養', ap: 2, fatigue: -40,
-    desc: '醫生說你再這樣下去會出事，你這次決定聽進去。' },
+  { id: 'theory', name: '組織理論', ap: 1, fatigue: 8, deferred: true,
+    desc: '把零散的想法整理成一套講得出來的東西。上節目、選舉、質詢，靠的都是這個。' },
 
-  { id: 'talkshow', name: '上政論節目', ap: 1, fatigue: 8,
+  { id: 'invitations', name: '出席邀約', ap: 0, fatigue: 0, deferred: true,
+    unlock: { invites: 1 }, unlockText: '手上要有人邀你才有得出席',
+    desc: '婚宴、告別式、運動會、企業活動。自己去最有用，派助理去至少人有到。' },
+  { id: 'livestream', name: '開直播', ap: 1, fatigue: 6, deferred: true,
+    unlock: { boldness: 3 }, unlockText: '氣魄要到「沉穩持重」才撐得住留言區',
+    desc: '沒有剪接沒有重來，講錯的那一句會被單獨剪出來播一個禮拜。' },
+  { id: 'streetSpeech', name: '街頭宣講', ap: 1, fatigue: 11, deferred: true,
+    unlock: { boldness: 4 }, unlockText: '氣魄要到「敢作敢當」才站得上那個定點',
+    desc: '站在一個沒有人有義務停下來的地方，講三十分鐘給不特定的人聽。' },
+
+  { id: 'talkshow', name: '上政論節目', ap: 1, fatigue: 8, deferred: true,
     unlock: { invitation: true }, unlockText: '要先收到節目通告',
     desc: '同溫層會很爽，對面會很氣，中間選民會轉台。講錯一句就是明天的頭條。' },
   { id: 'showPrep', name: '節目準備', ap: 1, fatigue: 6,
@@ -28,7 +34,7 @@ export const ACTIONS = [
   { id: 'fundraise', name: '募款餐會', ap: 1, fatigue: 8,
     unlock: { fame: 1 }, unlockText: '沒人認識你的時候，餐會是開不成的',
     desc: '選舉是很花錢的事，而錢從來不會憑空出現在專戶裡。' },
-  { id: 'commissionPoll', name: '委託民調', ap: 1, fatigue: 4,
+  { id: 'commissionPoll', name: '委託民調', ap: 1, fatigue: 4, deferred: true,
     unlock: { fame: 1, funds: 200000 }, unlockText: '要有一點知名度，專戶也要有二十萬',
     desc: '公開民調不會告訴你想知道的事。自己出錢做的那一份才會。' },
   { id: 'faction', name: '拜會派系大老', ap: 1, fatigue: 8,
@@ -48,6 +54,12 @@ export const ACTIONS = [
     unlock: { roles: ['councilor', 'legislator', 'mayor', 'minister', 'president'] },
     unlockText: '要有公職身分才排得到行程',
     desc: '出去一趟很累，但回來以後你講的話會不太一樣。' },
+  { id: 'setImage', name: '主打形象', ap: 1, fatigue: 4, deferred: true,
+    unlock: { fame: 1 }, unlockText: '沒人認識你的時候，主打什麼都沒有意義',
+    desc: '決定你要讓人記住哪一句話。形象會放大你的優勢，也會放大你的弱點。' },
+  { id: 'retire', name: '退出政壇', ap: 0, fatigue: 0, deferred: true,
+    unlock: { minTurn: 12 }, unlockText: '才剛開始就要走，這句話沒有份量',
+    desc: '把位子交出去，把服務處收掉，然後看看自己這些年到底留下了什麼。' },
   { id: 'dealmaking', name: '私下協商', ap: 2, fatigue: 15,
     unlock: { fame: 2, politicalCapital: 40 }, unlockText: '要有一定份量，別人才願意跟你談',
     desc: '有些事在檯面上永遠談不成，但在檯面下十分鐘就有結論。' },
@@ -64,6 +76,9 @@ export function actionState(state, data, a) {
   if (u.politicalCapital != null && p.politicalCapital < u.politicalCapital) return { unlocked: false, why: a.unlockText };
   if (u.roles && !u.roles.includes(p.role)) return { unlocked: false, why: a.unlockText };
   if (u.invitation && !(state.invitations ?? []).length) return { unlocked: false, why: a.unlockText };
+  if (u.invites != null && (state.socialInvites ?? []).length < u.invites) return { unlocked: false, why: a.unlockText };
+  if (u.boldness != null && p.attrs.boldness < u.boldness) return { unlocked: false, why: a.unlockText };
+  if (u.minTurn != null && state.meta.turn < u.minTurn) return { unlocked: false, why: a.unlockText };
   return { unlocked: true };
 }
 
@@ -75,25 +90,35 @@ export function lockedActions(state, data) {
 }
 
 export function apOf(state, data) {
+  const T = data.tuning?.actionPoints ?? {};
   const p = state.player;
-  let ap = data.meta.baseAP;
-  if (['mayor', 'minister', 'president'].includes(p.role)) ap += 1;
-  if (state.meta.scale === 'week' && state.team.some((t) => t.role === 'manager')) ap += 1;
-  if (p.attrs.stamina >= 5) ap += 1;
-  if (fatigueLevel(state) >= 4) ap -= 1;
+  let ap = data.tuning?.start?.baseAP ?? data.meta.baseAP;
+  if (['mayor', 'minister', 'president'].includes(p.role)) ap += T.bonusMayor ?? 1;
+  if (state.meta.scale === 'week' && state.team.some((t) => t.role === 'manager')) ap += T.bonusCampaignManager ?? 1;
+  if (p.attrs.stamina >= 5) ap += T.bonusStamina5 ?? 1;
+  if (fatigueLevel(state) >= 4) ap -= T.penaltyFatigue4 ?? 1;
   return Math.max(1, ap);
+}
+
+/** 可以硬撐的上限：行動點用完之後還能再借幾點 */
+export function maxAPWithOverdraft(state, data) {
+  const T = data.tuning?.actionPoints ?? {};
+  return apOf(state, data) + (T.allowOverdraft === false ? 0 : (T.maxOverdraft ?? 2));
 }
 
 export function fatigueLevel(state) { return clamp05(state.player.fatigueRaw / 24); }
 
 export function tick(state, ctx) {
-  const { rng, scaleMult } = ctx;
+  const { rng, scaleMult, data } = ctx;
   const p = state.player;
   const news = [];
   const age = state.meta.year - p.birthYear;
-  const agePenalty = age >= 75 ? 14 : age >= 65 ? 8 : age >= 55 ? 4 : 0;
+  const TF = data.tuning?.fatigue ?? {};
+  const AGE = TF.agePenalty ?? { 55: 4, 65: 8, 75: 14 };
+  const agePenalty = age >= 75 ? AGE['75'] : age >= 65 ? AGE['65'] : age >= 55 ? AGE['55'] : 0;
 
-  p.fatigueRaw = clamp(p.fatigueRaw - (10 + p.attrs.stamina * 4 - agePenalty) * scaleMult, 0, 120);
+  p.fatigueRaw = clamp(p.fatigueRaw
+    - ((TF.recoverBase ?? 10) + p.attrs.stamina * (TF.recoverPerStamina ?? 4) - agePenalty) * scaleMult, 0, 120);
   // 沒有人會一直記得你。知名度會慢慢退回去，
   // 但地方上原本就認得你的那一點基礎不會消失，所以設一個地板。
   if (p.fame > 1.2) p.fame = Math.max(1.2, p.fame - 0.018 * scaleMult);
@@ -105,14 +130,14 @@ export function tick(state, ctx) {
     return { news, hospitalized: true };
   }
 
-  const risk = Math.max(0, (p.fatigueRaw - 45) / 150)
-    * (1 + (5 - p.attrs.stamina) * 0.18)
+  const risk = Math.max(0, (p.fatigueRaw - (TF.hospitalThreshold ?? 45)) / (TF.hospitalRiskDivisor ?? 150))
+    * (1 + (5 - p.attrs.stamina) * (TF.hospitalStaminaFactor ?? 0.18))
     * (1 + agePenalty / 20);
   if (risk > 0 && rng.bool(clamp(risk, 0, 0.6) * scaleMult)) {
     p.hospitalTurns = p.fatigueRaw > 90 ? 3 : p.fatigueRaw > 70 ? 2 : 1;
     p.fatigueRaw = 0;
     p.favorNational = clamp(p.favorNational + 1, -5, 5);
-    if (rng.bool(0.2)) {
+    if (rng.bool(TF.permanentStaminaLossChance ?? 0.2)) {
       p.attrs.stamina = clamp05(p.attrs.stamina - 1);
       news.push({ kind: 'personal', text: `你在辦公室昏倒，被送進急診。醫生說這次是警訊，下次不見得會這麼幸運，你的身體已經回不到從前的狀態了。` });
     } else {
@@ -123,17 +148,64 @@ export function tick(state, ctx) {
   return { news };
 }
 
+/**
+ * 執行一個行動。
+ * 標記為 deferred 的行動只是「打開選單」，這一步不扣行動點——
+ * 玩家看完之後決定不做，不應該白白損失一個月。
+ * 真正做下去的時候由呼叫端再叫一次 commit()。
+ */
 export function doAction(state, data, actionId, payload = {}) {
   const a = ACTIONS.find((x) => x.id === actionId);
-  const p = state.player;
   if (!a) return { ok: false, msg: '沒有這個行動。' };
-  if (p.apUsed + a.ap > apOf(state, data)) return { ok: false, msg: '行動點不夠了，這個回合你只能做這麼多事。' };
-  p.apUsed += a.ap;
-  p.fatigueRaw = clamp(p.fatigueRaw + a.fatigue, 0, 120);
-  return { ok: true, action: a, payload };
+  if (a.deferred) {
+    const left = maxAPWithOverdraft(state, data) - state.player.apUsed;
+    if (a.ap > left) return { ok: false, msg: '真的撐不住了，這個月再怎麼硬排也排不下。' };
+    return { ok: true, deferred: true, action: a, payload };
+  }
+  return spendAP(state, data, a.ap, a.fatigue, { action: a, payload });
 }
 
-/** 屬性成長：進修累積到門檻才會跳一級 */
+/** 真的做下去了，這時才扣行動點 */
+export function commit(state, data, actionId) {
+  const a = ACTIONS.find((x) => x.id === actionId);
+  if (!a) return { ok: false, msg: '沒有這個行動。' };
+  return spendAP(state, data, a.ap, a.fatigue, { action: a });
+}
+
+/**
+ * 花行動點。用完之後還可以再硬撐幾點，
+ * 但每超支一點都有機率讓你在這個月的某個晚上突然覺得撐不下去。
+ */
+export function spendAP(state, data, ap, fatigue = 0, extra = {}) {
+  const T = data.tuning?.actionPoints ?? {};
+  const p = state.player;
+  const normal = apOf(state, data);
+  const hardMax = maxAPWithOverdraft(state, data);
+  if (p.apUsed + ap > hardMax) {
+    return { ok: false, msg: '真的撐不住了，這個月再怎麼硬排也排不下。' };
+  }
+  const before = Math.max(0, p.apUsed - normal);
+  p.apUsed += ap;
+  const after = Math.max(0, p.apUsed - normal);
+  const over = after - before;
+  p.fatigueRaw = clamp(p.fatigueRaw + fatigue, 0, 120);
+  let overdraftHit = 0;
+  if (over > 0) {
+    const rng = state._apRng ?? null;
+    for (let i = 0; i < over; i++) {
+      const roll = rng ? rng.next() : Math.random();
+      if (roll < (T.overdraftFatigueChance ?? 0.55)) overdraftHit += T.overdraftFatiguePerPoint ?? 14;
+    }
+    p.fatigueRaw = clamp(p.fatigueRaw + overdraftHit, 0, 120);
+  }
+  return { ok: true, over, overdraftHit, ...extra };
+}
+
+/**
+ * 屬性成長：累積到門檻才會跳一級。
+ * 另有一套里程碑機制在 CanvassSystem.bumpCounter——
+ * 做同一件事做到一定次數，那件事需要的能力會自己長出來。
+ */
 export function study(state, attr) {
   const key = 'study_' + attr;
   state.flags[key] = (state.flags[key] ?? 0) + 1;

@@ -37,6 +37,43 @@ export function mapPage(s, data, arg) {
   `) + card('經營中的選區', topDistricts(s, data));
 }
 
+function voterStructureBlock(r) {
+  const v = r.voterStructure;
+  if (!v) return '<div class="xs muted">沒有這個縣市的選民結構資料。</div>';
+  const bar = (label, val, color) => `
+    <div class="votebar"><span class="vn">${esc(label)}</span>
+      <span class="vb"><i style="width:${(val * 1.4).toFixed(1)}%;background:${color}"></i></span>
+      <span class="vp">${val.toFixed(2)}%</span></div>`;
+  return bar('泛綠', v.green, 'var(--pda)') + bar('泛藍', v.blue, 'var(--crp)') + bar('民眾黨', v.white, 'var(--tpl)')
+    + `<div class="xs muted" style="margin-top:8px;line-height:1.7">${esc(v._source ?? '')}。
+      這是這個縣市長期的基本盤結構，選戰打得再好也不容易撼動它的骨架。</div>`;
+}
+
+/** 選區的政治光譜：直接看這裡的人現在支持誰，而不是看模型參數 */
+function districtColorBlock(s, data, did) {
+  const P = s.pops;
+  const di = data.districts.districts.findIndex((x) => x.id === did);
+  const nP = data.partyIds.length;
+  const GREEN = ['PDA', 'NGF', 'TWR', 'GSP'], BLUE = ['CRP', 'CUA'];
+  let g = 0, b = 0, w = 0, tot = 0;
+  for (let i = 0; i < P.n; i++) {
+    if (P.district[i] !== di) continue;
+    const sz = P.size[i];
+    for (let p = 0; p < nP; p++) {
+      const id = data.partyIds[p], v = P.support[i * nP + p] * sz;
+      if (GREEN.includes(id)) g += v; else if (BLUE.includes(id)) b += v; else if (id === 'TPL') w += v;
+    }
+    tot += sz;
+  }
+  if (!tot) return '<span class="xs muted">還沒有資料</span>';
+  const gp = g / tot * 100, bp = b / tot * 100, wp = w / tot * 100;
+  const diff = bp - gp;
+  const wordOf = Math.abs(diff) < 3 ? '勢均力敵' : diff > 12 ? '藍營優勢' : diff > 3 ? '偏向藍營'
+    : diff < -12 ? '綠營優勢' : '偏向綠營';
+  return `<span class="word">${esc(wordOf)}</span>
+    <div class="xs muted" style="margin-top:3px">綠 ${gp.toFixed(0)}%・藍 ${bp.toFixed(0)}%・白 ${wp.toFixed(0)}%</div>`;
+}
+
 const SHORT = {
   TPE: '臺北', NTP: '新北', TYC: '桃園', TCH: '臺中', TNN: '臺南', KHH: '高雄',
   KEE: '基隆', HSC: '竹市', CYI: '嘉市', HSQ: '竹縣', MIA: '苗栗', CHA: '彰化',
@@ -102,6 +139,7 @@ function regionDetail(s, data, rid) {
       ${tile('平均所得', `<span class="num">${F.int(r.economy.perCapitaIncome)}</span>`, '元／年')}
       ${tile('首長政黨', `<span style="color:${partyColor(r.politics.mayorParty)}">${esc(s.parties[r.politics.mayorParty]?.shortName ?? '無黨籍')}</span>`, `施政滿意 ${r.mayorApproval.toFixed(0)}%`)}
     </div>`)}
+    ${card('選民結構', voterStructureBlock(r))}
     ${card('建設', `<div class="grid2">
       ${wordTile('交通', 'infrastructure', r.infrastructure.transport)}
       ${wordTile('能源', 'infrastructure', r.infrastructure.energy)}
@@ -159,7 +197,7 @@ function districtDetail(s, data, did) {
       ${row('涵蓋', esc(dd.areas.join('、')))}
       ${row('人口', `<span class="num">${F.int(dd.population)}</span>`)}
       ${row('應選席次', `<span class="num">${dd.seats}</span>`)}
-      ${row('政治底色', `<span class="word">${esc(biWord('lean', dd.lean))}</span>`)}
+      ${row('政治光譜', districtColorBlock(s, data, did))}
       ${row('你的基層組織', `<span class="word">${esc(word('grassroots', d.playerGrassroots))}</span>`)}
       ${row('你的好感度', `<span class="word">${esc(biWord('favor', d.playerFavor))}</span>`)}
       <div class="btn-row">

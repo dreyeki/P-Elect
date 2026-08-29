@@ -1,23 +1,209 @@
 {
   "roles": [
-    { "id":"manager","name":"競選經理","desc":"選戰期間替你排行程、算票、盯對手，把你從候選人變成一部機器。",
-      "effects":{"campaignAP":1,"campaignActionMult":0.12},"baseSalary":110000 },
-    { "id":"policy","name":"政策幕僚","desc":"替你把法案讀完、把數字查清楚，讓你在質詢台上不會被打回票。",
-      "effects":{"lawQuality":0.15,"interpellationPrep":1,"eventInsight":1},"baseSalary":90000 },
-    { "id":"spokesperson","name":"發言人","desc":"替你擋掉不該回答的問題，也替你把該講的話講得漂亮。",
-      "effects":{"mediaFrame":0.15,"crisisMitigation":0.25},"baseSalary":95000 },
-    { "id":"organizer","name":"組織部長","desc":"認識全縣的里長跟宮廟主委，知道哪一場一定要到、哪一場可以請人代。",
-      "effects":{"grassrootsGrowth":0.4,"officeCostMult":-0.25},"baseSalary":85000 },
-    { "id":"finance","name":"財務長","desc":"替你把每一筆錢的來路寫得乾乾淨淨，也替你想辦法多找幾筆。",
-      "effects":{"donationCap":0.3,"stigmaReduction":0.35,"declarationFix":1},"baseSalary":100000 },
-    { "id":"legal","name":"法律顧問","desc":"你被告的時候他在，你想告人的時候他也在，還會提醒你哪些事不能碰。",
-      "effects":{"investigationResist":0.3,"litigationCostMult":-0.4},"baseSalary":120000 }
+    {
+      "id": "manager",
+      "name": "競選經理",
+      "desc": "選戰期間替你排行程、算票、盯對手，把你從候選人變成一部機器。",
+      "effects": {
+        "campaignAP": 1,
+        "campaignActionMult": 0.12
+      },
+      "baseSalary": 110000
+    },
+    {
+      "id": "policy",
+      "name": "政策幕僚",
+      "desc": "替你把法案讀完、把數字查清楚，讓你在質詢台上不會被打回票。",
+      "effects": {
+        "lawQuality": 0.15,
+        "interpellationPrep": 1,
+        "eventInsight": 1
+      },
+      "baseSalary": 90000
+    },
+    {
+      "id": "spokesperson",
+      "name": "發言人",
+      "desc": "替你擋掉不該回答的問題，也替你把該講的話講得漂亮。",
+      "effects": {
+        "mediaFrame": 0.15,
+        "crisisMitigation": 0.25
+      },
+      "baseSalary": 95000
+    },
+    {
+      "id": "organizer",
+      "name": "組織部長",
+      "desc": "認識全縣的里長跟宮廟主委，知道哪一場一定要到、哪一場可以請人代。",
+      "effects": {
+        "grassrootsGrowth": 0.4,
+        "officeCostMult": -0.25
+      },
+      "baseSalary": 85000
+    },
+    {
+      "id": "finance",
+      "name": "財務長",
+      "desc": "替你把每一筆錢的來路寫得乾乾淨淨，也替你想辦法多找幾筆。",
+      "effects": {
+        "donationCap": 0.3,
+        "stigmaReduction": 0.35,
+        "declarationFix": 1
+      },
+      "baseSalary": 100000
+    },
+    {
+      "id": "legal",
+      "name": "法律顧問",
+      "desc": "你被告的時候他在，你想告人的時候他也在，還會提醒你哪些事不能碰。",
+      "effects": {
+        "investigationResist": 0.3,
+        "litigationCostMult": -0.4
+      },
+      "baseSalary": 120000
+    },
+    {
+      "id": "aide",
+      "name": "隨行助理",
+      "desc": "替你提包包、記行程、在你講錯話之前把手機遞給你。最不起眼但一天要跑八個地方的人。",
+      "effects": {
+        "scheduleSlack": 0.2,
+        "grassrootsGrowth": 0.15
+      },
+      "baseSalary": 52000
+    },
+    {
+      "id": "service",
+      "name": "選民服務專員",
+      "desc": "服務處的門一開就是他在坐，路燈不亮、水溝堵住、勞保有問題的人都先找他。",
+      "effects": {
+        "grassrootsGrowth": 0.3,
+        "favorGrowth": 0.2
+      },
+      "baseSalary": 48000
+    }
   ],
   "recruitTiers": [
-    { "minFame":0,"abilityRange":[0,2],"salaryMult":0.7 },
-    { "minFame":2,"abilityRange":[1,3],"salaryMult":1.0 },
-    { "minFame":3,"abilityRange":[2,4],"salaryMult":1.5 },
-    { "minFame":4,"abilityRange":[3,5],"salaryMult":2.4 }
+    {
+      "minFame": 0,
+      "abilityRange": [
+        0,
+        2
+      ],
+      "salaryMult": 0.7
+    },
+    {
+      "minFame": 2,
+      "abilityRange": [
+        1,
+        3
+      ],
+      "salaryMult": 1.0
+    },
+    {
+      "minFame": 3,
+      "abilityRange": [
+        2,
+        4
+      ],
+      "salaryMult": 1.5
+    },
+    {
+      "minFame": 4,
+      "abilityRange": [
+        3,
+        5
+      ],
+      "salaryMult": 2.4
+    }
   ],
-  "slotsByRole": { "citizen":1,"aide":1,"village":2,"councilor":2,"legislator":4,"mayor":5,"minister":5,"president":6 }
+  "slotsByRole": {
+    "citizen": 1,
+    "aide": 2,
+    "village": 2,
+    "councilor": 3,
+    "legislator": 5,
+    "mayor": 6,
+    "minister": 6,
+    "president": 7
+  },
+  "_note": "幕僚。effects 是這個職位提供的加成，各系統自己來查。backgrounds 是招募時顯示給玩家看的一段敘述——它讀起來像人物設定，但其中幾種帶著 graftRisk，那些人每年有機率收下不該收的錢。遊戲不會標記出來，這是刻意的。",
+  "backgrounds": [
+    {
+      "id": "BG_CLEAN_SCHOLAR",
+      "text": "研究所畢業之後就進了智庫，做的都是政策分析，沒有碰過選務。",
+      "graftRisk": 0
+    },
+    {
+      "id": "BG_LOCAL_KID",
+      "text": "就是這個里長大的孩子，國中同學現在有一半在里辦公室跟區公所上班。",
+      "graftRisk": 0
+    },
+    {
+      "id": "BG_EX_JOURNO",
+      "text": "跑過五年地方新聞，認得每一位承辦人員，也知道每一件案子的關鍵字。",
+      "graftRisk": 0
+    },
+    {
+      "id": "BG_NGO",
+      "text": "從倡議團體轉過來，講到理念的時候眼睛會發亮，講到預算的時候會皺眉。",
+      "graftRisk": 0
+    },
+    {
+      "id": "BG_FAMILY_DEBT",
+      "text": "家裡的加工廠前兩年收掉了，他沒有多談，只說還有一些事情要處理。",
+      "graftRisk": 0.05
+    },
+    {
+      "id": "BG_GAMBLER",
+      "text": "很會交朋友，週末常跟一群人約在中部，回來的時候臉色不太一定。",
+      "graftRisk": 0.05
+    },
+    {
+      "id": "BG_EX_BROKER",
+      "text": "進來之前在代辦公司做事，對建照、農地變更跟環評的流程熟到不用查。",
+      "graftRisk": 0.05
+    },
+    {
+      "id": "BG_BIGSPENDER",
+      "text": "用的東西都很好，開的車也不便宜，他說是家裡本來就有一點底子。",
+      "graftRisk": 0.05
+    },
+    {
+      "id": "BG_LOYAL_DRIVER",
+      "text": "原本是前一位老闆的司機，那位老闆出事之後他就一直沒有再找工作。",
+      "graftRisk": 0.05
+    },
+    {
+      "id": "BG_TEMPLE",
+      "text": "宮廟的委員之一，什麼場合該找誰他一清二楚，人脈廣到有點驚人。",
+      "graftRisk": 0.03
+    },
+    {
+      "id": "BG_YOUNG_IDEAL",
+      "text": "剛退伍就來報到，薪水多少他沒有問，只問可不可以跟著跑選舉。",
+      "graftRisk": 0
+    },
+    {
+      "id": "BG_RETIRED_CIVIL",
+      "text": "公務體系做到退休，程序跟公文格式沒有人比他熟，個性非常謹慎。",
+      "graftRisk": 0
+    }
+  ],
+  "graft": {
+    "_note": [
+      "帶著特定敘述的幕僚每年有機率收下不該收的錢。這件事不會立刻被發現——",
+      "它會先累積，然後在某一個最不方便的時候被翻出來。",
+      "yearlyChance 是每年的機率，遊戲內按回合折算。"
+    ],
+    "yearlyChance": 0.05,
+    "amountRange": [
+      300000,
+      4200000
+    ],
+    "discoveryChancePerTurn": 0.035,
+    "stigmaOnDiscovery": 1.2,
+    "stigmaIfFired": 0.5,
+    "loyaltyPenalty": 1
+  }
 }

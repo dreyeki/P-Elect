@@ -1,43 +1,303 @@
 {
   "_note": "民調不會憑空出現，要有人做才有。各家有自己的房效應與公信力，讀數不等於真值。",
   "pollsters": [
-    { "id": "SUNISLE", "name": "燦爛島電子報民調", "short": "燦爛島",
-      "bias": -2, "credibility": 4, "reach": 5, "freq": 1, "publishChance": 0.75,
-      "scopes": ["nation"], "commission": 380000, "sampleError": 3.0,
-      "desc": "每個月固定發布的國政民調，綠營色彩明顯，但方法論公開、時間序列完整，是政壇最常被引用的一家。" },
-    { "id": "SHANHAI", "name": "山海民意調查中心", "short": "山海",
-      "bias": 2, "credibility": 4, "reach": 5, "freq": 1, "publishChance": 0.7,
-      "scopes": ["nation", "region"], "commission": 420000, "sampleError": 3.1,
-      "desc": "電視台自營的民調中心，藍營色彩明顯，但樣本數大、選舉期會下到縣市層級，是選戰期最被緊盯的一家。" },
-    { "id": "GALLUPY", "name": "蓋皮尤國際研究", "short": "蓋皮尤",
-      "bias": 0, "credibility": 5, "reach": 4, "freq": 3, "publishChance": 0.85,
-      "scopes": ["nation"], "commission": 950000, "sampleError": 2.4,
-      "desc": "國際調查機構的台灣分支，一季才做一次，但抽樣嚴謹、跨國可比，數字出來以後連對手都不太敢質疑。" },
-    { "id": "UNIONPOLL", "name": "聯日報民調中心", "short": "聯日民調",
-      "bias": 3, "credibility": 3, "reach": 4, "freq": 2, "publishChance": 0.65,
-      "scopes": ["nation", "region"], "commission": 300000, "sampleError": 3.4,
-      "desc": "報系自營的老牌民調，題目設計常被批評有引導性，但發布得早，經常替一整週的輿論定調。" },
-    { "id": "MINGJING", "name": "明淨民調中心", "short": "明淨民調",
-      "bias": -3, "credibility": 3, "reach": 4, "freq": 2, "publishChance": 0.65,
-      "scopes": ["nation", "region"], "commission": 280000, "sampleError": 3.5,
-      "desc": "電視台自營，綠營色彩明顯，選舉期發布得特別勤，被對手戲稱為助選工具。" },
-    { "id": "ZHENGZHI", "name": "政智大學選研中心", "short": "政智選研",
-      "bias": 0, "credibility": 5, "reach": 3, "freq": 6, "publishChance": 0.9,
-      "scopes": ["nation"], "commission": 620000, "sampleError": 2.2,
-      "desc": "學術機構的長期追蹤調查，半年才發一次，不追新聞熱度，但那條政黨認同的長期曲線是所有人的共同基準。" },
-    { "id": "CHMOF", "name": "中華民意基金", "short": "中華民意",
-      "bias": -2, "credibility": 4, "reach": 3, "freq": 2, "publishChance": 0.6,
-      "scopes": ["nation"], "commission": 340000, "sampleError": 3.2,
-      "desc": "學者主持的基金會，每次記者會都會針對當月最熱的議題出一組交叉分析，媒體很愛引用。" },
-    { "id": "HUILIU", "name": "匯流快訊民調", "short": "匯流快訊",
-      "bias": 1, "credibility": 2, "reach": 3, "freq": 1, "publishChance": 0.8,
-      "scopes": ["nation", "region", "district"], "commission": 150000, "sampleError": 4.6,
-      "desc": "純商業的市調公司，價格便宜、交件快，誤差也相對大。想知道自己選區的狀況時，多數候選人第一個想到的是他們。" },
-    { "id": "PTCPOLL", "name": "PTC 網路快篩", "short": "PTC 快篩",
-      "bias": -1, "credibility": 1, "reach": 2, "freq": 1, "publishChance": 0.9,
-      "scopes": ["nation"], "commission": 0, "sampleError": 9.0,
-      "desc": "論壇自己發起的網路投票，樣本嚴重偏向年輕男性，準確度很差，但它跑得比誰都快，而且免費。" }
+    {
+      "id": "SUNISLE",
+      "name": "燦爛島電子報民調",
+      "short": "燦爛島",
+      "bias": -2,
+      "credibility": 4,
+      "reach": 5,
+      "freq": 1,
+      "publishChance": 0.75,
+      "scopes": [
+        "nation"
+      ],
+      "commission": 380000,
+      "desc": "每個月固定發布的國政民調，綠營色彩明顯，但方法論公開、時間序列完整，是政壇最常被引用的一家。",
+      "sampleSize": 1073,
+      "designEffect": 1.15,
+      "nonSamplingBias": 0.6,
+      "specialty": {
+        "id": "crosstab",
+        "name": "九大族群交叉分析",
+        "desc": "燦爛島把選民切成九個群體，每一份調查都會附上這九組的完整交叉表。這是他們最被引用也最被質疑的一項產品。"
+      }
+    },
+    {
+      "id": "SHANHAI",
+      "name": "山海民意調查中心",
+      "short": "山海",
+      "bias": 2,
+      "credibility": 4,
+      "reach": 5,
+      "freq": 1,
+      "publishChance": 0.7,
+      "scopes": [
+        "nation",
+        "region"
+      ],
+      "commission": 420000,
+      "desc": "電視台自營的民調中心，藍營色彩明顯，但樣本數大、選舉期會下到縣市層級，是選戰期最被緊盯的一家。",
+      "sampleSize": 1210,
+      "designEffect": 1.2,
+      "nonSamplingBias": 0.7,
+      "specialty": {
+        "id": "regionBreak",
+        "name": "六都與非六都分區",
+        "desc": "山海只做分區，他們相信全國平均是一個沒有意義的數字。"
+      }
+    },
+    {
+      "id": "GALLUPY",
+      "name": "蓋皮尤國際研究",
+      "short": "蓋皮尤",
+      "bias": 0,
+      "credibility": 5,
+      "reach": 4,
+      "freq": 3,
+      "publishChance": 0.85,
+      "scopes": [
+        "nation"
+      ],
+      "commission": 950000,
+      "desc": "國際調查機構的台灣分支，一季才做一次，但抽樣嚴謹、跨國可比，數字出來以後連對手都不太敢質疑。",
+      "sampleSize": 1580,
+      "designEffect": 1.05,
+      "nonSamplingBias": 0.3,
+      "specialty": {
+        "id": "issueSalience",
+        "name": "議題關注度排序",
+        "desc": "蓋皮尤不問你支持誰，先問你在意什麼。他們認為議題順序比支持度更能預測選舉。"
+      }
+    },
+    {
+      "id": "UNIONPOLL",
+      "name": "聯日報民調中心",
+      "short": "聯日民調",
+      "bias": 3,
+      "credibility": 3,
+      "reach": 4,
+      "freq": 2,
+      "publishChance": 0.65,
+      "scopes": [
+        "nation",
+        "region"
+      ],
+      "commission": 300000,
+      "desc": "報系自營的老牌民調，題目設計常被批評有引導性，但發布得早，經常替一整週的輿論定調。",
+      "sampleSize": 936,
+      "designEffect": 1.35,
+      "nonSamplingBias": 1.2,
+      "specialty": {
+        "id": "headToHead",
+        "name": "一對一對決假設",
+        "desc": "聯日報只做兩人對決的題目，這種題型的數字永遠比多人競逐好看，端看是誰家的人。"
+      }
+    },
+    {
+      "id": "MINGJING",
+      "name": "明淨民調中心",
+      "short": "明淨民調",
+      "bias": -3,
+      "credibility": 3,
+      "reach": 4,
+      "freq": 2,
+      "publishChance": 0.65,
+      "scopes": [
+        "nation",
+        "region"
+      ],
+      "commission": 280000,
+      "desc": "電視台自營，綠營色彩明顯，選舉期發布得特別勤，被對手戲稱為助選工具。",
+      "sampleSize": 912,
+      "designEffect": 1.35,
+      "nonSamplingBias": 1.2,
+      "specialty": {
+        "id": "trend",
+        "name": "逐月趨勢追蹤",
+        "desc": "明淨每個月問同一批題目，他們賣的是變化量而不是絕對值。"
+      }
+    },
+    {
+      "id": "ZHENGZHI",
+      "name": "政智大學選研中心",
+      "short": "政智選研",
+      "bias": 0,
+      "credibility": 5,
+      "reach": 3,
+      "freq": 6,
+      "publishChance": 0.9,
+      "scopes": [
+        "nation"
+      ],
+      "commission": 620000,
+      "desc": "學術機構的長期追蹤調查，半年才發一次，不追新聞熱度，但那條政黨認同的長期曲線是所有人的共同基準。",
+      "sampleSize": 1905,
+      "designEffect": 1.02,
+      "nonSamplingBias": 0.2,
+      "specialty": {
+        "id": "identity",
+        "name": "國家認同與兩岸態度",
+        "desc": "政智選研做這一題已經做了三十年，是全台灣唯一有完整長期資料的機構。"
+      }
+    },
+    {
+      "id": "CHMOF",
+      "name": "中華民意基金",
+      "short": "中華民意",
+      "bias": -2,
+      "credibility": 4,
+      "reach": 3,
+      "freq": 2,
+      "publishChance": 0.6,
+      "scopes": [
+        "nation"
+      ],
+      "commission": 340000,
+      "desc": "學者主持的基金會，每次記者會都會針對當月最熱的議題出一組交叉分析，媒體很愛引用。",
+      "sampleSize": 1078,
+      "designEffect": 1.18,
+      "nonSamplingBias": 0.6,
+      "specialty": {
+        "id": "genderAge",
+        "name": "性別年齡交叉",
+        "desc": "中華民意基金最早注意到年輕男女的立場正在分開，這幾年他們的交叉表變成必讀。"
+      }
+    },
+    {
+      "id": "HUILIU",
+      "name": "匯流快訊民調",
+      "short": "匯流快訊",
+      "bias": 1,
+      "credibility": 2,
+      "reach": 3,
+      "freq": 1,
+      "publishChance": 0.8,
+      "scopes": [
+        "nation",
+        "region",
+        "district"
+      ],
+      "commission": 150000,
+      "desc": "純商業的市調公司，價格便宜、交件快，誤差也相對大。想知道自己選區的狀況時，多數候選人第一個想到的是他們。",
+      "sampleSize": 618,
+      "designEffect": 1.45,
+      "nonSamplingBias": 1.6,
+      "specialty": {
+        "id": "quickTake",
+        "name": "單題快問快答",
+        "desc": "匯流只問一題，當天問當天發。速度是他們唯一的賣點，也是他們唯一的問題。"
+      }
+    },
+    {
+      "id": "PTCPOLL",
+      "name": "PTC 網路快篩",
+      "short": "PTC 快篩",
+      "bias": -1,
+      "credibility": 1,
+      "reach": 2,
+      "freq": 1,
+      "publishChance": 0.9,
+      "scopes": [
+        "nation"
+      ],
+      "commission": 0,
+      "desc": "論壇自己發起的網路投票，樣本嚴重偏向年輕男性，準確度很差，但它跑得比誰都快，而且免費。",
+      "sampleSize": 4200,
+      "designEffect": 1.0,
+      "nonSamplingBias": 7.5,
+      "specialty": {
+        "id": "openWeb",
+        "name": "網路開放自填",
+        "desc": "PTC 讓任何人都能填，樣本數大到誤差算起來很漂亮。問題是填的人跟投票的人不是同一群。"
+      }
+    }
   ],
-  "commissionScopeMult": { "nation": 1, "region": 0.55, "district": 0.3 },
-  "internalErrorMult": 0.45
+  "commissionScopeMult": {
+    "nation": 1,
+    "region": 0.55,
+    "district": 0.3
+  },
+  "internalErrorMult": 0.45,
+  "_moeNote": "誤差不再是手填的。顯示的誤差 = 1.96 × √(0.25/n) × √設計效果，也就是 95% 信心水準下的最大誤差；各政黨的讀數誤差另外用 1.96 × √(p(1-p)/n) 算，所以支持度 3% 的小黨誤差只有 ±0.6%，不會憑空跳到 10%。nonSamplingBias 是抽樣以外的系統性偏差（自我選擇、題目設計、加權方式），網路自填民調的樣本很大但這一項極高。",
+  "crosstabGroups": [
+    {
+      "id": "G1",
+      "name": "都會青年女性",
+      "gen": "youth",
+      "female": true,
+      "urbanMin": 3,
+      "desc": "六都的年輕女性，投票率上升最快的一群，也是這幾年變化最劇烈的一群。"
+    },
+    {
+      "id": "G2",
+      "name": "都會青年男性",
+      "gen": "youth",
+      "female": false,
+      "urbanMin": 3,
+      "desc": "六都的年輕男性，網路聲量極大但實際投票率落在平均以下。"
+    },
+    {
+      "id": "G3",
+      "name": "非都青年",
+      "gen": "youth",
+      "urbanMax": 2,
+      "desc": "外縣市的年輕人，離家工作與返鄉投票的成本，直接決定他們出不出現。"
+    },
+    {
+      "id": "G4",
+      "name": "都會中壯白領",
+      "gen": "middle",
+      "strata": [
+        "whitecollar",
+        "techpro"
+      ],
+      "urbanMin": 3,
+      "desc": "收入最高也最在意稅制與房價的一群，媒體最愛引用他們的意見。"
+    },
+    {
+      "id": "G5",
+      "name": "中壯藍領與服務業",
+      "gen": "middle",
+      "strata": [
+        "bluecollar",
+        "service"
+      ],
+      "desc": "人數最多的一塊，對物價與工時最敏感，政治態度也最容易被生活狀況推著走。"
+    },
+    {
+      "id": "G6",
+      "name": "中小企業主",
+      "gen": "middle",
+      "strata": [
+        "smallbiz",
+        "capitalist"
+      ],
+      "desc": "對景氣的感受最直接，兩岸經貿的每一次變化他們都算得出來影響幾成。"
+    },
+    {
+      "id": "G7",
+      "name": "農漁與傳統產業",
+      "strata": [
+        "farmer"
+      ],
+      "desc": "組織動員程度最高的一群，民調上看不出來但開票時看得出來。"
+    },
+    {
+      "id": "G8",
+      "name": "樂齡族群",
+      "gen": "senior",
+      "desc": "投票率最高、政黨認同最穩定，任何一份沒有加權的調查都會高估他們。"
+    },
+    {
+      "id": "G9",
+      "name": "軍公教與公部門",
+      "strata": [
+        "publicsvc"
+      ],
+      "desc": "人數不多但態度集中，年金與人事制度的任何變動都會立刻反映在這一格。"
+    }
+  ],
+  "_specNote": "每一家民調公司都有自己的招牌題組。玩家看到的不只是一個數字，而是這家公司選擇怎麼切這個社會——切法本身就是一種立場。"
 }

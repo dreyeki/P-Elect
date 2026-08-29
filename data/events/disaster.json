@@ -6,7 +6,15 @@
       "weight": 60,
       "cooldown": 8,
       "trigger": "month in [7,8,9] && region.geo.typhoonRisk > 0.4",
-      "requires": { "minTurn": 2, "roles": ["legislator", "mayor", "councilor", "citizen"] },
+      "requires": {
+        "minTurn": 2,
+        "roles": [
+          "legislator",
+          "mayor",
+          "councilor",
+          "citizen"
+        ]
+      },
       "headline": "強颱直撲西南部，中央氣象單位發布陸上颱風警報",
       "body": "中度颱風在昨日下午轉為強烈颱風，暴風圈預計於今晚十時前後接觸西南部陸地。低窪地區與山區部落已完成三千餘人的預防性撤離，但仍有部分住戶以顧守家園為由拒絕離開。縣市首長是否停止上班上課的決定引發激烈討論，工商團體與家長團體的立場明顯對立。",
       "options": [
@@ -14,50 +22,134 @@
           "text": "提前宣布停班停課並強制撤離危險區住戶",
           "hint": "安全至上不會錯，颱風轉向的話你就會變成笑話",
           "effects": {
-            "central": { "disaster.casualties": -0.03, "economy.gdpGrowth": -0.002 },
-            "popMood": { "_all": 3, "student": 4, "smallbiz": -3 },
-            "corpMood": { "retail": -4, "logistics": -3 },
-            "player": { "fame": 3, "fatigue": 4 },
-            "issueHeat": { "security": 4 },
-            "tagGain": ["TAG_DOER"]
+            "central": {
+              "disaster.casualties": -0.03,
+              "economy.gdpGrowth": -0.002
+            },
+            "popMood": {
+              "_all": 3,
+              "student": 4,
+              "smallbiz": -3
+            },
+            "corpMood": {
+              "retail": -4,
+              "logistics": -3
+            },
+            "player": {
+              "fame": 3,
+              "fatigue": 4
+            },
+            "issueHeat": {
+              "security": 4
+            },
+            "tagGain": [
+              "TAG_DOER"
+            ]
+          },
+          "gate": {
+            "office": [
+              "mayor",
+              "minister",
+              "president"
+            ],
+            "why": "要有行政首長的權限，這種事情不是喊一喊就會發生"
           }
         },
         {
           "text": "依氣象資料分區決定，市區照常山區停課",
           "hint": "看起來最專業的做法，任何一個誤判都會被放大檢視",
           "effects": {
-            "central": { "disaster.casualties": -0.01 },
-            "popMood": { "whitecollar": 2, "farmer": 2, "smallbiz": 2 },
-            "player": { "integrity": 3, "fatigue": 3, "stigma": 1 },
-            "corpMood": { "retail": 2 },
-            "issueHeat": { "security": 2 }
+            "central": {
+              "disaster.casualties": -0.01
+            },
+            "popMood": {
+              "whitecollar": 2,
+              "farmer": 2,
+              "smallbiz": 2
+            },
+            "player": {
+              "integrity": 3,
+              "fatigue": 3,
+              "stigma": 1
+            },
+            "corpMood": {
+              "retail": 2
+            },
+            "issueHeat": {
+              "security": 2
+            }
+          },
+          "gate": {
+            "office": [
+              "mayor",
+              "minister",
+              "president"
+            ],
+            "why": "要有行政首長的權限，這種事情不是喊一喊就會發生"
           }
         },
         {
           "text": "親自進駐應變中心，全程指揮撤離與搶險",
           "hint": "第一線的畫面很有說服力，你的體力會被榨到見底",
           "effects": {
-            "player": { "fame": 5, "fatigue": 8, "integrity": 2 },
-            "popMood": { "_all": 4 },
-            "grassroots": { "_home": 1 },
-            "central": { "disaster.casualties": -0.02 },
-            "issueHeat": { "security": 3 },
-            "tagGain": ["TAG_DOER"]
+            "player": {
+              "fame": 5,
+              "fatigue": 8,
+              "integrity": 2
+            },
+            "popMood": {
+              "_all": 4
+            },
+            "grassroots": {
+              "_home": 1
+            },
+            "central": {
+              "disaster.casualties": -0.02
+            },
+            "issueHeat": {
+              "security": 3
+            },
+            "tagGain": [
+              "TAG_DOER"
+            ]
+          },
+          "gate": {
+            "office": [
+              "mayor",
+              "minister",
+              "president"
+            ],
+            "why": "要有行政首長的權限，這種事情不是喊一喊就會發生"
           }
         },
         {
           "text": "尊重中央統一指揮，把資源集中在復原整備",
           "hint": "少了鏡頭前的英雄戲，災後重建的速度反而可能比較快",
           "effects": {
-            "central": { "disaster.recoverySpeed": 0.04 },
-            "valuePressure": { "centralization": 0.4 },
-            "player": { "favorNational": 3, "fame": -1, "fatigue": 2 },
-            "popMood": { "publicsvc": 3 },
-            "region": { "_player": { "infra.quality": 0.01 } }
+            "central": {
+              "disaster.recoverySpeed": 0.04
+            },
+            "valuePressure": {
+              "centralization": 0.4
+            },
+            "player": {
+              "favorNational": 3,
+              "fame": -1,
+              "fatigue": 2
+            },
+            "popMood": {
+              "publicsvc": 3
+            },
+            "region": {
+              "_player": {
+                "infra.quality": 0.01
+              }
+            }
           }
         }
       ],
-      "_designNote": "颱風應變的過度反應、精算、搏版面與低調四種取向"
+      "_designNote": "颱風應變的過度反應、精算、搏版面與低調四種取向",
+      "tier": "regional"
     },
     {
       "id": "EVT_DIS_EARTHQUAKE",
@@ -65,7 +157,15 @@
       "weight": 45,
       "cooldown": 24,
       "trigger": "region.geo.seismicRisk > 0.3 && turn > 10",
-      "requires": { "minTurn": 10, "roles": ["legislator", "mayor", "councilor", "citizen"] },
+      "requires": {
+        "minTurn": 10,
+        "roles": [
+          "legislator",
+          "mayor",
+          "councilor",
+          "citizen"
+        ]
+      },
       "headline": "規模六點八強震侵襲東部，兩棟老舊大樓嚴重傾斜",
       "body": "昨日凌晨三時二十分的規模六點八地震造成東部地區兩棟屋齡四十年以上的大樓嚴重傾斜，搜救人員已在瓦礫中找到十一名受困者。結構技師公會指出，傾斜大樓都屬於過去未納入耐震評估補強計畫的私有建物。地方政府坦承補強申請的核准率長期偏低，主要卡在住戶整合與自付款的門檻上。",
       "options": [
@@ -73,39 +173,89 @@
           "text": "推動老屋耐震評估與補強的強制入法",
           "hint": "災難的教訓終於變成制度，屋主自付與都更卡關會吵好幾年",
           "effects": {
-            "central": { "disaster.buildingSafety": 0.05, "fiscal.balance": -0.006 },
-            "valuePressure": { "centralization": 0.4, "marketFreedom": -0.4 },
-            "popMood": { "whitecollar": 3, "retiree": -3, "capitalist": -3 },
-            "corpMood": { "steel": 5, "machinery": 3 },
-            "player": { "integrity": 4, "fame": 3 },
-            "issueHeat": { "housing": 4, "security": 5 }
+            "central": {
+              "disaster.buildingSafety": 0.05,
+              "fiscal.balance": -0.006
+            },
+            "valuePressure": {
+              "centralization": 0.4,
+              "marketFreedom": -0.4
+            },
+            "popMood": {
+              "whitecollar": 3,
+              "retiree": -3,
+              "capitalist": -3
+            },
+            "corpMood": {
+              "steel": 5,
+              "machinery": 3
+            },
+            "player": {
+              "integrity": 4,
+              "fame": 3
+            },
+            "issueHeat": {
+              "housing": 4,
+              "security": 5
+            }
           }
         },
         {
           "text": "爭取災後重建特別預算與住戶安置方案",
           "hint": "災民能立刻安頓下來，結構性的問題原封不動留給下一次",
           "effects": {
-            "central": { "fiscal.balance": -0.008, "disaster.recoverySpeed": 0.05 },
-            "region": { "_player": { "infra.quality": 0.02 } },
-            "popSoL": { "_all": 1 },
-            "popMood": { "_all": 4 },
-            "player": { "fame": 4, "politicalCapital": -2 },
-            "grassroots": { "_home": 1 }
+            "central": {
+              "fiscal.balance": -0.008,
+              "disaster.recoverySpeed": 0.05
+            },
+            "region": {
+              "_player": {
+                "infra.quality": 0.02
+              }
+            },
+            "popSoL": {
+              "_all": 1
+            },
+            "popMood": {
+              "_all": 4
+            },
+            "player": {
+              "fame": 4,
+              "politicalCapital": -2
+            },
+            "grassroots": {
+              "_home": 1
+            }
           }
         },
         {
           "text": "要求追究建照審查與歷次補強核准的責任",
           "hint": "問責能給受災戶一個交代，公務體系的抵抗會非常真實",
           "effects": {
-            "player": { "fame": 4, "integrity": 3, "politicalCapital": -2 },
-            "popMood": { "publicsvc": -5, "whitecollar": 3 },
-            "issueHeat": { "corruption": 5, "security": 4 },
-            "corpMood": { "steel": -3 },
-            "tagGain": ["TAG_MUCKRAKER"]
+            "player": {
+              "fame": 4,
+              "integrity": 3,
+              "politicalCapital": -2
+            },
+            "popMood": {
+              "publicsvc": -5,
+              "whitecollar": 3
+            },
+            "issueHeat": {
+              "corruption": 5,
+              "security": 4
+            },
+            "corpMood": {
+              "steel": -3
+            },
+            "tagGain": [
+              "TAG_MUCKRAKER"
+            ]
           }
         }
       ],
-      "_designNote": "震災後的立法、重建與問責三條路，制度改革與立即救助互相排擠"
+      "_designNote": "震災後的立法、重建與問責三條路，制度改革與立即救助互相排擠",
+      "tier": "regional"
     },
     {
       "id": "EVT_DIS_DROUGHT",
@@ -113,7 +263,15 @@
       "weight": 50,
       "cooldown": 14,
       "trigger": "central.water.reservoirLevel < 0.3 && month in [2,3,4,5]",
-      "requires": { "minTurn": 4, "roles": ["legislator", "mayor", "councilor", "citizen"] },
+      "requires": {
+        "minTurn": 4,
+        "roles": [
+          "legislator",
+          "mayor",
+          "councilor",
+          "citizen"
+        ]
+      },
       "headline": "主要水庫蓄水率跌破兩成，第二階段限水提前上路",
       "body": "中南部主要水庫的蓄水率在昨日跌破百分之二十，水利主管機關宣布提前實施第二階段限水措施。農業用水的停灌補償範圍擴大到兩萬公頃，稻農在說明會上情緒激動，質疑用水永遠是農業先被犧牲。科學園區的業者則表示已啟動水車調度與回收系統，但若進入第三階段將直接衝擊產能。",
       "options": [
@@ -121,50 +279,115 @@
           "text": "支持擴大停灌補償並優先保障工業用水",
           "hint": "產業產能保得住，農民會覺得自己永遠是被犧牲的那一邊",
           "effects": {
-            "central": { "fiscal.balance": -0.005, "water.industrialSupply": 0.04 },
-            "corpMood": { "semiconductor": 8, "electronics": 5 },
-            "popSoL": { "farmer": -1 },
-            "popMood": { "farmer": -5, "techpro": 3 },
-            "valuePressure": { "marketFreedom": 0.3 },
-            "player": { "fame": 1, "politicalCapital": -1 }
+            "central": {
+              "fiscal.balance": -0.005,
+              "water.industrialSupply": 0.04
+            },
+            "corpMood": {
+              "semiconductor": 8,
+              "electronics": 5
+            },
+            "popSoL": {
+              "farmer": -1
+            },
+            "popMood": {
+              "farmer": -5,
+              "techpro": 3
+            },
+            "valuePressure": {
+              "marketFreedom": 0.3
+            },
+            "player": {
+              "fame": 1,
+              "politicalCapital": -1
+            }
           }
         },
         {
           "text": "主張工業用水同步減量，各行各業一起承擔",
           "hint": "公平的說法沒人能反駁，園區減產的新聞會馬上跟著出來",
           "effects": {
-            "central": { "economy.gdpGrowth": -0.004, "water.reservoirLevel": 0.02 },
-            "corpMood": { "semiconductor": -9, "electronics": -6 },
-            "popMood": { "farmer": 5, "bluecollar": 2, "techpro": -3 },
-            "valuePressure": { "environment": 0.4 },
-            "player": { "fame": 3, "integrity": 2 }
+            "central": {
+              "economy.gdpGrowth": -0.004,
+              "water.reservoirLevel": 0.02
+            },
+            "corpMood": {
+              "semiconductor": -9,
+              "electronics": -6
+            },
+            "popMood": {
+              "farmer": 5,
+              "bluecollar": 2,
+              "techpro": -3
+            },
+            "valuePressure": {
+              "environment": 0.4
+            },
+            "player": {
+              "fame": 3,
+              "integrity": 2
+            }
           }
         },
         {
           "text": "推動水價分級調整與再生水廠的加速興建",
           "hint": "治本的方案很難被反對，這一季的旱象半滴水都變不出來",
           "effects": {
-            "central": { "water.priceIndex": 0.05, "water.recycled": 0.03, "fiscal.balance": -0.004 },
-            "valuePressure": { "marketFreedom": 0.5, "environment": 0.5 },
-            "popMood": { "_all": -2, "techpro": 2 },
-            "corpMood": { "machinery": 4 },
-            "player": { "integrity": 4, "fame": -1 },
-            "tagGain": ["TAG_SCHOLAR"]
+            "central": {
+              "water.priceIndex": 0.05,
+              "water.recycled": 0.03,
+              "fiscal.balance": -0.004
+            },
+            "valuePressure": {
+              "marketFreedom": 0.5,
+              "environment": 0.5
+            },
+            "popMood": {
+              "_all": -2,
+              "techpro": 2
+            },
+            "corpMood": {
+              "machinery": 4
+            },
+            "player": {
+              "integrity": 4,
+              "fame": -1
+            },
+            "tagGain": [
+              "TAG_SCHOLAR"
+            ]
           }
         },
         {
           "text": "推動老舊管線汰換以降低驚人的漏水率",
           "hint": "每個人都同意該做，工程期程長到看不見任期的盡頭",
           "effects": {
-            "central": { "fiscal.balance": -0.007, "water.leakageRate": -0.03 },
-            "corpMood": { "machinery": 6, "steel": 3 },
-            "region": { "_player": { "infra.quality": 0.02 } },
-            "player": { "integrity": 3, "politicalCapital": -2, "fatigue": 2 },
-            "tagGain": ["TAG_DOER"]
+            "central": {
+              "fiscal.balance": -0.007,
+              "water.leakageRate": -0.03
+            },
+            "corpMood": {
+              "machinery": 6,
+              "steel": 3
+            },
+            "region": {
+              "_player": {
+                "infra.quality": 0.02
+              }
+            },
+            "player": {
+              "integrity": 3,
+              "politicalCapital": -2,
+              "fatigue": 2
+            },
+            "tagGain": [
+              "TAG_DOER"
+            ]
           }
         }
       ],
-      "_designNote": "旱災的用水分配是零和賽局，加上兩條見效很慢的治本選項"
+      "_designNote": "旱災的用水分配是零和賽局，加上兩條見效很慢的治本選項",
+      "tier": "regional"
     },
     {
       "id": "EVT_DIS_FLOOD",
@@ -172,7 +395,15 @@
       "weight": 50,
       "cooldown": 12,
       "trigger": "month in [5,6,7,8] && region.geo.floodRisk > 0.35",
-      "requires": { "minTurn": 3, "roles": ["legislator", "mayor", "councilor", "citizen"] },
+      "requires": {
+        "minTurn": 3,
+        "roles": [
+          "legislator",
+          "mayor",
+          "councilor",
+          "citizen"
+        ]
+      },
       "headline": "時雨量破百毫米釀市區積水，抽水站遭質疑未及時啟動",
       "body": "劇烈對流帶來的時雨量在兩小時內突破一百毫米，市區低窪路段最深積水達到一百二十公分。民眾拍下的畫面顯示，部分抽水站在積水初期並未見到運轉的跡象，水利單位則解釋是遭到大量垃圾堵塞。地方議員要求公布抽水站的完整運轉紀錄，工程顧問公司則指出排水系統的設計標準早已跟不上現在的降雨強度。",
       "options": [
@@ -180,49 +411,111 @@
           "text": "要求公開抽水站運轉紀錄並追究延誤責任",
           "hint": "民眾要的答案你給得出來，基層水利人員會覺得被推出來擋",
           "effects": {
-            "player": { "fame": 4, "integrity": 2 },
-            "popMood": { "_all": 3, "publicsvc": -4 },
-            "issueHeat": { "security": 4, "corruption": 3 },
-            "grassroots": { "_home": 1 },
-            "tagGain": ["TAG_MUCKRAKER"]
+            "player": {
+              "fame": 4,
+              "integrity": 2
+            },
+            "popMood": {
+              "_all": 3,
+              "publicsvc": -4
+            },
+            "issueHeat": {
+              "security": 4,
+              "corruption": 3
+            },
+            "grassroots": {
+              "_home": 1
+            },
+            "tagGain": [
+              "TAG_MUCKRAKER"
+            ]
           }
         },
         {
           "text": "爭取提高排水設計標準與滯洪池的特別預算",
           "hint": "工程一做就是好幾年，這個雨季的積水一次也少不了",
           "effects": {
-            "central": { "fiscal.balance": -0.008 },
-            "region": { "_player": { "infra.floodDefense": 0.04 } },
-            "corpMood": { "steel": 5, "machinery": 4 },
-            "player": { "integrity": 3, "politicalCapital": -2, "fame": 2 },
-            "issueHeat": { "security": 3 },
-            "tagGain": ["TAG_DOER"]
+            "central": {
+              "fiscal.balance": -0.008
+            },
+            "region": {
+              "_player": {
+                "infra.floodDefense": 0.04
+              }
+            },
+            "corpMood": {
+              "steel": 5,
+              "machinery": 4
+            },
+            "player": {
+              "integrity": 3,
+              "politicalCapital": -2,
+              "fame": 2
+            },
+            "issueHeat": {
+              "security": 3
+            },
+            "tagGain": [
+              "TAG_DOER"
+            ]
           }
         },
         {
           "text": "推動流域綜合治理與上游透水保水的管制",
           "hint": "科學上最正確的路，會直接踩到上游地主與農地開發的利益",
           "effects": {
-            "valuePressure": { "environment": 0.7, "marketFreedom": -0.4 },
-            "region": { "_all": { "infra.floodDefense": 0.02 } },
-            "popMood": { "farmer": -4, "student": 3, "whitecollar": 2 },
-            "player": { "integrity": 4, "fame": 1, "politicalCapital": -1 },
-            "grassroots": { "_home": -1 }
+            "valuePressure": {
+              "environment": 0.7,
+              "marketFreedom": -0.4
+            },
+            "region": {
+              "_all": {
+                "infra.floodDefense": 0.02
+              }
+            },
+            "popMood": {
+              "farmer": -4,
+              "student": 3,
+              "whitecollar": 2
+            },
+            "player": {
+              "integrity": 4,
+              "fame": 1,
+              "politicalCapital": -1
+            },
+            "grassroots": {
+              "_home": -1
+            }
           }
         },
         {
           "text": "先發放淹水救助金並協助商家清淤復業",
           "hint": "災民最直接有感的作為，被批評成只會發錢也是遲早的事",
           "effects": {
-            "central": { "fiscal.balance": -0.003 },
-            "popSoL": { "smallbiz": 1, "service": 1 },
-            "popMood": { "smallbiz": 5, "service": 3, "whitecollar": -1 },
-            "player": { "fame": 3, "fatigue": 3 },
-            "grassroots": { "_home": 2 }
+            "central": {
+              "fiscal.balance": -0.003
+            },
+            "popSoL": {
+              "smallbiz": 1,
+              "service": 1
+            },
+            "popMood": {
+              "smallbiz": 5,
+              "service": 3,
+              "whitecollar": -1
+            },
+            "player": {
+              "fame": 3,
+              "fatigue": 3
+            },
+            "grassroots": {
+              "_home": 2
+            }
           }
         }
       ],
-      "_designNote": "水患的問責、工程、流域治理與救助四種回應，時間尺度差異極大"
+      "_designNote": "水患的問責、工程、流域治理與救助四種回應，時間尺度差異極大",
+      "tier": "regional"
     },
     {
       "id": "EVT_DIS_EPIDEMIC",
@@ -230,7 +523,15 @@
       "weight": 45,
       "cooldown": 20,
       "trigger": "central.health.epidemicRisk > 0.4 && month in [11,12,1,2]",
-      "requires": { "minTurn": 6, "roles": ["legislator", "mayor", "councilor", "citizen"] },
+      "requires": {
+        "minTurn": 6,
+        "roles": [
+          "legislator",
+          "mayor",
+          "councilor",
+          "citizen"
+        ]
+      },
       "headline": "新型呼吸道疫情群聚擴散，急診壅塞與床位吃緊同時出現",
       "body": "疾病管制單位公布上週的類流感就診人次比前週增加六成，北中南三家醫學中心的急診暫留超過二十四小時。醫護團體警告人力早已在臨界點，若疫情再擴大就必須啟動降載與轉診分流。工商團體則反對倉促恢復大規模的管制措施，強調前一次的營業限制讓許多店家再也沒有站起來。",
       "options": [
@@ -238,38 +539,88 @@
           "text": "推動室內強制戴口罩與大型活動的人流管制",
           "hint": "疫情曲線壓得下來，服務業與活動產業會再一次被犧牲",
           "effects": {
-            "central": { "health.epidemicRisk": -0.05, "economy.gdpGrowth": -0.003 },
-            "corpMood": { "retail": -6, "tourism": -8, "food": -5 },
-            "popMood": { "retiree": 4, "publicsvc": 3, "smallbiz": -5 },
-            "valuePressure": { "centralization": 0.5, "marketFreedom": -0.5 },
-            "player": { "fame": 2, "integrity": 2 }
+            "central": {
+              "health.epidemicRisk": -0.05,
+              "economy.gdpGrowth": -0.003
+            },
+            "corpMood": {
+              "retail": -6,
+              "tourism": -8,
+              "food": -5
+            },
+            "popMood": {
+              "retiree": 4,
+              "publicsvc": 3,
+              "smallbiz": -5
+            },
+            "valuePressure": {
+              "centralization": 0.5,
+              "marketFreedom": -0.5
+            },
+            "player": {
+              "fame": 2,
+              "integrity": 2
+            }
           }
         },
         {
           "text": "爭取醫療量能加給與臨時人力的緊急預算",
           "hint": "醫護會真心感謝你，病毒本身不會因為加班費就退散",
           "effects": {
-            "central": { "fiscal.balance": -0.005, "health.capacity": 0.04 },
-            "popSoL": { "publicsvc": 2 },
-            "popMood": { "publicsvc": 6, "retiree": 3 },
-            "player": { "fame": 3, "politicalCapital": -1 },
-            "issueHeat": { "healthcare": 5 },
-            "tagGain": ["TAG_LABOR_FRIEND"]
+            "central": {
+              "fiscal.balance": -0.005,
+              "health.capacity": 0.04
+            },
+            "popSoL": {
+              "publicsvc": 2
+            },
+            "popMood": {
+              "publicsvc": 6,
+              "retiree": 3
+            },
+            "player": {
+              "fame": 3,
+              "politicalCapital": -1
+            },
+            "issueHeat": {
+              "healthcare": 5
+            },
+            "tagGain": [
+              "TAG_LABOR_FRIEND"
+            ]
           }
         },
         {
           "text": "主張不再管制，改以疫苗與抗病毒藥物為主",
           "hint": "經濟與生活能維持正常，重症與死亡數字會被拿來質問你",
           "effects": {
-            "central": { "health.epidemicRisk": 0.03, "economy.gdpGrowth": 0.001 },
-            "corpMood": { "retail": 6, "tourism": 7, "food": 5 },
-            "popMood": { "smallbiz": 5, "retiree": -5, "publicsvc": -3 },
-            "valuePressure": { "marketFreedom": 0.6, "centralization": -0.4 },
-            "player": { "fame": 1, "stigma": 1 }
+            "central": {
+              "health.epidemicRisk": 0.03,
+              "economy.gdpGrowth": 0.001
+            },
+            "corpMood": {
+              "retail": 6,
+              "tourism": 7,
+              "food": 5
+            },
+            "popMood": {
+              "smallbiz": 5,
+              "retiree": -5,
+              "publicsvc": -3
+            },
+            "valuePressure": {
+              "marketFreedom": 0.6,
+              "centralization": -0.4
+            },
+            "player": {
+              "fame": 1,
+              "stigma": 1
+            }
           }
         }
       ],
-      "_designNote": "疫情的管制、量能與共存三路線，公衛與經濟的取捨沒有免費午餐"
+      "_designNote": "疫情的管制、量能與共存三路線，公衛與經濟的取捨沒有免費午餐",
+      "tier": "regional"
     },
     {
       "id": "EVT_DIS_INDUSTRIAL_FIRE",
@@ -277,7 +628,15 @@
       "weight": 45,
       "cooldown": 14,
       "trigger": "region.economy.industryShare > 0.3 && central.safety.inspectionRate < 0.5",
-      "requires": { "minTurn": 4, "roles": ["legislator", "mayor", "councilor", "citizen"] },
+      "requires": {
+        "minTurn": 4,
+        "roles": [
+          "legislator",
+          "mayor",
+          "councilor",
+          "citizen"
+        ]
+      },
       "headline": "石化廠區儲槽爆炸引發大火，兩名外包工人失聯",
       "body": "臺原石化位於南部的廠區在昨日晚間發生儲槽爆炸並引發大火，火勢延燒六小時後才獲得控制。兩名承攬商的外包工人至今仍然失聯，環保單位在下風處測得的揮發性有機物濃度一度超標十倍以上。勞動檢查紀錄顯示，該廠區在過去三年共有九件違規，但每次的裁罰金額都不超過三十萬元。",
       "options": [
@@ -285,53 +644,122 @@
           "text": "推動高風險工廠的裁罰金額與停工門檻加重",
           "hint": "工安體制終於被拉起來，石化與傳產的成本壓力會全面上升",
           "effects": {
-            "central": { "safety.penaltyLevel": 0.06, "safety.inspectionRate": 0.04 },
-            "corpMood": { "petrochemical": -10, "steel": -6 },
-            "popMood": { "bluecollar": 5, "student": 3 },
-            "valuePressure": { "marketFreedom": -0.6, "environment": 0.5 },
-            "player": { "fame": 3, "integrity": 3 },
-            "issueHeat": { "security": 5, "environment": 4 }
+            "central": {
+              "safety.penaltyLevel": 0.06,
+              "safety.inspectionRate": 0.04
+            },
+            "corpMood": {
+              "petrochemical": -10,
+              "steel": -6
+            },
+            "popMood": {
+              "bluecollar": 5,
+              "student": 3
+            },
+            "valuePressure": {
+              "marketFreedom": -0.6,
+              "environment": 0.5
+            },
+            "player": {
+              "fame": 3,
+              "integrity": 3
+            },
+            "issueHeat": {
+              "security": 5,
+              "environment": 4
+            }
           }
         },
         {
           "text": "要求全面檢討承攬制度與外包工人的保障",
           "hint": "打到問題的核心，牽動的產業慣例大到你一個人推不動",
           "effects": {
-            "popMood": { "bluecollar": 6, "capitalist": -4 },
-            "corpMood": { "_all": -4, "petrochemical": -6 },
-            "central": { "labor.contractorProtection": 0.04 },
-            "player": { "fame": 3, "fatigue": 4, "politicalCapital": -2 },
-            "valuePressure": { "marketFreedom": -0.5 },
-            "tagGain": ["TAG_LABOR_FRIEND"]
+            "popMood": {
+              "bluecollar": 6,
+              "capitalist": -4
+            },
+            "corpMood": {
+              "_all": -4,
+              "petrochemical": -6
+            },
+            "central": {
+              "labor.contractorProtection": 0.04
+            },
+            "player": {
+              "fame": 3,
+              "fatigue": 4,
+              "politicalCapital": -2
+            },
+            "valuePressure": {
+              "marketFreedom": -0.5
+            },
+            "tagGain": [
+              "TAG_LABOR_FRIEND"
+            ]
           }
         },
         {
           "text": "推動廠區周邊的緩衝綠帶與居民遷村補償",
           "hint": "居民安全確實顧到了，遷村的錢與土地要從哪裡生出來",
           "effects": {
-            "central": { "fiscal.balance": -0.007 },
-            "region": { "_player": { "environment.quality": 0.03 } },
-            "popSoL": { "_all": 1 },
-            "popMood": { "retiree": 4, "bluecollar": 2 },
-            "valuePressure": { "environment": 0.5 },
-            "player": { "fame": 3, "politicalCapital": -2 },
-            "grassroots": { "_home": 1 }
+            "central": {
+              "fiscal.balance": -0.007
+            },
+            "region": {
+              "_player": {
+                "environment.quality": 0.03
+              }
+            },
+            "popSoL": {
+              "_all": 1
+            },
+            "popMood": {
+              "retiree": 4,
+              "bluecollar": 2
+            },
+            "valuePressure": {
+              "environment": 0.5
+            },
+            "player": {
+              "fame": 3,
+              "politicalCapital": -2
+            },
+            "grassroots": {
+              "_home": 1
+            }
           }
         },
         {
           "text": "強調個案不宜擴大，主張由業者自主管理改善",
           "hint": "產業界會鬆一口氣，下一次爆炸的責任就會直接算到你身上",
           "effects": {
-            "corpMood": { "petrochemical": 9, "steel": 5 },
-            "valuePressure": { "marketFreedom": 0.6 },
-            "popMood": { "bluecollar": -5, "retiree": -4 },
-            "player": { "funds": 3, "integrity": -2, "stigma": 1 },
-            "central": { "safety.inspectionRate": -0.02 },
-            "tagGain": ["TAG_BIZ_DARLING"]
+            "corpMood": {
+              "petrochemical": 9,
+              "steel": 5
+            },
+            "valuePressure": {
+              "marketFreedom": 0.6
+            },
+            "popMood": {
+              "bluecollar": -5,
+              "retiree": -4
+            },
+            "player": {
+              "funds": 3,
+              "integrity": -2,
+              "stigma": 1
+            },
+            "central": {
+              "safety.inspectionRate": -0.02
+            },
+            "tagGain": [
+              "TAG_BIZ_DARLING"
+            ]
           }
         }
       ],
-      "_designNote": "工安事故的加嚴、制度改革、遷村與自主管理四條路，代價分布極為分散"
+      "_designNote": "工安事故的加嚴、制度改革、遷村與自主管理四條路，代價分布極為分散",
+      "tier": "regional"
     },
     {
       "id": "EVT_DIS_FOOD_SAFETY",
@@ -339,7 +767,15 @@
       "weight": 50,
       "cooldown": 12,
       "trigger": "central.safety.foodInspection < 0.5 && issueHeat.healthcare > 25",
-      "requires": { "minTurn": 3, "roles": ["legislator", "mayor", "councilor", "citizen"] },
+      "requires": {
+        "minTurn": 3,
+        "roles": [
+          "legislator",
+          "mayor",
+          "councilor",
+          "citizen"
+        ]
+      },
       "headline": "校園午餐檢出禁用農藥，六縣市同步停用同批食材",
       "body": "衛生單位在例行抽驗中發現，供應六個縣市校園午餐的葉菜檢出禁用農藥，殘留量超過標準值的十二倍。經追查上游來自三個產銷班，但因為批次混雜與紙本紀錄不全，實際流向至今仍未完全釐清。家長團體要求全面公開供應鏈資訊，農民團體則擔心整個產區會被貼上標籤而失去所有通路。",
       "options": [
@@ -347,41 +783,94 @@
           "text": "推動校園食材全面溯源與電子化產銷履歷",
           "hint": "制度補起來了，小農的作業負擔與成本會明顯增加",
           "effects": {
-            "central": { "safety.foodInspection": 0.05, "fiscal.balance": -0.003 },
-            "popMood": { "whitecollar": 4, "student": 3, "farmer": -3 },
-            "corpMood": { "food": -3, "retail": 2 },
-            "valuePressure": { "centralization": 0.4 },
-            "player": { "fame": 3, "integrity": 3 },
-            "issueHeat": { "healthcare": 4, "education": 3 }
+            "central": {
+              "safety.foodInspection": 0.05,
+              "fiscal.balance": -0.003
+            },
+            "popMood": {
+              "whitecollar": 4,
+              "student": 3,
+              "farmer": -3
+            },
+            "corpMood": {
+              "food": -3,
+              "retail": 2
+            },
+            "valuePressure": {
+              "centralization": 0.4
+            },
+            "player": {
+              "fame": 3,
+              "integrity": 3
+            },
+            "issueHeat": {
+              "healthcare": 4,
+              "education": 3
+            }
           }
         },
         {
           "text": "要求提高午餐採購單價，讓廠商買得起好食材",
           "hint": "業者與營養師都會支持，加給的預算得由地方財政吸收",
           "effects": {
-            "central": { "fiscal.balance": -0.004 },
-            "region": { "_player": { "education.mealQuality": 0.04 } },
-            "popMood": { "student": 4, "publicsvc": 3, "whitecollar": 2 },
-            "corpMood": { "food": 5 },
-            "player": { "fame": 3, "politicalCapital": -1 },
-            "issueHeat": { "education": 3 }
+            "central": {
+              "fiscal.balance": -0.004
+            },
+            "region": {
+              "_player": {
+                "education.mealQuality": 0.04
+              }
+            },
+            "popMood": {
+              "student": 4,
+              "publicsvc": 3,
+              "whitecollar": 2
+            },
+            "corpMood": {
+              "food": 5
+            },
+            "player": {
+              "fame": 3,
+              "politicalCapital": -1
+            },
+            "issueHeat": {
+              "education": 3
+            }
           }
         },
         {
           "text": "主張加重違規農戶的裁罰並公布完整名單",
           "hint": "嚇阻效果最直接，被連坐的整個產區會恨你入骨",
           "effects": {
-            "central": { "safety.penaltyLevel": 0.04 },
-            "popMood": { "whitecollar": 3, "farmer": -6 },
-            "popSoL": { "farmer": -1 },
-            "corpMood": { "food": -4, "retail": -2 },
-            "player": { "fame": 4, "integrity": 2 },
-            "grassroots": { "_home": -1 },
-            "tagGain": ["TAG_FIREBRAND"]
+            "central": {
+              "safety.penaltyLevel": 0.04
+            },
+            "popMood": {
+              "whitecollar": 3,
+              "farmer": -6
+            },
+            "popSoL": {
+              "farmer": -1
+            },
+            "corpMood": {
+              "food": -4,
+              "retail": -2
+            },
+            "player": {
+              "fame": 4,
+              "integrity": 2
+            },
+            "grassroots": {
+              "_home": -1
+            },
+            "tagGain": [
+              "TAG_FIREBRAND"
+            ]
           }
         }
       ],
-      "_designNote": "食安事件的溯源制度、預算加碼與重罰三種思路，農民與家長利益直接對撞"
+      "_designNote": "食安事件的溯源制度、預算加碼與重罰三種思路，農民與家長利益直接對撞",
+      "tier": "regional"
     },
     {
       "id": "EVT_DIS_LANDSLIDE",
@@ -389,7 +878,14 @@
       "weight": 40,
       "cooldown": 16,
       "trigger": "region.geo.mountainous > 0.4 && month in [6,7,8,9]",
-      "requires": { "minTurn": 5, "roles": ["legislator", "mayor", "councilor"] },
+      "requires": {
+        "minTurn": 5,
+        "roles": [
+          "legislator",
+          "mayor",
+          "councilor"
+        ]
+      },
       "headline": "山區聯外道路坍方中斷，三個部落成為孤島已逾五日",
       "body": "連日豪雨造成山區聯外道路發生大規模坍方，三個原住民部落的對外交通已經中斷超過五天。直升機空投的物資僅能維持基本需求，慢性病患者的用藥與洗腎接送成為最急迫的問題。公路單位評估搶通至少需要三週，但部落長老指出這段路在過去六年已經崩塌了四次。",
       "options": [
@@ -397,39 +893,88 @@
           "text": "爭取搶通預算並協調國軍投入機具與人力",
           "hint": "最快讓路通的做法，同一段路明年大概還會再塌一次",
           "effects": {
-            "central": { "fiscal.balance": -0.004, "disaster.recoverySpeed": 0.05 },
-            "region": { "_player": { "infra.quality": 0.02 } },
-            "popMood": { "_all": 3, "farmer": 4 },
-            "player": { "fame": 4, "fatigue": 3 },
-            "grassroots": { "_home": 1 },
-            "tagGain": ["TAG_DOER"]
+            "central": {
+              "fiscal.balance": -0.004,
+              "disaster.recoverySpeed": 0.05
+            },
+            "region": {
+              "_player": {
+                "infra.quality": 0.02
+              }
+            },
+            "popMood": {
+              "_all": 3,
+              "farmer": 4
+            },
+            "player": {
+              "fame": 4,
+              "fatigue": 3
+            },
+            "grassroots": {
+              "_home": 1
+            },
+            "tagGain": [
+              "TAG_DOER"
+            ]
           }
         },
         {
           "text": "推動替代道路評估與部落遷居的長期方案",
           "hint": "根本解方擺在眼前，遷居兩個字會撕裂整個部落的意見",
           "effects": {
-            "central": { "fiscal.balance": -0.009 },
-            "valuePressure": { "environment": 0.5, "centralization": 0.3 },
-            "popMood": { "farmer": -3, "whitecollar": 2 },
-            "player": { "integrity": 3, "politicalCapital": -2, "fatigue": 3 },
-            "issueHeat": { "security": 3 }
+            "central": {
+              "fiscal.balance": -0.009
+            },
+            "valuePressure": {
+              "environment": 0.5,
+              "centralization": 0.3
+            },
+            "popMood": {
+              "farmer": -3,
+              "whitecollar": 2
+            },
+            "player": {
+              "integrity": 3,
+              "politicalCapital": -2,
+              "fatigue": 3
+            },
+            "issueHeat": {
+              "security": 3
+            }
           }
         },
         {
           "text": "推動部落自主的醫療站與物資儲備韌性計畫",
           "hint": "把命運交回部落手上，交通中斷的根本問題還是躺在那裡",
           "effects": {
-            "region": { "_player": { "health.localCapacity": 0.03 } },
-            "valuePressure": { "directDemocracy": 0.5, "centralization": -0.4 },
-            "popMood": { "farmer": 5, "publicsvc": 2 },
-            "central": { "fiscal.balance": -0.002 },
-            "player": { "integrity": 3, "fame": 2 },
-            "grassroots": { "_home": 2 }
+            "region": {
+              "_player": {
+                "health.localCapacity": 0.03
+              }
+            },
+            "valuePressure": {
+              "directDemocracy": 0.5,
+              "centralization": -0.4
+            },
+            "popMood": {
+              "farmer": 5,
+              "publicsvc": 2
+            },
+            "central": {
+              "fiscal.balance": -0.002
+            },
+            "player": {
+              "integrity": 3,
+              "fame": 2
+            },
+            "grassroots": {
+              "_home": 2
+            }
           }
         }
       ],
-      "_designNote": "山區災害的搶通、遷居與在地韌性三種取徑，短期救急與長期解方拉扯"
+      "_designNote": "山區災害的搶通、遷居與在地韌性三種取徑，短期救急與長期解方拉扯",
+      "tier": "regional"
     },
     {
       "id": "EVT_DIS_COLD_SNAP",
@@ -437,7 +982,15 @@
       "weight": 35,
       "cooldown": 14,
       "trigger": "month in [12,1,2] && central.energy.reserveMargin < 0.1",
-      "requires": { "minTurn": 4, "roles": ["legislator", "mayor", "councilor", "citizen"] },
+      "requires": {
+        "minTurn": 4,
+        "roles": [
+          "legislator",
+          "mayor",
+          "councilor",
+          "citizen"
+        ]
+      },
       "headline": "強烈大陸冷氣團南下，養殖漁業與獨居長者同時拉警報",
       "body": "強烈大陸冷氣團在三天內讓平地低溫下探攝氏六度，沿海養殖區的虱目魚與石斑出現大量凍斃的情形。社福單位統計，全縣列冊的獨居長者有將近三千人的住所缺乏基本禦寒設備。氣象單位預估低溫還會持續五天，電力調度也因為取暖負載暴增而出現吃緊的訊號。",
       "options": [
@@ -445,40 +998,88 @@
           "text": "啟動漁損現金救助與低利週轉貸款方案",
           "hint": "漁民能撐過這一季，救助的門檻與認定爭議會沒完沒了",
           "effects": {
-            "central": { "fiscal.balance": -0.003 },
-            "popSoL": { "farmer": 2 },
-            "popMood": { "farmer": 6, "whitecollar": -1 },
-            "corpMood": { "food": 3 },
-            "player": { "fame": 3, "politicalCapital": -1 },
-            "grassroots": { "_home": 1 }
+            "central": {
+              "fiscal.balance": -0.003
+            },
+            "popSoL": {
+              "farmer": 2
+            },
+            "popMood": {
+              "farmer": 6,
+              "whitecollar": -1
+            },
+            "corpMood": {
+              "food": 3
+            },
+            "player": {
+              "fame": 3,
+              "politicalCapital": -1
+            },
+            "grassroots": {
+              "_home": 1
+            }
           }
         },
         {
           "text": "動員社福與里鄰系統全面訪視獨居長者",
           "hint": "社會安全網被實際補起來，能上新聞的畫面幾乎沒有",
           "effects": {
-            "region": { "_player": { "social.careCoverage": 0.03 } },
-            "popSoL": { "retiree": 2 },
-            "popMood": { "retiree": 5, "publicsvc": 3 },
-            "player": { "integrity": 4, "fatigue": 3, "fame": 1 },
-            "grassroots": { "_home": 2 },
-            "tagGain": ["TAG_DOER"]
+            "region": {
+              "_player": {
+                "social.careCoverage": 0.03
+              }
+            },
+            "popSoL": {
+              "retiree": 2
+            },
+            "popMood": {
+              "retiree": 5,
+              "publicsvc": 3
+            },
+            "player": {
+              "integrity": 4,
+              "fatigue": 3,
+              "fame": 1
+            },
+            "grassroots": {
+              "_home": 2
+            },
+            "tagGain": [
+              "TAG_DOER"
+            ]
           }
         },
         {
           "text": "推動養殖保險強制納保與設施補助的配套",
           "hint": "長期把風險分攤掉，保費負擔會讓小型養殖戶叫苦連天",
           "effects": {
-            "central": { "agri.insuranceCoverage": 0.05, "fiscal.balance": -0.002 },
-            "corpMood": { "finance": 4, "food": 2 },
-            "popMood": { "farmer": -2 },
-            "valuePressure": { "marketFreedom": 0.3, "centralization": 0.3 },
-            "player": { "integrity": 3, "fame": -1 },
-            "tagGain": ["TAG_SCHOLAR"]
+            "central": {
+              "agri.insuranceCoverage": 0.05,
+              "fiscal.balance": -0.002
+            },
+            "corpMood": {
+              "finance": 4,
+              "food": 2
+            },
+            "popMood": {
+              "farmer": -2
+            },
+            "valuePressure": {
+              "marketFreedom": 0.3,
+              "centralization": 0.3
+            },
+            "player": {
+              "integrity": 3,
+              "fame": -1
+            },
+            "tagGain": [
+              "TAG_SCHOLAR"
+            ]
           }
         }
       ],
-      "_designNote": "寒害中的現金救助、社福訪視與保險制度，聲量與實效的落差是設計重點"
+      "_designNote": "寒害中的現金救助、社福訪視與保險制度，聲量與實效的落差是設計重點",
+      "tier": "regional"
     },
     {
       "id": "EVT_DIS_MASS_CASUALTY",
@@ -486,7 +1087,15 @@
       "weight": 35,
       "cooldown": 24,
       "trigger": "central.safety.transportSafety < 0.5 && turn > 12",
-      "requires": { "minTurn": 12, "roles": ["legislator", "mayor", "councilor", "citizen"] },
+      "requires": {
+        "minTurn": 12,
+        "roles": [
+          "legislator",
+          "mayor",
+          "councilor",
+          "citizen"
+        ]
+      },
       "headline": "遊覽車國道翻覆造成重大死傷，駕駛工時紀錄再度成為焦點",
       "body": "一輛承載進香團的遊覽車在國道匝道翻覆，造成十四人死亡與三十餘人受傷的重大事故。初步調閱的行車紀錄顯示，駕駛在事發前七天內有五天的工時超過十二小時。客運公會坦承旺季調度確實吃緊，但強調法定工時的稽查方式與實際營運狀況嚴重脫節。",
       "options": [
@@ -494,39 +1103,88 @@
           "text": "推動駕駛工時電子監理與違規停業的重罰",
           "hint": "制度終於補起來，中小型客運業者可能會直接被淘汰出局",
           "effects": {
-            "central": { "safety.transportSafety": 0.06, "safety.penaltyLevel": 0.04 },
-            "corpMood": { "logistics": -8, "tourism": -5 },
-            "popMood": { "bluecollar": 4, "smallbiz": -4, "_all": 2 },
-            "valuePressure": { "centralization": 0.5, "marketFreedom": -0.5 },
-            "player": { "fame": 4, "integrity": 3 },
-            "issueHeat": { "security": 6 }
+            "central": {
+              "safety.transportSafety": 0.06,
+              "safety.penaltyLevel": 0.04
+            },
+            "corpMood": {
+              "logistics": -8,
+              "tourism": -5
+            },
+            "popMood": {
+              "bluecollar": 4,
+              "smallbiz": -4,
+              "_all": 2
+            },
+            "valuePressure": {
+              "centralization": 0.5,
+              "marketFreedom": -0.5
+            },
+            "player": {
+              "fame": 4,
+              "integrity": 3
+            },
+            "issueHeat": {
+              "security": 6
+            }
           }
         },
         {
           "text": "推動運價合理化，讓業者付得起足額的人力",
           "hint": "打中根源的做法，團費上漲的抱怨會由消費者直接寄給你",
           "effects": {
-            "central": { "transport.fareLevel": 0.05 },
-            "corpMood": { "logistics": 5, "tourism": -3 },
-            "popMood": { "bluecollar": 5, "retiree": -3, "whitecollar": -2 },
-            "valuePressure": { "marketFreedom": -0.3 },
-            "player": { "integrity": 3, "fame": 1 },
-            "tagGain": ["TAG_LABOR_FRIEND"]
+            "central": {
+              "transport.fareLevel": 0.05
+            },
+            "corpMood": {
+              "logistics": 5,
+              "tourism": -3
+            },
+            "popMood": {
+              "bluecollar": 5,
+              "retiree": -3,
+              "whitecollar": -2
+            },
+            "valuePressure": {
+              "marketFreedom": -0.3
+            },
+            "player": {
+              "integrity": 3,
+              "fame": 1
+            },
+            "tagGain": [
+              "TAG_LABOR_FRIEND"
+            ]
           }
         },
         {
           "text": "要求成立獨立運輸安全調查委員會並公開報告",
           "hint": "調查專業能被制度化，家屬要等很久才等得到答案",
           "effects": {
-            "central": { "safety.transportSafety": 0.03, "fiscal.balance": -0.002 },
-            "player": { "integrity": 4, "fame": 2, "politicalCapital": -1 },
-            "popMood": { "whitecollar": 3, "publicsvc": -2 },
-            "issueHeat": { "security": 4 },
-            "tagGain": ["TAG_SCHOLAR"]
+            "central": {
+              "safety.transportSafety": 0.03,
+              "fiscal.balance": -0.002
+            },
+            "player": {
+              "integrity": 4,
+              "fame": 2,
+              "politicalCapital": -1
+            },
+            "popMood": {
+              "whitecollar": 3,
+              "publicsvc": -2
+            },
+            "issueHeat": {
+              "security": 4
+            },
+            "tagGain": [
+              "TAG_SCHOLAR"
+            ]
           }
         }
       ],
-      "_designNote": "重大運輸事故的監理、運價與調查制度三種改革路徑"
+      "_designNote": "重大運輸事故的監理、運價與調查制度三種改革路徑",
+      "tier": "regional"
     },
     {
       "id": "EVT_DIS_ANIMAL_DISEASE",
@@ -534,7 +1192,14 @@
       "weight": 35,
       "cooldown": 18,
       "trigger": "region.economy.agriShare > 0.15 && central.safety.foodInspection < 0.6",
-      "requires": { "minTurn": 6, "roles": ["legislator", "mayor", "councilor"] },
+      "requires": {
+        "minTurn": 6,
+        "roles": [
+          "legislator",
+          "mayor",
+          "councilor"
+        ]
+      },
       "headline": "禽流感疫情擴散至七個鄉鎮，逾八十萬隻家禽遭到撲殺",
       "body": "高病原性禽流感在兩週內從單一牧場擴散到七個鄉鎮，防疫單位已累計撲殺超過八十萬隻家禽。蛋價在同一時間跳漲三成，早餐業者與烘焙業者紛紛反映成本壓力難以吸收。獸醫師公會指出，開放式禽舍的比例過高才是疫情反覆爆發的根本原因，但改建的資金缺口一直沒有解決。",
       "options": [
@@ -542,39 +1207,88 @@
           "text": "推動禽舍密閉化改建的高比例補助方案",
           "hint": "根本問題有機會解決，這筆錢在預算會期一定會被砲轟",
           "effects": {
-            "central": { "fiscal.balance": -0.006, "agri.biosecurity": 0.05 },
-            "popSoL": { "farmer": 2 },
-            "popMood": { "farmer": 5, "whitecollar": -2 },
-            "corpMood": { "food": 4, "machinery": 3 },
-            "player": { "fame": 3, "politicalCapital": -2 },
-            "tagGain": ["TAG_DOER"]
+            "central": {
+              "fiscal.balance": -0.006,
+              "agri.biosecurity": 0.05
+            },
+            "popSoL": {
+              "farmer": 2
+            },
+            "popMood": {
+              "farmer": 5,
+              "whitecollar": -2
+            },
+            "corpMood": {
+              "food": 4,
+              "machinery": 3
+            },
+            "player": {
+              "fame": 3,
+              "politicalCapital": -2
+            },
+            "tagGain": [
+              "TAG_DOER"
+            ]
           }
         },
         {
           "text": "支持緊急進口雞蛋以平抑失控的價格",
           "hint": "物價壓得住，本土蛋農會覺得自己被政府補了一刀",
           "effects": {
-            "central": { "economy.cpi": -0.003 },
-            "popSoL": { "service": 1, "smallbiz": 1 },
-            "popMood": { "farmer": -6, "service": 3, "smallbiz": 3 },
-            "corpMood": { "food": 3, "retail": 4 },
-            "valuePressure": { "marketFreedom": 0.4 },
-            "player": { "fame": 1, "stigma": 1 }
+            "central": {
+              "economy.cpi": -0.003
+            },
+            "popSoL": {
+              "service": 1,
+              "smallbiz": 1
+            },
+            "popMood": {
+              "farmer": -6,
+              "service": 3,
+              "smallbiz": 3
+            },
+            "corpMood": {
+              "food": 3,
+              "retail": 4
+            },
+            "valuePressure": {
+              "marketFreedom": 0.4
+            },
+            "player": {
+              "fame": 1,
+              "stigma": 1
+            }
           }
         },
         {
           "text": "主張加嚴移動管制並落實分區封鎖的措施",
           "hint": "疫情能被壓在一區裡，被封鎖區域的農民損失只能自己吞",
           "effects": {
-            "central": { "agri.biosecurity": 0.03, "economy.cpi": 0.002 },
-            "popMood": { "farmer": -3, "whitecollar": 3 },
-            "valuePressure": { "centralization": 0.5 },
-            "player": { "integrity": 3, "fame": 1, "fatigue": 2 },
-            "issueHeat": { "healthcare": 3, "prices": 3 }
+            "central": {
+              "agri.biosecurity": 0.03,
+              "economy.cpi": 0.002
+            },
+            "popMood": {
+              "farmer": -3,
+              "whitecollar": 3
+            },
+            "valuePressure": {
+              "centralization": 0.5
+            },
+            "player": {
+              "integrity": 3,
+              "fame": 1,
+              "fatigue": 2
+            },
+            "issueHeat": {
+              "healthcare": 3,
+              "prices": 3
+            }
           }
         }
       ],
-      "_designNote": "動物疫病的補助改建、進口平抑與封鎖管制，農民與消費者的利益直接衝突"
+      "_designNote": "動物疫病的補助改建、進口平抑與封鎖管制，農民與消費者的利益直接衝突",
+      "tier": "regional"
     },
     {
       "id": "EVT_DIS_CHEMICAL_SPILL",
@@ -582,7 +1296,15 @@
       "weight": 35,
       "cooldown": 18,
       "trigger": "region.economy.industryShare > 0.25 && issueHeat.environment > 30",
-      "requires": { "minTurn": 8, "roles": ["legislator", "mayor", "councilor", "citizen"] },
+      "requires": {
+        "minTurn": 8,
+        "roles": [
+          "legislator",
+          "mayor",
+          "councilor",
+          "citizen"
+        ]
+      },
       "headline": "電鍍廠偷排重金屬廢水，下游兩百公頃農地全面停灌",
       "body": "環保稽查人員在夜間查獲一家電鍍廠透過暗管排放含鎳廢水，下游灌溉渠道的重金屬濃度超標三十倍。農政單位已宣布兩百公頃農地全面停灌，並著手清查今年一期稻作的流向與庫存。當地農民控訴同一條排水路的污染問題陳情了整整八年，稽查紀錄卻始終停留在勸導與輕微裁罰。",
       "options": [
@@ -590,39 +1312,89 @@
           "text": "要求對慣犯工廠斷水斷電並移送刑事究責",
           "hint": "農民會鼓掌叫好，中小型加工業者的恐慌情緒也會擴散",
           "effects": {
-            "central": { "safety.penaltyLevel": 0.05, "environment.quality": 0.02 },
-            "corpMood": { "machinery": -7, "steel": -4 },
-            "popMood": { "farmer": 6, "smallbiz": -4, "student": 3 },
-            "valuePressure": { "environment": 0.8, "marketFreedom": -0.5 },
-            "player": { "fame": 4, "integrity": 3 }
+            "central": {
+              "safety.penaltyLevel": 0.05,
+              "environment.quality": 0.02
+            },
+            "corpMood": {
+              "machinery": -7,
+              "steel": -4
+            },
+            "popMood": {
+              "farmer": 6,
+              "smallbiz": -4,
+              "student": 3
+            },
+            "valuePressure": {
+              "environment": 0.8,
+              "marketFreedom": -0.5
+            },
+            "player": {
+              "fame": 4,
+              "integrity": 3
+            }
           }
         },
         {
           "text": "推動農地重金屬普查與受害農民的完整補償",
           "hint": "受害者能被照顧到，污染源本身還在原地繼續運轉",
           "effects": {
-            "central": { "fiscal.balance": -0.005 },
-            "region": { "_player": { "environment.quality": 0.01 } },
-            "popSoL": { "farmer": 2 },
-            "popMood": { "farmer": 5 },
-            "player": { "fame": 3, "politicalCapital": -1 },
-            "grassroots": { "_home": 1 }
+            "central": {
+              "fiscal.balance": -0.005
+            },
+            "region": {
+              "_player": {
+                "environment.quality": 0.01
+              }
+            },
+            "popSoL": {
+              "farmer": 2
+            },
+            "popMood": {
+              "farmer": 5
+            },
+            "player": {
+              "fame": 3,
+              "politicalCapital": -1
+            },
+            "grassroots": {
+              "_home": 1
+            }
           }
         },
         {
           "text": "推動廢水專區與集中處理廠的公共建設",
           "hint": "把違規誘因從根本拿掉，建廠的選址抗爭會是下一個難題",
           "effects": {
-            "central": { "fiscal.balance": -0.007, "environment.treatmentCapacity": 0.05 },
-            "corpMood": { "machinery": 5, "steel": 3 },
-            "popMood": { "smallbiz": 3, "retiree": -2 },
-            "valuePressure": { "environment": 0.4, "centralization": 0.3 },
-            "player": { "integrity": 3, "fatigue": 3, "politicalCapital": -2 },
-            "tagGain": ["TAG_DOER"]
+            "central": {
+              "fiscal.balance": -0.007,
+              "environment.treatmentCapacity": 0.05
+            },
+            "corpMood": {
+              "machinery": 5,
+              "steel": 3
+            },
+            "popMood": {
+              "smallbiz": 3,
+              "retiree": -2
+            },
+            "valuePressure": {
+              "environment": 0.4,
+              "centralization": 0.3
+            },
+            "player": {
+              "integrity": 3,
+              "fatigue": 3,
+              "politicalCapital": -2
+            },
+            "tagGain": [
+              "TAG_DOER"
+            ]
           }
         }
       ],
-      "_designNote": "污染事件的重罰、補償與基礎建設三條路，受益者與付費者完全不同"
+      "_designNote": "污染事件的重罰、補償與基礎建設三條路，受益者與付費者完全不同",
+      "tier": "regional"
     }
   ]
 }

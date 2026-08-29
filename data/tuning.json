@@ -1,0 +1,247 @@
+{
+  "_README": [
+    "這個檔案集中了所有會影響開局手感的參數。改這裡就能調整整局的節奏，不需要動任何程式碼。",
+    "每一節底下的 _note 說明那組參數在做什麼、往哪個方向調會怎樣。",
+    "改完之後跑 node tests/headless.mjs SEED 120 看數值有沒有跑掉，",
+    "再跑 node tools/validate-data.js 確認格式沒壞。",
+    "沒有列在這裡的參數，程式會用自己的預設值，所以刪掉任何一行都不會讓遊戲壞掉。"
+  ],
+  "start": {
+    "_note": "開局的時間、玩家的起始狀態。行動點是整局節奏的總開關——調大會讓每回合能做的事變多，也會讓時間感變快。 attributePoints 是總額，開局選項的 attrCost 會從這裡扣。",
+    "baseAP": 2,
+    "attributePoints": 16,
+    "attributePointsNote": "建角時可分配的屬性總點數。六個屬性平均 2 點就是 12。",
+    "attributeMax": 4,
+    "attributeMaxNote": "建角時單一屬性的上限。設 5 會讓玩家一開始就有滿級屬性，不建議。",
+    "startPoliticalCapital": 40,
+    "startIntegrity": 3,
+    "startFame": {
+      "rookie": 0,
+      "aide": 1
+    }
+  },
+  "actionPoints": {
+    "_note": "行動點的加成與超支。超支是讓玩家可以硬撐，但要付疲勞的代價。",
+    "bonusMayor": 1,
+    "bonusStamina5": 1,
+    "bonusCampaignManager": 1,
+    "penaltyFatigue4": 1,
+    "allowOverdraft": true,
+    "maxOverdraft": 2,
+    "overdraftFatiguePerPoint": 14,
+    "overdraftFatigueChance": 0.55,
+    "overdraftNote": "超支一點行動點，有 55% 的機率累積 14 點疲勞。硬撐得起來，但撐久了會住院。"
+  },
+  "fatigue": {
+    "_note": "疲勞與過勞住院。恢復量越高越不容易倒，住院門檻越低越容易倒。",
+    "recoverBase": 10,
+    "recoverPerStamina": 4,
+    "agePenalty": {
+      "55": 4,
+      "65": 8,
+      "75": 14
+    },
+    "hospitalThreshold": 45,
+    "hospitalRiskDivisor": 150,
+    "hospitalStaminaFactor": 0.18,
+    "permanentStaminaLossChance": 0.2
+  },
+  "economy": {
+    "_note": "經濟模型。boomCoefficient 是全球科技週期對成長率的槓桿——這是 2026 開局最大的變數，調小會讓 AI 熱潮不那麼誇張。",
+    "baseGrowth": 0.012,
+    "boomCoefficient": 0.078,
+    "growthBlendRate": 0.22,
+    "unemploymentBase": 0.0375,
+    "unemploymentGrowthCoupling": 0.07,
+    "unemploymentFloor": 0.026,
+    "inflationBase": 0.012,
+    "inflationBlendRate": 0.22,
+    "stockIndexBase": 45300,
+    "housingPressureRate": 0.9
+  },
+  "pop": {
+    "_note": "POP 的演化速度與政黨支持度模型。這一節最敏感，一次只改一個值。",
+    "solConvergeRate": 0.12,
+    "solConvergeNote": "生活水準往目標收斂的速率。調大會讓玩家的施政立刻反映在民生上，調小會讓一切都變得很慢。",
+    "ideologyDriftRate": 0.025,
+    "ideologyDriftNote": "意識形態漂移速率。調大會讓選民立場容易被翻轉，遊戲會變得像在調滑桿。",
+    "solCalibration": -0.34,
+    "solCalibrationNote": "生活水準的整體校準偏移。往負調會讓全民過得更苦，往正調會讓大家都很爽。",
+    "softmaxTemperature": 4.2,
+    "softmaxNote": "政黨支持度的銳利度。調大會讓大黨吃掉更多、小黨更沒空間。",
+    "districtLeanPull": 0.3,
+    "districtLeanExponent": 1.0,
+    "leanNote": "選區政治底色對政黨支持度的拉力。這兩個值配上各縣市的 lean，決定了政治版圖是否貼近現實。",
+    "enthusiasmRate": 0.15,
+    "militancyRate": 0.08,
+    "militancyDecay": 0.04,
+    "chinaDriftRate": 0.02,
+    "chinaWeight": 1.15,
+    "_chinaNote": "chinaWeight 是兩岸七維在政黨支持度裡的份量。台灣選民最在意這一塊，所以它比一般的意識形態距離重。",
+    "districtWhitePull": 0.06,
+    "_whiteNote": "districtWhitePull 控制中間政黨的地方差異。調大新竹的白營會更高、臺東會更低。"
+  },
+  "values": {
+    "_note": "國家價值觀的移動速度。maxStepPerTurn 是每軸每個月回合的上限，0.02 代表跨一整級要四到五年。",
+    "maxStepPerTurn": 0.02,
+    "lawPressureCoefficient": 0.012,
+    "popPullCoefficient": 0.02,
+    "consensusTurns": 60
+  },
+  "election": {
+    "_note": "選舉模型。noise 那兩個值是投票日那個誰也算不準的乘數，刻意不對稱——政治的意外通常是爆冷。",
+    "noiseMin": 0.98,
+    "noiseMax": 1.05,
+    "partySupportWeight": 0.55,
+    "personalWeight": 0.3,
+    "mobilizationWeight": 0.15,
+    "enthusiasmFloor": 0.72,
+    "enthusiasmSlope": 0.056,
+    "awarenessTurnoutBonus": 0.15,
+    "mobilizationTurnoutBonus": 0.04,
+    "weekTurnLeadMonths": 2,
+    "subsidyPerVote": 30,
+    "subsidyThreshold": 0.03,
+    "rivalWithdrawChance": 0.3,
+    "draftOtherDistrictChance": 0.2,
+    "_primaryNote": "初選落敗之後：三成機會對手退選，兩成機會被徵召去別區，其餘走團結站台。"
+  },
+  "grassroots": {
+    "_note": "基層組織的成長與衰退。這是選舉真正的護城河，成長速度決定了「經營一個選區要多久」。",
+    "canvassGain": 0.2,
+    "organizerBonus": 0.25,
+    "officeGain": 0.1,
+    "decayUnworked": 0.05,
+    "decayWithOffice": 0.02,
+    "scandalPenalty": 0.3,
+    "officeBaseCost": 60000,
+    "canvassGoodMult": 1.9,
+    "canvassBadMult": 0.35
+  },
+  "poll": {
+    "_note": "民調系統。fameToAppear 是玩家的名字要到什麼知名度才會被列進全國民調的題目裡。",
+    "fameToAppear": 2,
+    "internalErrorMult": 0.45,
+    "commissionCostMult": 1.0,
+    "publishChanceMult": 1.0,
+    "confidenceZ": 1.96,
+    "confidenceNote": "95% 信心水準用 1.96。誤差 = z × √(p(1−p)/n) × √設計效果，這是統計學的定義，不要手填。"
+  },
+  "show": {
+    "_note": "政論節目的通告機率。調大會讓玩家很容易上節目，知名度的門檻感就消失了。",
+    "baseChance": 0.05,
+    "famePerLevel": 0.055,
+    "affinityWeight": 0.14,
+    "relationWeight": 0.02,
+    "buzzWeight": 0.05,
+    "difficultyPenalty": 0.012,
+    "campaignMultiplier": 1.7,
+    "maxChance": 0.55,
+    "maxInvitations": 5,
+    "invitationTurns": 2
+  },
+  "theory": {
+    "_note": "組織理論。研究一個理論要幾次「組織理論」行動，以及每次使用能讓它完善多少。",
+    "researchTurnsPerLevel": 3,
+    "refinePerUse": 0.34,
+    "maxTheories": 12,
+    "staffOfferChance": 0.18
+  },
+  "finance": {
+    "_note": "薪俸、生活開支與政治獻金。生活開支是刻意設計成隨職位上升的——位子越高，維持形象越花錢。",
+    "salary": {
+      "citizen": 0,
+      "aide": 45000,
+      "village": 50000,
+      "councilor": 120000,
+      "legislator": 190000,
+      "mayor": 240000,
+      "minister": 220000,
+      "president": 470000
+    },
+    "living": {
+      "citizen": 50000,
+      "aide": 55000,
+      "village": 60000,
+      "councilor": 90000,
+      "legislator": 140000,
+      "mayor": 180000,
+      "minister": 170000,
+      "president": 250000
+    },
+    "donationBaseChance": 0.16,
+    "donationFameBonus": 0.05,
+    "declarationWarnRatio": 0.05,
+    "declarationScandalRatio": 0.2,
+    "bankruptcyTurns": 3
+  },
+  "scandal": {
+    "_note": "汙名與檢調。stigmaThreshold 以上才會開始有被查的風險。",
+    "stigmaThreshold": 2,
+    "investigationRiskPerLevel": 0.12,
+    "investigationTurns": [
+      3,
+      8
+    ],
+    "convictionChance": 0.35
+  },
+  "court": {
+    "_note": "釋憲。controversyNeeded 越低，越多法案會被挑戰。",
+    "controversyNeeded": 4,
+    "petitionBaseChance": 0.35,
+    "petitionControversyBonus": 0.05,
+    "turnsToRule": 6
+  },
+  "event": {
+    "_note": "事件密度。cooldownMult 調小會讓同一則事件更快重複出現。",
+    "minPerTurn": 1,
+    "maxPerTurn": 4,
+    "cooldownMult": 0.7,
+    "weekScaleMult": 0.7
+  },
+  "effectScale": {
+    "_note": "事件文本的數值換算。內容端用 0~100 的直覺尺度寫，這裡把它換算成引擎的 0~5 抽象量。調大會讓每一則事件的影響更劇烈。",
+    "fame": 14,
+    "integrity": 12,
+    "partyPrestige": 12,
+    "favorNational": 8,
+    "stigma": 6,
+    "politicalCapital": 8,
+    "fatigue": 8,
+    "funds": 100000,
+    "personalAssets": 5000,
+    "popMood": 6,
+    "popSoL": 4,
+    "corpMood": 6,
+    "issueHeat": 3,
+    "grassrootsEffect": 3,
+    "divisorNote": "fame 到 grassrootsEffect 這些是除數（值越大影響越小）；funds 與 personalAssets 是乘數。"
+  },
+  "milestones": {
+    "_note": [
+      "做同一件事做到一定次數，那件事需要的能力就會自己長出來。",
+      "這比坐在房間裡讀書合理得多，也讓每一種玩法都養得出自己的長處。",
+      "數字調小玩家會成長得很快，調大則會逼玩家專精一條路。"
+    ],
+    "canvassForSociability": 5,
+    "showsForEloquence": 5,
+    "theoriesForJudgment": 1,
+    "streamsForBoldness": 8
+  },
+  "favor": {
+    "_note": "人情牽制。eventChance 是每回合跳出幫助或請託事件的機率。",
+    "eventChance": 0.22
+  },
+  "social": {
+    "_note": "社交平台。viralChance 是每回合發生病毒事件的機率，調高會讓聲量起伏更劇烈。",
+    "viralChance": 0.07
+  },
+  "people": {
+    "_note": [
+      "選區人物。這一組數字決定這個世界有多擁擠。",
+      "spawnMult 直接乘在每季新人的機率上，調到 0 就不會有新面孔進來。"
+    ],
+    "spawnMult": 1.0,
+    "threatDisplayMin": 1.2
+  }
+}

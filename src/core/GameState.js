@@ -4,6 +4,11 @@ import { ModifierStack } from './Modifier.js';
 import { buildPops } from './Pops.js';
 import { clamp, clamp05 } from './Formula.js';
 import * as Court from '../systems/CourtSystem.js';
+import * as Gov from '../systems/GovernmentSystem.js';
+import * as People from '../systems/PeopleSystem.js';
+import * as Social from '../systems/SocialSystem.js';
+import * as Semi from '../systems/SemiconductorSystem.js';
+import { makePolitician } from '../systems/NameGen.js';
 
 export const ROLE_ORDER = ['citizen', 'aide', 'village', 'councilor', 'legislator', 'mayor', 'minister', 'president'];
 export const ROLE_NAME = {
@@ -38,6 +43,10 @@ export function createGame(data, setup) {
     modifiers: new ModifierStack(),
     pendingEvents: [], news: [], log: [], promises: [], history: [],
     polls: [], invitations: [], court: null, presidency: null,
+    cabinet: null, theories: [],
+    people: {}, peopleByDistrict: {},
+    socialInvites: [], favorPending: [], canvassGigs: [],
+    social: null, semi: null, mediaAttack: null,
     counters: {}, tags: [], flags: {}, eventCooldown: {},
     legislature: structuredClone(data.central.government.legislature),
     session: { billsInProgress: [], budgetPhase: null },
@@ -72,7 +81,15 @@ export function createGame(data, setup) {
   // 政黨
   for (const p of data.parties.parties) {
     const c = structuredClone(p);
-    c.factions.forEach((f) => { f.favor = 0; f.trust = 2; });
+    c.factions.forEach((f) => {
+      f.favor = 0; f.trust = 2;
+      f.leaderName = makePolitician(data, rng, { party: p.id, birthYear: 2026 - rng.int(50, 72) }).name;
+    });
+    // 黨主席與黨團總召是玩家最常打交道的兩個人，開局就要有名字
+    const chair = makePolitician(data, rng, { party: p.id, birthYear: 2026 - rng.int(52, 70), fame: 4 });
+    const whip = makePolitician(data, rng, { party: p.id, birthYear: 2026 - rng.int(45, 62), fame: 3 });
+    c.chair = { name: chair.name, faction: rng.pick(c.factions).id, since: 2024 + rng.int(0, 2) };
+    c.whip = { name: whip.name, faction: rng.pick(c.factions).id, since: 2025 + rng.int(0, 1) };
     state.parties[p.id] = c;
   }
   // 企業
@@ -97,6 +114,14 @@ export function createGame(data, setup) {
 
   // 憲政機關：總統、行政院長、十五位大法官
   Court.init(state, data, rng);
+  // 內閣部會首長、各縣市首長與副首長
+  Gov.init(state, data, rng);
+  // 每個選區三到七位在地政治人物。他們一開始就在那裡，不是選舉時才生出來的。
+  People.init(state, data, rng);
+  // 社交平台的追蹤數
+  Social.init(state, data, rng);
+  // 半導體產業的五個版圖
+  Semi.init(state, data);
 
   // 起點資源
   applyStart(state, data, setup, rng);
@@ -108,13 +133,17 @@ export function createGame(data, setup) {
 function makePlayer(data, setup, rng) {
   const start = data.starts.starts.find((s) => s.id === setup.startId);
   const bg = data.backgrounds.backgrounds.find((b) => b.id === setup.backgroundId);
-  const attrs = { stamina: 2, sociability: 2, charisma: 2, eloquence: 2, judgment: 2, boldness: 2 };
+  const attrs = { ...(setup.baseAttrs
+    ?? { stamina: 2, sociability: 2, charisma: 2, eloquence: 2, judgment: 2, boldness: 2 }) };
   for (const k in bg.attrs) attrs[k] = clamp05(attrs[k] + bg.attrs[k]);
   for (const k in setup.attrBonus ?? {}) attrs[k] = clamp05(attrs[k] + setup.attrBonus[k]);
 
+  const age = setup.age != null
+    ? clamp(setup.age, start.ageRange[0], start.ageRange[1])
+    : rng.int(start.ageRange[0], start.ageRange[1]);
   return {
     name: setup.name, gender: setup.gender,
-    birthYear: data.meta.startDate.year - rng.int(start.ageRange[0], start.ageRange[1]),
+    birthYear: data.meta.startDate.year - age,
     homeDistrict: setup.homeDistrict,
     background: setup.backgroundId,
     education: setup.education,
@@ -125,7 +154,10 @@ function makePlayer(data, setup, rng) {
     partyPrestige: start.partyPrestige,
     fatigueRaw: 0, politicalCapital: 40,
     hospitalTurns: 0,
-    ideology: { ...setup.ideology },
+    ideology: Object.fromEntries(data.axisIds.map((a) => [a, setup.ideology?.[a] ?? 0])),
+    china: Object.fromEntries(data.chinaKeys.map((k) => [k, setup.china?.[k] ?? 0])),
+    followers: 0,
+    image: null, imageSince: null, imageSwitches: 0,
     mediaContacts: bg.mediaContacts ?? 0,
     ap: data.meta.baseAP, apUsed: 0,
     careerLog: [],

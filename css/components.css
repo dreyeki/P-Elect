@@ -161,3 +161,60 @@ svg.chart{width:100%;height:auto;display:block}
   scrollbar-width:none;-webkit-overflow-scrolling:touch}
 .tabrow::-webkit-scrollbar{display:none}
 .tabrow .btn{flex:0 0 auto;padding:7px 13px;font-size:var(--fs-s)}
+.attrrow{display:grid;grid-template-columns:38px 72px 1fr auto;grid-template-rows:auto auto;
+  gap:2px 8px;align-items:center;padding:8px 0;border-bottom:1px solid var(--line)}
+.attrrow:last-of-type{border-bottom:none}
+.attrrow .ar-n{font-size:var(--fs-s);color:var(--fg-2)}
+.attrrow .ar-w{font-size:var(--fs-s);font-weight:700;letter-spacing:.04em}
+.attrrow .ar-p{display:flex;gap:3px}
+.attrrow .ar-p i{width:100%;height:6px;border-radius:2px;background:var(--bg-4);min-width:10px}
+.attrrow .ar-p i.on{background:var(--accent)}
+.attrrow .ar-b{display:flex;gap:4px}
+.attrrow .ar-b .btn{padding:3px 9px;min-width:30px}
+.attrrow .ar-d{grid-column:1/-1;font-size:var(--fs-xs);color:var(--fg-3);line-height:1.5}
+.solrow{display:grid;grid-template-columns:1fr 62px 40px;grid-template-areas:"n w p" "b b b";
+  gap:2px 8px;align-items:center;padding:7px 0;border-bottom:1px solid var(--line)}
+.solrow:last-of-type{border-bottom:none}
+.solrow .sr-n{grid-area:n;font-size:var(--fs-s);font-weight:600;overflow:hidden;
+  text-overflow:ellipsis;white-space:nowrap}
+.solrow .sr-w{grid-area:w;font-size:var(--fs-xs);font-weight:700;letter-spacing:.03em;text-align:right}
+.solrow .sr-p{grid-area:p;font-size:var(--fs-xs);color:var(--fg-3);text-align:right;
+  font-family:var(--mono);font-variant-numeric:tabular-nums}
+.solrow .sr-b{grid-area:b;height:8px;background:var(--bg-4);border-radius:3px;overflow:hidden;margin-top:2px}
+.solrow .sr-b i{display:block;height:100%;border-radius:3px}
+
+/* ── v0.5：選區人物、反對選項、半導體版圖 ───────────────── */
+.opt.oppose{border-style:dashed;border-color:var(--warn,#c98a2e)}
+.opt.oppose .opt-t{color:var(--warn,#c98a2e)}
+.opt.locked{cursor:default;background:var(--bg-2)}
+
+.npcrow{display:grid;grid-template-columns:auto auto 1fr auto auto;gap:6px;align-items:center;
+  padding:7px 0;border-bottom:1px solid var(--line)}
+.npcrow:last-of-type{border-bottom:none}
+.npcrow .npc-n{font-weight:700;font-size:var(--fs-s)}
+.npcrow .npc-p{color:var(--fg-3);white-space:nowrap}
+.npcrow .npc-a{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.npcrow .npc-t{font-size:var(--fs-xs);color:var(--fg-2);white-space:nowrap}
+
+.lnk{background:none;border:none;color:var(--accent);text-decoration:underline;
+  padding:0 4px;cursor:pointer;font-size:inherit}
+
+.semirow{display:grid;grid-template-columns:1fr auto auto auto;gap:8px;align-items:center;
+  padding:8px 0;border-bottom:1px solid var(--line)}
+.semirow:last-of-type{border-bottom:none}
+.semirow .sm-n{font-weight:700;font-size:var(--fs-s)}
+.semirow .sm-d{grid-column:1/-1;font-size:var(--fs-xs);color:var(--fg-3);line-height:1.65;margin-top:-2px}
+.semirow .sm-v{font-size:var(--fs-xs);color:var(--fg-2);white-space:nowrap;text-align:right}
+
+.ctrow{display:grid;grid-template-columns:1fr 62px 68px 54px;gap:6px;align-items:center;
+  padding:6px 0;border-bottom:1px solid var(--line);font-size:var(--fs-xs)}
+.ctrow:last-of-type{border-bottom:none}
+.ctrow .ct-n{color:var(--fg-2);overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.ctrow .ct-v{text-align:right;color:var(--fg-1)}
+
+.gaprow{display:grid;grid-template-columns:1fr 56px 56px 60px;gap:6px;align-items:center;
+  padding:6px 0;border-bottom:1px solid var(--line);font-size:var(--fs-xs)}
+.gaprow:last-of-type{border-bottom:none}
+.gaprow .g-v{text-align:right}
+.gaprow .g-m{color:#5b8fd6}
+.gaprow .g-f{color:#d1699a}

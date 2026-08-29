@@ -36,6 +36,7 @@ const cases = [
   ['data/values', () => dataPage(state, data, 'values')],
   ['data/world', () => dataPage(state, data, 'world')],
   ['data/history', () => dataPage(state, data, 'history')],
+  ['data/semi', () => dataPage(state, data, 'semi')],
   ['map', () => mapPage(state, data, { mode: 'favor' })],
   ['map/region', () => mapPage(state, data, { region: 'TCH' })],
   ['map/district', () => mapPage(state, data, { district: 'TCH-03' })],
@@ -61,14 +62,29 @@ const ev = state.pendingEvents[0];
 if (ev) { try { eventModal(ev, state); console.log('OK     eventModal'); } catch (e) { bad++; console.log('FAIL   eventModal', e.message); } }
 // 存讀檔往返
 const SaveMgr = await import('../src/save/SaveManager.js');
+SaveMgr.setData(data);
 const round = SaveMgr.deserialize(JSON.parse(JSON.stringify(SaveMgr.serialize(state))));
+// POP 的有界欄位在存檔時被量化成一個位元組，所以往返比對要用容差而不是相等。
+// 容差取 0.05：解析度是 0.02~0.083，而玩家看到的是四字語詞，這個誤差永遠不會被看見。
+const TOL = 0.05;
+const near = (a, b) => Math.abs(a - b) <= TOL;
+let popDrift = 0;
+for (let i = 0; i < state.pops.n; i += 37) {
+  if (!near(round.pops.sol[i], state.pops.sol[i])) popDrift++;
+  if (!near(round.pops.ideology[i * 13], state.pops.ideology[i * 13])) popDrift++;
+  if (!near(round.pops.china[i * 7], state.pops.china[i * 7])) popDrift++;
+  if (!near(round.pops.femaleShare[i], state.pops.femaleShare[i])) popDrift++;
+}
+const peopleOk = Object.keys(round.people ?? {}).length === Object.keys(state.people ?? {}).length
+  && Object.values(round.people ?? {}).every((p) => p.regionId);
 const same = round.pops.n === state.pops.n && round.meta.turn === state.meta.turn
   && Math.abs(round.central.fiscal.gdp - state.central.fiscal.gdp) < 1e-6
-  && round.pops.sol[100] === state.pops.sol[100];
-console.log(same ? 'OK     存讀檔往返一致' : 'FAIL   存讀檔往返不一致');
+  && popDrift === 0 && peopleOk;
+console.log(same ? `OK     存讀檔往返一致（量化誤差皆在 ±${TOL} 之內）`
+  : `FAIL   存讀檔往返不一致（POP 偏移 ${popDrift} 處${peopleOk ? '' : '、人物欄位缺漏'}）`);
 if (!same) bad++;
 const bytes = JSON.stringify(SaveMgr.serialize(state)).length;
 console.log(`存檔大小 ${(bytes / 1024 / 1024).toFixed(2)} MB`);
-if (bytes > 4.5e6) { console.log('WARN   存檔超過 4.5 MB'); }
+if (bytes > 2.4e6) { console.log('WARN   存檔超過 2.4 MB，localStorage 以 UTF-16 儲存會逼近上限'); bad++; }
 console.log(bad ? `\n${bad} 項失敗` : '\n全部通過');
 process.exit(bad ? 1 : 0);

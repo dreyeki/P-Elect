@@ -11,6 +11,20 @@
 import fs from 'node:fs';
 import path from 'node:path';
 
+/**
+ * 迷你打包器處理不了 `export { a as b }` 這種帶別名的匯出——
+ * 它會產生一個指向不存在名稱的賦值，而且是在執行時才炸，
+ * 單檔版會整個開不起來。所以在打包之前先擋下來。
+ */
+function assertNoAliasedExports(src, file) {
+  const m = src.match(/export\s*\{[^}]*\bas\b[^}]*\}/);
+  if (m) {
+    throw new Error(`${file} 使用了帶別名的匯出，迷你打包器不支援：${m[0].trim()}\n`
+      + '請改成直接在宣告處加 export。');
+  }
+}
+
+
 const ROOT = path.resolve(import.meta.dirname, '..');
 const SRC = path.join(ROOT, 'src');
 
@@ -44,6 +58,7 @@ const modules = [];
 for (const abs of files) {
   const id = idOf(abs);
   let code = fs.readFileSync(abs, 'utf8');
+  assertNoAliasedExports(code, id);
   const exported = new Set();
   deps[id] = new Set();
 

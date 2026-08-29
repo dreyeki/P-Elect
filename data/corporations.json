@@ -17,7 +17,7 @@
       "mood": 2,
       "lobbyPower": 5,
       "exportDependency": 0.82,
-      "weightInIndex": 0.34
+      "weightInIndex": 0.2896
     },
     {
       "id": "HONGYU",
@@ -37,7 +37,7 @@
       "mood": 1,
       "lobbyPower": 5,
       "exportDependency": 0.88,
-      "weightInIndex": 0.085
+      "weightInIndex": 0.0724
     },
     {
       "id": "LIANDA",
@@ -55,7 +55,7 @@
       "mood": 2,
       "lobbyPower": 4,
       "exportDependency": 0.78,
-      "weightInIndex": 0.08
+      "weightInIndex": 0.0681
     },
     {
       "id": "HUATONG",
@@ -90,7 +90,7 @@
       "mood": 0,
       "lobbyPower": 4,
       "exportDependency": 0.08,
-      "weightInIndex": 0.05
+      "weightInIndex": 0.0426
     },
     {
       "id": "CHANGSHENG",
@@ -111,7 +111,7 @@
       "mood": 1,
       "lobbyPower": 3,
       "exportDependency": 0.72,
-      "weightInIndex": 0.05
+      "weightInIndex": 0.0426
     },
     {
       "id": "YANGSHENG",
@@ -133,7 +133,7 @@
       "mood": 0,
       "lobbyPower": 3,
       "exportDependency": 0.55,
-      "weightInIndex": 0.025
+      "weightInIndex": 0.0213
     },
     {
       "id": "HUAGANG",
@@ -153,7 +153,7 @@
       "mood": -2,
       "lobbyPower": 4,
       "exportDependency": 0.45,
-      "weightInIndex": 0.04
+      "weightInIndex": 0.0341
     },
     {
       "id": "TAIYUAN",
@@ -172,7 +172,7 @@
       "mood": -2,
       "lobbyPower": 5,
       "exportDependency": 0.58,
-      "weightInIndex": 0.05
+      "weightInIndex": 0.0426
     },
     {
       "id": "TAIAN",
@@ -207,7 +207,7 @@
       "mood": 1,
       "lobbyPower": 5,
       "exportDependency": 0.12,
-      "weightInIndex": 0.055
+      "weightInIndex": 0.0468
     },
     {
       "id": "FUMIN",
@@ -242,7 +242,7 @@
       "mood": 1,
       "lobbyPower": 4,
       "exportDependency": 0.1,
-      "weightInIndex": 0.045
+      "weightInIndex": 0.0383
     },
     {
       "id": "TONGHE",
@@ -277,7 +277,7 @@
       "mood": 0,
       "lobbyPower": 3,
       "exportDependency": 0.15,
-      "weightInIndex": 0.055
+      "weightInIndex": 0.0468
     },
     {
       "id": "DAGUAN",
@@ -298,7 +298,7 @@
       "mood": -1,
       "lobbyPower": 3,
       "exportDependency": 0.3,
-      "weightInIndex": 0.035
+      "weightInIndex": 0.0298
     },
     {
       "id": "TPEC",
@@ -333,7 +333,7 @@
       "mood": -3,
       "lobbyPower": 4,
       "exportDependency": 0,
-      "weightInIndex": 0.04
+      "weightInIndex": 0.0341
     },
     {
       "id": "TWOIL",
@@ -368,7 +368,7 @@
       "mood": -2,
       "lobbyPower": 4,
       "exportDependency": 0.05,
-      "weightInIndex": 0.035
+      "weightInIndex": 0.0298
     },
     {
       "id": "ZHONGXING",
@@ -389,7 +389,120 @@
       "mood": 3,
       "lobbyPower": 2,
       "exportDependency": 0.4,
-      "weightInIndex": 0.015
+      "weightInIndex": 0.0128
+    },
+    {
+      "id": "MEIGUANG",
+      "name": "美晶半導體台灣",
+      "sector": "semiconductor",
+      "foreign": true,
+      "marketCap": 0,
+      "employees": {
+        "TCH": 12000,
+        "TNN": 9000,
+        "TYC": 4000
+      },
+      "mood": 0,
+      "lobbyPower": 3,
+      "exportDependency": 0.91,
+      "weightInIndex": 0
+    },
+    {
+      "id": "LIXIN",
+      "name": "力芯記憶",
+      "sector": "semiconductor",
+      "foreign": false,
+      "marketCap": 680,
+      "employees": {
+        "TCH": 9000,
+        "HSC": 6000,
+        "TNN": 3000
+      },
+      "mood": -1,
+      "lobbyPower": 3,
+      "exportDependency": 0.86,
+      "weightInIndex": 0.017
+    },
+    {
+      "id": "TAIDA",
+      "name": "泰達電機",
+      "sector": "electronics",
+      "foreign": false,
+      "marketCap": 2400,
+      "employees": {
+        "TYC": 22000,
+        "TNN": 9000,
+        "TCH": 7000,
+        "NTP": 6000
+      },
+      "mood": 1,
+      "lobbyPower": 4,
+      "exportDependency": 0.79,
+      "weightInIndex": 0.0468
+    },
+    {
+      "id": "LIANFA",
+      "name": "聯捷電子",
+      "sector": "semiconductor",
+      "foreign": false,
+      "marketCap": 4100,
+      "employees": {
+        "HSC": 18000,
+        "TPE": 5000,
+        "TCH": 3000
+      },
+      "mood": 1,
+      "lobbyPower": 4,
+      "exportDependency": 0.88,
+      "weightInIndex": 0.0528
+    },
+    {
+      "id": "RUIYE",
+      "name": "瑞曄科技",
+      "sector": "semiconductor",
+      "foreign": false,
+      "marketCap": 720,
+      "employees": {
+        "HSC": 7000,
+        "TPE": 2500
+      },
+      "mood": 1,
+      "lobbyPower": 2,
+      "exportDependency": 0.83,
+      "weightInIndex": 0.0153
+    },
+    {
+      "id": "JIADENG",
+      "name": "家騰精機",
+      "sector": "machinery",
+      "foreign": false,
+      "marketCap": 180,
+      "employees": {
+        "TYC": 2600,
+        "HSC": 1800,
+        "TCH": 900
+      },
+      "mood": 0,
+      "lobbyPower": 2,
+      "exportDependency": 0.64,
+      "weightInIndex": 0.0068
+    },
+    {
+      "id": "HANWEI",
+      "name": "漢崴檢測",
+      "sector": "machinery",
+      "foreign": false,
+      "marketCap": 240,
+      "employees": {
+        "HSC": 3400,
+        "TNN": 2200,
+        "TCH": 1200
+      },
+      "mood": 1,
+      "lobbyPower": 2,
+      "exportDependency": 0.71,
+      "weightInIndex": 0.0094
     }
-  ]
+  ],
+  "_note": " weightInIndex 合計為 1，加入半導體細部產業鏈的公司之後已重新等比例正規化。foreign:true 的外商不列入加權指數。"
 }

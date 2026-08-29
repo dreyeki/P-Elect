@@ -7,7 +7,7 @@
       "desc": "你沒有職位、沒有頭銜、沒有人認識你。你有的是一個想改變的地方，跟一張選舉公報上的空位。",
       "ageRange": [
         26,
-        32
+        42
       ],
       "role": "citizen",
       "party": null,
@@ -17,7 +17,9 @@
       "partyPrestige": 0,
       "grassrootsHome": 1,
       "factionFavor": 0,
-      "path": "里長 → 議員 → 立委 → 縣市長 → 總統，全程約十五到二十年"
+      "path": "里長 → 議員 → 立委 → 縣市長 → 總統，全程約十五到二十年",
+      "attrCost": 0,
+      "costNote": "沒有任何人幫你，所以也沒有任何東西要先付出去。"
     },
     {
       "id": "aide",
@@ -26,7 +28,7 @@
       "desc": "你替老闆寫了五年的質詢稿，選民服務都是你在跑。老闆說明年可能不選了，位子看你有沒有本事接。",
       "ageRange": [
         28,
-        35
+        45
       ],
       "role": "aide",
       "party": "ASK",
@@ -36,7 +38,9 @@
       "partyPrestige": 1,
       "grassrootsHome": 2,
       "factionFavor": 2,
-      "path": "接班參選議員或立委，再一路往上爬"
+      "path": "接班參選議員或立委，再一路往上爬",
+      "attrCost": 3,
+      "costNote": "有職位、有政黨、有錢也有人脈。這些東西不是天上掉下來的，它們佔掉了你原本可以拿去長本事的那幾年。"
     }
   ],
   "partyChoice": [
@@ -52,7 +56,9 @@
         "partyPrestige": 0,
         "campaignFunds": 150000,
         "grassrootsBonus": 1
-      }
+      },
+      "attrCost": 2,
+      "costNote": "大黨的組織與提名管道很值錢，值錢的東西要用別的地方換。"
     },
     {
       "id": "minor",
@@ -69,7 +75,9 @@
         "partyPrestige": 1,
         "campaignFunds": 50000,
         "fame": 1
-      }
+      },
+      "attrCost": 1,
+      "costNote": "小黨給你的舞台比實力大一點，這個差額要先付。"
     },
     {
       "id": "independent",
@@ -80,7 +88,19 @@
         "campaignFunds": 0,
         "boldnessBonus": 0,
         "grassrootsBonus": 0
-      }
+      },
+      "attrCost": 0,
+      "costNote": "沒有人給你任何東西，所以你什麼都不必先付。"
     }
-  ]
+  ],
+  "defaults": {
+    "_note": "開局預設值。玩家可以全部改掉，這只是把游標放在一個合理的地方。",
+    "name": "龍天台",
+    "gender": "m",
+    "education": "大學",
+    "age": 35,
+    "startId": "rookie",
+    "homeRegion": "KHH"
+  },
+  "_note": "starts[].attrCost、backgrounds[].attrCost 與 partyChoice[].attrCost 會從屬性點數的總額裡先扣掉。選一個比較舒服的開局，代價是你本人比較弱——這樣所有開局才會站在同一條線上。"
 }

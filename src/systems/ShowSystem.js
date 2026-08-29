@@ -5,7 +5,9 @@
  */
 import { clamp, clamp05, clampBi } from '../core/Formula.js';
 import { bumpCounter } from './Effects.js';
+import { bumpCounter as bumpAttr } from './CanvassSystem.js';
 import { teamBonus } from './TeamSystem.js';
+import * as Theory from './TheorySystem.js';
 
 export function tick(state, ctx) {
   const { data, rng, scaleMult } = ctx;
@@ -51,15 +53,23 @@ export function tick(state, ctx) {
 }
 
 /** 上節目：表現分決定一切 */
-export function appear(state, data, showId, rng) {
+export function appear(state, data, showId, rng, theoryId = null) {
   const inv = state.invitations.find((i) => i.showId === showId);
   if (!inv) return { ok: false, msg: '你手上沒有這個節目的通告。' };
   const show = data.byId.show[showId];
   const p = state.player;
 
+  // 引用理論：講得出一套東西的人，在節目上的份量完全不一樣
+  let theoryBonus = 0, theoryDef = null;
+  if (theoryId && Theory.has(state, theoryId)) {
+    theoryDef = data.byId.theory[theoryId];
+    theoryBonus = Theory.citeBonus(state, data, theoryId, inv.topic) * 7;
+    Theory.use(state, data, theoryId);
+  }
+
   const prep = state.flags.showPrep ?? 0;
   const spokesperson = teamBonus(state, data, 'mediaFrame');
-  const score = p.attrs.eloquence * 11
+  const score = theoryBonus + p.attrs.eloquence * 11
     + p.attrs.judgment * 6
     + p.attrs.charisma * 5
     + prep * 6
@@ -115,7 +125,26 @@ export function appear(state, data, showId, rng) {
     p.stigma = clamp05(p.stigma + 0.3);
     extra = '節目最後主持人拿出一份文件問你，你當下沒有正面回答，那份文件現在在別人手上。';
   }
-  return { ok: true, perf, show, text, extra };
+  // 引用的理論如果打中了節目的觀眾，效果會再放大
+  if (theoryDef && perf >= 3) {
+    const P2 = state.pops;
+    for (let i = 0; i < P2.n; i++) {
+      const sid = data.strataIds[P2.stratum[i]];
+      const w = theoryDef.strataAppeal?.[sid] ?? 0;
+      if (Math.abs(w) < 0.1) continue;
+      P2.playerFavor[i] = clampBi(P2.playerFavor[i] + w * 0.05 * (perf - 2));
+    }
+    for (const ax in theoryDef.axis ?? {}) {
+      state.modifiers.add({
+        id: `theory:${theoryDef.id}:${ax}`, source: 'theory', label: theoryDef.name,
+        target: `value.${ax}`, op: 'add', value: theoryDef.axis[ax] * 0.4,
+        duration: 12, startTurn: state.meta.turn,
+      });
+    }
+  }
+  // 上了幾次節目之後，你不再需要看小抄也能把一段話講得有頭有尾
+  const milestone = bumpAttr(state, data, 'show');
+  return { ok: true, perf, show, text, extra, theory: theoryDef, milestone };
 }
 
 export function prepare(state) {

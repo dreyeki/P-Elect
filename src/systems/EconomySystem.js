@@ -7,14 +7,16 @@ export function tick(state, ctx) {
   const cyc = sectorCycles(state);
   const c = state.central;
   const news = [];
+  const TE = data.tuning?.economy ?? {};
 
   // ── 中央：通膨與匯率
   const importCost = (-state.world.MEA.cycle * 0.012) + (31.2 - c.monetary.exchangeRateUSD) * -0.0006;
   const demandPull = c.fiscal.gdpGrowth * 0.28 + c.monetary.m2Growth * 0.12;
   const wageCost = state.modifiers.get('econ.wageCost', 0) * 0.02;
   const expected = c.fiscal.inflation * 0.35;
-  const inflTarget = 0.012 + 0.40 * importCost + 0.30 * demandPull + 0.20 * wageCost + 0.10 * expected;
-  c.fiscal.inflation = clamp(c.fiscal.inflation + (inflTarget - c.fiscal.inflation) * 0.22 * scaleMult,
+  const inflTarget = (TE.inflationBase ?? 0.012) + 0.40 * importCost + 0.30 * demandPull + 0.20 * wageCost + 0.10 * expected;
+  c.fiscal.inflation = clamp(c.fiscal.inflation
+    + (inflTarget - c.fiscal.inflation) * (TE.inflationBlendRate ?? 0.22) * scaleMult,
     -0.02, 0.16);
   c.monetary.exchangeRateUSD = clamp(c.monetary.exchangeRateUSD
     - state.world.GLOBAL.cycle * 0.12 * scaleMult + rng.normal(0, 0.06) * scaleMult, 27, 37);
@@ -33,8 +35,8 @@ export function tick(state, ctx) {
     const disruption = state.modifiers.get(`region.${r.id}.disruption`, 0);
 
     // 全球科技週期是這一輪台灣經濟最大的槓桿，直接進到每個縣市的成長率
-    const boom = state.world.GLOBAL.cycle * 0.078;
-    const growth = 0.012
+    const boom = state.world.GLOBAL.cycle * (TE.boomCoefficient ?? 0.078);
+    const growth = (TE.baseGrowth ?? 0.012)
       + boom
       + sectorTerm
       + (infra - 0.6) * 0.010
@@ -45,13 +47,14 @@ export function tick(state, ctx) {
       - disruption * 0.01
       + rng.normal(0, 0.0025);
 
-    const blend = 0.22 * scaleMult;
+    const blend = (TE.growthBlendRate ?? 0.22) * scaleMult;
     r.economy.gdpGrowth = clamp(r.economy.gdpGrowth * (1 - blend) + growth * blend, -0.08, 0.18);
     r.economy.gdp *= 1 + r.economy.gdpGrowth / 12 * scaleMult;
 
     // 高成長會壓低失業率，但台灣的結構性失業有下限，不會因為景氣好就趨近於零
-    const targetUnemp = clamp(0.0375 - (r.economy.gdpGrowth - 0.025) * 0.07
-      + state.modifiers.get('econ.unemployment', 0), 0.026, 0.16);
+    const targetUnemp = clamp((TE.unemploymentBase ?? 0.0375)
+      - (r.economy.gdpGrowth - 0.025) * (TE.unemploymentGrowthCoupling ?? 0.07)
+      + state.modifiers.get('econ.unemployment', 0), TE.unemploymentFloor ?? 0.026, 0.16);
     r.economy.unemployment += (targetUnemp - r.economy.unemployment) * 0.12 * scaleMult;
 
     r.economy.perCapitaIncome *= 1 + (r.economy.gdpGrowth * 0.55 - c.fiscal.inflation * 0.25) / 12 * scaleMult;

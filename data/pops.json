@@ -9,10 +9,15 @@
         "unification": 0,
         "marketFreedom": -2,
         "progressivism": -2,
+        "genderRoles": -2,
         "immigration": -1,
         "environment": -1,
+        "equality": 1,
         "militaryAutonomy": 0,
-        "directDemocracy": 0
+        "directDemocracy": 0,
+        "punishment": 3,
+        "fiscalExpansion": 2,
+        "investmentPriority": -2
       },
       "issueWeights": {
         "economy": 0.22,
@@ -40,10 +45,15 @@
         "unification": 0,
         "marketFreedom": -3,
         "progressivism": -1,
+        "genderRoles": -1,
         "immigration": -2,
         "environment": 0,
+        "equality": 2,
         "militaryAutonomy": 1,
-        "directDemocracy": 1
+        "directDemocracy": 1,
+        "punishment": 3,
+        "fiscalExpansion": 2,
+        "investmentPriority": -1
       },
       "issueWeights": {
         "economy": 0.24,
@@ -71,10 +81,15 @@
         "unification": 0,
         "marketFreedom": -1,
         "progressivism": 1,
+        "genderRoles": 1,
         "immigration": 0,
         "environment": 0,
+        "equality": 2,
         "militaryAutonomy": 0,
-        "directDemocracy": 1
+        "directDemocracy": 1,
+        "punishment": 2,
+        "fiscalExpansion": 1,
+        "investmentPriority": -1
       },
       "issueWeights": {
         "economy": 0.26,
@@ -102,10 +117,15 @@
         "unification": 0,
         "marketFreedom": 1,
         "progressivism": 2,
+        "genderRoles": 1,
         "immigration": 1,
         "environment": 1,
+        "equality": 0,
         "militaryAutonomy": 0,
-        "directDemocracy": 1
+        "directDemocracy": 1,
+        "punishment": 2,
+        "fiscalExpansion": 0,
+        "investmentPriority": 1
       },
       "issueWeights": {
         "economy": 0.2,
@@ -133,10 +153,15 @@
         "unification": -1,
         "marketFreedom": 2,
         "progressivism": 2,
+        "genderRoles": 1,
         "immigration": 2,
         "environment": 1,
+        "equality": -1,
         "militaryAutonomy": 1,
-        "directDemocracy": 1
+        "directDemocracy": 1,
+        "punishment": 1,
+        "fiscalExpansion": -1,
+        "investmentPriority": 3
       },
       "issueWeights": {
         "economy": 0.2,
@@ -164,10 +189,15 @@
         "unification": 1,
         "marketFreedom": 3,
         "progressivism": -1,
+        "genderRoles": -1,
         "immigration": 0,
         "environment": -2,
+        "equality": -1,
         "militaryAutonomy": 0,
-        "directDemocracy": 0
+        "directDemocracy": 0,
+        "punishment": 3,
+        "fiscalExpansion": 1,
+        "investmentPriority": 1
       },
       "issueWeights": {
         "economy": 0.28,
@@ -195,10 +225,15 @@
         "unification": 2,
         "marketFreedom": 4,
         "progressivism": 0,
+        "genderRoles": -1,
         "immigration": 2,
         "environment": -2,
+        "equality": -3,
         "militaryAutonomy": -1,
-        "directDemocracy": -2
+        "directDemocracy": -2,
+        "punishment": 2,
+        "fiscalExpansion": -1,
+        "investmentPriority": 3
       },
       "issueWeights": {
         "economy": 0.3,
@@ -226,10 +261,15 @@
         "unification": 1,
         "marketFreedom": -1,
         "progressivism": -1,
+        "genderRoles": 1,
         "immigration": -1,
         "environment": 0,
+        "equality": 1,
         "militaryAutonomy": 1,
-        "directDemocracy": -1
+        "directDemocracy": -1,
+        "punishment": 2,
+        "fiscalExpansion": 0,
+        "investmentPriority": 0
       },
       "issueWeights": {
         "economy": 0.16,
@@ -257,10 +297,15 @@
         "unification": -2,
         "marketFreedom": -2,
         "progressivism": 4,
+        "genderRoles": 3,
         "immigration": 2,
         "environment": 3,
+        "equality": 3,
         "militaryAutonomy": 1,
-        "directDemocracy": 3
+        "directDemocracy": 3,
+        "punishment": -1,
+        "fiscalExpansion": 1,
+        "investmentPriority": -1
       },
       "issueWeights": {
         "economy": 0.14,
@@ -288,10 +333,15 @@
         "unification": 1,
         "marketFreedom": -1,
         "progressivism": -3,
+        "genderRoles": -2,
         "immigration": -2,
         "environment": 0,
+        "equality": 1,
         "militaryAutonomy": -1,
-        "directDemocracy": -1
+        "directDemocracy": -1,
+        "punishment": 4,
+        "fiscalExpansion": 1,
+        "investmentPriority": -1
       },
       "issueWeights": {
         "economy": 0.14,
@@ -325,7 +375,12 @@
         "unification": -1.5,
         "environment": 1,
         "directDemocracy": 1,
-        "immigration": 1
+        "immigration": 1,
+        "genderRoles": 2.0,
+        "equality": 1.2,
+        "punishment": -1.4,
+        "fiscalExpansion": 0.4,
+        "investmentPriority": -0.5
       },
       "awarenessShift": -0.3,
       "turnoutShift": -0.1
@@ -338,7 +393,9 @@
         54
       ],
       "share": 0.38,
-      "ideologyShift": {},
+      "ideologyShift": {
+        "punishment": 0.3
+      },
       "awarenessShift": 0.2,
       "turnoutShift": 0.02
     },
@@ -354,7 +411,12 @@
         "progressivism": -2,
         "unification": 1.5,
         "immigration": -1,
-        "directDemocracy": -1
+        "directDemocracy": -1,
+        "genderRoles": -2.0,
+        "equality": -0.3,
+        "punishment": 1.5,
+        "fiscalExpansion": -0.4,
+        "investmentPriority": 0.3
       },
       "awarenessShift": 0.4,
       "turnoutShift": 0.08
@@ -455,5 +517,57 @@
       "retiree": -0.013
     },
     "_comment": "urbanity 0..5 各對應一組職業階層分佈，總和 1.0"
+  },
+  "gender": {
+    "_note": [
+      "POP 不再分裂成男女兩份——那會讓存檔膨脹一倍——而是每個 POP 帶一個女性比例，",
+      "在計算支持度時用同一組意識形態加減 gap 算兩次，再按比例混合。",
+      "女性 = base + gap，男性 = base − gap。gap 會再乘上世代倍率：",
+      "台灣的性別政治落差幾乎全部集中在青年世代，長輩之間反而很小。",
+      "調整 gap 就等於調整男女投票差距，這是本檔最重要的一組參數。"
+    ],
+    "femaleShareBase": 0.508,
+    "femaleShareByStratum": {
+      "farmer": 0.42,
+      "bluecollar": 0.31,
+      "service": 0.62,
+      "whitecollar": 0.54,
+      "techpro": 0.29,
+      "smallbiz": 0.45,
+      "capitalist": 0.24,
+      "publicsvc": 0.58,
+      "student": 0.51,
+      "retiree": 0.55
+    },
+    "ideologyGap": {
+      "genderRoles": 1.35,
+      "progressivism": 0.85,
+      "equality": 0.55,
+      "environment": 0.45,
+      "punishment": -0.3,
+      "unification": -0.4,
+      "immigration": 0.2,
+      "militaryAutonomy": -0.25,
+      "marketFreedom": -0.3,
+      "investmentPriority": -0.25
+    },
+    "gapByGeneration": {
+      "youth": 1.75,
+      "middle": 1.0,
+      "senior": 0.45
+    },
+    "turnoutShift": 0.018,
+    "enthusiasmGap": 0.15,
+    "issueWeightGap": {
+      "_note": "女性對這些議題的權重乘數，男性取倒數。",
+      "healthcare": 1.22,
+      "education": 1.18,
+      "prices": 1.14,
+      "housing": 1.06,
+      "security": 1.1,
+      "defense": 0.78,
+      "energy": 0.88,
+      "economy": 0.94
+    }
   }
 }

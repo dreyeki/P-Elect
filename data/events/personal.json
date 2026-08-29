@@ -6,7 +6,15 @@
       "weight": 50,
       "cooldown": 18,
       "trigger": "player.fatigue > 40 && turn > 8",
-      "requires": { "minTurn": 8, "roles": ["legislator", "mayor", "councilor", "citizen"] },
+      "requires": {
+        "minTurn": 8,
+        "roles": [
+          "legislator",
+          "mayor",
+          "councilor",
+          "citizen"
+        ]
+      },
       "headline": "母親確診中風住進加護病房，家人要求你回去輪班照顧",
       "body": "你的母親在清晨被發現倒臥在浴室，送醫後確診為出血性中風並住進加護病房觀察。醫師表示接下來三個月的復健期會決定她往後的生活自理程度，家屬必須有人固定陪同。你的姊姊在電話裡直接問你，這些年是不是只有選舉的時候才會想起這個家。",
       "options": [
@@ -14,42 +22,84 @@
           "text": "暫停兩週的所有行程，親自守在醫院陪伴",
           "hint": "家人的關係能被修補回來，議場與選區都會留下空白",
           "effects": {
-            "player": { "fatigue": -6, "fame": -4, "integrity": 3, "politicalCapital": -3 },
-            "grassroots": { "_home": -1 },
-            "popMood": { "retiree": 2, "service": 1 },
-            "issueHeat": { "healthcare": 1 }
+            "player": {
+              "fatigue": -6,
+              "fame": -4,
+              "integrity": 3,
+              "politicalCapital": -3
+            },
+            "grassroots": {
+              "_home": -1
+            },
+            "popMood": {
+              "retiree": 2,
+              "service": 1
+            },
+            "issueHeat": {
+              "healthcare": 1
+            }
           }
         },
         {
           "text": "聘請專業看護，行程照舊但每晚趕回醫院",
           "hint": "兩邊都想抓住的結果，通常是兩邊都做得不夠好",
           "effects": {
-            "player": { "fatigue": 9, "personalAssets": -80, "fame": -1 },
-            "popMood": { "whitecollar": 1 },
-            "issueHeat": { "healthcare": 1 }
+            "player": {
+              "fatigue": 9,
+              "personalAssets": -80,
+              "fame": -1
+            },
+            "popMood": {
+              "whitecollar": 1
+            },
+            "issueHeat": {
+              "healthcare": 1
+            }
           }
         },
         {
           "text": "把照顧全數託付家人，自己專心投入公務",
           "hint": "政治工作不會被耽誤，家裡的裂痕會愈裂愈深",
           "effects": {
-            "player": { "fatigue": 3, "integrity": -2, "politicalCapital": 2, "stigma": 1 },
-            "popMood": { "retiree": -2 },
-            "grassroots": { "_home": 1 }
+            "player": {
+              "fatigue": 3,
+              "integrity": -2,
+              "politicalCapital": 2,
+              "stigma": 1
+            },
+            "popMood": {
+              "retiree": -2
+            },
+            "grassroots": {
+              "_home": 1
+            }
           }
         },
         {
           "text": "把這段經歷轉為推動長照政策的親身倡議",
           "hint": "私事變成公共議題很有力量，也會被說成消費自己的母親",
           "effects": {
-            "player": { "fame": 4, "fatigue": 5, "integrity": 1, "stigma": 1 },
-            "issueHeat": { "healthcare": 5 },
-            "popMood": { "retiree": 4, "service": 3 },
-            "central": { "social.careCapacity": 0.01 }
+            "player": {
+              "fame": 4,
+              "fatigue": 5,
+              "integrity": 1,
+              "stigma": 1
+            },
+            "issueHeat": {
+              "healthcare": 5
+            },
+            "popMood": {
+              "retiree": 4,
+              "service": 3
+            },
+            "central": {
+              "social.careCapacity": 0.01
+            }
           }
         }
       ],
-      "_designNote": "家人重病的陪伴、兩頭燒、託付與政治轉化，體力與家庭關係是主要貨幣"
+      "_designNote": "家人重病的陪伴、兩頭燒、託付與政治轉化，體力與家庭關係是主要貨幣",
+      "tier": "personal"
     },
     {
       "id": "EVT_PER_MARRIAGE_STRAIN",
@@ -57,7 +107,14 @@
       "weight": 45,
       "cooldown": 20,
       "trigger": "player.fatigue > 50 && player.fame > 25",
-      "requires": { "minTurn": 10, "roles": ["legislator", "mayor", "councilor"] },
+      "requires": {
+        "minTurn": 10,
+        "roles": [
+          "legislator",
+          "mayor",
+          "councilor"
+        ]
+      },
       "headline": "配偶提出想要暫時分居，指你已經三個月沒回家吃過飯",
       "body": "你的配偶在深夜的客廳裡平靜地提出想要暫時分居的想法，理由是這三個月你只回家睡覺，連一頓晚飯都沒有一起吃過。對方強調並非要離婚，只是需要一段時間確認自己是不是還想繼續過這種生活。你翻開行事曆才發現，接下來六週的週末已經全部被公開行程填滿。",
       "options": [
@@ -65,30 +122,56 @@
           "text": "推掉未來六週的週末行程，重新安排生活",
           "hint": "婚姻能被拉回來，錯過的六個週末行程都有人在等你",
           "effects": {
-            "player": { "fatigue": -10, "fame": -3, "politicalCapital": -3, "integrity": 2 },
-            "grassroots": { "_home": -2 },
-            "popMood": { "whitecollar": 1 }
+            "player": {
+              "fatigue": -10,
+              "fame": -3,
+              "politicalCapital": -3,
+              "integrity": 2
+            },
+            "grassroots": {
+              "_home": -2
+            },
+            "popMood": {
+              "whitecollar": 1
+            }
           }
         },
         {
           "text": "承諾改善但只做得到每週固定一次晚餐",
           "hint": "誠意有了但份量不夠，這個問題大概還會再回來一次",
           "effects": {
-            "player": { "fatigue": 2, "fame": -1, "stigma": 1 },
-            "popMood": { "whitecollar": 1, "service": 1 }
+            "player": {
+              "fatigue": 2,
+              "fame": -1,
+              "stigma": 1
+            },
+            "popMood": {
+              "whitecollar": 1,
+              "service": 1
+            }
           }
         },
         {
           "text": "請配偶再忍耐到選舉結束，之後全部補回來",
           "hint": "熟悉的說法一次又一次，這次可能真的沒有下一次了",
           "effects": {
-            "player": { "fatigue": 4, "politicalCapital": 2, "integrity": -3, "stigma": 2 },
-            "grassroots": { "_home": 1 },
-            "popMood": { "student": -1 }
+            "player": {
+              "fatigue": 4,
+              "politicalCapital": 2,
+              "integrity": -3,
+              "stigma": 2
+            },
+            "grassroots": {
+              "_home": 1
+            },
+            "popMood": {
+              "student": -1
+            }
           }
         }
       ],
-      "_designNote": "婚姻危機的三種回應，政治時間與親密關係是純粹的零和"
+      "_designNote": "婚姻危機的三種回應，政治時間與親密關係是純粹的零和",
+      "tier": "personal"
     },
     {
       "id": "EVT_PER_CHILD_TROUBLE",
@@ -96,7 +179,15 @@
       "weight": 45,
       "cooldown": 18,
       "trigger": "player.fame > 30 && turn > 10",
-      "requires": { "minTurn": 10, "roles": ["legislator", "mayor", "councilor", "citizen"] },
+      "requires": {
+        "minTurn": 10,
+        "roles": [
+          "legislator",
+          "mayor",
+          "councilor",
+          "citizen"
+        ]
+      },
       "headline": "就讀高中的女兒在校內衝突事件中被記過，班群截圖外流",
       "body": "你就讀高中的女兒因為與同學發生肢體衝突而被學校記了一支小過，班級群組的截圖被人轉貼到公開論壇。留言區出現大量針對你家庭教養的攻擊，其中不少人直接點名你的姓名與職務。導師私下告訴你，孩子這半年在學校變得沉默許多，多次被同學拿你的新聞當話題調侃。",
       "options": [
@@ -104,41 +195,87 @@
           "text": "公開聲明請外界不要騷擾未成年子女",
           "hint": "護住了孩子，這件事的能見度反而會再往上跳一階",
           "effects": {
-            "player": { "fame": 2, "fatigue": 3, "integrity": 3, "stigma": 1 },
-            "popMood": { "whitecollar": 3, "student": 3 },
-            "valuePressure": { "progressivism": 0.2 }
+            "player": {
+              "fame": 2,
+              "fatigue": 3,
+              "integrity": 3,
+              "stigma": 1
+            },
+            "popMood": {
+              "whitecollar": 3,
+              "student": 3
+            },
+            "valuePressure": {
+              "progressivism": 0.2
+            }
           }
         },
         {
           "text": "全面淡化處理，配合學校完成輔導程序",
           "hint": "新聞週期過得最快，孩子承受的壓力還是得自己扛",
           "effects": {
-            "player": { "fame": -2, "fatigue": 2, "integrity": 1 },
-            "popMood": { "publicsvc": 2, "whitecollar": 1 }
+            "player": {
+              "fame": -2,
+              "fatigue": 2,
+              "integrity": 1
+            },
+            "popMood": {
+              "publicsvc": 2,
+              "whitecollar": 1
+            }
           }
         },
         {
           "text": "請假一週陪孩子出遊，暫時離開所有鏡頭",
           "hint": "孩子最需要的其實是這個，你的政治時鐘不會為誰暫停",
           "effects": {
-            "player": { "fatigue": -8, "fame": -3, "politicalCapital": -2, "integrity": 3 },
-            "grassroots": { "_home": -1 },
-            "popMood": { "whitecollar": 2, "service": 1 }
+            "player": {
+              "fatigue": -8,
+              "fame": -3,
+              "politicalCapital": -2,
+              "integrity": 3
+            },
+            "grassroots": {
+              "_home": -1
+            },
+            "popMood": {
+              "whitecollar": 2,
+              "service": 1
+            }
           }
         },
         {
           "text": "推動未成年子女隱私保護的網路修法倡議",
           "hint": "把痛苦變成公共價值，也等於把孩子的事再說一次",
           "effects": {
-            "player": { "fame": 4, "integrity": 2, "fatigue": 3, "stigma": 1 },
-            "central": { "politics.minorPrivacy": 0.04 },
-            "popMood": { "student": 4, "whitecollar": 4 },
-            "issueHeat": { "education": 3 },
-            "valuePressure": { "progressivism": 0.4 }
+            "player": {
+              "fame": 4,
+              "integrity": 2,
+              "fatigue": 3,
+              "stigma": 1
+            },
+            "central": {
+              "politics.minorPrivacy": 0.04
+            },
+            "popMood": {
+              "student": 4,
+              "whitecollar": 4
+            },
+            "issueHeat": {
+              "education": 3
+            },
+            "valuePressure": {
+              "progressivism": 0.4
+            }
           }
         }
       ],
-      "_designNote": "子女受牽連的四種處理，保護、淡化、陪伴與公共化各有代價"
+      "_designNote": "子女受牽連的四種處理，保護、淡化、陪伴與公共化各有代價",
+      "tier": "personal",
+      "gate": {
+        "minFame": 1.0,
+        "why": "要先有人知道你是誰，這件事才會找上你"
+      }
     },
     {
       "id": "EVT_PER_HEALTH_WARNING",
@@ -146,7 +283,15 @@
       "weight": 50,
       "cooldown": 16,
       "trigger": "player.fatigue > 60 && turn > 6",
-      "requires": { "minTurn": 6, "roles": ["legislator", "mayor", "councilor", "citizen"] },
+      "requires": {
+        "minTurn": 6,
+        "roles": [
+          "legislator",
+          "mayor",
+          "councilor",
+          "citizen"
+        ]
+      },
       "headline": "健檢報告顯示心血管高風險，醫師建議立即降低工作強度",
       "body": "年度健檢報告顯示你的頸動脈已有明顯狹窄，加上長期偏高的血壓與睡眠不足，被列為心血管事件的高風險族群。心臟科醫師直接建議你在三個月內把每週工時壓到六十小時以下，並停止所有夜間應酬。你翻看下個月的行程表，光是廟會與婚喪喜慶的邀約就有四十七場。",
       "options": [
@@ -154,40 +299,78 @@
           "text": "全面刪減夜間應酬，改由助理代為出席",
           "hint": "身體能撐得比較久，地方上會開始說你架子變大了",
           "effects": {
-            "player": { "fatigue": -12, "fame": -3, "politicalCapital": -2 },
-            "grassroots": { "_home": -2 },
-            "popMood": { "farmer": -2, "smallbiz": -2 }
+            "player": {
+              "fatigue": -12,
+              "fame": -3,
+              "politicalCapital": -2
+            },
+            "grassroots": {
+              "_home": -2
+            },
+            "popMood": {
+              "farmer": -2,
+              "smallbiz": -2
+            }
           }
         },
         {
           "text": "照常出席但全面戒酒，並開始規律的運動",
           "hint": "折衷方案能撐一陣子，根本的工時問題完全沒有解決",
           "effects": {
-            "player": { "fatigue": -4, "integrity": 1 },
-            "popMood": { "retiree": 1, "farmer": 1 },
-            "grassroots": { "_home": 1 }
+            "player": {
+              "fatigue": -4,
+              "integrity": 1
+            },
+            "popMood": {
+              "retiree": 1,
+              "farmer": 1
+            },
+            "grassroots": {
+              "_home": 1
+            }
           }
         },
         {
           "text": "把健檢結果收進抽屜，行程一場都不減",
           "hint": "現在什麼都不會改變，你的身體會在最不方便的時候提醒你",
           "effects": {
-            "player": { "fatigue": 10, "fame": 3, "politicalCapital": 2, "stigma": 1 },
-            "grassroots": { "_home": 2 },
-            "popMood": { "farmer": 3, "smallbiz": 3 }
+            "player": {
+              "fatigue": 10,
+              "fame": 3,
+              "politicalCapital": 2,
+              "stigma": 1
+            },
+            "grassroots": {
+              "_home": 2
+            },
+            "popMood": {
+              "farmer": 3,
+              "smallbiz": 3
+            }
           }
         },
         {
           "text": "公開自身健檢結果，推動政治工作者健康倡議",
           "hint": "誠實面對很難得，也等於把弱點主動交給對手",
           "effects": {
-            "player": { "fame": 4, "integrity": 4, "fatigue": -3, "stigma": 2 },
-            "popMood": { "whitecollar": 4, "publicsvc": 3 },
-            "issueHeat": { "healthcare": 4 }
+            "player": {
+              "fame": 4,
+              "integrity": 4,
+              "fatigue": -3,
+              "stigma": 2
+            },
+            "popMood": {
+              "whitecollar": 4,
+              "publicsvc": 3
+            },
+            "issueHeat": {
+              "healthcare": 4
+            }
           }
         }
       ],
-      "_designNote": "健康警訊的減量、折衷、硬撐與公開，體力與基層黏著度直接互換"
+      "_designNote": "健康警訊的減量、折衷、硬撐與公開，體力與基層黏著度直接互換",
+      "tier": "personal"
     },
     {
       "id": "EVT_PER_OLD_FRIEND_FAVOR",
@@ -195,7 +378,14 @@
       "weight": 45,
       "cooldown": 14,
       "trigger": "player.politicalCapital > 10 && turn > 8",
-      "requires": { "minTurn": 8, "roles": ["legislator", "mayor", "councilor"] },
+      "requires": {
+        "minTurn": 8,
+        "roles": [
+          "legislator",
+          "mayor",
+          "councilor"
+        ]
+      },
       "headline": "三十年老友登門請託，希望協助兒子取得公職甄選資格",
       "body": "陪你走過第一次選舉的三十年老友帶著水果登門，希望你能替他兒子在公職甄選的資格審查上說一句話。他強調兒子的條件本來就符合，只是擔心承辦人員不清楚實務經驗的認定方式。這位老友在你最落魄的那一年抵押了自己的房子，替你補上了選舉保證金的缺口。",
       "options": [
@@ -203,45 +393,91 @@
           "text": "婉拒請託，但親自陪同去承辦窗口問清楚規定",
           "hint": "分寸守住了，三十年的交情會出現一道看不見的裂痕",
           "effects": {
-            "player": { "integrity": 5, "politicalCapital": -2, "fatigue": 2 },
-            "popMood": { "publicsvc": 3, "whitecollar": 2 },
-            "grassroots": { "_home": -1 },
-            "tagGain": ["TAG_CLEAN"]
+            "player": {
+              "integrity": 5,
+              "politicalCapital": -2,
+              "fatigue": 2
+            },
+            "popMood": {
+              "publicsvc": 3,
+              "whitecollar": 2
+            },
+            "grassroots": {
+              "_home": -1
+            },
+            "tagGain": [
+              "TAG_CLEAN"
+            ]
           }
         },
         {
           "text": "打一通電話給主管，只請對方依規定加速處理",
           "hint": "分寸看起來還在，這通電話的存在本身就是一個把柄",
           "effects": {
-            "player": { "politicalCapital": -1, "integrity": -2, "stigma": 2 },
-            "grassroots": { "_home": 1 },
-            "popMood": { "publicsvc": -2 },
-            "issueHeat": { "corruption": 2 }
+            "player": {
+              "politicalCapital": -1,
+              "integrity": -2,
+              "stigma": 2
+            },
+            "grassroots": {
+              "_home": 1
+            },
+            "popMood": {
+              "publicsvc": -2
+            },
+            "issueHeat": {
+              "corruption": 2
+            }
           }
         },
         {
           "text": "全力協助到底，把人情當作必須償還的債",
           "hint": "情義兩個字全部做到，你的把柄也交到了別人手上",
           "effects": {
-            "player": { "integrity": -4, "stigma": 3, "politicalCapital": 3, "funds": 2 },
-            "grassroots": { "_home": 2 },
-            "popMood": { "farmer": 2, "publicsvc": -4 },
-            "issueHeat": { "corruption": 3 },
-            "tagGain": ["TAG_GREEDY"]
+            "player": {
+              "integrity": -4,
+              "stigma": 3,
+              "politicalCapital": 3,
+              "funds": 2
+            },
+            "grassroots": {
+              "_home": 2
+            },
+            "popMood": {
+              "farmer": 2,
+              "publicsvc": -4
+            },
+            "issueHeat": {
+              "corruption": 3
+            },
+            "tagGain": [
+              "TAG_GREEDY"
+            ]
           }
         },
         {
           "text": "改以個人資金償還當年的保證金與利息",
           "hint": "把人情債換成金錢債，老友大概會覺得被你羞辱了",
           "effects": {
-            "player": { "personalAssets": -200, "integrity": 4, "politicalCapital": -1 },
-            "grassroots": { "_home": -1 },
-            "popMood": { "smallbiz": 1 },
-            "tagGain": ["TAG_CLEAN"]
+            "player": {
+              "personalAssets": -200,
+              "integrity": 4,
+              "politicalCapital": -1
+            },
+            "grassroots": {
+              "_home": -1
+            },
+            "popMood": {
+              "smallbiz": 1
+            },
+            "tagGain": [
+              "TAG_CLEAN"
+            ]
           }
         }
       ],
-      "_designNote": "人情債的四種償還方式，清廉、情義與資產三者互相排擠"
+      "_designNote": "人情債的四種償還方式，清廉、情義與資產三者互相排擠",
+      "tier": "personal"
     },
     {
       "id": "EVT_PER_MENTOR_DEATH",
@@ -249,7 +485,14 @@
       "weight": 40,
       "cooldown": 24,
       "trigger": "player.partyPrestige > 15 && turn > 12",
-      "requires": { "minTurn": 12, "roles": ["legislator", "mayor", "councilor"] },
+      "requires": {
+        "minTurn": 12,
+        "roles": [
+          "legislator",
+          "mayor",
+          "councilor"
+        ]
+      },
       "headline": "政治恩師病逝，家屬希望由你來主持追思會並致悼詞",
       "body": "把你帶進政壇的老縣長在昨夜病逝，享年八十三歲，家屬希望由你來主持追思會並代表門生致悼詞。老縣長晚年因為一件土地開發案的爭議而聲譽受損，至今仍有受害住戶在網路上追討當年的說法。派系內部有人建議追思會低調處理，也有人主張應該藉此凝聚整個系統的向心力。",
       "options": [
@@ -257,34 +500,71 @@
           "text": "主持追思會並在悼詞中誠實面對那樁爭議",
           "hint": "誠實的代價會立刻到來，長遠來看你會贏得另一種尊敬",
           "effects": {
-            "player": { "integrity": 5, "partyPrestige": -4, "fame": 3, "fatigue": 3 },
-            "popMood": { "whitecollar": 4, "student": 3, "retiree": -2 },
-            "grassroots": { "_home": -1 },
-            "issueHeat": { "corruption": 2 }
+            "player": {
+              "integrity": 5,
+              "partyPrestige": -4,
+              "fame": 3,
+              "fatigue": 3
+            },
+            "popMood": {
+              "whitecollar": 4,
+              "student": 3,
+              "retiree": -2
+            },
+            "grassroots": {
+              "_home": -1
+            },
+            "issueHeat": {
+              "corruption": 2
+            }
           }
         },
         {
           "text": "主持追思會並全力頌揚恩師的一生功績",
           "hint": "整個派系會把你當接班人，那樁舊案會被翻出來提醒你",
           "effects": {
-            "player": { "partyPrestige": 6, "politicalCapital": 4, "integrity": -3, "stigma": 1 },
-            "grassroots": { "_home": 2, "_all": 1 },
-            "popMood": { "retiree": 4, "student": -4 },
-            "issueHeat": { "corruption": 2 }
+            "player": {
+              "partyPrestige": 6,
+              "politicalCapital": 4,
+              "integrity": -3,
+              "stigma": 1
+            },
+            "grassroots": {
+              "_home": 2,
+              "_all": 1
+            },
+            "popMood": {
+              "retiree": 4,
+              "student": -4
+            },
+            "issueHeat": {
+              "corruption": 2
+            }
           }
         },
         {
           "text": "婉拒主持，僅以私人身分到靈前上香致意",
           "hint": "誰都不必得罪的安全牌，門生故舊會覺得你避得太乾淨",
           "effects": {
-            "player": { "partyPrestige": -3, "integrity": 1, "fame": -2 },
-            "grassroots": { "_home": -1 },
-            "popMood": { "publicsvc": 1 },
-            "tagGain": ["TAG_EMPTY"]
+            "player": {
+              "partyPrestige": -3,
+              "integrity": 1,
+              "fame": -2
+            },
+            "grassroots": {
+              "_home": -1
+            },
+            "popMood": {
+              "publicsvc": 1
+            },
+            "tagGain": [
+              "TAG_EMPTY"
+            ]
           }
         }
       ],
-      "_designNote": "恩師身後名的誠實、頌揚與迴避，派系繼承與個人誠信的取捨"
+      "_designNote": "恩師身後名的誠實、頌揚與迴避，派系繼承與個人誠信的取捨",
+      "tier": "personal"
     },
     {
       "id": "EVT_PER_JOB_OFFER",
@@ -292,7 +572,14 @@
       "weight": 40,
       "cooldown": 20,
       "trigger": "player.fame > 40 && player.funds < 150",
-      "requires": { "minTurn": 12, "roles": ["legislator", "mayor", "councilor"] },
+      "requires": {
+        "minTurn": 12,
+        "roles": [
+          "legislator",
+          "mayor",
+          "councilor"
+        ]
+      },
       "headline": "泰安金控開出高薪邀你出任法遵長，年薪逾千萬元",
       "body": "泰安金控的董事長透過共同友人轉達邀請，希望你出任集團法遵長並主導兩岸與東南亞的合規布局。開出的條件是年薪超過千萬元加上配股，同時保證不介入任何政治性的公開發言。你的家庭財務在連續兩次選舉之後仍有未償還的貸款，配偶已經連續兩年沒有換過一次工作以外的行程。",
       "options": [
@@ -300,34 +587,73 @@
           "text": "婉拒邀約，公開說明政治工作尚未完成",
           "hint": "清白與初衷都保住了，家裡的財務壓力一分都沒有減少",
           "effects": {
-            "player": { "integrity": 5, "fame": 3, "funds": -2 },
-            "popMood": { "whitecollar": 4, "student": 3 },
-            "tagGain": ["TAG_CLEAN"]
+            "player": {
+              "integrity": 5,
+              "fame": 3,
+              "funds": -2
+            },
+            "popMood": {
+              "whitecollar": 4,
+              "student": 3
+            },
+            "tagGain": [
+              "TAG_CLEAN"
+            ]
           }
         },
         {
           "text": "接受聘任並同時辭去現職，轉換人生跑道",
           "hint": "財務問題一次解決，你累積多年的政治資本會歸零",
           "effects": {
-            "player": { "personalAssets": 2000, "fame": -8, "politicalCapital": -10, "partyPrestige": -6 },
-            "corpMood": { "finance": 8 },
-            "popMood": { "whitecollar": -3, "capitalist": 4 },
-            "grassroots": { "_home": -3 }
+            "player": {
+              "personalAssets": 2000,
+              "fame": -8,
+              "politicalCapital": -10,
+              "partyPrestige": -6
+            },
+            "corpMood": {
+              "finance": 8
+            },
+            "popMood": {
+              "whitecollar": -3,
+              "capitalist": 4
+            },
+            "grassroots": {
+              "_home": -3
+            }
+          },
+          "gate": {
+            "minFame": 2,
+            "why": "這種金額不會落在沒有份量的人身上"
           }
         },
         {
           "text": "婉拒本職但接受集團的無給職顧問頭銜",
           "hint": "保留了兩邊的選項，利益迴避的質疑遲早會找上門",
           "effects": {
-            "player": { "funds": 4, "integrity": -3, "stigma": 2 },
-            "corpMood": { "finance": 6 },
-            "popMood": { "whitecollar": -3, "student": -3 },
-            "issueHeat": { "corruption": 3 },
-            "tagGain": ["TAG_BIZ_DARLING"]
+            "player": {
+              "funds": 4,
+              "integrity": -3,
+              "stigma": 2
+            },
+            "corpMood": {
+              "finance": 6
+            },
+            "popMood": {
+              "whitecollar": -3,
+              "student": -3
+            },
+            "issueHeat": {
+              "corruption": 3
+            },
+            "tagGain": [
+              "TAG_BIZ_DARLING"
+            ]
           }
         }
       ],
-      "_designNote": "被挖角的三種選擇，理想、財務與灰色地帶的直接對價"
+      "_designNote": "被挖角的三種選擇，理想、財務與灰色地帶的直接對價",
+      "tier": "personal"
     },
     {
       "id": "EVT_PER_BURNOUT",
@@ -335,7 +661,15 @@
       "weight": 50,
       "cooldown": 12,
       "trigger": "player.fatigue > 70 && turn > 10",
-      "requires": { "minTurn": 10, "roles": ["legislator", "mayor", "councilor", "citizen"] },
+      "requires": {
+        "minTurn": 10,
+        "roles": [
+          "legislator",
+          "mayor",
+          "councilor",
+          "citizen"
+        ]
+      },
       "headline": "連續四個月無休後，你在質詢台上出現短暫的失神狀況",
       "body": "在連續四個月沒有完整休假的狀態下，你在委員會質詢時出現長達十餘秒的失神與語句斷裂。現場的記者拍下了完整畫面，社群平台上開始出現對你健康與能力的各種揣測。你的辦公室主任私下攤開行事曆，說接下來四十天內只有兩個半天是完全空著的。",
       "options": [
@@ -343,42 +677,89 @@
           "text": "公開說明是過勞，宣布休假兩週徹底調整",
           "hint": "身體能被救回來，對手會拿這兩週說你早就撐不住了",
           "effects": {
-            "player": { "fatigue": -20, "fame": -4, "politicalCapital": -3, "integrity": 2 },
-            "grassroots": { "_home": -1 },
-            "popMood": { "whitecollar": 3, "publicsvc": 2 }
+            "player": {
+              "fatigue": -20,
+              "fame": -4,
+              "politicalCapital": -3,
+              "integrity": 2
+            },
+            "grassroots": {
+              "_home": -1
+            },
+            "popMood": {
+              "whitecollar": 3,
+              "publicsvc": 2
+            }
           }
         },
         {
           "text": "重整團隊分工，把三成行程授權給幕僚出席",
           "hint": "結構性的調整比較穩，選民會覺得看到你的次數變少了",
           "effects": {
-            "player": { "fatigue": -10, "fame": -2, "politicalCapital": -1 },
-            "grassroots": { "_home": -1 },
-            "popMood": { "farmer": -1, "smallbiz": -1 },
-            "tagGain": ["TAG_DOER"]
+            "player": {
+              "fatigue": -10,
+              "fame": -2,
+              "politicalCapital": -1
+            },
+            "grassroots": {
+              "_home": -1
+            },
+            "popMood": {
+              "farmer": -1,
+              "smallbiz": -1
+            },
+            "tagGain": [
+              "TAG_DOER"
+            ]
           }
         },
         {
           "text": "咬牙照常跑完全部行程，對外強調只是感冒",
           "hint": "沒有人會看出破綻，你的身體會替這個決定付利息",
           "effects": {
-            "player": { "fatigue": 12, "fame": 2, "stigma": 1 },
-            "grassroots": { "_home": 1 },
-            "popMood": { "farmer": 2, "smallbiz": 2 }
+            "player": {
+              "fatigue": 12,
+              "fame": 2,
+              "stigma": 1
+            },
+            "grassroots": {
+              "_home": 1
+            },
+            "popMood": {
+              "farmer": 2,
+              "smallbiz": 2
+            }
           }
         },
         {
           "text": "藉此推動議會議事效率與工時制度的改革",
           "hint": "把個人問題變成制度議題，同僚會覺得你在把自己的難堪外包",
           "effects": {
-            "player": { "fame": 4, "partyPrestige": -3, "integrity": 3, "fatigue": 2 },
-            "central": { "politics.legislativeEfficiency": 0.03 },
-            "popMood": { "whitecollar": 4, "publicsvc": 3 },
-            "issueHeat": { "employment": 3 }
+            "player": {
+              "fame": 4,
+              "partyPrestige": -3,
+              "integrity": 3,
+              "fatigue": 2
+            },
+            "central": {
+              "politics.legislativeEfficiency": 0.03
+            },
+            "popMood": {
+              "whitecollar": 4,
+              "publicsvc": 3
+            },
+            "issueHeat": {
+              "employment": 3
+            }
           }
         }
       ],
-      "_designNote": "過勞崩潰的休息、授權、硬撐與制度化，體力與曝光度的取捨"
+      "_designNote": "過勞崩潰的休息、授權、硬撐與制度化，體力與曝光度的取捨",
+      "tier": "personal",
+      "gate": {
+        "minFame": 1.0,
+        "why": "要先有人知道你是誰，這件事才會找上你"
+      }
     },
     {
       "id": "EVT_PER_SIBLING_DEBT",
@@ -386,7 +767,15 @@
       "weight": 40,
       "cooldown": 18,
       "trigger": "player.personalAssets > 500 && issueHeat.corruption > 15",
-      "requires": { "minTurn": 10, "roles": ["legislator", "mayor", "councilor", "citizen"] },
+      "requires": {
+        "minTurn": 10,
+        "roles": [
+          "legislator",
+          "mayor",
+          "councilor",
+          "citizen"
+        ]
+      },
       "headline": "弟弟投資失利積欠民間借貸，債主已找到服務處門口",
       "body": "你的弟弟在虛擬資產投資上虧損慘重，積欠民間借貸的本金與利息合計約一千四百萬元。三名自稱債權人的男子昨天下午在服務處外拉起布條，並向前來陳情的民眾散發傳單。你的弟弟在電話中哭著說，如果沒有人幫忙，他真的不知道還能撐幾天。",
       "options": [
@@ -394,42 +783,85 @@
           "text": "動用個人資產代為清償，並要求弟弟簽下切結",
           "hint": "事情能被壓下來，你的家底會被削掉相當可觀的一塊",
           "effects": {
-            "player": { "personalAssets": -1400, "integrity": 2, "fatigue": 3, "stigma": 1 },
-            "popMood": { "retiree": 1 },
-            "issueHeat": { "corruption": -1 }
+            "player": {
+              "personalAssets": -1400,
+              "integrity": 2,
+              "fatigue": 3,
+              "stigma": 1
+            },
+            "popMood": {
+              "retiree": 1
+            },
+            "issueHeat": {
+              "corruption": -1
+            }
           }
         },
         {
           "text": "協助他向法院聲請債務清理並公開全部經過",
           "hint": "程序上完全乾淨，家醜外揚的代價由整個家族一起承擔",
           "effects": {
-            "player": { "integrity": 5, "fame": -2, "stigma": 1, "fatigue": 2 },
-            "popMood": { "whitecollar": 4, "smallbiz": 2 },
-            "issueHeat": { "corruption": 1 },
-            "tagGain": ["TAG_CLEAN"]
+            "player": {
+              "integrity": 5,
+              "fame": -2,
+              "stigma": 1,
+              "fatigue": 2
+            },
+            "popMood": {
+              "whitecollar": 4,
+              "smallbiz": 2
+            },
+            "issueHeat": {
+              "corruption": 1
+            },
+            "tagGain": [
+              "TAG_CLEAN"
+            ]
           }
         },
         {
           "text": "透過地方人士出面協調債務的減免與分期",
           "hint": "最快也最省錢的解法，你會欠下一份很難估價的人情",
           "effects": {
-            "player": { "politicalCapital": -4, "integrity": -3, "stigma": 3 },
-            "grassroots": { "_home": 1 },
-            "popMood": { "whitecollar": -2, "publicsvc": -2 },
-            "issueHeat": { "corruption": 3 }
+            "player": {
+              "politicalCapital": -4,
+              "integrity": -3,
+              "stigma": 3
+            },
+            "grassroots": {
+              "_home": 1
+            },
+            "popMood": {
+              "whitecollar": -2,
+              "publicsvc": -2
+            },
+            "issueHeat": {
+              "corruption": 3
+            }
           }
         },
         {
           "text": "公開切割並聲明不會為家人的債務負任何責任",
           "hint": "政治上最安全的做法，你會被說成連自己家人都不管",
           "effects": {
-            "player": { "integrity": 1, "fame": -3, "stigma": 2 },
-            "popMood": { "retiree": -4, "farmer": -3, "whitecollar": 2 },
-            "grassroots": { "_home": -1 }
+            "player": {
+              "integrity": 1,
+              "fame": -3,
+              "stigma": 2
+            },
+            "popMood": {
+              "retiree": -4,
+              "farmer": -3,
+              "whitecollar": 2
+            },
+            "grassroots": {
+              "_home": -1
+            }
           }
         }
       ],
-      "_designNote": "家人債務的四種處理，資產、清白、人情與親情各賠一項"
+      "_designNote": "家人債務的四種處理，資產、清白、人情與親情各賠一項",
+      "tier": "personal"
     },
     {
       "id": "EVT_PER_ANNIVERSARY",
@@ -437,7 +869,15 @@
       "weight": 35,
       "cooldown": 20,
       "trigger": "player.fatigue > 35 && month in [4,10]",
-      "requires": { "minTurn": 8, "roles": ["legislator", "mayor", "councilor", "citizen"] },
+      "requires": {
+        "minTurn": 8,
+        "roles": [
+          "legislator",
+          "mayor",
+          "councilor",
+          "citizen"
+        ]
+      },
       "headline": "結婚二十週年當天，選區同時有三場非去不可的場子",
       "body": "結婚二十週年的當天，選區裡同時排了農會理事長的女兒婚宴、里長母親的公祭與後援會的年度大會。三場都是你經營多年的關鍵節點，任何一場缺席都會被解讀成特定的政治訊號。配偶昨晚只淡淡說了一句，這次她已經先訂好餐廳了。",
       "options": [
@@ -445,32 +885,65 @@
           "text": "推掉全部行程，把整個晚上留給配偶",
           "hint": "婚姻能被存進一筆，三個地方的人都會記得你沒到",
           "effects": {
-            "player": { "fatigue": -6, "fame": -2, "politicalCapital": -2, "integrity": 2 },
-            "grassroots": { "_home": -2 },
-            "popMood": { "farmer": -2, "retiree": -2 }
+            "player": {
+              "fatigue": -6,
+              "fame": -2,
+              "politicalCapital": -2,
+              "integrity": 2
+            },
+            "grassroots": {
+              "_home": -2
+            },
+            "popMood": {
+              "farmer": -2,
+              "retiree": -2
+            }
           }
         },
         {
           "text": "三場都露臉致意，晚餐訂在深夜十一點",
           "hint": "每個場子都交代得過去，餐桌對面的人會愈來愈沉默",
           "effects": {
-            "player": { "fatigue": 8, "fame": 2, "politicalCapital": 1, "stigma": 1 },
-            "grassroots": { "_home": 2 },
-            "popMood": { "farmer": 2, "retiree": 2 }
+            "player": {
+              "fatigue": 8,
+              "fame": 2,
+              "politicalCapital": 1,
+              "stigma": 1
+            },
+            "grassroots": {
+              "_home": 2
+            },
+            "popMood": {
+              "farmer": 2,
+              "retiree": 2
+            }
           }
         },
         {
           "text": "只去公祭一場，其餘由配偶陪同一起出席餐會",
           "hint": "折衷得相當聰明，配偶要的其實不是這種陪伴方式",
           "effects": {
-            "player": { "fatigue": 3, "fame": 1, "integrity": -1, "stigma": 1 },
-            "grassroots": { "_home": 1 },
-            "popMood": { "retiree": 1, "farmer": -1 },
-            "issueHeat": { "corruption": 1 }
+            "player": {
+              "fatigue": 3,
+              "fame": 1,
+              "integrity": -1,
+              "stigma": 1
+            },
+            "grassroots": {
+              "_home": 1
+            },
+            "popMood": {
+              "retiree": 1,
+              "farmer": -1
+            },
+            "issueHeat": {
+              "corruption": 1
+            }
           }
         }
       ],
-      "_designNote": "時間分配的小型抉擇，累積起來會決定家庭與基層兩條線的走向"
+      "_designNote": "時間分配的小型抉擇，累積起來會決定家庭與基層兩條線的走向",
+      "tier": "personal"
     },
     {
       "id": "EVT_PER_STAFF_LEAVING",
@@ -478,7 +951,14 @@
       "weight": 40,
       "cooldown": 16,
       "trigger": "player.fatigue > 45 && player.funds < 200",
-      "requires": { "minTurn": 8, "roles": ["legislator", "mayor", "councilor"] },
+      "requires": {
+        "minTurn": 8,
+        "roles": [
+          "legislator",
+          "mayor",
+          "councilor"
+        ]
+      },
       "headline": "跟了八年的核心幕僚遞出辭呈，說想在三十五歲前換一種活法",
       "body": "跟了你八年的政策幕僚在週一早上遞出辭呈，理由是薪水八年只調過一次，而工時卻愈拉愈長。她負責的法案研究與新聞稿撰寫，短期內辦公室裡沒有任何人接得起來。她臨走前只說了一句，你對外談勞動權益的那些話，她每一次都聽得很難受。",
       "options": [
@@ -486,41 +966,81 @@
           "text": "調高全辦公室薪資並重新檢討工作分配",
           "hint": "留得住人也對得起自己的主張，選舉經費會被壓縮得很緊",
           "effects": {
-            "player": { "funds": -8, "integrity": 5, "fatigue": -3 },
-            "popMood": { "whitecollar": 3, "publicsvc": 2 },
-            "tagGain": ["TAG_LABOR_FRIEND"]
+            "player": {
+              "funds": -8,
+              "integrity": 5,
+              "fatigue": -3
+            },
+            "popMood": {
+              "whitecollar": 3,
+              "publicsvc": 2
+            },
+            "tagGain": [
+              "TAG_LABOR_FRIEND"
+            ]
           }
         },
         {
           "text": "誠懇慰留但只承諾等選後再處理薪資問題",
           "hint": "熟悉的畫餅方式，她會走而且往後不會替你說話",
           "effects": {
-            "player": { "fatigue": 6, "integrity": -3, "stigma": 1 },
-            "popMood": { "whitecollar": -2, "student": -2 }
+            "player": {
+              "fatigue": 6,
+              "integrity": -3,
+              "stigma": 1
+            },
+            "popMood": {
+              "whitecollar": -2,
+              "student": -2
+            }
           }
         },
         {
           "text": "祝福她離開，並親自替她引薦更好的去處",
           "hint": "成全與體面都做到了，辦公室的戰力缺口要你自己補",
           "effects": {
-            "player": { "fatigue": 8, "integrity": 4, "politicalCapital": 1 },
-            "popMood": { "whitecollar": 3, "student": 2 },
-            "tagGain": ["TAG_CLEAN"]
+            "player": {
+              "fatigue": 8,
+              "integrity": 4,
+              "politicalCapital": 1
+            },
+            "popMood": {
+              "whitecollar": 3,
+              "student": 2
+            },
+            "tagGain": [
+              "TAG_CLEAN"
+            ]
           }
         },
         {
           "text": "藉此推動民代助理勞動條件的全面性修法",
           "hint": "個人問題被推成公共議題，其他辦公室的老闆會全部跳腳",
           "effects": {
-            "player": { "fame": 4, "partyPrestige": -4, "integrity": 4, "fatigue": 3 },
-            "central": { "labor.staffCondition": 0.05 },
-            "popMood": { "whitecollar": 5, "student": 4 },
-            "issueHeat": { "employment": 4 },
-            "tagGain": ["TAG_LABOR_FRIEND"]
+            "player": {
+              "fame": 4,
+              "partyPrestige": -4,
+              "integrity": 4,
+              "fatigue": 3
+            },
+            "central": {
+              "labor.staffCondition": 0.05
+            },
+            "popMood": {
+              "whitecollar": 5,
+              "student": 4
+            },
+            "issueHeat": {
+              "employment": 4
+            },
+            "tagGain": [
+              "TAG_LABOR_FRIEND"
+            ]
           }
         }
       ],
-      "_designNote": "幕僚出走的加薪、畫餅、成全與修法，言行一致的成本被具體標價"
+      "_designNote": "幕僚出走的加薪、畫餅、成全與修法，言行一致的成本被具體標價",
+      "tier": "personal"
     },
     {
       "id": "EVT_PER_HOMETOWN_CALL",
@@ -528,7 +1048,15 @@
       "weight": 35,
       "cooldown": 20,
       "trigger": "player.fame > 25 && turn > 14",
-      "requires": { "minTurn": 14, "roles": ["legislator", "mayor", "councilor", "citizen"] },
+      "requires": {
+        "minTurn": 14,
+        "roles": [
+          "legislator",
+          "mayor",
+          "councilor",
+          "citizen"
+        ]
+      },
       "headline": "老家三合院面臨都更拆除，宗親會盼你出面保住祖厝",
       "body": "你出生的三合院被劃入都市更新的範圍，實施者已取得法定同意比例並準備進行拆除。宗親會的長輩集體北上找你，希望你能運用職務上的影響力把祖厝保留下來作為文化資產。都發單位的評估報告指出，這棟建物並不具備法定的文化資產價值，而多數住戶其實早已同意搬遷。",
       "options": [
@@ -536,45 +1064,100 @@
           "text": "婉拒介入，強調不能用職務處理自家的產權",
           "hint": "分際守得乾乾淨淨，整個宗親系統會覺得你六親不認",
           "effects": {
-            "player": { "integrity": 5, "fame": 1, "politicalCapital": -1 },
-            "grassroots": { "_home": -2 },
-            "popMood": { "whitecollar": 4, "farmer": -3 },
-            "tagGain": ["TAG_CLEAN"]
+            "player": {
+              "integrity": 5,
+              "fame": 1,
+              "politicalCapital": -1
+            },
+            "grassroots": {
+              "_home": -2
+            },
+            "popMood": {
+              "whitecollar": 4,
+              "farmer": -3
+            },
+            "tagGain": [
+              "TAG_CLEAN"
+            ]
           }
         },
         {
           "text": "推動地方老屋普查與聚落保存的一般性政策",
           "hint": "把私事轉成公共政策很聰明，祖厝大概還是趕不上進度",
           "effects": {
-            "player": { "integrity": 3, "fame": 3, "fatigue": 3 },
-            "region": { "_player": { "culture.heritage": 0.03 } },
-            "valuePressure": { "environment": 0.2, "progressivism": 0.2 },
-            "popMood": { "retiree": 3, "student": 2 },
-            "issueHeat": { "housing": 2 }
+            "player": {
+              "integrity": 3,
+              "fame": 3,
+              "fatigue": 3
+            },
+            "region": {
+              "_player": {
+                "culture.heritage": 0.03
+              }
+            },
+            "valuePressure": {
+              "environment": 0.2,
+              "progressivism": 0.2
+            },
+            "popMood": {
+              "retiree": 3,
+              "student": 2
+            },
+            "issueHeat": {
+              "housing": 2
+            }
           }
         },
         {
           "text": "親自向都發單位施壓，要求重新認定文資價值",
           "hint": "宗親會的向心力會回到頂點，這件事會被寫成教科書等級的案例",
           "effects": {
-            "player": { "integrity": -4, "stigma": 3, "politicalCapital": -3, "fame": 2 },
-            "grassroots": { "_home": 3 },
-            "popMood": { "farmer": 4, "whitecollar": -5, "student": -4 },
-            "issueHeat": { "corruption": 4 }
+            "player": {
+              "integrity": -4,
+              "stigma": 3,
+              "politicalCapital": -3,
+              "fame": 2
+            },
+            "grassroots": {
+              "_home": 3
+            },
+            "popMood": {
+              "farmer": 4,
+              "whitecollar": -5,
+              "student": -4
+            },
+            "issueHeat": {
+              "corruption": 4
+            }
           }
         },
         {
           "text": "自費買下祖厝的相關持分並捐給地方協會",
           "hint": "用自己的錢解決自己的事，這筆支出對家計是相當重的",
           "effects": {
-            "player": { "personalAssets": -800, "integrity": 4, "fame": 3 },
-            "grassroots": { "_home": 1 },
-            "popMood": { "retiree": 3, "farmer": 2, "whitecollar": 2 },
-            "region": { "_player": { "culture.heritage": 0.01 } }
+            "player": {
+              "personalAssets": -800,
+              "integrity": 4,
+              "fame": 3
+            },
+            "grassroots": {
+              "_home": 1
+            },
+            "popMood": {
+              "retiree": 3,
+              "farmer": 2,
+              "whitecollar": 2
+            },
+            "region": {
+              "_player": {
+                "culture.heritage": 0.01
+              }
+            }
           }
         }
       ],
-      "_designNote": "私人產權與公職身分的糾纏，四種處理方式對應四種不同的付款方式"
+      "_designNote": "私人產權與公職身分的糾纏，四種處理方式對應四種不同的付款方式",
+      "tier": "personal"
     }
   ]
 }

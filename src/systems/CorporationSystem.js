@@ -41,6 +41,6 @@ export function tick(state, ctx) {
     index += c.marketCap * c.weightInIndex;
   }
   const base = data.corporations.corporations.reduce((a, c) => a + c.marketCap * c.weightInIndex, 0);
-  state.central.stockIndex = Math.round(45300 * (index / base));
+  state.central.stockIndex = Math.round((data.tuning?.economy?.stockIndexBase ?? 45300) * (index / base));
   return { news };
 }

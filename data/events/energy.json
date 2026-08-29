@@ -6,7 +6,15 @@
       "weight": 60,
       "cooldown": 10,
       "trigger": "central.energy.reserveMargin < 0.06 && month in [6,7,8]",
-      "requires": { "minTurn": 3, "roles": ["legislator", "mayor", "councilor", "citizen"] },
+      "requires": {
+        "minTurn": 3,
+        "roles": [
+          "legislator",
+          "mayor",
+          "councilor",
+          "citizen"
+        ]
+      },
       "headline": "備轉容量率連三日亮紅燈，工業大戶被要求配合降載",
       "body": "連續高溫使全國用電量再創歷史新高，備轉容量率連續三個交易日跌破百分之六的警戒線。台灣電能公司已依契約通知半導體與鋼鐵業的用電大戶配合尖峰降載，並暫緩兩座機組的歲修時程。在野立委則質疑供電規劃長期失準，要求主管機關公開未來三年的機組退場與新增時程。",
       "options": [
@@ -14,50 +22,120 @@
           "text": "支持啟動需量反應，加碼補貼大戶降載",
           "hint": "限電危機能拖過去，電力公司的虧損黑洞會再深一層",
           "effects": {
-            "central": { "energy.reserveMargin": 0.02, "fiscal.balance": -0.003 },
-            "corpMood": { "semiconductor": -3, "steel": -4 },
-            "popMood": { "whitecollar": 2, "_all": 1 },
-            "player": { "fame": 2, "politicalCapital": -1 },
-            "issueHeat": { "energy": 4 }
+            "central": {
+              "energy.reserveMargin": 0.02,
+              "fiscal.balance": -0.003
+            },
+            "corpMood": {
+              "semiconductor": -3,
+              "steel": -4
+            },
+            "popMood": {
+              "whitecollar": 2,
+              "_all": 1
+            },
+            "player": {
+              "fame": 2,
+              "politicalCapital": -1
+            },
+            "issueHeat": {
+              "energy": 4
+            }
           }
         },
         {
           "text": "要求重啟既有燃煤機組度過夏季尖峰",
           "hint": "供電數字馬上好看，中南部的空品抗議會排到你家門口",
           "effects": {
-            "central": { "energy.reserveMargin": 0.04, "energy.emissions": 0.03 },
-            "valuePressure": { "environment": -0.9 },
-            "popSoL": { "_all": 1 },
-            "popMood": { "student": -3, "retiree": -2 },
-            "player": { "fame": 1, "stigma": 1 },
-            "issueHeat": { "energy": 5, "environment": 5 }
+            "central": {
+              "energy.reserveMargin": 0.04,
+              "energy.emissions": 0.03
+            },
+            "valuePressure": {
+              "environment": -0.9
+            },
+            "popSoL": {
+              "_all": 1
+            },
+            "popMood": {
+              "student": -3,
+              "retiree": -2
+            },
+            "player": {
+              "fame": 1,
+              "stigma": 1
+            },
+            "issueHeat": {
+              "energy": 5,
+              "environment": 5
+            }
           }
         },
         {
           "text": "推動夏月電價分級與尖峰時段的價格訊號",
           "hint": "節電的效果最紮實，帳單一寄出去民怨就會直接找上你",
           "effects": {
-            "central": { "energy.priceIndex": 0.04, "energy.reserveMargin": 0.025 },
-            "valuePressure": { "marketFreedom": 0.5, "environment": 0.3 },
-            "popMood": { "_all": -3, "retiree": -4 },
-            "corpMood": { "_all": -3 },
-            "player": { "integrity": 3, "fame": -2 },
-            "issueHeat": { "prices": 4, "energy": 4 }
+            "central": {
+              "energy.priceIndex": 0.04,
+              "energy.reserveMargin": 0.025
+            },
+            "valuePressure": {
+              "marketFreedom": 0.5,
+              "environment": 0.3
+            },
+            "popMood": {
+              "_all": -3,
+              "retiree": -4
+            },
+            "corpMood": {
+              "_all": -3
+            },
+            "player": {
+              "integrity": 3,
+              "fame": -2
+            },
+            "issueHeat": {
+              "prices": 4,
+              "energy": 4
+            }
           }
         },
         {
           "text": "在議場要求電力公司公布完整供電缺口報告",
           "hint": "監督姿態拿得住，眼前這一波尖峰還是得靠別人去扛",
           "effects": {
-            "player": { "fame": 4, "integrity": 2 },
-            "issueHeat": { "energy": 6 },
-            "popMood": { "whitecollar": 2, "techpro": 2 },
-            "corpMood": { "_all": -1 },
-            "tagGain": ["TAG_MUCKRAKER"]
+            "player": {
+              "fame": 4,
+              "integrity": 2
+            },
+            "issueHeat": {
+              "energy": 6
+            },
+            "popMood": {
+              "whitecollar": 2,
+              "techpro": 2
+            },
+            "corpMood": {
+              "_all": -1
+            },
+            "tagGain": [
+              "TAG_MUCKRAKER"
+            ]
+          },
+          "gate": {
+            "office": [
+              "councilor",
+              "legislator",
+              "mayor",
+              "minister",
+              "president"
+            ],
+            "why": "要有民意代表或首長的身分才進得了這個程序"
           }
         }
       ],
-      "_designNote": "夏季供電危機的四種對策，成本分別落在財政、空品、電價與空談上"
+      "_designNote": "夏季供電危機的四種對策，成本分別落在財政、空品、電價與空談上",
+      "tier": "national"
     },
     {
       "id": "EVT_ENER_PRICE_REVIEW",
@@ -65,7 +143,15 @@
       "weight": 55,
       "cooldown": 12,
       "trigger": "central.energy.utilityDeficit > 0.03 && month in [3,9]",
-      "requires": { "minTurn": 5, "roles": ["legislator", "mayor", "councilor", "citizen"] },
+      "requires": {
+        "minTurn": 5,
+        "roles": [
+          "legislator",
+          "mayor",
+          "councilor",
+          "citizen"
+        ]
+      },
       "headline": "電價費率審議在即，電力公司累虧突破四千億元",
       "body": "台灣電能公司的累積虧損在上一季正式突破新台幣四千億元，主要來自國際燃料價格與長期凍漲的雙重壓力。經濟主管機關傾向調漲民生與工業電價，但擔憂調幅過大將立刻推升物價與製造成本。消費者團體主張先檢討購電合約與經營效率，反對把虧損直接轉嫁給一般家庭。",
       "options": [
@@ -73,40 +159,91 @@
           "text": "支持工業用電大戶調漲，民生電價全面凍漲",
           "hint": "一般家庭會感謝你，出口製造業的成本壓力會集中爆開",
           "effects": {
-            "central": { "energy.utilityDeficit": -0.015, "economy.laborCost": 0.005 },
-            "corpMood": { "steel": -9, "petrochemical": -8, "semiconductor": -4 },
-            "popMood": { "_all": 3, "retiree": 4 },
-            "valuePressure": { "marketFreedom": -0.5 },
-            "player": { "fame": 3 },
-            "issueHeat": { "energy": 4 }
+            "central": {
+              "energy.utilityDeficit": -0.015,
+              "economy.laborCost": 0.005
+            },
+            "corpMood": {
+              "steel": -9,
+              "petrochemical": -8,
+              "semiconductor": -4
+            },
+            "popMood": {
+              "_all": 3,
+              "retiree": 4
+            },
+            "valuePressure": {
+              "marketFreedom": -0.5
+            },
+            "player": {
+              "fame": 3
+            },
+            "issueHeat": {
+              "energy": 4
+            }
           }
         },
         {
           "text": "支持全面合理反映成本，配合弱勢電費補助",
           "hint": "財務窟窿補得起來，物價與民怨會在下個月一起找上門",
           "effects": {
-            "central": { "energy.utilityDeficit": -0.03, "economy.cpi": 0.004 },
-            "popSoL": { "_all": -1, "retiree": 0 },
-            "popMood": { "_all": -4, "capitalist": 2 },
-            "corpMood": { "_all": -2, "finance": 3 },
-            "valuePressure": { "marketFreedom": 0.7 },
-            "player": { "integrity": 3, "fame": -3 },
-            "issueHeat": { "prices": 6 }
+            "central": {
+              "energy.utilityDeficit": -0.03,
+              "economy.cpi": 0.004
+            },
+            "popSoL": {
+              "_all": -1,
+              "retiree": 0
+            },
+            "popMood": {
+              "_all": -4,
+              "capitalist": 2
+            },
+            "corpMood": {
+              "_all": -2,
+              "finance": 3
+            },
+            "valuePressure": {
+              "marketFreedom": 0.7
+            },
+            "player": {
+              "integrity": 3,
+              "fame": -3
+            },
+            "issueHeat": {
+              "prices": 6
+            }
           }
         },
         {
           "text": "要求先公開檢討民營電廠的長期購電合約",
           "hint": "查得下去會是重案，也代表你要正面對上幾個大股東",
           "effects": {
-            "player": { "fame": 4, "integrity": 2, "politicalCapital": -2 },
-            "corpMood": { "finance": -6, "petrochemical": -4 },
-            "issueHeat": { "energy": 5, "corruption": 4 },
-            "popMood": { "whitecollar": 3, "capitalist": -4 },
-            "tagGain": ["TAG_MUCKRAKER"]
+            "player": {
+              "fame": 4,
+              "integrity": 2,
+              "politicalCapital": -2
+            },
+            "corpMood": {
+              "finance": -6,
+              "petrochemical": -4
+            },
+            "issueHeat": {
+              "energy": 5,
+              "corruption": 4
+            },
+            "popMood": {
+              "whitecollar": 3,
+              "capitalist": -4
+            },
+            "tagGain": [
+              "TAG_MUCKRAKER"
+            ]
           }
         }
       ],
-      "_designNote": "電價審議的產業轉嫁、全面反映與體制追查三條路"
+      "_designNote": "電價審議的產業轉嫁、全面反映與體制追查三條路",
+      "tier": "national"
     },
     {
       "id": "EVT_ENER_NUCLEAR_EXTEND",
@@ -114,7 +251,15 @@
       "weight": 50,
       "cooldown": 18,
       "trigger": "central.energy.reserveMargin < 0.1 && issueHeat.energy > 45",
-      "requires": { "minTurn": 8, "roles": ["legislator", "mayor", "councilor", "citizen"] },
+      "requires": {
+        "minTurn": 8,
+        "roles": [
+          "legislator",
+          "mayor",
+          "councilor",
+          "citizen"
+        ]
+      },
       "headline": "既有核電機組延役案送審，公投與科學論證同時開打",
       "body": "原子能主管機關收到既有核能機組的延役申請，安全審查預估需要花上二十八個月的時間。支持方以減碳與供電穩定為由要求加速審查，反對方則指出核廢料最終處置場址至今仍毫無著落。北海岸的地方居民在說明會上情緒激動，質疑歷次承諾都沒有被兌現。",
       "options": [
@@ -122,51 +267,118 @@
           "text": "公開支持延役，主張以減碳與供電穩定為先",
           "hint": "工商界與部分中間選民會靠過來，反核陣營從此把你列冊",
           "effects": {
-            "central": { "energy.reserveMargin": 0.03, "energy.emissions": -0.02 },
-            "corpMood": { "semiconductor": 7, "steel": 5, "electronics": 4 },
-            "valuePressure": { "environment": -0.4, "marketFreedom": 0.2 },
-            "popMood": { "techpro": 3, "student": -4 },
-            "player": { "fame": 3, "politicalCapital": -2 },
-            "issueHeat": { "energy": 6 }
+            "central": {
+              "energy.reserveMargin": 0.03,
+              "energy.emissions": -0.02
+            },
+            "corpMood": {
+              "semiconductor": 7,
+              "steel": 5,
+              "electronics": 4
+            },
+            "valuePressure": {
+              "environment": -0.4,
+              "marketFreedom": 0.2
+            },
+            "popMood": {
+              "techpro": 3,
+              "student": -4
+            },
+            "player": {
+              "fame": 3,
+              "politicalCapital": -2
+            },
+            "issueHeat": {
+              "energy": 6
+            }
           }
         },
         {
           "text": "主張延役須先通過核廢料最終處置的立法",
           "hint": "條件開得站得住腳，兩派人馬都會覺得你在拖時間",
           "effects": {
-            "valuePressure": { "environment": 0.3, "directDemocracy": 0.2 },
-            "player": { "integrity": 4, "fame": -1, "fatigue": 2 },
-            "popMood": { "whitecollar": 2, "techpro": -1, "student": 1 },
-            "corpMood": { "_all": -2 },
-            "issueHeat": { "energy": 4, "environment": 3 },
-            "tagGain": ["TAG_SCHOLAR"]
+            "valuePressure": {
+              "environment": 0.3,
+              "directDemocracy": 0.2
+            },
+            "player": {
+              "integrity": 4,
+              "fame": -1,
+              "fatigue": 2
+            },
+            "popMood": {
+              "whitecollar": 2,
+              "techpro": -1,
+              "student": 1
+            },
+            "corpMood": {
+              "_all": -2
+            },
+            "issueHeat": {
+              "energy": 4,
+              "environment": 3
+            },
+            "tagGain": [
+              "TAG_SCHOLAR"
+            ]
           }
         },
         {
           "text": "堅決反對延役，改推綠能加速與儲能建設",
           "hint": "環保支持者會全力相挺，供電缺口的帳單遲早會寄回來",
           "effects": {
-            "central": { "energy.renewShare": 0.02, "energy.reserveMargin": -0.02, "fiscal.balance": -0.005 },
-            "valuePressure": { "environment": 0.9 },
-            "popMood": { "student": 5, "techpro": -2, "capitalist": -3 },
-            "corpMood": { "steel": -4, "semiconductor": -3 },
-            "player": { "fame": 3 },
-            "issueHeat": { "energy": 6, "environment": 5 }
+            "central": {
+              "energy.renewShare": 0.02,
+              "energy.reserveMargin": -0.02,
+              "fiscal.balance": -0.005
+            },
+            "valuePressure": {
+              "environment": 0.9
+            },
+            "popMood": {
+              "student": 5,
+              "techpro": -2,
+              "capitalist": -3
+            },
+            "corpMood": {
+              "steel": -4,
+              "semiconductor": -3
+            },
+            "player": {
+              "fame": 3
+            },
+            "issueHeat": {
+              "energy": 6,
+              "environment": 5
+            }
           }
         },
         {
           "text": "主張交付全國公民投票，由選民自己決定",
           "hint": "誰都不能怪你獨斷，你也等於把兩年的時間交了出去",
           "effects": {
-            "valuePressure": { "directDemocracy": 0.9 },
-            "player": { "fame": 2, "politicalCapital": -1, "integrity": 1 },
-            "issueHeat": { "energy": 7 },
-            "popMood": { "_all": 1 },
-            "corpMood": { "_all": -3 }
+            "valuePressure": {
+              "directDemocracy": 0.9
+            },
+            "player": {
+              "fame": 2,
+              "politicalCapital": -1,
+              "integrity": 1
+            },
+            "issueHeat": {
+              "energy": 7
+            },
+            "popMood": {
+              "_all": 1
+            },
+            "corpMood": {
+              "_all": -3
+            }
           }
         }
       ],
-      "_designNote": "核能延役的四種立場，分別以環境價值、時間成本、供電風險與決策拖延為代價"
+      "_designNote": "核能延役的四種立場，分別以環境價值、時間成本、供電風險與決策拖延為代價",
+      "tier": "national"
     },
     {
       "id": "EVT_ENER_OFFSHORE_WIND",
@@ -174,7 +386,14 @@
       "weight": 45,
       "cooldown": 14,
       "trigger": "central.energy.renewShare < 0.28 && region.economy.fishery > 0.02",
-      "requires": { "minTurn": 6, "roles": ["legislator", "mayor", "councilor"] },
+      "requires": {
+        "minTurn": 6,
+        "roles": [
+          "legislator",
+          "mayor",
+          "councilor"
+        ]
+      },
       "headline": "離岸風電三期選商爭議延燒，漁會封鎖港口抗議",
       "body": "離岸風電第三期的海域範圍與漁業補償方案談判破裂，中部地區三個漁會在昨天清晨以漁船封鎖航道表達抗議。開發商指出併網時程如果再延後，將直接影響國內企業的綠電採購與供應鏈認證。漁民代表強調爭的不是補償金額，而是作業海域被切割後根本無法維持生計。",
       "options": [
@@ -182,40 +401,87 @@
           "text": "全力促成開發，提高漁業補償與轉業方案",
           "hint": "綠電時程保得住，用錢換來的和平通常撐不了太久",
           "effects": {
-            "central": { "energy.renewShare": 0.02, "fiscal.balance": -0.003 },
-            "corpMood": { "electronics": 4, "semiconductor": 3 },
-            "popSoL": { "farmer": 1 },
-            "popMood": { "farmer": -2, "techpro": 2 },
-            "valuePressure": { "environment": 0.4 },
-            "player": { "fame": 2, "politicalCapital": -1 }
+            "central": {
+              "energy.renewShare": 0.02,
+              "fiscal.balance": -0.003
+            },
+            "corpMood": {
+              "electronics": 4,
+              "semiconductor": 3
+            },
+            "popSoL": {
+              "farmer": 1
+            },
+            "popMood": {
+              "farmer": -2,
+              "techpro": 2
+            },
+            "valuePressure": {
+              "environment": 0.4
+            },
+            "player": {
+              "fame": 2,
+              "politicalCapital": -1
+            }
           }
         },
         {
           "text": "要求重新劃定海域範圍並暫停選商程序",
           "hint": "漁民會把你當恩人，綠電買家與外商的耐性正在耗盡",
           "effects": {
-            "central": { "energy.renewShare": -0.01, "economy.fdi": -0.01 },
-            "popMood": { "farmer": 6 },
-            "corpMood": { "electronics": -6, "semiconductor": -4 },
-            "grassroots": { "_home": 2 },
-            "player": { "fame": 3, "politicalCapital": -2 },
-            "issueHeat": { "energy": 4 }
+            "central": {
+              "energy.renewShare": -0.01,
+              "economy.fdi": -0.01
+            },
+            "popMood": {
+              "farmer": 6
+            },
+            "corpMood": {
+              "electronics": -6,
+              "semiconductor": -4
+            },
+            "grassroots": {
+              "_home": 2
+            },
+            "player": {
+              "fame": 3,
+              "politicalCapital": -2
+            },
+            "issueHeat": {
+              "energy": 4
+            }
           }
         },
         {
           "text": "推動漁電共生與漁民入股的分潤機制",
           "hint": "折衷方案要花很多時間去談，兩邊都得先願意坐下來",
           "effects": {
-            "player": { "fatigue": 4, "integrity": 3, "fame": 2 },
-            "popMood": { "farmer": 3 },
-            "corpMood": { "electronics": 2 },
-            "central": { "energy.renewShare": 0.01 },
-            "valuePressure": { "environment": 0.3, "directDemocracy": 0.3 },
-            "tagGain": ["TAG_DOER"]
+            "player": {
+              "fatigue": 4,
+              "integrity": 3,
+              "fame": 2
+            },
+            "popMood": {
+              "farmer": 3
+            },
+            "corpMood": {
+              "electronics": 2
+            },
+            "central": {
+              "energy.renewShare": 0.01
+            },
+            "valuePressure": {
+              "environment": 0.3,
+              "directDemocracy": 0.3
+            },
+            "tagGain": [
+              "TAG_DOER"
+            ]
           }
         }
       ],
-      "_designNote": "綠能開發與在地生計的衝突，測試玩家是重時程、重在地還是願意付出談判成本"
+      "_designNote": "綠能開發與在地生計的衝突，測試玩家是重時程、重在地還是願意付出談判成本",
+      "tier": "national"
     },
     {
       "id": "EVT_ENER_SOLAR_FARMLAND",
@@ -223,7 +489,15 @@
       "weight": 45,
       "cooldown": 14,
       "trigger": "central.energy.renewShare < 0.3 && issueHeat.environment > 30",
-      "requires": { "minTurn": 5, "roles": ["legislator", "mayor", "councilor", "citizen"] },
+      "requires": {
+        "minTurn": 5,
+        "roles": [
+          "legislator",
+          "mayor",
+          "councilor",
+          "citizen"
+        ]
+      },
       "headline": "農地種電查獲大批違規案件，糧食安全再度被端上檯面",
       "body": "農業主管機關清查發現，中南部有超過六百公頃的優良農地以假農作名義違規設置太陽能板。地方業者辯稱租金收益是老農唯一穩定的收入來源，反對一刀切的拆除政策。糧食安全團體則警告，農地流失與地下水超抽的問題若不處理，未來十年的自給率會掉到難以接受的水準。",
       "options": [
@@ -231,39 +505,85 @@
           "text": "全面清查違規並限期恢復農地原狀",
           "hint": "法治與糧安兩面站得住，靠租金過活的老農會第一個哭",
           "effects": {
-            "central": { "energy.renewShare": -0.008, "agri.landArea": 0.01 },
-            "popMood": { "farmer": -4, "student": 3 },
-            "popSoL": { "farmer": -2 },
-            "valuePressure": { "environment": 0.5 },
-            "player": { "integrity": 3, "fame": 1 },
-            "issueHeat": { "environment": 4 }
+            "central": {
+              "energy.renewShare": -0.008,
+              "agri.landArea": 0.01
+            },
+            "popMood": {
+              "farmer": -4,
+              "student": 3
+            },
+            "popSoL": {
+              "farmer": -2
+            },
+            "valuePressure": {
+              "environment": 0.5
+            },
+            "player": {
+              "integrity": 3,
+              "fame": 1
+            },
+            "issueHeat": {
+              "environment": 4
+            }
           }
         },
         {
           "text": "推動地層下陷區與不利耕作區的專區設置",
           "hint": "把衝突移到別的地方去，劃設專區的協商會拖上好幾年",
           "effects": {
-            "central": { "energy.renewShare": 0.012 },
-            "popMood": { "farmer": 2 },
-            "corpMood": { "electronics": 3 },
-            "player": { "fatigue": 3, "integrity": 2, "fame": 2 },
-            "valuePressure": { "environment": 0.2 },
-            "tagGain": ["TAG_DOER"]
+            "central": {
+              "energy.renewShare": 0.012
+            },
+            "popMood": {
+              "farmer": 2
+            },
+            "corpMood": {
+              "electronics": 3
+            },
+            "player": {
+              "fatigue": 3,
+              "integrity": 2,
+              "fame": 2
+            },
+            "valuePressure": {
+              "environment": 0.2
+            },
+            "tagGain": [
+              "TAG_DOER"
+            ]
           }
         },
         {
           "text": "支持既有案場就地合法，改課徵農地回饋金",
           "hint": "業者與地主都會開心，違規者反而得利的批評跑不掉",
           "effects": {
-            "central": { "energy.renewShare": 0.015, "fiscal.taxRevenue": 0.002 },
-            "corpMood": { "electronics": 7 },
-            "popMood": { "farmer": 4, "student": -3, "whitecollar": -2 },
-            "valuePressure": { "marketFreedom": 0.5, "environment": -0.4 },
-            "player": { "funds": 3, "integrity": -2, "stigma": 1 }
+            "central": {
+              "energy.renewShare": 0.015,
+              "fiscal.taxRevenue": 0.002
+            },
+            "corpMood": {
+              "electronics": 7
+            },
+            "popMood": {
+              "farmer": 4,
+              "student": -3,
+              "whitecollar": -2
+            },
+            "valuePressure": {
+              "marketFreedom": 0.5,
+              "environment": -0.4
+            },
+            "player": {
+              "funds": 3,
+              "integrity": -2,
+              "stigma": 1
+            }
           }
         }
       ],
-      "_designNote": "光電與農地的衝突，嚴管、劃區與就地合法三者各自付出不同代價"
+      "_designNote": "光電與農地的衝突，嚴管、劃區與就地合法三者各自付出不同代價",
+      "tier": "national"
     },
     {
       "id": "EVT_ENER_CARBON_FEE",
@@ -271,7 +591,15 @@
       "weight": 50,
       "cooldown": 16,
       "trigger": "central.energy.carbonFee < 500 && world.EU.stance > 30",
-      "requires": { "minTurn": 8, "roles": ["legislator", "mayor", "councilor", "citizen"] },
+      "requires": {
+        "minTurn": 8,
+        "roles": [
+          "legislator",
+          "mayor",
+          "councilor",
+          "citizen"
+        ]
+      },
       "headline": "碳費費率審議陷入僵局，出口業者憂心邊境調整機制",
       "body": "碳費費率審議會的環保團體代表主張每噸應以八百元起徵，工商團體則堅持三百元以內才不會傷到競爭力。石化與鋼鐵業者指出，歐盟碳邊境調整機制上路後，國內費率過低反而等於把稅金送給別人收。環境權益團體則批評高碳洩漏係數的優惠折扣，讓真正的排放大戶幾乎不必付錢。",
       "options": [
@@ -279,41 +607,97 @@
           "text": "支持高費率起徵並取消碳洩漏優惠折扣",
           "hint": "國際評價會漂亮，傳統重工業的裁員新聞也會跟著來",
           "effects": {
-            "central": { "energy.carbonFee": 300, "fiscal.taxRevenue": 0.004, "energy.emissions": -0.03 },
-            "corpMood": { "steel": -10, "petrochemical": -10, "food": -3 },
-            "valuePressure": { "environment": 0.9 },
-            "world": { "EU": { "stance": 5 } },
-            "popMood": { "student": 4, "bluecollar": -3 },
-            "player": { "fame": 3 },
-            "issueHeat": { "environment": 5 }
+            "central": {
+              "energy.carbonFee": 300,
+              "fiscal.taxRevenue": 0.004,
+              "energy.emissions": -0.03
+            },
+            "corpMood": {
+              "steel": -10,
+              "petrochemical": -10,
+              "food": -3
+            },
+            "valuePressure": {
+              "environment": 0.9
+            },
+            "world": {
+              "EU": {
+                "stance": 5
+              }
+            },
+            "popMood": {
+              "student": 4,
+              "bluecollar": -3
+            },
+            "player": {
+              "fame": 3
+            },
+            "issueHeat": {
+              "environment": 5
+            }
           }
         },
         {
           "text": "支持低費率起徵，搭配自主減量的獎勵機制",
           "hint": "產業界的掌聲很響亮，環團會把你的名字寫在看板上",
           "effects": {
-            "central": { "energy.carbonFee": 80, "energy.emissions": -0.005 },
-            "corpMood": { "steel": 8, "petrochemical": 8 },
-            "valuePressure": { "environment": -0.6, "marketFreedom": 0.5 },
-            "popMood": { "student": -4, "capitalist": 4 },
-            "player": { "funds": 3, "integrity": -1 },
-            "tagGain": ["TAG_BIZ_DARLING"]
+            "central": {
+              "energy.carbonFee": 80,
+              "energy.emissions": -0.005
+            },
+            "corpMood": {
+              "steel": 8,
+              "petrochemical": 8
+            },
+            "valuePressure": {
+              "environment": -0.6,
+              "marketFreedom": 0.5
+            },
+            "popMood": {
+              "student": -4,
+              "capitalist": 4
+            },
+            "player": {
+              "funds": 3,
+              "integrity": -1
+            },
+            "tagGain": [
+              "TAG_BIZ_DARLING"
+            ]
           }
         },
         {
           "text": "主張費率逐年遞增，並把收入專款用於轉型",
           "hint": "折衷路線最不容易被罵，兩邊也都不會替你出面說話",
           "effects": {
-            "central": { "energy.carbonFee": 150, "fiscal.greenFund": 0.005 },
-            "valuePressure": { "environment": 0.4 },
-            "corpMood": { "steel": -3, "petrochemical": -3, "machinery": 3 },
-            "player": { "integrity": 3, "fame": -1, "fatigue": 2 },
-            "issueHeat": { "environment": 2 },
-            "tagGain": ["TAG_SCHOLAR"]
+            "central": {
+              "energy.carbonFee": 150,
+              "fiscal.greenFund": 0.005
+            },
+            "valuePressure": {
+              "environment": 0.4
+            },
+            "corpMood": {
+              "steel": -3,
+              "petrochemical": -3,
+              "machinery": 3
+            },
+            "player": {
+              "integrity": 3,
+              "fame": -1,
+              "fatigue": 2
+            },
+            "issueHeat": {
+              "environment": 2
+            },
+            "tagGain": [
+              "TAG_SCHOLAR"
+            ]
           }
         }
       ],
-      "_designNote": "碳費費率的高、低、漸進三種路線，牽動國際評價、重工業與環保陣營"
+      "_designNote": "碳費費率的高、低、漸進三種路線，牽動國際評價、重工業與環保陣營",
+      "tier": "national"
     },
     {
       "id": "EVT_ENER_GRID_FAILURE",
@@ -321,7 +705,15 @@
       "weight": 40,
       "cooldown": 24,
       "trigger": "central.energy.gridAge > 0.6 && central.energy.reserveMargin < 0.12",
-      "requires": { "minTurn": 6, "roles": ["legislator", "mayor", "councilor", "citizen"] },
+      "requires": {
+        "minTurn": 6,
+        "roles": [
+          "legislator",
+          "mayor",
+          "councilor",
+          "citizen"
+        ]
+      },
       "headline": "超高壓變電所事故釀大停電，逾三百萬戶受影響五小時",
       "body": "南部一座超高壓變電所在昨日下午發生匯流排事故，連鎖跳脫造成全國逾三百萬戶停電長達五個小時。醫院與科學園區的備援系統雖然啟動，但仍有多條半導體產線因瞬間斷電而報廢在製品。電力公司初步歸咎於設備老化與人為操作疏失，行政部門則已宣布成立獨立調查小組。",
       "options": [
@@ -329,38 +721,81 @@
           "text": "要求追究高層責任並公開完整事故報告",
           "hint": "人民要的交代你給了，電網本身的老毛病一點都沒動到",
           "effects": {
-            "player": { "fame": 5, "integrity": 2 },
-            "issueHeat": { "energy": 7, "corruption": 3 },
-            "popMood": { "_all": 3 },
-            "corpMood": { "_all": -2 },
-            "central": { "energy.publicTrust": -0.02 },
-            "tagGain": ["TAG_MUCKRAKER"]
+            "player": {
+              "fame": 5,
+              "integrity": 2
+            },
+            "issueHeat": {
+              "energy": 7,
+              "corruption": 3
+            },
+            "popMood": {
+              "_all": 3
+            },
+            "corpMood": {
+              "_all": -2
+            },
+            "central": {
+              "energy.publicTrust": -0.02
+            },
+            "tagGain": [
+              "TAG_MUCKRAKER"
+            ]
           }
         },
         {
           "text": "推動電網分散化與強韌化的十年特別預算",
           "hint": "真正治本的方案，代價是一筆看不到剪綵時刻的巨款",
           "effects": {
-            "central": { "fiscal.balance": -0.012, "energy.gridAge": -0.08 },
-            "corpMood": { "machinery": 6, "steel": 4 },
-            "player": { "politicalCapital": -3, "integrity": 3, "fame": 2 },
-            "issueHeat": { "energy": 4 },
-            "tagGain": ["TAG_DOER"]
+            "central": {
+              "fiscal.balance": -0.012,
+              "energy.gridAge": -0.08
+            },
+            "corpMood": {
+              "machinery": 6,
+              "steel": 4
+            },
+            "player": {
+              "politicalCapital": -3,
+              "integrity": 3,
+              "fame": 2
+            },
+            "issueHeat": {
+              "energy": 4
+            },
+            "tagGain": [
+              "TAG_DOER"
+            ]
           }
         },
         {
           "text": "主張開放售電市場與微電網以分散風險",
           "hint": "結構性的解法很誘人，既得利益的抵抗會從第一天就開始",
           "effects": {
-            "valuePressure": { "marketFreedom": 0.8, "centralization": -0.4 },
-            "corpMood": { "finance": 5, "electronics": 4 },
-            "popMood": { "publicsvc": -4, "techpro": 3 },
-            "player": { "politicalCapital": -2, "fame": 2 },
-            "central": { "energy.marketOpenness": 0.05 }
+            "valuePressure": {
+              "marketFreedom": 0.8,
+              "centralization": -0.4
+            },
+            "corpMood": {
+              "finance": 5,
+              "electronics": 4
+            },
+            "popMood": {
+              "publicsvc": -4,
+              "techpro": 3
+            },
+            "player": {
+              "politicalCapital": -2,
+              "fame": 2
+            },
+            "central": {
+              "energy.marketOpenness": 0.05
+            }
           }
         }
       ],
-      "_designNote": "大停電後的問責、投資與市場改革三種路徑，短期聲量與長期效果明顯背離"
+      "_designNote": "大停電後的問責、投資與市場改革三種路徑，短期聲量與長期效果明顯背離",
+      "tier": "national"
     },
     {
       "id": "EVT_ENER_LNG_TERMINAL",
@@ -368,7 +803,14 @@
       "weight": 45,
       "cooldown": 18,
       "trigger": "central.energy.gasReserveDays < 12 && issueHeat.energy > 35",
-      "requires": { "minTurn": 8, "roles": ["legislator", "mayor", "councilor"] },
+      "requires": {
+        "minTurn": 8,
+        "roles": [
+          "legislator",
+          "mayor",
+          "councilor"
+        ]
+      },
       "headline": "第四座接收站環評再闖關，藻礁與供氣安全兩難再現",
       "body": "第四座液化天然氣接收站的環境影響評估在昨日再度進入實質審查，安全存量僅剩十一天的現況成為支持方最有力的論據。保育團體提出的水下調查影像顯示，工業港區外圍的礁體覆蓋情形比開發方的報告更為完整。地方里長之間的意見也明顯分裂，靠海聚落與工業區周邊的居民各自舉辦了說明會。",
       "options": [
@@ -376,39 +818,86 @@
           "text": "支持原案通過，強調供氣安全刻不容緩",
           "hint": "產業與電力調度會鬆一口氣，保育團體的訴訟不會停",
           "effects": {
-            "central": { "energy.gasReserveDays": 6, "energy.reserveMargin": 0.02 },
-            "corpMood": { "petrochemical": 6, "semiconductor": 4 },
-            "valuePressure": { "environment": -0.8 },
-            "popMood": { "student": -4, "techpro": 2 },
-            "player": { "fame": 2, "stigma": 1 },
-            "issueHeat": { "energy": 5, "environment": 6 }
+            "central": {
+              "energy.gasReserveDays": 6,
+              "energy.reserveMargin": 0.02
+            },
+            "corpMood": {
+              "petrochemical": 6,
+              "semiconductor": 4
+            },
+            "valuePressure": {
+              "environment": -0.8
+            },
+            "popMood": {
+              "student": -4,
+              "techpro": 2
+            },
+            "player": {
+              "fame": 2,
+              "stigma": 1
+            },
+            "issueHeat": {
+              "energy": 5,
+              "environment": 6
+            }
           }
         },
         {
           "text": "要求採用外推方案並補做水下生態調查",
           "hint": "折衷的代價是工期與造價一起往上跳，兩邊都不會滿意",
           "effects": {
-            "central": { "energy.gasReserveDays": 3, "fiscal.balance": -0.004 },
-            "valuePressure": { "environment": 0.3 },
-            "corpMood": { "petrochemical": 1 },
-            "player": { "integrity": 3, "fatigue": 3, "fame": 1 },
-            "issueHeat": { "environment": 3 }
+            "central": {
+              "energy.gasReserveDays": 3,
+              "fiscal.balance": -0.004
+            },
+            "valuePressure": {
+              "environment": 0.3
+            },
+            "corpMood": {
+              "petrochemical": 1
+            },
+            "player": {
+              "integrity": 3,
+              "fatigue": 3,
+              "fame": 1
+            },
+            "issueHeat": {
+              "environment": 3
+            }
           }
         },
         {
           "text": "主張全案退回，改以浮動式儲槽方案替代",
           "hint": "保育立場最乾淨，供氣缺口與替代方案的可行性要自己扛",
           "effects": {
-            "central": { "energy.gasReserveDays": -2, "energy.reserveMargin": -0.015 },
-            "valuePressure": { "environment": 1.0 },
-            "popMood": { "student": 5, "capitalist": -4 },
-            "corpMood": { "petrochemical": -8, "semiconductor": -3 },
-            "player": { "fame": 3, "politicalCapital": -2 },
-            "issueHeat": { "environment": 6 }
+            "central": {
+              "energy.gasReserveDays": -2,
+              "energy.reserveMargin": -0.015
+            },
+            "valuePressure": {
+              "environment": 1.0
+            },
+            "popMood": {
+              "student": 5,
+              "capitalist": -4
+            },
+            "corpMood": {
+              "petrochemical": -8,
+              "semiconductor": -3
+            },
+            "player": {
+              "fame": 3,
+              "politicalCapital": -2
+            },
+            "issueHeat": {
+              "environment": 6
+            }
           }
         }
       ],
-      "_designNote": "能源安全與生態保育的正面衝撞，三個選項都有站得住腳的論述"
+      "_designNote": "能源安全與生態保育的正面衝撞，三個選項都有站得住腳的論述",
+      "tier": "national"
     },
     {
       "id": "EVT_ENER_GREEN_POWER_PPA",
@@ -416,7 +905,14 @@
       "weight": 40,
       "cooldown": 14,
       "trigger": "world.SEMI.cycle > 0.5 && central.energy.renewShare < 0.25",
-      "requires": { "minTurn": 10, "roles": ["legislator", "mayor", "citizen"] },
+      "requires": {
+        "minTurn": 10,
+        "roles": [
+          "legislator",
+          "mayor",
+          "citizen"
+        ]
+      },
       "headline": "綠電被大廠包走，中小企業出口面臨認證斷鏈危機",
       "body": "國內可再生能源憑證有超過八成被少數幾家半導體與電子大廠透過長約鎖定，中小型供應鏈廠商幾乎買不到綠電。工具機與紡織業者反映，歐洲客戶已要求在兩年內提出百分之三十的綠電使用證明，否則將被移出供應商名單。能源主管機關研議設置綠電分配的保留額度，但大廠認為這會破壞既有的長期合約秩序。",
       "options": [
@@ -424,39 +920,87 @@
           "text": "推動中小企業綠電保留額度與團購平台",
           "hint": "中小企業會把你當救命恩人，大廠的法務部門也會開始動作",
           "effects": {
-            "popSoL": { "smallbiz": 2 },
-            "popMood": { "smallbiz": 5, "capitalist": -3 },
-            "corpMood": { "machinery": 7, "semiconductor": -6 },
-            "valuePressure": { "marketFreedom": -0.5 },
-            "player": { "fame": 3, "politicalCapital": -1 },
-            "issueHeat": { "energy": 3 }
+            "popSoL": {
+              "smallbiz": 2
+            },
+            "popMood": {
+              "smallbiz": 5,
+              "capitalist": -3
+            },
+            "corpMood": {
+              "machinery": 7,
+              "semiconductor": -6
+            },
+            "valuePressure": {
+              "marketFreedom": -0.5
+            },
+            "player": {
+              "fame": 3,
+              "politicalCapital": -1
+            },
+            "issueHeat": {
+              "energy": 3
+            }
           }
         },
         {
           "text": "主張加速綠電總量開發，不介入分配秩序",
           "hint": "把餅做大最沒有爭議，緩不濟急也是最真實的問題",
           "effects": {
-            "central": { "energy.renewShare": 0.015, "fiscal.balance": -0.004 },
-            "valuePressure": { "marketFreedom": 0.5, "environment": 0.4 },
-            "corpMood": { "electronics": 5, "semiconductor": 3 },
-            "popMood": { "smallbiz": -2, "techpro": 2 },
-            "player": { "integrity": 2, "fame": -1 }
+            "central": {
+              "energy.renewShare": 0.015,
+              "fiscal.balance": -0.004
+            },
+            "valuePressure": {
+              "marketFreedom": 0.5,
+              "environment": 0.4
+            },
+            "corpMood": {
+              "electronics": 5,
+              "semiconductor": 3
+            },
+            "popMood": {
+              "smallbiz": -2,
+              "techpro": 2
+            },
+            "player": {
+              "integrity": 2,
+              "fame": -1
+            }
           }
         },
         {
           "text": "推動公有屋頂與工業區的公民電廠計畫",
           "hint": "地方參與感會很強，發電規模對出口缺口只是杯水車薪",
           "effects": {
-            "region": { "_player": { "energy.localRenew": 0.03 } },
-            "valuePressure": { "directDemocracy": 0.5, "environment": 0.4 },
-            "popMood": { "smallbiz": 2, "student": 3 },
-            "grassroots": { "_home": 2 },
-            "player": { "fatigue": 2, "fame": 2 },
-            "tagGain": ["TAG_DOER"]
+            "region": {
+              "_player": {
+                "energy.localRenew": 0.03
+              }
+            },
+            "valuePressure": {
+              "directDemocracy": 0.5,
+              "environment": 0.4
+            },
+            "popMood": {
+              "smallbiz": 2,
+              "student": 3
+            },
+            "grassroots": {
+              "_home": 2
+            },
+            "player": {
+              "fatigue": 2,
+              "fame": 2
+            },
+            "tagGain": [
+              "TAG_DOER"
+            ]
           }
         }
       ],
-      "_designNote": "綠電分配的管制、擴大供給與公民參與三條路，各自對應不同的支持基礎"
+      "_designNote": "綠電分配的管制、擴大供給與公民參與三條路，各自對應不同的支持基礎",
+      "tier": "national"
     },
     {
       "id": "EVT_ENER_COAL_PLANT_PROTEST",
@@ -464,7 +1008,15 @@
       "weight": 45,
       "cooldown": 14,
       "trigger": "central.energy.emissions > 0.5 && issueHeat.environment > 40",
-      "requires": { "minTurn": 4, "roles": ["legislator", "mayor", "councilor", "citizen"] },
+      "requires": {
+        "minTurn": 4,
+        "roles": [
+          "legislator",
+          "mayor",
+          "councilor",
+          "citizen"
+        ]
+      },
       "headline": "中部火力電廠燃煤許可展延，市府與中央互槓不下",
       "body": "中部大型火力發電廠的燃煤使用許可即將到期，地方環保局主張大幅削減年度用煤上限並加嚴排放標準。中央主管機關則警告，一旦削減幅度過大，中部地區在夏季尖峰的供電調度將出現嚴重缺口。電廠周邊六個里的居民連署要求全面停燒生煤，工會則擔心機組減載會導致外包人力被大量遣散。",
       "options": [
@@ -472,38 +1024,88 @@
           "text": "全力支持地方削減用煤並加嚴排放標準",
           "hint": "空品與地方自治都有得分，供電責任會被中央丟回你身上",
           "effects": {
-            "central": { "energy.emissions": -0.03, "energy.reserveMargin": -0.02 },
-            "valuePressure": { "environment": 0.8, "centralization": -0.5 },
-            "popMood": { "student": 4, "retiree": 3, "bluecollar": -2 },
-            "player": { "fame": 4, "favorNational": -2 },
-            "issueHeat": { "environment": 6, "energy": 4 }
+            "central": {
+              "energy.emissions": -0.03,
+              "energy.reserveMargin": -0.02
+            },
+            "valuePressure": {
+              "environment": 0.8,
+              "centralization": -0.5
+            },
+            "popMood": {
+              "student": 4,
+              "retiree": 3,
+              "bluecollar": -2
+            },
+            "player": {
+              "fame": 4,
+              "favorNational": -2
+            },
+            "issueHeat": {
+              "environment": 6,
+              "energy": 4
+            }
           }
         },
         {
           "text": "支持中央調度優先，改以加裝防制設備因應",
           "hint": "供電穩了，居民會覺得你選擇站在他們的對立面",
           "effects": {
-            "central": { "energy.reserveMargin": 0.015, "fiscal.balance": -0.003 },
-            "valuePressure": { "centralization": 0.5, "environment": -0.3 },
-            "popMood": { "retiree": -3, "student": -3, "bluecollar": 2 },
-            "corpMood": { "steel": 4, "machinery": 3 },
-            "player": { "favorNational": 3, "fame": -1 }
+            "central": {
+              "energy.reserveMargin": 0.015,
+              "fiscal.balance": -0.003
+            },
+            "valuePressure": {
+              "centralization": 0.5,
+              "environment": -0.3
+            },
+            "popMood": {
+              "retiree": -3,
+              "student": -3,
+              "bluecollar": 2
+            },
+            "corpMood": {
+              "steel": 4,
+              "machinery": 3
+            },
+            "player": {
+              "favorNational": 3,
+              "fame": -1
+            }
           }
         },
         {
           "text": "推動燃煤機組改建燃氣，爭取專案時程與預算",
           "hint": "方向大家都同意，工程期間的過渡缺口誰來扛還沒人回答",
           "effects": {
-            "central": { "fiscal.balance": -0.008, "energy.emissions": -0.015 },
-            "corpMood": { "machinery": 5, "petrochemical": 3 },
-            "popMood": { "bluecollar": 1, "student": 2 },
-            "player": { "integrity": 2, "fatigue": 3, "politicalCapital": -2 },
-            "issueHeat": { "energy": 3 },
-            "tagGain": ["TAG_DOER"]
+            "central": {
+              "fiscal.balance": -0.008,
+              "energy.emissions": -0.015
+            },
+            "corpMood": {
+              "machinery": 5,
+              "petrochemical": 3
+            },
+            "popMood": {
+              "bluecollar": 1,
+              "student": 2
+            },
+            "player": {
+              "integrity": 2,
+              "fatigue": 3,
+              "politicalCapital": -2
+            },
+            "issueHeat": {
+              "energy": 3
+            },
+            "tagGain": [
+              "TAG_DOER"
+            ]
           }
         }
       ],
-      "_designNote": "地方自治與中央調度的能源角力，同時牽動空品、供電與勞工"
+      "_designNote": "地方自治與中央調度的能源角力，同時牽動空品、供電與勞工",
+      "tier": "national"
     },
     {
       "id": "EVT_ENER_ENERGY_STORAGE",
@@ -511,7 +1113,14 @@
       "weight": 35,
       "cooldown": 16,
       "trigger": "central.energy.renewShare > 0.2 && central.energy.storageCapacity < 0.05",
-      "requires": { "minTurn": 12, "roles": ["legislator", "mayor", "councilor"] },
+      "requires": {
+        "minTurn": 12,
+        "roles": [
+          "legislator",
+          "mayor",
+          "councilor"
+        ]
+      },
       "headline": "儲能案場密度過高引發疑慮，兩起電池火警燒出管理漏洞",
       "body": "北部與南部各發生一起儲能貨櫃的電池熱失控火警，所幸並未造成人員傷亡，但延燒時間都超過六個小時。消防主管機關坦承現行的設置規範與滅火標準明顯落後於技術演進，地方政府則收到大量的居民陳情。儲能業者強調事故案場屬於早期建置的舊型設備，要求不要因為個案而全面凍結新案的併網。",
       "options": [
@@ -519,38 +1128,83 @@
           "text": "推動儲能設置專法與強制安全距離規範",
           "hint": "居民的恐懼會被安撫，業者的建置成本會直接跳一個級距",
           "effects": {
-            "central": { "energy.storageCapacity": 0.01, "energy.safetyStandard": 0.05 },
-            "corpMood": { "electronics": -5, "machinery": 3 },
-            "popMood": { "retiree": 3, "whitecollar": 2 },
-            "valuePressure": { "marketFreedom": -0.4 },
-            "player": { "integrity": 3, "fame": 2 }
+            "central": {
+              "energy.storageCapacity": 0.01,
+              "energy.safetyStandard": 0.05
+            },
+            "corpMood": {
+              "electronics": -5,
+              "machinery": 3
+            },
+            "popMood": {
+              "retiree": 3,
+              "whitecollar": 2
+            },
+            "valuePressure": {
+              "marketFreedom": -0.4
+            },
+            "player": {
+              "integrity": 3,
+              "fame": 2
+            }
           }
         },
         {
           "text": "要求全面停止新案併網直到調查結束",
           "hint": "最能安撫恐慌的做法，綠能調度與投資信心會受重擊",
           "effects": {
-            "central": { "energy.storageCapacity": -0.01, "energy.reserveMargin": -0.01 },
-            "corpMood": { "electronics": -9, "finance": -4 },
-            "popMood": { "retiree": 5, "techpro": -3 },
-            "player": { "fame": 3, "politicalCapital": -1 },
-            "issueHeat": { "energy": 5, "security": 3 }
+            "central": {
+              "energy.storageCapacity": -0.01,
+              "energy.reserveMargin": -0.01
+            },
+            "corpMood": {
+              "electronics": -9,
+              "finance": -4
+            },
+            "popMood": {
+              "retiree": 5,
+              "techpro": -3
+            },
+            "player": {
+              "fame": 3,
+              "politicalCapital": -1
+            },
+            "issueHeat": {
+              "energy": 5,
+              "security": 3
+            }
           }
         },
         {
           "text": "主張只汰換舊型設備，新案照常審查併網",
           "hint": "專業判斷站得住腳，下一次事故就會全部算在你頭上",
           "effects": {
-            "central": { "energy.storageCapacity": 0.02 },
-            "corpMood": { "electronics": 6 },
-            "valuePressure": { "marketFreedom": 0.4 },
-            "popMood": { "retiree": -3, "techpro": 3 },
-            "player": { "integrity": 1, "stigma": 1, "fame": -1 },
-            "tagGain": ["TAG_SCHOLAR"]
+            "central": {
+              "energy.storageCapacity": 0.02
+            },
+            "corpMood": {
+              "electronics": 6
+            },
+            "valuePressure": {
+              "marketFreedom": 0.4
+            },
+            "popMood": {
+              "retiree": -3,
+              "techpro": 3
+            },
+            "player": {
+              "integrity": 1,
+              "stigma": 1,
+              "fame": -1
+            },
+            "tagGain": [
+              "TAG_SCHOLAR"
+            ]
           }
         }
       ],
-      "_designNote": "新技術風險治理的三種強度，在鄰避恐懼與能源轉型之間拉扯"
+      "_designNote": "新技術風險治理的三種強度，在鄰避恐懼與能源轉型之間拉扯",
+      "tier": "national"
     },
     {
       "id": "EVT_ENER_OIL_SHOCK",
@@ -558,7 +1212,15 @@
       "weight": 45,
       "cooldown": 18,
       "trigger": "world.MEA.stance < 25 && central.energy.oilPrice > 1.2",
-      "requires": { "minTurn": 6, "roles": ["legislator", "mayor", "councilor", "citizen"] },
+      "requires": {
+        "minTurn": 6,
+        "roles": [
+          "legislator",
+          "mayor",
+          "councilor",
+          "citizen"
+        ]
+      },
       "headline": "中東航道風險升高，國內油價連四週亮出漲聲",
       "body": "中東主要航道的保險費率因區域衝突而暴漲，臺灣石油公司宣布汽柴油零售價連續第四週調漲。貨運與計程車業者表示油料成本已吃掉全部的毛利，正在評估發動聯合休假來爭取補貼。經濟主管機關指出安全存量仍然充足，但也承認平穩機制的補貼款項在本季就會用罄。",
       "options": [
@@ -566,40 +1228,89 @@
           "text": "支持動用平穩基金並暫時調降貨物稅",
           "hint": "運輸業者馬上有感，國庫與減碳目標會同時後退一步",
           "effects": {
-            "central": { "energy.oilPrice": -0.08, "fiscal.taxRevenue": -0.005 },
-            "corpMood": { "logistics": 8, "retail": 3 },
-            "popSoL": { "service": 1, "bluecollar": 1 },
-            "valuePressure": { "environment": -0.3 },
-            "player": { "fame": 3, "politicalCapital": -1 },
-            "issueHeat": { "prices": -3 }
+            "central": {
+              "energy.oilPrice": -0.08,
+              "fiscal.taxRevenue": -0.005
+            },
+            "corpMood": {
+              "logistics": 8,
+              "retail": 3
+            },
+            "popSoL": {
+              "service": 1,
+              "bluecollar": 1
+            },
+            "valuePressure": {
+              "environment": -0.3
+            },
+            "player": {
+              "fame": 3,
+              "politicalCapital": -1
+            },
+            "issueHeat": {
+              "prices": -3
+            }
           }
         },
         {
           "text": "推動大眾運輸補貼與通勤月票方案擴大",
           "hint": "長期方向是對的，開車與跑車的人短期完全感受不到",
           "effects": {
-            "central": { "fiscal.balance": -0.004, "transport.ridership": 0.03 },
-            "valuePressure": { "environment": 0.5 },
-            "popMood": { "student": 4, "whitecollar": 3, "service": -2 },
-            "corpMood": { "logistics": -3 },
-            "player": { "integrity": 2, "fame": 2 },
-            "tagGain": ["TAG_DOER"]
+            "central": {
+              "fiscal.balance": -0.004,
+              "transport.ridership": 0.03
+            },
+            "valuePressure": {
+              "environment": 0.5
+            },
+            "popMood": {
+              "student": 4,
+              "whitecollar": 3,
+              "service": -2
+            },
+            "corpMood": {
+              "logistics": -3
+            },
+            "player": {
+              "integrity": 2,
+              "fame": 2
+            },
+            "tagGain": [
+              "TAG_DOER"
+            ]
           }
         },
         {
           "text": "主張油價完全反映成本，加碼補貼受衝擊業者",
           "hint": "價格訊號留住了，被點名補貼的行業以外全都會抱怨",
           "effects": {
-            "central": { "economy.cpi": 0.004, "fiscal.balance": -0.002 },
-            "valuePressure": { "marketFreedom": 0.7 },
-            "corpMood": { "logistics": 4, "_all": -2 },
-            "popMood": { "_all": -3, "service": 1 },
-            "player": { "integrity": 3, "fame": -2 },
-            "issueHeat": { "prices": 5 }
+            "central": {
+              "economy.cpi": 0.004,
+              "fiscal.balance": -0.002
+            },
+            "valuePressure": {
+              "marketFreedom": 0.7
+            },
+            "corpMood": {
+              "logistics": 4,
+              "_all": -2
+            },
+            "popMood": {
+              "_all": -3,
+              "service": 1
+            },
+            "player": {
+              "integrity": 3,
+              "fame": -2
+            },
+            "issueHeat": {
+              "prices": 5
+            }
           }
         }
       ],
-      "_designNote": "油價衝擊的補貼、轉型與價格機制三種回應，分別付出財政、時效與民怨"
+      "_designNote": "油價衝擊的補貼、轉型與價格機制三種回應，分別付出財政、時效與民怨",
+      "tier": "national"
     }
   ]
 }

@@ -6,6 +6,8 @@ import { word } from '../../util/scale.js';
 import { ACTIONS, apOf, actionState, lockedActions } from '../../systems/CharacterSystem.js';
 import { latestPublic, latestAny } from '../../systems/PollSystem.js';
 import { biWord } from '../../util/scale.js';
+import * as People from '../../systems/PeopleSystem.js';
+import { ledger } from '../../systems/FavorSystem.js';
 import { app } from '../app.js';
 
 export function turnPage(s, data) {
@@ -28,8 +30,55 @@ export function turnPage(s, data) {
 
     ${card('民調與風向', pollBlock(s, data))}
 
-    ${card('新聞', news.length ? news.map(newsRow).join('') : '<div class="xs muted">這個月島上很安靜，沒有什麼值得上報的事。</div>')}
+    ${card('選區裡的人', peopleBlock(s, data))}
+
+    ${raw(favorBlock(s, data))}
+
+    ${card('新聞', news.length ? news.map(newsRow).join('') : '<div class="xs muted">島上這幾天很安靜，沒有什麼值得上報的事。</div>')}
   `;
+}
+
+/**
+ * 選區裡的人。
+ * 這一格從開局第一回合就在，而且會一直在——
+ * 這些人不是選舉那一刻才生出來的對手，他們一直都在同一條街上跑。
+ */
+function peopleBlock(s, data) {
+  const list = People.inDistrict(s, s.player.homeDistrict)
+    .slice(0, data.people.homePageDisplay?.maxShown ?? 5);
+  if (!list.length) return '<div class="xs muted">這個選區目前沒有其他在跑的人。這種情況不會維持太久。</div>';
+  const rows = list.map((p) => {
+    const party = p.party ? data.byId.party[p.party] : null;
+    const arc = data.people.archetypes.find((a) => a.id === p.archetype);
+    const th = People.threat(p);
+    const age = s.meta.year - p.birthYear;
+    const traits = p.traits.map((t) => data.people.traits.find((x) => x.id === t)?.name).filter(Boolean);
+    const fav = p.favor ?? 0;
+    const favTag = Math.abs(fav) < 0.3 ? ''
+      : fav > 0 ? `<span class="chip ok xs">欠你人情</span>`
+        : `<span class="chip warn xs">你欠他人情</span>`;
+    return `<div class="npcrow">
+      <span class="npc-n" style="color:${party ? party.color : 'var(--fg-2)'}">${esc(p.name)}</span>
+      <span class="npc-p xs">${esc(party ? party.shortName : '無黨籍')}・${age} 歲</span>
+      <span class="npc-a xs muted">${esc(arc?.name ?? '')}${traits.length ? '・' + esc(traits[0]) : ''}</span>
+      <span class="npc-t">${esc(word('npcThreat', th))}</span>
+      ${favTag}
+    </div>`;
+  }).join('');
+  return `${rows}<div class="xs muted" style="margin-top:8px;line-height:1.7">
+    這些人跟你跑同一批婚喪喜慶。等到要選的時候，名單多半就是從這裡出來的。</div>`;
+}
+
+/** 手上握著誰的人情、又欠了誰 */
+function favorBlock(s, data) {
+  const L = ledger(s);
+  if (!L.owed.length && !L.owing.length) return '';
+  const line = (p, owed) => `<span class="chip ${owed ? 'ok' : 'warn'} xs">${esc(p.name)}　${esc(word('favorDebt', Math.abs(p.favor)))}</span>`;
+  return card('人情往來', `
+    ${L.owed.length ? `<div class="small" style="margin-bottom:6px">欠你的：${L.owed.slice(0, 6).map((p) => line(p, true)).join('')}</div>` : ''}
+    ${L.owing.length ? `<div class="small">你欠的：${L.owing.slice(0, 6).map((p) => line(p, false)).join('')}</div>` : ''}
+    <div class="xs muted" style="margin-top:8px;line-height:1.7">
+      這一行真正的貨幣不是錢，是誰欠誰。握著別人的人情，幫忙會自己找上門；欠著別人的，請託也會。</div>`);
 }
 
 function newsRow(n) {
@@ -70,6 +119,41 @@ function pending(s, data) {
       <span><span class="ph">選舉登記就要截止了</span>
       <span class="pb">你必須決定這一次要不要出來選，選哪一個位子。</span></span></button>`);
   }
+  // 社交邀約：婚宴、告別式、運動會、企業活動
+  for (const inv of (s.socialInvites ?? []).slice(0, 3)) {
+    const k = data.byId.invitation[inv.kindId];
+    if (!k) continue;
+    out.push(`<button class="pending" data-act="open-invites">
+      <span class="pi">${esc(k.icon)}</span>
+      <span><span class="ph">${esc(k.name)}的邀約</span>
+      <span class="pb">${esc(inv.lead.slice(0, 44))}…</span></span></button>`);
+  }
+  // 人情牽制帶來的幫忙或請託
+  (s.favorPending ?? []).forEach((f, i) => {
+    out.push(`<button class="pending" data-act="open-favor" data-id="${i}">
+      <span class="pi">${f.kind === 'help' ? '🤝' : '📿'}</span>
+      <span><span class="ph">${esc(f.headline)}</span>
+      <span class="pb">${esc(f.body.slice(0, 44))}…</span></span></button>`);
+  });
+  if (s.mediaAttack) {
+    out.push(`<button class="pending" data-act="open-attack">
+      <span class="pi">📰</span>
+      <span><span class="ph">${esc(s.mediaAttack.headline)}</span>
+      <span class="pb">${esc(s.mediaAttack.body.slice(0, 44))}…</span></span></button>`);
+  }
+  if (s.flags.graftCase) {
+    const g = s.flags.graftCase;
+    out.push(`<button class="pending" data-act="open-graft">
+      <span class="pi">🚨</span>
+      <span><span class="ph">${esc(g.name)}名下有一筆說不清楚的錢</span>
+      <span class="pb">記者已經在服務處門口，你必須在今天之內決定怎麼處理。</span></span></button>`);
+  }
+  if (s.flags.pendingPrimaryEvent && s.meta.turn >= s.flags.pendingPrimaryEvent.turn) {
+    out.push(`<button class="pending" data-act="open-aftermath">
+      <span class="pi">🗳️</span>
+      <span><span class="ph">初選之後的那通電話來了</span>
+      <span class="pb">這件事跟你上一次沒有拿到的那張提名有關。</span></span></button>`);
+  }
   return out;
 }
 
@@ -93,12 +177,50 @@ function actionList(s, data) {
       <summary>還沒解鎖的 ${locked.length} 項</summary>
       ${locked.map((x) => `<div class="lockrow"><b>${esc(x.a.name)}</b><span>${esc(x.st.why ?? '')}</span></div>`).join('')}
     </details>` : '';
-  const hint = blocked ? '你在住院，這個月什麼都做不了。'
-    : left <= 0 ? '這個月的時間已經用完了。' : open[0].desc;
+  const unit = s.meta.scale === 'week' ? '這一週' : '這個月';
+  const hint = blocked ? `你在住院，${unit}什麼都做不了。`
+    : left <= 0 ? `${unit}的時間已經用完了。` : open[0].desc;
+
+  // 常駐通告佔掉的行動點要讓玩家看得見，不然他會以為是程式壞了
+  const gigs = (s.canvassGigs ?? []).filter((g) => g.active);
+  const gigBlock = gigs.length ? `
+    <div class="xs muted" style="margin-top:6px;line-height:1.7">
+      固定要跑的場子：${gigs.map((g) => `${esc(g.name)}<button class="lnk xs" data-act="drop-gig" data-id="${esc(g.sceneId)}">退掉</button>`).join('、')}
+      　合計先佔掉 ${gigs.length} 點。
+    </div>` : '';
+
   return `<div class="actgrid">${grid}</div>
     <div class="xs muted" style="margin-top:8px;line-height:1.6">${esc(hint)}</div>
+    ${gigBlock}
     ${lockedBlock}
-    <button class="btn primary full" data-act="end-turn" style="margin-top:10px">結束這個回合</button>`;
+    <button class="btn primary full" data-act="end-turn" style="margin-top:10px">${esc(endTurnLabel(s, data, left, pendCount(s)))}</button>`;
+}
+
+function pendCount(s) {
+  return (s.pendingEvents?.length ?? 0) + (s.favorPending?.length ?? 0)
+    + (s.mediaAttack ? 1 : 0) + (s.flags.graftCase ? 1 : 0);
+}
+
+/**
+ * 結束回合的按鈕不該永遠寫同一句話。
+ * 還有事沒處理、還有行動點沒用、在住院、在選戰倒數——
+ * 這幾種情況下玩家按下去的意義完全不同，那句話就該不一樣。
+ */
+export function endTurnLabel(s, data, left, pend) {
+  if (s.player.hospitalTurns > 0) return '躺著讓時間過去';
+  if (s.election?.phase === 'campaign') {
+    const w = s.election.weeksLeft ?? 0;
+    return w <= 1 ? '撐完投票前的最後一週' : `結束這一週（投票倒數 ${w} 週）`;
+  }
+  if (s.meta.scale === 'week') return '結束這一週';
+  if (pend > 0) return `還有 ${pend} 件事沒處理，直接結束這個月`;
+  if (left >= 2) return `還剩 ${left} 點沒用，就這樣結束`;
+  if (left === 1) return '把剩下的一點時間留給自己';
+  if ((s.player.fatigueRaw ?? 0) >= 60) return '真的撐不住了，結束這個月';
+  const m = s.meta.month;
+  if (m === 12) return '結束十二月，準備跨年';
+  if (m === 1 && s.meta.turn > 2) return '結束一月，這一年才剛開始';
+  return '結束這個月';
 }
 
 /** 民調要有人做才有。沒人做的時候，這一格就該老實承認自己不知道。 */
@@ -146,7 +268,16 @@ function hottest(s, data) {
   return best ? `${best.name}・${word('issueHeat', v)}` : '無';
 }
 
-/** 事件 Modal */
+/**
+ * 事件 Modal。
+ *
+ * 被鎖住的選項不會消失，它會留在那裡變成暗的，旁邊寫著你缺什麼——
+ * 一個政治素人可以對颱風有意見，但他宣布不了停班停課，
+ * 而看得到那個按鈕是暗的，比看不到那個按鈕有意義得多。
+ *
+ * 最下面永遠有一個表態反對的選項。這是這一行最常見也最便宜的回應：
+ * 不需要方案，只需要立場。用詞每次都會換，效果由口才決定。
+ */
 export function eventModal(ev, s) {
   const opts = ev.options.map((o) => `
     <button class="opt" data-act="pick-option" data-ev="${esc(ev.id)}" data-idx="${o.idx}">
@@ -154,6 +285,16 @@ export function eventModal(ev, s) {
       ${o.hint ? `<div class="opt-h">${esc(o.hint)}</div>` : ''}
       ${effectPreview(o.effects)}
     </button>`).join('');
+  const locked = (ev.lockedOptions ?? []).map((o) => `
+    <div class="opt locked">
+      <div class="opt-t">${esc(o.text)}</div>
+      <div class="opt-h">🔒 ${esc(o.why)}</div>
+    </div>`).join('');
+  const opp = ev.oppose ? `
+    <button class="opt oppose" data-act="pick-oppose" data-ev="${esc(ev.id)}">
+      <div class="opt-t">${esc(ev.oppose.text)}</div>
+      <div class="opt-h">${esc(ev.oppose.hint)}</div>
+    </button>` : '';
   return `<div class="modal-h">${esc(ev.headline)}</div>
-    <div class="modal-b">${esc(ev.body)}</div>${opts}`;
+    <div class="modal-b">${esc(ev.body)}</div>${opts}${opp}${locked}`;
 }

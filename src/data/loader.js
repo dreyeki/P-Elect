@@ -4,6 +4,9 @@ const FILES = [
   'corporations', 'parties', 'laws', 'localBills', 'values', 'pops',
   'media', 'issues', 'budget', 'elections', 'starts', 'backgrounds',
   'tags', 'staffRoles', 'donations', 'pollsters', 'shows', 'constitution',
+  'tuning', 'theories', 'images', 'cabinet',
+  'china', 'people', 'canvass', 'favors', 'invitations', 'semiconductor', 'social',
+  'reactions',
 ];
 const EVENT_FILES = ['economy', 'energy', 'crossStrait', 'disaster', 'society', 'scandal', 'party', 'personal'];
 
@@ -59,10 +62,23 @@ function index(d) {
     event: Object.fromEntries(d.events.map((e) => [e.id, e])),
     pollster: Object.fromEntries(d.pollsters.pollsters.map((p) => [p.id, p])),
     show: Object.fromEntries(d.shows.shows.map((s) => [s.id, s])),
+    theory: Object.fromEntries(d.theories.theories.map((t) => [t.id, t])),
+    playerImage: Object.fromEntries(d.images.playerImages.map((i) => [i.id, i])),
+    partyImage: Object.fromEntries(d.images.partyImages.map((i) => [i.id, i])),
+    ministry: Object.fromEntries(d.cabinet.ministries.map((m) => [m.id, m])),
+    chinaDim: Object.fromEntries(d.china.dims.map((x) => [x.id, x])),
+    chinaReason: Object.fromEntries(d.china.reasons.map((x) => [x.id, x])),
+    canvassScene: Object.fromEntries(d.canvass.scenes.map((x) => [x.id, x])),
+    favorKind: Object.fromEntries(d.favors.kinds.map((x) => [x.id, x])),
+    invitation: Object.fromEntries(d.invitations.kinds.map((x) => [x.id, x])),
+    semiSegment: Object.fromEntries(d.semiconductor.segments.map((x) => [x.id, x])),
+    mediaAttack: Object.fromEntries(d.reactions.events.map((x) => [x.id, x])),
   };
   d.strataIds = d.pops.strata.map((s) => s.id);
   d.genIds = d.pops.generations.map((g) => g.id);
   d.partyIds = d.parties.parties.map((p) => p.id);
   d.axisIds = d.values.axes.map((a) => a.id);
   d.issueIds = d.issues.issues.map((i) => i.id);
+  d.chinaKeys = d.china.dims.map((x) => x.id);
+  d.reasonKeys = d.china.reasons.map((x) => x.id);
 }

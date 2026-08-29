@@ -30,16 +30,9 @@ function overview(s, data) {
       <div class="row"><span class="row-k">政治結構</span><span class="row-v ${sum.divided ? 'tone-warn' : 'tone-ok'}">${sum.divided ? '朝小野大' : '完全執政'}</span></div>
       <div class="row"><span class="row-k">會期</span><span class="row-v">${inSession(s) ? '開議中' : '休會中'}</span></div>`)}
 
-    ${card('政黨', Object.values(s.parties).filter((p) => (s.legislature[p.id] ?? 0) > 0 || p.support > 0.02)
-      .sort((a, b) => (b.support ?? 0) - (a.support ?? 0)).map((p) => `
-      <div class="row" style="display:block">
-        <div style="display:flex;justify-content:space-between;align-items:baseline">
-          <span class="row-k"><b class="p-${p.id}" style="color:${p.color}">${esc(p.name)}</b>
-            <span class="xs muted">${s.legislature[p.id] ?? 0} 席</span></span>
-          <span class="row-v num">${((p.support ?? 0) * 100).toFixed(1)}%</span>
-        </div>
-        <div class="xs muted" style="margin-top:2px">團結度 ${esc(word('cohesion', p.cohesion))}・形象 ${esc(word('publicImage', p.publicImage))}</div>
-      </div>`).join(''))}
+    ${card('政黨', partyBlock(s, data))}
+
+    ${card('行政院', cabinetBlock(s, data))}
 
     ${card('進行中的法案', s.session.billsInProgress.length
       ? s.session.billsInProgress.map((b) => {
@@ -57,6 +50,87 @@ function overview(s, data) {
       }).join('')
       : '<div class="xs muted">目前沒有你提的法案在程序中。法案要一關一關走，急不得。</div>')}
   `;
+}
+
+/**
+ * 政黨。
+ *
+ * 這裡刻意不顯示引擎裡那個真實的支持度——玩家不該有一個全知的數字。
+ * 有民調就寫民調寫出來的數字，附上是誰做的跟誤差；
+ * 沒有人做民調的時候，這一格就老實說不知道。
+ */
+function partyBlock(s, data) {
+  const poll = (s.polls ?? []).find((x) => x.scope === 'nation');
+  const list = Object.values(s.parties)
+    .filter((p) => (s.legislature[p.id] ?? 0) > 0 || (poll?.partySupport?.[p.id] ?? 0) > 2)
+    .sort((a, b) => (poll?.partySupport?.[b.id] ?? 0) - (poll?.partySupport?.[a.id] ?? 0)
+      || (s.legislature[b.id] ?? 0) - (s.legislature[a.id] ?? 0));
+
+  const rows = list.map((p) => {
+    const img = p.image ? data.byId.partyImage[p.image] : null;
+    const v = poll?.partySupport?.[p.id];
+    const num = v == null ? '<span class="xs muted">無資料</span>'
+      : `<span class="num">${v.toFixed(1)}%</span>`;
+    return `<div class="row" style="display:block">
+      <div style="display:flex;justify-content:space-between;align-items:baseline">
+        <span class="row-k"><b class="p-${p.id}" style="color:${p.color}">${esc(p.name)}</b>
+          <span class="xs muted">${s.legislature[p.id] ?? 0} 席</span></span>
+        ${num}
+      </div>
+      <div class="xs muted" style="margin-top:3px;line-height:1.7">
+        主席 ${esc(p.chair?.name ?? '從缺')}${p.chair ? `（${p.chair.since} 年就任）` : ''}<br>
+        黨團總召 ${esc(p.whip?.name ?? '從缺')}
+        ${img ? `<br>主打 ${esc(img.name)}` : ''}
+      </div>
+    </div>`;
+  }).join('');
+
+  const foot = poll
+    ? `<div class="xs muted" style="margin-top:8px;line-height:1.7">
+        資料來源：${esc(poll.pollsterName)}，${poll.year} 年 ${poll.month} 月，
+        樣本 ${poll.sampleSize} 人，最大誤差 ±${poll.error.toFixed(1)}%。
+        這是別人做出來的數字，不是這個世界真正的樣子。</div>`
+    : `<div class="xs muted" style="margin-top:8px;line-height:1.7">
+        最近沒有任何一家做過全國民調，所以這裡沒有數字可以寫。
+        在這一行，沒有人知道的事情就是真的沒有人知道。</div>`;
+  return rows + foot;
+}
+
+function cabinetBlock(s, data) {
+  if (!s.cabinet) return '<div class="xs muted">內閣名單還沒建立。</div>';
+  // 部會首長的滿意度也是問出來的。沒有人問過，就沒有數字。
+  const poll = (s.polls ?? []).find((x) => x.ministers?.length);
+  const byId = Object.fromEntries((poll?.ministers ?? []).map((m) => [m.id, m]));
+  const rows = s.cabinet.slice()
+    .sort((a, b) => data.byId.ministry[b.ministryId].influence - data.byId.ministry[a.ministryId].influence
+      || (byId[b.ministryId]?.approval ?? 0) - (byId[a.ministryId]?.approval ?? 0))
+    .slice(0, 8).map((m) => {
+      const def = data.byId.ministry[m.ministryId];
+      const q = byId[m.ministryId];
+      const num = q
+        ? `<span class="row-v num ${q.approval < 25 ? 'tone-bad' : q.approval > 55 ? 'tone-ok' : ''}">${q.approval.toFixed(0)}%</span>`
+        : '<span class="row-v xs muted">沒被問過</span>';
+      return `<div class="row">
+        <span class="row-k">${esc(def.name)}
+          <span class="xs muted">　${esc(m.name)}${m.isPlayer ? '（你）' : ''}</span></span>
+        ${num}
+      </div>`;
+    }).join('');
+  const foot = poll
+    ? `<div class="xs muted" style="margin-top:6px;line-height:1.7">
+        滿意度取自${esc(poll.pollsterShort)}的部會題組，子樣本較小，誤差約 ±${(poll.ministers[0]?.moe ?? 5).toFixed(1)}%。</div>`
+    : `<div class="xs muted" style="margin-top:6px;line-height:1.7">
+        最近沒有人做部會首長的滿意度調查。沒有數字不代表他們做得好或不好。</div>`;
+  return rows + foot + `<button class="btn ghost full xs" data-act="open-cabinet" style="margin-top:8px">看完整內閣名單</button>`;
+}
+
+/** 總統滿意度一律走民調。沒人問過就寫沒人問過。 */
+function presApproval(s) {
+  const poll = (s.polls ?? [])[0];
+  if (!poll) return '<span class="xs muted">最近沒有人做過調查</span>';
+  return `<span class="num ${poll.presidentApproval >= 50 ? 'tone-ok' : poll.presidentApproval < 35 ? 'tone-bad' : ''}">`
+    + `${poll.presidentApproval.toFixed(1)}%</span>`
+    + `<span class="xs muted">　${esc(poll.pollsterShort)}・±${poll.error.toFixed(1)}%</span>`;
 }
 
 /* ── 憲政：總統、行政院長、大法官、釋憲 ── */
@@ -97,9 +171,9 @@ function court(s, data) {
   return html`
     ${card('總統府', `
       ${row('總統', `<b style="color:${partyColor(pres.party)}">${esc(pres.name)}</b>　<span class="xs muted">第 ${pres.term} 任</span>`)}
-      ${row('滿意度', `<span class="num ${pres.approval >= 50 ? 'tone-ok' : pres.approval < 35 ? 'tone-bad' : ''}">${pres.approval.toFixed(1)}%</span>`)}
+      ${row('滿意度', presApproval(s))}
       ${row('任期', `<span class="num">${pres.termStart} － ${pres.termEnd}</span>`)}
-      ${row('行政院長', `${esc(pres.premier.name)}　<span class="xs muted">滿意度 ${pres.premier.approval.toFixed(0)}%</span>`)}
+      ${row('行政院長', `${esc(pres.premier.name)}`)}
       <div class="xs muted" style="margin-top:8px;line-height:1.7">
         行政院長由總統直接任命，不需要立法院同意；但立法院過半就可以倒閣，代價是總統可以解散國會重選。
       </div>`)}

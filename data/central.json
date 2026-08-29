@@ -32,10 +32,10 @@
   },
   "defense": {
     "budgetRatio": 0.031,
-    "readiness": 3,
+    "readiness": 2,
     "conscriptionMonths": 12,
     "reserveStrength": 3,
-    "asymmetricCapability": 2,
+    "asymmetricCapability": 1,
     "domesticProduction": 2
   },
   "diplomacy": {

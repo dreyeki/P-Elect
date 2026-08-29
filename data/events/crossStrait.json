@@ -6,7 +6,15 @@
       "weight": 60,
       "cooldown": 10,
       "trigger": "world.CHN.stance < 20 && issueHeat.crossStrait > 35",
-      "requires": { "minTurn": 3, "roles": ["legislator", "mayor", "councilor", "citizen"] },
+      "requires": {
+        "minTurn": 3,
+        "roles": [
+          "legislator",
+          "mayor",
+          "councilor",
+          "citizen"
+        ]
+      },
       "headline": "對岸宣布環台實彈演習，四條國際航路被迫改道",
       "body": "對岸軍方昨日深夜劃設六處實彈射擊區，演習範圍逼近我方鄰接水域並持續三天。民航主管機關緊急調整四條國際航路，超過兩百架次的航班被迫繞飛或延誤，貨櫃輪的保費也在一夜之間跳漲。國安高層強調已完全掌握動態，但股匯市在開盤後仍出現明顯的資金流出跡象。",
       "options": [
@@ -14,52 +22,134 @@
           "text": "要求提升戰備等級並公開演習全部細節",
           "hint": "強硬回應能鞏固基本盤，市場恐慌與外交壓力會同步升溫",
           "effects": {
-            "central": { "defense.readiness": 0.04, "economy.stockIndex": -0.02 },
-            "valuePressure": { "unification": -0.7, "militaryAutonomy": 0.5 },
-            "world": { "CHN": { "stance": -6 }, "USA": { "stance": 4 } },
-            "player": { "fame": 4, "favorNational": 2 },
-            "issueHeat": { "crossStrait": 6, "defense": 5 },
-            "tagGain": ["TAG_FIREBRAND"]
+            "central": {
+              "defense.readiness": 0.04,
+              "economy.stockIndex": -0.02
+            },
+            "valuePressure": {
+              "unification": -0.7,
+              "militaryAutonomy": 0.5
+            },
+            "world": {
+              "CHN": {
+                "stance": -6
+              },
+              "USA": {
+                "stance": 4
+              }
+            },
+            "player": {
+              "fame": 4,
+              "favorNational": 2
+            },
+            "issueHeat": {
+              "crossStrait": 6,
+              "defense": 5
+            },
+            "tagGain": [
+              "TAG_FIREBRAND"
+            ]
           }
         },
         {
           "text": "呼籲各界保持冷靜，避免給對方升高的藉口",
           "hint": "穩定金融的效果最好，會被批評成軟弱閃躲的那一派",
           "effects": {
-            "central": { "economy.stockIndex": 0.01 },
-            "world": { "CHN": { "stance": 2 } },
-            "popMood": { "capitalist": 4, "smallbiz": 2, "student": -3 },
-            "corpMood": { "finance": 5, "logistics": 3 },
-            "player": { "fame": -1, "integrity": 2 },
-            "valuePressure": { "unification": 0.2 }
+            "central": {
+              "economy.stockIndex": 0.01
+            },
+            "world": {
+              "CHN": {
+                "stance": 2
+              }
+            },
+            "popMood": {
+              "capitalist": 4,
+              "smallbiz": 2,
+              "student": -3
+            },
+            "corpMood": {
+              "finance": 5,
+              "logistics": 3
+            },
+            "player": {
+              "fame": -1,
+              "integrity": 2
+            },
+            "valuePressure": {
+              "unification": 0.2
+            }
           }
         },
         {
           "text": "要求盟邦公開表態並推動國際航道聯合聲明",
           "hint": "把問題國際化是好棋，也等於把主導權交到別人手上",
           "effects": {
-            "world": { "USA": { "stance": 6 }, "JPN": { "stance": 5 }, "CHN": { "stance": -8 } },
-            "central": { "diplomacy.intlSpace": 0.03 },
-            "valuePressure": { "militaryAutonomy": -0.4, "unification": -0.4 },
-            "player": { "fame": 3, "favorNational": 1 },
-            "issueHeat": { "crossStrait": 4 },
-            "tagGain": ["TAG_PROUS"]
+            "world": {
+              "USA": {
+                "stance": 6
+              },
+              "JPN": {
+                "stance": 5
+              },
+              "CHN": {
+                "stance": -8
+              }
+            },
+            "central": {
+              "diplomacy.intlSpace": 0.03
+            },
+            "valuePressure": {
+              "militaryAutonomy": -0.4,
+              "unification": -0.4
+            },
+            "player": {
+              "fame": 3,
+              "favorNational": 1
+            },
+            "issueHeat": {
+              "crossStrait": 4
+            },
+            "tagGain": [
+              "TAG_PROUS"
+            ]
           }
         },
         {
           "text": "主張重啟兩岸事務性協商以降低誤判風險",
           "hint": "務實派會給你掌聲，被貼上親中標籤的風險也一起附贈",
           "effects": {
-            "world": { "CHN": { "stance": 7 }, "USA": { "stance": -4 } },
-            "valuePressure": { "unification": 0.6 },
-            "popMood": { "smallbiz": 3, "farmer": 2, "student": -5 },
-            "player": { "fame": 2, "stigma": 1 },
-            "issueHeat": { "crossStrait": 5 },
-            "tagGain": ["TAG_PROCN"]
+            "world": {
+              "CHN": {
+                "stance": 7
+              },
+              "USA": {
+                "stance": -4
+              }
+            },
+            "valuePressure": {
+              "unification": 0.6
+            },
+            "popMood": {
+              "smallbiz": 3,
+              "farmer": 2,
+              "student": -5
+            },
+            "player": {
+              "fame": 2,
+              "stigma": 1
+            },
+            "issueHeat": {
+              "crossStrait": 5
+            },
+            "tagGain": [
+              "TAG_PROCN"
+            ]
           }
         }
       ],
-      "_designNote": "軍事施壓下的四種路線，強硬、冷處理、國際化與協商各有真實代價"
+      "_designNote": "軍事施壓下的四種路線，強硬、冷處理、國際化與協商各有真實代價",
+      "tier": "national"
     },
     {
       "id": "EVT_CS_TRADE_COERCION",
@@ -67,7 +157,15 @@
       "weight": 55,
       "cooldown": 12,
       "trigger": "world.CHN.stance < 30 && central.economy.exportGrowth < 0.02",
-      "requires": { "minTurn": 5, "roles": ["legislator", "mayor", "councilor", "citizen"] },
+      "requires": {
+        "minTurn": 5,
+        "roles": [
+          "legislator",
+          "mayor",
+          "councilor",
+          "citizen"
+        ]
+      },
       "headline": "對岸暫停十七項農漁產輸入，南部產地價格應聲崩跌",
       "body": "對岸海關以檢出禁用藥劑為由，宣布暫停我方十七項農漁產品的輸入資格，其中石斑與釋迦占出口值最高。屏東與台東的產地價在公告後三天內下跌超過四成，冷鏈倉儲已經開始出現爆倉的情形。農政單位緊急啟動內銷通路與外銷轉單，但業者直言短期內找不到吃得下這個量的替代市場。",
       "options": [
@@ -75,52 +173,125 @@
           "text": "推動全國性促銷與冷鏈加工的緊急補助",
           "hint": "產地價格能撐住一陣子，明年這批人還是會遇到同樣的事",
           "effects": {
-            "central": { "fiscal.balance": -0.004, "agri.income": 0.02 },
-            "popSoL": { "farmer": 2 },
-            "popMood": { "farmer": 5 },
-            "corpMood": { "food": 5, "retail": 3, "logistics": 2 },
-            "player": { "fame": 3, "politicalCapital": -1 },
-            "grassroots": { "_home": 1 }
+            "central": {
+              "fiscal.balance": -0.004,
+              "agri.income": 0.02
+            },
+            "popSoL": {
+              "farmer": 2
+            },
+            "popMood": {
+              "farmer": 5
+            },
+            "corpMood": {
+              "food": 5,
+              "retail": 3,
+              "logistics": 2
+            },
+            "player": {
+              "fame": 3,
+              "politicalCapital": -1
+            },
+            "grassroots": {
+              "_home": 1
+            }
           }
         },
         {
           "text": "向國際貿易組織提出申訴並要求技術磋商",
           "hint": "程序上站得住腳，農民等不到裁決出爐就先撐不下去了",
           "effects": {
-            "central": { "diplomacy.intlSpace": 0.02 },
-            "world": { "CHN": { "stance": -5 }, "EU": { "stance": 3 } },
-            "popMood": { "farmer": -2, "whitecollar": 3 },
-            "valuePressure": { "unification": -0.4 },
-            "player": { "integrity": 3, "fame": 1 },
-            "issueHeat": { "crossStrait": 4 }
+            "central": {
+              "diplomacy.intlSpace": 0.02
+            },
+            "world": {
+              "CHN": {
+                "stance": -5
+              },
+              "EU": {
+                "stance": 3
+              }
+            },
+            "popMood": {
+              "farmer": -2,
+              "whitecollar": 3
+            },
+            "valuePressure": {
+              "unification": -0.4
+            },
+            "player": {
+              "integrity": 3,
+              "fame": 1
+            },
+            "issueHeat": {
+              "crossStrait": 4
+            }
           }
         },
         {
           "text": "推動輸出市場多元化與檢疫標準全面升級",
           "hint": "體質改善的正解，這一季的產地慘況一點忙也幫不上",
           "effects": {
-            "central": { "agri.exportDiversity": 0.04, "fiscal.balance": -0.003 },
-            "world": { "JPN": { "stance": 4 }, "ASEAN": { "stance": 3 } },
-            "popSoL": { "farmer": 1 },
-            "popMood": { "farmer": -1, "techpro": 2 },
-            "player": { "integrity": 3, "fatigue": 2 },
-            "tagGain": ["TAG_DOER"]
+            "central": {
+              "agri.exportDiversity": 0.04,
+              "fiscal.balance": -0.003
+            },
+            "world": {
+              "JPN": {
+                "stance": 4
+              },
+              "ASEAN": {
+                "stance": 3
+              }
+            },
+            "popSoL": {
+              "farmer": 1
+            },
+            "popMood": {
+              "farmer": -1,
+              "techpro": 2
+            },
+            "player": {
+              "integrity": 3,
+              "fatigue": 2
+            },
+            "tagGain": [
+              "TAG_DOER"
+            ]
           }
         },
         {
           "text": "主張派代表赴對岸協商，優先恢復輸入資格",
           "hint": "最快讓農民有飯吃的路，政治上的代價要你自己吞下去",
           "effects": {
-            "world": { "CHN": { "stance": 8 } },
-            "popMood": { "farmer": 6, "student": -4 },
-            "popSoL": { "farmer": 2 },
-            "valuePressure": { "unification": 0.7 },
-            "player": { "fame": 3, "stigma": 1, "favorNational": -2 },
-            "tagGain": ["TAG_PROCN"]
+            "world": {
+              "CHN": {
+                "stance": 8
+              }
+            },
+            "popMood": {
+              "farmer": 6,
+              "student": -4
+            },
+            "popSoL": {
+              "farmer": 2
+            },
+            "valuePressure": {
+              "unification": 0.7
+            },
+            "player": {
+              "fame": 3,
+              "stigma": 1,
+              "favorNational": -2
+            },
+            "tagGain": [
+              "TAG_PROCN"
+            ]
           }
         }
       ],
-      "_designNote": "經貿脅迫下補貼、申訴、轉型與協商四路並陳，農民利益與國家立場正面拉扯"
+      "_designNote": "經貿脅迫下補貼、申訴、轉型與協商四路並陳，農民利益與國家立場正面拉扯",
+      "tier": "national"
     },
     {
       "id": "EVT_CS_TOURISM_REOPEN",
@@ -128,7 +299,15 @@
       "weight": 45,
       "cooldown": 16,
       "trigger": "world.CHN.stance > 35 && central.economy.tourismIndex < 1.0",
-      "requires": { "minTurn": 8, "roles": ["legislator", "mayor", "councilor", "citizen"] },
+      "requires": {
+        "minTurn": 8,
+        "roles": [
+          "legislator",
+          "mayor",
+          "councilor",
+          "citizen"
+        ]
+      },
       "headline": "對岸放話有條件恢復團客來台，觀光業者集體喊話",
       "body": "對岸文旅部門透過涉台管道釋出訊息，表示可以分階段恢復團客來台，但要求我方先在旅遊安全聲明上調整措辭。旅行業同業公會估算，全面恢復後每年可為國內帶來超過八百億元的觀光收入。國安幕僚則提醒，團客配額向來是對方調控我方輿論的工具，開放後的政治依賴度必須事先估算清楚。",
       "options": [
@@ -136,41 +315,101 @@
           "text": "全力支持恢復團客，先解決業者的生計問題",
           "hint": "觀光鏈立刻回血，經濟依賴的風險會在往後幾年慢慢發酵",
           "effects": {
-            "central": { "economy.tourismIndex": 0.12 },
-            "corpMood": { "tourism": 12, "retail": 6, "logistics": 3 },
-            "popSoL": { "service": 2, "smallbiz": 2 },
-            "world": { "CHN": { "stance": 6 } },
-            "valuePressure": { "unification": 0.6 },
-            "player": { "fame": 3, "funds": 2 },
-            "tagGain": ["TAG_PROCN"]
+            "central": {
+              "economy.tourismIndex": 0.12
+            },
+            "corpMood": {
+              "tourism": 12,
+              "retail": 6,
+              "logistics": 3
+            },
+            "popSoL": {
+              "service": 2,
+              "smallbiz": 2
+            },
+            "world": {
+              "CHN": {
+                "stance": 6
+              }
+            },
+            "valuePressure": {
+              "unification": 0.6
+            },
+            "player": {
+              "fame": 3,
+              "funds": 2
+            },
+            "tagGain": [
+              "TAG_PROCN"
+            ]
           }
         },
         {
           "text": "主張有條件開放並設定人數與比例上限",
           "hint": "兩邊都能交代得過去，兩邊也都會嫌你算計得太精",
           "effects": {
-            "central": { "economy.tourismIndex": 0.05 },
-            "corpMood": { "tourism": 5 },
-            "world": { "CHN": { "stance": 2 } },
-            "valuePressure": { "unification": 0.2 },
-            "player": { "integrity": 2, "fame": 1, "fatigue": 2 },
-            "issueHeat": { "crossStrait": 3 }
+            "central": {
+              "economy.tourismIndex": 0.05
+            },
+            "corpMood": {
+              "tourism": 5
+            },
+            "world": {
+              "CHN": {
+                "stance": 2
+              }
+            },
+            "valuePressure": {
+              "unification": 0.2
+            },
+            "player": {
+              "integrity": 2,
+              "fame": 1,
+              "fatigue": 2
+            },
+            "issueHeat": {
+              "crossStrait": 3
+            }
           }
         },
         {
           "text": "拒絕在安全聲明讓步，改推日韓歐美客源",
           "hint": "國家立場守得漂亮，觀光業者的怒火會直接燒到選區",
           "effects": {
-            "world": { "CHN": { "stance": -5 }, "JPN": { "stance": 4 }, "USA": { "stance": 3 } },
-            "central": { "economy.tourismIndex": -0.03, "fiscal.balance": -0.003 },
-            "corpMood": { "tourism": -8 },
-            "popMood": { "service": -4, "student": 4 },
-            "valuePressure": { "unification": -0.6 },
-            "player": { "favorNational": 3, "fame": 2 }
+            "world": {
+              "CHN": {
+                "stance": -5
+              },
+              "JPN": {
+                "stance": 4
+              },
+              "USA": {
+                "stance": 3
+              }
+            },
+            "central": {
+              "economy.tourismIndex": -0.03,
+              "fiscal.balance": -0.003
+            },
+            "corpMood": {
+              "tourism": -8
+            },
+            "popMood": {
+              "service": -4,
+              "student": 4
+            },
+            "valuePressure": {
+              "unification": -0.6
+            },
+            "player": {
+              "favorNational": 3,
+              "fame": 2
+            }
           }
         }
       ],
-      "_designNote": "觀光開放的經濟利益與政治槓桿之爭，三種尺度各自對應不同群體"
+      "_designNote": "觀光開放的經濟利益與政治槓桿之爭，三種尺度各自對應不同群體",
+      "tier": "national"
     },
     {
       "id": "EVT_CS_INFILTRATION",
@@ -178,7 +417,15 @@
       "weight": 50,
       "cooldown": 14,
       "trigger": "issueHeat.security > 35 && world.CHN.stance < 35",
-      "requires": { "minTurn": 6, "roles": ["legislator", "mayor", "councilor", "citizen"] },
+      "requires": {
+        "minTurn": 6,
+        "roles": [
+          "legislator",
+          "mayor",
+          "councilor",
+          "citizen"
+        ]
+      },
       "headline": "檢調查獲跨境資金經宮廟系統流入地方選舉樁腳",
       "body": "北部地檢署昨日搜索三間宮廟與兩家貿易公司，查扣帳冊顯示有超過一億元的境外資金以香油錢與顧問費名義入境。檢方懷疑款項最終流向多個縣市的地方樁腳，用於基層動員與宴席開銷。被點名的宮廟主委否認任何政治意圖，強調那是海外信眾長年的正常捐獻，並痛批辦案手法有政治操作的味道。",
       "options": [
@@ -186,50 +433,111 @@
           "text": "支持加嚴境外資金申報並提高刑度",
           "hint": "國安防線會補得比較穩，宮廟與僑界系統的反彈是實打實的",
           "effects": {
-            "central": { "security.counterInfiltration": 0.04 },
-            "valuePressure": { "unification": -0.6, "centralization": 0.4 },
-            "popMood": { "student": 4, "retiree": -3, "farmer": -2 },
-            "player": { "fame": 3, "integrity": 3 },
-            "grassroots": { "_home": -1 },
-            "issueHeat": { "security": 5, "corruption": 4 }
+            "central": {
+              "security.counterInfiltration": 0.04
+            },
+            "valuePressure": {
+              "unification": -0.6,
+              "centralization": 0.4
+            },
+            "popMood": {
+              "student": 4,
+              "retiree": -3,
+              "farmer": -2
+            },
+            "player": {
+              "fame": 3,
+              "integrity": 3
+            },
+            "grassroots": {
+              "_home": -1
+            },
+            "issueHeat": {
+              "security": 5,
+              "corruption": 4
+            }
           }
         },
         {
           "text": "要求檢調同步公開偵辦標準以避免選擇性辦案",
           "hint": "程序正義的訴求很難反駁，辦案能量會被無形中稀釋掉",
           "effects": {
-            "player": { "integrity": 4, "fame": 1 },
-            "valuePressure": { "directDemocracy": 0.4, "centralization": -0.3 },
-            "popMood": { "whitecollar": 3, "retiree": 2 },
-            "central": { "security.counterInfiltration": -0.01 },
-            "issueHeat": { "security": 3 },
-            "tagGain": ["TAG_SCHOLAR"]
+            "player": {
+              "integrity": 4,
+              "fame": 1
+            },
+            "valuePressure": {
+              "directDemocracy": 0.4,
+              "centralization": -0.3
+            },
+            "popMood": {
+              "whitecollar": 3,
+              "retiree": 2
+            },
+            "central": {
+              "security.counterInfiltration": -0.01
+            },
+            "issueHeat": {
+              "security": 3
+            },
+            "tagGain": [
+              "TAG_SCHOLAR"
+            ]
           }
         },
         {
           "text": "批評辦案手法擴大打擊，要求保障宗教自由",
           "hint": "地方宮廟系統會全面挺你，國安圈的名單上也會多一個你",
           "effects": {
-            "popMood": { "retiree": 5, "farmer": 4, "student": -5 },
-            "grassroots": { "_home": 2 },
-            "valuePressure": { "unification": 0.4, "centralization": -0.5 },
-            "player": { "fame": 2, "favorNational": -3, "stigma": 1 },
-            "central": { "security.counterInfiltration": -0.02 }
+            "popMood": {
+              "retiree": 5,
+              "farmer": 4,
+              "student": -5
+            },
+            "grassroots": {
+              "_home": 2
+            },
+            "valuePressure": {
+              "unification": 0.4,
+              "centralization": -0.5
+            },
+            "player": {
+              "fame": 2,
+              "favorNational": -3,
+              "stigma": 1
+            },
+            "central": {
+              "security.counterInfiltration": -0.02
+            }
           }
         },
         {
           "text": "推動地方宮廟財務透明化的自律公約",
           "hint": "折衷做法不痛不癢，兩邊都覺得你只是在拖時間而已",
           "effects": {
-            "player": { "integrity": 2, "fame": -1, "fatigue": 2 },
-            "popMood": { "retiree": 1, "whitecollar": 1 },
-            "grassroots": { "_home": 1 },
-            "issueHeat": { "corruption": 2 },
-            "valuePressure": { "directDemocracy": 0.2 }
+            "player": {
+              "integrity": 2,
+              "fame": -1,
+              "fatigue": 2
+            },
+            "popMood": {
+              "retiree": 1,
+              "whitecollar": 1
+            },
+            "grassroots": {
+              "_home": 1
+            },
+            "issueHeat": {
+              "corruption": 2
+            },
+            "valuePressure": {
+              "directDemocracy": 0.2
+            }
           }
         }
       ],
-      "_designNote": "統戰滲透案裡的國安、程序、地方系統與折衷四種站位"
+      "_designNote": "統戰滲透案裡的國安、程序、地方系統與折衷四種站位",
+      "tier": "national"
     },
     {
       "id": "EVT_CS_ARMS_DEAL",
@@ -237,7 +545,13 @@
       "weight": 50,
       "cooldown": 18,
       "trigger": "world.USA.stance > 40 && central.defense.budgetShare < 0.03",
-      "requires": { "minTurn": 8, "roles": ["legislator", "citizen"] },
+      "requires": {
+        "minTurn": 8,
+        "roles": [
+          "legislator",
+          "citizen"
+        ]
+      },
       "headline": "特別軍購案送進立法院，四千億預算引發排擠疑慮",
       "body": "行政部門將一項為期五年、總額約新台幣四千億元的特別軍購案送交立法院審議，主要項目包括海空不對稱戰力與防空系統。國防部門強調交機時程已排到二零三二年，延宕將直接影響戰力空窗期的填補。在野黨團則質疑舉債編列會排擠長照與教育預算，要求逐項說明價格合理性與後續維持費用。",
       "options": [
@@ -245,51 +559,130 @@
           "text": "支持全額通過，強調戰力空窗不能再拖",
           "hint": "安全防線與盟邦關係都加分，社福預算被排擠的批評會纏著你",
           "effects": {
-            "central": { "defense.budgetShare": 0.008, "fiscal.debtRatio": 0.012 },
-            "world": { "USA": { "stance": 7 }, "CHN": { "stance": -6 } },
-            "valuePressure": { "militaryAutonomy": 0.4, "unification": -0.5 },
-            "popMood": { "publicsvc": -2, "retiree": -3, "student": 2 },
-            "player": { "favorNational": 3, "fame": 2 },
-            "issueHeat": { "defense": 6 }
+            "central": {
+              "defense.budgetShare": 0.008,
+              "fiscal.debtRatio": 0.012
+            },
+            "world": {
+              "USA": {
+                "stance": 7
+              },
+              "CHN": {
+                "stance": -6
+              }
+            },
+            "valuePressure": {
+              "militaryAutonomy": 0.4,
+              "unification": -0.5
+            },
+            "popMood": {
+              "publicsvc": -2,
+              "retiree": -3,
+              "student": 2
+            },
+            "player": {
+              "favorNational": 3,
+              "fame": 2
+            },
+            "issueHeat": {
+              "defense": 6
+            }
           }
         },
         {
           "text": "支持通過但要求刪減外購改增本土研製比例",
           "hint": "國防自主的路線很吸引人，交機時程與技術風險同時放大",
           "effects": {
-            "central": { "defense.budgetShare": 0.005, "defense.localContent": 0.06 },
-            "corpMood": { "machinery": 8, "electronics": 5 },
-            "world": { "USA": { "stance": -3 } },
-            "valuePressure": { "militaryAutonomy": 0.9 },
-            "player": { "fame": 3, "politicalCapital": -1 },
-            "issueHeat": { "defense": 5 }
+            "central": {
+              "defense.budgetShare": 0.005,
+              "defense.localContent": 0.06
+            },
+            "corpMood": {
+              "machinery": 8,
+              "electronics": 5
+            },
+            "world": {
+              "USA": {
+                "stance": -3
+              }
+            },
+            "valuePressure": {
+              "militaryAutonomy": 0.9
+            },
+            "player": {
+              "fame": 3,
+              "politicalCapital": -1
+            },
+            "issueHeat": {
+              "defense": 5
+            }
           }
         },
         {
           "text": "主張凍結半數預算，先審查價格與維持費用",
           "hint": "監督的姿態最漂亮，友邦與軍方會把延宕的帳算在你頭上",
           "effects": {
-            "central": { "defense.budgetShare": 0.002, "fiscal.debtRatio": 0.004 },
-            "world": { "USA": { "stance": -6 } },
-            "player": { "fame": 4, "integrity": 3, "favorNational": -2 },
-            "popMood": { "whitecollar": 3, "publicsvc": 2 },
-            "issueHeat": { "defense": 4, "corruption": 2 },
-            "tagGain": ["TAG_MUCKRAKER"]
+            "central": {
+              "defense.budgetShare": 0.002,
+              "fiscal.debtRatio": 0.004
+            },
+            "world": {
+              "USA": {
+                "stance": -6
+              }
+            },
+            "player": {
+              "fame": 4,
+              "integrity": 3,
+              "favorNational": -2
+            },
+            "popMood": {
+              "whitecollar": 3,
+              "publicsvc": 2
+            },
+            "issueHeat": {
+              "defense": 4,
+              "corruption": 2
+            },
+            "tagGain": [
+              "TAG_MUCKRAKER"
+            ]
           }
         },
         {
           "text": "主張軍購改列年度預算，優先補足社福缺口",
           "hint": "社福支持者會很滿意，國安圈與美方的臉色會非常難看",
           "effects": {
-            "central": { "defense.budgetShare": -0.004, "social.welfareSpend": 0.006 },
-            "world": { "USA": { "stance": -9 }, "CHN": { "stance": 5 } },
-            "valuePressure": { "militaryAutonomy": -0.6, "unification": 0.3 },
-            "popMood": { "retiree": 5, "publicsvc": 4, "student": -3 },
-            "player": { "fame": 3, "favorNational": -3 }
+            "central": {
+              "defense.budgetShare": -0.004,
+              "social.welfareSpend": 0.006
+            },
+            "world": {
+              "USA": {
+                "stance": -9
+              },
+              "CHN": {
+                "stance": 5
+              }
+            },
+            "valuePressure": {
+              "militaryAutonomy": -0.6,
+              "unification": 0.3
+            },
+            "popMood": {
+              "retiree": 5,
+              "publicsvc": 4,
+              "student": -3
+            },
+            "player": {
+              "fame": 3,
+              "favorNational": -3
+            }
           }
         }
       ],
-      "_designNote": "軍購審查的四種立場，把國防、自主、監督與社福的排擠效應同時攤開"
+      "_designNote": "軍購審查的四種立場，把國防、自主、監督與社福的排擠效應同時攤開",
+      "tier": "national"
     },
     {
       "id": "EVT_CS_INTL_SPACE",
@@ -297,7 +690,14 @@
       "weight": 45,
       "cooldown": 16,
       "trigger": "central.diplomacy.intlSpace < 0.4 && world.IO.stance < 30",
-      "requires": { "minTurn": 6, "roles": ["legislator", "mayor", "citizen"] },
+      "requires": {
+        "minTurn": 6,
+        "roles": [
+          "legislator",
+          "mayor",
+          "citizen"
+        ]
+      },
       "headline": "我方申請國際衛生組織觀察員再度受阻，代表團滯留日內瓦",
       "body": "國際衛生組織大會的總務委員會以程序理由再度否決我方的觀察員提案，代表團在日內瓦滯留三天仍未取得發言機會。友邦與理念相近國家在場外舉行聯合記者會，但正式表決仍未跨過門檻。國內輿論分裂，一派主張加碼投入國際遊說，另一派則認為年年闖關的固定戲碼只是在消耗國家資源。",
       "options": [
@@ -305,38 +705,100 @@
           "text": "主張加碼國際遊說預算並擴大友邦動員",
           "hint": "國際能見度會提高，年復一年的支出效益永遠說不清楚",
           "effects": {
-            "central": { "diplomacy.intlSpace": 0.03, "fiscal.balance": -0.004 },
-            "world": { "IO": { "stance": 4 }, "USA": { "stance": 3 }, "CHN": { "stance": -4 } },
-            "valuePressure": { "unification": -0.5 },
-            "player": { "favorNational": 2, "fame": 2 },
-            "issueHeat": { "crossStrait": 4 }
+            "central": {
+              "diplomacy.intlSpace": 0.03,
+              "fiscal.balance": -0.004
+            },
+            "world": {
+              "IO": {
+                "stance": 4
+              },
+              "USA": {
+                "stance": 3
+              },
+              "CHN": {
+                "stance": -4
+              }
+            },
+            "valuePressure": {
+              "unification": -0.5
+            },
+            "player": {
+              "favorNational": 2,
+              "fame": 2
+            },
+            "issueHeat": {
+              "crossStrait": 4
+            }
           }
         },
         {
           "text": "改推專業實質參與，暫緩年度的政治性闖關",
           "hint": "務實派會覺得對，衝撞派會直接說你在自我矮化",
           "effects": {
-            "central": { "diplomacy.intlSpace": 0.015 },
-            "world": { "IO": { "stance": 3 }, "CHN": { "stance": 3 } },
-            "valuePressure": { "unification": 0.3 },
-            "popMood": { "whitecollar": 2, "student": -4 },
-            "player": { "integrity": 3, "fame": -2 },
-            "tagGain": ["TAG_SCHOLAR"]
+            "central": {
+              "diplomacy.intlSpace": 0.015
+            },
+            "world": {
+              "IO": {
+                "stance": 3
+              },
+              "CHN": {
+                "stance": 3
+              }
+            },
+            "valuePressure": {
+              "unification": 0.3
+            },
+            "popMood": {
+              "whitecollar": 2,
+              "student": -4
+            },
+            "player": {
+              "integrity": 3,
+              "fame": -2
+            },
+            "tagGain": [
+              "TAG_SCHOLAR"
+            ]
           }
         },
         {
           "text": "推動雙邊衛生合作協定，繞開國際組織架構",
           "hint": "累積實質關係最紮實，象徵意義上的挫敗還是會被拿來說嘴",
           "effects": {
-            "world": { "JPN": { "stance": 5 }, "EU": { "stance": 4 }, "ASEAN": { "stance": 3 } },
-            "central": { "diplomacy.intlSpace": 0.02, "health.cooperation": 0.03 },
-            "player": { "integrity": 2, "fatigue": 3, "fame": 1 },
-            "popMood": { "publicsvc": 3, "techpro": 2 },
-            "tagGain": ["TAG_DOER"]
+            "world": {
+              "JPN": {
+                "stance": 5
+              },
+              "EU": {
+                "stance": 4
+              },
+              "ASEAN": {
+                "stance": 3
+              }
+            },
+            "central": {
+              "diplomacy.intlSpace": 0.02,
+              "health.cooperation": 0.03
+            },
+            "player": {
+              "integrity": 2,
+              "fatigue": 3,
+              "fame": 1
+            },
+            "popMood": {
+              "publicsvc": 3,
+              "techpro": 2
+            },
+            "tagGain": [
+              "TAG_DOER"
+            ]
           }
         }
       ],
-      "_designNote": "國際空間困境的加碼、務實與繞道三種策略，聲量與實質效益明顯錯開"
+      "_designNote": "國際空間困境的加碼、務實與繞道三種策略，聲量與實質效益明顯錯開",
+      "tier": "national"
     },
     {
       "id": "EVT_CS_FISHING_CLASH",
@@ -344,7 +806,14 @@
       "weight": 45,
       "cooldown": 12,
       "trigger": "world.CHN.stance < 25 && region.geo.coastal > 0",
-      "requires": { "minTurn": 4, "roles": ["legislator", "mayor", "councilor"] },
+      "requires": {
+        "minTurn": 4,
+        "roles": [
+          "legislator",
+          "mayor",
+          "councilor"
+        ]
+      },
       "headline": "離島海域越界捕撈激增，海巡登檢時與陸船發生擦撞",
       "body": "離島周邊海域近月的越界捕撈通報量比去年同期增加超過兩倍，昨天下午一艘海巡艇在登檢時與對方漁船發生擦撞。所幸雙方人員都沒有受傷，但船身受損的畫面在網路上被大量轉傳，兩岸的網路輿論同時激化。當地漁會表示漁場已被掃到見底，要求政府採取更具強制力的驅離作為。",
       "options": [
@@ -352,41 +821,91 @@
           "text": "要求海巡加派艦艇並提高強制驅離的層級",
           "hint": "漁民會替你放鞭炮，海上擦槍走火的風險也一起被拉高",
           "effects": {
-            "central": { "defense.coastGuard": 0.03, "fiscal.balance": -0.002 },
-            "world": { "CHN": { "stance": -6 } },
-            "popMood": { "farmer": 6 },
-            "valuePressure": { "militaryAutonomy": 0.5, "unification": -0.4 },
-            "player": { "fame": 4, "favorNational": 1 },
-            "grassroots": { "_home": 1 },
-            "issueHeat": { "security": 5 }
+            "central": {
+              "defense.coastGuard": 0.03,
+              "fiscal.balance": -0.002
+            },
+            "world": {
+              "CHN": {
+                "stance": -6
+              }
+            },
+            "popMood": {
+              "farmer": 6
+            },
+            "valuePressure": {
+              "militaryAutonomy": 0.5,
+              "unification": -0.4
+            },
+            "player": {
+              "fame": 4,
+              "favorNational": 1
+            },
+            "grassroots": {
+              "_home": 1
+            },
+            "issueHeat": {
+              "security": 5
+            }
           }
         },
         {
           "text": "推動兩岸海上執法的熱線與通報機制",
           "hint": "降低誤判是實在的收穫，會被質疑等於承認對方的執法權",
           "effects": {
-            "world": { "CHN": { "stance": 6 } },
-            "central": { "security.maritimeRisk": -0.03 },
-            "valuePressure": { "unification": 0.5 },
-            "popMood": { "farmer": 1, "student": -4 },
-            "player": { "integrity": 2, "stigma": 1 },
-            "issueHeat": { "crossStrait": 3 }
+            "world": {
+              "CHN": {
+                "stance": 6
+              }
+            },
+            "central": {
+              "security.maritimeRisk": -0.03
+            },
+            "valuePressure": {
+              "unification": 0.5
+            },
+            "popMood": {
+              "farmer": 1,
+              "student": -4
+            },
+            "player": {
+              "integrity": 2,
+              "stigma": 1
+            },
+            "issueHeat": {
+              "crossStrait": 3
+            }
           }
         },
         {
           "text": "推動離島漁場復育與漁民轉業的專案補助",
           "hint": "資源問題總算被正視，眼前的越界船隊一艘都不會少",
           "effects": {
-            "central": { "fiscal.balance": -0.003, "agri.fishery": 0.03 },
-            "popSoL": { "farmer": 2 },
-            "popMood": { "farmer": 2 },
-            "valuePressure": { "environment": 0.5 },
-            "player": { "integrity": 2, "fame": 1 },
-            "grassroots": { "_home": 1 }
+            "central": {
+              "fiscal.balance": -0.003,
+              "agri.fishery": 0.03
+            },
+            "popSoL": {
+              "farmer": 2
+            },
+            "popMood": {
+              "farmer": 2
+            },
+            "valuePressure": {
+              "environment": 0.5
+            },
+            "player": {
+              "integrity": 2,
+              "fame": 1
+            },
+            "grassroots": {
+              "_home": 1
+            }
           }
         }
       ],
-      "_designNote": "海上摩擦的強硬執法、風險管控與資源治理三條路，各有不同的受益者"
+      "_designNote": "海上摩擦的強硬執法、風險管控與資源治理三條路，各有不同的受益者",
+      "tier": "national"
     },
     {
       "id": "EVT_CS_CABLE_CUT",
@@ -394,7 +913,15 @@
       "weight": 40,
       "cooldown": 20,
       "trigger": "world.CHN.stance < 25 && central.security.infraRisk > 0.3",
-      "requires": { "minTurn": 10, "roles": ["legislator", "mayor", "councilor", "citizen"] },
+      "requires": {
+        "minTurn": 10,
+        "roles": [
+          "legislator",
+          "mayor",
+          "councilor",
+          "citizen"
+        ]
+      },
       "headline": "離島海底電纜半年內四度斷裂，通訊備援僅剩微波系統",
       "body": "連接離島的海底電纜在半年內第四度斷裂，維修船預估要三週後才能抵達現場作業。通訊主管機關啟動微波與衛星備援，但頻寬只有原本的十分之一，島上的醫療遠距與金流系統都出現明顯延遲。海巡調閱的航跡資料顯示，事發時段有數艘懸掛權宜船旗的貨輪長時間在纜線上方低速徘徊。",
       "options": [
@@ -402,39 +929,91 @@
           "text": "要求對可疑船舶登檢並公布完整航跡證據",
           "hint": "把灰色行動攤在陽光下，外交與航運糾紛也會跟著上門",
           "effects": {
-            "world": { "CHN": { "stance": -7 }, "USA": { "stance": 4 } },
-            "central": { "security.infraRisk": -0.02 },
-            "corpMood": { "logistics": -5 },
-            "valuePressure": { "unification": -0.5, "militaryAutonomy": 0.4 },
-            "player": { "fame": 4, "favorNational": 2 },
-            "issueHeat": { "security": 6 }
+            "world": {
+              "CHN": {
+                "stance": -7
+              },
+              "USA": {
+                "stance": 4
+              }
+            },
+            "central": {
+              "security.infraRisk": -0.02
+            },
+            "corpMood": {
+              "logistics": -5
+            },
+            "valuePressure": {
+              "unification": -0.5,
+              "militaryAutonomy": 0.4
+            },
+            "player": {
+              "fame": 4,
+              "favorNational": 2
+            },
+            "issueHeat": {
+              "security": 6
+            }
           }
         },
         {
           "text": "推動低軌衛星與微波備援的離島韌性建設",
           "hint": "把自己的體質練好，需要的時間與預算都不會太客氣",
           "effects": {
-            "central": { "fiscal.balance": -0.006, "security.infraRisk": -0.04 },
-            "corpMood": { "electronics": 6, "logistics": 2 },
-            "popSoL": { "_all": 1 },
-            "player": { "integrity": 3, "politicalCapital": -2, "fatigue": 2 },
-            "tagGain": ["TAG_DOER"]
+            "central": {
+              "fiscal.balance": -0.006,
+              "security.infraRisk": -0.04
+            },
+            "corpMood": {
+              "electronics": 6,
+              "logistics": 2
+            },
+            "popSoL": {
+              "_all": 1
+            },
+            "player": {
+              "integrity": 3,
+              "politicalCapital": -2,
+              "fatigue": 2
+            },
+            "tagGain": [
+              "TAG_DOER"
+            ]
           }
         },
         {
           "text": "主張先做離島民生補償，避免過度政治解讀",
           "hint": "島上居民會馬上有感，國安部門會覺得你在幫忙淡化事情",
           "effects": {
-            "region": { "_player": { "infra.quality": 0.02 } },
-            "popSoL": { "_all": 1, "smallbiz": 1 },
-            "popMood": { "smallbiz": 3, "retiree": 3, "student": -3 },
-            "central": { "fiscal.balance": -0.002 },
-            "player": { "fame": 2, "favorNational": -1 },
-            "grassroots": { "_home": 1 }
+            "region": {
+              "_player": {
+                "infra.quality": 0.02
+              }
+            },
+            "popSoL": {
+              "_all": 1,
+              "smallbiz": 1
+            },
+            "popMood": {
+              "smallbiz": 3,
+              "retiree": 3,
+              "student": -3
+            },
+            "central": {
+              "fiscal.balance": -0.002
+            },
+            "player": {
+              "fame": 2,
+              "favorNational": -1
+            },
+            "grassroots": {
+              "_home": 1
+            }
           }
         }
       ],
-      "_designNote": "灰色地帶行動的追究、韌性建設與民生優先三種回應"
+      "_designNote": "灰色地帶行動的追究、韌性建設與民生優先三種回應",
+      "tier": "national"
     },
     {
       "id": "EVT_CS_STUDENT_EXCHANGE",
@@ -442,7 +1021,15 @@
       "weight": 35,
       "cooldown": 16,
       "trigger": "world.CHN.stance > 30 && issueHeat.education > 25",
-      "requires": { "minTurn": 6, "roles": ["legislator", "mayor", "councilor", "citizen"] },
+      "requires": {
+        "minTurn": 6,
+        "roles": [
+          "legislator",
+          "mayor",
+          "councilor",
+          "citizen"
+        ]
+      },
       "headline": "對岸擴大招收台生並加碼獎學金，教育界憂心人才單向流動",
       "body": "對岸多所重點大學宣布針對台生擴大免試入學名額，並提供涵蓋學雜費與生活費的全額獎學金。國內私立大學校長協進會指出，少子化衝擊下這波招手將讓部分學校的招生缺口雪上加霜。教育主管機關評估是否比照提出留才方案，也有立委主張應該全面檢視學歷採認與交流團的資金來源。",
       "options": [
@@ -450,39 +1037,88 @@
           "text": "推動國內獎助學金加碼與產學合作留才方案",
           "hint": "正面迎戰的做法最得體，錢從哪裡來的問題還是沒解決",
           "effects": {
-            "central": { "fiscal.balance": -0.005, "education.quality": 0.02 },
-            "popSoL": { "student": 2 },
-            "popMood": { "student": 5, "whitecollar": 2 },
-            "corpMood": { "semiconductor": 3, "electronics": 3 },
-            "player": { "fame": 3, "politicalCapital": -1 },
-            "issueHeat": { "education": 4 }
+            "central": {
+              "fiscal.balance": -0.005,
+              "education.quality": 0.02
+            },
+            "popSoL": {
+              "student": 2
+            },
+            "popMood": {
+              "student": 5,
+              "whitecollar": 2
+            },
+            "corpMood": {
+              "semiconductor": 3,
+              "electronics": 3
+            },
+            "player": {
+              "fame": 3,
+              "politicalCapital": -1
+            },
+            "issueHeat": {
+              "education": 4
+            }
           }
         },
         {
           "text": "要求檢視交流團資金來源與學歷採認標準",
           "hint": "防範統戰的理由充分，被說成限制年輕人選擇也很難反駁",
           "effects": {
-            "central": { "security.counterInfiltration": 0.02 },
-            "valuePressure": { "unification": -0.5, "progressivism": -0.2 },
-            "popMood": { "student": -3, "publicsvc": 2 },
-            "world": { "CHN": { "stance": -4 } },
-            "player": { "favorNational": 2, "fame": 1 },
-            "issueHeat": { "security": 3 }
+            "central": {
+              "security.counterInfiltration": 0.02
+            },
+            "valuePressure": {
+              "unification": -0.5,
+              "progressivism": -0.2
+            },
+            "popMood": {
+              "student": -3,
+              "publicsvc": 2
+            },
+            "world": {
+              "CHN": {
+                "stance": -4
+              }
+            },
+            "player": {
+              "favorNational": 2,
+              "fame": 1
+            },
+            "issueHeat": {
+              "security": 3
+            }
           }
         },
         {
           "text": "主張全面開放交流，以自由環境留住年輕人",
           "hint": "自信滿滿的說法，人才真的流出去以後就很難再拉回來",
           "effects": {
-            "valuePressure": { "progressivism": 0.5, "unification": 0.2 },
-            "world": { "CHN": { "stance": 4 } },
-            "popMood": { "student": 3, "publicsvc": -3 },
-            "central": { "education.talentOutflow": 0.02 },
-            "player": { "fame": 2, "integrity": 1 }
+            "valuePressure": {
+              "progressivism": 0.5,
+              "unification": 0.2
+            },
+            "world": {
+              "CHN": {
+                "stance": 4
+              }
+            },
+            "popMood": {
+              "student": 3,
+              "publicsvc": -3
+            },
+            "central": {
+              "education.talentOutflow": 0.02
+            },
+            "player": {
+              "fame": 2,
+              "integrity": 1
+            }
           }
         }
       ],
-      "_designNote": "人才競爭下的加碼留才、防範管制與開放自信三種路線"
+      "_designNote": "人才競爭下的加碼留才、防範管制與開放自信三種路線",
+      "tier": "national"
     },
     {
       "id": "EVT_CS_DISINFO_WAVE",
@@ -490,7 +1126,15 @@
       "weight": 50,
       "cooldown": 12,
       "trigger": "issueHeat.security > 30 && issueHeat.crossStrait > 30",
-      "requires": { "minTurn": 5, "roles": ["legislator", "mayor", "councilor", "citizen"] },
+      "requires": {
+        "minTurn": 5,
+        "roles": [
+          "legislator",
+          "mayor",
+          "councilor",
+          "citizen"
+        ]
+      },
       "headline": "境外協同帳號操作在地話題，防疫與軍演謠言同時擴散",
       "body": "資安研究團隊公布報告指出，近兩個月有超過八千個高度協同的境外帳號在社群平台上放大特定爭議話題。內容集中在軍演恐慌與醫療物資短缺兩個主題，並大量套用本地時事的畫面與方言腔調。平台業者表示已移除部分帳號，但公民團體警告過度的內容管制可能會侵蝕言論自由的界線。",
       "options": [
@@ -498,36 +1142,77 @@
           "text": "推動數位平台問責法與境外帳號揭露義務",
           "hint": "防禦體系會健全許多，言論自由的紅線爭議也會被點燃",
           "effects": {
-            "central": { "security.counterInfiltration": 0.04 },
-            "valuePressure": { "centralization": 0.5, "progressivism": -0.3 },
-            "popMood": { "publicsvc": 3, "student": -2, "whitecollar": 1 },
-            "player": { "fame": 3, "politicalCapital": -1 },
-            "issueHeat": { "security": 5 }
+            "central": {
+              "security.counterInfiltration": 0.04
+            },
+            "valuePressure": {
+              "centralization": 0.5,
+              "progressivism": -0.3
+            },
+            "popMood": {
+              "publicsvc": 3,
+              "student": -2,
+              "whitecollar": 1
+            },
+            "player": {
+              "fame": 3,
+              "politicalCapital": -1
+            },
+            "issueHeat": {
+              "security": 5
+            }
           }
         },
         {
           "text": "推動媒體識讀教育與事實查核的公私協力",
           "hint": "沒有人會反對的方向，效果要好幾年後才看得出來",
           "effects": {
-            "central": { "education.mediaLiteracy": 0.03, "fiscal.balance": -0.002 },
-            "popMood": { "student": 3, "whitecollar": 2 },
-            "valuePressure": { "progressivism": 0.3, "directDemocracy": 0.3 },
-            "player": { "integrity": 3, "fame": 1 },
-            "tagGain": ["TAG_SCHOLAR"]
+            "central": {
+              "education.mediaLiteracy": 0.03,
+              "fiscal.balance": -0.002
+            },
+            "popMood": {
+              "student": 3,
+              "whitecollar": 2
+            },
+            "valuePressure": {
+              "progressivism": 0.3,
+              "directDemocracy": 0.3
+            },
+            "player": {
+              "integrity": 3,
+              "fame": 1
+            },
+            "tagGain": [
+              "TAG_SCHOLAR"
+            ]
           }
         },
         {
           "text": "反對新增管制，主張以更多資訊對抗假資訊",
           "hint": "自由派會替你辯護，下一波認知作戰你也只能眼睜睜看著",
           "effects": {
-            "valuePressure": { "progressivism": 0.6, "centralization": -0.5 },
-            "central": { "security.counterInfiltration": -0.015 },
-            "popMood": { "student": 4, "publicsvc": -3 },
-            "player": { "integrity": 3, "favorNational": -1, "fame": 1 }
+            "valuePressure": {
+              "progressivism": 0.6,
+              "centralization": -0.5
+            },
+            "central": {
+              "security.counterInfiltration": -0.015
+            },
+            "popMood": {
+              "student": 4,
+              "publicsvc": -3
+            },
+            "player": {
+              "integrity": 3,
+              "favorNational": -1,
+              "fame": 1
+            }
           }
         }
       ],
-      "_designNote": "認知作戰的管制、教育與自由三種對策，安全與言論自由正面碰撞"
+      "_designNote": "認知作戰的管制、教育與自由三種對策，安全與言論自由正面碰撞",
+      "tier": "national"
     },
     {
       "id": "EVT_CS_BUSINESS_RETURN",
@@ -535,7 +1220,14 @@
       "weight": 40,
       "cooldown": 18,
       "trigger": "world.CHN.stance < 30 && central.economy.fdi < 0.03",
-      "requires": { "minTurn": 10, "roles": ["legislator", "mayor", "councilor"] },
+      "requires": {
+        "minTurn": 10,
+        "roles": [
+          "legislator",
+          "mayor",
+          "councilor"
+        ]
+      },
       "headline": "台商回流專案用地告罄，環評與水電配套雙雙卡關",
       "body": "統合企業與大冠汽車等多家台商申請的回流投資案，因為專案用地已經全數配罄而暫時無法動工。工業區周邊的地下水與排放總量早已逼近上限，環評委員要求開發單位先提出區域性的減量抵換方案。地方政府則希望中央鬆綁工業區的擴編標準，讓投資與就業機會不要因為程序問題而流失。",
       "options": [
@@ -543,39 +1235,88 @@
           "text": "支持鬆綁工業區擴編並加速環評的審查",
           "hint": "投資與就業立刻到位，環境總量的帳遲早要有人來結",
           "effects": {
-            "central": { "economy.fdi": 0.015, "energy.emissions": 0.015 },
-            "region": { "_player": { "economy.gdpGrowth": 0.004 } },
-            "corpMood": { "machinery": 7, "steel": 5 },
-            "valuePressure": { "environment": -0.7, "marketFreedom": 0.4 },
-            "player": { "fame": 3, "funds": 2 },
-            "issueHeat": { "environment": 4 }
+            "central": {
+              "economy.fdi": 0.015,
+              "energy.emissions": 0.015
+            },
+            "region": {
+              "_player": {
+                "economy.gdpGrowth": 0.004
+              }
+            },
+            "corpMood": {
+              "machinery": 7,
+              "steel": 5
+            },
+            "valuePressure": {
+              "environment": -0.7,
+              "marketFreedom": 0.4
+            },
+            "player": {
+              "fame": 3,
+              "funds": 2
+            },
+            "issueHeat": {
+              "environment": 4
+            }
           }
         },
         {
           "text": "要求以既有閒置工業用地優先媒合投資案",
           "hint": "資源盤活的思路很正確，媒合速度絕對趕不上業者的期待",
           "effects": {
-            "central": { "economy.fdi": 0.006, "land.idleUse": 0.04 },
-            "corpMood": { "machinery": 2 },
-            "valuePressure": { "environment": 0.4 },
-            "player": { "integrity": 3, "fatigue": 3, "fame": 1 },
-            "tagGain": ["TAG_DOER"]
+            "central": {
+              "economy.fdi": 0.006,
+              "land.idleUse": 0.04
+            },
+            "corpMood": {
+              "machinery": 2
+            },
+            "valuePressure": {
+              "environment": 0.4
+            },
+            "player": {
+              "integrity": 3,
+              "fatigue": 3,
+              "fame": 1
+            },
+            "tagGain": [
+              "TAG_DOER"
+            ]
           }
         },
         {
           "text": "主張回流投資須先承諾在地僱用與減碳比例",
           "hint": "條件開得漂亮，部分業者會轉身把錢投到別的國家去",
           "effects": {
-            "central": { "economy.fdi": -0.005, "energy.emissions": -0.01 },
-            "corpMood": { "machinery": -6, "steel": -4 },
-            "popMood": { "bluecollar": 4, "student": 3 },
-            "valuePressure": { "environment": 0.6, "marketFreedom": -0.4 },
-            "player": { "integrity": 2, "fame": 2 },
-            "tagGain": ["TAG_LABOR_FRIEND"]
+            "central": {
+              "economy.fdi": -0.005,
+              "energy.emissions": -0.01
+            },
+            "corpMood": {
+              "machinery": -6,
+              "steel": -4
+            },
+            "popMood": {
+              "bluecollar": 4,
+              "student": 3
+            },
+            "valuePressure": {
+              "environment": 0.6,
+              "marketFreedom": -0.4
+            },
+            "player": {
+              "integrity": 2,
+              "fame": 2
+            },
+            "tagGain": [
+              "TAG_LABOR_FRIEND"
+            ]
           }
         }
       ],
-      "_designNote": "台商回流的鬆綁、盤活與附條件三種做法，環境與投資的取捨清楚可見"
+      "_designNote": "台商回流的鬆綁、盤活與附條件三種做法，環境與投資的取捨清楚可見",
+      "tier": "national"
     },
     {
       "id": "EVT_CS_PEACE_INITIATIVE",
@@ -583,7 +1324,14 @@
       "weight": 35,
       "cooldown": 24,
       "trigger": "world.CHN.stance > 40 && issueHeat.crossStrait > 45",
-      "requires": { "minTurn": 14, "roles": ["legislator", "mayor", "citizen"] },
+      "requires": {
+        "minTurn": 14,
+        "roles": [
+          "legislator",
+          "mayor",
+          "citizen"
+        ]
+      },
       "headline": "第三方拋出兩岸對話倡議，各政黨立場當日就全面分裂",
       "body": "一個國際智庫聯盟在論壇上拋出兩岸互不武力威脅的對話倡議，並邀請兩邊派出非官方代表先行接觸。護家統一聯盟與台灣民生黨表態支持，世代力量與本土基進黨則批評這是替對方的政治框架背書。民調顯示社會意見高度分裂，超過四成受訪者表示願意支持任何能降低戰爭風險的嘗試。",
       "options": [
@@ -591,50 +1339,122 @@
           "text": "公開支持接觸，主張對話本身沒有損失",
           "hint": "中間與務實選民會靠過來，被扣上矮化帽子的機率也很高",
           "effects": {
-            "world": { "CHN": { "stance": 8 }, "USA": { "stance": -4 } },
-            "valuePressure": { "unification": 0.7 },
-            "popMood": { "smallbiz": 4, "retiree": 3, "student": -5 },
-            "corpMood": { "tourism": 5, "finance": 4 },
-            "player": { "fame": 3, "stigma": 1 },
-            "tagGain": ["TAG_PROCN"]
+            "world": {
+              "CHN": {
+                "stance": 8
+              },
+              "USA": {
+                "stance": -4
+              }
+            },
+            "valuePressure": {
+              "unification": 0.7
+            },
+            "popMood": {
+              "smallbiz": 4,
+              "retiree": 3,
+              "student": -5
+            },
+            "corpMood": {
+              "tourism": 5,
+              "finance": 4
+            },
+            "player": {
+              "fame": 3,
+              "stigma": 1
+            },
+            "tagGain": [
+              "TAG_PROCN"
+            ]
           }
         },
         {
           "text": "要求對話前提須是對方先撤除武力威脅",
           "hint": "立場清楚又不算好戰，倡議大概也就到此為止了",
           "effects": {
-            "world": { "CHN": { "stance": -5 }, "USA": { "stance": 4 } },
-            "valuePressure": { "unification": -0.6, "militaryAutonomy": 0.4 },
-            "popMood": { "student": 5, "smallbiz": -3 },
-            "player": { "favorNational": 2, "fame": 3 },
-            "issueHeat": { "crossStrait": 5 }
+            "world": {
+              "CHN": {
+                "stance": -5
+              },
+              "USA": {
+                "stance": 4
+              }
+            },
+            "valuePressure": {
+              "unification": -0.6,
+              "militaryAutonomy": 0.4
+            },
+            "popMood": {
+              "student": 5,
+              "smallbiz": -3
+            },
+            "player": {
+              "favorNational": 2,
+              "fame": 3
+            },
+            "issueHeat": {
+              "crossStrait": 5
+            }
           }
         },
         {
           "text": "主張任何協議都須先經公民投票複決",
           "hint": "把決定權還給人民很難被反對，過程會被拖得又長又亂",
           "effects": {
-            "valuePressure": { "directDemocracy": 1.0 },
-            "player": { "fame": 3, "integrity": 2, "politicalCapital": -2 },
-            "popMood": { "_all": 2, "student": 3 },
-            "world": { "CHN": { "stance": -3 } },
-            "issueHeat": { "crossStrait": 6 }
+            "valuePressure": {
+              "directDemocracy": 1.0
+            },
+            "player": {
+              "fame": 3,
+              "integrity": 2,
+              "politicalCapital": -2
+            },
+            "popMood": {
+              "_all": 2,
+              "student": 3
+            },
+            "world": {
+              "CHN": {
+                "stance": -3
+              }
+            },
+            "issueHeat": {
+              "crossStrait": 6
+            }
           }
         },
         {
           "text": "推動先從人道與救災的低政治議題開始接觸",
           "hint": "阻力最小的切入點，兩邊的鷹派都會覺得你在避重就輕",
           "effects": {
-            "world": { "CHN": { "stance": 4 } },
-            "central": { "security.crossStraitRisk": -0.02 },
-            "player": { "integrity": 3, "fame": -1, "fatigue": 2 },
-            "popMood": { "whitecollar": 2, "student": -1 },
-            "valuePressure": { "unification": 0.2 },
-            "tagGain": ["TAG_SCHOLAR"]
+            "world": {
+              "CHN": {
+                "stance": 4
+              }
+            },
+            "central": {
+              "security.crossStraitRisk": -0.02
+            },
+            "player": {
+              "integrity": 3,
+              "fame": -1,
+              "fatigue": 2
+            },
+            "popMood": {
+              "whitecollar": 2,
+              "student": -1
+            },
+            "valuePressure": {
+              "unification": 0.2
+            },
+            "tagGain": [
+              "TAG_SCHOLAR"
+            ]
           }
         }
       ],
-      "_designNote": "和平倡議的四種姿態，統獨光譜上的每一格都能找到自己的論據"
+      "_designNote": "和平倡議的四種姿態，統獨光譜上的每一格都能找到自己的論據",
+      "tier": "national"
     }
   ]
 }

@@ -1,0 +1,154 @@
+{
+  "_note": [
+    "兩岸態度的細部模型。統獨是台灣選民最在意的一件事，把它壓成一條軸太粗糙了。",
+    "這裡把它拆成七個彼此獨立的維度，加上一個「主要理由」的類別。",
+    "關鍵設計：理由不等於方向。主張友中有利經濟的人跟主張抗中才能保住經濟的人，",
+    "在 reason 上同屬 economy，但在 friendly 上是相反的兩端。所以同一則經濟新聞，",
+    "會同時強化這兩群人原本的立場，而不是把他們推往同一個方向。",
+    "dims 全部是 −5~+5，用四字語詞呈現，見 scales.json 的 bipolar 區塊。"
+  ],
+  "dims": [
+    {
+      "id": "friendly", "negName": "抗中保台", "posName": "友中求和", "weight": 1.0,
+      "desc": "對中政策的總方向。負端主張把風險降到最低，正端主張把衝突的可能性降到最低，兩邊都認為自己才是在保護這座島。"
+    },
+    {
+      "id": "strength", "negName": "外強中乾", "posName": "難以撼動", "weight": 0.55,
+      "desc": "對岸到底有多強，是一個信念問題而不是事實問題。認為它就要垮掉的人願意賭，認為它撼動不了的人傾向先求安穩。"
+    },
+    {
+      "id": "morality", "negName": "極權為惡", "posName": "同胞善意", "weight": 0.7,
+      "desc": "對岸的體制與人民是不是懷有惡意。這一項跟強弱認知彼此獨立：有人認為它很強但沒有惡意，也有人認為它已經虛弱卻更危險。"
+    },
+    {
+      "id": "culture", "negName": "文化排斥", "posName": "同文同種", "weight": 0.6,
+      "desc": "對中華文化的親近或厭惡。影響教科書、語言政策與影視消費，跟政治立場的相關性比多數人以為的低。"
+    },
+    {
+      "id": "openness", "negName": "拒之門外", "posName": "來者不拒", "weight": 0.65,
+      "desc": "陸資、陸生、陸配與對岸企業要開放到什麼程度。這是最容易被個案新聞牽動的一項，一起社會事件就能翻轉幾個百分點。"
+    },
+    {
+      "id": "usTrust", "negName": "疑美主義", "posName": "堅信盟友", "weight": 0.75,
+      "desc": "美國到底會不會來，以及來了以後台灣要付出什麼。疑美情緒在近年快速上升，而且藍綠兩邊都有。"
+    },
+    {
+      "id": "japanTrust", "negName": "舊恨難消", "posName": "唇齒相依", "weight": 0.4,
+      "desc": "對日本的信賴與情感。它同時牽動安全期待、觀光消費與歷史記憶，世代差異在這一項上最為明顯。"
+    }
+  ],
+  "reasons": [
+    {
+      "id": "economy", "name": "經濟利害",
+      "desc": "從飯碗與訂單出發思考兩岸。同一群人裡有人認為離不開對岸市場，也有人認為押注在那裡遲早被掐住咽喉。",
+      "movedBy": ["economy", "prices", "employment"],
+      "share": 0.34
+    },
+    {
+      "id": "regime", "name": "政治體制",
+      "desc": "在意的是那一套制度本身。有人厭惡一黨專政，也有人羨慕那種說做就做的效率，兩種心情都真實存在。",
+      "movedBy": ["corruption", "security"],
+      "share": 0.18
+    },
+    {
+      "id": "ethnic", "name": "同文同種",
+      "desc": "從血緣、語言與家族記憶出發。這一群的立場最穩定，也最不容易被經濟數字說服。",
+      "movedBy": ["education", "crossStrait"],
+      "share": 0.16
+    },
+    {
+      "id": "security", "name": "安全存亡",
+      "desc": "只問一件事：怎樣比較不會打起來。有人認為要備戰才能止戰，也有人認為備戰本身就是在招惹戰爭。",
+      "movedBy": ["defense", "crossStrait", "security"],
+      "share": 0.22
+    },
+    {
+      "id": "democracy", "name": "民主價值",
+      "desc": "把自由選舉與言論空間視為不可交換的底線。這一群對經濟代價的容忍度最高，也最容易被國際新聞動員。",
+      "movedBy": ["crossStrait", "corruption"],
+      "share": 0.10
+    }
+  ],
+  "reasonAffinity": {
+    "_note": "各理由對哪些階層與世代特別集中。數字是相對權重，會與 share 相乘後正規化。",
+    "byStratum": {
+      "farmer":     { "economy": 1.5, "ethnic": 1.3, "security": 0.8, "regime": 0.6, "democracy": 0.4 },
+      "bluecollar": { "economy": 1.6, "ethnic": 1.0, "security": 0.9, "regime": 0.7, "democracy": 0.5 },
+      "service":    { "economy": 1.3, "security": 1.0, "ethnic": 0.9, "regime": 0.9, "democracy": 0.8 },
+      "whitecollar":{ "economy": 1.1, "security": 1.1, "democracy": 1.2, "regime": 1.0, "ethnic": 0.7 },
+      "techpro":    { "economy": 1.4, "security": 1.2, "democracy": 1.1, "regime": 0.9, "ethnic": 0.4 },
+      "smallbiz":   { "economy": 1.8, "ethnic": 1.1, "security": 0.7, "regime": 0.6, "democracy": 0.4 },
+      "capitalist": { "economy": 2.0, "regime": 0.9, "security": 0.6, "ethnic": 0.6, "democracy": 0.3 },
+      "publicsvc":  { "security": 1.4, "regime": 1.2, "democracy": 1.0, "economy": 0.9, "ethnic": 0.9 },
+      "student":    { "democracy": 1.9, "security": 1.2, "regime": 1.0, "economy": 0.7, "ethnic": 0.3 },
+      "retiree":    { "ethnic": 1.6, "security": 1.3, "regime": 1.0, "economy": 0.8, "democracy": 0.5 }
+    },
+    "byGeneration": {
+      "youth":  { "democracy": 1.6, "economy": 1.1, "security": 1.0, "regime": 0.9, "ethnic": 0.3 },
+      "middle": { "economy": 1.3, "security": 1.1, "regime": 1.0, "democracy": 0.9, "ethnic": 0.8 },
+      "senior": { "ethnic": 1.8, "security": 1.1, "regime": 1.0, "economy": 0.9, "democracy": 0.6 }
+    }
+  },
+  "baseByLean": {
+    "_note": "依選區 lean(-5..5) 線性內插得到七個維度的起始值。green 為 lean=-5，blue 為 lean=+5。",
+    "green":   { "friendly": -2.6, "strength": -0.9, "morality": -2.4, "culture": -1.5, "openness": -2.2, "usTrust": 1.8, "japanTrust": 2.4 },
+    "neutral": { "friendly": -0.4, "strength": 0.4, "morality": -0.9, "culture": 0.2, "openness": -0.5, "usTrust": 0.6, "japanTrust": 1.1 },
+    "blue":    { "friendly": 1.9, "strength": 1.8, "morality": 0.6, "culture": 2.1, "openness": 1.4, "usTrust": -1.2, "japanTrust": -0.4 }
+  },
+  "stratumShift": {
+    "_note": "階層對七維的結構性偏移，疊加在 baseByLean 之上。",
+    "farmer":     { "friendly": 0.7, "culture": 0.6, "openness": 0.4, "usTrust": -0.3 },
+    "bluecollar": { "friendly": 0.2, "openness": -0.5, "usTrust": -0.4 },
+    "service":    { "friendly": 0.1, "openness": -0.2 },
+    "whitecollar":{ "friendly": -0.3, "usTrust": 0.4, "morality": -0.3 },
+    "techpro":    { "friendly": -0.8, "strength": -0.5, "usTrust": 0.9, "openness": -0.9, "morality": -0.6 },
+    "smallbiz":   { "friendly": 0.9, "openness": 0.7, "strength": 0.4 },
+    "capitalist": { "friendly": 1.2, "openness": 1.1, "strength": 0.8, "morality": 0.4 },
+    "publicsvc":  { "friendly": 0.2, "culture": 0.5, "usTrust": 0.2 },
+    "student":    { "friendly": -1.4, "morality": -1.1, "culture": -0.9, "openness": -1.2, "japanTrust": 0.8 },
+    "retiree":    { "friendly": 0.6, "culture": 1.2, "strength": 0.5, "japanTrust": -0.6 }
+  },
+  "generationShift": {
+    "youth":  { "friendly": -1.1, "culture": -1.0, "morality": -0.8, "openness": -0.9, "japanTrust": 1.2, "usTrust": -0.4, "strength": -0.6 },
+    "middle": { "usTrust": 0.2 },
+    "senior": { "friendly": 0.9, "culture": 1.4, "morality": 0.5, "openness": 0.6, "japanTrust": -0.9, "strength": 0.7 }
+  },
+  "genderShift": {
+    "_note": "女性 = base + shift，男性 = base − shift。台灣年輕女性的抗中傾向明顯高於同齡男性，這一項在青年世代會被放大。",
+    "friendly": -0.35, "morality": -0.25, "openness": -0.30, "strength": 0.15, "usTrust": 0.10, "japanTrust": 0.20, "culture": -0.10
+  },
+  "toUnification": {
+    "_note": "七維如何折算回 unification 那條總軸。這讓細部維度的變化能反映到國家定位上，而不是各走各的。",
+    "friendly": 0.42, "culture": 0.20, "openness": 0.18, "morality": 0.12, "usTrust": -0.14, "japanTrust": -0.08, "strength": 0.06,
+    "scale": 0.62
+  },
+  "argumentPower": {
+    "_note": "事件與理論帶著 chinaArgument 時的說服力乘數。理由對得上的人會被強烈影響，對不上的人幾乎不動搖。",
+    "onReason": 2.2,
+    "offReason": 0.45,
+    "awarenessFactor": 0.14,
+    "maxStepPerTurn": 0.9
+  },
+  "narratives": [
+    { "id": "CN_ECON_DEPEND", "reason": "economy", "direction": 1, "power": 0.8,
+      "text": "沒有那邊的訂單，這座島的工廠要關掉一半，這是算數不是立場。" },
+    { "id": "CN_ECON_DERISK", "reason": "economy", "direction": -1, "power": 0.8,
+      "text": "把命脈押在一個隨時能斷你水電的地方，那不叫生意，那叫人質。" },
+    { "id": "CN_REGIME_EFFICIENT", "reason": "regime", "direction": 1, "power": 0.6,
+      "text": "人家要蓋一條高鐵三年就通車，我們光是環評就走了七年。" },
+    { "id": "CN_REGIME_AUTHORITARIAN", "reason": "regime", "direction": -1, "power": 0.9,
+      "text": "一個抓律師抓到自己家裡的政權，沒有理由對外人比較客氣。" },
+    { "id": "CN_ETHNIC_KIN", "reason": "ethnic", "direction": 1, "power": 0.7,
+      "text": "我父親的墳在那邊的山上，你要我怎麼把那當成敵國。" },
+    { "id": "CN_ETHNIC_SEPARATE", "reason": "ethnic", "direction": -1, "power": 0.7,
+      "text": "在這裡出生長大的人，本來就有權利決定自己要當什麼人。" },
+    { "id": "CN_SEC_DETERRENCE", "reason": "security", "direction": -1, "power": 0.85,
+      "text": "打不下來的地方沒有人會想打，這是幾千年來沒有變過的道理。" },
+    { "id": "CN_SEC_PROVOKE", "reason": "security", "direction": 1, "power": 0.85,
+      "text": "軍購買得越多，對方的飛彈就對得越準，這是誰都看得懂的循環。" },
+    { "id": "CN_DEM_FREEDOM", "reason": "democracy", "direction": -1, "power": 1.0,
+      "text": "投票這件事一旦丟掉了，就再也沒有人會還給你了。" },
+    { "id": "CN_DEM_ORDER", "reason": "democracy", "direction": 1, "power": 0.5,
+      "text": "選舉選了三十年，物價漲了三倍，這樣的民主到底在保障誰。" }
+  ]
+}

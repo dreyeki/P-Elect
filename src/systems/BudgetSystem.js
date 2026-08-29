@@ -80,7 +80,64 @@ export function tick(state, ctx) {
 
 function scaleObj(o, k) { const out = {}; for (const kk in o) out[kk] = o[kk] * k; return out; }
 
-/** 玩家調整歲出配置（總和必須為 1） */
+/**
+ * 誰可以編預算。
+ * 這在現實裡是憲政層級的分工：行政院編、立法院審，地方也是同一套。
+ * 所以民代玩家看到的預算頁不會有滑桿，只會有刪減、凍結跟附帶決議。
+ */
+export function canAllocate(state, data) {
+  return (data.budget.authority?.canAllocate ?? ['minister', 'president'])
+    .includes(state.player.role);
+}
+export function canReview(state, data) {
+  return (data.budget.authority?.canReview ?? ['councilor', 'legislator'])
+    .includes(state.player.role);
+}
+
+/**
+ * 民代審預算。
+ * 刪減是把錢砍掉，凍結是把錢留著但不准動——後者才是實際上最有用的，
+ * 因為解凍要行政部門來做報告，而做報告的時候你就有籌碼了。
+ */
+export function review(state, data, categoryId, actionId) {
+  const A = data.budget.authority;
+  if (!canReview(state, data)) {
+    return { ok: false, msg: '你沒有審預算的身分。這件事只有民意代表做得到。' };
+  }
+  const act = A.reviewActions.find((x) => x.id === actionId);
+  const cat = data.budget.categories.find((c) => c.id === categoryId);
+  if (!act || !cat) return { ok: false, msg: '找不到這個科目或這種處理方式。' };
+  const p = state.player;
+  if (p.politicalCapital < act.politicalCapital) {
+    return { ok: false, msg: '你手上的政治資本不夠推動這一案，委員會裡沒有人會跟著你舉手。' };
+  }
+  p.politicalCapital -= act.politicalCapital;
+  p.fatigueRaw = clamp(p.fatigueRaw + (A.cutFatigue ?? 6), 0, 120);
+
+  const rec = state.flags.budgetReview ??= {};
+  rec[categoryId] = { action: actionId, ratio: act.maxRatio, turn: state.meta.turn };
+
+  if (act.id === 'cut') {
+    const alloc = state.flags.budgetAlloc
+      ?? Object.fromEntries(data.budget.categories.map((c) => [c.id, c.share]));
+    const floor = cat.share * cat.rigid;
+    alloc[categoryId] = Math.max(floor, alloc[categoryId] * (1 - act.maxRatio));
+    const sum = Object.values(alloc).reduce((a, b) => a + b, 0);
+    for (const k in alloc) alloc[k] /= sum;
+    state.flags.budgetAlloc = alloc;
+    if (act.corpMood) for (const c of Object.values(state.corporations)) c.mood = clamp(c.mood + act.corpMood, -5, 5);
+    return { ok: true, msg: `${cat.name}被刪減了。行政部門的人在議場外面講了幾句很難聽的話，記者都聽見了。` };
+  }
+  if (act.id === 'freeze') {
+    state.flags.frozenBudget = (state.flags.frozenBudget ?? 0) + 1;
+    state.flags.executiveLeverage = (state.flags.executiveLeverage ?? 0) + (act.leverage ?? 1);
+    return { ok: true, msg: `${cat.name}被凍結。要動這筆錢，部裡得先來做一次專案報告，而報告什麼時候排得進來由你決定。` };
+  }
+  p.fame = clamp05(p.fame + (act.fame ?? 0));
+  return { ok: true, msg: `附帶決議寫進了紀錄。它沒有強制力，但下一次質詢的時候你可以拿著這一頁問他為什麼沒有做。` };
+}
+
+/** 玩家調整歲出配置（總和必須為 1）。只有行政部門做得到。 */
 export function setAllocation(state, data, alloc) {
   const sum = Object.values(alloc).reduce((a, b) => a + b, 0);
   const norm = {};
@@ -99,8 +156,35 @@ export function setAllocation(state, data, alloc) {
 export function launchSpecialBudget(state, data, id) {
   const sb = data.budget.specialBudgets.find((s) => s.id === id);
   if (!sb || state.flags['sb_' + id]) return { ok: false, msg: '這個特別預算已經在執行中了。' };
+  if (!canAllocate(state, data)) {
+    return { ok: false, msg: '編列特別預算是行政部門的事。你能做的是等它送到議場，然後決定要不要讓它過。' };
+  }
+  if (sb.year && state.meta.year < sb.year) {
+    return { ok: false, msg: `這一案要到 ${sb.year} 年度才會排進編列作業。` };
+  }
   state.flags['sb_' + id] = state.meta.turn;
   state.central.fiscal.debtOutstanding += sb.amount;
   applyEffects(state, data, sb.effects, { source: 'sb:' + id, label: sb.name, duration: sb.years * 12 });
+
+  // 普發現金這類政策的政治效果是立即的，財政效果是長期的——順序反過來就是問題所在
+  const pol = sb.politics;
+  if (pol) {
+    if (pol.approvalBoost) {
+      state.modifiers.add({ id: 'sb:approval:' + id, source: sb.name, target: 'player.approval',
+        op: 'add', value: pol.approvalBoost, duration: pol.approvalDecayTurns ?? 8, startTurn: state.meta.turn });
+      state.central.government.presidentApproval = clamp(
+        state.central.government.presidentApproval + pol.approvalBoost, 3, 95);
+    }
+    if (pol.corpMood) for (const c of Object.values(state.corporations)) c.mood = clamp(c.mood + pol.corpMood, -5, 5);
+    for (const k in (pol.valuePressure ?? {})) {
+      state.flags.valuePressure ??= {};
+      state.flags.valuePressure[k] = (state.flags.valuePressure[k] ?? 0) + pol.valuePressure[k];
+    }
+    // 普及式給付會變成往後每一年都要編的固定支出
+    if (pol.rigidCost) {
+      const cat = data.budget.categories.find((c) => c.id === 'welfare');
+      if (cat) cat.rigid = Math.min(0.95, cat.rigid + pol.rigidCost);
+    }
+  }
   return { ok: true, msg: `${sb.name}編列 ${sb.amount} 億元，全數以舉債支應。短期內看得到成果，但這筆帳會跟著你很多年。` };
 }

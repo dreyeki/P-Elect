@@ -16,7 +16,8 @@
       "corpMood": 0,
       "stigma": 0,
       "grassroots": 0,
-      "mediaContacts": 1
+      "mediaContacts": 1,
+      "attrCost": 2
     },
     {
       "id": "reporter",
@@ -33,7 +34,8 @@
       "corpMood": -1,
       "stigma": 0,
       "grassroots": 0,
-      "mediaContacts": 3
+      "mediaContacts": 3,
+      "attrCost": 1
     },
     {
       "id": "activist",
@@ -51,7 +53,8 @@
       "corpMood": -2,
       "stigma": 0,
       "grassroots": 0,
-      "mediaContacts": 1
+      "mediaContacts": 1,
+      "attrCost": 0
     },
     {
       "id": "heir",
@@ -70,7 +73,8 @@
       "stigma": 1,
       "grassroots": 0,
       "mediaContacts": 1,
-      "extraNote": "家族每年還會給一筆，但那筆錢從來不是白拿的。"
+      "extraNote": "家族每年還會給一筆，但那筆錢從來不是白拿的。",
+      "attrCost": 4
     },
     {
       "id": "doctor",
@@ -88,7 +92,8 @@
       "corpMood": 0,
       "stigma": 0,
       "grassroots": 0,
-      "mediaContacts": 0
+      "mediaContacts": 0,
+      "attrCost": 2
     },
     {
       "id": "local",
@@ -106,7 +111,8 @@
       "corpMood": 0,
       "stigma": 0,
       "grassroots": 2,
-      "mediaContacts": 0
+      "mediaContacts": 0,
+      "attrCost": 1
     }
   ]
 }

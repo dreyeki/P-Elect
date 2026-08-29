@@ -72,13 +72,51 @@ function decidePhase(s, data, e) {
 }
 
 function primaryPhase(s, data, e) {
-  return card('黨內初選', `
-    <div class="small dim" style="line-height:1.8">${esc(e.primaryMsg ?? '')}</div>
-    ${e.primaryWon === false ? `
+  const pri = e.primary;
+  // 還沒開票：看清楚對手是誰，還有幾天可以去談
+  if (pri && e.primaryWon === undefined) {
+    const party = s.parties[s.player.party];
+    const rivals = pri.rivals.map((r) => `
+      <div class="row" style="display:block">
+        <div style="display:flex;justify-content:space-between;align-items:baseline">
+          <span class="row-k"><b>${esc(r.name)}</b></span>
+          <span class="row-v xs">${esc(r.factionName)}</span>
+        </div>
+        <div class="xs muted" style="margin-top:3px">${esc(r.desc)}</div>
+      </div>`).join('');
+    const left = pri.lobbyBudget - pri.lobbied.length;
+    const facs = party.factions.map((f) => {
+      const done = pri.lobbied.includes(f.id);
+      return `<button class="btn ${done ? 'ghost' : ''} xs" data-act="primary-lobby" data-id="${esc(f.id)}"
+        ${done || left <= 0 ? 'disabled' : ''} style="padding:6px 11px">
+        ${esc(f.name)}　<span class="muted">${esc(biWord('favor', f.favor))}</span></button>`;
+    }).join('');
+    return html`
+      ${card(`${e.run.name}　黨內初選`, `
+        <div class="small dim" style="line-height:1.8">${esc(pri.msg)}</div>`)}
+      ${card('跟你搶的人', rivals)}
+      ${card(`去談（還能跑 ${left} 個地方）`, `
+        <div class="xs muted" style="line-height:1.7;margin-bottom:8px">
+          每談一個派系要花 40 政治資本，成不成要看對方對你的好感。
+          談成了，他們的票就是你的；談不成，那杯茶你也喝了。
+        </div>
+        <div class="btn-row" style="margin:0">${facs}</div>`)}
+      ${card('', `<button class="btn primary full" data-act="primary-vote">開票</button>`)}`;
+  }
+
+  const field = e.primaryField ? barRows(e.primaryField.map((x) => ({
+    label: x.name, value: x.share * 100, text: (x.share * 100).toFixed(1) + '%',
+    color: x.isPlayer ? 'var(--gold)' : 'var(--line-2)',
+  }))) : '';
+
+  return html`
+    ${card('初選結果', field + `
+      <div class="small dim" style="line-height:1.8;margin-top:10px">${esc(e.primaryMsg ?? '')}</div>`)}
+    ${card('', e.primaryWon === false ? `
       <div class="btn-row">
         <button class="btn" data-act="primary-accept">接受結果，留下來輔選</button>
         <button class="btn danger" data-act="primary-bolt">脫黨參選</button>
-      </div>` : `<button class="btn primary full" data-act="primary-next" style="margin-top:10px">進入選戰</button>`}`);
+      </div>` : `<button class="btn primary full" data-act="primary-next">進入選戰</button>`)}`;
 }
 
 function campaignPhase(s, data, e) {

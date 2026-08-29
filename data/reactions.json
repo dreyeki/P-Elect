@@ -1,0 +1,218 @@
+{
+  "_note": [
+    "通用的反對選項。任何一則事件都可以選擇「表示反對」——",
+    "這是政治工作最常見也最便宜的一種回應，成本低但不是沒有代價。",
+    "效果與口才掛勾：同樣一句反對，講得好是立場鮮明，講得差是為反對而反對。",
+    "用詞會在七種同義說法之間隨機替換，避免玩家一直看到同樣四個字。",
+    "events 這個欄位放的是媒體攻擊——知名度越高越容易被盯上，",
+    "退出兩大黨的人會被該黨親近的媒體同時圍剿。"
+  ],
+  "opposePhrases": [
+    "表示反對",
+    "公開抨擊",
+    "批評雙標",
+    "痛批到底",
+    "嚴詞駁斥",
+    "強烈質疑",
+    "當場翻臉"
+  ],
+  "opposeHints": [
+    "立場鮮明的代價是把中間的人推遠一點",
+    "罵得漂亮會有人叫好，罵得難看會被剪成一段",
+    "反對是最便宜的表態，也是最容易被記住的那一種",
+    "同溫層會很滿意，對面會把你的話截圖存起來",
+    "這一句講出去就收不回來了"
+  ],
+  "opposeOutcomes": [
+    {
+      "min": 0.78,
+      "q": 2,
+      "text": "你的反對講得又快又準，把對方的立論裡最弱的那一環直接點了出來。當天晚上那一段被各家新聞台重播了整晚，連平常不站你這邊的評論員都承認你講得有道理。",
+      "effects": {
+        "fame": 0.35,
+        "favorNational": 0.3,
+        "politicalCapital": 6
+      }
+    },
+    {
+      "min": 0.52,
+      "q": 1,
+      "text": "你的反對表達得清楚也有分寸，支持者覺得你終於站出來講話了。中間選民的反應普通，但至少沒有人覺得你講得過火。",
+      "effects": {
+        "fame": 0.15,
+        "favorNational": 0.12,
+        "politicalCapital": 2
+      }
+    },
+    {
+      "min": 0.28,
+      "q": 0,
+      "text": "你的反對講得有點含糊，該罵的沒有罵到重點，該留的餘地又留得太多。這種發言在新聞裡只會被剪掉，兩邊都不會記得。",
+      "effects": {
+        "fame": 0.03
+      }
+    },
+    {
+      "min": 0.0,
+      "q": -1,
+      "text": "你講得太衝，中間有一句話明顯超出了你原本想表達的意思。那一句被單獨截出來播了三天，你花了整整一週在解釋自己不是那個意思。",
+      "effects": {
+        "fame": 0.2,
+        "stigma": 0.25,
+        "favorNational": -0.25
+      }
+    }
+  ],
+  "opposeRoll": {
+    "_note": "分數 = 口才×eloquence + 氣魄×boldness + 判斷×judgment + 理論加成 − 疲勞。",
+    "eloquence": 0.4,
+    "boldness": 0.16,
+    "judgment": 0.14,
+    "theoryBonus": 0.22,
+    "fatiguePenalty": 0.003,
+    "noise": 0.1
+  },
+  "mediaAttack": {
+    "_note": [
+      "媒體攻擊。越知名越容易被盯上，這是這一行的常態而不是意外。",
+      "退出兩大黨的人會遭到該黨親近媒體的同時圍剿，那一波的強度是平常的兩倍多。"
+    ],
+    "baseChance": 0.05,
+    "famePerLevel": 0.035,
+    "stigmaPerLevel": 0.03,
+    "boltMultiplier": 2.4,
+    "boltDurationTurns": 10,
+    "imageBackfireMult": 1.5,
+    "shieldReduction": 0.55
+  },
+  "events": [
+    {
+      "id": "MED_ATK_ASSET",
+      "weight": 24,
+      "minFame": 2,
+      "headline": "{media}以整版篇幅質疑你的財產申報有一筆說不清楚",
+      "body": "報導把你三年前那筆土地移轉的時間點跟一份都市計畫變更案排在同一條時間軸上，然後在中間打了一個問號。整篇稿子沒有一句斷言，但每一段都在暗示同一件事。你的幕僚把資料調出來核對了一整夜，發現要解釋清楚需要五分鐘，而那則新聞只有四十秒。",
+      "effects": {
+        "stigma": 0.4,
+        "fame": 0.2,
+        "favorNational": -0.3
+      }
+    },
+    {
+      "id": "MED_ATK_QUOTE",
+      "weight": 26,
+      "minFame": 1.5,
+      "headline": "{media}把你八年前的一段發言重新剪出來播",
+      "body": "那是你還在做別的工作時講的一段話，前後文加起來大概三分鐘，被剪成十二秒之後意思完全變了。你要求更正，對方回覆說剪輯符合新聞專業判斷。同一段素材在接下來的四十八小時裡出現在七個不同的節目上。",
+      "effects": {
+        "stigma": 0.3,
+        "fame": 0.25,
+        "favorNational": -0.25
+      }
+    },
+    {
+      "id": "MED_ATK_FAMILY",
+      "weight": 18,
+      "minFame": 2.5,
+      "headline": "{media}開始追你家人的公司登記資料",
+      "body": "記者查到你配偶名下有一間設址在自家住處的公司，實際上是幫親戚代辦報稅用的空殼。這件事完全合法，但標題寫成那樣以後，合法兩個字沒有任何人在意。你太太打電話來的時候聲音在抖，那是你今年最難受的一通電話。",
+      "effects": {
+        "stigma": 0.45,
+        "fatigue": 12,
+        "favorNational": -0.35
+      }
+    },
+    {
+      "id": "MED_ATK_BOLT",
+      "weight": 40,
+      "requiresBolt": true,
+      "headline": "{media}與{media2}同時開砲，你脫黨的事情被講成一場算計",
+      "body": "兩家立場截然不同的媒體在同一天用了幾乎一樣的角度，把你離開的原因寫成談不攏的分贓。有匿名的黨內人士出來說你早就在跟別人接觸，時間點精確到某一場飯局。你知道那場飯局根本沒有發生過，但要證明一件事沒有發生過，比證明它發生過困難太多了。",
+      "effects": {
+        "stigma": 0.55,
+        "fame": 0.35,
+        "favorNational": -0.5,
+        "politicalCapital": -12
+      }
+    },
+    {
+      "id": "MED_ATK_IMAGE",
+      "weight": 22,
+      "requiresImage": true,
+      "headline": "{media}專門針對你主打的形象做了一整集",
+      "body": "整集節目的結構很清楚：先播你講那句口號的畫面，再一件一件列出跟那句話對不上的紀錄。有幾件是斷章取義，有幾件確實是你自己沒有做到。主打形象的好處是別人一想到那件事就想到你，壞處是別人一想到你就想到那件事。",
+      "effects": {
+        "stigma": 0.5,
+        "favorNational": -0.4,
+        "imageDamage": 1
+      }
+    },
+    {
+      "id": "MED_ATK_POLL",
+      "weight": 20,
+      "minFame": 2,
+      "headline": "{media}公布一份把你放在最後一名的民調",
+      "body": "那份調查的樣本數只有四百多，題目的順序把你排在幾個負面題組的後面，這些細節都寫在方法說明的最後一頁。但頭條寫的是你的名字跟那個數字，而看到頭條的人是看方法說明的人的一百倍。你的幕僚建議不要回應，因為回應等於幫那則新聞延長一天。",
+      "effects": {
+        "fame": -0.15,
+        "favorNational": -0.3,
+        "pollDistrust": 1
+      }
+    }
+  ],
+  "responses": [
+    {
+      "id": "RESP_CLARIFY",
+      "name": "召開記者會逐條說明",
+      "hint": "把資料攤開講清楚，代價是這則新聞多活一天",
+      "effects": {
+        "stigmaReduce": 0.3,
+        "fame": 0.1,
+        "fatigue": 8,
+        "ap": 1
+      }
+    },
+    {
+      "id": "RESP_LEGAL",
+      "name": "委任律師發函並提出告訴",
+      "hint": "態度很硬，但官司要打好幾年而且期間新聞不會停",
+      "effects": {
+        "stigmaReduce": 0.15,
+        "campaignFunds": -150000,
+        "mediaRelation": -1
+      }
+    },
+    {
+      "id": "RESP_IGNORE",
+      "name": "完全不回應，讓它自己過去",
+      "hint": "不餵養話題是最省力的一種處理，也是最沒有存在感的",
+      "effects": {
+        "stigmaReduce": 0.05,
+        "favorNational": -0.05
+      }
+    },
+    {
+      "id": "RESP_COUNTER",
+      "name": "反過來質疑對方的金主與立場",
+      "hint": "同溫層會非常滿意，中間選民會覺得你在轉移焦點",
+      "effects": {
+        "fame": 0.25,
+        "stigma": 0.15,
+        "mediaRelation": -2,
+        "enthusiasm": 0.3
+      }
+    },
+    {
+      "id": "RESP_FRIENDLY",
+      "name": "透過相熟的記者放另一個版本",
+      "hint": "有效但要動用人脈，而且欠下的人情總有一天要還",
+      "effects": {
+        "stigmaReduce": 0.35,
+        "favorCost": 0.8
+      },
+      "requires": {
+        "mediaContacts": 1
+      }
+    }
+  ]
+}

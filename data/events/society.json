@@ -6,7 +6,15 @@
       "weight": 55,
       "cooldown": 12,
       "trigger": "central.labor.disputeIndex > 0.4 && issueHeat.employment > 30",
-      "requires": { "minTurn": 4, "roles": ["legislator", "mayor", "councilor", "citizen"] },
+      "requires": {
+        "minTurn": 4,
+        "roles": [
+          "legislator",
+          "mayor",
+          "councilor",
+          "citizen"
+        ]
+      },
       "headline": "陽昇航空空服員罷工投票通過，春節班表全面亮紅燈",
       "body": "陽昇航空企業工會的罷工投票以八成六的同意率通過，工會要求調整過夜津貼與最低休息時數的規定。公司方指出人力調度已依法辦理，若罷工在春節前發動，估計將有超過十萬名旅客的行程受到影響。交通主管機關呼籲雙方回到協商桌，旅行業者則要求政府比照公用事業設定罷工的預告期間。",
       "options": [
@@ -14,50 +22,111 @@
           "text": "公開站台支持罷工，要求資方回到談判桌",
           "hint": "勞工陣營會把你列為第一戰友，滯留旅客的怒火也會找上你",
           "effects": {
-            "popMood": { "bluecollar": 6, "service": 4, "capitalist": -5 },
-            "corpMood": { "tourism": -7, "logistics": -4 },
-            "valuePressure": { "marketFreedom": -0.6 },
-            "player": { "fame": 4, "politicalCapital": -1 },
-            "issueHeat": { "employment": 6 },
-            "tagGain": ["TAG_LABOR_FRIEND"]
+            "popMood": {
+              "bluecollar": 6,
+              "service": 4,
+              "capitalist": -5
+            },
+            "corpMood": {
+              "tourism": -7,
+              "logistics": -4
+            },
+            "valuePressure": {
+              "marketFreedom": -0.6
+            },
+            "player": {
+              "fame": 4,
+              "politicalCapital": -1
+            },
+            "issueHeat": {
+              "employment": 6
+            },
+            "tagGain": [
+              "TAG_LABOR_FRIEND"
+            ]
           }
         },
         {
           "text": "主張立法設定必要服務業的罷工預告期",
           "hint": "旅客與業者會覺得你務實，勞工團體會說你在拆罷工權",
           "effects": {
-            "central": { "labor.strikeRule": 0.05 },
-            "corpMood": { "tourism": 6, "logistics": 4 },
-            "popMood": { "whitecollar": 3, "bluecollar": -5, "smallbiz": 3 },
-            "valuePressure": { "marketFreedom": 0.4, "centralization": 0.3 },
-            "player": { "fame": 2, "integrity": 1 }
+            "central": {
+              "labor.strikeRule": 0.05
+            },
+            "corpMood": {
+              "tourism": 6,
+              "logistics": 4
+            },
+            "popMood": {
+              "whitecollar": 3,
+              "bluecollar": -5,
+              "smallbiz": 3
+            },
+            "valuePressure": {
+              "marketFreedom": 0.4,
+              "centralization": 0.3
+            },
+            "player": {
+              "fame": 2,
+              "integrity": 1
+            }
           }
         },
         {
           "text": "促成勞資政三方協商並親自擔任調人",
           "hint": "談成了兩邊都欠你人情，談不成兩邊都會說是你搞砸的",
           "effects": {
-            "player": { "fatigue": 5, "fame": 3, "integrity": 2 },
-            "central": { "labor.disputeIndex": -0.05 },
-            "popMood": { "bluecollar": 2, "service": 2 },
-            "corpMood": { "tourism": 2 },
-            "issueHeat": { "employment": 3 },
-            "tagGain": ["TAG_DOER"]
+            "player": {
+              "fatigue": 5,
+              "fame": 3,
+              "integrity": 2
+            },
+            "central": {
+              "labor.disputeIndex": -0.05
+            },
+            "popMood": {
+              "bluecollar": 2,
+              "service": 2
+            },
+            "corpMood": {
+              "tourism": 2
+            },
+            "issueHeat": {
+              "employment": 3
+            },
+            "tagGain": [
+              "TAG_DOER"
+            ]
           }
         },
         {
           "text": "推動航空業人力配置標準的強制性規範",
           "hint": "從根本解決過勞問題，票價與航班密度都會付出代價",
           "effects": {
-            "central": { "labor.staffingStandard": 0.05, "economy.cpi": 0.002 },
-            "corpMood": { "tourism": -5, "logistics": -3 },
-            "popMood": { "bluecollar": 5, "whitecollar": -2 },
-            "valuePressure": { "marketFreedom": -0.5 },
-            "player": { "integrity": 3, "fame": 2 }
+            "central": {
+              "labor.staffingStandard": 0.05,
+              "economy.cpi": 0.002
+            },
+            "corpMood": {
+              "tourism": -5,
+              "logistics": -3
+            },
+            "popMood": {
+              "bluecollar": 5,
+              "whitecollar": -2
+            },
+            "valuePressure": {
+              "marketFreedom": -0.5
+            },
+            "player": {
+              "integrity": 3,
+              "fame": 2
+            }
           }
         }
       ],
-      "_designNote": "罷工事件裡的挺勞、限制、調解與制度化四種角色"
+      "_designNote": "罷工事件裡的挺勞、限制、調解與制度化四種角色",
+      "tier": "regional"
     },
     {
       "id": "EVT_SOC_RENT_CRISIS",
@@ -65,7 +134,15 @@
       "weight": 50,
       "cooldown": 12,
       "trigger": "central.economy.rentIndex > 1.12 && issueHeat.housing > 30",
-      "requires": { "minTurn": 5, "roles": ["legislator", "mayor", "councilor", "citizen"] },
+      "requires": {
+        "minTurn": 5,
+        "roles": [
+          "legislator",
+          "mayor",
+          "councilor",
+          "citizen"
+        ]
+      },
       "headline": "租金補貼上路後房東同步漲租，年輕租客反而更難負擔",
       "body": "住宅補貼專案上路半年後，六個都會區的實價登錄租金平均上漲一成三，超過補貼的加碼幅度。租屋服務團體指出，房東要求承租人放棄申報補貼的案例大量增加，甚至出現以口頭契約規避查核的情形。房東協會則反駁租金上漲主要來自持有稅與管理成本，並警告過度管制只會讓房源退出市場。",
       "options": [
@@ -73,39 +150,86 @@
           "text": "推動租賃契約強制登錄與租金漲幅上限",
           "hint": "租客會覺得終於有人站出來，房源退出市場的風險是真的",
           "effects": {
-            "central": { "economy.rentIndex": -0.04, "housing.rentalSupply": -0.02 },
-            "popMood": { "student": 6, "whitecollar": 4, "capitalist": -6 },
-            "corpMood": { "finance": -4 },
-            "valuePressure": { "marketFreedom": -0.8 },
-            "player": { "fame": 4, "funds": -2 },
-            "issueHeat": { "housing": 6 }
+            "central": {
+              "economy.rentIndex": -0.04,
+              "housing.rentalSupply": -0.02
+            },
+            "popMood": {
+              "student": 6,
+              "whitecollar": 4,
+              "capitalist": -6
+            },
+            "corpMood": {
+              "finance": -4
+            },
+            "valuePressure": {
+              "marketFreedom": -0.8
+            },
+            "player": {
+              "fame": 4,
+              "funds": -2
+            },
+            "issueHeat": {
+              "housing": 6
+            }
           }
         },
         {
           "text": "推動包租代管擴大與社宅存量的加速興建",
           "hint": "供給端才是解方，量能要好幾年後才追得上需求",
           "effects": {
-            "central": { "fiscal.balance": -0.006, "housing.socialStock": 0.03 },
-            "popMood": { "student": 3, "whitecollar": 3 },
-            "corpMood": { "steel": 3, "finance": 2 },
-            "player": { "integrity": 3, "politicalCapital": -2, "fame": 2 },
-            "issueHeat": { "housing": 3 },
-            "tagGain": ["TAG_DOER"]
+            "central": {
+              "fiscal.balance": -0.006,
+              "housing.socialStock": 0.03
+            },
+            "popMood": {
+              "student": 3,
+              "whitecollar": 3
+            },
+            "corpMood": {
+              "steel": 3,
+              "finance": 2
+            },
+            "player": {
+              "integrity": 3,
+              "politicalCapital": -2,
+              "fame": 2
+            },
+            "issueHeat": {
+              "housing": 3
+            },
+            "tagGain": [
+              "TAG_DOER"
+            ]
           }
         },
         {
           "text": "改採直接減稅誘因，鼓勵房東誠實申報出租",
           "hint": "房源會願意浮出檯面，被說成在替房東減稅也很難辯解",
           "effects": {
-            "central": { "fiscal.taxRevenue": -0.004, "housing.rentalSupply": 0.03 },
-            "popMood": { "capitalist": 5, "student": -3 },
-            "corpMood": { "finance": 4 },
-            "valuePressure": { "marketFreedom": 0.6 },
-            "player": { "funds": 3, "integrity": -1 }
+            "central": {
+              "fiscal.taxRevenue": -0.004,
+              "housing.rentalSupply": 0.03
+            },
+            "popMood": {
+              "capitalist": 5,
+              "student": -3
+            },
+            "corpMood": {
+              "finance": 4
+            },
+            "valuePressure": {
+              "marketFreedom": 0.6
+            },
+            "player": {
+              "funds": 3,
+              "integrity": -1
+            }
           }
         }
       ],
-      "_designNote": "租屋市場的管制、供給與誘因三種工具，租客與房東立場正面對撞"
+      "_designNote": "租屋市場的管制、供給與誘因三種工具，租客與房東立場正面對撞",
+      "tier": "regional"
     },
     {
       "id": "EVT_SOC_LONGTERM_CARE",
@@ -113,7 +237,15 @@
       "weight": 50,
       "cooldown": 14,
       "trigger": "central.social.elderRatio > 0.2 && central.social.careCapacity < 0.6",
-      "requires": { "minTurn": 6, "roles": ["legislator", "mayor", "councilor", "citizen"] },
+      "requires": {
+        "minTurn": 6,
+        "roles": [
+          "legislator",
+          "mayor",
+          "councilor",
+          "citizen"
+        ]
+      },
       "headline": "長照排隊人數破七萬，居服員月流失率創下新高",
       "body": "長照服務的等候名單在今年首度突破七萬人，其中重度失能個案的平均等候時間長達四個月。居家服務員的月流失率攀升到百分之六，主要原因是薪資與交通時間不成比例、以及缺乏職業安全的保障。家庭照顧者總會警告，照顧殺人的社會案件在過去兩年已經出現七起，制度再不補上就是逼人走絕路。",
       "options": [
@@ -121,51 +253,115 @@
           "text": "推動居服員底薪保障與交通時間的給薪制度",
           "hint": "人力流失能被止住，長照基金的財務缺口會馬上被放大",
           "effects": {
-            "central": { "fiscal.balance": -0.008, "social.careCapacity": 0.05 },
-            "popSoL": { "service": 2, "publicsvc": 1 },
-            "popMood": { "service": 5, "retiree": 4 },
-            "player": { "fame": 3, "politicalCapital": -2 },
-            "issueHeat": { "healthcare": 5 },
-            "tagGain": ["TAG_LABOR_FRIEND"]
+            "central": {
+              "fiscal.balance": -0.008,
+              "social.careCapacity": 0.05
+            },
+            "popSoL": {
+              "service": 2,
+              "publicsvc": 1
+            },
+            "popMood": {
+              "service": 5,
+              "retiree": 4
+            },
+            "player": {
+              "fame": 3,
+              "politicalCapital": -2
+            },
+            "issueHeat": {
+              "healthcare": 5
+            },
+            "tagGain": [
+              "TAG_LABOR_FRIEND"
+            ]
           }
         },
         {
           "text": "推動外籍看護家庭聘僱鬆綁與訓練配套",
           "hint": "家庭負擔立刻減輕，本國照服人力的薪資會被繼續壓著",
           "effects": {
-            "central": { "social.careCapacity": 0.06, "economy.laborShortage": -0.01 },
-            "valuePressure": { "immigration": 0.7 },
-            "popMood": { "retiree": 5, "service": -4, "bluecollar": -2 },
-            "player": { "fame": 3, "integrity": -1 },
-            "issueHeat": { "healthcare": 4 }
+            "central": {
+              "social.careCapacity": 0.06,
+              "economy.laborShortage": -0.01
+            },
+            "valuePressure": {
+              "immigration": 0.7
+            },
+            "popMood": {
+              "retiree": 5,
+              "service": -4,
+              "bluecollar": -2
+            },
+            "player": {
+              "fame": 3,
+              "integrity": -1
+            },
+            "issueHeat": {
+              "healthcare": 4
+            }
           }
         },
         {
           "text": "推動長照保險制度，以社會保險取代稅收支應",
           "hint": "財源終於穩定下來，等於在你任內開徵一筆新的保費",
           "effects": {
-            "central": { "social.careFunding": 0.08, "economy.laborCost": 0.01 },
-            "popMood": { "retiree": 4, "whitecollar": -4, "bluecollar": -3 },
-            "corpMood": { "_all": -4 },
-            "valuePressure": { "centralization": 0.5 },
-            "player": { "integrity": 4, "fame": -2, "politicalCapital": -3 },
-            "tagGain": ["TAG_SCHOLAR"]
+            "central": {
+              "social.careFunding": 0.08,
+              "economy.laborCost": 0.01
+            },
+            "popMood": {
+              "retiree": 4,
+              "whitecollar": -4,
+              "bluecollar": -3
+            },
+            "corpMood": {
+              "_all": -4
+            },
+            "valuePressure": {
+              "centralization": 0.5
+            },
+            "player": {
+              "integrity": 4,
+              "fame": -2,
+              "politicalCapital": -3
+            },
+            "tagGain": [
+              "TAG_SCHOLAR"
+            ]
           }
         },
         {
           "text": "推動社區共照中心與喘息服務的在地擴點",
           "hint": "看得見摸得到的政績，涵蓋率成長的速度慢得讓人心急",
           "effects": {
-            "region": { "_player": { "social.careCoverage": 0.04 } },
-            "central": { "fiscal.balance": -0.003 },
-            "popMood": { "retiree": 4, "service": 2 },
-            "player": { "fame": 3, "fatigue": 3 },
-            "grassroots": { "_home": 2 },
-            "tagGain": ["TAG_DOER"]
+            "region": {
+              "_player": {
+                "social.careCoverage": 0.04
+              }
+            },
+            "central": {
+              "fiscal.balance": -0.003
+            },
+            "popMood": {
+              "retiree": 4,
+              "service": 2
+            },
+            "player": {
+              "fame": 3,
+              "fatigue": 3
+            },
+            "grassroots": {
+              "_home": 2
+            },
+            "tagGain": [
+              "TAG_DOER"
+            ]
           }
         }
       ],
-      "_designNote": "長照困境的四種解法，分別對應勞動條件、移民、財源與地方建設"
+      "_designNote": "長照困境的四種解法，分別對應勞動條件、移民、財源與地方建設",
+      "tier": "regional"
     },
     {
       "id": "EVT_SOC_BIRTH_RATE",
@@ -173,7 +369,15 @@
       "weight": 45,
       "cooldown": 16,
       "trigger": "central.social.birthRate < 0.9 && issueHeat.education > 20",
-      "requires": { "minTurn": 8, "roles": ["legislator", "mayor", "councilor", "citizen"] },
+      "requires": {
+        "minTurn": 8,
+        "roles": [
+          "legislator",
+          "mayor",
+          "councilor",
+          "citizen"
+        ]
+      },
       "headline": "新生兒數再創新低，公托候補名額比錄取名額多五倍",
       "body": "去年全國新生兒數再度改寫歷史新低，總生育率跌至零點八七的水準。都會區公共托育的候補人數是實際名額的五倍以上，私立托嬰中心的月費則普遍站上兩萬五千元。婦女團體指出，職場對懷孕與育嬰假的隱性歧視才是關鍵，光靠發放生育津貼並不會改變任何人的決定。",
       "options": [
@@ -181,49 +385,111 @@
           "text": "推動公共托育大幅擴點與保母薪資的加給",
           "hint": "家長最有感的投資，土地與人力的瓶頸會拖慢每一個進度",
           "effects": {
-            "central": { "fiscal.balance": -0.008, "social.childcareCoverage": 0.05 },
-            "popSoL": { "whitecollar": 2, "service": 2 },
-            "popMood": { "whitecollar": 5, "service": 4 },
-            "player": { "fame": 4, "politicalCapital": -2 },
-            "issueHeat": { "education": 5 },
-            "tagGain": ["TAG_DOER"]
+            "central": {
+              "fiscal.balance": -0.008,
+              "social.childcareCoverage": 0.05
+            },
+            "popSoL": {
+              "whitecollar": 2,
+              "service": 2
+            },
+            "popMood": {
+              "whitecollar": 5,
+              "service": 4
+            },
+            "player": {
+              "fame": 4,
+              "politicalCapital": -2
+            },
+            "issueHeat": {
+              "education": 5
+            },
+            "tagGain": [
+              "TAG_DOER"
+            ]
           }
         },
         {
           "text": "推動育嬰假彈性化與職場歧視的裁罰加重",
           "hint": "直指問題核心，中小企業會說這是在懲罰願意僱人的老闆",
           "effects": {
-            "central": { "labor.parentalRight": 0.05 },
-            "corpMood": { "_all": -4, "retail": -6 },
-            "popMood": { "whitecollar": 5, "smallbiz": -5, "student": 3 },
-            "valuePressure": { "progressivism": 0.6, "marketFreedom": -0.4 },
-            "player": { "fame": 3, "integrity": 2 }
+            "central": {
+              "labor.parentalRight": 0.05
+            },
+            "corpMood": {
+              "_all": -4,
+              "retail": -6
+            },
+            "popMood": {
+              "whitecollar": 5,
+              "smallbiz": -5,
+              "student": 3
+            },
+            "valuePressure": {
+              "progressivism": 0.6,
+              "marketFreedom": -0.4
+            },
+            "player": {
+              "fame": 3,
+              "integrity": 2
+            }
           }
         },
         {
           "text": "推動大幅提高生育與育兒津貼的現金給付",
           "hint": "最容易宣傳的政策，學者會說這筆錢的效果幾乎等於零",
           "effects": {
-            "central": { "fiscal.balance": -0.01, "social.birthRate": 0.01 },
-            "popSoL": { "_all": 1 },
-            "popMood": { "_all": 3, "whitecollar": 2 },
-            "player": { "fame": 4, "integrity": -1, "politicalCapital": -2 },
-            "issueHeat": { "education": 3 }
+            "central": {
+              "fiscal.balance": -0.01,
+              "social.birthRate": 0.01
+            },
+            "popSoL": {
+              "_all": 1
+            },
+            "popMood": {
+              "_all": 3,
+              "whitecollar": 2
+            },
+            "player": {
+              "fame": 4,
+              "integrity": -1,
+              "politicalCapital": -2
+            },
+            "issueHeat": {
+              "education": 3
+            }
           }
         },
         {
           "text": "推動居住成本與工時的結構性配套改革",
           "hint": "把問題看得最透徹，見效的時間長到根本無法計算",
           "effects": {
-            "central": { "economy.housePriceIndex": -0.01, "labor.workHours": -0.01 },
-            "valuePressure": { "progressivism": 0.4, "marketFreedom": -0.3 },
-            "popMood": { "student": 4, "whitecollar": 3, "capitalist": -4 },
-            "player": { "integrity": 4, "fame": -1, "fatigue": 3 },
-            "tagGain": ["TAG_SCHOLAR"]
+            "central": {
+              "economy.housePriceIndex": -0.01,
+              "labor.workHours": -0.01
+            },
+            "valuePressure": {
+              "progressivism": 0.4,
+              "marketFreedom": -0.3
+            },
+            "popMood": {
+              "student": 4,
+              "whitecollar": 3,
+              "capitalist": -4
+            },
+            "player": {
+              "integrity": 4,
+              "fame": -1,
+              "fatigue": 3
+            },
+            "tagGain": [
+              "TAG_SCHOLAR"
+            ]
           }
         }
       ],
-      "_designNote": "少子化的托育、職場、現金與結構四種解方，短期政績與長期效果嚴重背離"
+      "_designNote": "少子化的托育、職場、現金與結構四種解方，短期政績與長期效果嚴重背離",
+      "tier": "regional"
     },
     {
       "id": "EVT_SOC_MIGRANT_WORKER",
@@ -231,7 +497,15 @@
       "weight": 45,
       "cooldown": 14,
       "trigger": "central.economy.migrantWorkers > 0.8 && values.immigration < 0.5",
-      "requires": { "minTurn": 6, "roles": ["legislator", "mayor", "councilor", "citizen"] },
+      "requires": {
+        "minTurn": 6,
+        "roles": [
+          "legislator",
+          "mayor",
+          "councilor",
+          "citizen"
+        ]
+      },
       "headline": "移工宿舍大火燒出違規隔間，仲介抽佣爭議同步引爆",
       "body": "一處收容一百二十名移工的廠區宿舍發生大火，違規的鐵皮隔間與封死的逃生門造成五人重傷。勞動檢查發現該廠的宿舍登記與實際使用完全不符，過去兩年卻從未被列為重點稽查對象。移工團體同時揭露仲介以服務費名義每月抽取薪資的兩成，要求全面檢討跨國聘僱的仲介制度。",
       "options": [
@@ -239,38 +513,88 @@
           "text": "推動移工宿舍安全稽查與仲介抽佣的上限",
           "hint": "人權與工安都站得住腳，仲介公會與部分雇主會強力反彈",
           "effects": {
-            "central": { "labor.migrantProtection": 0.05, "safety.inspectionRate": 0.03 },
-            "corpMood": { "machinery": -5, "food": -4 },
-            "popMood": { "bluecollar": 3, "smallbiz": -4 },
-            "valuePressure": { "immigration": 0.5, "progressivism": 0.4 },
-            "player": { "fame": 3, "integrity": 3 }
+            "central": {
+              "labor.migrantProtection": 0.05,
+              "safety.inspectionRate": 0.03
+            },
+            "corpMood": {
+              "machinery": -5,
+              "food": -4
+            },
+            "popMood": {
+              "bluecollar": 3,
+              "smallbiz": -4
+            },
+            "valuePressure": {
+              "immigration": 0.5,
+              "progressivism": 0.4
+            },
+            "player": {
+              "fame": 3,
+              "integrity": 3
+            }
           }
         },
         {
           "text": "推動直接聘僱平台以取代營利仲介制度",
           "hint": "結構性的改革，整個仲介產業會傾巢而出反對你",
           "effects": {
-            "central": { "labor.migrantProtection": 0.07, "economy.laborCost": -0.005 },
-            "corpMood": { "_all": 2, "retail": -3 },
-            "popMood": { "smallbiz": -3, "bluecollar": 2, "capitalist": -3 },
-            "player": { "integrity": 4, "politicalCapital": -3, "fame": 2 },
-            "valuePressure": { "immigration": 0.4, "marketFreedom": -0.5 }
+            "central": {
+              "labor.migrantProtection": 0.07,
+              "economy.laborCost": -0.005
+            },
+            "corpMood": {
+              "_all": 2,
+              "retail": -3
+            },
+            "popMood": {
+              "smallbiz": -3,
+              "bluecollar": 2,
+              "capitalist": -3
+            },
+            "player": {
+              "integrity": 4,
+              "politicalCapital": -3,
+              "fame": 2
+            },
+            "valuePressure": {
+              "immigration": 0.4,
+              "marketFreedom": -0.5
+            }
           }
         },
         {
           "text": "主張凍結移工引進配額直到安全改善為止",
           "hint": "本土勞工會替你叫好，缺工的產線與長照家庭會立刻崩潰",
           "effects": {
-            "central": { "economy.laborShortage": 0.03, "social.careCapacity": -0.03 },
-            "corpMood": { "machinery": -8, "food": -6 },
-            "valuePressure": { "immigration": -0.8 },
-            "popMood": { "bluecollar": 5, "retiree": -4, "smallbiz": -5 },
-            "player": { "fame": 3, "politicalCapital": -1 },
-            "tagGain": ["TAG_NATIVIST"]
+            "central": {
+              "economy.laborShortage": 0.03,
+              "social.careCapacity": -0.03
+            },
+            "corpMood": {
+              "machinery": -8,
+              "food": -6
+            },
+            "valuePressure": {
+              "immigration": -0.8
+            },
+            "popMood": {
+              "bluecollar": 5,
+              "retiree": -4,
+              "smallbiz": -5
+            },
+            "player": {
+              "fame": 3,
+              "politicalCapital": -1
+            },
+            "tagGain": [
+              "TAG_NATIVIST"
+            ]
           }
         }
       ],
-      "_designNote": "移工議題的稽查、制度改革與限縮三條路，本土勞工與缺工產業直接對立"
+      "_designNote": "移工議題的稽查、制度改革與限縮三條路，本土勞工與缺工產業直接對立",
+      "tier": "regional"
     },
     {
       "id": "EVT_SOC_SCHOOL_CLOSURE",
@@ -278,7 +602,14 @@
       "weight": 40,
       "cooldown": 16,
       "trigger": "central.social.birthRate < 1.0 && region.education.schoolUtilization < 0.5",
-      "requires": { "minTurn": 8, "roles": ["legislator", "mayor", "councilor"] },
+      "requires": {
+        "minTurn": 8,
+        "roles": [
+          "legislator",
+          "mayor",
+          "councilor"
+        ]
+      },
       "headline": "十二所國小面臨併校，偏鄉家長連署要求保留學區",
       "body": "教育主管機關公布的評估報告指出，全縣有十二所國小的全校學生數已不足三十人，建議在兩年內完成併校或轉型。偏鄉家長連署反對，強調併校後孩子的通勤時間將增加到單程一小時以上。教育學者則指出，過小的學校難以維持完整師資與同儕互動，長期對孩子的發展未必是好事。",
       "options": [
@@ -286,38 +617,89 @@
           "text": "推動併校並提供完善的交通與住宿配套",
           "hint": "教育品質的說法站得住，被廢校的社區會記恨很多年",
           "effects": {
-            "central": { "education.quality": 0.03, "fiscal.balance": -0.002 },
-            "region": { "_player": { "education.efficiency": 0.04 } },
-            "popMood": { "farmer": -6, "whitecollar": 2, "publicsvc": 2 },
-            "player": { "integrity": 3, "fame": -1 },
-            "grassroots": { "_home": -2 }
+            "central": {
+              "education.quality": 0.03,
+              "fiscal.balance": -0.002
+            },
+            "region": {
+              "_player": {
+                "education.efficiency": 0.04
+              }
+            },
+            "popMood": {
+              "farmer": -6,
+              "whitecollar": 2,
+              "publicsvc": 2
+            },
+            "player": {
+              "integrity": 3,
+              "fame": -1
+            },
+            "grassroots": {
+              "_home": -2
+            }
           }
         },
         {
           "text": "反對併校，推動小校轉型為特色實驗學校",
           "hint": "社區會把你當守護者，每年的維持成本會愈疊愈高",
           "effects": {
-            "central": { "fiscal.balance": -0.004 },
-            "region": { "_player": { "education.diversity": 0.03 } },
-            "popMood": { "farmer": 6, "student": 2, "publicsvc": -2 },
-            "valuePressure": { "centralization": -0.5, "progressivism": 0.3 },
-            "player": { "fame": 3, "politicalCapital": -1 },
-            "grassroots": { "_home": 2 }
+            "central": {
+              "fiscal.balance": -0.004
+            },
+            "region": {
+              "_player": {
+                "education.diversity": 0.03
+              }
+            },
+            "popMood": {
+              "farmer": 6,
+              "student": 2,
+              "publicsvc": -2
+            },
+            "valuePressure": {
+              "centralization": -0.5,
+              "progressivism": 0.3
+            },
+            "player": {
+              "fame": 3,
+              "politicalCapital": -1
+            },
+            "grassroots": {
+              "_home": 2
+            }
           }
         },
         {
           "text": "推動跨校聯盟與混齡教學的共享師資模式",
           "hint": "折衷方案聽起來很美，執行複雜度會把基層老師壓垮",
           "effects": {
-            "region": { "_player": { "education.quality": 0.02 } },
-            "popMood": { "publicsvc": -3, "farmer": 2, "whitecollar": 1 },
-            "player": { "integrity": 3, "fatigue": 4, "fame": 1 },
-            "central": { "education.innovation": 0.03 },
-            "tagGain": ["TAG_SCHOLAR"]
+            "region": {
+              "_player": {
+                "education.quality": 0.02
+              }
+            },
+            "popMood": {
+              "publicsvc": -3,
+              "farmer": 2,
+              "whitecollar": 1
+            },
+            "player": {
+              "integrity": 3,
+              "fatigue": 4,
+              "fame": 1
+            },
+            "central": {
+              "education.innovation": 0.03
+            },
+            "tagGain": [
+              "TAG_SCHOLAR"
+            ]
           }
         }
       ],
-      "_designNote": "少子化下的併校議題，教育品質、社區存續與制度創新三方拉鋸"
+      "_designNote": "少子化下的併校議題，教育品質、社區存續與制度創新三方拉鋸",
+      "tier": "regional"
     },
     {
       "id": "EVT_SOC_PUBLIC_SAFETY",
@@ -325,7 +707,15 @@
       "weight": 45,
       "cooldown": 12,
       "trigger": "central.social.crimeRate > 0.4 && issueHeat.security > 25",
-      "requires": { "minTurn": 4, "roles": ["legislator", "mayor", "councilor", "citizen"] },
+      "requires": {
+        "minTurn": 4,
+        "roles": [
+          "legislator",
+          "mayor",
+          "councilor",
+          "citizen"
+        ]
+      },
       "headline": "跨境詐騙集團案值破百億，車手年齡下探十六歲",
       "body": "刑事單位偵破一個跨境詐騙集團，統計國內受害金額累計超過新台幣一百二十億元。落網的三十七名車手中有十一人未滿十八歲，其中最小的僅有十六歲，多數是透過社群平台上的高薪打工廣告被吸收。金融與電信業者被要求承擔更多的攔阻責任，但也擔憂過度的凍結措施會誤傷一般用戶。",
       "options": [
@@ -333,50 +723,112 @@
           "text": "推動金流與電信的強制攔阻與延遲匯款機制",
           "hint": "詐騙的成功率會下降，一般人的匯款體驗會變得很麻煩",
           "effects": {
-            "central": { "social.crimeRate": -0.04, "security.fraudControl": 0.05 },
-            "corpMood": { "finance": -5, "electronics": -3 },
-            "popMood": { "retiree": 5, "whitecollar": -2, "smallbiz": -2 },
-            "valuePressure": { "centralization": 0.5, "marketFreedom": -0.4 },
-            "player": { "fame": 3, "integrity": 2 }
+            "central": {
+              "social.crimeRate": -0.04,
+              "security.fraudControl": 0.05
+            },
+            "corpMood": {
+              "finance": -5,
+              "electronics": -3
+            },
+            "popMood": {
+              "retiree": 5,
+              "whitecollar": -2,
+              "smallbiz": -2
+            },
+            "valuePressure": {
+              "centralization": 0.5,
+              "marketFreedom": -0.4
+            },
+            "player": {
+              "fame": 3,
+              "integrity": 2
+            }
           }
         },
         {
           "text": "主張加重刑度並推動少年車手的專責處遇",
           "hint": "民眾情緒能被安撫，重刑對整個結構的嚇阻效果非常有限",
           "effects": {
-            "central": { "social.crimeRate": -0.01, "judicial.severity": 0.05 },
-            "popMood": { "_all": 4, "retiree": 5, "student": -2 },
-            "valuePressure": { "progressivism": -0.5 },
-            "player": { "fame": 4, "integrity": -1 },
-            "issueHeat": { "security": 5 },
-            "tagGain": ["TAG_FIREBRAND"]
+            "central": {
+              "social.crimeRate": -0.01,
+              "judicial.severity": 0.05
+            },
+            "popMood": {
+              "_all": 4,
+              "retiree": 5,
+              "student": -2
+            },
+            "valuePressure": {
+              "progressivism": -0.5
+            },
+            "player": {
+              "fame": 4,
+              "integrity": -1
+            },
+            "issueHeat": {
+              "security": 5
+            },
+            "tagGain": [
+              "TAG_FIREBRAND"
+            ]
           }
         },
         {
           "text": "推動高風險青少年的就業銜接與輔導網絡",
           "hint": "從源頭把人接住，短期內看不到任何破案數字的改善",
           "effects": {
-            "central": { "fiscal.balance": -0.003, "social.youthSupport": 0.05 },
-            "popSoL": { "student": 1 },
-            "popMood": { "student": 4, "publicsvc": 3, "retiree": -2 },
-            "valuePressure": { "progressivism": 0.5 },
-            "player": { "integrity": 4, "fame": 1 },
-            "tagGain": ["TAG_DOER"]
+            "central": {
+              "fiscal.balance": -0.003,
+              "social.youthSupport": 0.05
+            },
+            "popSoL": {
+              "student": 1
+            },
+            "popMood": {
+              "student": 4,
+              "publicsvc": 3,
+              "retiree": -2
+            },
+            "valuePressure": {
+              "progressivism": 0.5
+            },
+            "player": {
+              "integrity": 4,
+              "fame": 1
+            },
+            "tagGain": [
+              "TAG_DOER"
+            ]
           }
         },
         {
           "text": "要求平台業者為求職廣告的真實性負起責任",
           "hint": "抓住了關鍵節點，平台業者的法律戰會拖上好幾年",
           "effects": {
-            "central": { "security.platformDuty": 0.04 },
-            "corpMood": { "electronics": -6, "retail": -3 },
-            "popMood": { "whitecollar": 3, "student": 2 },
-            "valuePressure": { "marketFreedom": -0.5 },
-            "player": { "fame": 3, "politicalCapital": -1 }
+            "central": {
+              "security.platformDuty": 0.04
+            },
+            "corpMood": {
+              "electronics": -6,
+              "retail": -3
+            },
+            "popMood": {
+              "whitecollar": 3,
+              "student": 2
+            },
+            "valuePressure": {
+              "marketFreedom": -0.5
+            },
+            "player": {
+              "fame": 3,
+              "politicalCapital": -1
+            }
           }
         }
       ],
-      "_designNote": "詐騙治理的金流管制、重刑、預防與平台責任四種思路"
+      "_designNote": "詐騙治理的金流管制、重刑、預防與平台責任四種思路",
+      "tier": "regional"
     },
     {
       "id": "EVT_SOC_ENVIRO_PROTEST",
@@ -384,7 +836,15 @@
       "weight": 45,
       "cooldown": 12,
       "trigger": "issueHeat.environment > 40 && region.economy.industryShare > 0.2",
-      "requires": { "minTurn": 4, "roles": ["legislator", "mayor", "councilor", "citizen"] },
+      "requires": {
+        "minTurn": 4,
+        "roles": [
+          "legislator",
+          "mayor",
+          "councilor",
+          "citizen"
+        ]
+      },
       "headline": "焚化爐更新案居民夜宿抗議，垃圾去化只剩四十天量能",
       "body": "既有焚化爐的除役期限逼近，更新改建案在地方說明會上遭到周邊六個里的強烈反對。環保局坦承現有掩埋場的餘裕僅能支撐約四十天，屆時垃圾必須外運到其他縣市付費處理。抗議居民指出過去二十年的空污與惡臭都由他們獨自承擔，要求把新爐蓋在垃圾產生量最大的行政區。",
       "options": [
@@ -392,40 +852,94 @@
           "text": "支持原址更新，同步提出高額回饋與健檢方案",
           "hint": "垃圾問題解得掉，被犧牲二十年的社區會覺得又被賣一次",
           "effects": {
-            "central": { "environment.wasteCapacity": 0.05, "fiscal.balance": -0.004 },
-            "region": { "_player": { "environment.wasteCapacity": 0.05 } },
-            "popMood": { "retiree": -5, "whitecollar": 3, "bluecollar": 1 },
-            "valuePressure": { "centralization": 0.4, "environment": -0.3 },
-            "player": { "fame": 2, "stigma": 1 },
-            "grassroots": { "_home": -2 }
+            "central": {
+              "environment.wasteCapacity": 0.05,
+              "fiscal.balance": -0.004
+            },
+            "region": {
+              "_player": {
+                "environment.wasteCapacity": 0.05
+              }
+            },
+            "popMood": {
+              "retiree": -5,
+              "whitecollar": 3,
+              "bluecollar": 1
+            },
+            "valuePressure": {
+              "centralization": 0.4,
+              "environment": -0.3
+            },
+            "player": {
+              "fame": 2,
+              "stigma": 1
+            },
+            "grassroots": {
+              "_home": -2
+            }
           }
         },
         {
           "text": "支持居民訴求，要求重新評估選址與區域分攤",
           "hint": "社區會站到你這邊，四十天後的垃圾山會由你來面對",
           "effects": {
-            "region": { "_player": { "environment.wasteCapacity": -0.03 } },
-            "popMood": { "retiree": 6, "whitecollar": -3 },
-            "valuePressure": { "directDemocracy": 0.6, "environment": 0.4 },
-            "player": { "fame": 3, "politicalCapital": -2 },
-            "grassroots": { "_home": 2 },
-            "issueHeat": { "environment": 5 }
+            "region": {
+              "_player": {
+                "environment.wasteCapacity": -0.03
+              }
+            },
+            "popMood": {
+              "retiree": 6,
+              "whitecollar": -3
+            },
+            "valuePressure": {
+              "directDemocracy": 0.6,
+              "environment": 0.4
+            },
+            "player": {
+              "fame": 3,
+              "politicalCapital": -2
+            },
+            "grassroots": {
+              "_home": 2
+            },
+            "issueHeat": {
+              "environment": 5
+            }
           }
         },
         {
           "text": "推動源頭減量與強制分類回收的加嚴措施",
           "hint": "方向沒有人能反對，減量的速度追不上除役的時程",
           "effects": {
-            "central": { "environment.wasteReduction": 0.04 },
-            "valuePressure": { "environment": 0.7 },
-            "popMood": { "student": 4, "smallbiz": -3, "retiree": 1 },
-            "corpMood": { "retail": -4, "food": -3 },
-            "player": { "integrity": 3, "fame": 1, "fatigue": 2 },
-            "tagGain": ["TAG_SCHOLAR"]
+            "central": {
+              "environment.wasteReduction": 0.04
+            },
+            "valuePressure": {
+              "environment": 0.7
+            },
+            "popMood": {
+              "student": 4,
+              "smallbiz": -3,
+              "retiree": 1
+            },
+            "corpMood": {
+              "retail": -4,
+              "food": -3
+            },
+            "player": {
+              "integrity": 3,
+              "fame": 1,
+              "fatigue": 2
+            },
+            "tagGain": [
+              "TAG_SCHOLAR"
+            ]
           }
         }
       ],
-      "_designNote": "鄰避設施的典型三難，環境正義、實務時程與源頭減量各有道理"
+      "_designNote": "鄰避設施的典型三難，環境正義、實務時程與源頭減量各有道理",
+      "tier": "regional"
     },
     {
       "id": "EVT_SOC_GENDER_BILL",
@@ -433,7 +947,15 @@
       "weight": 40,
       "cooldown": 18,
       "trigger": "values.progressivism > 0.45 && issueHeat.education > 20",
-      "requires": { "minTurn": 8, "roles": ["legislator", "mayor", "councilor", "citizen"] },
+      "requires": {
+        "minTurn": 8,
+        "roles": [
+          "legislator",
+          "mayor",
+          "councilor",
+          "citizen"
+        ]
+      },
       "headline": "校園性平教材爭議延燒，兩派家長團體同日包圍議會",
       "body": "新版校園性別平等教材的授課指引引發激烈爭論，支持與反對的家長團體在同一天分別包圍議會的兩個出入口。反對方認為部分內容不符合國小階段的身心發展，支持方則指出性騷擾通報件數逐年上升正是教育不足的結果。教育主管機關傾向讓學校自主選用版本，但兩邊都認為這只是在推卸責任。",
       "options": [
@@ -441,39 +963,85 @@
           "text": "支持維持現行教材並強化教師的專業訓練",
           "hint": "教育專業站得住腳，保守家長團體會把你當成頭號目標",
           "effects": {
-            "valuePressure": { "progressivism": 0.7 },
-            "central": { "education.genderEquity": 0.04 },
-            "popMood": { "student": 5, "whitecollar": 3, "retiree": -5 },
-            "player": { "fame": 3, "politicalCapital": -1 },
-            "issueHeat": { "education": 5 },
-            "grassroots": { "_home": -1 }
+            "valuePressure": {
+              "progressivism": 0.7
+            },
+            "central": {
+              "education.genderEquity": 0.04
+            },
+            "popMood": {
+              "student": 5,
+              "whitecollar": 3,
+              "retiree": -5
+            },
+            "player": {
+              "fame": 3,
+              "politicalCapital": -1
+            },
+            "issueHeat": {
+              "education": 5
+            },
+            "grassroots": {
+              "_home": -1
+            }
           }
         },
         {
           "text": "主張授課內容應依年段調整並加入家長參與",
           "hint": "折衷的姿態能降溫，兩邊都會覺得你根本沒有立場",
           "effects": {
-            "valuePressure": { "directDemocracy": 0.4, "progressivism": 0.1 },
-            "popMood": { "whitecollar": 2, "retiree": 1, "student": -2 },
-            "player": { "integrity": 2, "fame": -2, "fatigue": 2 },
-            "central": { "education.parentInvolve": 0.03 },
-            "issueHeat": { "education": 3 }
+            "valuePressure": {
+              "directDemocracy": 0.4,
+              "progressivism": 0.1
+            },
+            "popMood": {
+              "whitecollar": 2,
+              "retiree": 1,
+              "student": -2
+            },
+            "player": {
+              "integrity": 2,
+              "fame": -2,
+              "fatigue": 2
+            },
+            "central": {
+              "education.parentInvolve": 0.03
+            },
+            "issueHeat": {
+              "education": 3
+            }
           }
         },
         {
           "text": "支持家長全面選擇權，敏感單元改為自願參加",
           "hint": "宗教與保守社群會全力動員支持你，年輕世代會直接翻臉",
           "effects": {
-            "valuePressure": { "progressivism": -0.7 },
-            "central": { "education.genderEquity": -0.03 },
-            "popMood": { "retiree": 6, "farmer": 3, "student": -6 },
-            "player": { "fame": 3, "integrity": -1 },
-            "grassroots": { "_home": 2 },
-            "tagGain": ["TAG_NATIVIST"]
+            "valuePressure": {
+              "progressivism": -0.7
+            },
+            "central": {
+              "education.genderEquity": -0.03
+            },
+            "popMood": {
+              "retiree": 6,
+              "farmer": 3,
+              "student": -6
+            },
+            "player": {
+              "fame": 3,
+              "integrity": -1
+            },
+            "grassroots": {
+              "_home": 2
+            },
+            "tagGain": [
+              "TAG_NATIVIST"
+            ]
           }
         }
       ],
-      "_designNote": "性平教育的三種立場，進步、折衷與保守都各有真實的支持基礎"
+      "_designNote": "性平教育的三種立場，進步、折衷與保守都各有真實的支持基礎",
+      "tier": "regional"
     },
     {
       "id": "EVT_SOC_TRANSIT_FARE",
@@ -481,7 +1049,14 @@
       "weight": 40,
       "cooldown": 14,
       "trigger": "region.infra.transitDeficit > 0.05 && issueHeat.prices > 25",
-      "requires": { "minTurn": 6, "roles": ["mayor", "councilor", "legislator"] },
+      "requires": {
+        "minTurn": 6,
+        "roles": [
+          "mayor",
+          "councilor",
+          "legislator"
+        ]
+      },
       "headline": "公車票價二十年未調，客運業者揚言退出六條偏遠路線",
       "body": "民營客運業者聯合發函表示，在票價凍漲二十年與油料人力成本翻倍的夾擊下，六條偏遠路線已無法繼續營運。這六條路線每天服務約四千名乘客，其中超過六成是通勤學生與就醫長者。交通局評估若改為公辦民營，每年的補貼金額將增加約兩億元，但也能把路線的決定權收回公部門手上。",
       "options": [
@@ -489,41 +1064,98 @@
           "text": "同意合理調漲票價並設定學生與長者優惠",
           "hint": "路線保得住，一般通勤族的荷包會直接感受到痛",
           "effects": {
-            "central": { "transport.fareLevel": 0.05 },
-            "region": { "_player": { "infra.transitDeficit": -0.03 } },
-            "corpMood": { "logistics": 6 },
-            "popMood": { "bluecollar": -3, "whitecollar": -2, "student": 2, "retiree": 2 },
-            "valuePressure": { "marketFreedom": 0.4 },
-            "player": { "integrity": 3, "fame": -2 }
+            "central": {
+              "transport.fareLevel": 0.05
+            },
+            "region": {
+              "_player": {
+                "infra.transitDeficit": -0.03
+              }
+            },
+            "corpMood": {
+              "logistics": 6
+            },
+            "popMood": {
+              "bluecollar": -3,
+              "whitecollar": -2,
+              "student": 2,
+              "retiree": 2
+            },
+            "valuePressure": {
+              "marketFreedom": 0.4
+            },
+            "player": {
+              "integrity": 3,
+              "fame": -2
+            }
           }
         },
         {
           "text": "改採公辦民營，由市府編列補貼保住路線",
           "hint": "沒有人要漲價的痛苦，市庫的長期負擔會愈滾愈大",
           "effects": {
-            "region": { "_player": { "infra.transitDeficit": 0.03 } },
-            "central": { "fiscal.balance": -0.003 },
-            "popMood": { "student": 4, "retiree": 4, "publicsvc": 2 },
-            "corpMood": { "logistics": 2 },
-            "valuePressure": { "centralization": 0.4, "marketFreedom": -0.5 },
-            "player": { "fame": 3, "politicalCapital": -2 },
-            "grassroots": { "_home": 1 }
+            "region": {
+              "_player": {
+                "infra.transitDeficit": 0.03
+              }
+            },
+            "central": {
+              "fiscal.balance": -0.003
+            },
+            "popMood": {
+              "student": 4,
+              "retiree": 4,
+              "publicsvc": 2
+            },
+            "corpMood": {
+              "logistics": 2
+            },
+            "valuePressure": {
+              "centralization": 0.4,
+              "marketFreedom": -0.5
+            },
+            "player": {
+              "fame": 3,
+              "politicalCapital": -2
+            },
+            "grassroots": {
+              "_home": 1
+            }
           }
         },
         {
           "text": "推動需求反應式接送取代固定班次的路線",
           "hint": "資源用得最有效率，習慣了站牌與時刻表的長者會很不適應",
           "effects": {
-            "region": { "_player": { "infra.transitEfficiency": 0.04 } },
-            "central": { "transport.ridership": 0.02 },
-            "popMood": { "retiree": -3, "student": 2, "techpro": 3 },
-            "player": { "integrity": 3, "fame": 1, "fatigue": 2 },
-            "corpMood": { "logistics": 3 },
-            "tagGain": ["TAG_SCHOLAR"]
+            "region": {
+              "_player": {
+                "infra.transitEfficiency": 0.04
+              }
+            },
+            "central": {
+              "transport.ridership": 0.02
+            },
+            "popMood": {
+              "retiree": -3,
+              "student": 2,
+              "techpro": 3
+            },
+            "player": {
+              "integrity": 3,
+              "fame": 1,
+              "fatigue": 2
+            },
+            "corpMood": {
+              "logistics": 3
+            },
+            "tagGain": [
+              "TAG_SCHOLAR"
+            ]
           }
         }
       ],
-      "_designNote": "公共運輸的漲價、補貼與科技三種解方，代價分別在民怨、財政與適應成本"
+      "_designNote": "公共運輸的漲價、補貼與科技三種解方，代價分別在民怨、財政與適應成本",
+      "tier": "regional"
     },
     {
       "id": "EVT_SOC_MEDICAL_STRAIN",
@@ -531,7 +1163,15 @@
       "weight": 45,
       "cooldown": 14,
       "trigger": "central.health.capacity < 0.55 && issueHeat.healthcare > 30",
-      "requires": { "minTurn": 6, "roles": ["legislator", "mayor", "councilor", "citizen"] },
+      "requires": {
+        "minTurn": 6,
+        "roles": [
+          "legislator",
+          "mayor",
+          "councilor",
+          "citizen"
+        ]
+      },
       "headline": "急重症科別招不到住院醫師，三家區域醫院關閉夜間急診",
       "body": "內外婦兒急五大科別的住院醫師招收率連續三年下滑，中部三家區域醫院已宣布關閉夜間急診服務。醫師公會指出，健保給付結構長期偏向檢查與處置，讓高風險科別的收入與訴訟壓力完全不成比例。民眾則反映轉診距離拉長，深夜急症必須跨區奔波超過四十公里才有醫院收治。",
       "options": [
@@ -539,51 +1179,112 @@
           "text": "推動急重症給付大幅調升與醫療事故補償",
           "hint": "醫界會全力支持你，健保財務的缺口會被撐得更開",
           "effects": {
-            "central": { "health.capacity": 0.05, "health.insuranceDeficit": 0.03 },
-            "popSoL": { "publicsvc": 1 },
-            "popMood": { "publicsvc": 6, "whitecollar": 2 },
-            "player": { "fame": 3, "politicalCapital": -2 },
-            "issueHeat": { "healthcare": 5 }
+            "central": {
+              "health.capacity": 0.05,
+              "health.insuranceDeficit": 0.03
+            },
+            "popSoL": {
+              "publicsvc": 1
+            },
+            "popMood": {
+              "publicsvc": 6,
+              "whitecollar": 2
+            },
+            "player": {
+              "fame": 3,
+              "politicalCapital": -2
+            },
+            "issueHeat": {
+              "healthcare": 5
+            }
           }
         },
         {
           "text": "推動健保費率調整以支應必要的給付改革",
           "hint": "財源問題正面處理，調漲保費的政治代價要自己扛下來",
           "effects": {
-            "central": { "health.insuranceDeficit": -0.05, "economy.laborCost": 0.008 },
-            "popMood": { "_all": -4, "publicsvc": 3 },
-            "corpMood": { "_all": -3 },
-            "valuePressure": { "centralization": 0.4 },
-            "player": { "integrity": 4, "fame": -3 },
-            "issueHeat": { "healthcare": 6 }
+            "central": {
+              "health.insuranceDeficit": -0.05,
+              "economy.laborCost": 0.008
+            },
+            "popMood": {
+              "_all": -4,
+              "publicsvc": 3
+            },
+            "corpMood": {
+              "_all": -3
+            },
+            "valuePressure": {
+              "centralization": 0.4
+            },
+            "player": {
+              "integrity": 4,
+              "fame": -3
+            },
+            "issueHeat": {
+              "healthcare": 6
+            }
           }
         },
         {
           "text": "推動分級醫療與轉診制度的強制落實",
           "hint": "大醫院的壅塞會改善，習慣直接掛號的民眾會非常不滿",
           "effects": {
-            "central": { "health.capacity": 0.03, "health.referralRate": 0.05 },
-            "popMood": { "retiree": -4, "publicsvc": 3, "whitecollar": -1 },
-            "valuePressure": { "centralization": 0.5 },
-            "player": { "integrity": 3, "fame": -1 },
-            "issueHeat": { "healthcare": 4 }
+            "central": {
+              "health.capacity": 0.03,
+              "health.referralRate": 0.05
+            },
+            "popMood": {
+              "retiree": -4,
+              "publicsvc": 3,
+              "whitecollar": -1
+            },
+            "valuePressure": {
+              "centralization": 0.5
+            },
+            "player": {
+              "integrity": 3,
+              "fame": -1
+            },
+            "issueHeat": {
+              "healthcare": 4
+            }
           }
         },
         {
           "text": "推動偏鄉遠距醫療與救護後送的加強布建",
           "hint": "距離問題有解，急重症科別缺人的核心一點都沒動到",
           "effects": {
-            "region": { "_player": { "health.localCapacity": 0.04 } },
-            "central": { "fiscal.balance": -0.004 },
-            "corpMood": { "electronics": 4 },
-            "popMood": { "retiree": 3, "farmer": 4 },
-            "player": { "fame": 3, "fatigue": 2 },
-            "grassroots": { "_home": 1 },
-            "tagGain": ["TAG_DOER"]
+            "region": {
+              "_player": {
+                "health.localCapacity": 0.04
+              }
+            },
+            "central": {
+              "fiscal.balance": -0.004
+            },
+            "corpMood": {
+              "electronics": 4
+            },
+            "popMood": {
+              "retiree": 3,
+              "farmer": 4
+            },
+            "player": {
+              "fame": 3,
+              "fatigue": 2
+            },
+            "grassroots": {
+              "_home": 1
+            },
+            "tagGain": [
+              "TAG_DOER"
+            ]
           }
         }
       ],
-      "_designNote": "醫療崩壞的給付、財源、分級與科技四種對策，難處各不相同"
+      "_designNote": "醫療崩壞的給付、財源、分級與科技四種對策，難處各不相同",
+      "tier": "regional"
     },
     {
       "id": "EVT_SOC_DIGITAL_DIVIDE",
@@ -591,7 +1292,15 @@
       "weight": 35,
       "cooldown": 18,
       "trigger": "central.social.elderRatio > 0.18 && central.tech.digitalService > 0.5",
-      "requires": { "minTurn": 8, "roles": ["legislator", "mayor", "councilor", "citizen"] },
+      "requires": {
+        "minTurn": 8,
+        "roles": [
+          "legislator",
+          "mayor",
+          "councilor",
+          "citizen"
+        ]
+      },
       "headline": "政府服務全面數位化，長者臨櫃申辦被要求先下載應用程式",
       "body": "行政服務數位轉型上路後，多項補助申辦改為僅接受線上受理，臨櫃窗口的服務量能同步縮減。多個社區發展協會反映，長者為了申請一筆三千元的津貼必須請孫子協助操作，甚至出現放棄申請的情形。數位發展部門強調線上化每年可節省超過十億元的行政成本，並已設置協助專線。",
       "options": [
@@ -599,38 +1308,86 @@
           "text": "要求保留紙本與臨櫃管道並設在地協助員",
           "hint": "長者的權益守住了，數位轉型省下的錢會再吐回去一大半",
           "effects": {
-            "central": { "fiscal.balance": -0.003, "tech.serviceAccess": 0.05 },
-            "popSoL": { "retiree": 1 },
-            "popMood": { "retiree": 6, "publicsvc": 2, "techpro": -2 },
-            "player": { "fame": 3, "integrity": 2 },
-            "grassroots": { "_home": 1 }
+            "central": {
+              "fiscal.balance": -0.003,
+              "tech.serviceAccess": 0.05
+            },
+            "popSoL": {
+              "retiree": 1
+            },
+            "popMood": {
+              "retiree": 6,
+              "publicsvc": 2,
+              "techpro": -2
+            },
+            "player": {
+              "fame": 3,
+              "integrity": 2
+            },
+            "grassroots": {
+              "_home": 1
+            }
           }
         },
         {
           "text": "推動社區數位培力課程與行動服務車巡迴",
           "hint": "把人真的帶上車，培力的成效要好幾年才看得出來",
           "effects": {
-            "region": { "_player": { "social.digitalLiteracy": 0.04 } },
-            "central": { "education.mediaLiteracy": 0.02 },
-            "popMood": { "retiree": 4, "student": 2, "publicsvc": 1 },
-            "player": { "fatigue": 3, "integrity": 3, "fame": 2 },
-            "grassroots": { "_home": 2 },
-            "tagGain": ["TAG_DOER"]
+            "region": {
+              "_player": {
+                "social.digitalLiteracy": 0.04
+              }
+            },
+            "central": {
+              "education.mediaLiteracy": 0.02
+            },
+            "popMood": {
+              "retiree": 4,
+              "student": 2,
+              "publicsvc": 1
+            },
+            "player": {
+              "fatigue": 3,
+              "integrity": 3,
+              "fame": 2
+            },
+            "grassroots": {
+              "_home": 2
+            },
+            "tagGain": [
+              "TAG_DOER"
+            ]
           }
         },
         {
           "text": "支持全面數位化，把省下的預算轉入社福給付",
           "hint": "效率派會給你高分，被卡在門檻外的人會直接消失在統計裡",
           "effects": {
-            "central": { "fiscal.balance": 0.004, "tech.digitalService": 0.04 },
-            "popMood": { "techpro": 4, "whitecollar": 2, "retiree": -6 },
-            "valuePressure": { "marketFreedom": 0.3, "centralization": 0.3 },
-            "player": { "integrity": 2, "fame": -2 },
-            "corpMood": { "electronics": 5 }
+            "central": {
+              "fiscal.balance": 0.004,
+              "tech.digitalService": 0.04
+            },
+            "popMood": {
+              "techpro": 4,
+              "whitecollar": 2,
+              "retiree": -6
+            },
+            "valuePressure": {
+              "marketFreedom": 0.3,
+              "centralization": 0.3
+            },
+            "player": {
+              "integrity": 2,
+              "fame": -2
+            },
+            "corpMood": {
+              "electronics": 5
+            }
           }
         }
       ],
-      "_designNote": "數位落差的補救、培力與效率優先三種選擇，世代利益直接對立"
+      "_designNote": "數位落差的補救、培力與效率優先三種選擇，世代利益直接對立",
+      "tier": "regional"
     }
   ]
 }

@@ -14,7 +14,8 @@
       "type": "general",
       "population": 503000,
       "urbanity": 4,
-      "lean": 0
+      "lean": -0.997,
+      "whiteLean": 0.33
     },
     {
       "id": "TPE-02",
@@ -28,7 +29,8 @@
       "type": "general",
       "population": 384000,
       "urbanity": 4,
-      "lean": 1
+      "lean": -0.097,
+      "whiteLean": 0.33
     },
     {
       "id": "TPE-03",
@@ -42,7 +44,8 @@
       "type": "general",
       "population": 390000,
       "urbanity": 5,
-      "lean": 2
+      "lean": 0.803,
+      "whiteLean": 0.33
     },
     {
       "id": "TPE-04",
@@ -56,7 +59,8 @@
       "type": "general",
       "population": 334000,
       "urbanity": 5,
-      "lean": -1
+      "lean": -1.897,
+      "whiteLean": 0.33
     },
     {
       "id": "TPE-05",
@@ -70,7 +74,8 @@
       "type": "general",
       "population": 324000,
       "urbanity": 5,
-      "lean": 0
+      "lean": -0.997,
+      "whiteLean": 0.33
     },
     {
       "id": "TPE-06",
@@ -84,7 +89,8 @@
       "type": "general",
       "population": 528000,
       "urbanity": 5,
-      "lean": 3
+      "lean": 1.703,
+      "whiteLean": 0.33
     },
     {
       "id": "TPE-P1",
@@ -97,8 +103,9 @@
       "type": "plainIndigenous",
       "population": 9000,
       "urbanity": 3,
-      "lean": 3,
-      "_estimated": true
+      "lean": 1.703,
+      "_estimated": true,
+      "whiteLean": 0.33
     },
     {
       "id": "TPE-M1",
@@ -111,8 +118,9 @@
       "type": "mountainIndigenous",
       "population": 8000,
       "urbanity": 2,
-      "lean": 4,
-      "_estimated": true
+      "lean": 2.603,
+      "_estimated": true,
+      "whiteLean": 0.33
     },
     {
       "id": "NTP-01",
@@ -128,8 +136,9 @@
       "type": "general",
       "population": 262000,
       "urbanity": 3,
-      "lean": 0,
-      "_estimated": true
+      "lean": -0.706,
+      "_estimated": true,
+      "whiteLean": 0.185
     },
     {
       "id": "NTP-02",
@@ -145,8 +154,9 @@
       "type": "general",
       "population": 486000,
       "urbanity": 4,
-      "lean": -1,
-      "_estimated": true
+      "lean": -1.616,
+      "_estimated": true,
+      "whiteLean": 0.185
     },
     {
       "id": "NTP-03",
@@ -159,8 +169,9 @@
       "type": "general",
       "population": 374000,
       "urbanity": 5,
-      "lean": -2,
-      "_estimated": true
+      "lean": -2.506,
+      "_estimated": true,
+      "whiteLean": 0.185
     },
     {
       "id": "NTP-04",
@@ -173,8 +184,9 @@
       "type": "general",
       "population": 413000,
       "urbanity": 4,
-      "lean": -1,
-      "_estimated": true
+      "lean": -1.616,
+      "_estimated": true,
+      "whiteLean": 0.185
     },
     {
       "id": "NTP-05",
@@ -187,8 +199,9 @@
       "type": "general",
       "population": 541000,
       "urbanity": 5,
-      "lean": 0,
-      "_estimated": true
+      "lean": -0.706,
+      "_estimated": true,
+      "whiteLean": 0.185
     },
     {
       "id": "NTP-06",
@@ -201,8 +214,9 @@
       "type": "general",
       "population": 403000,
       "urbanity": 5,
-      "lean": 1,
-      "_estimated": true
+      "lean": 0.194,
+      "_estimated": true,
+      "whiteLean": 0.185
     },
     {
       "id": "NTP-07",
@@ -215,8 +229,9 @@
       "type": "general",
       "population": 216000,
       "urbanity": 5,
-      "lean": 3,
-      "_estimated": true
+      "lean": 1.994,
+      "_estimated": true,
+      "whiteLean": 0.185
     },
     {
       "id": "NTP-08",
@@ -232,8 +247,9 @@
       "type": "general",
       "population": 618000,
       "urbanity": 4,
-      "lean": 0,
-      "_estimated": true
+      "lean": -0.706,
+      "_estimated": true,
+      "whiteLean": 0.185
     },
     {
       "id": "NTP-09",
@@ -250,8 +266,9 @@
       "type": "general",
       "population": 338000,
       "urbanity": 3,
-      "lean": 3,
-      "_estimated": true
+      "lean": 1.994,
+      "_estimated": true,
+      "whiteLean": 0.185
     },
     {
       "id": "NTP-10",
@@ -270,8 +287,9 @@
       "type": "general",
       "population": 301000,
       "urbanity": 3,
-      "lean": 1,
-      "_estimated": true
+      "lean": 0.194,
+      "_estimated": true,
+      "whiteLean": 0.185
     },
     {
       "id": "NTP-P1",
@@ -284,8 +302,9 @@
       "type": "plainIndigenous",
       "population": 30000,
       "urbanity": 3,
-      "lean": 3,
-      "_estimated": true
+      "lean": 1.994,
+      "_estimated": true,
+      "whiteLean": 0.185
     },
     {
       "id": "NTP-M1",
@@ -298,8 +317,9 @@
       "type": "mountainIndigenous",
       "population": 28000,
       "urbanity": 2,
-      "lean": 4,
-      "_estimated": true
+      "lean": 2.894,
+      "_estimated": true,
+      "whiteLean": 0.185
     },
     {
       "id": "TYC-01",
@@ -312,8 +332,9 @@
       "type": "general",
       "population": 449000,
       "urbanity": 4,
-      "lean": 1,
-      "_estimated": true
+      "lean": -0.749,
+      "_estimated": true,
+      "whiteLean": 0.455
     },
     {
       "id": "TYC-02",
@@ -326,8 +347,9 @@
       "type": "general",
       "population": 174000,
       "urbanity": 3,
-      "lean": 2,
-      "_estimated": true
+      "lean": 0.15,
+      "_estimated": true,
+      "whiteLean": 0.455
     },
     {
       "id": "TYC-03",
@@ -340,8 +362,9 @@
       "type": "general",
       "population": 200000,
       "urbanity": 3,
-      "lean": 1,
-      "_estimated": true
+      "lean": -0.749,
+      "_estimated": true,
+      "whiteLean": 0.455
     },
     {
       "id": "TYC-04",
@@ -355,8 +378,9 @@
       "type": "general",
       "population": 105000,
       "urbanity": 2,
-      "lean": 2,
-      "_estimated": true
+      "lean": 0.15,
+      "_estimated": true,
+      "whiteLean": 0.455
     },
     {
       "id": "TYC-05",
@@ -369,8 +393,9 @@
       "type": "general",
       "population": 396000,
       "urbanity": 4,
-      "lean": 1,
-      "_estimated": true
+      "lean": -0.749,
+      "_estimated": true,
+      "whiteLean": 0.455
     },
     {
       "id": "TYC-06",
@@ -383,8 +408,9 @@
       "type": "general",
       "population": 220000,
       "urbanity": 3,
-      "lean": 1,
-      "_estimated": true
+      "lean": -0.749,
+      "_estimated": true,
+      "whiteLean": 0.455
     },
     {
       "id": "TYC-07",
@@ -397,8 +423,9 @@
       "type": "general",
       "population": 171000,
       "urbanity": 3,
-      "lean": 2,
-      "_estimated": true
+      "lean": 0.15,
+      "_estimated": true,
+      "whiteLean": 0.455
     },
     {
       "id": "TYC-08",
@@ -411,8 +438,9 @@
       "type": "general",
       "population": 117000,
       "urbanity": 2,
-      "lean": 2,
-      "_estimated": true
+      "lean": 0.15,
+      "_estimated": true,
+      "whiteLean": 0.455
     },
     {
       "id": "TYC-09",
@@ -425,8 +453,9 @@
       "type": "general",
       "population": 161000,
       "urbanity": 3,
-      "lean": 1,
-      "_estimated": true
+      "lean": -0.749,
+      "_estimated": true,
+      "whiteLean": 0.455
     },
     {
       "id": "TYC-10",
@@ -439,8 +468,9 @@
       "type": "general",
       "population": 87000,
       "urbanity": 2,
-      "lean": 0,
-      "_estimated": true
+      "lean": -1.65,
+      "_estimated": true,
+      "whiteLean": 0.455
     },
     {
       "id": "TYC-11",
@@ -453,8 +483,9 @@
       "type": "general",
       "population": 65000,
       "urbanity": 2,
-      "lean": 0,
-      "_estimated": true
+      "lean": -1.65,
+      "_estimated": true,
+      "whiteLean": 0.455
     },
     {
       "id": "TYC-12",
@@ -467,8 +498,9 @@
       "type": "general",
       "population": 45000,
       "urbanity": 1,
-      "lean": 2,
-      "_estimated": true
+      "lean": 0.15,
+      "_estimated": true,
+      "whiteLean": 0.455
     },
     {
       "id": "TYC-P1",
@@ -481,8 +513,9 @@
       "type": "plainIndigenous",
       "population": 50000,
       "urbanity": 3,
-      "lean": 3,
-      "_estimated": true
+      "lean": 1.051,
+      "_estimated": true,
+      "whiteLean": 0.455
     },
     {
       "id": "TYC-M1",
@@ -495,8 +528,9 @@
       "type": "mountainIndigenous",
       "population": 30000,
       "urbanity": 2,
-      "lean": 4,
-      "_estimated": true
+      "lean": 1.95,
+      "_estimated": true,
+      "whiteLean": 0.455
     },
     {
       "id": "TCH-01",
@@ -512,8 +546,9 @@
       "type": "general",
       "population": 178000,
       "urbanity": 2,
-      "lean": 1,
-      "_estimated": true
+      "lean": 0.131,
+      "_estimated": true,
+      "whiteLean": 0.552
     },
     {
       "id": "TCH-02",
@@ -530,8 +565,9 @@
       "type": "general",
       "population": 368000,
       "urbanity": 3,
-      "lean": 0,
-      "_estimated": true
+      "lean": -0.769,
+      "_estimated": true,
+      "whiteLean": 0.552
     },
     {
       "id": "TCH-03",
@@ -546,8 +582,9 @@
       "type": "general",
       "population": 264000,
       "urbanity": 3,
-      "lean": 1,
-      "_estimated": true
+      "lean": 0.131,
+      "_estimated": true,
+      "whiteLean": 0.552
     },
     {
       "id": "TCH-04",
@@ -561,8 +598,9 @@
       "type": "general",
       "population": 406000,
       "urbanity": 5,
-      "lean": 0,
-      "_estimated": true
+      "lean": -0.769,
+      "_estimated": true,
+      "whiteLean": 0.552
     },
     {
       "id": "TCH-05",
@@ -575,8 +613,9 @@
       "type": "general",
       "population": 289000,
       "urbanity": 4,
-      "lean": 0,
-      "_estimated": true
+      "lean": -0.769,
+      "_estimated": true,
+      "whiteLean": 0.552
     },
     {
       "id": "TCH-06",
@@ -590,8 +629,9 @@
       "type": "general",
       "population": 160000,
       "urbanity": 5,
-      "lean": 0,
-      "_estimated": true
+      "lean": -0.769,
+      "_estimated": true,
+      "whiteLean": 0.552
     },
     {
       "id": "TCH-07",
@@ -605,8 +645,9 @@
       "type": "general",
       "population": 240000,
       "urbanity": 5,
-      "lean": -1,
-      "_estimated": true
+      "lean": -1.669,
+      "_estimated": true,
+      "whiteLean": 0.552
     },
     {
       "id": "TCH-08",
@@ -620,8 +661,9 @@
       "type": "general",
       "population": 150000,
       "urbanity": 4,
-      "lean": 0,
-      "_estimated": true
+      "lean": -0.769,
+      "_estimated": true,
+      "whiteLean": 0.552
     },
     {
       "id": "TCH-09",
@@ -634,8 +676,9 @@
       "type": "general",
       "population": 196000,
       "urbanity": 3,
-      "lean": 0,
-      "_estimated": true
+      "lean": -0.769,
+      "_estimated": true,
+      "whiteLean": 0.552
     },
     {
       "id": "TCH-10",
@@ -649,8 +692,9 @@
       "type": "general",
       "population": 274000,
       "urbanity": 3,
-      "lean": -1,
-      "_estimated": true
+      "lean": -1.669,
+      "_estimated": true,
+      "whiteLean": 0.552
     },
     {
       "id": "TCH-11",
@@ -663,8 +707,9 @@
       "type": "general",
       "population": 162000,
       "urbanity": 4,
-      "lean": 1,
-      "_estimated": true
+      "lean": 0.131,
+      "_estimated": true,
+      "whiteLean": 0.552
     },
     {
       "id": "TCH-12",
@@ -680,8 +725,9 @@
       "type": "general",
       "population": 94000,
       "urbanity": 1,
-      "lean": 2,
-      "_estimated": true
+      "lean": 1.031,
+      "_estimated": true,
+      "whiteLean": 0.552
     },
     {
       "id": "TCH-P1",
@@ -694,8 +740,9 @@
       "type": "plainIndigenous",
       "population": 20000,
       "urbanity": 3,
-      "lean": 3,
-      "_estimated": true
+      "lean": 1.931,
+      "_estimated": true,
+      "whiteLean": 0.552
     },
     {
       "id": "TCH-M1",
@@ -708,8 +755,9 @@
       "type": "mountainIndigenous",
       "population": 19000,
       "urbanity": 2,
-      "lean": 4,
-      "_estimated": true
+      "lean": 2.831,
+      "_estimated": true,
+      "whiteLean": 0.552
     },
     {
       "id": "TNN-01",
@@ -727,7 +775,8 @@
       "type": "general",
       "population": 190000,
       "urbanity": 2,
-      "lean": -3
+      "lean": -1.604,
+      "whiteLean": -0.61
     },
     {
       "id": "TNN-02",
@@ -744,7 +793,8 @@
       "type": "general",
       "population": 118000,
       "urbanity": 2,
-      "lean": -3
+      "lean": -1.604,
+      "whiteLean": -0.61
     },
     {
       "id": "TNN-03",
@@ -762,7 +812,8 @@
       "type": "general",
       "population": 156000,
       "urbanity": 2,
-      "lean": -3
+      "lean": -1.604,
+      "whiteLean": -0.61
     },
     {
       "id": "TNN-04",
@@ -783,7 +834,8 @@
       "type": "general",
       "population": 201000,
       "urbanity": 2,
-      "lean": -3
+      "lean": -1.604,
+      "whiteLean": -0.61
     },
     {
       "id": "TNN-05",
@@ -796,7 +848,8 @@
       "type": "general",
       "population": 240000,
       "urbanity": 4,
-      "lean": -3
+      "lean": -1.604,
+      "whiteLean": -0.61
     },
     {
       "id": "TNN-06",
@@ -812,7 +865,8 @@
       "type": "general",
       "population": 182000,
       "urbanity": 3,
-      "lean": -3
+      "lean": -1.604,
+      "whiteLean": -0.61
     },
     {
       "id": "TNN-07",
@@ -825,7 +879,8 @@
       "type": "general",
       "population": 185000,
       "urbanity": 5,
-      "lean": -2
+      "lean": -0.704,
+      "whiteLean": -0.61
     },
     {
       "id": "TNN-08",
@@ -838,7 +893,8 @@
       "type": "general",
       "population": 122000,
       "urbanity": 4,
-      "lean": -3
+      "lean": -1.604,
+      "whiteLean": -0.61
     },
     {
       "id": "TNN-09",
@@ -851,7 +907,8 @@
       "type": "general",
       "population": 190000,
       "urbanity": 3,
-      "lean": -4
+      "lean": -2.504,
+      "whiteLean": -0.61
     },
     {
       "id": "TNN-10",
@@ -865,7 +922,8 @@
       "type": "general",
       "population": 201000,
       "urbanity": 5,
-      "lean": -3
+      "lean": -1.604,
+      "whiteLean": -0.61
     },
     {
       "id": "TNN-11",
@@ -878,7 +936,8 @@
       "type": "general",
       "population": 67000,
       "urbanity": 4,
-      "lean": -2
+      "lean": -0.704,
+      "whiteLean": -0.61
     },
     {
       "id": "TNN-P1",
@@ -891,8 +950,9 @@
       "type": "plainIndigenous",
       "population": 6000,
       "urbanity": 3,
-      "lean": 0,
-      "_estimated": true
+      "lean": 1.096,
+      "_estimated": true,
+      "whiteLean": -0.61
     },
     {
       "id": "TNN-M1",
@@ -905,8 +965,9 @@
       "type": "mountainIndigenous",
       "population": 5000,
       "urbanity": 2,
-      "lean": 4,
-      "_estimated": true
+      "lean": 4.696,
+      "_estimated": true,
+      "whiteLean": -0.61
     },
     {
       "id": "KHH-01",
@@ -927,8 +988,9 @@
       "type": "general",
       "population": 134000,
       "urbanity": 1,
-      "lean": -1,
-      "_estimated": true
+      "lean": -0.169,
+      "_estimated": true,
+      "whiteLean": -0.908
     },
     {
       "id": "KHH-02",
@@ -951,8 +1013,9 @@
       "type": "general",
       "population": 383000,
       "urbanity": 2,
-      "lean": -2,
-      "_estimated": true
+      "lean": -1.069,
+      "_estimated": true,
+      "whiteLean": -0.908
     },
     {
       "id": "KHH-03",
@@ -966,8 +1029,9 @@
       "type": "general",
       "population": 367000,
       "urbanity": 4,
-      "lean": -2,
-      "_estimated": true
+      "lean": -1.069,
+      "_estimated": true,
+      "whiteLean": -0.908
     },
     {
       "id": "KHH-04",
@@ -982,8 +1046,9 @@
       "type": "general",
       "population": 183000,
       "urbanity": 4,
-      "lean": -2,
-      "_estimated": true
+      "lean": -1.069,
+      "_estimated": true,
+      "whiteLean": -0.908
     },
     {
       "id": "KHH-05",
@@ -996,8 +1061,9 @@
       "type": "general",
       "population": 332000,
       "urbanity": 5,
-      "lean": -2,
-      "_estimated": true
+      "lean": -1.069,
+      "_estimated": true,
+      "whiteLean": -0.908
     },
     {
       "id": "KHH-06",
@@ -1012,8 +1078,9 @@
       "type": "general",
       "population": 230000,
       "urbanity": 5,
-      "lean": -2,
-      "_estimated": true
+      "lean": -1.069,
+      "_estimated": true,
+      "whiteLean": -0.908
     },
     {
       "id": "KHH-07",
@@ -1027,8 +1094,9 @@
       "type": "general",
       "population": 327000,
       "urbanity": 4,
-      "lean": -3,
-      "_estimated": true
+      "lean": -1.969,
+      "_estimated": true,
+      "whiteLean": -0.908
     },
     {
       "id": "KHH-08",
@@ -1041,8 +1109,9 @@
       "type": "general",
       "population": 357000,
       "urbanity": 4,
-      "lean": -2,
-      "_estimated": true
+      "lean": -1.069,
+      "_estimated": true,
+      "whiteLean": -0.908
     },
     {
       "id": "KHH-09",
@@ -1057,8 +1126,9 @@
       "type": "general",
       "population": 218000,
       "urbanity": 3,
-      "lean": -2,
-      "_estimated": true
+      "lean": -1.069,
+      "_estimated": true,
+      "whiteLean": -0.908
     },
     {
       "id": "KHH-10",
@@ -1073,8 +1143,9 @@
       "type": "general",
       "population": 167000,
       "urbanity": 3,
-      "lean": -2,
-      "_estimated": true
+      "lean": -1.069,
+      "_estimated": true,
+      "whiteLean": -0.908
     },
     {
       "id": "KHH-P1",
@@ -1087,8 +1158,9 @@
       "type": "plainIndigenous",
       "population": 12000,
       "urbanity": 3,
-      "lean": 0,
-      "_estimated": true
+      "lean": 0.731,
+      "_estimated": true,
+      "whiteLean": -0.908
     },
     {
       "id": "KHH-M1",
@@ -1101,8 +1173,9 @@
       "type": "mountainIndigenous",
       "population": 20000,
       "urbanity": 2,
-      "lean": 4,
-      "_estimated": true
+      "lean": 4.331,
+      "_estimated": true,
+      "whiteLean": -0.908
     },
     {
       "id": "KEE-01",
@@ -1115,8 +1188,9 @@
       "type": "general",
       "population": 50000,
       "urbanity": 4,
-      "lean": 1,
-      "_estimated": true
+      "lean": 0.497,
+      "_estimated": true,
+      "whiteLean": 0.105
     },
     {
       "id": "KEE-02",
@@ -1129,8 +1203,9 @@
       "type": "general",
       "population": 46000,
       "urbanity": 4,
-      "lean": 0,
-      "_estimated": true
+      "lean": -0.403,
+      "_estimated": true,
+      "whiteLean": 0.105
     },
     {
       "id": "KEE-03",
@@ -1143,8 +1218,9 @@
       "type": "general",
       "population": 37000,
       "urbanity": 4,
-      "lean": 1,
-      "_estimated": true
+      "lean": 0.497,
+      "_estimated": true,
+      "whiteLean": 0.105
     },
     {
       "id": "KEE-04",
@@ -1157,8 +1233,9 @@
       "type": "general",
       "population": 43000,
       "urbanity": 4,
-      "lean": 0,
-      "_estimated": true
+      "lean": -0.403,
+      "_estimated": true,
+      "whiteLean": 0.105
     },
     {
       "id": "KEE-05",
@@ -1171,8 +1248,9 @@
       "type": "general",
       "population": 84000,
       "urbanity": 4,
-      "lean": 0,
-      "_estimated": true
+      "lean": -0.403,
+      "_estimated": true,
+      "whiteLean": 0.105
     },
     {
       "id": "KEE-06",
@@ -1185,8 +1263,9 @@
       "type": "general",
       "population": 37000,
       "urbanity": 3,
-      "lean": 0,
-      "_estimated": true
+      "lean": -0.403,
+      "_estimated": true,
+      "whiteLean": 0.105
     },
     {
       "id": "KEE-07",
@@ -1199,8 +1278,9 @@
       "type": "general",
       "population": 54000,
       "urbanity": 3,
-      "lean": 0,
-      "_estimated": true
+      "lean": -0.403,
+      "_estimated": true,
+      "whiteLean": 0.105
     },
     {
       "id": "KEE-P1",
@@ -1213,8 +1293,9 @@
       "type": "plainIndigenous",
       "population": 6000,
       "urbanity": 3,
-      "lean": 3,
-      "_estimated": true
+      "lean": 2.297,
+      "_estimated": true,
+      "whiteLean": 0.105
     },
     {
       "id": "KEE-M1",
@@ -1227,8 +1308,9 @@
       "type": "mountainIndigenous",
       "population": 6000,
       "urbanity": 2,
-      "lean": 4,
-      "_estimated": true
+      "lean": 3.197,
+      "_estimated": true,
+      "whiteLean": 0.105
     },
     {
       "id": "HSC-01",
@@ -1241,7 +1323,8 @@
       "type": "general",
       "population": 217000,
       "urbanity": 5,
-      "lean": 1
+      "lean": -0.343,
+      "whiteLean": 1.417
     },
     {
       "id": "HSC-02",
@@ -1254,7 +1337,8 @@
       "type": "general",
       "population": 149000,
       "urbanity": 4,
-      "lean": 1
+      "lean": -0.343,
+      "whiteLean": 1.417
     },
     {
       "id": "HSC-03",
@@ -1267,7 +1351,8 @@
       "type": "general",
       "population": 77000,
       "urbanity": 3,
-      "lean": 0
+      "lean": -1.241,
+      "whiteLean": 1.417
     },
     {
       "id": "HSC-P1",
@@ -1280,8 +1365,9 @@
       "type": "plainIndigenous",
       "population": 5000,
       "urbanity": 3,
-      "lean": 3,
-      "_estimated": true
+      "lean": 1.457,
+      "_estimated": true,
+      "whiteLean": 1.417
     },
     {
       "id": "HSC-M1",
@@ -1294,8 +1380,9 @@
       "type": "mountainIndigenous",
       "population": 4000,
       "urbanity": 2,
-      "lean": 4,
-      "_estimated": true
+      "lean": 2.359,
+      "_estimated": true,
+      "whiteLean": 1.417
     },
     {
       "id": "CYI-01",
@@ -1308,7 +1395,8 @@
       "type": "general",
       "population": 113000,
       "urbanity": 4,
-      "lean": -1
+      "lean": -1.018,
+      "whiteLean": -0.025
     },
     {
       "id": "CYI-02",
@@ -1321,7 +1409,8 @@
       "type": "general",
       "population": 147000,
       "urbanity": 4,
-      "lean": -1
+      "lean": -1.018,
+      "whiteLean": -0.025
     },
     {
       "id": "CYI-A1",
@@ -1334,8 +1423,9 @@
       "type": "indigenous",
       "population": 3000,
       "urbanity": 3,
-      "lean": 2,
-      "_estimated": true
+      "lean": 1.682,
+      "_estimated": true,
+      "whiteLean": -0.025
     },
     {
       "id": "HSQ-01",
@@ -1348,8 +1438,9 @@
       "type": "general",
       "population": 203000,
       "urbanity": 4,
-      "lean": 2,
-      "_estimated": true
+      "lean": -0.679,
+      "_estimated": true,
+      "whiteLean": 1.075
     },
     {
       "id": "HSQ-02",
@@ -1363,8 +1454,9 @@
       "type": "general",
       "population": 130000,
       "urbanity": 3,
-      "lean": 3,
-      "_estimated": true
+      "lean": 0.221,
+      "_estimated": true,
+      "whiteLean": 1.075
     },
     {
       "id": "HSQ-03",
@@ -1378,8 +1470,9 @@
       "type": "general",
       "population": 56000,
       "urbanity": 2,
-      "lean": 3,
-      "_estimated": true
+      "lean": 0.221,
+      "_estimated": true,
+      "whiteLean": 1.075
     },
     {
       "id": "HSQ-04",
@@ -1394,8 +1487,9 @@
       "type": "general",
       "population": 49000,
       "urbanity": 1,
-      "lean": 3,
-      "_estimated": true
+      "lean": 0.221,
+      "_estimated": true,
+      "whiteLean": 1.075
     },
     {
       "id": "HSQ-05",
@@ -1409,8 +1503,9 @@
       "type": "general",
       "population": 97000,
       "urbanity": 3,
-      "lean": 3,
-      "_estimated": true
+      "lean": 0.221,
+      "_estimated": true,
+      "whiteLean": 1.075
     },
     {
       "id": "HSQ-06",
@@ -1425,8 +1520,9 @@
       "type": "general",
       "population": 28000,
       "urbanity": 1,
-      "lean": 3,
-      "_estimated": true
+      "lean": 0.221,
+      "_estimated": true,
+      "whiteLean": 1.075
     },
     {
       "id": "HSQ-P1",
@@ -1439,8 +1535,9 @@
       "type": "plainIndigenous",
       "population": 7000,
       "urbanity": 1,
-      "lean": 3,
-      "_estimated": true
+      "lean": 0.221,
+      "_estimated": true,
+      "whiteLean": 1.075
     },
     {
       "id": "HSQ-M1",
@@ -1453,8 +1550,9 @@
       "type": "mountainIndigenous",
       "population": 16000,
       "urbanity": 0,
-      "lean": 4,
-      "_estimated": true
+      "lean": 1.121,
+      "_estimated": true,
+      "whiteLean": 1.075
     },
     {
       "id": "MIA-01",
@@ -1467,8 +1565,9 @@
       "type": "general",
       "population": 87000,
       "urbanity": 3,
-      "lean": 2,
-      "_estimated": true
+      "lean": -0.524,
+      "_estimated": true,
+      "whiteLean": 0.025
     },
     {
       "id": "MIA-02",
@@ -1483,8 +1582,9 @@
       "type": "general",
       "population": 118000,
       "urbanity": 3,
-      "lean": 3,
-      "_estimated": true
+      "lean": 0.376,
+      "_estimated": true,
+      "whiteLean": 0.025
     },
     {
       "id": "MIA-03",
@@ -1499,8 +1599,9 @@
       "type": "general",
       "population": 107000,
       "urbanity": 3,
-      "lean": 3,
-      "_estimated": true
+      "lean": 0.376,
+      "_estimated": true,
+      "whiteLean": 0.025
     },
     {
       "id": "MIA-04",
@@ -1516,8 +1617,9 @@
       "type": "general",
       "population": 54000,
       "urbanity": 1,
-      "lean": 3,
-      "_estimated": true
+      "lean": 0.376,
+      "_estimated": true,
+      "whiteLean": 0.025
     },
     {
       "id": "MIA-05",
@@ -1532,8 +1634,9 @@
       "type": "general",
       "population": 70000,
       "urbanity": 2,
-      "lean": 2,
-      "_estimated": true
+      "lean": -0.524,
+      "_estimated": true,
+      "whiteLean": 0.025
     },
     {
       "id": "MIA-06",
@@ -1546,8 +1649,9 @@
       "type": "general",
       "population": 43000,
       "urbanity": 2,
-      "lean": 2,
-      "_estimated": true
+      "lean": -0.524,
+      "_estimated": true,
+      "whiteLean": 0.025
     },
     {
       "id": "MIA-07",
@@ -1562,8 +1666,9 @@
       "type": "general",
       "population": 46000,
       "urbanity": 1,
-      "lean": 3,
-      "_estimated": true
+      "lean": 0.376,
+      "_estimated": true,
+      "whiteLean": 0.025
     },
     {
       "id": "MIA-P1",
@@ -1576,8 +1681,9 @@
       "type": "plainIndigenous",
       "population": 5000,
       "urbanity": 1,
-      "lean": 3,
-      "_estimated": true
+      "lean": 0.376,
+      "_estimated": true,
+      "whiteLean": 0.025
     },
     {
       "id": "MIA-M1",
@@ -1590,8 +1696,9 @@
       "type": "mountainIndigenous",
       "population": 5000,
       "urbanity": 0,
-      "lean": 4,
-      "_estimated": true
+      "lean": 1.276,
+      "_estimated": true,
+      "whiteLean": 0.025
     },
     {
       "id": "CHA-01",
@@ -1604,8 +1711,9 @@
       "type": "general",
       "population": 234000,
       "urbanity": 4,
-      "lean": 0,
-      "_estimated": true
+      "lean": -0.6,
+      "_estimated": true,
+      "whiteLean": 0.255
     },
     {
       "id": "CHA-02",
@@ -1620,8 +1728,9 @@
       "type": "general",
       "population": 104000,
       "urbanity": 2,
-      "lean": 0,
-      "_estimated": true
+      "lean": -0.6,
+      "_estimated": true,
+      "whiteLean": 0.255
     },
     {
       "id": "CHA-03",
@@ -1636,8 +1745,9 @@
       "type": "general",
       "population": 142000,
       "urbanity": 2,
-      "lean": -1,
-      "_estimated": true
+      "lean": -1.5,
+      "_estimated": true,
+      "whiteLean": 0.255
     },
     {
       "id": "CHA-04",
@@ -1652,8 +1762,9 @@
       "type": "general",
       "population": 156000,
       "urbanity": 2,
-      "lean": 0,
-      "_estimated": true
+      "lean": -0.6,
+      "_estimated": true,
+      "whiteLean": 0.255
     },
     {
       "id": "CHA-05",
@@ -1666,8 +1777,9 @@
       "type": "general",
       "population": 124000,
       "urbanity": 3,
-      "lean": 0,
-      "_estimated": true
+      "lean": -0.6,
+      "_estimated": true,
+      "whiteLean": 0.255
     },
     {
       "id": "CHA-06",
@@ -1682,8 +1794,9 @@
       "type": "general",
       "population": 109000,
       "urbanity": 2,
-      "lean": 0,
-      "_estimated": true
+      "lean": -0.6,
+      "_estimated": true,
+      "whiteLean": 0.255
     },
     {
       "id": "CHA-07",
@@ -1698,8 +1811,9 @@
       "type": "general",
       "population": 119000,
       "urbanity": 2,
-      "lean": 0,
-      "_estimated": true
+      "lean": -0.6,
+      "_estimated": true,
+      "whiteLean": 0.255
     },
     {
       "id": "CHA-08",
@@ -1715,8 +1829,9 @@
       "type": "general",
       "population": 116000,
       "urbanity": 2,
-      "lean": -1,
-      "_estimated": true
+      "lean": -1.5,
+      "_estimated": true,
+      "whiteLean": 0.255
     },
     {
       "id": "CHA-09",
@@ -1733,8 +1848,9 @@
       "type": "general",
       "population": 140000,
       "urbanity": 1,
-      "lean": -1,
-      "_estimated": true
+      "lean": -1.5,
+      "_estimated": true,
+      "whiteLean": 0.255
     },
     {
       "id": "CHA-P1",
@@ -1747,8 +1863,9 @@
       "type": "plainIndigenous",
       "population": 6000,
       "urbanity": 1,
-      "lean": 3,
-      "_estimated": true
+      "lean": 2.1,
+      "_estimated": true,
+      "whiteLean": 0.255
     },
     {
       "id": "NAN-01",
@@ -1761,8 +1878,9 @@
       "type": "general",
       "population": 91000,
       "urbanity": 3,
-      "lean": 1,
-      "_estimated": true
+      "lean": -1.147,
+      "_estimated": true,
+      "whiteLean": -0.39
     },
     {
       "id": "NAN-02",
@@ -1776,8 +1894,9 @@
       "type": "general",
       "population": 48000,
       "urbanity": 1,
-      "lean": 2,
-      "_estimated": true
+      "lean": -0.257,
+      "_estimated": true,
+      "whiteLean": -0.39
     },
     {
       "id": "NAN-03",
@@ -1790,8 +1909,9 @@
       "type": "general",
       "population": 91000,
       "urbanity": 3,
-      "lean": 2,
-      "_estimated": true
+      "lean": -0.257,
+      "_estimated": true,
+      "whiteLean": -0.39
     },
     {
       "id": "NAN-04",
@@ -1805,8 +1925,9 @@
       "type": "general",
       "population": 91000,
       "urbanity": 2,
-      "lean": 2,
-      "_estimated": true
+      "lean": -0.257,
+      "_estimated": true,
+      "whiteLean": -0.39
     },
     {
       "id": "NAN-05",
@@ -1822,8 +1943,9 @@
       "type": "general",
       "population": 56000,
       "urbanity": 1,
-      "lean": 2,
-      "_estimated": true
+      "lean": -0.257,
+      "_estimated": true,
+      "whiteLean": -0.39
     },
     {
       "id": "NAN-06",
@@ -1838,8 +1960,9 @@
       "type": "general",
       "population": 74000,
       "urbanity": 2,
-      "lean": 2,
-      "_estimated": true
+      "lean": -0.257,
+      "_estimated": true,
+      "whiteLean": -0.39
     },
     {
       "id": "NAN-P1",
@@ -1852,8 +1975,9 @@
       "type": "plainIndigenous",
       "population": 8000,
       "urbanity": 1,
-      "lean": 3,
-      "_estimated": true
+      "lean": 0.653,
+      "_estimated": true,
+      "whiteLean": -0.39
     },
     {
       "id": "NAN-M1",
@@ -1866,8 +1990,9 @@
       "type": "mountainIndigenous",
       "population": 22000,
       "urbanity": 0,
-      "lean": 4,
-      "_estimated": true
+      "lean": 1.543,
+      "_estimated": true,
+      "whiteLean": -0.39
     },
     {
       "id": "YUN-01",
@@ -1880,8 +2005,9 @@
       "type": "general",
       "population": 115000,
       "urbanity": 3,
-      "lean": -1,
-      "_estimated": true
+      "lean": -0.574,
+      "_estimated": true,
+      "whiteLean": -0.095
     },
     {
       "id": "YUN-02",
@@ -1896,8 +2022,9 @@
       "type": "general",
       "population": 76000,
       "urbanity": 1,
-      "lean": -2,
-      "_estimated": true
+      "lean": -1.474,
+      "_estimated": true,
+      "whiteLean": -0.095
     },
     {
       "id": "YUN-03",
@@ -1911,8 +2038,9 @@
       "type": "general",
       "population": 63000,
       "urbanity": 2,
-      "lean": -2,
-      "_estimated": true
+      "lean": -1.474,
+      "_estimated": true,
+      "whiteLean": -0.095
     },
     {
       "id": "YUN-04",
@@ -1926,8 +2054,9 @@
       "type": "general",
       "population": 99000,
       "urbanity": 2,
-      "lean": -2,
-      "_estimated": true
+      "lean": -1.474,
+      "_estimated": true,
+      "whiteLean": -0.095
     },
     {
       "id": "YUN-05",
@@ -1942,8 +2071,9 @@
       "type": "general",
       "population": 47000,
       "urbanity": 1,
-      "lean": -2,
-      "_estimated": true
+      "lean": -1.474,
+      "_estimated": true,
+      "whiteLean": -0.095
     },
     {
       "id": "YUN-06",
@@ -1958,8 +2088,9 @@
       "type": "general",
       "population": 99000,
       "urbanity": 1,
-      "lean": -2,
-      "_estimated": true
+      "lean": -1.474,
+      "_estimated": true,
+      "whiteLean": -0.095
     },
     {
       "id": "YUN-07",
@@ -1973,8 +2104,9 @@
       "type": "general",
       "population": 54000,
       "urbanity": 1,
-      "lean": -2,
-      "_estimated": true
+      "lean": -1.474,
+      "_estimated": true,
+      "whiteLean": -0.095
     },
     {
       "id": "YUN-08",
@@ -1989,8 +2121,9 @@
       "type": "general",
       "population": 68000,
       "urbanity": 1,
-      "lean": -3,
-      "_estimated": true
+      "lean": -2.374,
+      "_estimated": true,
+      "whiteLean": -0.095
     },
     {
       "id": "YUN-09",
@@ -2003,8 +2136,9 @@
       "type": "general",
       "population": 40000,
       "urbanity": 2,
-      "lean": -2,
-      "_estimated": true
+      "lean": -1.474,
+      "_estimated": true,
+      "whiteLean": -0.095
     },
     {
       "id": "YUN-P1",
@@ -2017,8 +2151,9 @@
       "type": "plainIndigenous",
       "population": 4000,
       "urbanity": 1,
-      "lean": 3,
-      "_estimated": true
+      "lean": 3.026,
+      "_estimated": true,
+      "whiteLean": -0.095
     },
     {
       "id": "CYQ-01",
@@ -2033,8 +2168,9 @@
       "type": "general",
       "population": 115000,
       "urbanity": 2,
-      "lean": -3,
-      "_estimated": true
+      "lean": -1.804,
+      "_estimated": true,
+      "whiteLean": -0.598
     },
     {
       "id": "CYQ-02",
@@ -2051,8 +2187,9 @@
       "type": "general",
       "population": 65000,
       "urbanity": 1,
-      "lean": -2,
-      "_estimated": true
+      "lean": -0.904,
+      "_estimated": true,
+      "whiteLean": -0.598
     },
     {
       "id": "CYQ-03",
@@ -2066,8 +2203,9 @@
       "type": "general",
       "population": 51000,
       "urbanity": 1,
-      "lean": -3,
-      "_estimated": true
+      "lean": -1.804,
+      "_estimated": true,
+      "whiteLean": -0.598
     },
     {
       "id": "CYQ-04",
@@ -2081,8 +2219,9 @@
       "type": "general",
       "population": 65000,
       "urbanity": 2,
-      "lean": -3,
-      "_estimated": true
+      "lean": -1.804,
+      "_estimated": true,
+      "whiteLean": -0.598
     },
     {
       "id": "CYQ-05",
@@ -2097,8 +2236,9 @@
       "type": "general",
       "population": 57000,
       "urbanity": 1,
-      "lean": -3,
-      "_estimated": true
+      "lean": -1.804,
+      "_estimated": true,
+      "whiteLean": -0.598
     },
     {
       "id": "CYQ-06",
@@ -2112,8 +2252,9 @@
       "type": "general",
       "population": 89000,
       "urbanity": 2,
-      "lean": -3,
-      "_estimated": true
+      "lean": -1.804,
+      "_estimated": true,
+      "whiteLean": -0.598
     },
     {
       "id": "CYQ-07",
@@ -2126,8 +2267,9 @@
       "type": "general",
       "population": 41000,
       "urbanity": 1,
-      "lean": -2,
-      "_estimated": true
+      "lean": -0.904,
+      "_estimated": true,
+      "whiteLean": -0.598
     },
     {
       "id": "CYQ-P1",
@@ -2140,8 +2282,9 @@
       "type": "plainIndigenous",
       "population": 4000,
       "urbanity": 1,
-      "lean": 3,
-      "_estimated": true
+      "lean": 3.596,
+      "_estimated": true,
+      "whiteLean": -0.598
     },
     {
       "id": "CYQ-M1",
@@ -2154,8 +2297,9 @@
       "type": "mountainIndigenous",
       "population": 3000,
       "urbanity": 0,
-      "lean": 4,
-      "_estimated": true
+      "lean": 4.496,
+      "_estimated": true,
+      "whiteLean": -0.598
     },
     {
       "id": "PIF-01",
@@ -2168,8 +2312,9 @@
       "type": "general",
       "population": 185000,
       "urbanity": 4,
-      "lean": -2,
-      "_estimated": true
+      "lean": -1.41,
+      "_estimated": true,
+      "whiteLean": -1.275
     },
     {
       "id": "PIF-02",
@@ -2186,8 +2331,9 @@
       "type": "general",
       "population": 72000,
       "urbanity": 1,
-      "lean": -2,
-      "_estimated": true
+      "lean": -1.41,
+      "_estimated": true,
+      "whiteLean": -1.275
     },
     {
       "id": "PIF-03",
@@ -2203,8 +2349,9 @@
       "type": "general",
       "population": 68000,
       "urbanity": 2,
-      "lean": -2,
-      "_estimated": true
+      "lean": -1.41,
+      "_estimated": true,
+      "whiteLean": -1.275
     },
     {
       "id": "PIF-04",
@@ -2221,8 +2368,9 @@
       "type": "general",
       "population": 94000,
       "urbanity": 1,
-      "lean": -2,
-      "_estimated": true
+      "lean": -1.41,
+      "_estimated": true,
+      "whiteLean": -1.275
     },
     {
       "id": "PIF-05",
@@ -2235,8 +2383,9 @@
       "type": "general",
       "population": 43000,
       "urbanity": 2,
-      "lean": -3,
-      "_estimated": true
+      "lean": -2.31,
+      "_estimated": true,
+      "whiteLean": -1.275
     },
     {
       "id": "PIF-06",
@@ -2250,8 +2399,9 @@
       "type": "general",
       "population": 64000,
       "urbanity": 2,
-      "lean": -3,
-      "_estimated": true
+      "lean": -2.31,
+      "_estimated": true,
+      "whiteLean": -1.275
     },
     {
       "id": "PIF-07",
@@ -2266,8 +2416,9 @@
       "type": "general",
       "population": 74000,
       "urbanity": 2,
-      "lean": -3,
-      "_estimated": true
+      "lean": -2.31,
+      "_estimated": true,
+      "whiteLean": -1.275
     },
     {
       "id": "PIF-08",
@@ -2283,8 +2434,9 @@
       "type": "general",
       "population": 55000,
       "urbanity": 1,
-      "lean": -3,
-      "_estimated": true
+      "lean": -2.31,
+      "_estimated": true,
+      "whiteLean": -1.275
     },
     {
       "id": "PIF-09",
@@ -2300,8 +2452,9 @@
       "type": "general",
       "population": 38000,
       "urbanity": 1,
-      "lean": -2,
-      "_estimated": true
+      "lean": -1.41,
+      "_estimated": true,
+      "whiteLean": -1.275
     },
     {
       "id": "PIF-10",
@@ -2317,8 +2470,9 @@
       "type": "general",
       "population": 47000,
       "urbanity": 1,
-      "lean": -2,
-      "_estimated": true
+      "lean": -1.41,
+      "_estimated": true,
+      "whiteLean": -1.275
     },
     {
       "id": "PIF-P1",
@@ -2331,8 +2485,9 @@
       "type": "plainIndigenous",
       "population": 20000,
       "urbanity": 1,
-      "lean": 3,
-      "_estimated": true
+      "lean": 3.09,
+      "_estimated": true,
+      "whiteLean": -1.275
     },
     {
       "id": "PIF-M1",
@@ -2345,8 +2500,9 @@
       "type": "mountainIndigenous",
       "population": 40000,
       "urbanity": 0,
-      "lean": 4,
-      "_estimated": true
+      "lean": 3.99,
+      "_estimated": true,
+      "whiteLean": -1.275
     },
     {
       "id": "ILA-01",
@@ -2359,8 +2515,9 @@
       "type": "general",
       "population": 92000,
       "urbanity": 3,
-      "lean": -2,
-      "_estimated": true
+      "lean": -1.769,
+      "_estimated": true,
+      "whiteLean": -0.073
     },
     {
       "id": "ILA-02",
@@ -2374,8 +2531,9 @@
       "type": "general",
       "population": 55000,
       "urbanity": 1,
-      "lean": -2,
-      "_estimated": true
+      "lean": -1.769,
+      "_estimated": true,
+      "whiteLean": -0.073
     },
     {
       "id": "ILA-03",
@@ -2389,8 +2547,9 @@
       "type": "general",
       "population": 62000,
       "urbanity": 2,
-      "lean": -1,
-      "_estimated": true
+      "lean": -0.869,
+      "_estimated": true,
+      "whiteLean": -0.073
     },
     {
       "id": "ILA-04",
@@ -2403,8 +2562,9 @@
       "type": "general",
       "population": 70000,
       "urbanity": 3,
-      "lean": -2,
-      "_estimated": true
+      "lean": -1.769,
+      "_estimated": true,
+      "whiteLean": -0.073
     },
     {
       "id": "ILA-05",
@@ -2418,8 +2578,9 @@
       "type": "general",
       "population": 87000,
       "urbanity": 2,
-      "lean": -2,
-      "_estimated": true
+      "lean": -1.769,
+      "_estimated": true,
+      "whiteLean": -0.073
     },
     {
       "id": "ILA-06",
@@ -2433,8 +2594,9 @@
       "type": "general",
       "population": 24000,
       "urbanity": 1,
-      "lean": -1,
-      "_estimated": true
+      "lean": -0.869,
+      "_estimated": true,
+      "whiteLean": -0.073
     },
     {
       "id": "ILA-07",
@@ -2448,8 +2610,9 @@
       "type": "general",
       "population": 42000,
       "urbanity": 2,
-      "lean": -2,
-      "_estimated": true
+      "lean": -1.769,
+      "_estimated": true,
+      "whiteLean": -0.073
     },
     {
       "id": "ILA-P1",
@@ -2462,8 +2625,9 @@
       "type": "plainIndigenous",
       "population": 5000,
       "urbanity": 1,
-      "lean": 3,
-      "_estimated": true
+      "lean": 2.731,
+      "_estimated": true,
+      "whiteLean": -0.073
     },
     {
       "id": "ILA-M1",
@@ -2476,8 +2640,9 @@
       "type": "mountainIndigenous",
       "population": 12000,
       "urbanity": 0,
-      "lean": 4,
-      "_estimated": true
+      "lean": 3.631,
+      "_estimated": true,
+      "whiteLean": -0.073
     },
     {
       "id": "HUA-01",
@@ -2490,8 +2655,9 @@
       "type": "general",
       "population": 71000,
       "urbanity": 3,
-      "lean": 3,
-      "_estimated": true
+      "lean": 1.043,
+      "_estimated": true,
+      "whiteLean": -0.87
     },
     {
       "id": "HUA-02",
@@ -2505,8 +2671,9 @@
       "type": "general",
       "population": 25000,
       "urbanity": 1,
-      "lean": 3,
-      "_estimated": true
+      "lean": 1.043,
+      "_estimated": true,
+      "whiteLean": -0.87
     },
     {
       "id": "HUA-03",
@@ -2519,8 +2686,9 @@
       "type": "general",
       "population": 59000,
       "urbanity": 3,
-      "lean": 3,
-      "_estimated": true
+      "lean": 1.043,
+      "_estimated": true,
+      "whiteLean": -0.87
     },
     {
       "id": "HUA-04",
@@ -2535,8 +2703,9 @@
       "type": "general",
       "population": 24000,
       "urbanity": 1,
-      "lean": 3,
-      "_estimated": true
+      "lean": 1.043,
+      "_estimated": true,
+      "whiteLean": -0.87
     },
     {
       "id": "HUA-05",
@@ -2551,8 +2720,9 @@
       "type": "general",
       "population": 19000,
       "urbanity": 0,
-      "lean": 3,
-      "_estimated": true
+      "lean": 1.043,
+      "_estimated": true,
+      "whiteLean": -0.87
     },
     {
       "id": "HUA-06",
@@ -2567,8 +2737,9 @@
       "type": "general",
       "population": 27000,
       "urbanity": 1,
-      "lean": 2,
-      "_estimated": true
+      "lean": 0.143,
+      "_estimated": true,
+      "whiteLean": -0.87
     },
     {
       "id": "HUA-P1",
@@ -2581,8 +2752,9 @@
       "type": "plainIndigenous",
       "population": 50000,
       "urbanity": 1,
-      "lean": 3,
-      "_estimated": true
+      "lean": 1.043,
+      "_estimated": true,
+      "whiteLean": -0.87
     },
     {
       "id": "HUA-M1",
@@ -2595,8 +2767,9 @@
       "type": "mountainIndigenous",
       "population": 45000,
       "urbanity": 0,
-      "lean": 4,
-      "_estimated": true
+      "lean": 1.943,
+      "_estimated": true,
+      "whiteLean": -0.87
     },
     {
       "id": "TTT-01",
@@ -2609,8 +2782,9 @@
       "type": "general",
       "population": 65000,
       "urbanity": 3,
-      "lean": 3,
-      "_estimated": true
+      "lean": 0.647,
+      "_estimated": true,
+      "whiteLean": -1.233
     },
     {
       "id": "TTT-02",
@@ -2624,8 +2798,9 @@
       "type": "general",
       "population": 13000,
       "urbanity": 1,
-      "lean": 3,
-      "_estimated": true
+      "lean": 0.647,
+      "_estimated": true,
+      "whiteLean": -1.233
     },
     {
       "id": "TTT-03",
@@ -2641,8 +2816,9 @@
       "type": "general",
       "population": 18000,
       "urbanity": 0,
-      "lean": 3,
-      "_estimated": true
+      "lean": 0.647,
+      "_estimated": true,
+      "whiteLean": -1.233
     },
     {
       "id": "TTT-04",
@@ -2657,8 +2833,9 @@
       "type": "general",
       "population": 18000,
       "urbanity": 0,
-      "lean": 3,
-      "_estimated": true
+      "lean": 0.647,
+      "_estimated": true,
+      "whiteLean": -1.233
     },
     {
       "id": "TTT-05",
@@ -2674,8 +2851,9 @@
       "type": "general",
       "population": 15000,
       "urbanity": 0,
-      "lean": 3,
-      "_estimated": true
+      "lean": 0.647,
+      "_estimated": true,
+      "whiteLean": -1.233
     },
     {
       "id": "TTT-06",
@@ -2689,8 +2867,9 @@
       "type": "general",
       "population": 5000,
       "urbanity": 0,
-      "lean": 2,
-      "_estimated": true
+      "lean": -0.253,
+      "_estimated": true,
+      "whiteLean": -1.233
     },
     {
       "id": "TTT-P1",
@@ -2703,8 +2882,9 @@
       "type": "plainIndigenous",
       "population": 42000,
       "urbanity": 1,
-      "lean": 3,
-      "_estimated": true
+      "lean": 0.647,
+      "_estimated": true,
+      "whiteLean": -1.233
     },
     {
       "id": "TTT-M1",
@@ -2717,8 +2897,9 @@
       "type": "mountainIndigenous",
       "population": 38000,
       "urbanity": 0,
-      "lean": 4,
-      "_estimated": true
+      "lean": 1.547,
+      "_estimated": true,
+      "whiteLean": -1.233
     },
     {
       "id": "PEN-01",
@@ -2731,8 +2912,9 @@
       "type": "general",
       "population": 65000,
       "urbanity": 3,
-      "lean": -1,
-      "_estimated": true
+      "lean": -0.46,
+      "_estimated": true,
+      "whiteLean": -0.673
     },
     {
       "id": "PEN-02",
@@ -2745,8 +2927,9 @@
       "type": "general",
       "population": 15000,
       "urbanity": 1,
-      "lean": -1,
-      "_estimated": true
+      "lean": -0.46,
+      "_estimated": true,
+      "whiteLean": -0.673
     },
     {
       "id": "PEN-03",
@@ -2759,8 +2942,9 @@
       "type": "general",
       "population": 9000,
       "urbanity": 1,
-      "lean": -1,
-      "_estimated": true
+      "lean": -0.46,
+      "_estimated": true,
+      "whiteLean": -0.673
     },
     {
       "id": "PEN-04",
@@ -2773,8 +2957,9 @@
       "type": "general",
       "population": 9000,
       "urbanity": 1,
-      "lean": -1,
-      "_estimated": true
+      "lean": -0.46,
+      "_estimated": true,
+      "whiteLean": -0.673
     },
     {
       "id": "PEN-05",
@@ -2788,8 +2973,9 @@
       "type": "general",
       "population": 8000,
       "urbanity": 0,
-      "lean": -1,
-      "_estimated": true
+      "lean": -0.46,
+      "_estimated": true,
+      "whiteLean": -0.673
     },
     {
       "id": "KIN-01",
@@ -2802,8 +2988,9 @@
       "type": "general",
       "population": 45000,
       "urbanity": 3,
-      "lean": 5,
-      "_estimated": true
+      "lean": 3.168,
+      "_estimated": true,
+      "whiteLean": -0.468
     },
     {
       "id": "KIN-02",
@@ -2816,8 +3003,9 @@
       "type": "general",
       "population": 33000,
       "urbanity": 2,
-      "lean": 5,
-      "_estimated": true
+      "lean": 3.168,
+      "_estimated": true,
+      "whiteLean": -0.468
     },
     {
       "id": "KIN-03",
@@ -2830,8 +3018,9 @@
       "type": "general",
       "population": 23000,
       "urbanity": 1,
-      "lean": 5,
-      "_estimated": true
+      "lean": 3.168,
+      "_estimated": true,
+      "whiteLean": -0.468
     },
     {
       "id": "KIN-04",
@@ -2844,8 +3033,9 @@
       "type": "general",
       "population": 33000,
       "urbanity": 2,
-      "lean": 5,
-      "_estimated": true
+      "lean": 3.168,
+      "_estimated": true,
+      "whiteLean": -0.468
     },
     {
       "id": "KIN-05",
@@ -2859,8 +3049,9 @@
       "type": "general",
       "population": 8000,
       "urbanity": 0,
-      "lean": 5,
-      "_estimated": true
+      "lean": 3.168,
+      "_estimated": true,
+      "whiteLean": -0.468
     },
     {
       "id": "LIE-01",
@@ -2873,8 +3064,9 @@
       "type": "general",
       "population": 8000,
       "urbanity": 2,
-      "lean": 5,
-      "_estimated": true
+      "lean": 3.414,
+      "_estimated": true,
+      "whiteLean": -0.453
     },
     {
       "id": "LIE-02",
@@ -2887,8 +3079,9 @@
       "type": "general",
       "population": 3000,
       "urbanity": 1,
-      "lean": 5,
-      "_estimated": true
+      "lean": 3.414,
+      "_estimated": true,
+      "whiteLean": -0.453
     },
     {
       "id": "LIE-03",
@@ -2901,8 +3094,9 @@
       "type": "general",
       "population": 1000,
       "urbanity": 0,
-      "lean": 5,
-      "_estimated": true
+      "lean": 3.414,
+      "_estimated": true,
+      "whiteLean": -0.453
     },
     {
       "id": "LIE-04",
@@ -2915,8 +3109,9 @@
       "type": "general",
       "population": 1000,
       "urbanity": 0,
-      "lean": 5,
-      "_estimated": true
+      "lean": 3.414,
+      "_estimated": true,
+      "whiteLean": -0.453
     }
   ]
 }
