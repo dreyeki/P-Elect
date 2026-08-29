@@ -8,7 +8,7 @@
         "eloquence": 1,
         "judgment": 1
       },
-      "personalAssets": 800000,
+      "personalAssets": 3800000,
       "popFavor": {
         "farmer": -1,
         "bluecollar": -1
@@ -27,7 +27,7 @@
         "sociability": 1,
         "judgment": 1
       },
-      "personalAssets": 350000,
+      "personalAssets": 1350000,
       "popFavor": {
         "capitalist": -1
       },
@@ -44,7 +44,7 @@
       "attrs": {
         "boldness": 2
       },
-      "personalAssets": 150000,
+      "personalAssets": 400000,
       "popFavor": {
         "student": 1,
         "bluecollar": 1,
@@ -64,7 +64,7 @@
         "sociability": 1,
         "stamina": 1
       },
-      "personalAssets": 3000000,
+      "personalAssets": 300000000,
       "popFavor": {
         "bluecollar": -1,
         "capitalist": 2
@@ -85,7 +85,7 @@
         "charisma": 1,
         "boldness": -1
       },
-      "personalAssets": 1500000,
+      "personalAssets": 25000000,
       "popFavor": {
         "retiree": 1
       },
@@ -103,7 +103,7 @@
         "sociability": 2,
         "eloquence": -1
       },
-      "personalAssets": 500000,
+      "personalAssets": 1000000,
       "popFavor": {
         "student": -1,
         "retiree": 1
