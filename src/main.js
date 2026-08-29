@@ -93,6 +93,7 @@ function registerPages() {
 
 function showSetup() {
   app.state = null;
+  initDraft(DATA);
   el('topbar').innerHTML = '';
   el('navbar').innerHTML = '';
   el('view').innerHTML = setupPage(DATA);
@@ -113,6 +114,24 @@ function handle(act, ds) {
     'setup-edu': () => { setupDraft.education = ds.value; },
     'setup-region': () => { setupDraft.homeRegion = ds.value; setupDraft.homeDistrict = null; reSetup(); },
     'setup-age': () => { setupDraft.age = +ds.value; reSetup(); },
+    'setup-partymode': () => {
+      setupDraft.partyMode = ds.id;
+      // 路線換了，屬性額度也會跟著變，超支的話從最高的那幾項退回來
+      const cap = attrBudget(DATA).cap;
+      let used = Object.values(setupDraft.attrs).reduce((a, b) => a + b, 0);
+      while (used > cap) {
+        const k = ATTRS.map(([x]) => x).sort((a, b) => setupDraft.attrs[b] - setupDraft.attrs[a])[0];
+        if (setupDraft.attrs[k] <= 0) break;
+        setupDraft.attrs[k] -= 1; used -= 1;
+      }
+      reSetup();
+    },
+    'setup-reset': () => {
+      SaveMgr.clearSetupPrefs();
+      initDraft(DATA, { usePrefs: false });
+      toast('建角設定已經改回預設值。');
+      reSetup();
+    },
     'setup-ideo': () => { setupDraft.ideology[ds.id] = +ds.value; reSetup(); },
     'setup-china': () => { setupDraft.china[ds.id] = +ds.value; reSetup(); },
     'attr-up': () => {
@@ -452,6 +471,8 @@ const reSetup = () => { el('view').innerHTML = setupPage(DATA); };
 function startGame() {
   const d = setupDraft;
   if (!d.name.trim() || !d.backgroundId || !d.homeDistrict) return toast('還有必填欄位沒完成。');
+  // 先把這一局的建角選擇記下來，下一局就從這裡開始
+  SaveMgr.saveSetupPrefs(d);
   app.state = createGame(DATA, {
     seedStr: d.seedStr || randomSeedString(),
     name: d.name.trim(), gender: d.gender, education: d.education,
@@ -461,26 +482,48 @@ function startGame() {
     age: d.age,
     baseAttrs: { ...d.attrs },
   });
+  // 這一局才剛開始就先存一次。
+  // 舊版要等到玩家結束第一個回合才有自動存檔，中間關掉分頁就整局不見了。
+  autosave('新的一局已經建立，這一刻就先存好了。');
   go('turn');
   askPartyChoice();
 }
 
+/**
+ * 自動存檔。
+ * 存檔滿了不能只是安靜地失敗——那會讓玩家以為有存到，
+ * 直到下一次開啟才發現整局不見了。
+ */
+function autosave(okMsg) {
+  const r = SaveMgr.save(app.state, 'auto');
+  if (!r.ok) toast('自動存檔失敗：' + r.msg);
+  else if (okMsg) toast(okMsg);
+  return r.ok;
+}
+
 function askPartyChoice() {
   const s = app.state;
-  const opts = DATA.starts.partyChoice.map((c) => {
+  const mode = setupDraft.partyMode;
+  const last = setupDraft.party;
+  // 建角時已經選過路線的話，這裡就只問是哪一個黨
+  const routes = mode ? DATA.starts.partyChoice.filter((c) => c.id === mode) : DATA.starts.partyChoice;
+  const opts = routes.map((c) => {
     if (c.id === 'independent') {
-      return `<button class="opt" data-act="choose-party" data-pid="">
+      return `<button class="opt ${last === null && mode === 'independent' ? 'on' : ''}" data-act="choose-party" data-pid="">
         <div class="opt-t">${esc(c.name)}</div><div class="opt-h">${esc(c.desc)}</div></button>`;
     }
     return c.options.map((pid) => {
       const p = DATA.byId.party[pid];
-      return `<button class="opt" data-act="choose-party" data-pid="${pid}">
-        <div class="opt-t" style="color:${p.color}">${esc(p.name)}</div>
+      return `<button class="opt ${last === pid ? 'on' : ''}" data-act="choose-party" data-pid="${pid}">
+        <div class="opt-t" style="color:${p.color}">${esc(p.name)}${last === pid ? '　<span class="chip on xs">上一局選的</span>' : ''}</div>
         <div class="opt-h">${esc(c.name)}｜${esc(c.desc)}</div></button>`;
     }).join('');
   }).join('');
+  const head = mode
+    ? `你在建角的時候選了「${esc(routes[0]?.name ?? '')}」這條路，現在要決定是哪一個。`
+    : '這個決定會塑造你接下來八年的整個玩法。大黨有資源但要排隊，小黨出頭快但天花板低，無黨籍什麼都得自己來。';
   openModal(`<div class="modal-h">你要靠哪一邊</div>
-    <div class="modal-b">這個決定會塑造你接下來八年的整個玩法。大黨有資源但要排隊，小黨出頭快但天花板低，無黨籍什麼都得自己來。</div>${opts}`);
+    <div class="modal-b">${head}</div>${opts}`);
   const orig = handle;
   document.body.addEventListener('click', function once(e) {
     const t = e.target.closest('[data-act="choose-party"]');
@@ -488,6 +531,9 @@ function askPartyChoice() {
     document.body.removeEventListener('click', once);
     const pid = t.dataset.pid || null;
     joinParty(pid);
+    setupDraft.party = pid;
+    SaveMgr.saveSetupPrefs(setupDraft);
+    autosave();
     closeModal(); render();
   });
 }
@@ -576,7 +622,7 @@ function reallyEnd() {
   const s = app.state;
   advance(s, DATA);
   checkElection();
-  SaveMgr.save(s, 'auto');
+  autosave();
   ui.mapArg = { mode: ui.mapMode };
   render();
 }

@@ -2,6 +2,7 @@
 import { html, raw, esc } from '../../util/dom.js';
 import { randomSeedString } from '../../core/Rng.js';
 import { word } from '../../util/scale.js';
+import { loadSetupPrefs, hasSetupPrefs } from '../../save/SaveManager.js';
 
 export const ATTRS = [
   ['stamina', '體力', '疲勞恢復得快，比較不會倒下'],
@@ -23,8 +24,15 @@ export const setupDraft = {
   china: {},
 };
 
-/** 用資料檔裡的預設值把草稿初始化一次 */
-export function initDraft(data) {
+/**
+ * 把建角草稿初始化一次。
+ *
+ * 順序是：資料檔的預設值 → 上一局實際用過的選擇。
+ * 多數人開第二局的時候只想改一兩個地方，讓他從頭再點一次
+ * 姓名、年齡、家鄉、十三條軸跟七個維度是沒有道理的。
+ * 上一局的紀錄會先用現在的資料檔驗過，驗不過的項目才退回預設值。
+ */
+export function initDraft(data, { usePrefs = true } = {}) {
   const d = setupDraft;
   const def = data.starts.defaults ?? {};
   d.name = def.name ?? d.name;
@@ -33,8 +41,34 @@ export function initDraft(data) {
   d.age = def.age ?? d.age;
   d.startId = def.startId ?? d.startId;
   d.homeRegion = def.homeRegion ?? d.homeRegion;
-  for (const ax of data.values.axes) d.ideology[ax.id] ??= 0;
-  for (const dim of data.china.dims) d.china[dim.id] ??= 0;
+  d.homeDistrict = null;
+  d.backgroundId = null;
+  d.partyMode = null;
+  d.party = null;
+  d.attrs = { stamina: 2, sociability: 2, charisma: 2, eloquence: 2, judgment: 2, boldness: 2 };
+  d.ideology = {};
+  d.china = {};
+  for (const ax of data.values.axes) d.ideology[ax.id] = 0;
+  for (const dim of data.china.dims) d.china[dim.id] = 0;
+  d.restoredFrom = null;
+
+  if (usePrefs) {
+    const prev = loadSetupPrefs(data);
+    if (prev) {
+      for (const k of ['name', 'gender', 'education', 'age', 'startId', 'backgroundId',
+        'homeDistrict', 'homeRegion', 'partyMode', 'party']) {
+        if (prev[k] !== undefined) d[k] = prev[k];
+      }
+      if (prev.attrs) d.attrs = { ...d.attrs, ...prev.attrs };
+      if (prev.ideology) d.ideology = { ...d.ideology, ...prev.ideology };
+      if (prev.china) d.china = { ...d.china, ...prev.china };
+      // 家鄉如果被帶回來了，縣市要跟著對上，不然選單會顯示錯的縣市
+      const home = data.byId.district[d.homeDistrict];
+      if (home) d.homeRegion = home.regionId;
+      d.restoredFrom = prev.savedAt ?? true;
+    }
+  }
+  d.step = 0;
   return d;
 }
 
@@ -56,27 +90,42 @@ export function attrBudget(data) {
 export function setupPage(data) {
   const d = setupDraft;
   const steps = ['起點', '出身', '屬性', '家鄉', '立場', '種子'];
+  const restored = d.restoredFrom ? `
+    <div class="restoreline">
+      沿用了你上一局的設定。
+      <button class="lnk" data-act="setup-reset">全部改回預設值</button>
+    </div>` : '';
   const nav = `<div class="btn-row" style="margin-bottom:14px">${steps.map((n, i) =>
     `<button class="btn ${d.step === i ? 'primary' : 'ghost'}" data-act="setup-step" data-id="${i}">${n}</button>`).join('')}</div>`;
   const body = [stepStart, stepBg, stepAttrs, stepHome, stepIdeo, stepSeed][d.step](data);
-  const ready = d.backgroundId && d.homeDistrict && d.name.trim();
+  const ready = d.backgroundId && d.homeDistrict && d.name.trim() && d.partyMode;
   return html`
     <div style="text-align:center;margin-bottom:16px">
       <div style="font-size:24px;font-weight:800;letter-spacing:.06em">選舉人生</div>
       <div class="xs muted" style="letter-spacing:.3em;margin-top:4px">福爾摩沙・2026</div>
     </div>
-    ${raw(nav)}${raw(body)}
+    ${raw(restored)}${raw(nav)}${raw(body)}
     <div class="btn-row" style="margin-top:16px">
       ${raw(d.step > 0 ? `<button class="btn ghost" data-act="setup-step" data-id="${d.step - 1}">上一步</button>` : '')}
       ${raw(d.step < 4 ? `<button class="btn primary" data-act="setup-step" data-id="${d.step + 1}">下一步</button>`
     : `<button class="btn primary full" data-act="start-game" ${ready ? '' : 'disabled'}>開始</button>`)}
     </div>
-    ${raw(!ready && d.step === 5 ? '<div class="warnline">還有必填的欄位沒有完成。</div>' : '')}
+    ${raw(!ready && d.step === 5 ? `<div class="warnline">${esc(missingText(d))}</div>` : '')}
     <div class="btn-row" style="margin-top:20px">
       <button class="btn ghost xs" data-act="load-game" data-id="auto">讀取自動存檔</button>
       <button class="btn ghost xs" data-act="load-game" data-id="1">讀取欄位一</button>
       <button class="btn ghost xs" data-act="import-save">匯入存檔檔案</button>
     </div>`;
+}
+
+/** 還缺什麼。與其寫「還有欄位沒完成」，不如直接講是哪一項。 */
+function missingText(d) {
+  const miss = [];
+  if (!d.name.trim()) miss.push('姓名');
+  if (!d.partyMode) miss.push('政黨路線');
+  if (!d.backgroundId) miss.push('出身背景');
+  if (!d.homeDistrict) miss.push('家鄉選區');
+  return `還沒有決定：${miss.join('、')}。`;
 }
 
 function stepStart(data) {
@@ -119,6 +168,20 @@ function stepStart(data) {
         </select></div>
       <div class="xs muted" style="margin-top:6px;line-height:1.7">
         年齡會影響體力恢復與住院風險，也決定「青年世代」這個形象你還掛不掛得上去。
+      </div>
+    </div>
+    <div class="setup-step">
+      <h3>你打算靠哪一邊</h3>
+      <div class="pick">${raw(data.starts.partyChoice.map((c) => `
+        <button data-act="setup-partymode" data-id="${esc(c.id)}" class="${d.partyMode === c.id ? 'on' : ''}">
+          <div class="pt">${esc(c.name)}
+            ${c.attrCost ? `<span class="chip warn xs">屬性 −${c.attrCost}</span>` : ''}</div>
+          <div class="pd">${esc(c.desc)}</div>
+          <div class="pd" style="margin-top:4px;color:var(--fg-2)">${esc(c.costNote ?? '')}</div>
+        </button>`).join(''))}</div>
+      <div class="xs muted" style="margin-top:10px;line-height:1.75">
+        這裡決定的是路線，開局之後還要再挑是哪一個黨。
+        大黨的組織與提名管道很值錢，值錢的東西要用別的地方換——所以它先從你的屬性點裡扣。
       </div>
     </div>`;
 }
@@ -249,6 +312,8 @@ function stepSeed(data) {
       ${row('姓名', esc(d.name || '（未填）'))}
       ${row('起點', esc(data.starts.starts.find((s) => s.id === d.startId)?.name ?? ''))}
       ${row('出身', esc(data.backgrounds.backgrounds.find((b) => b.id === d.backgroundId)?.name ?? '（未選）'))}
+      ${row('政黨路線', esc(data.starts.partyChoice.find((c) => c.id === d.partyMode)?.name ?? '（未選）'))}
+      ${row('屬性點', `${Object.values(d.attrs).reduce((a, b) => a + b, 0)} / ${attrBudget(data).cap}`)}
       ${row('家鄉', esc(data.byId.district[d.homeDistrict]?.name ?? '（未選）'))}
       ${row('種子', esc(d.seedStr))}
     </div>

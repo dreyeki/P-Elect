@@ -352,6 +352,14 @@ costOk ? pass('比較好的開局要付屬性點') : fail('開局選項沒有屬
 D.starts.defaults?.name === '龍天台' && D.starts.defaults?.age === 35
   ? pass('開局預設為龍天台、35 歲') : fail('開局預設值不符');
 
+// 政黨路線的屬性成本要有差別，否則「選比較好的開局要付代價」這件事等於沒做
+const pcCosts = D.starts.partyChoice.map((c) => c.attrCost ?? 0);
+new Set(pcCosts).size > 1 && Math.max(...pcCosts) > 0
+  ? pass(`政黨路線的屬性成本有差別：${D.starts.partyChoice.map((c) => `${c.name} −${c.attrCost ?? 0}`).join('、')}`)
+  : fail('政黨路線沒有屬性成本差異');
+D.starts.partyChoice.every((c) => c.costNote)
+  ? pass('每一種政黨路線都寫了為什麼要付這個代價') : fail('政黨路線缺少 costNote');
+
 // 幕僚的雷
 const gf = D.staffRoles.graft;
 const risky = D.staffRoles.backgrounds.filter((b) => b.graftRisk > 0);
