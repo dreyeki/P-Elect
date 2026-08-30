@@ -27,7 +27,7 @@ const turns = Number(process.argv[3] ?? 120);
 
 const state = createGame(data, {
   seedStr: seed, name: '測試員', gender: 'x',
-  startId: 'rookie', backgroundId: 'activist', education: '大學',
+  startId: 'rookie', backgroundId: 'reporter', education: '大學',
   homeDistrict: 'KHH-05', party: 'PDA',
   ideology: { centralization: 0, unification: -2, marketFreedom: -2, progressivism: 3, immigration: 1, environment: 2, militaryAutonomy: 1, directDemocracy: 2 },
 });

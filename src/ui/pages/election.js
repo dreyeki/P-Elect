@@ -12,7 +12,9 @@ import { partyColor } from '../app.js';
  * 一場議員選戰打滿大約一百到三百萬，立委兩百萬到兩千萬，跟現實對得上。
  */
 export const CAMPAIGN_ACTIONS = [
-  { id: 'street', name: '掃街拜票', ap: 1, cost: 30000, fatigue: 12,
+  // 掃街拜票的成本是鞋子跟時間，不是錢。破產的候選人如果連街都掃不了，
+  // 這場選戰就只剩下按結束這一週這一個選項。
+  { id: 'street', name: '掃街拜票', ap: 1, cost: 0, fatigue: 12,
     desc: '一條街一條街走，握到手酸為止。最便宜也最紮實的辦法。' },
   { id: 'motorcade', name: '車隊掃街', ap: 1, cost: 80000, fatigue: 14,
     desc: '宣傳車配旗隊繞遍全區，聲音大、觸及廣，鄰居可能會有意見。' },
@@ -151,7 +153,14 @@ function campaignPhase(s, data, e) {
           <span class="xs muted">${a.ap} AP・${F.money(cost)}</span>
         </div>
         <div class="opt-h">${esc(a.desc)}</div></button>`;
-    }).join('') + `<button class="btn primary full" data-act="end-turn" style="margin-top:6px">結束這一週</button>`)}`;
+    }).join('') + `<button class="btn primary full" data-act="end-turn" style="margin-top:6px">結束這一週</button>`)}
+
+    ${raw(s.flags?.debug ? card('<span class="tone-bad">調試模式</span>', `
+      <div class="xs muted" style="line-height:1.7;margin-bottom:8px">
+        直接跳過剩下的週數開票，而且把你排到第一名。
+        後面的授職、補助款與生涯紀錄照原本的流程跑，只有票數是假的。
+      </div>
+      <button class="btn full danger" data-act="dbg-win">強制勝選</button>`) : '')}`;
 }
 
 function resultPhase(s, data, e) {
@@ -169,5 +178,7 @@ function resultPhase(s, data, e) {
       color: x.candidate.isPlayer ? 'var(--gold)' : partyColor(x.candidate.party),
     }))))}
     ${card('', `<div class="small dim" style="line-height:1.8">${esc(e.resultText ?? '')}</div>
+      ${e.subsidyText ? `<div class="small dim" style="line-height:1.8;margin-top:10px;
+        padding-top:10px;border-top:1px solid var(--line)">${esc(e.subsidyText)}</div>` : ''}
       <button class="btn primary full" data-act="close-election" style="margin-top:12px">繼續</button>`)}`;
 }

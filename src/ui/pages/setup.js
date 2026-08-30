@@ -2,6 +2,7 @@
 import { html, raw, esc } from '../../util/dom.js';
 import { randomSeedString } from '../../core/Rng.js';
 import { word } from '../../util/scale.js';
+import { ROLE_NAME, wealthAt } from '../../core/GameState.js';
 import { loadSetupPrefs, hasSetupPrefs } from '../../save/SaveManager.js';
 import * as F from '../../util/format.js';
 
@@ -23,6 +24,7 @@ export const setupDraft = {
   party: null, partyMode: null,
   ideology: {},
   china: {},
+  debug: false,
 };
 
 /**
@@ -142,9 +144,16 @@ function stepStart(data) {
           <div class="pd">${esc(s.desc)}</div>
           <div class="pd" style="margin-top:5px;color:var(--fg-2)">${esc(s.path)}</div>
           <div class="pd" style="margin-top:4px;color:var(--fg-2)">${esc(s.costNote ?? '')}</div>
+          <div class="pd" style="margin-top:4px">
+            ${s.role !== 'citizen' ? `<span class="chip xs">開局就是${esc(ROLE_NAME[s.role])}</span>　` : ''}
+            ${s.fame ? `<span class="xs muted">知名度 ${esc(word('fame', s.fame))}・</span>` : ''}
+            <span class="xs muted">專戶 ${esc(F.money(s.campaignFunds))}${
+              s.wealth ? `・家底約 ${esc(F.money(wealthAt(s.wealth, d.age)))}` : ''}</span>
+          </div>
         </button>`).join(''))}</div>
       <div class="xs muted" style="margin-top:10px;line-height:1.75">
-        兩種起點都要從基層打起。這是刻意的——這個遊戲的核心就是爬上去的那段路。<br>
+        星星越多越難。素人要從里長選起，不分區立委一上任就有質詢權跟助理費——
+        但他沒有選區，四年之內要自己把一條街經營出來。<br>
         比較舒服的開局會先扣掉一部分屬性點，因為那些現成的資源本來就是別人先付過的。
       </div>
     </div>
@@ -192,7 +201,7 @@ function stepBg(data) {
       ${costTag}
         <div class="pt">${esc(b.name)}</div>
         <div class="pd">${esc(b.desc)}</div>
-        <div class="pd" style="margin-top:5px">${esc(plus)}　私產 ${(b.personalAssets / 10000).toLocaleString()} 萬${b.stigma ? '　汙名 微有瑕疵' : ''}</div>
+        <div class="pd" style="margin-top:5px">${esc(plus)}　${d.age} 歲的存款約 ${esc(F.money(wealthAt(b.wealth, d.age)))}${b.stigma ? '　汙名 微有瑕疵' : ''}</div>
       </button>`;
   }).join(''))}</div></div>`;
 }
@@ -307,6 +316,15 @@ function stepSeed(data) {
     <div class="xs muted" style="margin-top:10px;line-height:1.75">
       開局後的第一件事，是決定要加入大黨、加入小黨，還是誰都不靠。
       那個決定不花屬性點，但它會塑造你接下來八年的整個玩法。
+    </div>
+  </div>
+  <div class="setup-step"><h3>調試模式</h3>
+    <button class="btn ${d.debug ? 'primary' : 'ghost'} full" data-act="setup-debug">
+      ${d.debug ? '● 調試模式：開' : '調試模式：關'}</button>
+    <div class="xs muted" style="margin-top:10px;line-height:1.8">
+      開了以後，個人頁面會多一排調試按鈕：隨意加錢、加政治資本、
+      直接跳職位，選舉時可以強制勝選。這是給你自己測試用的，
+      不會影響任何平衡，但開過的存檔會一直帶著這個標記。
     </div>
   </div>`;
 }

@@ -248,5 +248,36 @@
       "否則財務一旦崩掉，玩家就只剩下按結束回合這一個選項。"
     ],
     "cost": 0
+  },
+  "serviceDesk": {
+    "_note": [
+      "服務處的負載量。台灣的地方政治有一半發生在這個房間裡。",
+      "陳情案是會堆積的：人手不夠的時候案子不會消失，它們只是排在那裡，",
+      "而每一件排太久的案子最後都會變成一個對你失望的人。",
+      "這就是為什麼民代要拚命請助理，也是為什麼助理費補助在台灣會變成政治新聞。"
+    ],
+    "basePerOffice": 14,
+    "famePull": 0.9,
+    "grassrootsPull": 0.7,
+    "roleMult": {
+      "citizen": 0.5,
+      "aide": 0.6,
+      "village": 1.1,
+      "councilor": 1.6,
+      "legislator": 2.1,
+      "mayor": 1.4,
+      "minister": 1.2,
+      "president": 1.0
+    },
+    "selfCapacity": 6,
+    "perStaff": 9,
+    "serviceStaffMult": 2.2,
+    "aideMult": 1.3,
+    "otherMult": 0.6,
+    "favorPerCase": 0.0022,
+    "grassrootsPerFavor": 0.6,
+    "dropThreshold": 40,
+    "dropRate": 0.35,
+    "favorPerDrop": 0.004
   }
 }

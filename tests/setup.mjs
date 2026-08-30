@@ -84,13 +84,25 @@ ok(setupDraft.name === '龍天台', '壞掉的紀錄不會讓建角畫面壞掉'
 /* ── 4. 屬性成本只看起點與出身，選政黨不收錢 ── */
 store.clear();
 initDraft(data);
-setupDraft.startId = 'rookie'; setupDraft.backgroundId = 'activist';
-const capBase = attrBudget(data).cap;
-ok(capBase === 16, `素人加社運出身不扣點，全額 ${capBase} 點`);
+setupDraft.startId = 'rookie'; setupDraft.backgroundId = 'reporter';
+const FULL = attrBudget(data).cap + data.starts.starts.find((x) => x.id === 'rookie').attrCost
+  + data.backgrounds.backgrounds.find((x) => x.id === 'reporter').attrCost;
+const rep = data.backgrounds.backgrounds.find((x) => x.id === 'reporter').attrCost;
+ok(attrBudget(data).cap === FULL - rep, `素人加記者出身扣 ${rep} 點，剩 ${attrBudget(data).cap} 點`);
 setupDraft.startId = 'aide';
-ok(attrBudget(data).cap === 16 - 3, `議助起點扣 3 點，剩 ${attrBudget(data).cap} 點`);
-setupDraft.backgroundId = 'heir';
-ok(attrBudget(data).cap === 16 - 3 - 4, `再加企業二代共扣 7 點，剩 ${attrBudget(data).cap} 點`);
+const aideCost = data.starts.starts.find((x) => x.id === 'aide').attrCost;
+ok(attrBudget(data).cap === FULL - rep - aideCost, `議助起點再扣 ${aideCost} 點，剩 ${attrBudget(data).cap} 點`);
+setupDraft.backgroundId = 'doctor';
+const docCost = data.backgrounds.backgrounds.find((x) => x.id === 'doctor').attrCost;
+ok(attrBudget(data).cap === FULL - aideCost - docCost, `改成醫師出身共扣 ${aideCost + docCost} 點，剩 ${attrBudget(data).cap} 點`);
+// 三個新起點也要算得出額度來（v0.6.1）
+for (const id of ['scion', 'listMP', 'tycoon']) {
+  setupDraft.startId = id;
+  const st = data.starts.starts.find((x) => x.id === id);
+  ok(attrBudget(data).cap === FULL - st.attrCost - docCost,
+    `${st.name}起點扣 ${st.attrCost} 點，剩 ${attrBudget(data).cap} 點`);
+}
+setupDraft.startId = 'aide';
 // 政黨在建角階段完全不影響額度
 const before = attrBudget(data).cap;
 for (const mode of ['major', 'minor', 'independent', null]) {
@@ -104,7 +116,7 @@ ok(data.starts.partyChoice.every((c) => (c.attrCost ?? 0) === 0), '三種政黨�
 store.clear();
 const state = createGame(data, {
   seedStr: 'SETUP', name: '龍天台', gender: 'm', education: '大學', age: 35,
-  startId: 'rookie', backgroundId: 'activist',
+  startId: 'rookie', backgroundId: 'reporter',
   homeDistrict: data.districts.districts[0].id, party: null,
   ideology: {}, china: {},
   baseAttrs: { stamina: 2, sociability: 2, charisma: 2, eloquence: 2, judgment: 2, boldness: 2 },

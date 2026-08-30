@@ -17,9 +17,10 @@
       "partyPrestige": 0,
       "grassrootsHome": 1,
       "factionFavor": 0,
-      "path": "從議員到總統，登高之途舉步維艱",
+      "path": "里長 → 議員 → 立委 → 縣市長 → 總統，全程約十五到二十年",
       "attrCost": 0,
-      "costNote": "沒有任何人幫你，所以也沒有任何東西要先付出去。"
+      "costNote": "沒有任何人幫你，所以也沒有任何東西要先付出去。",
+      "_wealthNote": "這個起點沒有家底。存款完全來自出身那一條曲線——你這幾年自己存下來的，就是全部。"
     },
     {
       "id": "aide",
@@ -40,14 +41,105 @@
       "factionFavor": 2,
       "path": "接班參選議員或立委，再一路往上爬",
       "attrCost": 3,
-      "costNote": "有職位、有政黨、有錢也有人脈。這些東西不是天上掉下來的，它們佔掉了你原本可以拿去長本事的那幾年。"
+      "costNote": "有職位、有政黨、有錢也有人脈。這些東西不是天上掉下來的，它們佔掉了你原本可以拿去長本事的那幾年。",
+      "_wealthNote": "這個起點沒有家底。存款完全來自出身那一條曲線——你這幾年自己存下來的，就是全部。"
+    },
+    {
+      "id": "scion",
+      "name": "政治世家",
+      "difficulty": 2,
+      "desc": "你父親做了三屆立委，服務處的鐵捲門上還留著他的名字。地方上每個人都認得你，而且每個人看你的時候都在看他。",
+      "ageRange": [
+        28,
+        45
+      ],
+      "role": "citizen",
+      "party": "ASK",
+      "fame": 2,
+      "campaignFunds": 1500000,
+      "assetMult": 1,
+      "wealth": {
+        "base": 6000000,
+        "perYear": 220000,
+        "perYear2": 7000,
+        "sinceAge": 25,
+        "floor": 4000000,
+        "cap": 40000000
+      },
+      "partyPrestige": 2,
+      "grassrootsHome": 3,
+      "factionFavor": 3,
+      "path": "直接選議員或立委，家族的系統會替你扛掉前面十年",
+      "attrCost": 5,
+      "costNote": "名字、人脈、地方系統、還有一筆不用你開口就有的錢。這些東西讓你少走十年，代價是你少長了那十年的本事。",
+      "startNote": "你走到哪裡都有人叫得出你的名字，但他們接下來那句話多半是「你爸最近好嗎」。"
+    },
+    {
+      "id": "listMP",
+      "name": "不分區立委",
+      "difficulty": 1,
+      "desc": "你在專業領域做出了成績，政黨把你放進不分區名單的安全名次。你一上任就是立法委員，但你沒有選區，沒有樁腳，也沒有人欠你人情。",
+      "ageRange": [
+        34,
+        58
+      ],
+      "role": "legislator",
+      "party": "ASK",
+      "fame": 3,
+      "campaignFunds": 800000,
+      "assetMult": 1,
+      "wealth": {
+        "base": 2500000,
+        "perYear": 320000,
+        "perYear2": 9000,
+        "sinceAge": 30,
+        "floor": 1500000,
+        "cap": 45000000
+      },
+      "partyPrestige": 2,
+      "grassrootsHome": 0,
+      "factionFavor": 1,
+      "path": "四年任期內把地方經營起來，否則下一屆名單上就沒有你了",
+      "attrCost": 6,
+      "costNote": "一上任就是立委：質詢權、提案權、助理費、全國知名度全部到手。這些東西的價錢是你這輩子在別的地方付掉的。",
+      "startNote": "不分區沒有選區。你有全國的知名度，卻沒有一條街的人認識你——這一屆結束以前，你得把那條街找出來。"
+    },
+    {
+      "id": "tycoon",
+      "name": "知名企業家",
+      "difficulty": 3,
+      "desc": "你的公司上過財經雜誌的封面，員工兩千人。你決定出來選，理由講出來很漂亮，但沒有人真的相信那個理由。",
+      "ageRange": [
+        40,
+        62
+      ],
+      "role": "citizen",
+      "party": null,
+      "fame": 3,
+      "campaignFunds": 3000000,
+      "assetMult": 1,
+      "wealth": {
+        "base": 25000000,
+        "perYear": 2800000,
+        "perYear2": 180000,
+        "sinceAge": 30,
+        "floor": 15000000,
+        "cap": 600000000
+      },
+      "partyPrestige": 0,
+      "grassrootsHome": 1,
+      "factionFavor": 0,
+      "path": "用錢跟知名度直接挑戰縣市長或立委，但基層要從零開始",
+      "attrCost": 5,
+      "costNote": "錢、知名度、企業界的人脈。你買得起任何一場造勢，買不到的是那些人為什麼要投你。",
+      "startNote": "你的財力讓每一場選戰都打得起，也讓每一個對手都有一句現成的話可以攻擊你。"
     }
   ],
   "partyChoice": [
     {
       "id": "major",
       "name": "加入大黨",
-      "desc": "資源多、限制多、要排隊。倘若能通過初選，就有不小機會。",
+      "desc": "資源多、限制多、要排隊。你會拿到組織與提名機會，但你的一舉一動都要看黨中央臉色。",
       "options": [
         "PDA",
         "CRP"
@@ -63,7 +155,7 @@
     {
       "id": "minor",
       "name": "加入小黨",
-      "desc": "天花板低、資源少。你能開創政治新格局嗎？",
+      "desc": "出頭快、天花板低、資源少。你可能兩年內就變成全國知名人物，也可能永遠只有那幾席。",
       "options": [
         "TPL",
         "NGF",
@@ -102,5 +194,13 @@
     "startId": "rookie",
     "homeRegion": "KHH"
   },
-  "_note": "starts[].attrCost 與 backgrounds[].attrCost 會從屬性點數的總額裡先扣掉。選一個比較舒服的開局，代價是你本人比較弱——這樣所有開局才會站在同一條線上。政黨不在這個清單裡：加入哪一個黨是開局之後的第一個決定，不是建角的一部分。"
+  "_note": "starts[].attrCost 與 backgrounds[].attrCost 會從屬性點數的總額裡先扣掉。選一個比較舒服的開局，代價是你本人比較弱——這樣所有開局才會站在同一條線上。政黨不在這個清單裡：加入哪一個黨是開局之後的第一個決定，不是建角的一部分。",
+  "_wealthNote": [
+    "存款是年齡的函數，不是一個固定數字。",
+    "一個三十歲的醫師跟一個五十歲的醫師差的不只是幾年薪水——",
+    "前面那幾年在還學貸，後面那幾年在收租金，所以曲線是往上彎的，不是直線。",
+    "assets = base + perYear × 年資 + perYear2 × 年資²，年資從 sinceAge 起算，",
+    "算出來的數字會落在 floor 與 cap 之間。",
+    "起點的 wealth 是家裡的錢或公司的股份，出身的 wealth 是你自己這幾年存下來的。兩個相加。"
+  ]
 }

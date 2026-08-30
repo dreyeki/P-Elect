@@ -18,7 +18,7 @@ let fails = 0;
 const ok = (c, m) => { console.log((c ? 'OK   ' : 'FAIL ') + m); if (!c) fails++; };
 const mk = (seed = 'FIRST') => createGame(data, {
   seedStr: seed, name: '龍天台', gender: 'm', education: '大學', age: 35,
-  startId: 'rookie', backgroundId: 'activist',
+  startId: 'rookie', backgroundId: 'reporter',
   homeDistrict: data.districts.districts[0].id, party: null,
   ideology: {}, china: {},
   baseAttrs: { stamina: 2, sociability: 2, charisma: 2, eloquence: 2, judgment: 2, boldness: 2 },

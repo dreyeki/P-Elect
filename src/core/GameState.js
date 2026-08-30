@@ -51,6 +51,7 @@ export function createGame(data, setup) {
     counters: {}, tags: [], flags: {}, eventCooldown: {},
     legislature: structuredClone(data.central.government.legislature),
     session: { billsInProgress: [], budgetPhase: null },
+    proposal: null, suggestions: [],
     election: null,
   };
 
@@ -165,10 +166,28 @@ function makePlayer(data, setup, rng) {
   };
 }
 
+/**
+ * 存款曲線。
+ *
+ * 一個三十歲的醫師跟一個五十歲的醫師差的不只是幾年薪水——
+ * 前面那幾年在還學貸與付診所頭期，後面那幾年是複利與租金，
+ * 所以曲線是往上彎的，不是直線。二次項就是在做這件事。
+ */
+export function wealthAt(w, age) {
+  if (!w) return 0;
+  const y = Math.max(0, age - (w.sinceAge ?? 25));
+  const v = (w.base ?? 0) + (w.perYear ?? 0) * y + (w.perYear2 ?? 0) * y * y;
+  return Math.min(w.cap ?? Infinity, Math.max(w.floor ?? 0, v));
+}
+
 function applyStart(state, data, setup, rng) {
   const start = data.starts.starts.find((s) => s.id === setup.startId);
   const bg = data.backgrounds.backgrounds.find((b) => b.id === setup.backgroundId);
-  state.finance.personal = Math.round(bg.personalAssets * start.assetMult);
+  // 存款是年齡的函數，不是一個固定數字。出身的那一條是你自己存下來的，
+  // 起點的那一條是家裡的錢或公司的股份，兩個相加。
+  const age = state.meta.year - state.player.birthYear;
+  state.finance.personal = Math.round(
+    (wealthAt(bg.wealth, age) + wealthAt(start.wealth, age)) * (start.assetMult ?? 1));
   state.finance.campaign = start.campaignFunds;
 
   // 開局送一間房，同時送一筆三百萬的貸款。

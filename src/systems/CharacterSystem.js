@@ -2,6 +2,7 @@
 import { clamp, clamp05 } from '../core/Formula.js';
 import { take as takeFirst } from './FirstTimeSystem.js';
 import { canSet as imageDue } from './ImageSystem.js';
+import { canPropose, lobbyOpen } from './ProposalSystem.js';
 
 /**
  * 行動選單。
@@ -56,6 +57,15 @@ export const ACTIONS = [
     unlock: { roles: ['councilor', 'legislator', 'mayor', 'minister', 'president'] },
     unlockText: '要有民意代表或首長的身分',
     desc: '把條文寫扎實，通過的機會才會高，也才禁得起對手挑毛病。' },
+  { id: 'proposeBill', name: '提案修法', ap: 1, fatigue: 8, deferred: true,
+    unlock: { proposeRight: true }, unlockText: '提案權附著在職位上，你現在只能建議',
+    desc: '把一件事送進程序。一次只能推一案，而且要跟同一個會期裡別人的案子搶那幾個位子。' },
+  { id: 'lobbySupport', name: '遊說支持', ap: 1, fatigue: 6, deferred: true,
+    unlock: { lobbyOpen: true }, unlockText: '手上要有一個還在拉票期的案子',
+    desc: '一個一個黨團去談。自己人談一次多半就定了，別人的黨團談十次也還是那樣。' },
+  { id: 'suggest', name: '建議修法', ap: 1, fatigue: 6, deferred: true,
+    unlock: { noProposeRight: true }, unlockText: '你已經可以自己提案了，不必再繞這一圈',
+    desc: '記者會、公聽會、投書。把一件事推到有提案權的人面前，然後等。' },
   { id: 'prepQuestion', name: '質詢準備', ap: 1, fatigue: 8,
     unlock: { roles: ['councilor', 'legislator'] }, unlockText: '要當上議員或立委才有質詢權',
     desc: '把資料讀熟、把數字背下來，上台才不會被反問到啞口無言。' },
@@ -97,6 +107,11 @@ export function actionState(state, data, a) {
       return { unlocked: false, why: a.unlockText };
     }
   }
+  // 提案權附著在職位上。沒有的人看到的是「建議修法」，有的人看到的是「提案修法」，
+  // 兩個選項互斥，因為它們是同一件事的兩種身分版本。
+  if (u.proposeRight && !canPropose(state, data)) return { unlocked: false, why: a.unlockText };
+  if (u.noProposeRight && canPropose(state, data)) return { unlocked: false, why: a.unlockText };
+  if (u.lobbyOpen && !lobbyOpen(state, data)) return { unlocked: false, why: a.unlockText };
   if (u.imageDue && !imageDue(state, data)) {
     return { unlocked: false, why: '這句話才剛立起來，現在改只會讓人覺得你沒有中心思想' };
   }

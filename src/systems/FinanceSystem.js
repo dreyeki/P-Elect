@@ -3,6 +3,7 @@ import { clamp, clamp05 } from '../core/Formula.js';
 import { officeCost } from './DistrictSystem.js';
 import { bumpCounter } from './Effects.js';
 import { declarable } from './AssetSystem.js';
+import { payrollSplit } from './ServiceOfficeSystem.js';
 
 const SALARY = { citizen: 0, aide: 45000, village: 50000, councilor: 120000, legislator: 190000, mayor: 240000, minister: 220000, president: 470000 };
 const LIVING = { citizen: 50000, aide: 55000, village: 60000, councilor: 90000, legislator: 140000, mayor: 180000, minister: 170000, president: 250000 };
@@ -27,9 +28,11 @@ export function tick(state, ctx) {
   // 演講與出書
   if (p.fame >= 3) f.personal += rng.range(30000, 300000) * (p.fame - 2) * m;
 
-  // 團隊薪資與服務處
-  const salaries = state.team.reduce((a, t) => a + t.salary, 0);
-  f.campaign -= salaries * m;
+  // 團隊薪資與服務處。
+  // 助理費補助是台灣各層級公職差最多的一件事：立委的助理是公家出錢，
+  // 素人的幕僚是自己出錢。同樣一句「我請了三個助理」，兩個身分底下是兩件事。
+  const pay = payrollSplit(state, data);
+  f.campaign -= pay.outOfPocket * m;
   f.campaign -= officeCost(state, data) * m;
 
   if (f.campaign < 0) {

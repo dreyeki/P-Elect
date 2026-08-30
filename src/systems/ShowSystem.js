@@ -26,15 +26,18 @@ export function tick(state, ctx) {
     const media = state.media[show.mediaId];
     const rel = media?.playerRelation ?? 0;
 
-    // 立場相近的節目比較願意找你；有話題性的時候大家都來找你
+    // 台灣的政論節目各有各的主場。製作單位平常找的就是自己觀眾想看的那一邊，
+    // 所以同一個人掛不同的黨籍，收到的通告完全不是同一批。
+    // 偶爾找對面的人來當沙包是另一回事，那個機率壓低但不會是零。
     const myLean = p.party ? (state.parties[p.party]?.platform.unification ?? 0) : 0;
     const affinity = 1 - Math.abs(show.bias - myLean) / 12;
-    let chance = 0.05
+    const partyPull = p.party ? (show.partyAffinity?.[p.party] ?? 1) : 0.85;
+    let chance = (0.05
       + p.fame * 0.055
       + affinity * 0.14
       + rel * 0.02
       + (state.flags.recentBuzz ?? 0) * 0.05
-      - show.difficulty * 0.012;
+      - show.difficulty * 0.012) * partyPull;
     if (state.meta.scale === 'week') chance *= 1.7;      // 選戰期大家都在搶來賓
     if (p.stigma >= 3) chance *= show.riskBonus ? 1.6 : 0.7;   // 爆料節目反而更想找你
 
@@ -94,6 +97,8 @@ export function appear(state, data, showId, rng, theoryId = null) {
     P.playerFavor[i] = clampBi(P.playerFavor[i] + gain * w * (show.reach / 5));
   }
   p.fame = clamp05(p.fame + (perf >= 3 ? 0.12 : 0.05) * (show.reach / 4));
+  // 通告費入個人帳戶。一個月只有兩點行動點，上一次節目佔掉半個月，
+  // 那半個月換到的錢應該讓玩家有感覺。
   state.finance.personal += show.fee ?? 0;
 
   const media = state.media[show.mediaId];

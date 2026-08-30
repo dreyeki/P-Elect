@@ -6,6 +6,7 @@ import { teamBonus } from './TeamSystem.js';
 import { isConsensus } from './ValueSystem.js';
 import { nationalSupport } from './PopSystem.js';
 import { petition } from './CourtSystem.js';
+import { lobbyBonus } from './ProposalSystem.js';
 
 export const STAGES = ['提案', '一讀付委', '委員會審查', '黨團協商', '二讀', '三讀', '公布施行'];
 
@@ -63,6 +64,11 @@ export function tick(state, ctx) {
         state.player.partyPrestige = clamp05(state.player.partyPrestige - 0.2);
       }
       state.session.billsInProgress = state.session.billsInProgress.filter((b) => b !== bill);
+      // 這一案結束了，遊說換來的支持不該被下一案沿用
+      if (bill.fromProposal) {
+        state.flags.proposalSupport = null;
+        if (state.proposal?.id === bill.fromProposal) state.proposal = null;
+      }
     } else if (bill.stage === 3) {
       news.push({ kind: 'law', text: `《${law.name}》修正案進入黨團協商，依規定要先經過一個月的冷凍期，各方都在利用這段時間拉票。` });
     }
@@ -81,10 +87,15 @@ export function vote(state, data, bill, rng) {
   for (const pid in state.legislature) {
     const seats = state.legislature[pid];
     if (!seats) continue;
-    const party = state.parties[pid];
+    // 無黨籍不是一個政黨，state.parties 裡沒有它。
+    // 那兩三席在表決裡是真的存在的，所以給一組中間值：沒有黨紀，也沒有黨團立場。
+    const party = state.parties[pid] ?? { shortName: '無黨籍', cohesion: 0.5, factions: [] };
     let p = 0.5 + (tier.partyStance?.[pid] ?? 0) * 0.45;
     // 民意壓力
     p += (support[pid] ?? 0) * 0.1;
+    // 遊說期答應要幫你講話的人，到了表決那一天要真的按下去。
+    // 換算成投票傾向的時候打對折——答應歸答應，按鈕還是他自己按的。
+    p += lobbyBonus(state, pid, data);
     // 玩家的派系動員
     if (pid === state.player.party) {
       const mob = party.factions.reduce((a, f) => a + clamp(f.favor / 5, -1, 1) * f.seatShare, 0);

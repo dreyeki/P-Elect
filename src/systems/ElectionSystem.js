@@ -35,6 +35,21 @@ export function enterCampaignScale(state) {
   state.meta.weekIndex = 0;
 }
 
+/**
+ * 這個層級在這個縣市存不存在。
+ *
+ * 台灣的地方制度是兩套：縣底下是鄉鎮市，首長民選、代表會民選；
+ * 直轄市與省轄市底下是區，區長由市長派任，沒有區民代表會。
+ * 所以同樣一場地方選舉，住在雲林的人多兩張票，住在板橋的人沒有。
+ */
+export function levelExistsIn(data, level, regionId) {
+  const only = level?.onlyRegionTypes;
+  if (!only) return true;
+  const type = data.byId?.region?.[regionId]?.type
+    ?? data.regions.regions.find((r) => r.id === regionId)?.type;
+  return only.includes(type);
+}
+
 /** 玩家可參選的職位 */
 export function availableRuns(state, data, sched) {
   const p = state.player;
@@ -52,7 +67,12 @@ export function availableRuns(state, data, sched) {
       const ld = data.elections.legislatorDistricts.find((l) => l.parts.some((x) => x.districtId === homeD.id));
       if (ld) out.push({ type, scopeId: ld.id, name: `${ld.name}${lv.name}`, level: lv });
     } else if (type === 'president') out.push({ type, scopeId: 'NATION', name: '總統', level: lv });
-    else if (type === 'villageHead' || type === 'townshipHead') out.push({ type, scopeId: homeD.id, name: `${homeD.name}${lv.name}`, level: lv });
+    else if (type === 'villageHead' || type === 'townshipHead' || type === 'townshipRep') {
+      // 直轄市與省轄市底下是區，區長是派任的，不會有鄉鎮市長可以選。
+      // 一個住在板橋的人這輩子都不會看到這張選票，這件事應該長在選單裡而不是靠玩家自己知道。
+      if (!levelExistsIn(data, lv, homeD.regionId)) continue;
+      out.push({ type, scopeId: homeD.id, name: `${homeD.name}${lv.name}`, level: lv });
+    }
   }
   return out;
 }
@@ -438,6 +458,56 @@ export function resolvePrimary(state, data, pri, rng) {
 }
 
 /**
+ * 選舉補助款。
+ *
+ * 依選罷法：得票數達該選區當選票數三分之一以上者，每票三十元。
+ * 門檻寫的是票數不是得票率，所以在複數選區裡它比想像中低——
+ * 一個五席的議員選區，當選門檻本來就只有兩成上下的票。
+ *
+ * 然後是台灣政治裡大家知道但不會寫在法條上的那一段：
+ * 政黨會從當選人的補助款裡抽一筆，名目叫回饋金或黨務發展基金。
+ * 無黨籍不用抽，代價是也沒有人替你扛。
+ */
+export function subsidyFor(state, data, run, outcome) {
+  const S = data.elections.subsidy ?? {};
+  const my = outcome.results?.find((r) => r.candidate.isPlayer);
+  const blank = { gross: 0, cut: 0, net: 0, rate: 0, votes: my?.votes ?? 0 };
+  if (!my) return blank;
+  if ((S.noSubsidyLevels ?? []).includes(run.type)) return { ...blank, reason: 'none' };
+
+  // 當選線：應選席次以內的最後一名拿到的票
+  const seats = run.level?.seats ?? data.byId.district[run.scopeId]?.seats ?? 1;
+  const sorted = [...outcome.results].sort((a, b) => b.votes - a.votes);
+  const winnerVotes = sorted[Math.min(seats, sorted.length) - 1]?.votes ?? sorted[0]?.votes ?? 0;
+  if (my.votes < winnerVotes * (S.winnerRatio ?? 0.3334)) {
+    return { ...blank, reason: 'missed', need: Math.ceil(winnerVotes * (S.winnerRatio ?? 0.3334)) };
+  }
+
+  const gross = Math.round(my.votes * (S.perVote ?? 30));
+  const rate = state.player.party
+    ? (S.partyCut?.[state.player.party] ?? S.partyCut?.default ?? 0.2) : 0;
+  const cut = Math.round(gross * rate);
+  return { gross, cut, net: gross - cut, rate, votes: my.votes, reason: 'got' };
+}
+
+/** 補助款的那一段敘述，選後結算頁要用 */
+export function subsidyText(data, sub, moneyFn) {
+  const T = data.elections.subsidy?.text ?? {};
+  if (!sub || sub.reason === 'none') return T.none ?? '';
+  if (sub.reason === 'missed') {
+    return (T.missed ?? '') + (sub.need ? `（你拿 ${sub.votes.toLocaleString()} 票，門檻是 ${sub.need.toLocaleString()} 票）` : '');
+  }
+  const got = (T.got ?? '')
+    .replace('{votes}', sub.votes.toLocaleString())
+    .replace('{gross}', moneyFn(sub.gross));
+  if (!sub.rate) return got + T.clean;
+  return got + (T.cut ?? '')
+    .replace('{rate}', (sub.rate * 100).toFixed(0) + '%')
+    .replace('{cut}', moneyFn(sub.cut))
+    .replace('{net}', moneyFn(sub.net));
+}
+
+/**
  * 選後結算。
  *
  * sched 一定要傳進來：這個函式的最後一行會把 state.election 清成 null，
@@ -458,10 +528,12 @@ export function applyResult(state, data, run, outcome, sched = null) {
     p.careerLog.push({ turn: state.meta.turn, kind: 'lose', text: `${run.name}落選` });
     p.fame = clamp05(p.fame - 0.2);
   }
-  // 選舉補助款
-  const my = outcome.results.find((r) => r.candidate.isPlayer);
-  if (my && my.share >= data.elections.subsidyThreshold) {
-    state.finance.campaign += my.votes * data.elections.subsidyPerVote;
+  // 選舉補助款。門檻不是得票率，是當選人票數的三分之一——
+  // 這個差別很重要：在一個五席的議員選區裡它比想像中低，在單一席次的選區裡則高得多。
+  const sub = subsidyFor(state, data, run, outcome);
+  if (sub.gross > 0) {
+    state.finance.campaign += sub.net;
+    state.flags.lastSubsidy = sub;
   }
   // 這一年的選舉到此為止，不管選上還是落選
   const year = sched?.year ?? state.election?.sched?.year;

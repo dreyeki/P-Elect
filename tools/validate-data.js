@@ -32,6 +32,7 @@ const D = {
   firstTimes: read('data/firstTimes.json'),
   rally: read('data/rally.json'), personalFinance: read('data/personalFinance.json'),
   fundraising: read('data/fundraising.json'), fastForward: read('data/fastForward.json'),
+  proposals: read('data/proposals.json'),
 };
 D.byIdInv = Object.fromEntries(D.invitations.kinds.map((x) => [x.id, x]));
 D.byIdCorp = Object.fromEntries(D.corps.corporations.map((x) => [x.id, x]));
@@ -404,7 +405,8 @@ const FT = D.firstTimes;
 const actionIds = ['canvass', 'theory', 'invitations', 'livestream', 'streetSpeech', 'talkshow',
   'showPrep', 'presser', 'commissionPoll', 'faction', 'trainStaff', 'draftLaw',
   'prepQuestion', 'visit', 'setImage', 'retire', 'dealmaking',
-  'rally', 'FUND_DINNER', 'FUND_SMALL', 'FUND_DEVELOPER'];
+  'rally', 'FUND_DINNER', 'FUND_SMALL', 'FUND_DEVELOPER',
+  'proposeBill', 'lobbySupport', 'suggest'];
 const ftMiss = actionIds.filter((id) => !FT.actions[id]);
 ftMiss.length ? fail(`${ftMiss.length} 個行動沒有第一次的文本：${ftMiss.join('、')}`)
   : pass(`全部 ${actionIds.length} 個行動都有專屬的第一次文本`);
@@ -586,6 +588,100 @@ D.elections.levels.councilor.fameNeed === 0
 const unitFiles = ['src/ui/pages/map.js', 'src/ui/pages/data.js'];
 const unitLeak = unitFiles.filter((f) => /十億/.test(fs.readFileSync(path.join(ROOT, f), 'utf8')));
 !unitLeak.length ? pass('畫面上不再用十億當金錢單位') : fail(`還在用十億：${unitLeak.join('、')}`);
+
+/* ═══════════ v0.6.1 ═══════════ */
+console.log('\n── v0.6.1 ──');
+
+// 直轄市沒有鄉鎮市
+const LV = D.elections.levels;
+LV.townshipHead.onlyRegionTypes?.includes('縣') && !LV.townshipHead.onlyRegionTypes.includes('直轄市')
+  ? pass('鄉鎮市長只在縣底下才選得到，直轄市與省轄市的區長是派任的') : fail('鄉鎮市長沒有限制在縣');
+LV.townshipRep.onlyRegionTypes?.includes('縣')
+  ? pass('鄉鎮市民代表同樣只在縣底下') : fail('鄉鎮市民代表沒有限制在縣');
+
+// 提案權
+const SC = D.proposals.scopes;
+['councilor', 'mayor', 'legislator', 'president'].every((r) => SC[r])
+  ? pass(`${Object.keys(SC).filter((k) => k[0] !== '_').length} 種職位有提案權，其餘只能建議`) : fail('提案權的職位不齊');
+!SC.citizen && !SC.village && !SC.aide
+  ? pass('素人、助理、村里長都沒有提案權——提案權附著在職位上') : fail('不該有提案權的職位拿到了提案權');
+SC.councilor.kind === 'localBill' && SC.legislator.kind === 'law'
+  ? pass('議員的提案權在議會，立委的在立法院，兩邊不會互相跨界') : fail('提案權的議事機關對不上');
+
+// 遊說：同黨與他黨必須是量級的差別
+const LB = D.proposals.lobby;
+LB.windowTurns === 3 ? pass('提案之後有三個回合的遊說期') : fail('遊說期不是三個回合');
+LB.ownParty.baseGain > LB.otherParty.maxSupport * 2
+  ? pass(`自己政黨遊說一次的效果（${LB.ownParty.baseGain}）大於別的政黨的上限（${LB.otherParty.maxSupport}）`)
+  : fail('同黨與他黨的遊說沒有拉開差距');
+D.proposals.vote.unlobbiedPenalty > 0
+  ? pass('沒有被遊說過的黨團不會平白給你一半的票') : fail('沒遊說的黨團還是從五成起跳');
+
+// 助理費補助
+const AS = D.staffRoles.aideSubsidy.byRole;
+AS.citizen.monthly === 0 && AS.legislator.monthly > AS.councilor.monthly
+  && AS.councilor.monthly > AS.village.monthly
+  ? pass(`助理費補助隨層級放大：村里長 ${AS.village.monthly / 10000} 萬、縣市議員 ${AS.councilor.monthly / 10000} 萬、直轄市議員 ${AS.councilor.metroMonthly / 10000} 萬、立委 ${AS.legislator.monthly / 10000} 萬`)
+  : fail('助理費補助的層級關係不對');
+AS.councilor.metroMonthly === 320000 && AS.councilor.monthly === 160000
+  ? pass('直轄市議員三十二萬、縣市議員十六萬，跟地方民代費用支給條例第六條對得上') : fail('議員助理費不符法定數字');
+AS.village.monthly === 50000
+  ? pass('村里長的事務補助費每月五萬，原住民地區加兩成') : fail('村里長事務費不符');
+Object.values(AS).every((x) => x.note && x.note.length >= 10)
+  ? pass('每一級的補助都寫了它在現實裡是什麼') : fail('有補助沒有說明');
+
+// 服務處負載
+const SD = D.tuning.serviceDesk;
+SD.serviceStaffMult > SD.aideMult && SD.aideMult > SD.otherMult
+  ? pass('選民服務專員處理陳情的效率最高，這是他這個位子存在的理由') : fail('服務處的人力效率沒有分級');
+SD.dropThreshold > 0 && SD.favorPerDrop > 0
+  ? pass(`案子堆超過 ${SD.dropThreshold} 件就會有人等到放棄，而每一件都是一個對你失望的人`) : fail('沒有做出案子爛掉的後果');
+SD.roleMult.legislator > SD.roleMult.citizen
+  ? pass('有公職的人被找上門的機會多很多，因為大家知道你講得上話') : fail('陳情量沒有跟職位掛勾');
+
+// 得票補助款
+const SB = D.elections.subsidy;
+SB.perVote === 30 && SB.partyPerVote === 50
+  ? pass('候選人每票三十元、政黨票每票五十元，跟選罷法對得上') : fail('補助款金額不符法定數字');
+Math.abs(SB.winnerRatio - 1 / 3) < 0.01
+  ? pass('門檻是當選票數的三分之一，不是得票率——這個差別在複數選區裡差很多') : fail('補助款門檻不是三分之一');
+Object.entries(SB.partyCut).filter(([k]) => k[0] !== '_').every(([, v]) => v > 0 && v < 0.5)
+  ? pass('每個政黨都會從當選人的補助款裡抽一筆，比例落在合理範圍') : fail('政黨抽成的比例不合理');
+(SB.noSubsidyLevels ?? []).includes('villageHead')
+  ? pass('村里長這一級沒有中央的競選費用補助款') : fail('村里長不該有補助款');
+
+// 起點與存款
+const STS = D.starts.starts;
+STS.length === 5 && ['scion', 'listMP', 'tycoon'].every((id) => STS.some((x) => x.id === id))
+  ? pass(`五種起點：${STS.map((x) => x.name).join('、')}`) : fail('起點數量或內容不對');
+STS.find((x) => x.id === 'listMP').role === 'legislator'
+  ? pass('不分區立委開局就是立法委員，但沒有選區') : fail('不分區立委的職位不對');
+STS.find((x) => x.id === 'listMP').grassrootsHome === 0
+  ? pass('不分區沒有選區，所以家鄉基層是零') : fail('不分區立委不該有家鄉基層');
+const BGS = D.backgrounds.backgrounds;
+!BGS.some((b) => ['activist', 'heir', 'local'].includes(b.id))
+  ? pass(`會跟遊戲文本打架的三個出身已經拿掉，現在剩 ${BGS.map((b) => b.name).join('、')}`) : fail('該拿掉的出身還在');
+BGS.every((b) => b.wealth && b.wealth.perYear2 > 0) && STS.filter((s) => s.wealth).every((s) => s.wealth.perYear2 > 0)
+  ? pass('存款全部改成年齡的二次函數，前幾年在還學貸，後幾年是複利') : fail('有出身或起點的存款不是二次函數');
+BGS.every((b) => b.personalAssets === undefined)
+  ? pass('舊的固定存款欄位已經全部移除') : fail('還有出身留著固定存款');
+
+// 政論節目
+const SHW = D.shows.shows;
+SHW.every((x) => x.partyAffinity && Object.keys(x.partyAffinity).length >= 7)
+  ? pass(`${SHW.length} 個節目都標了對七個政黨的邀約傾向`) : fail('有節目沒有標政黨傾向');
+SHW.every((x) => x.fee >= 20000 && x.fee <= 80000)
+  ? pass(`通告費落在 ${Math.min(...SHW.map((x) => x.fee)) / 10000}～${Math.max(...SHW.map((x) => x.fee)) / 10000} 萬——一個月只有兩點行動點，那半個月的價錢要看得見`)
+  : fail('通告費不在兩萬到八萬之間');
+SHW.every((x) => Object.values(x.partyAffinity).every((v) => v > 0))
+  ? pass('沒有一個節目把任何一黨壓到零，偶爾還是會找對面的人來當沙包') : fail('有節目把某一黨完全排除');
+SHW.some((x) => x.partyAffinity.TPL >= 2)
+  ? pass('中間政黨也有自己的主場節目') : fail('民生黨沒有主場節目');
+
+// 掃街不花錢（兩條路都要是零）
+const elecSrc = fs.readFileSync(path.join(ROOT, 'src/ui/pages/election.js'), 'utf8');
+/id: 'street',[^}]*cost: 0/.test(elecSrc)
+  ? pass('選戰期的掃街拜票也是零成本，破產的候選人還是走得出門') : fail('選戰期的掃街還在扣錢');
 
 console.log(`\n${errors ? `✗ ${errors} 項錯誤` : '✓ 全部通過'}${warns ? `，${warns} 項警告` : ''}`);
 process.exit(errors ? 1 : 0);

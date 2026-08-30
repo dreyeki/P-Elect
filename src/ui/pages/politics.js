@@ -233,10 +233,32 @@ export function lawModal(s, data, lawId, pick) {
       ${lawEffectSummary(sel, data)}
     </div>` : '')}
     <div class="btn-row">
-      ${raw(pick != null && pick !== cur
-    ? `<button class="btn primary" data-act="propose-law" data-id="${esc(lawId)}" data-idx="${pick}">提出修正案</button>` : '')}
+      ${raw(pick != null && pick !== cur ? proposeButton(s, data, lawId, pick) : '')}
       <button class="btn ghost" data-act="modal-close">關閉</button>
     </div>`;
+}
+
+/**
+ * 提案的那顆按鈕。
+ *
+ * 提案權附著在職位上，不是附著在你的想法有多好。
+ * 沒有提案權的人在這裡看到的是一句說明與一條替代路線，
+ * 而不是一顆按下去會被拒絕的按鈕——被擋住的當下就要知道為什麼。
+ */
+function proposeButton(s, data, lawId, pick) {
+  const scope = data.proposals?.scopes?.[s.player.role];
+  if (!scope || scope.kind !== 'law') {
+    return `<span class="xs muted" style="line-height:1.7;flex:1">
+      ${esc(data.proposals?.noRightText ?? '')}</span>
+      <button class="btn" data-act="open-suggest">改用建議（1 AP）</button>`;
+  }
+  if (s.proposal && !s.proposal.resolved) {
+    return `<span class="xs muted" style="line-height:1.7;flex:1">
+      你手上的《${esc(s.proposal.targetName)}》還在程序裡，一次只能推一案。</span>
+      <button class="btn" data-act="open-lobby">看那個案子</button>`;
+  }
+  return `<button class="btn primary" data-act="do-propose" data-kind="law"
+    data-id="${esc(lawId)}" data-idx="${pick}" data-region="">提案修法（1 AP）</button>`;
 }
 
 const STRATA_NAME = { farmer: '農漁民', bluecollar: '藍領', service: '服務業', whitecollar: '白領', techpro: '專業技術', smallbiz: '小企業', capitalist: '大資本', publicsvc: '軍公教', student: '學生', retiree: '退休族', _all: '全民' };

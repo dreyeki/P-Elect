@@ -7,12 +7,15 @@ import { slots, roleAvailable } from '../../systems/TeamSystem.js';
 import { ROLE_NAME } from '../../core/GameState.js';
 import { officeCost } from '../../systems/DistrictSystem.js';
 import * as Asset from '../../systems/AssetSystem.js';
+import * as Desk from '../../systems/ServiceOfficeSystem.js';
 
 /* ───────── 團隊 ───────── */
 export function teamPage(s, data) {
   const cap = slots(s, data);
   const offer = s.flags.recruitOffer;
   return html`
+    ${raw(deskBlock(s, data))}
+
     ${card(`團隊 ${s.team.length}／${cap}`, s.team.length ? s.team.map((t) => `
       <div class="staff">
         <span class="av">${esc(t.name[0])}</span>
@@ -64,10 +67,81 @@ export function teamPage(s, data) {
     }).join(''))}`;
 }
 
+/**
+ * 服務處。
+ *
+ * 台灣的地方政治有一半發生在這個房間裡，而這一格要講清楚的只有一件事：
+ * 陳情案是會堆積的。人手不夠的時候案子不會消失，它們只是排在那裡，
+ * 而每一件排太久的案子最後都會變成一個對你失望的人。
+ */
+function deskBlock(s, data) {
+  const offices = Desk.officeCount(s);
+  const pay = Desk.payrollSplit(s, data);
+  const subRow = pay.subsidy > 0
+    ? `<div class="row"><span class="row-k">公費助理補助</span>
+        <span class="row-v"><span class="num tone-ok">＋${esc(F.money(pay.subsidy))}</span>
+        <span class="xs muted">／月</span></span></div>
+       <div class="xs muted" style="margin-top:2px;line-height:1.7">${esc(pay.sub.note)}</div>`
+    : `<div class="xs muted" style="line-height:1.7">
+        你這個身分沒有任何助理費補助。你請的每一個人都是自己付錢——
+        這件事在台灣是很多素人真正撐不下去的原因。</div>`;
+
+  const payRow = `
+    <div class="row"><span class="row-k">幕僚薪資合計</span>
+      <span class="row-v"><span class="num">${esc(F.money(pay.salaries))}</span></span></div>
+    <div class="row"><span class="row-k">補助支應</span>
+      <span class="row-v"><span class="num tone-ok">${esc(F.money(pay.covered))}</span></span></div>
+    <div class="row"><span class="row-k">要自己貼的</span>
+      <span class="row-v"><span class="num ${pay.outOfPocket > 0 ? 'tone-warn' : ''}">${esc(F.money(pay.outOfPocket))}</span></span></div>
+    ${pay.unused > 0 ? `<div class="xs muted" style="margin-top:4px;line-height:1.7">
+      補助還有 ${esc(F.money(pay.unused))} 沒有用掉。多請一個人不用你出錢，但那個人的忠誠要你自己帶。</div>` : ''}`;
+
+  if (!offices) {
+    return card('服務處與助理費', `
+      <div class="xs muted" style="line-height:1.75">
+        你還沒有掛牌的服務處。沒有服務處就沒有人會來找你處理路燈、水溝跟勞保，
+        而那些事情才是地方選票真正的來源。到選區頁面可以開一間。
+      </div>
+      ${subRow}
+      ${s.team.length ? payRow : ''}`);
+  }
+
+  const x = Desk.load(s, data);
+  const w = Desk.loadWord(x);
+  const D = Desk.ensure(s);
+  const cap = Desk.capacity(s, data);
+  const inc = Desk.inflow(s, data);
+  const barPct = Math.min(100, Math.round(x * 50));
+  return card(`服務處 ${offices} 間`, `
+    <div class="row" style="display:block">
+      <div style="display:flex;justify-content:space-between;align-items:baseline">
+        <span class="row-k">負載量</span>
+        <span class="word ${w.tone}">${esc(w.text)}</span>
+      </div>
+      <div class="bar b"><i style="width:${barPct}%"></i></div>
+      <div class="xs muted" style="margin-top:5px;line-height:1.7">
+        這個月會進來 ${inc} 件陳情，你們處理得掉 ${cap} 件${D.queue > 0 ? `，還有 ${D.queue} 件排在那裡` : ''}。
+      </div>
+    </div>
+    <div class="row"><span class="row-k">累計處理</span>
+      <span class="row-v"><span class="num">${F.int(D.handledTotal)}</span> 件</span></div>
+    ${D.droppedTotal > 0 ? `<div class="row"><span class="row-k">等到放棄的</span>
+      <span class="row-v"><span class="num tone-bad">${F.int(D.droppedTotal)}</span> 件</span></div>` : ''}
+    ${subRow}
+    ${payRow}
+    <div class="xs muted" style="margin-top:8px;line-height:1.75">
+      ${x > 1.5
+        ? '案子堆著的時候，沒有一件事情是做壞的，只是每一件都晚了。選民記得的是後者。'
+        : x < 0.6
+          ? '沒有人來找你，不是因為大家都過得很好。'
+          : '路燈、水溝、勞保、學區。這些事情跟你在電視上講的話沒有關係，但它們才是票。'}
+    </div>`);
+}
+
 /* ───────── 財務 ───────── */
 export function financePage(s, data) {
   const f = s.finance;
-  const salaries = s.team.reduce((a, t) => a + t.salary, 0);
+  const pay = Desk.payrollSplit(s, data);
   const office = officeCost(s, data);
   return html`
     ${card('三個帳戶', `<div class="grid2">
@@ -87,7 +161,10 @@ export function financePage(s, data) {
     ${raw(assetBlock(s, data))}
 
     ${card('每回合固定支出', `
-      ${row('幕僚薪資', `<span class="num">${F.money(salaries)}</span>`)}
+      ${row('幕僚薪資（自付）', `<span class="num">${F.money(pay.outOfPocket)}</span>`)}
+      ${raw(pay.subsidy > 0
+        ? `<div class="xs muted" style="margin:-4px 0 6px;line-height:1.7">公費助理補助支應 ${esc(F.money(pay.covered))}，薪資合計 ${esc(F.money(pay.salaries))}。</div>`
+        : '')}
       ${row('服務處與組織維持', `<span class="num">${F.money(office)}</span>`)}
       ${row('個人生活開支', `<span class="num">${F.money(livingOf(s))}</span>`)}
       ${raw(debtPaymentRow(s))}

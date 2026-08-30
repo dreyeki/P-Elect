@@ -8,7 +8,6 @@
         "eloquence": 1,
         "judgment": 1
       },
-      "personalAssets": 3800000,
       "popFavor": {
         "farmer": -1,
         "bluecollar": -1
@@ -17,7 +16,15 @@
       "stigma": 0,
       "grassroots": 0,
       "mediaContacts": 1,
-      "attrCost": 2
+      "attrCost": 2,
+      "wealth": {
+        "base": 250000,
+        "perYear": 300000,
+        "perYear2": 12000,
+        "sinceAge": 28,
+        "floor": 300000,
+        "cap": 60000000
+      }
     },
     {
       "id": "reporter",
@@ -27,7 +34,6 @@
         "sociability": 1,
         "judgment": 1
       },
-      "personalAssets": 1350000,
       "popFavor": {
         "capitalist": -1
       },
@@ -35,46 +41,15 @@
       "stigma": 0,
       "grassroots": 0,
       "mediaContacts": 3,
-      "attrCost": 1
-    },
-    {
-      "id": "activist",
-      "name": "社運工作者",
-      "desc": "你在街頭上被拖走過三次，支持者叫你戰神，工商團體叫你麻煩人物。",
-      "attrs": {
-        "boldness": 2
-      },
-      "personalAssets": 400000,
-      "popFavor": {
-        "student": 1,
-        "bluecollar": 1,
-        "capitalist": -2
-      },
-      "corpMood": -2,
-      "stigma": 0,
-      "grassroots": 0,
-      "mediaContacts": 1,
-      "attrCost": 0
-    },
-    {
-      "id": "heir",
-      "name": "企業二代",
-      "desc": "家族企業給了你資源與人脈，也給了你一個永遠洗不掉的出身標籤。",
-      "attrs": {
-        "sociability": 1,
-        "stamina": 1
-      },
-      "personalAssets": 300000000,
-      "popFavor": {
-        "bluecollar": -1,
-        "capitalist": 2
-      },
-      "corpMood": 2,
-      "stigma": 1,
-      "grassroots": 0,
-      "mediaContacts": 1,
-      "extraNote": "家族每年還會給一筆，但那筆錢從來不是白拿的。",
-      "attrCost": 4
+      "attrCost": 1,
+      "wealth": {
+        "base": 120000,
+        "perYear": 90000,
+        "perYear2": 2500,
+        "sinceAge": 25,
+        "floor": 150000,
+        "cap": 12000000
+      }
     },
     {
       "id": "doctor",
@@ -85,7 +60,6 @@
         "charisma": 1,
         "boldness": -1
       },
-      "personalAssets": 25000000,
       "popFavor": {
         "retiree": 1
       },
@@ -93,26 +67,25 @@
       "stigma": 0,
       "grassroots": 0,
       "mediaContacts": 0,
-      "attrCost": 2
-    },
-    {
-      "id": "local",
-      "name": "里長樁腳",
-      "desc": "婚喪喜慶你場場到，誰家孫子考上哪間學校你都記得，就是上台講話會卡詞。",
-      "attrs": {
-        "sociability": 2,
-        "eloquence": -1
-      },
-      "personalAssets": 1000000,
-      "popFavor": {
-        "student": -1,
-        "retiree": 1
-      },
-      "corpMood": 0,
-      "stigma": 0,
-      "grassroots": 2,
-      "mediaContacts": 0,
-      "attrCost": 1
+      "attrCost": 2,
+      "wealth": {
+        "base": 300000,
+        "perYear": 600000,
+        "perYear2": 30000,
+        "sinceAge": 30,
+        "floor": 400000,
+        "cap": 120000000
+      }
     }
+  ],
+  "_note": [
+    "出身決定你在踏進政治以前是誰：屬性、族群好感、企業界觀感，還有你存了多少錢。",
+    "存款用的是年齡的二次函數而不是固定數字——",
+    "一個三十歲的醫師跟一個五十歲的醫師差的不只是幾年薪水，",
+    "前面那幾年在還學貸，後面那幾年在收租金，所以曲線是往上彎的。",
+    "",
+    "社運工作者、企業二代、里長樁腳這三個出身在 v0.6.1 拿掉了，",
+    "因為它們跟遊戲裡的其他文本會打架：社運與企業二代的身分敘述會跟起點重複，",
+    "里長樁腳則會跟真的選上里長這件事在同一局裡同時成立。"
   ]
 }

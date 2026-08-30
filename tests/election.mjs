@@ -16,7 +16,7 @@ const ok = (c, m) => { console.log((c ? 'OK   ' : 'FAIL ') + m); if (!c) fails++
 
 const state = createGame(data, {
   seedStr: 'ELEC0001', name: '王明德', gender: 'x', startId: 'aide',
-  backgroundId: 'local', education: '大學', homeDistrict: 'TNN-04', party: 'PDA',
+  backgroundId: 'lawyer', education: '大學', homeDistrict: 'TNN-04', party: 'PDA',
   ideology: { centralization: 0, unification: -2, marketFreedom: -1, progressivism: 2, immigration: 0, environment: 1, militaryAutonomy: 1, directDemocracy: 2 },
 });
 
@@ -126,7 +126,7 @@ ok(badCov.length === 0, `所有一般選區的權重加總都接近 1（異常 $
 console.log('\n── 選舉季的收尾 ──');
 const mkE = (seed) => createGame(data, {
   seedStr: seed, name: '王明德', gender: 'x', startId: 'aide',
-  backgroundId: 'local', education: '大學', homeDistrict: 'TNN-04', party: 'PDA',
+  backgroundId: 'lawyer', education: '大學', homeDistrict: 'TNN-04', party: 'PDA',
   ideology: {}, china: {},
 });
 {

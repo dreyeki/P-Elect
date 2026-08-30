@@ -1,7 +1,7 @@
 // @ts-check
 import { loadData } from './data/loader.js';
 import { initScales, word, biWord } from './util/scale.js';
-import { createGame } from './core/GameState.js';
+import { createGame, ROLE_NAME } from './core/GameState.js';
 import { advance } from './core/TurnEngine.js';
 import { Rng, randomSeedString } from './core/Rng.js';
 import { el, html, raw, esc } from './util/dom.js';
@@ -23,7 +23,6 @@ import * as Char from './systems/CharacterSystem.js';
 import * as Fin from './systems/FinanceSystem.js';
 import * as Team from './systems/TeamSystem.js';
 import * as Legis from './systems/LegislatureSystem.js';
-import * as Council from './systems/CouncilSystem.js';
 import * as Budget from './systems/BudgetSystem.js';
 import * as Party from './systems/PartySystem.js';
 import * as Interp from './systems/InterpellationSystem.js';
@@ -48,6 +47,7 @@ import * as Rally from './systems/RallySystem.js';
 import * as Asset from './systems/AssetSystem.js';
 import * as Fund from './systems/FundraiseSystem.js';
 import * as FF from './systems/FastForwardSystem.js';
+import * as Proposal from './systems/ProposalSystem.js';
 import { applyEffects, bumpCounter } from './systems/Effects.js';
 import { clamp, clamp05, clampBi } from './core/Formula.js';
 
@@ -92,7 +92,7 @@ function registerPages() {
   registerPage('map', (s, d) => mapPage(s, d, ui.mapArg ?? { mode: ui.mapMode }));
   registerPage('team', teamPage);
   registerPage('finance', financePage);
-  registerPage('profile', profilePage);
+  registerPage('profile', (st, d) => debugPanel(st) + profilePage(st, d));
   registerPage('setup', () => setupPage(DATA));
 }
 
@@ -140,6 +140,7 @@ function handle(act, ds) {
       reSetup();
     },
     'setup-seed': () => { setupDraft.seedStr = ds.value.toUpperCase(); },
+    'setup-debug': () => { setupDraft.debug = !setupDraft.debug; reSetup(); },
     'reroll-seed': () => { setupDraft.seedStr = randomSeedString(); reSetup(); },
     'start-game': startGame,
     'load-game': () => {
@@ -189,7 +190,6 @@ function handle(act, ds) {
     'politics-tab': () => { ui.politicsTab = ds.id; render(); },
     'open-law': () => { ui.lawPick[ds.id] = s.laws[ds.id]; openModal(lawModal(s, DATA, ds.id, ui.lawPick[ds.id])); },
     'law-pick': () => { ui.lawPick[ds.id] = +ds.idx; openModal(lawModal(s, DATA, ds.id, +ds.idx)); },
-    'propose-law': (d) => proposeLaw(d),
     'push-bill': () => {
       if (s.player.politicalCapital < 50) return toast('政治資本不夠。');
       Legis.pushBill(s, ds.id, 50);
@@ -215,7 +215,6 @@ function handle(act, ds) {
     'open-interp': () => openInterp(),
     'interp-style': (d) => runInterp(d),
     'open-bill': (d) => openLocalBill(d),
-    'bill-propose': (d) => proposeLocalBill(d),
 
     /* 數據與地圖 */
     'data-tab': () => { ui.dataTab = ds.id; render(); },
@@ -299,6 +298,20 @@ function handle(act, ds) {
     },
     'do-rally': doRally,
     'open-finances': () => openFinances(),
+    ...debugActions(s, ds),
+
+    'open-propose': openPropose,
+    'prop-pick-law': () => openProposeTier('law', ds.id, null),
+    'prop-pick-bill': () => openProposeTier('localBill', ds.id, ds.region),
+    'do-propose': () => doPropose(ds),
+    'open-lobby': openLobby,
+    'do-lobby': () => doLobby(ds.id),
+    'push-agenda': () => { const r = Proposal.pushAgenda(s, +ds.amt); toast(r.msg); openLobby(); render(); },
+    'cancel-proposal': () => confirmModal('撤回這個案子？',
+      '撤案不用付什麼代價，除了那些已經替你講過話的人以後不會再那麼快答應。',
+      '撤回', () => { const r = Proposal.cancel(s, DATA); toast(r.msg); render(); }),
+    'open-suggest': openSuggest,
+    'do-suggest': () => doSuggest(ds.id),
     'open-ff': openFastForward,
     'do-ff': () => doFastForward(ds.id),
     'fin-tab': () => openFinances(ds.id),
@@ -540,6 +553,9 @@ function startGame() {
     age: d.age,
     baseAttrs: { ...d.attrs },
   });
+  // 調試模式是這一局的一個標記，不是一個開關——
+  // 開過的存檔會一直帶著它，這樣看存檔的人就知道那一局的數字不能當真。
+  if (d.debug) app.state.flags.debug = true;
   // 這一局才剛開始就先存一次。
   // 舊版要等到玩家結束第一個回合才有自動存檔，中間關掉分頁就整局不見了。
   autosave('新的一局已經建立，這一刻就先存好了。');
@@ -759,6 +775,15 @@ function resolveAction(s, id, arg, rng) {
     case 'fastForward':
       openFastForward();
       return '';
+    case 'proposeBill':
+      openPropose();
+      return '';
+    case 'lobbySupport':
+      openLobby();
+      return '';
+    case 'suggest':
+      openSuggest();
+      return '';
     case 'faction': {
       if (!p.party) return '你沒有政黨，沒有派系大老可以拜會。';
       const party = s.parties[p.party];
@@ -796,16 +821,6 @@ function resolveAction(s, id, arg, rng) {
     }
   }
   return '完成了。';
-}
-
-/* ─────────── 法案 ─────────── */
-function proposeLaw(ds) {
-  const s = app.state;
-  const r = Legis.propose(s, DATA, ds.id, +ds.idx);
-  closeModal();
-  if (!r.ok) return toast(r.msg);
-  if (s.flags.draftBank > 0) { s.flags.draftBank -= 1; r.bill.quality += 0.15; }
-  toast(r.msg); render();
 }
 
 /* ─────────── 選舉流程 ─────────── */
@@ -1000,6 +1015,18 @@ function runElection() {
   const r = Election.computeVotes(s, DATA, run, cands, rng);
   s.meta.rngCounter = rng.counter;
   const seats = run.level.system === 'SNTV' ? (DATA.byId.district[run.scopeId]?.seats ?? 1) : 1;
+  // 調試模式的強制勝選：只動票數，後面的授職、補助款、生涯紀錄照原本的流程跑
+  if (s.flags.debugForceWin) {
+    s.flags.debugForceWin = false;
+    const top = r.results[0].votes;
+    const me = r.results.find((x) => x.candidate.isPlayer);
+    if (me) {
+      me.votes = Math.round(top * 1.2);
+      const sum = r.results.reduce((a, x) => a + x.votes, 0);
+      for (const x of r.results) x.share = x.votes / sum;
+      r.results.sort((a, b) => b.votes - a.votes);
+    }
+  }
   const winners = r.results.slice(0, seats).map((x) => x.candidate);
   const won = winners.some((c) => c.isPlayer);
   const my = r.results.find((x) => x.candidate.isPlayer);
@@ -1010,6 +1037,10 @@ function runElection() {
     resultText: won
       ? `你以 ${F.int(my.votes)} 票當選。開票那天晚上，服務處外面擠滿了人，你講到一半聲音就啞了。`
       : `你以 ${F.int(my.votes)} 票落選，差距是 ${F.int(Math.abs(r.results[0].votes - my.votes))} 票。有些支持者到最後都沒有離開。`,
+    // 補助款是選後最現實的一段：門檻沒到的人要自己扛掉整年的文宣費，
+    // 門檻到了的人則會發現黨中央先抽走了一截。
+    subsidyText: Election.subsidyText(DATA, s.flags.lastSubsidy
+      ?? Election.subsidyFor(s, DATA, run, outcome), F.money),
   };
   render();
 }
@@ -1050,25 +1081,34 @@ function openLocalBill(ds) {
   const { region, id } = ds;
   const b = DATA.byId.bill[id];
   const cur = s.localBills[region][id];
-  const tiers = b.tiers.map((t, i) => `
-    <button class="tier ${i === cur ? 'cur' : ''}" data-act="bill-propose" data-region="${esc(region)}" data-id="${esc(id)}" data-idx="${i}">
-      ${esc(t.name)}</button>`).join('');
+  const scope = DATA.proposals.scopes[s.player.role];
+  const mine = scope?.kind === 'localBill'
+    && region === (s.player.office?.regionId ?? DATA.byId.district[s.player.homeDistrict]?.regionId);
+  const busy = s.proposal && !s.proposal.resolved;
+
+  const tiers = b.tiers.map((t, i) => (mine && !busy && i !== cur)
+    ? `<button class="tier" data-act="do-propose" data-kind="localBill"
+        data-region="${esc(region)}" data-id="${esc(id)}" data-idx="${i}">${esc(t.name)}</button>`
+    : `<span class="tier ${i === cur ? 'cur' : 'off'}">${esc(t.name)}</span>`).join('');
+
+  // 提案權附著在職位上。沒有的人在這裡看到的是為什麼，還有一條繞遠路的替代方案。
+  const foot = mine
+    ? (busy
+      ? `<div class="warnline">你手上的《${esc(s.proposal.targetName)}》還在程序裡，一次只能推一案。</div>
+         <div class="btn-row"><button class="btn" data-act="open-lobby">看那個案子</button></div>`
+      : `<div class="xs muted" style="margin-top:12px;line-height:1.7">
+          點一個檔位就送進議會，花 1 點行動點。送進去之後有三個回合可以拉票，
+          然後跟同一個會期其他人的案子搶議程。</div>`)
+    : `<div class="xs muted" style="margin-top:12px;line-height:1.7">
+        ${esc(DATA.proposals.noRightText)}${scope?.kind === 'law'
+          ? '（你的提案權在立法院，不在這裡。）' : ''}</div>
+       ${scope ? '' : '<div class="btn-row"><button class="btn" data-act="open-suggest">改用建議（1 AP）</button></div>'}`;
+
   openModal(`<div class="modal-h">《${esc(b.name)}》</div>
     <div class="modal-b">${esc(b.desc)}</div>
     <div class="tiers">${tiers}</div>
-    <div class="xs muted" style="margin-top:12px;line-height:1.7">
-      點一個檔位就會送進議會表決。議會不是你家開的，通不通過要看席次跟人情。
-    </div>
+    ${foot}
     <div class="btn-row"><button class="btn ghost" data-act="modal-close">關閉</button></div>`);
-}
-
-function proposeLocalBill(ds) {
-  const s = app.state;
-  const { region, id, idx } = ds;
-  const rng = new Rng(s.meta.seed, s.meta.rngCounter);
-  const r = Council.proposeBill(s, DATA, region, id, +idx, rng);
-  s.meta.rngCounter = rng.counter;
-  closeModal(); toast(r.msg); render();
 }
 
 /* ─────────── 政論節目 ─────────── */
@@ -1725,6 +1765,244 @@ function doRally() {
   render();
 }
 
+/* ─────────── 調試模式 ─────────── */
+/**
+ * 這是給開發與測試用的。
+ * 它不做平衡，也不假裝自己是遊戲的一部分——所有數字都直接改，
+ * 而且畫面上一直掛著一個紅色的標記，免得有人拿調試過的存檔來回報數值問題。
+ */
+function debugPanel(s) {
+  if (!s.flags?.debug) return '';
+  const P = s.player;
+  return card('<span class="tone-bad">調試模式</span>', `
+    <div class="xs muted" style="line-height:1.7;margin-bottom:8px">
+      這一局開了調試模式。以下的按鈕直接改數值，不經過任何規則。
+    </div>
+    <div class="btn-row">
+      <button class="btn xs" data-act="dbg-money" data-amt="1000000">私產 +100 萬</button>
+      <button class="btn xs" data-act="dbg-money" data-amt="10000000">私產 +1000 萬</button>
+      <button class="btn xs" data-act="dbg-fund" data-amt="1000000">專戶 +100 萬</button>
+      <button class="btn xs" data-act="dbg-fund" data-amt="10000000">專戶 +1000 萬</button>
+    </div>
+    <div class="btn-row">
+      <button class="btn xs" data-act="dbg-pc" data-amt="100">政治資本 +100</button>
+      <button class="btn xs" data-act="dbg-fame">知名度拉滿</button>
+      <button class="btn xs" data-act="dbg-attrs">屬性全部拉滿</button>
+      <button class="btn xs" data-act="dbg-rest">疲勞歸零</button>
+    </div>
+    <div class="btn-row">
+      ${['village', 'councilor', 'legislator', 'mayor', 'minister', 'president'].map((r) =>
+        `<button class="btn xs ghost" data-act="dbg-role" data-id="${r}">${esc(ROLE_NAME[r])}</button>`).join('')}
+    </div>
+    <div class="xs muted" style="margin-top:8px;line-height:1.7">
+      強制勝選的按鈕在選戰頁面，投票那一週才會出現。
+    </div>`);
+}
+
+function debugActions(s, ds) {
+  return {
+    'dbg-money': () => { s.finance.personal += +ds.amt; toast('加好了。'); render(); },
+    'dbg-fund': () => { s.finance.campaign += +ds.amt; toast('加好了。'); render(); },
+    'dbg-pc': () => { s.player.politicalCapital += +ds.amt; toast('加好了。'); render(); },
+    'dbg-fame': () => { s.player.fame = 5; toast('知名度拉到舉國皆知。'); render(); },
+    'dbg-attrs': () => {
+      for (const k in s.player.attrs) s.player.attrs[k] = 5;
+      toast('六個屬性全部拉滿。'); render();
+    },
+    'dbg-rest': () => { s.player.fatigueRaw = 0; s.player.hospitalTurns = 0; toast('疲勞歸零。'); render(); },
+    'dbg-role': () => {
+      const homeD = DATA.byId.district[s.player.homeDistrict];
+      s.player.role = ds.id;
+      s.player.office = {
+        type: ds.id, name: ROLE_NAME[ds.id], since: s.meta.turn,
+        scopeId: ds.id === 'president' ? 'NATION'
+          : ds.id === 'mayor' ? homeD.regionId : s.player.homeDistrict,
+        regionId: homeD.regionId,
+      };
+      if (ds.id === 'president') s.central.government.presidentParty = s.player.party ?? 'IND';
+      toast(`你現在是${ROLE_NAME[ds.id]}。`); render();
+    },
+    'dbg-win': () => {
+      // 強制勝選：把票數改成第一名再走一次正常的結算，
+      // 這樣後面的授職、補助款、生涯紀錄都還是照原本的流程跑
+      if (!s.election?.run) return toast('現在沒有選舉在進行。');
+      s.election.weeksLeft = 0;
+      s.flags.debugForceWin = true;
+      runElection();
+      toast('強制勝選。');
+    },
+  };
+}
+
+/* ─────────── 提案修法 ─────────── */
+/**
+ * 提案權附著在職位上，不是附著在你的想法有多好。
+ * 有提案權的人一次只能推一案，因為一個會期能排上議程的位子有限——
+ * 自己提兩案就是自己跟自己搶。
+ */
+function openPropose() {
+  const s = app.state;
+  const st = Proposal.proposeState(s, DATA);
+  if (!st.ok) return openModal(textModal('現在提不了案', st.why));
+  const scope = st.scope;
+
+  if (scope.kind === 'law') {
+    const rows = DATA.laws.laws.slice(0, 40).map((l) => `
+      <button class="opt" data-act="prop-pick-law" data-id="${esc(l.id)}">
+        <div class="opt-t">《${esc(l.name)}》　<span class="xs muted">現行：${esc(l.tiers[s.laws[l.id]]?.name ?? '')}</span></div>
+        <div class="opt-h">${esc(l.desc)}</div></button>`).join('');
+    return openModal(`<div class="modal-h">提案修法・${esc(scope.name)}</div>
+      <div class="modal-b" style="line-height:1.9">
+        ${scope.viaExecutive ? '你的機關可以把草案送進立法院。' : '你有提案權。'}
+        一次只能推一案，送進去之後有三個回合可以拉票，然後跟同一個會期其他人的案子搶議程。</div>
+      ${rows}
+      <button class="btn ghost full" data-act="modal-close">再想想</button>`);
+  }
+
+  const rid = s.player.office?.regionId ?? DATA.byId.district[s.player.homeDistrict]?.regionId;
+  const rows = DATA.localBills.bills.map((b) => `
+    <button class="opt" data-act="prop-pick-bill" data-id="${esc(b.id)}" data-region="${esc(rid)}">
+      <div class="opt-t">《${esc(b.name)}》　<span class="xs muted">現行：${esc(b.tiers[s.localBills[rid]?.[b.id] ?? 0]?.name ?? '')}</span></div>
+      <div class="opt-h">${esc(b.desc ?? '')}</div></button>`).join('');
+  openModal(`<div class="modal-h">提案・${esc(DATA.byId.region[rid]?.name ?? '')}議會</div>
+    <div class="modal-b" style="line-height:1.9">
+      ${scope.viaExecutive ? '行政機關的版本送進議會。' : '你有提案權。'}
+      一次只能推一案，送進去之後有三個回合可以拉票。</div>
+    ${rows}
+    <button class="btn ghost full" data-act="modal-close">再想想</button>`);
+}
+
+/** 挑檔位 */
+function openProposeTier(kind, targetId, regionId) {
+  const s = app.state;
+  const target = kind === 'law' ? DATA.byId.law[targetId] : DATA.byId.bill[targetId];
+  const cur = kind === 'law' ? s.laws[targetId] : (s.localBills[regionId]?.[targetId] ?? 0);
+  const rows = target.tiers.map((t, i) => i === cur
+    ? `<button class="opt locked" disabled>
+        <div class="opt-t">${esc(t.name)}　<span class="xs muted">現行規定</span></div>
+        <div class="opt-h">${esc(t.desc ?? '')}</div></button>`
+    : `<button class="opt" data-act="do-propose" data-kind="${esc(kind)}" data-id="${esc(targetId)}"
+        data-idx="${i}" data-region="${esc(regionId ?? '')}">
+        <div class="opt-t">改成「${esc(t.name)}」</div>
+        <div class="opt-h">${esc(t.desc ?? '')}</div></button>`).join('');
+  openModal(`<div class="modal-h">《${esc(target.name)}》</div>
+    <div class="modal-b" style="line-height:1.9">${esc(target.desc ?? '')}</div>
+    ${rows}
+    <button class="btn ghost full" data-act="open-propose">換一個法案</button>`);
+}
+
+function doPropose(ds) {
+  const s = app.state;
+  const rng = new Rng(s.meta.seed, s.meta.rngCounter);
+  const r = Proposal.propose(s, DATA, ds.kind, ds.id, +ds.idx, rng, ds.region || null);
+  s.meta.rngCounter = rng.counter;
+  if (!r.ok) { closeModal(); return toast(r.msg); }
+  const paid = Char.commit(s, DATA, 'proposeBill');
+  if (!paid.ok) { s.proposal = null; closeModal(); return toast(paid.msg); }
+  closeModal();
+  openModal(`<div class="modal-h">送進程序</div>
+    ${firstTimeBanner(s)}
+    <div class="modal-b" style="line-height:1.95;white-space:pre-wrap">${esc(r.msg)}</div>
+    <button class="btn primary full" data-act="open-lobby">去拉票</button>
+    <button class="btn ghost full" data-act="modal-close">之後再說</button>`);
+  render();
+}
+
+/* ─────────── 遊說 ─────────── */
+/**
+ * 同黨與他黨的差別不是數字大小，是兩件不同的事。
+ * 同黨是在跟黨團要一個會期裡的位子，他黨是在要求對方改變一個已經表過態的立場。
+ */
+function openLobby() {
+  const s = app.state;
+  const pr = s.proposal;
+  if (!pr || pr.resolved) return openModal(textModal('沒有案子在跑', '你手上沒有在程序裡的案子。'));
+  const open = Proposal.lobbyOpen(s, DATA);
+  const score = Proposal.agendaScore(s, DATA);
+  const rows = Proposal.lobbyTargets(s, DATA).map((t) => {
+    // 無黨籍不是一個政黨，byId.party 裡沒有它，但那幾席在表決裡是真的
+    const party = DATA.byId.party[t.pid] ?? { shortName: '無黨籍' };
+    const bar = Math.round(t.support * 100);
+    const tag = t.own ? '<span class="chip ok xs">自己人</span>' : '';
+    if (!open) {
+      return `<div class="row"><span class="row-k">${esc(party?.shortName ?? t.pid)} ${t.seats} 席</span>
+        <span class="row-v"><span class="num">${bar}%</span></span></div>`;
+    }
+    return `<button class="opt" data-act="do-lobby" data-id="${esc(t.pid)}">
+      <div class="opt-t">${esc(party?.shortName ?? t.pid)}　<span class="xs muted">${t.seats} 席・目前支持 ${bar}%</span>　${raw(tag)}</div>
+      <div class="opt-h">${t.done ? '已經談過一次了，再談效果會差很多' : t.own ? '跟自己的黨團要一個會期裡的位子' : '要求對方在一件已經表過態的事情上改變立場'}</div>
+      <div class="bar b"><i style="width:${bar}%"></i></div></button>`;
+  }).join('');
+
+  const rivalRows = pr.rivals.map((r) => `
+    <div class="row"><span class="row-k xs">${esc(r.title)}</span>
+    <span class="row-v xs ${score > r.weight ? 'tone-ok' : 'tone-warn'}">${score > r.weight ? '你排在它前面' : '它排在你前面'}</span></div>`).join('');
+
+  openModal(`<div class="modal-h">《${esc(pr.targetName)}》・${esc(pr.bodyName)}</div>
+    <div class="modal-b" style="line-height:1.9">
+      要改成「${esc(pr.tierName)}」。${open
+        ? `拉票期還剩 ${pr.lobbyUntil - s.meta.turn + 1} 個回合。`
+        : '拉票期已經結束，接下來就看排不排得上議程。'}
+      <br><b>目前競爭力 ${(score * 100).toFixed(0)}</b>，同會期還有 ${pr.rivals.length} 個案子在搶 ${DATA.proposals.agenda.slots} 個位子。</div>
+    <div class="modal-sub">各黨團</div>${rows}
+    <div class="modal-sub">同會期的其他案子</div>${rivalRows}
+    ${open ? `<div class="btn-row">
+      <button class="btn" data-act="push-agenda" data-amt="20">砸 20 點政治資本搶位子</button>
+      <button class="btn ghost danger" data-act="cancel-proposal">撤回這個案子</button>
+    </div>` : ''}
+    <button class="btn ghost full" data-act="modal-close">關上</button>`);
+}
+
+function doLobby(pid) {
+  const s = app.state;
+  const rng = new Rng(s.meta.seed, s.meta.rngCounter);
+  const r = Proposal.lobby(s, DATA, pid, rng);
+  s.meta.rngCounter = rng.counter;
+  if (!r.ok) { closeModal(); return toast(r.msg); }
+  const paid = Char.commit(s, DATA, 'lobbySupport');
+  if (!paid.ok) { closeModal(); return toast(paid.msg); }
+  closeModal();
+  openModal(`<div class="modal-h">遊說${esc(r.party)}</div>
+    ${firstTimeBanner(s)}
+    <div class="modal-b" style="line-height:1.95;white-space:pre-wrap">${esc(r.msg)}</div>
+    <div class="modal-b xs muted">${esc(r.party)}的支持度現在是 ${(r.support * 100).toFixed(0)}%。</div>
+    <button class="btn primary full" data-act="open-lobby">回到案子</button>
+    <button class="btn ghost full" data-act="modal-close">好</button>`);
+  render();
+}
+
+/* ─────────── 建議（沒有提案權的人） ─────────── */
+function openSuggest() {
+  const s = app.state;
+  const rows = DATA.issues.issues.slice(0, 12).map((i) => `
+    <button class="opt" data-act="do-suggest" data-id="${esc(i.id)}">
+      <div class="opt-t">${esc(i.name)}　<span class="xs muted">關注度 ${esc(word('issueHeat', s.issues[i.id] ?? 0))}</span></div>
+      <div class="opt-h">${esc(i.desc ?? '')}</div></button>`).join('');
+  openModal(`<div class="modal-h">建議修法</div>
+    <div class="modal-b" style="line-height:1.9">
+      你沒有提案權，所以只能把事情講到有提案權的人面前。
+      這件事是有用的——台灣很多修法的起點就是一場公聽會或一次投書。
+      代價是你要等，而且功勞多半不會記在你身上。</div>
+    ${rows}
+    <button class="btn ghost full" data-act="modal-close">算了</button>`);
+}
+
+function doSuggest(issueId) {
+  const s = app.state;
+  const rng = new Rng(s.meta.seed, s.meta.rngCounter);
+  const r = Proposal.suggest(s, DATA, issueId, rng);
+  s.meta.rngCounter = rng.counter;
+  const paid = Char.commit(s, DATA, 'suggest');
+  if (!paid.ok) { closeModal(); return toast(paid.msg); }
+  closeModal();
+  openModal(`<div class="modal-h">建議修法</div>
+    ${firstTimeBanner(s)}
+    <div class="modal-b" style="line-height:1.95;white-space:pre-wrap">${esc(r.msg)}</div>
+    <div class="modal-b xs muted">有 ${(r.chance * 100).toFixed(0)}% 的機會有人把它撿起來變成正式提案。</div>
+    <button class="btn primary full" data-act="modal-close">好</button>`);
+  render();
+}
+
 /* ─────────── 快轉半年 ─────────── */
 /**
  * 一個沒有職位的人，一個月能做的事情就是那幾件。
@@ -1815,11 +2093,12 @@ function openFinances(tab) {
       ratio >= (rules.refuseRatio ?? 20) ? '，銀行已經不再放款'
         : ratio >= (rules.warnRatio ?? 12) ? '，你已經被列入警示' : ''}</span></div>`;
 
-  const tabs = `<div class="tabs">
-    <button data-act="fin-tab" data-id="loan" class="${t === 'loan' ? 'on' : ''}">貸款</button>
-    <button data-act="fin-tab" data-id="invest" class="${t === 'invest' ? 'on' : ''}">投資</button>
-    <button data-act="fin-tab" data-id="hold" class="${t === 'hold' ? 'on' : ''}">持有部位</button>
-  </div>`;
+  // 這三個是分頁不是標題。第一版做得太安靜，測試的人以為這一頁只能貸款，
+  // 所以改成整排看得出來可以按的按鈕，而且現在在哪一頁一眼就看得到。
+  const TABS = [['loan', '貸款', '💳'], ['invest', '投資', '📈'], ['hold', '持有部位', '🏠']];
+  const tabs = `<div class="tabrow" style="margin:10px 0 12px">${TABS.map(([id, name, ico]) =>
+    `<button class="btn ${t === id ? 'primary' : 'ghost'}" data-act="fin-tab" data-id="${id}"
+      style="flex:1">${ico} ${name}</button>`).join('')}</div>`;
 
   let body = '';
   if (t === 'loan') {
