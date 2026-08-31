@@ -145,9 +145,10 @@ export function financePage(s, data) {
   const office = officeCost(s, data);
   return html`
     ${card('三個帳戶', `<div class="grid2">
-      ${tile('現金', `<span class="num ${f.personal < 0 ? 'tone-bad' : ''}">${F.money(f.personal)}</span>`)}
+      ${tile('現金', `<span class="num ${f.personal < 0 ? 'tone-bad' : ''}">${F.money(f.personal)}</span>`, '這是唯一花得出去的錢')}
       ${tile('競選經費', `<span class="num ${f.campaign < 100000 ? 'tone-warn' : ''}">${F.money(f.campaign)}</span>`)}
-      ${tile('淨資產', `<span class="num ${Asset.netWorth(s) < 0 ? 'tone-bad' : ''}">${F.money(Asset.netWorth(s))}</span>`, '房產與投資扣掉負債')}
+      ${tile('淨資產', `<span class="num ${Asset.netWorth(s) < 0 ? 'tone-bad' : ''}">${F.money(Asset.netWorth(s))}</span>`,
+        (s.assets?.holdings ?? []).some((h) => h.inherited) ? '大部分不是現金，要用得先賣' : '房產與投資扣掉負債')}
       ${tile('總負債', `<span class="num ${Asset.totalDebt(s) > 0 ? 'tone-warn' : ''}">${F.money(Asset.totalDebt(s))}</span>`, `年收入的 ${Asset.debtRatio(s, data).toFixed(1)} 倍`)}
     </div>
     <div class="xs muted" style="margin-top:8px;line-height:1.7">
@@ -221,7 +222,20 @@ function assetBlock(s, data) {
       <span class="row-v"><span class="num tone-warn">${esc(F.money(l.balance))}</span>
       <span class="xs muted">　月付 ${esc(F.money(l.monthly))}</span></span></div>`);
   }
-  for (const h of A.holdings ?? []) {
+  // 家產（股票、土地、房產）跟一般投資分開列。
+  // 這兩種東西在「花不花得出去」這件事上完全不一樣。
+  const KIND = { stock: '持股', land: '土地', realty: '不動產' };
+  for (const h of (A.holdings ?? []).filter((x) => x.inherited)) {
+    rows.push(`<div class="row" style="display:block">
+      <div style="display:flex;justify-content:space-between;align-items:baseline">
+        <span class="row-k">${esc(h.name)}<span class="xs muted">　${esc(KIND[h.kind] ?? '')}</span></span>
+        <span class="row-v"><span class="num">${esc(F.money(h.value))}</span></span>
+      </div>
+      <div class="xs muted" style="margin-top:2px;line-height:1.65">
+        變現只拿得到 ${Math.round((h.liquidity ?? 1) * 100)}%${h.sellTax ? `，還要繳 ${(h.sellTax * 100).toFixed(1)}% 的稅` : '，稅很輕'}</div>
+    </div>`);
+  }
+  for (const h of (A.holdings ?? []).filter((x) => !x.inherited)) {
     const pnl = h.value - h.cost;
     const pct = h.cost ? pnl / h.cost * 100 : 0;
     rows.push(`<div class="row"><span class="row-k">${esc(h.name)}</span>

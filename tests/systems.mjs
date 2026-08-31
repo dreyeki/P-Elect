@@ -39,7 +39,8 @@ const mk = () => createGame(data, {
 let s = mk();
 // 存款是年齡的函數：三十五歲的記者存得比三十歲多，也比同齡的醫師少（v0.6.1）
 const repWealth = s.finance.personal;
-ok(repWealth > 800000 && repWealth < 2000000, `三十五歲記者的存款 ${repWealth.toLocaleString()} 元`);
+// v0.6.3 把三條存款曲線都往上調了三到四倍——舊的數字對不起現實
+ok(repWealth > 3000000 && repWealth < 8000000, `三十五歲記者的存款 ${repWealth.toLocaleString()} 元`);
 const open0 = Char.availableActions(s, data).map((a) => a.id);
 // 素人開局能做的事：跑攤、進修、募款（只有小額捐開得成）、快轉半年、看自己的帳、建議修法
 ok(open0.length === 6 && ['canvass', 'theory', 'fundraise', 'fastForward', 'finances', 'suggest'].every((x) => open0.includes(x)),

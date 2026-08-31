@@ -194,7 +194,10 @@ function applyStart(state, data, setup, rng) {
   // 在台灣，這個年紀還在租屋的參選人非常少；而那間房子背著的貸款，
   // 會在往後很多時候逼玩家做出跟他的理念不一致的決定。
   Asset.ensure(state);
-  Asset.grantHouse(state, data, rng);
+  Asset.grantHouse(state, data, rng, setup);
+  // 家底不只是現金。企業家的大宗是自家公司的持股，政二代的是三代人買下來的土地——
+  // 那些東西名下有，但不是現金，要用就得賣，而賣有代價。
+  Asset.grantEstate(state, data, setup);
   state.finance.lastDeclaredAssets = Asset.declarable(state);
 
   const home = state.districts[setup.homeDistrict];

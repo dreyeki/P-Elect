@@ -86,6 +86,25 @@ function checkConditionKept(state, d) {
 }
 
 /**
+ * 身家裡有多少比例是跟著市場跳動的。
+ *
+ * 財產申報要抓的是解釋不掉的增減，不是股價漲跌。
+ * 一個創辦人的持股一年上下兩成很正常，那不該每年都變成一則監察機關來函的新聞。
+ */
+function marketShare(state) {
+  const A = state.assets;
+  if (!A) return 0;
+  const total = Math.abs(state.finance.personal)
+    + (A.holdings ?? []).reduce((a, h) => a + h.value, 0)
+    + (A.house?.value ?? 0);
+  if (total <= 0) return 0;
+  const market = (A.holdings ?? [])
+    .filter((h) => h.kind === 'stock' || h.defId === 'INV_ETF50' || h.defId === 'INV_SANDISC')
+    .reduce((a, h) => a + h.value, 0);
+  return Math.min(1, market / total);
+}
+
+/**
  * 年度財產申報。
  *
  * 申報的是全部身家，不是帳戶餘額——房子、投資、貸款都要寫進去。
@@ -95,7 +114,10 @@ function checkConditionKept(state, d) {
 function declare(state, news) {
   const f = state.finance;
   const now = declarable(state);
-  const diff = Math.abs(now - f.lastDeclaredAssets) / Math.max(1, Math.abs(f.lastDeclaredAssets));
+  let diff = Math.abs(now - f.lastDeclaredAssets) / Math.max(1, Math.abs(f.lastDeclaredAssets));
+  // 一個身家七成在股票上的人，帳面每年上下兩成是正常的，那不是財產來源不明。
+  // 監察機關看的是解釋不掉的那一段，所以把市場部位的比例讓出來。
+  diff = Math.max(0, diff - marketShare(state) * 0.25);
   if (diff > 0.20) {
     state.player.stigma = clamp05(state.player.stigma + 0.6);
     news.push({ kind: 'finance', text: '今年的財產申報和去年的差距大到監察機關主動來函詢問，媒體很快就拿到了那份對照表，你的辦公室整個下午都在接電話。' });

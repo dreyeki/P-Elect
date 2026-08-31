@@ -23,10 +23,6 @@ jobs:
         run: node tests/firsts.mjs
       - name: 造勢、私人財務、募款、快轉
         run: node tests/v060.mjs
-      - name: 提案修法、助理費、服務處、補助款
-        run: node tests/v061.mjs
-      - name: 同日選舉、選區評估、免費造勢、人群試作
-        run: node tests/v062.mjs
       - name: 長線模擬（120 回合）
         run: node tests/headless.mjs CISEED 120
       - name: 單檔版可以順利打包

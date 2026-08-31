@@ -28,11 +28,66 @@ export function ensure(state) {
   return state.assets;
 }
 
+/**
+ * 開局就在名下的股票、土地與房產。
+ *
+ * 這是 v0.6.3 加的，理由很簡單：舊版把企業家的家底寫成四千萬，
+ * 可是他自己的介紹寫的是千億企業創辦人。那不合理。
+ *
+ * 家底分成兩塊，因為現實裡本來就是兩塊：
+ *   **現金**可以直接拿去用；
+ *   **股票、土地、房產**名下有，但不是現金——要用就得賣，而賣有代價。
+ *
+ * 企業家的十幾億是自家公司的持股，而那些持股同時也是公司的控制權；
+ * 政二代的底氣是三代人陸續買下來的土地，那些地平常一毛錢都變不出來。
+ * 這個分法讓「有錢」跟「花得出去」變成兩件事。
+ */
+export function grantEstate(state, data, setup) {
+  const A = ensure(state);
+  const age = state.meta.year - state.player.birthYear;
+  const start = data.starts.starts.find((x) => x.id === setup.startId);
+  const bg = data.backgrounds.backgrounds.find((b) => b.id === setup.backgroundId);
+  const specs = [...(start?.estate ?? []), ...(bg?.estate ?? [])];
+  for (const e of specs) {
+    const value = curveAt(e, age);
+    if (value <= 0) continue;
+    A.holdings.push({
+      id: `${e.id}_start`,
+      defId: e.id,
+      name: e.name,
+      kind: e.kind ?? 'realty',
+      inherited: true,
+      founderStake: !!e.founderStake,
+      cost: Math.round(value),
+      value: Math.round(value),
+      since: 0,
+      appreciation: e.appreciationPerYear ?? 0.02,
+      liquidity: e.liquidity ?? 0.85,
+      sellTax: e.sellTax ?? 0.2,
+      sellStigma: e.sellStigma ?? 0,
+      desc: e.desc ?? '',
+      sellNews: e.sellNews ?? '',
+    });
+  }
+  return A.holdings.filter((h) => h.inherited);
+}
+
+/** 年齡的二次函數。跟 GameState.wealthAt 是同一條式子，這裡是為了不互相 import。 */
+function curveAt(w, age) {
+  if (!w) return 0;
+  const y = Math.max(0, age - (w.sinceAge ?? 25));
+  const v = (w.base ?? 0) + (w.perYear ?? 0) * y + (w.perYear2 ?? 0) * y * y;
+  return Math.min(w.cap ?? Infinity, Math.max(w.floor ?? 0, v));
+}
+
 /** 開局的自有住宅。父母幫忙付的頭期，剩下的自己揹。 */
-export function grantHouse(state, data, rng) {
+export function grantHouse(state, data, rng, setup = null) {
   const A = ensure(state);
   const H = data.personalFinance?.housing;
   if (!H || A.house) return null;
+  // 「父母幫忙付了頭期款，剩下的你自己揹」寫給素人是對的，
+  // 寫給一個二十二億身家的企業家就很荒謬。有家底的起點各自帶自己的房子。
+  const OV = data.starts.starts.find((x) => x.id === setup?.startId)?.housing ?? null;
   const region = state.regions[data.byId.district[state.player.homeDistrict]?.regionId];
   // 家鄉的房價會影響這間房子值多少錢，但貸款餘額是固定的——
   // 台北的房子比較貴，不代表你借得比較少，只代表你的頭期款比較痛。
@@ -41,12 +96,12 @@ export function grantHouse(state, data, rng) {
   const priceIdx = clamp((region?.economy?.housingPriceIndex ?? 100) / 100, 0.6, 1.9);
   const base = rng.range(H.baseValueRange[0], H.baseValueRange[1]);
   A.house = {
-    value: Math.round(base * priceIdx / 10000) * 10000,
-    mortgage: H.mortgage,
+    value: Math.round(base * priceIdx * (OV?.valueMult ?? 1) / 10000) * 10000,
+    mortgage: OV?.mortgage != null ? OV.mortgage : H.mortgage,
     rate: H.mortgageRate,
     termYears: H.termYears,
     monthsPaid: 0,
-    desc: H.descOwn,
+    desc: OV?.descOwn ?? H.descOwn,
   };
   return A.house;
 }
@@ -215,20 +270,66 @@ export function buy(state, data, defId, amount) {
   return { ok: true, msg: def.scam ? def.pitch : `你把 ${Math.round(amt / 10000)} 萬放進了${def.name}。`, row };
 }
 
-export function sell(state, data, rowId) {
+/**
+ * 賣掉一筆部位。
+ *
+ * 一般的投資賣掉就是賣掉，家產不一樣：
+ *   **稅**——土地增值稅動輒三成，證交稅只有千分之三，這個差別大到會改變決策
+ *   **市場衝擊**——一塊地不是掛上去就有人接，急著脫手就要讓價
+ *   **新聞**——政治人物賣祖產、創辦人減碼，這兩件事都會被寫
+ *   **控制權**——創辦人賣掉的每一張都是在把公司交出去一點，剩下的也跟著縮水
+ *
+ * 所以「有錢」跟「花得出去」是兩件事，而這正是家底要分成現金與資產的理由。
+ */
+export function sell(state, data, rowId, ratio = 1) {
   const A = ensure(state);
   const h = A.holdings.find((x) => x.id === rowId);
   if (!h) return { ok: false, msg: '找不到這筆投資。' };
-  A.holdings = A.holdings.filter((x) => x.id !== rowId);
-  state.finance.personal += Math.round(h.value);
-  const pnl = h.value - h.cost;
-  const pct = h.cost ? (pnl / h.cost * 100) : 0;
-  return {
-    ok: true, pnl,
-    msg: pnl >= 0
-      ? `你賣掉了${h.name}，實現獲利 ${Math.round(pnl / 10000)} 萬（${pct.toFixed(0)}%）。`
-      : `你把${h.name}停損出場，認賠 ${Math.round(-pnl / 10000)} 萬（${pct.toFixed(0)}%）。`,
-  };
+  const part = clamp(ratio, 0.05, 1);
+  const book = h.value * part;
+
+  // 一般投資沒有摩擦，家產有
+  const liq = h.inherited ? (h.liquidity ?? 0.85) : 1;
+  const tax = h.inherited ? (h.sellTax ?? 0) : 0;
+  // 一次出清比分批賣更傷：急著脫手就要讓價
+  const haste = h.inherited ? 1 - (1 - liq) * part : 1;
+  const gross = book * haste;
+  const taxed = Math.round(gross * (1 - tax));
+
+  const costPart = h.cost * part;
+  if (part >= 0.999) A.holdings = A.holdings.filter((x) => x.id !== rowId);
+  else { h.value -= book; h.cost -= costPart; }
+  state.finance.personal += taxed;
+
+  const lines = [];
+  const pnl = taxed - costPart;
+  lines.push(part >= 0.999
+    ? `你把${h.name}全部出清，入袋 ${Math.round(taxed / 10000)} 萬。`
+    : `你賣掉了${h.name}的${Math.round(part * 100)}%，入袋 ${Math.round(taxed / 10000)} 萬。`);
+  if (tax > 0) {
+    lines.push(`光是稅就繳掉 ${Math.round(gross * tax / 10000)} 萬。這一項在賣之前很少有人真的算過。`);
+  }
+  if (haste < 0.98) {
+    lines.push(`急著脫手讓掉了 ${Math.round(book * (1 - haste) / 10000)} 萬。想賣好價錢的人不會一次全丟出來。`);
+  }
+
+  // 創辦人減碼：剩下的持股會跟著縮水，因為市場的解讀就是這樣
+  if (h.founderStake && part > 0.08) {
+    const hit = clamp(part * 0.55, 0, 0.4);
+    const rest = A.holdings.find((x) => x.id === rowId);
+    if (rest) {
+      rest.value *= 1 - hit;
+      lines.push(`剩下的持股跟著縮水 ${(hit * 100).toFixed(0)}%，也就是 ${Math.round(rest.value / (1 - hit) * hit / 10000)} 萬。`);
+    }
+  }
+  if (h.inherited && h.sellNews && part > 0.15) {
+    lines.push(h.sellNews);
+    if (h.sellStigma) {
+      state.player.stigma = clamp05(state.player.stigma + h.sellStigma * part);
+    }
+  }
+
+  return { ok: true, pnl, amount: taxed, partial: part < 0.999, msg: lines.join('\n\n') };
 }
 
 /**
@@ -291,7 +392,8 @@ export function tick(state, ctx) {
   for (const h of [...A.holdings]) {
     const def = (PF.investments ?? []).find((x) => x.id === h.defId)
       ?? (PF.scams ?? []).find((x) => x.id === h.defId);
-    if (!def) continue;
+    // 家產不在 personalFinance 的清單裡，它的參數帶在自己身上
+    if (!def && !h.inherited) continue;
 
     if (h.scam) {
       // 帳面上一直在漲，而且漲得很漂亮。這就是它們的樣子。
@@ -309,6 +411,15 @@ export function tick(state, ctx) {
           h.bustAt = state.meta.turn + 6;
         }
       }
+      continue;
+    }
+
+    // 家產走自己的增值率。土地不會因為加權指數跌了就變便宜，
+    // 創辦人的持股則跟著公司走，波動比大盤大。
+    if (h.inherited) {
+      const drift = (h.appreciation ?? 0.02) / 12 * m;
+      const vol = h.kind === 'stock' ? rng.range(-0.035, 0.035) * m : rng.range(-0.004, 0.004) * m;
+      h.value = Math.max(0, h.value * (1 + drift + vol));
       continue;
     }
 

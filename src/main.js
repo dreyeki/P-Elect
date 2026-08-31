@@ -342,7 +342,15 @@ function handle(act, ds) {
       openModal(textModal(DATA.byId.investment[ds.id]?.name ?? '投資', r.msg));
       render();
     },
-    'do-sell': () => { const r = Asset.sell(s, DATA, ds.id); toast(r.msg); openFinances(); render(); },
+    'do-sell': () => {
+      const r = Asset.sell(s, DATA, ds.id, ds.ratio ? +ds.ratio : 1);
+      closeModal();
+      if (!r.ok) { toast(r.msg); return openFinances(); }
+      // 賣家產的後果有好幾段，用視窗講比用 toast 講清楚
+      if (r.msg.includes('\n\n')) openModal(textModal('變現', r.msg));
+      else { toast(r.msg); openFinances(); }
+      render();
+    },
     'open-scam': () => {
       const off = Asset.ensure(s).scamOffer;
       if (!off) return toast('那個人沒有再打電話來。');
@@ -2220,7 +2228,27 @@ function openFinances(tab) {
       這一頁不會告訴你哪一個是好的。判斷高的人看得到別人看不到的機會，
       判斷低的人看到的世界裡也一樣有很多機會——差別在哪一種是真的。</div>`;
   } else {
+    const KIND = { stock: '持股', land: '土地', realty: '不動產' };
     body = A.holdings.length ? A.holdings.map((h) => {
+      // 家產要能分批賣。一次全丟出來的人拿不到好價錢，這件事要讓玩家選得到。
+      if (h.inherited) {
+        const net = Math.round(h.value * (h.liquidity ?? 1) * (1 - (h.sellTax ?? 0)));
+        return `<div class="row" style="display:block">
+          <div style="display:flex;justify-content:space-between">
+            <span class="row-k">${esc(h.name)}<span class="xs muted">　${esc(KIND[h.kind] ?? '')}</span></span>
+            <span class="row-v"><span class="num">${esc(F.money(h.value))}</span></span>
+          </div>
+          <div class="xs muted" style="margin-top:3px;line-height:1.7">${esc(h.desc ?? '')}</div>
+          <div class="xs muted" style="margin-top:3px;line-height:1.7">
+            全部出清大概只拿得到 ${esc(F.money(net))}——變現率 ${Math.round((h.liquidity ?? 1) * 100)}%，
+            稅 ${((h.sellTax ?? 0) * 100).toFixed(1)}%${h.sellStigma ? '，而且會有人寫' : ''}。</div>
+          <div class="btn-row">
+            <button class="btn ghost xs" data-act="do-sell" data-id="${esc(h.id)}" data-ratio="0.1">賣一成</button>
+            <button class="btn ghost xs" data-act="do-sell" data-id="${esc(h.id)}" data-ratio="0.3">賣三成</button>
+            <button class="btn ghost xs danger" data-act="do-sell" data-id="${esc(h.id)}" data-ratio="1">全部出清</button>
+          </div>
+        </div>`;
+      }
       const pnl = h.value - h.cost;
       const pct = h.cost ? pnl / h.cost * 100 : 0;
       return `<div class="row" style="display:block">

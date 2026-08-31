@@ -754,5 +754,73 @@ PL.bands.support.length >= 4 && PL.bands.militancy.length >= 3
 JSON.stringify(D.popLab._note).includes('沒有任何連結')
   ? pass('資料檔開頭就寫明這是獨立沙盒，跟主系統沒有連結') : fail('沒有寫明這是沙盒');
 
+/* ═══════════ v0.6.3 ═══════════ */
+console.log('\n── v0.6.3 ──');
+
+const curveAt = (w, age) => {
+  if (!w) return 0;
+  const y = Math.max(0, age - (w.sinceAge ?? 25));
+  const v = (w.base ?? 0) + (w.perYear ?? 0) * y + (w.perYear2 ?? 0) * y * y;
+  return Math.min(w.cap ?? Infinity, Math.max(w.floor ?? 0, v));
+};
+const yi = (v) => v >= 1e8 ? (v / 1e8).toFixed(1) + ' 億' : Math.round(v / 1e4) + ' 萬';
+
+// 存款翻上去了
+const BG63 = D.backgrounds.backgrounds;
+BG63.every((b) => curveAt(b.wealth, 45) >= 8000000)
+  ? pass(`四十五歲的三種出身：${BG63.map((b) => b.name + ' ' + yi(curveAt(b.wealth, 45))).join('、')}`)
+  : fail('有出身在四十五歲的存款低於八百萬，對不起現實');
+curveAt(BG63.find((b) => b.id === 'doctor').wealth, 45) > curveAt(BG63.find((b) => b.id === 'lawyer').wealth, 45)
+  && curveAt(BG63.find((b) => b.id === 'lawyer').wealth, 45) > curveAt(BG63.find((b) => b.id === 'reporter').wealth, 45)
+  ? pass('醫師 > 律師 > 記者，三條曲線的相對關係沒有跑掉') : fail('出身的存款排序不對');
+BG63.every((b) => b.wealth.perYear2 > 0)
+  ? pass('三條曲線都還是往上彎的二次函數') : fail('有出身的存款變成直線了');
+
+// 家底的組成
+const STARTS63 = D.starts.starts;
+const withEstate = STARTS63.filter((s) => (s.estate ?? []).length);
+withEstate.length >= 3
+  ? pass(`${withEstate.length} 個起點名下有股票、土地或房產：${withEstate.map((s) => s.name).join('、')}`)
+  : fail('有家底的起點太少');
+STARTS63.filter((s) => !(s.estate ?? []).length).map((s) => s.id).sort().join(',') === 'aide,rookie'
+  ? pass('素人與議員助理名下沒有家產，他們只有自己存的那點錢') : fail('該沒有家底的起點拿到了家底');
+
+const tycoon63 = STARTS63.find((s) => s.id === 'tycoon');
+const stake = (tycoon63.estate ?? []).find((e) => e.founderStake);
+stake && curveAt(stake, 50) > 1e9
+  ? pass(`企業家五十歲的創辦人持股 ${yi(curveAt(stake, 50))}——他自己的介紹寫的是千億企業創辦人`)
+  : fail('創辦人持股的規模對不起他的介紹');
+const tycoonEstate = (tycoon63.estate ?? []).reduce((a, e) => a + curveAt(e, 50), 0);
+curveAt(tycoon63.wealth, 50) < tycoonEstate * 0.25
+  ? pass(`而他的現金只有 ${yi(curveAt(tycoon63.wealth, 50))}，佔資產不到四分之一——有錢跟花得出去是兩件事`)
+  : fail('企業家的現金比例太高，變現的摩擦就沒有意義了');
+
+const scion63 = STARTS63.find((s) => s.id === 'scion');
+const scionLand = (scion63.estate ?? []).filter((e) => e.kind === 'land' || e.kind === 'realty');
+scionLand.length && scionLand.reduce((a, e) => a + curveAt(e, 35), 0) > 1.2e8
+  ? pass(`政二代三十五歲的土地與房產 ${yi(scionLand.reduce((a, e) => a + curveAt(e, 35), 0))}——三代人買下來的地才是政治世家的底氣`)
+  : fail('政二代的土地規模不足');
+
+// 每一筆家產都要有變現的參數與文本
+const allEstate = STARTS63.flatMap((s) => s.estate ?? []);
+allEstate.every((e) => e.liquidity > 0 && e.liquidity <= 1 && e.sellTax >= 0 && e.sellTax < 0.5)
+  ? pass(`${allEstate.length} 筆家產的變現率與稅率都在合理範圍`) : fail('有家產的變現參數不合理');
+allEstate.filter((e) => e.kind === 'land' || e.kind === 'realty').every((e) => e.sellTax >= 0.15)
+  ? pass('土地與不動產的稅都在一成五以上——土地增值稅不是開玩笑的') : fail('不動產的稅太輕');
+allEstate.filter((e) => e.kind === 'stock').every((e) => e.sellTax < 0.02)
+  ? pass('股票的證交稅很輕，這個差別大到會改變決策') : fail('股票的稅率不對');
+allEstate.every((e) => e.desc && e.desc.length >= 20 && e.sellNews && e.sellNews.length >= 20)
+  ? pass('每一筆家產都寫了它是什麼，以及賣掉的時候會發生什麼事') : fail('有家產缺少描述或變現的新聞');
+allEstate.every((e) => e.appreciationPerYear > 0 && e.appreciationPerYear < 0.12)
+  ? pass('家產的年增值率都設在合理範圍——土地不是飆股') : fail('家產的增值率不合理');
+
+// 有家底的起點要有自己的房子敘述
+const withHouse = STARTS63.filter((s) => s.housing);
+withHouse.length === withEstate.length
+  ? pass(`${withHouse.length} 個有家底的起點都帶了自己的自用住宅敘述`)
+  : fail('有家底的起點沒有覆寫房子——「父母幫忙付頭期款」那句話寫給他們很荒謬');
+withHouse.every((s) => s.housing.descOwn && s.housing.descOwn.length >= 25)
+  ? pass('每一段房子的敘述都夠長，看得出那是誰的房子') : fail('有房子敘述太短');
+
 console.log(`\n${errors ? `✗ ${errors} 項錯誤` : '✓ 全部通過'}${warns ? `，${warns} 項警告` : ''}`);
 process.exit(errors ? 1 : 0);

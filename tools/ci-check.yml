@@ -27,6 +27,8 @@ jobs:
         run: node tests/v061.mjs
       - name: 同日選舉、選區評估、免費造勢、人群試作
         run: node tests/v062.mjs
+      - name: 開局家底與變現摩擦
+        run: node tests/v063.mjs
       - name: 長線模擬（120 回合）
         run: node tests/headless.mjs CISEED 120
       - name: 單檔版可以順利打包

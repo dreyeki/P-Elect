@@ -148,7 +148,13 @@ function stepStart(data) {
             ${s.role !== 'citizen' ? `<span class="chip xs">開局就是${esc(ROLE_NAME[s.role])}</span>　` : ''}
             ${s.fame ? `<span class="xs muted">知名度 ${esc(word('fame', s.fame))}・</span>` : ''}
             <span class="xs muted">專戶 ${esc(F.money(s.campaignFunds))}${
-              s.wealth ? `・家底約 ${esc(F.money(wealthAt(s.wealth, d.age)))}` : ''}</span>
+              s.wealth ? `・現金約 ${esc(F.money(wealthAt(s.wealth, d.age)))}` : ''}</span>
+          </div>
+          ${(s.estate ?? []).length ? `<div class="pd" style="margin-top:3px">
+            <span class="xs muted">名下另有 ${(s.estate ?? []).map((e) =>
+              `${esc(e.name)} ${esc(F.money(wealthAt(e, d.age)))}`).join('、')}——這些不是現金，要用得先賣</span>
+          </div>` : ''}
+          <div style="display:none">
           </div>
         </button>`).join(''))}</div>
       <div class="xs muted" style="margin-top:10px;line-height:1.75">
