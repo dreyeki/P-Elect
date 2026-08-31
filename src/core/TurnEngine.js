@@ -34,6 +34,7 @@ import * as Asset from '../systems/AssetSystem.js';
 import * as Fundraise from '../systems/FundraiseSystem.js';
 import * as Proposal from '../systems/ProposalSystem.js';
 import * as Desk from '../systems/ServiceOfficeSystem.js';
+import * as Rally from '../systems/RallySystem.js';
 import { apOf } from '../systems/CharacterSystem.js';
 
 const PIPELINE = [
@@ -45,7 +46,7 @@ const PIPELINE = [
   ['team', Team.tick], ['character', Character.tick],
   ['people', People.tick], ['favor', Favor.tick], ['invite', Invite.tick],
   ['desk', Desk.tick],
-  ['canvassGig', Canvass.tickGigs], ['social', Social.tick],
+  ['canvassGig', Canvass.tickGigs], ['rally', Rally.tick], ['social', Social.tick],
   ['scandal', Scandal.tick], ['proposal', Proposal.tick], ['legis', Legis.tick], ['interp', Interp.tick],
   ['court', Court.tick], ['gov', Gov.tick], ['image', Image.tick],
   ['theory', Theory.tick], ['media', Media.tick],

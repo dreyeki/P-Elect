@@ -12,6 +12,8 @@
  */
 import { clamp, clamp05, clampBi } from '../core/Formula.js';
 import * as Theory from './TheorySystem.js';
+import * as People from './PeopleSystem.js';
+import { makePolitician } from './NameGen.js';
 
 export function venues(data) { return data.rally?.venues ?? []; }
 export function mobilizeOptions(data) { return data.rally?.mobilize ?? []; }
@@ -153,4 +155,119 @@ function bumpEnthusiasm(state, data, amount) {
     if (P.district[i] !== di) continue;
     P.enthusiasm[i] = clamp(P.enthusiasm[i] + amount, 0, 5);
   }
+}
+
+/* ─────────── 上級人物辦的造勢場 ─────────── */
+
+/**
+ * 台灣選舉最常見的畫面之一：大咖辦場子，底下站著一排要靠他抬轎的候選人。
+ *
+ * 對玩家來說這是一次免費的曝光——場地、動員、舞台全部是別人出的錢，
+ * 他要付的只有一個行動點跟一段上台講話的時間。
+ *
+ * 代價藏在別的地方：站上那個台就是選邊，而且那個邊不是你選的。
+ * 更現實的是**你只有三分鐘**，講得好會被剪成短影音，講不好也會。
+ */
+export function guestConfig(data) { return data.rally?.guestRally ?? null; }
+
+/** 每回合擲一次：有沒有大咖找你去站台 */
+export function rollGuestInvite(state, data, rng) {
+  const G = guestConfig(data);
+  if (!G || state.flags.guestRally) return null;
+  const p = state.player;
+  if (G.requiresParty && !p.party) return null;
+  if (p.fame < (G.minFame ?? 1)) return null;
+  // 選戰期間大咖的場子排得最密，平時偶爾也有
+  const mult = state.meta.scale === 'week' ? 1 : 0.35;
+  if (!rng.bool((G.chancePerWeek ?? 0.2) * mult)) return null;
+
+  // 找得到多大的咖，看你自己有多大。沒有人會為了一個素人辦場子。
+  const pool = G.hosts.filter((h) => h.minHostFame <= p.fame + 1.6);
+  if (!pool.length) return null;
+  const host = rng.weighted(pool, (h) => 1 / (1 + Math.abs(h.minHostFame - p.fame)));
+  const person = People.pickAcquaintance(state, data, rng, { sameParty: true, minFame: 2 });
+
+  state.flags.guestRally = {
+    hostId: host.id,
+    hostTitle: host.name,
+    hostName: person?.name ?? makePolitician(data, rng, { party: p.party, fame: 4 }).name,
+    scale: host.scale,
+    invite: host.invite,
+    risk: host.risk,
+    expiresIn: G.expiresIn ?? 2,
+  };
+  return state.flags.guestRally;
+}
+
+/**
+ * 上台講三分鐘。
+ *
+ * 四種講法的差別不是好壞，是**你把那三分鐘用在誰身上**：
+ * 講場面話最安全也最浪費，吹捧主人換到的是他的人情，
+ * 講自己的事會惹主人不高興但玩家自己有收穫，
+ * 火力全開的聲量最大，代價是那個表情今天晚上會出現在每一台。
+ */
+export function attendGuestRally(state, data, speakId, rng) {
+  const G = guestConfig(data);
+  const inv = state.flags.guestRally;
+  if (!G || !inv) return { ok: false, msg: '現在沒有人找你去站台。' };
+  const sp = G.speak.find((x) => x.id === speakId);
+  if (!sp) return { ok: false, msg: '沒有這個講法。' };
+
+  const p = state.player;
+  const home = state.districts[p.homeDistrict];
+  // 講得好不好看口才與氣魄，風險高的講法要撐得住才有回報
+  const skill = (p.attrs.eloquence / 5) * 0.6 + (p.attrs.boldness / 5) * 0.4;
+  const roll = skill - sp.risk + rng.range(-0.25, 0.25);
+  const q = roll > 0.35 ? 'great' : roll > -0.1 ? 'ok' : 'flop';
+  const mult = q === 'great' ? 1.3 : q === 'ok' ? 0.85 : 0.35;
+  const gain = sp.gain * inv.scale * mult;
+
+  p.fame = clamp05(p.fame + gain * 0.16);
+  p.favorNational = clampBi(p.favorNational + gain * 0.10);
+  if (home) home.playerFavor = clampBi(home.playerFavor + gain * 0.22);
+  if (sp.stigma && q !== 'great') p.stigma = clamp05(p.stigma + sp.stigma);
+
+  // 主人的觀感。吹捧換人情，講自己的事會被記一筆。
+  let hostLine = '';
+  if (sp.favorHost) {
+    p.partyPrestige = clamp05(p.partyPrestige + sp.favorHost * 0.25);
+    hostLine = `${inv.hostTitle}在後台跟你多聊了兩句，那兩句話比台上那三分鐘有用。`;
+  } else if (sp.hostAnnoy) {
+    p.partyPrestige = clamp05(p.partyPrestige - sp.hostAnnoy * 0.18);
+    hostLine = `${inv.hostTitle}沒有說什麼，但他的幕僚事後提醒你「下次照稿念比較好」。`;
+  }
+
+  state.flags.guestRally = null;
+  state.flags.guestRallyCount = (state.flags.guestRallyCount ?? 0) + 1;
+  return {
+    ok: true, q, gain,
+    hostTitle: inv.hostTitle, hostName: inv.hostName,
+    msg: [sp.text, G.outcome[q], hostLine, inv.risk].filter(Boolean).join('\n\n'),
+  };
+}
+
+export function declineGuestRally(state, data) {
+  const G = guestConfig(data);
+  if (!state.flags.guestRally) return { ok: false, msg: '現在沒有邀請。' };
+  state.flags.guestRally = null;
+  state.flags.guestRallyDeclined = (state.flags.guestRallyDeclined ?? 0) + 1;
+  // 拒絕一次沒事，拒絕多了黨內會有人開始講話
+  if (state.flags.guestRallyDeclined >= 2) {
+    state.player.partyPrestige = clamp05(state.player.partyPrestige - 0.2);
+  }
+  return { ok: true, msg: G?.declineText ?? '你婉拒了。' };
+}
+
+/** 邀請會過期。大咖的場子不會等你。 */
+export function tick(state, ctx) {
+  const { data, rng, scaleMult } = ctx;
+  const inv = state.flags.guestRally;
+  if (inv) {
+    inv.expiresIn -= 1;
+    if (inv.expiresIn <= 0) state.flags.guestRally = null;
+    return {};
+  }
+  rollGuestInvite(state, data, rng);
+  return {};
 }

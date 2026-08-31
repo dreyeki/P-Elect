@@ -1,6 +1,6 @@
 {
   "name": "p-election",
-  "version": "0.6.1",
+  "version": "0.6.2",
   "private": true,
   "type": "module",
   "description": "選舉人生：福爾摩沙 — 台灣政治生涯模擬器",

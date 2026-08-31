@@ -32,7 +32,7 @@ const D = {
   firstTimes: read('data/firstTimes.json'),
   rally: read('data/rally.json'), personalFinance: read('data/personalFinance.json'),
   fundraising: read('data/fundraising.json'), fastForward: read('data/fastForward.json'),
-  proposals: read('data/proposals.json'),
+  proposals: read('data/proposals.json'), popLab: read('data/popLab.json'),
 };
 D.byIdInv = Object.fromEntries(D.invitations.kinds.map((x) => [x.id, x]));
 D.byIdCorp = Object.fromEntries(D.corps.corporations.map((x) => [x.id, x]));
@@ -682,6 +682,77 @@ SHW.some((x) => x.partyAffinity.TPL >= 2)
 const elecSrc = fs.readFileSync(path.join(ROOT, 'src/ui/pages/election.js'), 'utf8');
 /id: 'street',[^}]*cost: 0/.test(elecSrc)
   ? pass('選戰期的掃街拜票也是零成本，破產的候選人還是走得出門') : fail('選戰期的掃街還在扣錢');
+
+/* ═══════════ v0.6.2 ═══════════ */
+console.log('\n── v0.6.2 ──');
+
+// 同一天的選票
+const SAMEDAY = D.elections.sameDay;
+SAMEDAY.ticketOrder[0] === 'president' && SAMEDAY.ticketOrder.includes('villageHead')
+  ? pass(`同一天的選票排序共 ${SAMEDAY.ticketOrder.length} 格，總統排最前面、村里長排最後`) : fail('選票排序不對');
+D.elections.schedule.every((sc) => sc.types.some((t) => SAMEDAY.ticketOrder.includes(t)))
+  ? pass('每一場排定的選舉都排得進選票順序') : fail('有選舉不在選票順序裡');
+SAMEDAY.coattail.president.partyList > SAMEDAY.coattail.president.legislator
+  ? pass(`政黨票跟著總統跑得最兇（${SAMEDAY.coattail.president.partyList}），因為那是同一張選票上的同一個判斷`)
+  : fail('政黨票的衣尾效應應該最強');
+SAMEDAY.coattail.mayor.villageHead < SAMEDAY.coattail.mayor.councilor * 0.4
+  ? pass(`村里長幾乎不受縣市長影響（${SAMEDAY.coattail.mayor.villageHead}）——那一票投的是隔壁的鄰居`)
+  : fail('村里長的衣尾效應太強');
+SAMEDAY.coattail.maxShift > 0 && SAMEDAY.coattail.maxShift < 0.3
+  ? pass(`衣尾效應有上限（${SAMEDAY.coattail.maxShift}），再大的勝差也不會把下層級整碗端走`) : fail('衣尾效應沒有上限');
+Object.entries(SAMEDAY.text).filter(([k]) => k !== 'header')
+  .every(([, t]) => typeof t === 'string' && t.length >= 25)
+  ? pass('母雞帶小雞的五段敘述都寫好了') : fail('同日選舉的敘述不完整');
+
+// 黨中央的評估
+const PA = D.elections.partyAssess;
+const tossup = PA.tiers.find((t) => t.id === 'MUST_WIN');
+tossup && PA.tiers.every((t) => t.id === 'MUST_WIN' || t.resource < tossup.resource)
+  ? pass(`五五波的必爭之地拿到最多資源（${tossup.resource}），其餘都比它少`) : fail('五五波不是資源最多的');
+tossup.min <= 0.45 && tossup.max >= 0.55
+  ? pass(`必爭之地的定義涵蓋 ${(tossup.min * 100).toFixed(0)}～${(tossup.max * 100).toFixed(0)}%，真的是五五波`) : fail('必爭之地的區間不對');
+PA.seatBonus.single > PA.seatBonus.multi
+  ? pass(`單一席次的加成 ${PA.seatBonus.single} 高於複數席次 ${PA.seatBonus.multi}——贏一票就全拿，邊際效益最高`)
+  : fail('單一席次沒有拿到比較高的加成');
+PA.tiers.length === 5 && PA.tiers.every((t) => t.desc && t.note && t.desc.length >= 12)
+  ? pass(`${PA.tiers.length} 個分級各有描述與一句給玩家的話`) : fail('分級的文本不完整');
+PA.support.arrivalTurn >= 1
+  ? pass(`撥款在第 ${PA.support.arrivalTurn} 週——那是黨部把全部選區排完序之後的日子`) : fail('撥款時間不對');
+
+// 免費造勢場
+const GR = D.rally.guestRally;
+GR.hosts.length >= 4 && GR.hosts.every((h) => h.invite.length >= 30 && h.risk.length >= 12)
+  ? pass(`${GR.hosts.length} 種大咖各有邀請與代價的敘述`) : fail('大咖的文本不完整');
+[...GR.hosts].sort((a, b) => a.minHostFame - b.minHostFame).every((h, i, arr) =>
+  i === 0 || h.scale >= arr[i - 1].scale)
+  ? pass('咖越大、門檻越高、效果也越大') : fail('大咖的門檻與效果沒有同向');
+GR.speak.length === 4 && GR.speak.every((x) => x.text.length >= 40)
+  ? pass('四種講法各有一段夠長的敘述') : fail('講法的敘述太短');
+[...GR.speak].sort((a, b) => a.risk - b.risk).every((x, i, arr) => i === 0 || x.gain >= arr[i - 1].gain)
+  ? pass('風險越高的講法回報越大，這條線是這個選擇存在的理由') : fail('風險與回報沒有同向');
+GR.requiresParty === true
+  ? pass('無黨籍收不到黨內大咖的邀請') : fail('無黨籍不該收到黨內邀請');
+
+// 人群試作
+const PL = D.popLab;
+PL.sampleSize === 60
+  ? pass(`人群試作抽 ${PL.sampleSize} 個人`) : fail('抽樣數不是 60');
+PL.support.terms.some((t) => t.id === 'BASE' && t.value === -20)
+  ? pass('每個人都從基礎不情願 −20 開始') : fail('缺少基礎不情願');
+PL.support.terms.some((t) => t.id === 'PARTY_SAME' && t.same === 42)
+  ? pass('同黨的政黨認同是 +42，台灣選民最強的單一預測因子') : fail('政黨認同的數字不對');
+PL.support.terms.some((t) => t.id === 'MEDIA' && t.max === 30)
+  ? pass('媒體宣傳上限 +30——這是唯一花錢買得到的一項') : fail('媒體宣傳的數字不對');
+PL.support.terms.every((t) => t.why && t.why.length >= 15)
+  ? pass(`支持度的 ${PL.support.terms.length} 項全部寫了它在現實裡是什麼`) : fail('有加值項沒有說明');
+PL.militancy.terms.every((t) => t.why && t.why.length >= 15)
+  ? pass(`激進度的 ${PL.militancy.terms.length} 項也一樣`) : fail('激進度有加值項沒有說明');
+Math.abs(Object.values(PL.profiles.strataWeight).reduce((a, b) => a + b, 0) - 1) < 0.02
+  ? pass('抽樣的階層比例加起來是 1') : fail('階層比例沒有加到 1');
+PL.bands.support.length >= 4 && PL.bands.militancy.length >= 3
+  ? pass(`支持度切 ${PL.bands.support.length} 檔、激進度切 ${PL.bands.militancy.length} 檔`) : fail('檔位數量不足');
+JSON.stringify(D.popLab._note).includes('沒有任何連結')
+  ? pass('資料檔開頭就寫明這是獨立沙盒，跟主系統沒有連結') : fail('沒有寫明這是沙盒');
 
 console.log(`\n${errors ? `✗ ${errors} 項錯誤` : '✓ 全部通過'}${warns ? `，${warns} 項警告` : ''}`);
 process.exit(errors ? 1 : 0);

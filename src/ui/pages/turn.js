@@ -147,6 +147,14 @@ function pending(s, data) {
       <span><span class="ph">${esc(r.name)} 想來當你的${esc(r.roleName)}</span>
       <span class="pb">能力 ${esc(word('ability', r.ability))}，月薪開 ${esc(F.money(r.salary))}。</span></span></button>`);
   }
+  // 大咖辦的場子。免費的曝光不會天天有，而且不會等你。
+  if (s.flags?.guestRally) {
+    const g = s.flags.guestRally;
+    out.push(`<button class="pending" data-act="open-guest-rally">
+      <span class="pi">📣</span>
+      <span><span class="ph">${esc(g.hostTitle)}${esc(g.hostName)}找你去站台</span>
+      <span class="pb">${esc(g.invite.slice(0, 44))}…</span></span></button>`);
+  }
   // 有人拿著一份印刷精美的資料來找你。
   // 遊戲不會標示這是不是詐騙，但每一段話裡都留了線索。
   if (s.assets?.scamOffer) {

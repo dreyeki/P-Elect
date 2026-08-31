@@ -7,14 +7,16 @@ import { word, biWord } from '../../util/scale.js';
 import { bracketOf, isConsensus } from '../../systems/ValueSystem.js';
 import * as Semi from '../../systems/SemiconductorSystem.js';
 import { chinaMood } from '../../systems/PopSystem.js';
+import * as Lab from '../../systems/PopLabSystem.js';
+import { app } from '../app.js';
 
 export function dataPage(s, data, tab = 'macro') {
   const t = tab ?? 'macro';
   const tabs = [['macro', '總體'], ['semi', '半導體'], ['pops', '民生'],
-    ['values', '價值觀'], ['world', '世界'], ['history', '走勢']];
+    ['values', '價值觀'], ['world', '世界'], ['history', '走勢'], ['lab', '人群試作']];
   const nav = `<div class="tabrow">${tabs.map(([id, n]) =>
     `<button class="btn ${t === id ? 'primary' : 'ghost'}" data-act="data-tab" data-id="${id}">${n}</button>`).join('')}</div>`;
-  return nav + ({ macro, semi, pops, values, world, history }[t] ?? macro)(s, data, t);
+  return nav + ({ macro, semi, pops, values, world, history, lab }[t] ?? macro)(s, data, t);
 }
 
 /**
@@ -75,6 +77,103 @@ function semi(s, data) {
       研發強度是唯一一個你今天投下去、五年後才看得到的數字，
       而政治人物的任期通常比五年短。
     </div>`)}`;
+}
+
+/**
+ * 人群試作（POP Lab）。
+ *
+ * 這一頁是一個**獨立的沙盒**，跟遊戲裡真正在跑的 5,850 個 POP 沒有連結。
+ * 它要回答的問題只有一個：一個人為什麼支持你？
+ *
+ * 遊戲裡的支持度是一條公式算出來的浮點數，你只看得到結果。
+ * 這一頁把每一項都攤開來——基礎不情願 −20、政黨認同 +42、媒體宣傳 +30……
+ * 確認這套拆解合理之後，再考慮要不要接回主系統。
+ */
+function lab(s, data) {
+  const ui = app.labState ??= { seed: 'LAB', open: null };
+  const me = Lab.playerProfileFrom(s, data);
+  const res = Lab.sample(s, data, ui.seed, me);
+  const sum = Lab.summarize(res, data);
+  const q = sum.quad;
+
+  const bandRow = (bands, total) => bands.map((b) => `
+    <div class="row"><span class="row-k ${b.tone === 'bad' ? 'tone-bad' : b.tone === 'warn' ? 'tone-warn' : b.tone === 'ok' ? 'tone-ok' : 'muted'}">${esc(b.name)}</span>
+      <span class="row-v"><span class="num">${b.n}</span>
+      <span class="xs muted">　${((b.n / total) * 100).toFixed(0)}%</span></span></div>`).join('');
+
+  const personRows = res.people.map((p, i) => {
+    const open = ui.open === i;
+    const sTone = p.support >= 20 ? 'tone-ok' : p.support <= -20 ? 'tone-bad' : 'muted';
+    const terms = (rows) => rows.map((t) => `
+      <div style="display:flex;justify-content:space-between;gap:8px;padding:2px 0">
+        <span class="xs">${esc(t.name)}${t.detail ? `<span class="muted">　${esc(t.detail)}</span>` : ''}</span>
+        <span class="xs num ${t.value > 0 ? 'tone-ok' : t.value < 0 ? 'tone-bad' : 'muted'}">${t.value > 0 ? '+' : ''}${t.value}</span>
+      </div>`).join('');
+    return `<button class="lawrow" data-act="lab-open" data-id="${i}" style="width:100%;text-align:left;display:block">
+      <span class="ln" style="display:flex;justify-content:space-between;gap:8px">
+        <span class="lt">${esc(p.stratumName)}・${esc(p.genName)}・${p.female ? '女' : '男'}
+          ${p.party ? `<span class="xs" style="color:${partyColorOf(data, p.party)}">${esc(data.byId.party[p.party]?.shortName ?? '')}</span>` : '<span class="xs muted">無黨派</span>'}</span>
+        <span class="lc"><span class="num ${sTone}">${p.support > 0 ? '+' : ''}${p.support}</span>
+          <span class="xs muted">　激進 ${p.militancy}</span></span>
+      </span>
+      ${open ? `<div style="margin-top:8px;padding-top:8px;border-top:1px solid var(--line)">
+        <div class="xs muted" style="margin-bottom:4px">支持度 ${p.support > 0 ? '+' : ''}${p.support}（${esc(p.supportBand.name)}）</div>
+        ${terms(p.supportTerms)}
+        <div class="xs muted" style="margin:8px 0 4px">激進度 ${p.militancy}（${esc(p.militancyBand.name)}）</div>
+        ${terms(p.militancyTerms)}
+      </div>` : ''}
+    </button>`;
+  }).join('');
+
+  return html`
+    ${card('這一頁在做什麼', `<div class="small muted" style="line-height:1.9">
+      這是一個獨立的沙盒，<b>跟遊戲裡真正在跑的 5,850 個 POP 沒有連結</b>，
+      改這裡的數字不會影響你的選情。<br><br>
+      它要回答的問題只有一個：一個人為什麼支持你？遊戲裡的支持度是一條公式算出來的浮點數，
+      你只看得到結果。這一頁把每一項都攤開——基礎不情願 −20、政黨認同 +42、媒體宣傳 +30——
+      點任何一個人就展開他的完整拆解。<br><br>
+      兩個值刻意分開：<b>支持度</b>（−100～+100）是他站哪一邊，
+      <b>激進度</b>（0～100）是他願意為了這件事做到什麼程度。
+      一個人可以「很支持但很消極」，也可以「不太支持但很激進」——
+      這兩格才是把兩個值分開的理由。
+    </div>`)}
+
+    ${card('用來算的那個你', `<div class="grid2">
+      ${tile('政黨', me.party ? esc(data.byId.party[me.party]?.shortName ?? '') : '無黨籍', '', 'sm')}
+      ${tile('兩岸立場', (me.china > 0 ? '+' : '') + me.china.toFixed(1), me.china < 0 ? '偏抗中' : me.china > 0 ? '偏友中' : '中間', 'sm')}
+      ${tile('知名度', me.fame.toFixed(1), '決定媒體宣傳那一項的上限', 'sm')}
+      ${tile('汙名', me.stigma.toFixed(1), '只增不減的那一項', 'sm')}
+    </div>
+    <div class="btn-row" style="margin-top:8px">
+      <button class="btn ghost xs" data-act="lab-reroll">換一批人</button>
+      <span class="xs muted" style="align-self:center">種子 ${esc(String(ui.seed))}</span>
+    </div>`)}
+
+    ${card(`${sum.n} 個人的樣貌`, `<div class="grid2">
+      ${tile('平均支持度', `<span class="num ${sum.avgS > 0 ? 'tone-ok' : 'tone-bad'}">${sum.avgS > 0 ? '+' : ''}${sum.avgS.toFixed(1)}</span>`, '', 'sm')}
+      ${tile('平均激進度', `<span class="num">${sum.avgM.toFixed(1)}</span>`, '', 'sm')}
+    </div>
+    <div class="sec-t" style="margin-top:10px">支持度分佈</div>
+    ${bandRow(sum.supportBands, sum.n)}
+    <div class="sec-t" style="margin-top:10px">激進度分佈</div>
+    ${bandRow(sum.militancyBands, sum.n)}`)}
+
+    ${card('把兩個值分開之後看得到的東西', `
+      ${row('死忠（支持又願意動）', `<span class="num tone-ok">${q.loyal}</span>`)}
+      ${row('支持但消極（會投票，不會幫你做別的）', `<span class="num">${q.passive}</span>`)}
+      ${row('游離未定', `<span class="num">${q.swing}</span>`)}
+      ${row('反對而且激進（會去你的場子鬧）', `<span class="num tone-bad">${q.hostile}</span>`)}
+      ${row('反對但沉默', `<span class="num muted">${q.quiet}</span>`)}
+      <div class="xs muted" style="margin-top:8px;line-height:1.75">
+        「支持但消極」跟「反對但激進」這兩格，是把支持度跟激進度拆成兩個值的全部理由。
+        只用一個數字的話，這兩種人會被算成同一種人，而他們在選戰裡做的事完全不一樣。
+      </div>`)}
+
+    ${card('點一個人看他的拆解', personRows)}`;
+}
+
+function partyColorOf(data, pid) {
+  return data.byId.party[pid]?.color ?? 'var(--fg-2)';
 }
 
 function macro(s, data) {

@@ -7,7 +7,7 @@ const FILES = [
   'tuning', 'theories', 'images', 'cabinet',
   'china', 'people', 'canvass', 'favors', 'invitations', 'semiconductor', 'social',
   'reactions', 'firstTimes',
-  'rally', 'personalFinance', 'fundraising', 'fastForward', 'proposals',
+  'rally', 'personalFinance', 'fundraising', 'fastForward', 'proposals', 'popLab',
 ];
 const EVENT_FILES = ['economy', 'energy', 'crossStrait', 'disaster', 'society', 'scandal', 'party', 'personal'];
 

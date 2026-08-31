@@ -5,6 +5,7 @@ import { barRows } from '../charts.js';
 import * as F from '../../util/format.js';
 import { word, biWord } from '../../util/scale.js';
 import { partyColor } from '../app.js';
+import * as Election from '../../systems/ElectionSystem.js';
 
 /**
  * 競選行動。cost 是「議員層級」的基準價，
@@ -126,6 +127,46 @@ function primaryPhase(s, data, e) {
       </div>` : `<button class="btn primary full" data-act="primary-next">進入選戰</button>`)}`;
 }
 
+/**
+ * 黨中央怎麼看這個選區。
+ *
+ * 這一格要講清楚一件很冷的事：黨部把錢往打得下來的地方倒。
+ * 穩贏的不用給，穩輸的給了也是丟到水裡，只有五五波的地方值得投資。
+ * 玩家看得到自己被分在哪一級，也就知道為什麼電話沒有人接。
+ */
+function assessBlock(s, data, e) {
+  const A = data.elections.partyAssess;
+  if (!A) return '';
+  if (!s.player.party) {
+    return card(A.text.header, `<div class="xs muted" style="line-height:1.75">${esc(A.text.none)}</div>`);
+  }
+  const a = Election.assessDistrict(s, data, e.run);
+  if (!a) return '';
+  const pct = Math.round(a.resource / 1.6 * 100);
+  return card(A.text.header, `
+    <div class="row" style="display:block">
+      <div style="display:flex;justify-content:space-between;align-items:baseline">
+        <span class="row-k">這個選區的分級</span>
+        <span class="word ${a.tier.tone === 'bad' ? 'tone-bad' : a.tier.tone === 'warn' ? 'tone-warn' : 'tone-ok'}">${esc(a.tier.name)}</span>
+      </div>
+      <div class="xs muted" style="margin-top:4px;line-height:1.7">${esc(a.tier.desc)}</div>
+    </div>
+    ${row('估計勝算', `<span class="num">${(a.odds * 100).toFixed(0)}%</span>`)}
+    ${row('應選席次', `<span class="num">${a.seats}</span>${a.single
+      ? '<span class="xs muted">　贏一票就全拿，黨部的邊際效益最高</span>'
+      : '<span class="xs muted">　多一點票只是名次往前挪</span>'}`)}
+    <div class="row" style="display:block">
+      <div style="display:flex;justify-content:space-between;align-items:baseline">
+        <span class="row-k">中央挹注</span>
+        <span class="row-v xs ${e.partyFunded ? 'tone-ok' : 'muted'}">${
+          e.partyFunded ? '已撥款' : `第 ${A.support.arrivalTurn} 週撥下來`}</span>
+      </div>
+      <div class="bar b"><i style="width:${pct}%"></i></div>
+      <div class="xs muted" style="margin-top:4px;line-height:1.7">${esc(a.tier.note)}</div>
+    </div>
+    <div class="xs muted" style="margin-top:8px;line-height:1.75">${esc(A.text.explain)}</div>`);
+}
+
 function campaignPhase(s, data, e) {
   const left = (s.player.ap ?? 2) - s.player.apUsed;
   const poll = e.poll ?? [];
@@ -136,6 +177,8 @@ function campaignPhase(s, data, e) {
       ${row('已經花掉', `<span class="num">${F.money(e.spent ?? 0)}</span>`)}
       ${row('距離投票', `<span class="num">${e.weeksLeft} 週</span>`)}
       ${row('動員強度', `<span class="word">${esc(word('grassroots', e.mobilization ?? 0))}</span>`)}`)}
+
+    ${raw(assessBlock(s, data, e))}
 
     ${card('選情預估', poll.length ? barRows(poll.map((p) => ({
       label: p.name, value: p.share * 100, text: (p.share * 100).toFixed(1) + '%',
@@ -163,6 +206,48 @@ function campaignPhase(s, data, e) {
       <button class="btn full danger" data-act="dbg-win">強制勝選</button>`) : '')}`;
 }
 
+/**
+ * 同一天開出來的其他票。
+ *
+ * 台灣的選舉是綁在一起投的，而下層級的結果很大程度取決於上層級——
+ * 縣市長選情好的那一邊，議員會多上幾席。玩家那一席有沒有一部分
+ * 不是他自己贏來的，要在同一個畫面上看得到。
+ */
+function ticketBlock(s, data, e) {
+  const races = e.ticket ?? [];
+  if (!races.length) return '';
+  const myParty = s.player.party;
+  const rows = races.map((r) => {
+    const party = data.byId.party[r.winnerParty];
+    const mine = myParty && r.winnerParty === myParty;
+    if (r.seatSplit) {
+      const split = r.seatSplit.map((x) => {
+        const p = data.byId.party[x.pid];
+        return `<span style="color:${partyColor(x.pid)}">${esc(p?.shortName ?? x.pid)} ${x.seats}</span>`;
+      }).join('　');
+      return `<div class="row" style="display:block">
+        <div style="display:flex;justify-content:space-between;align-items:baseline">
+          <span class="row-k">${esc(r.name)}</span>
+          <span class="row-v xs muted">應選 ${r.seats} 席</span>
+        </div>
+        <div class="xs" style="margin-top:3px;line-height:1.7">${raw(split)}</div>
+      </div>`;
+    }
+    return `<div class="row">
+      <span class="row-k">${esc(r.name)}</span>
+      <span class="row-v">
+        <span style="color:${partyColor(r.winnerParty)}">${esc(party?.shortName ?? '無黨籍')}</span>
+        <span class="${mine ? 'tone-ok' : ''}">${esc(r.winnerName)}</span>
+        <span class="xs muted">　${(r.share * 100).toFixed(1)}%</span>
+      </span></div>`;
+  }).join('');
+  return card(data.elections.sameDay?.text?.header ?? '同一天開出來的其他票', rows + `
+    <div class="xs muted" style="margin-top:8px;line-height:1.7">
+      這幾張票是同一天投的，而且是同一批人投的。上面那一格的氣勢會一路帶到下面幾格，
+      這件事在台灣叫母雞帶小雞。
+    </div>`);
+}
+
 function resultPhase(s, data, e) {
   const r = e.outcome;
   const my = r.results.find((x) => x.candidate.isPlayer);
@@ -177,7 +262,10 @@ function resultPhase(s, data, e) {
       value: x.share * 100, text: (x.share * 100).toFixed(1) + '%',
       color: x.candidate.isPlayer ? 'var(--gold)' : partyColor(x.candidate.party),
     }))))}
+    ${raw(ticketBlock(s, data, e))}
     ${card('', `<div class="small dim" style="line-height:1.8">${esc(e.resultText ?? '')}</div>
+      ${e.coattailText ? `<div class="small dim" style="line-height:1.8;margin-top:10px;
+        padding-top:10px;border-top:1px solid var(--line);white-space:pre-wrap">${esc(e.coattailText)}</div>` : ''}
       ${e.subsidyText ? `<div class="small dim" style="line-height:1.8;margin-top:10px;
         padding-top:10px;border-top:1px solid var(--line)">${esc(e.subsidyText)}</div>` : ''}
       <button class="btn primary full" data-act="close-election" style="margin-top:12px">繼續</button>`)}`;

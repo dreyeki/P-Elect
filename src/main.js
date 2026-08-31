@@ -48,6 +48,7 @@ import * as Asset from './systems/AssetSystem.js';
 import * as Fund from './systems/FundraiseSystem.js';
 import * as FF from './systems/FastForwardSystem.js';
 import * as Proposal from './systems/ProposalSystem.js';
+import * as Ballot from './systems/BallotSystem.js';
 import { applyEffects, bumpCounter } from './systems/Effects.js';
 import { clamp, clamp05, clampBi } from './core/Formula.js';
 
@@ -299,6 +300,18 @@ function handle(act, ds) {
     'do-rally': doRally,
     'open-finances': () => openFinances(),
     ...debugActions(s, ds),
+
+    'lab-open': () => { app.labState ??= { seed: 'LAB', open: null };
+      app.labState.open = app.labState.open === +ds.id ? null : +ds.id; render(); },
+    'lab-reroll': () => { app.labState ??= { seed: 'LAB', open: null };
+      app.labState.seed = randomSeedString(); app.labState.open = null; render(); },
+
+    'open-guest-rally': openGuestRally,
+    'do-guest-rally': () => doGuestRally(ds.id),
+    'decline-guest-rally': () => {
+      const r = Rally.declineGuestRally(s, DATA);
+      closeModal(); toast(r.msg); render();
+    },
 
     'open-propose': openPropose,
     'prop-pick-law': () => openProposeTier('law', ds.id, null),
@@ -832,7 +845,11 @@ function checkElection() {
   if (s.election) {
     if (s.election.phase === 'campaign') {
       s.election.weeksLeft -= 1;
+      s.election.weeksElapsed = (s.election.weeksElapsed ?? 0) + 1;
       updatePoll();
+      // 黨部把全部選區排完序、確定要放棄誰之後，錢才會下來
+      const fund = Election.deliverPartySupport(s, DATA, s.election.run, new Rng(s.meta.seed, s.meta.rngCounter++));
+      if (fund) openModal(textModal('黨中央的決定', fund.text));
       if (s.election.weeksLeft <= 0) runElection();
     }
     return;
@@ -1012,6 +1029,10 @@ function runElection() {
   // 於是玩家在開完票之後，下一週又會被問一次要不要參選。
   const sched = s.election.sched;
   const cands = candidates(s);
+  // 先開排在你上面的那幾場。這一步一定要在 computeVotes 之前——
+  // 縣市長那一場的結果會直接改變你自己這一席的票數，
+  // 那是台灣選舉真實存在的事，玩家應該在同一個畫面上看到它。
+  const above = Ballot.runAbove(s, DATA, run, sched, rng);
   const r = Election.computeVotes(s, DATA, run, cands, rng);
   s.meta.rngCounter = rng.counter;
   const seats = run.level.system === 'SNTV' ? (DATA.byId.district[run.scopeId]?.seats ?? 1) : 1;
@@ -1041,7 +1062,12 @@ function runElection() {
     // 門檻到了的人則會發現黨中央先抽走了一截。
     subsidyText: Election.subsidyText(DATA, s.flags.lastSubsidy
       ?? Election.subsidyFor(s, DATA, run, outcome), F.money),
+    // 同一天開出來的其他票。上面那幾場已經跑過了，下面那幾場現在才跑，
+    // 因為它們吃的是你這一場的結果。
+    ticket: [...above.races, ...Ballot.runBelow(s, DATA, run, outcome, sched, rng, above)],
+    coattailText: Ballot.coattailText(s, DATA, run, outcome, s.flags.coattail),
   };
+  s.flags.coattail = null;
   render();
 }
 
@@ -1832,6 +1858,50 @@ function debugActions(s, ds) {
       toast('強制勝選。');
     },
   };
+}
+
+/* ─────────── 上級人物的造勢場 ─────────── */
+/**
+ * 免費的曝光：場地、動員、舞台全部是別人出的錢。
+ * 玩家要付的只有一個行動點，以及那三分鐘要講給誰聽的決定。
+ */
+function openGuestRally() {
+  const s = app.state;
+  const inv = s.flags.guestRally;
+  if (!inv) return openModal(textModal('沒有邀請', '現在沒有人找你去站台。'));
+  const G = DATA.rally.guestRally;
+  const opts = G.speak.map((sp) => `
+    <button class="opt" data-act="do-guest-rally" data-id="${esc(sp.id)}">
+      <div class="opt-t">${esc(sp.name)}　<span class="xs muted">${
+        sp.risk >= 0.5 ? '風險很高' : sp.risk >= 0.3 ? '有風險' : sp.risk > 0 ? '風險不大' : '零風險'}</span></div>
+      <div class="opt-h">${esc(sp.text.slice(0, 42))}…</div></button>`).join('');
+  openModal(`<div class="modal-h">${esc(inv.hostTitle)}${esc(inv.hostName)}的造勢場</div>
+    <div class="modal-b" style="line-height:1.95">${esc(inv.invite)}</div>
+    <div class="modal-b xs muted" style="line-height:1.75">
+      場地、動員、舞台全部是他出的錢，你只要花一個行動點過去。
+      但站上那個台就是選邊，而且那個邊不是你選的。</div>
+    <div class="modal-sub">你要把那三分鐘用在誰身上</div>
+    ${opts}
+    <button class="btn ghost full" data-act="decline-guest-rally">婉拒</button>`);
+}
+
+function doGuestRally(id) {
+  const s = app.state;
+  const paid = Char.commit(s, DATA, 'rally');
+  if (!paid.ok) { closeModal(); return toast(paid.msg); }
+  const rng = new Rng(s.meta.seed, s.meta.rngCounter);
+  const r = Rally.attendGuestRally(s, DATA, id, rng);
+  s.meta.rngCounter = rng.counter;
+  if (!r.ok) {
+    s.player.apUsed = Math.max(0, s.player.apUsed - 1);
+    closeModal(); return toast(r.msg);
+  }
+  closeModal();
+  openModal(`<div class="modal-h">${esc(r.hostTitle)}的場子</div>
+    ${firstTimeBanner(s)}
+    <div class="modal-b" style="line-height:1.95;white-space:pre-wrap">${esc(r.msg)}</div>
+    <button class="btn primary full" data-act="modal-close">好</button>`);
+  render();
 }
 
 /* ─────────── 提案修法 ─────────── */

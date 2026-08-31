@@ -273,6 +273,14 @@ export function computeVotes(state, data, run, candidates, rng) {
   const totals = candidates.map(() => 0);
   const byDistrict = {};
 
+  // 這一天排在玩家上面那一場的結果。runAbove() 已經先跑過，答案存在 flags 裡。
+  const coat = state.flags?.coattail ?? null;
+  const coatTable = data.elections.sameDay?.coattail ?? {};
+  const coatRate = coat
+    ? clamp(coat.shift * (coatTable[coat.topType]?.[run.type] ?? 0),
+      -(coatTable.maxShift ?? 0.14), coatTable.maxShift ?? 0.14)
+    : 0;
+
   for (let i = 0; i < P.n; i++) {
     const d = dIndex[P.district[i]];
     const w = partMap[d.id];
@@ -285,7 +293,11 @@ export function computeVotes(state, data, run, candidates, rng) {
       const mob = c.isPlayer ? mobilization(state, d.id, c.party) : (c.grassroots ?? 1);
       const personal = personalFactor(state, data, c, d, i);
 
-      const scoreRaw = partySup * 0.55 + personal * 0.30 + (mob / 5) * 0.15;
+      // 母雞帶小雞：同一天排在你上面那一場的贏家，會把自己人一起帶上去。
+      // 這一段加在政黨支持度上而不是個人因素上，因為選民帶下來的是政黨的情緒，
+      // 不是對你這個人的評價。
+      const lift = coat && c.party === coat.party ? coatRate : 0;
+      const scoreRaw = (partySup + lift) * 0.55 + personal * 0.30 + (mob / 5) * 0.15;
       // 投票率
       const enth = P.enthusiasm[i];
       const turnout = clamp(
@@ -505,6 +517,74 @@ export function subsidyText(data, sub, moneyFn) {
     .replace('{rate}', (sub.rate * 100).toFixed(0) + '%')
     .replace('{cut}', moneyFn(sub.cut))
     .replace('{net}', moneyFn(sub.net));
+}
+
+/* ─────────── 黨中央的選區評估 ─────────── */
+
+/**
+ * 黨中央怎麼看這個選區。
+ *
+ * 選前黨部會把全部的選區分級，然後把錢跟人往「打得下來」的地方倒。
+ * 這件事的邏輯很冷：穩贏的不用給，穩輸的給了也是丟到水裡，
+ * **只有五五波的地方值得投資**——而且席次越少，投資的邊際效益越高，
+ * 因為單一席次選區贏一票就全拿，複數選區多一點票只是名次往前挪。
+ *
+ * 所以一個在艱困選區苦撐的人會發現黨中央的資源永遠到不了他手上；
+ * 而一個在五五波選區的人會突然發現有人主動打電話來問他缺什麼。
+ */
+export function assessDistrict(state, data, run) {
+  const A = data.elections.partyAssess;
+  if (!A || !state.player.party) return null;
+  const poll = state.election?.poll ?? [];
+  const me = poll.find((p) => p.isPlayer);
+  const seats = run.level?.seats ?? data.byId.district[run.scopeId]?.seats ?? 1;
+
+  // 用目前的選情預估當作勝算。還沒有民調的時候退回政黨在這個範圍的支持度。
+  let odds;
+  if (me) {
+    const top = poll.filter((p) => !p.isPlayer).reduce((a, p) => Math.max(a, p.share), 0);
+    // 複數選區看的是「進不進得了應選席次」，不是贏不贏第一名
+    odds = seats > 1
+      ? clamp(me.share * seats * 0.9 + 0.1, 0, 1)
+      : clamp(0.5 + (me.share - top) * 1.6, 0, 1);
+  } else {
+    const d = state.districts[state.player.homeDistrict];
+    odds = clamp(0.35 + (d?.playerGrassroots ?? 0) / 5 * 0.3 + state.player.fame / 5 * 0.2, 0, 1);
+  }
+
+  const tier = A.tiers.find((t) => odds >= t.min && odds < t.max) ?? A.tiers[A.tiers.length - 1];
+  const seatMult = seats > 1 ? (A.seatBonus?.multi ?? 0.85) : (A.seatBonus?.single ?? 1.35);
+  const resource = clamp(tier.resource * seatMult, 0, 1.6);
+  return { tier, odds, seats, resource, single: seats <= 1 };
+}
+
+/**
+ * 黨中央實際撥下來的東西。
+ * 一場選戰只撥一次，時間在登記之後兩週——
+ * 那是黨部把全部選區排完序、確定要放棄誰之後的日子。
+ */
+export function deliverPartySupport(state, data, run, rng) {
+  const A = data.elections.partyAssess;
+  const e = state.election;
+  if (!A || !e || e.partyFunded) return null;
+  const S = A.support ?? {};
+  if ((e.weeksElapsed ?? 0) < (S.arrivalTurn ?? 2)) return null;
+
+  const a = assessDistrict(state, data, run);
+  if (!a) return null;
+  e.partyFunded = true;
+  e.assessment = a;
+
+  const amount = Math.round(
+    (S.fundsBase ?? 600000) * a.resource * (run.level?.costMult ?? 1) / 10000) * 10000;
+  if (amount > 0) state.finance.campaign += amount;
+
+  const T = A.text ?? {};
+  const text = amount <= 0 ? (T.nothing ?? '')
+    : a.resource >= (S.apBonusAt ?? 0.9)
+      ? (T.incoming ?? '').replace('{amount}', `${Math.round(amount / 10000)} 萬`)
+      : (T.meagre ?? '').replace('{amount}', `${Math.round(amount / 10000)} 萬`);
+  return { amount, assessment: a, text };
 }
 
 /**
